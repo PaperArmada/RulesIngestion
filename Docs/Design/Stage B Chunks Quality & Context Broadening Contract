@@ -1,0 +1,313 @@
+# Stage B — Chunk Quality & Context Broadening Contract
+
+**Chunk → EvidenceChunk**
+
+---
+
+## Purpose
+
+Stage B exists to solve a single, critical problem:
+
+> **Produce EvidenceChunks that are large enough, coherent enough, and self-contained enough for embeddings to be meaningful.**
+
+Stage A guarantees correctness and provenance.  
+Stage B guarantees _semantic usability_.
+
+If Stage B fails, retrieval will fail silently, similarity scores will lie, and grounding will be forced to choose between weak candidates. This stage is therefore quality-critical and aggressively gated.
+
+---
+
+## Inputs
+
+### Required Inputs
+
+- `Chunk[]` from Stage A (immutable)
+- `MarkerStream` (for reference, not modification)
+- `doc_id`, `ruleset_id`, `book_id`
+- extractor + schema version metadata
+
+### Optional Inputs
+
+- deterministic section heading signals from extraction
+- block-type and layout hints
+
+---
+
+## Outputs
+
+### B1 — EvidenceChunk[]
+
+An **EvidenceChunk** is a broadened, semantically coherent unit designed for retrieval and grounding.
+
+Each EvidenceChunk MUST:
+
+- preserve provenance back to **all source Chunks**
+- represent a _meaningful unit of explanation, definition, or rule_
+- meet minimum context and coherence thresholds
+
+EvidenceChunks are immutable once emitted.
+
+---
+
+## Determinism Constraints
+
+1. EvidenceChunk construction MUST be deterministic:
+   - identical input Chunk[] ⇒ identical EvidenceChunk[]
+2. Grouping rules must be rule-based and order-independent.
+3. No learned models, no similarity heuristics, no LLMs.
+4. EvidenceChunk IDs are derived deterministically from:
+
+(doc_hash, sorted(source_chunk_ids), grouping_rule_id)
+
+---
+
+## Hard Invariants
+
+### B-INV-1: Provenance Closure
+
+Every EvidenceChunk MUST include:
+
+- `source_chunk_ids[]` (≥ 1)
+- for each source chunk:
+- original `chunk_id`
+- original `(page_index, span)` mapping
+
+No EvidenceChunk may contain text that cannot be traced to Stage A chunks.
+
+---
+
+### B-INV-2: Minimum Semantic Mass
+
+Every EvidenceChunk MUST meet **all** minimum thresholds:
+
+- `min_chars ≥ 300`
+- `min_tokens ≥ 80`
+- `sentence_count ≥ 2`
+
+EvidenceChunks below thresholds are **invalid** unless explicitly allowlisted
+(e.g., single-sentence axioms, glossary entries).
+
+---
+
+### B-INV-3: Structural Coherence
+
+All source chunks in an EvidenceChunk MUST satisfy at least one:
+
+- share the same CDS structural address prefix, OR
+- belong to a single table/figure group, OR
+- are consecutive blocks under the same heading, OR
+- are part of a single detected rule/procedure section
+
+No EvidenceChunk may span unrelated sections.
+
+---
+
+### B-INV-4: Boundary Discipline
+
+EvidenceChunks MUST NOT cross:
+
+- chapter boundaries
+- rule/procedure boundaries
+- mutually exclusive layout tiers (e.g., sidebar + core text)
+
+If a boundary is encountered, grouping must stop.
+
+---
+
+### B-INV-5: Explicit Grouping Rule Attribution
+
+Each EvidenceChunk MUST record:
+
+- `grouping_rule_id` (e.g., `HEADING_SPAN`, `PARAGRAPH_RUN`, `TABLE_BLOCK`)
+- grouping rules MUST be finite, named, and versioned
+
+This is required for debugging and rollback.
+
+---
+
+## Allowed Grouping Rules (Closed Set)
+
+Stage B may ONLY use the following deterministic grouping strategies:
+
+1. **Heading Span Grouping**  
+   Merge consecutive chunks under the same heading until:
+
+- heading changes, OR
+- max size reached, OR
+- disallowed block type encountered
+
+2. **Paragraph Run Grouping**  
+   Merge consecutive text blocks with no intervening structural break.
+
+3. **Table / Figure Consolidation**  
+   Merge all blocks belonging to the same table or figure.
+
+4. **Rule Block Expansion**  
+   Expand a detected rule/definition block to include immediately following explanatory paragraphs.
+
+No other grouping is permitted.
+
+---
+
+## Failure Modes
+
+### FM-B1: Under-Contextualization
+
+EvidenceChunks are too small to encode meaning.
+Symptoms: low retrieval recall, near-tie similarity scores, gold never top-ranked.
+
+---
+
+### FM-B2: Over-Broadening
+
+EvidenceChunks contain multiple distinct ideas.
+Symptoms: irrelevant information retrieved alongside relevant content; grounding ambiguity.
+
+---
+
+### FM-B3: Boundary Violation
+
+Chunks cross conceptual or structural boundaries.
+Symptoms: incorrect authority attribution, CDS/PSC conflicts later.
+
+---
+
+### FM-B4: Fragment Retention
+
+Single-sentence or micro-chunks pass through ungrouped.
+Symptoms: embeddings encode noise, not explanations.
+
+---
+
+## Metrics
+
+### M-B1: EvidenceChunk Size Distribution
+
+- median_chars
+- p10_chars, p90_chars
+
+**Gate:**
+
+- p10_chars ≥ 300
+- median_chars ∈ [500, 1200]
+
+---
+
+### M-B2: Fragment Rate
+
+fragments = EvidenceChunks below min thresholds
+fragment_rate = fragments / total_EvidenceChunks
+
+**Gate:** ≤ 0.02
+
+---
+
+### M-B3: Over-Broad Rate
+
+over_broad = EvidenceChunks exceeding max_chars (e.g., 2000)
+
+**Gate:** ≤ 0.05
+
+---
+
+### M-B4: Structural Coherence Violations
+
+Count EvidenceChunks violating B-INV-3 or B-INV-4.
+
+**Gate:** 0
+
+---
+
+### M-B5: Grouping Rule Coverage
+
+Distribution of grouping_rule_id usage.
+
+**Gate:**
+
+- No single rule accounts for > 80% unless explicitly justified.
+
+---
+
+### M-B6: Gold Coverage Lift (Benchmark-Aware)
+
+For benchmark gold chunks:
+
+gold_present = gold EvidenceChunk exists containing gold source text
+
+**Gate:** ≥ Stage A gold existence rate  
+(Regressions are forbidden.)
+
+---
+
+## Gates — Proceed to Stage C Only If
+
+ALL are true:
+
+- M-B1 within bounds
+- M-B2 ≤ 0.02
+- M-B3 ≤ 0.05
+- M-B4 == 0
+- M-B6 shows no gold loss vs Stage A
+
+---
+
+## Stop-the-Line Conditions
+
+- Any EvidenceChunk without provenance closure
+- Any structural boundary violation
+- Fragment rate above threshold
+- Gold evidence lost during broadening
+
+---
+
+## Benchmark Alignment (50-Query / 6-Batch)
+
+### EA-B1: Gold Chunk Quality Audit
+
+For each gold EvidenceChunk:
+
+- verify it meets minimum size thresholds
+- verify it contains the full gold explanation span
+
+Any gold EvidenceChunk failing quality thresholds is a hard failure.
+
+---
+
+### EA-B2: Near-Tie Risk Proxy
+
+Compute similarity between:
+
+- gold EvidenceChunk
+- nearest non-gold EvidenceChunk
+
+Track:
+
+delta = score(gold) - score(nearest_non_gold)
+
+Stage B success should increase median delta vs Stage A.
+
+---
+
+## Authority Legibility (Soft Degrade)
+
+Stage B does not assign authority.
+
+It MUST:
+
+- preserve all raw signals needed for CDS/PSC attachment
+- never invent authority classifications
+- never collapse distinct layout tiers
+
+Missing authority signals are allowed but must remain explicit.
+
+---
+
+## Outcome
+
+Stage B transforms _correct but weak_ chunks into
+**semantically meaningful EvidenceChunks**.
+
+If Stage B passes, embeddings and retrieval have a fighting chance.
+If Stage B fails, later improvements are meaningless.
+
+This stage is where “finding gold” becomes possible at all.

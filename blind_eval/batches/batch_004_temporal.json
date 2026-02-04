@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "batch_id": "004",
+    "reasoning_mode": "temporal_ordering_and_triggers",
+    "created_by": "human",
+    "pdf_source": "PZO22003_PlayerCore.pdf",
+    "creation_method": "reasoning_mode_targeted",
+    "created_at": "2026-01-29",
+    "notes": "Temporal ordering & triggers batch. Tests when rules resolve (start/end of turn), trigger ordering, reaction vs action timing.",
+    "graph_capabilities_tested": [
+      "turn_phase_ordering",
+      "trigger_resolution_timing",
+      "start_of_turn_vs_end_of_turn",
+      "reaction_interrupt_semantics",
+      "directional_trigger_chains"
+    ]
+  },
+  "queries": [
+    {
+      "id": "batch_004_01",
+      "source_page": 403,
+      "question": "When in my turn does the dying recovery check happen—start or end?",
+      "reasoning_modes": ["temporal_ordering", "procedure_timing"],
+      "graph_capabilities_tested": ["start_of_turn", "turn_phase_ordering"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21"
+      ],
+      "expected_answer_summary": "At the start of your turn each round when you're dying, you must attempt a recovery check. Many things happen at the start of your turn; the dying check is one of them.",
+      "notes": "Temporal: recovery check at start of turn."
+    },
+    {
+      "id": "batch_004_02",
+      "source_page": 415,
+      "question": "When do I take persistent damage—start or end of my turn?",
+      "reasoning_modes": ["temporal_ordering", "procedure_timing"],
+      "graph_capabilities_tested": ["end_of_turn", "turn_phase_ordering"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20"
+      ],
+      "expected_answer_summary": "You take persistent damage at the end of each of your turns (not immediately when you get it). After you take the damage you can attempt the flat check to end it.",
+      "notes": "Temporal: persistent damage at end of turn."
+    },
+    {
+      "id": "batch_004_03",
+      "source_page": 406,
+      "question": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
+      "reasoning_modes": ["temporal_ordering", "trigger_precedence"],
+      "graph_capabilities_tested": ["trigger_resolution_timing", "before_vs_after"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "expected_answer_summary": "Trigger says 'about to attempt' so the reaction resolves before the check. You use the reaction when the trigger is met, then you attempt the recovery check.",
+      "notes": "Temporal: 'about to attempt' = before the attempt."
+    },
+    {
+      "id": "batch_004_04",
+      "source_page": 138,
+      "question": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
+      "reasoning_modes": ["temporal_ordering", "optional_ordering"],
+      "graph_capabilities_tested": ["before_or_after_phrasing", "free_action_timing"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/10/Text/50"
+      ],
+      "expected_answer_summary": "You can Stride up to half your speed once as a free action immediately before or after making your attacks. So you choose: either before or after, once.",
+      "notes": "Temporal: 'before or after' = choice of order, one use."
+    },
+    {
+      "id": "batch_004_05",
+      "source_page": 406,
+      "question": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
+      "reasoning_modes": ["temporal_ordering", "trigger_reference"],
+      "graph_capabilities_tested": ["triggering_creature_reference", "reaction_effect_target"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/45",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/46"
+      ],
+      "expected_answer_summary": "Yes. 'The triggering creature' is the creature that triggered the reaction (e.g. the one who critically failed the melee Strike against you). You attempt to Grapple that creature.",
+      "notes": "Temporal: 'triggering creature' = cause of the trigger."
+    },
+    {
+      "id": "batch_004_06",
+      "source_page": 428,
+      "question": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "reasoning_modes": ["temporal_ordering", "condition_duration"],
+      "graph_capabilities_tested": ["end_of_turn", "penalty_reset_timing"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/8/Text/8"
+      ],
+      "expected_answer_summary": "The multiple attack penalty starts at -5 on the second attack and increases for each additional attack. It lasts until the end of your turn, so it resets at the end of your turn (before your next turn).",
+      "notes": "Temporal: MAP until end of turn; reset at end."
+    }
+  ]
+}

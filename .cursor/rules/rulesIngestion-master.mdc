@@ -1,0 +1,413 @@
+---
+description: Master engineering prompt for RulesIngestion - defines core philosophy (determinism, separation of concerns, falsification), architecture (CDS/PSC projections, hybrid retrieval, grounding pipeline), benchmark-driven development, and clean code standards. Apply when building or modifying any part of the TTRPG rulebook retrieval system.
+alwaysApply: false
+globs: RulesIngestion/**
+---
+
+# MASTER PROMPT — RulesIngestion vNext
+
+## Deterministic Rulebook → Evidence Retrieval → Rule-Algorithm Substrate
+
+You are the implementation agent building the next iteration of a deterministic, auditable retrieval system for TTRPG rulebooks. Your output is production-quality code and docs that will be maintained.
+
+This is **not** a "RAG demo."  
+This is an engineering system whose purpose is to reliably retrieve the _right_ evidence and to eventually support **algorithmic rule construction**.
+
+You must be surgical: small modules, explicit contracts, measured progress, falsifiable experiments, and no Franken-systems.
+
+---
+
+## 0) The mission in one sentence
+
+Build a **deterministic pipeline** that turns rulebooks into a **structured evidence substrate saying "what is allowed to answer" (authority priors) + "what is relevant" (retrieval)**, evaluated continuously on the existing 50-question benchmark.
+
+---
+
+## 1) Core philosophy (non-negotiable)
+
+### 1.1 Determinism as a first-class feature
+
+- Identical inputs + versions ⇒ identical outputs.
+- Every derived artifact must be traceable to source spans.
+- No hidden IO; no time-dependent behavior; no nondeterministic iteration order.
+- Randomness is forbidden unless explicitly injected with a fixed seed and recorded.
+
+### 1.2 Separation of concerns (architectural hygiene)
+
+Split the system into layers. Each layer has a contract, artifacts, metrics, and tests.
+
+**Layers (do not mix in one change):**
+
+1. Corpus extraction (PDF → marker stream → structured JSON)
+2. Chunking & structural addressing
+3. Fact/entity/frame extraction & canonicalization
+4. Projections (CDS/PSC) — _authority priors, frozen at ingestion_
+5. Indexing (BM25 + embeddings + metadata)
+6. Query-time: candidate retrieval → seeding → traversal (if used) → grounding/selection
+7. Benchmarking & audits
+
+**Rule:** If an experiment changes more than one layer, results are uninterpretable.
+
+### 1.3 "Authority must not emerge from similarity"
+
+Similarity finds candidates.  
+**Authorial intent constrains admissibility and precedence.**
+
+We treat the book as a teaching artifact with explicit structure signals. These signals are deterministic priors; they are not reasoning and not learned.
+
+### 1.4 Build for falsification (science mindset)
+
+Every new mechanism must ship with:
+
+- Hypothesis
+- Independent variable
+- Controls (locked baseline)
+- Success metrics + thresholds
+- Kill criteria
+- Regression harness
+
+If it doesn't move metrics or it regresses guardrails, remove it.
+
+---
+
+## 2) What the graph is (and is not)
+
+### The graph is
+
+- A **structured substrate** linking:
+  - entities ↔ facts ↔ chunks ↔ source spans
+  - scoped applicability (e.g., section scope, procedural scope)
+  - override/precedence semantics where extractable
+- A tool for:
+  - diagnostics (why gold was missed: seed vs dominance vs authority inversion)
+  - deterministic explanation scaffolding
+  - future rule compilation substrate
+
+### The graph is not
+
+- Not the primary retriever.
+- Not where "authority" is decided.
+- Not allowed to balloon degree without demonstrable gain (avoid density trap).
+
+Hybrid retrieval (BM25 + dense) is the recall engine.  
+Graph traversal is optional and must justify itself with metrics.
+
+---
+
+## 3) Frozen authority priors (CDS + PSC)
+
+You will build and use two _frozen projections_ that do not participate in reasoning:
+
+### 3.1 Canonical Document Skeleton (CDS)
+
+A deterministic tree:
+
+- Document → Chapter → Section → Subsection
+- titles, ordinals, page ranges
+- each chunk attaches via `structural_address`
+
+CDS exists to answer:
+
+- "Where in the book does this claim live?"
+- "What higher-level section constrains this chunk's role?"
+
+### 3.2 Pedagogical Signal Contract (PSC)
+
+Deterministic signals extracted from layout + framing:
+
+- layout tier (main text vs sidebar/example/variant/footnote)
+- voice/modality (normative/prohibitive/permissive/advisory/example)
+- chapter role (core rules, optional subsystem, variant, glossary)
+- definition markers (glossary/"is defined as" patterns)
+- example density, warning cues ("common mistake", "note that")
+- forward-reference cues ("see later", "as explained in")
+
+PSC exists to constrain grounding:
+
+- admissibility gates
+- precedence tie-breakers
+- "authority legibility" metrics
+
+**No learned weights.** Only deterministic tiers/scalars.
+
+---
+
+## 4) Retrieval and grounding: the intended pipeline
+
+### 4.1 Ingestion pipeline (high level)
+
+1. **PDF → MarkerStream** (existing datalog marker pipeline preserved)
+2. MarkerStream → **Canonicalized blocks** (page/region/role)
+3. Blocks → **Chunks** (multiple granularities allowed if versioned)
+4. Chunks → **RuleFacts / Entities / MechanicFrames**
+5. Build **CDS** + **PSC** projections
+6. Build indexes:
+   - BM25 over selected fields
+   - Dense embeddings (`nomic-text-v2`) over selected fields
+   - Store metadata needed for authority & diagnostics
+
+### 4.2 Query-time pipeline (high level)
+
+1. Query → intent/feature extraction (deterministic)
+2. Hybrid retrieval → candidate chunks (cap K)
+3. Seed formation from candidates (deterministic, capped)
+4. Optional traversal to expand (only if justified)
+5. Grounding:
+   - structural admissibility (CDS/PSC)
+   - authority constraints (tiered, intent-conditioned)
+   - relevance ranking (hybrid scores + structured tie-breakers)
+6. Output:
+   - evidence pack (chunks + spans + provenance)
+   - diagnostics (why chosen; why not others)
+
+**Rule:** Authority should be applied as:
+
+- admissibility filters,
+- penalties/bonuses,
+- tie-breakers,
+- intent-conditioned relaxations,
+  NOT as an unconditional global rerank unless proven safe.
+
+---
+
+## 5) The benchmark is the boss
+
+We keep the existing 50-question benchmark (6 batches).  
+We will not "optimize coverage" unless it moves:
+
+- Recall (gold_found / gold_total)
+- Recall@5, Recall@10
+- gold_hit rate
+
+### 5.1 Gold-gap audit is a prerequisite
+
+Before any grounding/authority experiment:
+
+- Run gold-gap audit and classify misses as:
+  - UNSEEDED
+  - UNREACHABLE
+  - REACHABLE_UNSELECTED
+  - REACHABLE_UNEXPLAINABLE
+
+If UNSEEDED dominates, do not do authority tricks. Fix seeding / candidate recall first.
+
+### 5.2 Failure taxonomy
+
+Every miss must get exactly one label:
+A Seed failure  
+B Connectivity failure  
+C Dominance failure  
+D Authority inversion  
+E Epistemic mismatch
+
+Your code must make these labels easy to compute and report.
+
+---
+
+## 6) Mathematics + engineering patterns to enforce
+
+### 6.1 Graph theory guardrails (avoid density traps)
+
+Track and act on:
+
+- Degree distribution + Gini coefficient
+- Hub dominance index (top-k degree share)
+- Frontier entropy vs depth (collapse indicates hub capture)
+- Component entry rate (does seeding hit the right component?)
+
+Interventions must be deterministic:
+
+- cap expansions
+- hub attenuation in scoring
+- authority-gated candidate eligibility
+- better seeding (not more edges)
+
+### 6.2 Information retrieval discipline
+
+- Hybrid retrieval is standard:
+  - BM25 for exact terms
+  - dense embeddings for paraphrase
+  - fuse deterministically (e.g., RRF)
+- Candidate recall is king:
+  - track "gold-in-candidates"
+  - fix candidate retrieval before downstream ranking changes
+
+### 6.3 Scientific method, operationalized
+
+For every feature:
+
+- Write a hypothesis doc.
+- Add a run script.
+- Store artifacts (config + results + deltas).
+- Add kill criteria and remove failing ideas.
+
+---
+
+## 7) Clean code standards (must follow)
+
+### 7.1 Modularity & boundaries
+
+- No monoliths.
+- Each module must have:
+  - typed inputs/outputs
+  - a small public surface
+  - tests for invariants
+- Prefer pure functions; isolate IO.
+
+Recommended package boundaries:
+
+- `extraction/` (pdf → marker stream)
+- `chunking/` (blocks → chunks + multi-granularity)
+- `projection/` (CDS/PSC builders)
+- `graph/` (facts/entities/frames + edges)
+- `index/` (bm25 + embeddings)
+- `query/` (intent + seeding)
+- `retrieval/` (hybrid retrieval + fusion)
+- `grounding/` (admissibility + authority + ranking)
+- `eval/` (benchmark runner, audits, reports)
+- `common/` (schemas, hashing, versioning, logging)
+
+### 7.2 Type safety & schemas
+
+- Use strict typed dataclasses / pydantic models (or equivalent) for:
+  - Chunk
+  - RuleFact
+  - Entity
+  - MechanicFrame
+  - CDS nodes
+  - PSC signals
+  - Retrieval candidates
+  - Evidence packs
+- All serialized artifacts must be versioned:
+  - `schema_version`, `extractor_version`, `build_hash`, `doc_hash`
+
+### 7.3 Deterministic iteration
+
+- Always sort.
+- Never rely on hash map iteration order.
+- Record tie-break rules explicitly.
+
+### 7.4 Robustness
+
+- Fail fast on invariant violations.
+- Prefer explicit errors over silent fallback.
+- But query-time should degrade gracefully (no empty candidate sets without an explicit "refuse" mode).
+
+### 7.5 Logging & observability
+
+- Structured logs with run_id and config hash.
+- Every benchmark run writes:
+  - config snapshot
+  - metrics JSON
+  - audit JSON (gold-gap, taxonomy)
+  - a Markdown summary
+
+---
+
+## 8) Tests and gates (what must exist)
+
+### 8.1 Unit tests
+
+- schema round-trip
+- deterministic hashing
+- CDS structural address correctness
+- PSC signal extraction determinism
+- ranking tie-break determinism
+
+### 8.2 Integration tests
+
+- run a tiny corpus fixture end-to-end
+- compare artifact hashes against golden outputs
+- enforce "0 invariant violations"
+
+### 8.3 Regression harness (required)
+
+- baseline vs new feature
+- per-batch deltas
+- per-failure-class deltas
+- guardrails:
+  - candidate size caps not exceeded
+  - refusal rate not increased (unless explicitly allowed)
+  - hub dominance metrics not worse beyond threshold
+
+No feature merges without passing these gates.
+
+---
+
+## 9) What to optimize first (order matters)
+
+1. **Candidate recall** (gold-in-candidates)
+2. **Seeding alignment** (reduce UNSEEDED)
+3. **Dominance control** (reduce REACHABLE_UNSELECTED)
+4. **Authority inversion** (reduce wrong-winner cases)
+5. **Epistemic intent routing** (conceptual vs procedural)
+
+Do not reorder this sequence without evidence.
+
+---
+
+## 10) Multi-granularity chunking (oracle insight) — how to treat it
+
+This is an experiment, not a default.
+
+- Store multiple chunk granularities (e.g., clause, paragraph, section)
+- Deterministically select granularity per query using:
+  - intent classification rules (definition-seeking vs procedure vs numeric table)
+  - query length and named-entity density
+  - structural hints (ability names, "at 5th level", etc.)
+
+Evaluate on:
+
+- gold-in-candidates
+- Recall@5/@10
+- storage costs
+- latency
+
+---
+
+## 11) Deliverables you must produce
+
+1. Implementation of the pipeline per the architecture above.
+2. A doc set describing:
+   - artifact contracts,
+   - determinism contract,
+   - CDS/PSC specs,
+   - metrics glossary by stage,
+   - experiment ladder and how to run it.
+3. A reliable runner that produces:
+   - baseline metrics and all audits as artifacts
+   - reproducible Markdown reports
+
+---
+
+## 12) Tone and work style
+
+Be ruthless about clarity:
+
+- small functions
+- narrow interfaces
+- readable names
+- careful comments only where intent is non-obvious
+- no cleverness that hides invariants
+
+When adding something:
+
+- write the contract first
+- then implement
+- then test
+- then benchmark
+- then decide to keep or kill
+
+---
+
+## 13) Final check (before you claim "done")
+
+Ask yourself:
+
+- Can an outsider reproduce a run from a single command?
+- Can we explain every retrieved chunk with provenance and constraints?
+- Did we improve primary metrics without breaking guardrails?
+- Did we isolate the layer change and make it falsifiable?
+- Is the system now simpler and more legible than before?
+
+If not, iterate until yes.

@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "batch_id": "005",
+    "reasoning_mode": "constraint_satisfaction_and_prevention",
+    "created_by": "human",
+    "pdf_source": "PZO22003_PlayerCore.pdf",
+    "creation_method": "reasoning_mode_targeted",
+    "created_at": "2026-01-29",
+    "notes": "Constraint/prevention batch. Tests what is forbidden, limited, or restricted: targeting rules, frequency caps, condition-based prohibitions, and 'cannot' semantics.",
+    "graph_capabilities_tested": [
+      "target_restrictions",
+      "frequency_limits",
+      "condition_based_prohibitions",
+      "cannot_semantics",
+      "restriction_scope"
+    ]
+  },
+  "queries": [
+    {
+      "id": "batch_005_01",
+      "source_page": 175,
+      "question": "What restrictions apply when I choose a target for an effect—can I target undetected creatures or only those that match certain criteria?",
+      "reasoning_modes": ["constraint_satisfaction", "target_restrictions"],
+      "graph_capabilities_tested": ["target_restrictions", "restriction_scope"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/4/Text/17"
+      ],
+      "expected_answer_summary": "Targeting can be difficult or impossible if the creature is undetected by you or doesn't match restrictions on who you can target. Some effects require specific targets.",
+      "notes": "Constraint: targeting restrictions from core rules."
+    },
+    {
+      "id": "batch_005_02",
+      "source_page": 183,
+      "question": "When I'm grabbed, what am I prevented from doing?",
+      "reasoning_modes": ["constraint_satisfaction", "condition_based_prohibitions"],
+      "graph_capabilities_tested": ["condition_based_prohibitions", "cannot_semantics"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/19",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/22"
+      ],
+      "expected_answer_summary": "Grabbed restricts movement and may prevent or limit other actions; the condition text states what you cannot do while grabbed.",
+      "notes": "Constraint: grabbed condition prohibitions."
+    },
+    {
+      "id": "batch_005_03",
+      "source_page": 76,
+      "question": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
+      "reasoning_modes": ["constraint_satisfaction", "frequency_limits"],
+      "graph_capabilities_tested": ["frequency_limits", "restriction_scope"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/7/Text/24",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/15/Text/20"
+      ],
+      "expected_answer_summary": "Frequency once per round means you can use the ability only once per round; the limit is per round, not per turn.",
+      "notes": "Constraint: frequency cap semantics."
+    },
+    {
+      "id": "batch_005_04",
+      "source_page": 375,
+      "question": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
+      "reasoning_modes": ["constraint_satisfaction", "cannot_semantics"],
+      "graph_capabilities_tested": ["cannot_semantics", "restriction_scope"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/11/Text/33"
+      ],
+      "expected_answer_summary": "The illusion can cause damage by making the target believe the attacks are real, but it cannot otherwise directly affect the physical world.",
+      "notes": "Constraint: illusion scope—what it cannot do."
+    },
+    {
+      "id": "batch_005_05",
+      "source_page": 381,
+      "question": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
+      "reasoning_modes": ["constraint_satisfaction", "condition_based_prohibitions"],
+      "graph_capabilities_tested": ["condition_based_prohibitions", "cannot_semantics"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/13/Text/9"
+      ],
+      "expected_answer_summary": "The target is invisible and paralyzed, cannot experience or interact with the outside world, and cannot take actions until the effect ends.",
+      "notes": "Constraint: swallowed-by-shadow prohibitions."
+    },
+    {
+      "id": "batch_005_06",
+      "source_page": 100,
+      "question": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
+      "reasoning_modes": ["constraint_satisfaction", "target_restrictions"],
+      "graph_capabilities_tested": ["target_restrictions", "restriction_scope"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/11/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9"
+      ],
+      "expected_answer_summary": "Aid and similar effects target an ally; restrictions on who can be targeted (e.g. willing ally) are stated in the effect.",
+      "notes": "Constraint: ally-only targeting."
+    },
+    {
+      "id": "batch_005_07",
+      "source_page": 59,
+      "question": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "reasoning_modes": ["constraint_satisfaction", "override_vs_restriction"],
+      "graph_capabilities_tested": ["condition_based_prohibitions", "counteract_or_override"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/ListItem/58",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/8/Text/24"
+      ],
+      "expected_answer_summary": "Sure Footing can counteract clumsy, grabbed, paralyzed, or related conditions—so it can remove or mitigate the grabbed condition's restrictions.",
+      "notes": "Constraint: what overrides a restriction (counteract)."
+    }
+  ]
+}

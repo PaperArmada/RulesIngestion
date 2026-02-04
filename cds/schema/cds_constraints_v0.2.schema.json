@@ -1,0 +1,291 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dungeonmind.invalid/cds-constraints-v0.2.schema.json",
+  "title": "CDS Constraints v0.2",
+  "type": "object",
+  "required": ["schema_version", "documents"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.2"
+    },
+    "documents": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/definitions/document" }
+    }
+  },
+  "definitions": {
+    "document": {
+      "type": "object",
+      "required": ["document_id", "outline", "chunk_facts", "constraint_sets"],
+      "additionalProperties": false,
+      "properties": {
+        "document_id": { "type": "string", "minLength": 1 },
+        "outline": { "$ref": "#/definitions/outline" },
+        "chunk_facts": {
+          "type": "array",
+          "minItems": 0,
+          "items": { "$ref": "#/definitions/chunk_facts" }
+        },
+        "constraint_sets": { "$ref": "#/definitions/constraint_sets" }
+      }
+    },
+
+    "outline": {
+      "type": "object",
+      "required": ["chapters", "sections"],
+      "additionalProperties": false,
+      "properties": {
+        "chapters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/chapter_node" }
+        },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/section_node" }
+        }
+      }
+    },
+
+    "chapter_node": {
+      "type": "object",
+      "required": ["chapter_id", "title", "ordinal"],
+      "additionalProperties": false,
+      "properties": {
+        "chapter_id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "ordinal": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "section_node": {
+      "type": "object",
+      "required": ["section_id", "path", "ordinal"],
+      "additionalProperties": false,
+      "properties": {
+        "section_id": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "ordinal": { "type": "integer", "minimum": 0 },
+        "chapter_id": { "type": "string" }
+      }
+    },
+
+    "chunk_facts": {
+      "type": "object",
+      "required": ["chunk_id", "section_id", "ordinal", "layout", "rhetoric_explicit", "references_explicit", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": { "type": "string", "minLength": 1 },
+        "section_id": { "type": "string", "minLength": 1 },
+        "ordinal": { "type": "integer", "minimum": 0 },
+
+        "layout": { "$ref": "#/definitions/layout_facts" },
+        "rhetoric_explicit": { "$ref": "#/definitions/rhetoric_explicit_facts" },
+        "references_explicit": { "$ref": "#/definitions/references_explicit_facts" },
+
+        "provenance": { "$ref": "#/definitions/provenance" }
+      }
+    },
+
+    "layout_facts": {
+      "type": "object",
+      "required": ["block_type"],
+      "additionalProperties": false,
+      "properties": {
+        "block_type": { "type": "string", "minLength": 1 },
+        "container_type": { "type": ["string", "null"] },
+        "is_callout": { "type": ["boolean", "null"] },
+        "page": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+
+    "rhetoric_explicit_facts": {
+      "type": "object",
+      "required": ["has_example_label", "has_variant_label", "has_definition_label"],
+      "additionalProperties": false,
+      "properties": {
+        "has_example_label": { "type": "boolean" },
+        "has_variant_label": { "type": "boolean" },
+        "has_definition_label": { "type": "boolean" }
+      }
+    },
+
+    "references_explicit_facts": {
+      "type": "object",
+      "required": ["explicit_section_refs", "explicit_page_refs"],
+      "additionalProperties": false,
+      "properties": {
+        "explicit_section_refs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/explicit_section_ref" }
+        },
+        "explicit_page_refs": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+
+    "explicit_section_ref": {
+      "type": "object",
+      "required": ["raw_text", "resolved_section_id", "resolution_confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "raw_text": { "type": "string" },
+        "resolved_section_id": { "type": ["string", "null"] },
+        "resolution_confidence": {
+          "type": "string",
+          "enum": ["unresolved", "ambiguous", "resolved_unique"]
+        }
+      }
+    },
+
+    "constraint_sets": {
+      "type": "object",
+      "required": ["admissibility_rules", "conflict_rules"],
+      "additionalProperties": false,
+      "properties": {
+        "admissibility_rules": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/admissibility_rule" }
+        },
+        "conflict_rules": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/conflict_rule" }
+        }
+      }
+    },
+
+    "admissibility_rule": {
+      "type": "object",
+      "required": ["rule_id", "version", "description", "decision", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 },
+        "description": { "type": "string" },
+
+        "applies_when": { "$ref": "#/definitions/rule_conditions" },
+
+        "decision": {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "type": "string", "enum": ["ALLOW", "DENY", "UNKNOWN"] }
+          }
+        },
+
+        "provenance": { "$ref": "#/definitions/provenance" }
+      }
+    },
+
+    "conflict_rule": {
+      "type": "object",
+      "required": ["rule_id", "version", "description", "decision", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 },
+        "description": { "type": "string" },
+
+        "applies_when": { "$ref": "#/definitions/rule_conditions" },
+
+        "decision": {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "type": "string", "enum": ["A_OVER_B", "B_OVER_A", "UNKNOWN"] }
+          }
+        },
+
+        "provenance": { "$ref": "#/definitions/provenance" }
+      }
+    },
+
+    "rule_conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "query_intents": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/query_intent" }
+        },
+        "require_flags": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" }
+        },
+        "chunk_predicates": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/chunk_predicate" }
+        },
+        "pair_predicates": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/pair_predicate" }
+        }
+      }
+    },
+
+    "query_intent": {
+      "type": "string",
+      "enum": ["definition", "procedure", "constraint", "lookup", "example_request", "unknown"]
+    },
+
+    "chunk_predicate": {
+      "type": "object",
+      "required": ["field", "op", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "type": "string",
+          "enum": [
+            "layout.block_type",
+            "layout.container_type",
+            "layout.is_callout",
+            "rhetoric_explicit.has_example_label",
+            "rhetoric_explicit.has_variant_label",
+            "rhetoric_explicit.has_definition_label"
+          ]
+        },
+        "op": { "type": "string", "enum": ["eq", "neq", "in", "not_in", "is_true", "is_false"] },
+        "value": {}
+      }
+    },
+
+    "pair_predicate": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "one_is_example_other_not",
+            "one_is_variant_other_not",
+            "one_refs_other_resolved_unique"
+          ]
+        }
+      }
+    },
+
+    "provenance": {
+      "type": "object",
+      "required": ["derived_from", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

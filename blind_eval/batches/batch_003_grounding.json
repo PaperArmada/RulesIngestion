@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "batch_id": "003",
+    "reasoning_mode": "grounding_stressors",
+    "created_by": "human",
+    "pdf_source": "PZO22003_PlayerCore.pdf",
+    "creation_method": "ruleset_agnostic_parameterized",
+    "created_at": "2026-01-29",
+    "notes": "Grounding-stressor benchmark. Questions stress scope, authority, conditions/triggers, definitions, procedure, and examples—not recall. Parameterized from generic forms and grounded in SF2e text.",
+    "graph_capabilities_tested": [
+      "scope_duration_and_header_inheritance",
+      "authority_and_override_resolution",
+      "condition_and_trigger_precision",
+      "glossary_and_definition_authority",
+      "procedure_and_order_of_operations",
+      "example_vs_rule_authority"
+    ]
+  },
+  "queries": [
+    {
+      "id": "batch_003_01",
+      "source_page": 417,
+      "question": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
+      "reasoning_modes": ["scope_applicability", "scope_duration"],
+      "graph_capabilities_tested": ["scope_duration", "header_inheritance"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/11/Text/7"
+      ],
+      "expected_answer_summary": "Off-guard from flanking is situational: the creature is off-guard to melee attacks from creatures that are flanking it. It applies only while flanked; when the ally moves away the creature is no longer flanked so the penalty ends.",
+      "notes": "A. Scope: rule applies only when condition (flanking) is met; no persistence clause."
+    },
+    {
+      "id": "batch_003_02",
+      "source_page": 15,
+      "question": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
+      "reasoning_modes": ["scope_applicability", "repetition_semantics"],
+      "graph_capabilities_tested": ["scope_duration", "Frequency_Trigger_structure"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/19"
+      ],
+      "expected_answer_summary": "Frequency limits how often you can use the ability; Trigger says when a reaction/free action can be used. 'Until the end of your next turn' is duration of the effect once you use the ability—it's one effect per use, not re-applied every time the trigger fires.",
+      "notes": "A. Scope: duration applies to single use; Frequency governs how often you can use."
+    },
+    {
+      "id": "batch_003_03",
+      "source_page": 406,
+      "question": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "reasoning_modes": ["scope_applicability", "target_scope"],
+      "graph_capabilities_tested": ["target_scope", "core_rule_clause"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/10"
+      ],
+      "expected_answer_summary": "Aid applies only to an ally. Requirements: the ally is willing to accept your aid, and you've prepared to help. You try to help your ally with a task—target is explicitly an ally.",
+      "notes": "A. Target scope: core rule states ally; not enemies or self."
+    },
+    {
+      "id": "batch_003_04",
+      "source_page": 406,
+      "question": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
+      "reasoning_modes": ["authority_override", "conflict_resolution"],
+      "graph_capabilities_tested": ["override_semantics", "order_of_operations"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "expected_answer_summary": "You can use only one action in response to a given trigger. If you had a reaction and a free action that both had the same trigger, you would choose one to use.",
+      "notes": "B. Authority: explicit rule—one action per trigger; resolves conflict."
+    },
+    {
+      "id": "batch_003_05",
+      "source_page": 41,
+      "question": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "reasoning_modes": ["authority_override", "replacement_vs_supplement"],
+      "graph_capabilities_tested": ["specific_over_general", "variant_authority"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/4/SectionHeader/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/36"
+      ],
+      "expected_answer_summary": "Enhanced Nanite Surge (feat) lets you use Nanite Surge with a frequency of once per 10 minutes, rather than once per hour. It replaces the frequency for that use, not adds an extra use.",
+      "notes": "B. Override: 'rather than' indicates replacement of the base frequency."
+    },
+    {
+      "id": "batch_003_06",
+      "source_page": 15,
+      "question": "What exact condition must be true to use your one reaction per round?",
+      "reasoning_modes": ["conditions_triggers", "condition_precision"],
+      "graph_capabilities_tested": ["condition_definition", "trigger_semantics"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "expected_answer_summary": "You get one reaction per round. You can use it only when its specific trigger is fulfilled. So the condition is: (1) you haven't used your reaction yet this round, and (2) the trigger for that reaction has occurred.",
+      "notes": "C. Conditions: trigger must be met; one per round."
+    },
+    {
+      "id": "batch_003_07",
+      "source_page": 406,
+      "question": "Can you use more than one reaction in response to the same trigger?",
+      "reasoning_modes": ["conditions_triggers", "trigger_multiplicity"],
+      "graph_capabilities_tested": ["once_per_X_phrasing", "trigger_conflict"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "expected_answer_summary": "No. You can use only one action in response to a given trigger. So even if multiple reactions could fire on the same trigger, you choose one.",
+      "notes": "C. Trigger multiplicity: one action per trigger."
+    },
+    {
+      "id": "batch_003_08",
+      "source_page": 428,
+      "question": "What does 'reaction' mean in Starfinder rules terms?",
+      "reasoning_modes": ["definitions_terminology", "glossary_authority"],
+      "graph_capabilities_tested": ["defined_concept", "glossary_entry"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "expected_answer_summary": "Reaction ([reaction]): an action you can use even when it's not your turn. You get one reaction per round, and you can use it only when its specific trigger is fulfilled.",
+      "notes": "D. Definitions: rules definition, not colloquial."
+    },
+    {
+      "id": "batch_003_09",
+      "source_page": 5,
+      "question": "Where does the book tell you to look for the complete definition of a bolded term?",
+      "reasoning_modes": ["definitions_terminology", "authorial_guidance"],
+      "graph_capabilities_tested": ["how_to_use_book", "glossary_index"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "expected_answer_summary": "New concepts are presented in bold. The complete game rules are defined in later chapters, and the Glossary and Index in the back of the book will help you find the specific rules you need.",
+      "notes": "D. Authorial guidance: later chapters + Glossary & Index."
+    },
+    {
+      "id": "batch_003_10",
+      "source_page": 403,
+      "question": "When in your turn does the dying recovery check happen?",
+      "reasoning_modes": ["procedure_order", "timing_semantics"],
+      "graph_capabilities_tested": ["step_by_step_procedure", "start_of_turn"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "expected_answer_summary": "Many things happen at the start of your turn. When you're dying, you must attempt a recovery check at the start of your turn each round. So the dying recovery check happens at the start of your turn.",
+      "notes": "E. Procedure: start of turn; explicit in dying condition."
+    },
+    {
+      "id": "batch_003_11",
+      "source_page": 15,
+      "question": "Does a free action with a trigger use up your one reaction per round?",
+      "reasoning_modes": ["procedure_order", "interrupt_semantics"],
+      "graph_capabilities_tested": ["free_action_vs_reaction", "reaction_per_round"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/5/Text/43",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "expected_answer_summary": "No. Free actions with triggers can be used at any time, but they don't use up your 1 reaction per round. Reactions use your one reaction per round; free actions do not.",
+      "notes": "E. Procedure: free action with trigger ≠ reaction; doesn't consume reaction."
+    },
+    {
+      "id": "batch_003_12",
+      "source_page": 15,
+      "question": "Can you use a reaction when it's not your turn?",
+      "reasoning_modes": ["procedure_order", "timing_semantics"],
+      "graph_capabilities_tested": ["reaction_timing", "interrupt_vs_wait"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12"
+      ],
+      "expected_answer_summary": "Yes. Reactions can be used even when it's not your turn. You only get one per round and only when the trigger is fulfilled.",
+      "notes": "E. Procedure: reaction explicitly usable when not your turn."
+    },
+    {
+      "id": "batch_003_13",
+      "source_page": 406,
+      "question": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
+      "reasoning_modes": ["examples_edge_cases", "example_authority"],
+      "graph_capabilities_tested": ["example_vs_rule", "illustration_not_exception"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "expected_answer_summary": "It illustrates the rule. The rule states you can use only one action in response to a given trigger. The example ('if you had a reaction and a free action that both had a trigger of...') is clarifying that you choose one—it doesn't add or change the rule.",
+      "notes": "F. Examples: example illustrates one-action-per-trigger; doesn't override."
+    },
+    {
+      "id": "batch_003_14",
+      "source_page": 5,
+      "question": "If the text is ambiguous, where does the book say to look?",
+      "reasoning_modes": ["examples_edge_cases", "authorial_guidance"],
+      "graph_capabilities_tested": ["how_to_use_book", "glossary_index"],
+      "gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "expected_answer_summary": "The introduction says the complete game rules are in later chapters and the Glossary and Index in the back will help you find the specific rules you need. So for ambiguity, look to later chapters and the Glossary & Index.",
+      "notes": "F. Silence/ambiguity: authorial guidance to later chapters and Glossary & Index."
+    }
+  ]
+}

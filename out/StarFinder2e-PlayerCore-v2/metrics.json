@@ -1,0 +1,57 @@
+{
+  "markerstream_hash": "6e64ec15bd23036ba713b362f83cd717e6ad0910ee0bbb65c6b8ef8274d78186",
+  "chunkset_hash": "57cc8411acc4f8056bd131d49c8ee338b61de8c18db3306a0f3b0a9985264fd3",
+  "gates": {
+    "passed": true,
+    "results": [
+      {
+        "name": "M-A2_page_coverage",
+        "value": 1.0,
+        "threshold": ">= 0.99",
+        "passed": true
+      },
+      {
+        "name": "M-A3_block_retention",
+        "value": 0.9996717410036519,
+        "threshold": ">= 0.995",
+        "passed": true
+      },
+      {
+        "name": "M-A4_span_validity",
+        "value": 1.0,
+        "threshold": ">= 0.999",
+        "passed": true
+      },
+      {
+        "name": "M-A5_structural_address",
+        "value": 1.0,
+        "threshold": ">= 0.95",
+        "passed": true
+      },
+      {
+        "name": "M-A6_unknown_block_rate",
+        "value": 0.0,
+        "threshold": "<= 0.01",
+        "passed": true
+      },
+      {
+        "name": "M-A7_fragmentation",
+        "value": 2.5370843989769822,
+        "threshold": "p95 <= 5*median",
+        "passed": true
+      },
+      {
+        "name": "M-A8_text_entropy",
+        "value": 1.0,
+        "threshold": ">= 0.98",
+        "passed": true
+      },
+      {
+        "name": "M-A9_provenance_completeness",
+        "value": 1.0,
+        "threshold": "= 1.0",
+        "passed": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,522 @@
+{
+  "document": "merged",
+  "queries": [
+    {
+      "id": "blind_001_01",
+      "query_text": "What abilities can cancel out Vent Gas when a Barathu uses it?",
+      "query_text_short": "What abilities can cancel out Vent Gas when a Barathu uses it?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/9/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-330-363::/page/6/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/7/Text/7"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_02",
+      "query_text": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
+      "query_text_short": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/24",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/28",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/2/Table/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/8"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_03",
+      "query_text": "Can I use Redirect Current to power up a console?",
+      "query_text_short": "Can I use Redirect Current to power up a console?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/34"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_04",
+      "query_text": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
+      "query_text_short": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/13/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/12/Text/44",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-232-249::/page/4/Text/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/9"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_05",
+      "query_text": "I don't really understand perception?",
+      "query_text_short": "I don't really understand perception?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/SectionHeader/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/22",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/23",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/5"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_06",
+      "query_text": "I need help deciding between Covering Fire or I'll be back as my 6th level feat I'm playing an Android",
+      "query_text_short": "I need help deciding between Covering Fire or I'll be back as my 6th level feat I'm playing an Android",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/5",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/8",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/15",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/18",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/19",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/20"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_07",
+      "query_text": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy within reach leaves a square during a move action?",
+      "query_text_short": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy within reach leaves a square during a move action?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/SectionHeader/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/4",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/SectionHeader/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/Text/46"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_08",
+      "query_text": "Do Androids with Revivification Protocol need to make recovery checks?",
+      "query_text_short": "Do Androids with Revivification Protocol need to make recovery checks?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/SectionHeader/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_09",
+      "query_text": "Can a Shirren use Undying more than once per day?",
+      "query_text_short": "Can a Shirren use Undying more than once per day?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "blind_001_10",
+      "query_text": "What's the difference between Android Revivification Protocol and Shirren Undying?",
+      "query_text_short": "What's the difference between Android Revivification Protocol and Shirren Undying?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_01",
+      "query_text": "What penalties do I have while prone?",
+      "query_text_short": "What penalties do I have while prone?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/13/Text/96",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_02",
+      "query_text": "Can I use Stealth to Hide while I'm prone?",
+      "query_text_short": "Can I use Stealth to Hide while I'm prone?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/25/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_03",
+      "query_text": "What changes when I gain the wounded condition?",
+      "query_text_short": "What changes when I gain the wounded condition?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/23",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/24"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_04",
+      "query_text": "If I'm dying and taking persistent damage, what happens during my turn?",
+      "query_text_short": "If I'm dying and taking persistent damage, what happens during my turn?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_05",
+      "query_text": "Does the concealed condition stack with cover?",
+      "query_text_short": "Does the concealed condition stack with cover?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/2/Text/6",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Table/10"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_06",
+      "query_text": "What penalties apply while blinded?",
+      "query_text_short": "What penalties apply while blinded?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/10"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_07",
+      "query_text": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
+      "query_text_short": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/ListItem/10",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/14/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-250-267::/page/6/Text/17"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_002_08",
+      "query_text": "Can I crawl while prone and does it provoke?",
+      "query_text_short": "Can I crawl while prone and does it provoke?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_01",
+      "query_text": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
+      "query_text_short": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/11/Text/7"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_02",
+      "query_text": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
+      "query_text_short": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/19"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_03",
+      "query_text": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "query_text_short": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/10"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_04",
+      "query_text": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
+      "query_text_short": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_05",
+      "query_text": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "query_text_short": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/4/SectionHeader/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/36"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_06",
+      "query_text": "What exact condition must be true to use your one reaction per round?",
+      "query_text_short": "What exact condition must be true to use your one reaction per round?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_07",
+      "query_text": "Can you use more than one reaction in response to the same trigger?",
+      "query_text_short": "Can you use more than one reaction in response to the same trigger?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_08",
+      "query_text": "What does 'reaction' mean in Starfinder rules terms?",
+      "query_text_short": "What does 'reaction' mean in Starfinder rules terms?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_09",
+      "query_text": "Where does the book tell you to look for the complete definition of a bolded term?",
+      "query_text_short": "Where does the book tell you to look for the complete definition of a bolded term?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_10",
+      "query_text": "When in your turn does the dying recovery check happen?",
+      "query_text_short": "When in your turn does the dying recovery check happen?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_11",
+      "query_text": "Does a free action with a trigger use up your one reaction per round?",
+      "query_text_short": "Does a free action with a trigger use up your one reaction per round?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/5/Text/43",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_12",
+      "query_text": "Can you use a reaction when it's not your turn?",
+      "query_text_short": "Can you use a reaction when it's not your turn?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_13",
+      "query_text": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
+      "query_text_short": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_003_14",
+      "query_text": "If the text is ambiguous, where does the book say to look?",
+      "query_text_short": "If the text is ambiguous, where does the book say to look?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_01",
+      "query_text": "When in my turn does the dying recovery check happen\u2014start or end?",
+      "query_text_short": "When in my turn does the dying recovery check happen\u2014start or end?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_02",
+      "query_text": "When do I take persistent damage\u2014start or end of my turn?",
+      "query_text_short": "When do I take persistent damage\u2014start or end of my turn?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_03",
+      "query_text": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
+      "query_text_short": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_04",
+      "query_text": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
+      "query_text_short": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/10/Text/50"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_05",
+      "query_text": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
+      "query_text_short": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/45",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/46"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_004_06",
+      "query_text": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "query_text_short": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/8/Text/8"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_01",
+      "query_text": "What restrictions apply when I choose a target for an effect\u2014can I target undetected creatures or only those that match certain criteria?",
+      "query_text_short": "What restrictions apply when I choose a target for an effect\u2014can I target undetected creatures or only those that match certain criteria?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/4/Text/17"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_02",
+      "query_text": "When I'm grabbed, what am I prevented from doing?",
+      "query_text_short": "When I'm grabbed, what am I prevented from doing?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/19",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/22"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_03",
+      "query_text": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
+      "query_text_short": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/7/Text/24",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/15/Text/20"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_04",
+      "query_text": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
+      "query_text_short": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/11/Text/33"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_05",
+      "query_text": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
+      "query_text_short": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/13/Text/9"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_06",
+      "query_text": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
+      "query_text_short": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/11/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_005_07",
+      "query_text": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "query_text_short": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/ListItem/58",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/8/Text/24"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_006_01",
+      "query_text": "Why would I look at several conditions together instead of one at a time?",
+      "query_text_short": "Why would I look at several conditions together instead of one at a time?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_006_02",
+      "query_text": "What is an archetype in character-building terms?",
+      "query_text_short": "What is an archetype in character-building terms?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/1/Text/6"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_006_03",
+      "query_text": "Do spells always have visible or sensory effects when cast?",
+      "query_text_short": "Do spells always have visible or sensory effects when cast?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/4/Text/4"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_006_04",
+      "query_text": "How do conditions that share a theme relate to each other?",
+      "query_text_short": "How do conditions that share a theme relate to each other?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/1/Text/6",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2"
+      ],
+      "document_id": "merged"
+    },
+    {
+      "id": "batch_006_05",
+      "query_text": "What is the purpose of the Frequency and Trigger entries on an ability block?",
+      "query_text_short": "What is the purpose of the Frequency and Trigger entries on an ability block?",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-030-039::/page/5/Text/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14"
+      ],
+      "document_id": "merged"
+    }
+  ]
+}

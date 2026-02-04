@@ -1,0 +1,815 @@
+{
+  "distribution": {
+    "hit": 9,
+    "A": 14,
+    "B": 0,
+    "C": 25,
+    "D": 0,
+    "E": 2
+  },
+  "per_query": [
+    {
+      "query_id": "blind_001_01",
+      "batch_id": "001",
+      "question": "What abilities can cancel out Vent Gas when a Barathu uses it?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 53,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.050645574596848646,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_02",
+      "batch_id": "001",
+      "question": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_03",
+      "batch_id": "001",
+      "question": "Can I use Redirect Current to power up a console?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 8,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.09650896073594732,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": true
+    },
+    {
+      "query_id": "blind_001_04",
+      "batch_id": "001",
+      "question": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 24,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.09359996324581574,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_05",
+      "batch_id": "001",
+      "question": "I don't really understand perception?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_06",
+      "batch_id": "001",
+      "question": "I need help deciding between Covering Fire or I'll be back as my 6th level feat ",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 96,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_07",
+      "batch_id": "001",
+      "question": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy w",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_08",
+      "batch_id": "001",
+      "question": "Do Androids with Revivification Protocol need to make recovery checks?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 14,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.5269079614313803,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_09",
+      "batch_id": "001",
+      "question": "Can a Shirren use Undying more than once per day?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 34,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6108643020548935,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "blind_001_10",
+      "batch_id": "001",
+      "question": "What's the difference between Android Revivification Protocol and Shirren Undyin",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 25,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.07005428087549845,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": null
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_01",
+      "batch_id": "002",
+      "question": "What penalties do I have while prone?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 163,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_02",
+      "batch_id": "002",
+      "question": "Can I use Stealth to Hide while I'm prone?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_03",
+      "batch_id": "002",
+      "question": "What changes when I gain the wounded condition?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 158,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_04",
+      "batch_id": "002",
+      "question": "If I'm dying and taking persistent damage, what happens during my turn?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 162,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_05",
+      "batch_id": "002",
+      "question": "Does the concealed condition stack with cover?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 161,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_06",
+      "batch_id": "002",
+      "question": "What penalties apply while blinded?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 174,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_07",
+      "batch_id": "002",
+      "question": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_002_08",
+      "batch_id": "002",
+      "question": "Can I crawl while prone and does it provoke?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "state_and_condition_reasoning"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_01",
+      "batch_id": "003",
+      "question": "Does the off-guard condition from flanking apply only while the creature is flan",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_02",
+      "batch_id": "003",
+      "question": "Is the 'until the end of your next turn' effect from an ability applied once whe",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_03",
+      "batch_id": "003",
+      "question": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 36,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.09503011725564635,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_04",
+      "batch_id": "003",
+      "question": "When you have both a reaction and a free action with the same trigger, can you u",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 38,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6929471672244782,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_05",
+      "batch_id": "003",
+      "question": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 7,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_003_06",
+      "batch_id": "003",
+      "question": "What exact condition must be true to use your one reaction per round?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_07",
+      "batch_id": "003",
+      "question": "Can you use more than one reaction in response to the same trigger?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 35,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.09650896073594732,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_08",
+      "batch_id": "003",
+      "question": "What does 'reaction' mean in Starfinder rules terms?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_09",
+      "batch_id": "003",
+      "question": "Where does the book tell you to look for the complete definition of a bolded ter",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 9,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_003_10",
+      "batch_id": "003",
+      "question": "When in your turn does the dying recovery check happen?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 116,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.040048630190433046,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_11",
+      "batch_id": "003",
+      "question": "Does a free action with a trigger use up your one reaction per round?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 48,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6929471672244782,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_12",
+      "batch_id": "003",
+      "question": "Can you use a reaction when it's not your turn?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 3,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.09650896073594732,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_003_13",
+      "batch_id": "003",
+      "question": "If the book gives an example of having both a reaction and a free action with th",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 162,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_003_14",
+      "batch_id": "003",
+      "question": "If the text is ambiguous, where does the book say to look?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 6,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "grounding_stressors"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_004_01",
+      "batch_id": "004",
+      "question": "When in my turn does the dying recovery check happen\u2014start or end?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 124,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03835078340871136,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_004_02",
+      "batch_id": "004",
+      "question": "When do I take persistent damage\u2014start or end of my turn?",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_004_03",
+      "batch_id": "004",
+      "question": "If I have a reaction that triggers on 'you are about to attempt a recovery check",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 4,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6929471672244782,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_004_04",
+      "batch_id": "004",
+      "question": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, ",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 39,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_004_05",
+      "batch_id": "004",
+      "question": "When a reaction says you Grapple the 'triggering creature', does that mean the c",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 9,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6929471672244782,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_004_06",
+      "batch_id": "004",
+      "question": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 4,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "temporal_ordering_and_triggers"
+      },
+      "hit": true
+    },
+    {
+      "query_id": "batch_005_01",
+      "batch_id": "005",
+      "question": "What restrictions apply when I choose a target for an effect\u2014can I target undete",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.04886809589500825,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_02",
+      "batch_id": "005",
+      "question": "When I'm grabbed, what am I prevented from doing?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 13,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_03",
+      "batch_id": "005",
+      "question": "If an ability says 'Frequency once per round', can I use it more than once in th",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 12,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_04",
+      "batch_id": "005",
+      "question": "Can an illusion created by a spell affect the physical world or cause damage bey",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_05",
+      "batch_id": "005",
+      "question": "When a creature is swallowed by its own shadow (spell failure), can it act or pe",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 177,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_06",
+      "batch_id": "005",
+      "question": "Are there restrictions on who I can target with the Aid action or similar ally-o",
+      "failure_class": "A",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_005_07",
+      "batch_id": "005",
+      "question": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 13,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.5623351446188083,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "constraint_satisfaction_and_prevention"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_006_01",
+      "batch_id": "006",
+      "question": "Why would I look at several conditions together instead of one at a time?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 171,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "non_mechanic_conceptual"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_006_02",
+      "batch_id": "006",
+      "question": "What is an archetype in character-building terms?",
+      "failure_class": "E",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "non_mechanic_conceptual"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_006_03",
+      "batch_id": "006",
+      "question": "Do spells always have visible or sensory effects when cast?",
+      "failure_class": "E",
+      "failure_signals": {
+        "gold_in_reachable_set": false,
+        "gold_reachable_at_infinite_depth": false,
+        "gold_rank_if_reachable": null,
+        "seed_component_contains_gold": false,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "non_mechanic_conceptual"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_006_04",
+      "batch_id": "006",
+      "question": "How do conditions that share a theme relate to each other?",
+      "failure_class": "C",
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 171,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.03134732940431287,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "non_mechanic_conceptual"
+      },
+      "hit": false
+    },
+    {
+      "query_id": "batch_006_05",
+      "batch_id": "006",
+      "question": "What is the purpose of the Frequency and Trigger entries on an ability block?",
+      "failure_class": null,
+      "failure_signals": {
+        "gold_in_reachable_set": true,
+        "gold_reachable_at_infinite_depth": true,
+        "gold_rank_if_reachable": 1,
+        "seed_component_contains_gold": true,
+        "frontier_entropy_at_termination": 0.6931471805599453,
+        "authority_inversion_detected": false,
+        "batch_reasoning_mode": "non_mechanic_conceptual"
+      },
+      "hit": true
+    }
+  ],
+  "total_queries": 50,
+  "hits": 9,
+  "recall": 0.18
+}
