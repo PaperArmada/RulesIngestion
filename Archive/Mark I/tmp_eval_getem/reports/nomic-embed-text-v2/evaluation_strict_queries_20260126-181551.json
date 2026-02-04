@@ -1,0 +1,195 @@
+{
+  "summary": {
+    "run_id": "2026-01-25_19-16-02",
+    "queries_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/tmp_eval_getem/merged.evaluation_queries.json",
+    "queries_dir": null,
+    "ruleset_id": null,
+    "document_ids": [
+      "merged"
+    ],
+    "model_id": "nomic-embed-text-v2",
+    "model_name": "nomic-ai/nomic-embed-text-v2-moe",
+    "chunk_source": "enriched",
+    "chunk_count": 23248,
+    "query_count": 1,
+    "evaluated_queries": 1,
+    "coverage": 1.0,
+    "mrr": 4.9531923324582696e-05,
+    "hit_rates": {
+      "hit@1": 0.0,
+      "hit@3": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    "answer_similarity": null,
+    "cross_book_contamination": {
+      "contamination@1": 1.0,
+      "contamination@3": 1.0,
+      "contamination@5": 1.0,
+      "contamination@10": 1.0
+    },
+    "embedding_reused": true,
+    "embedding_reuse_reason": "store_cache",
+    "coverage_expanded": null,
+    "mrr_expanded": null,
+    "hit_rates_expanded": null,
+    "gold_delta": null,
+    "expanded_matches_strict": null,
+    "expanded_stats": null,
+    "gold_expansion": {
+      "enabled": false,
+      "next_depth": 1,
+      "include_section": true,
+      "same_kind_only": false,
+      "max_total": 12
+    },
+    "graph_boost": {
+      "enabled": false,
+      "value": 0.0,
+      "depth": 1,
+      "top_k": null,
+      "source": "expected",
+      "seed_top_n": 1,
+      "same_kind_only": false,
+      "decay": 1.0
+    },
+    "routing_prior": {
+      "enabled": false,
+      "prior_boost": 0.0,
+      "prior_pool_multiplier": 1.0,
+      "seeded_boost": false,
+      "seeded_boost_source": null
+    },
+    "chapter_routing": {
+      "enabled": false,
+      "top_n": null,
+      "embedding_source": "summary",
+      "chapter_count": 550,
+      "avg_allowed_chunks": null,
+      "rerank_enabled": false,
+      "rerank_source": "none",
+      "rerank_changed_queries": null,
+      "rerank_total_queries": null,
+      "rerank_change_rate": null,
+      "expected_recall": null
+    },
+    "traversal_eval": {
+      "enabled": false,
+      "baseline": null,
+      "delta": null,
+      "rank_monotonicity": null,
+      "reachability": null,
+      "cross_book_reachability": null
+    },
+    "toc_traversal_eval": {
+      "enabled": false,
+      "scope_depth": null,
+      "avg_candidate_fraction": null,
+      "missing_scope_count": null,
+      "baseline": null,
+      "compare": null,
+      "delta": null,
+      "rank_monotonicity": null
+    },
+    "timings_ms": {
+      "embedding": 0,
+      "query_embedding": 95,
+      "answer_embedding": 0,
+      "evaluation_strict": 36,
+      "evaluation_expanded": 0,
+      "total": 12490
+    },
+    "timings_estimate_ms": {
+      "evaluation_strict": 60,
+      "evaluation_expanded": null,
+      "total": 155
+    }
+  },
+  "queries": [
+    {
+      "query_index": 0,
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-HC-Player-Core-000::/page/0/Text/5"
+      ],
+      "expected_found": true,
+      "expected_rank": 20189,
+      "top_results": [
+        {
+          "rank": 1,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/1/Text/20",
+          "score": 0.674358606338501,
+          "preview": "You gain the Lead by Example benefit for your Get 'Em!  directive, except you and your allies get a +2 status bonus  to damage on both the initial and subsequent Strikes."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/6/Text/15",
+          "score": 0.6398723125457764,
+          "preview": "**Lead by Example** If you used two actions, Strike the target.  You gain a status bonus to the damage roll equal to your  Charisma modifier. Regardless of whether the Strike hits, you  and your allie"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/14/Text/18",
+          "score": 0.5492603778839111,
+          "preview": "You follow-up your issued directive with an understood  order by attacking a notable foe. Make a Strike. If the Strike  hits, the target is affected by a 1-action Get 'Em."
+        },
+        {
+          "rank": 4,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/10/Text/12",
+          "score": 0.5385757088661194,
+          "preview": "Strength for melee Strikes and Dexterity for ranged  Strikes). You also add any item bonus from the weapon  and any other permanent bonuses or penalties. You also  need to calculate how much damage ea"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/10/Text/40",
+          "score": 0.5380656719207764,
+          "preview": "**Lead by Example** If you used two actions, Strike a target with  a nonlethal attack. On a success, you gain a status bonus  to damage equal to your Charisma modifier. On a critical  success, an ally"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/2/Text/25",
+          "score": 0.5369515419006348,
+          "preview": "**Strike** (page 410) actions have the attack trait and allow you  to attack with a weapon you're wielding or an unarmed attack  (such as a tail). If you're using a melee weapon or unarmed  attack, yo"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/2/Text/21",
+          "score": 0.5366877913475037,
+          "preview": "This section specifies the levels at which your character  can increase their proficiency rank in a skill. At 3rd level  and every 2 levels thereafter, most classes grant a skill  increase, though env"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/1/Text/30",
+          "score": 0.5349902510643005,
+          "preview": "You gain the envoy directives class feature (see page  104), but do not gain the Lead by Example benefits  of the Get 'Em! envoy directive. You become trained in  Deception, Diplomacy, or Intimidation"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/10/Text/11",
+          "score": 0.5251303911209106,
+          "preview": "Next to where you've written your character's melee and  ranged weapons, calculate the modifier to Strike with  each weapon and how much damage that Strike deals. The  modifier for a Strike is equal t"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/6/Text/26",
+          "score": 0.5115729570388794,
+          "preview": "**Lead by Example** If you used two actions, Strike the target to  focus their attention on you. The target takes a \u20131 circumstance  penalty on attacks made against other creatures until the start  of"
+        }
+      ],
+      "graph_boost_applied": null,
+      "graph_boosted_count": null,
+      "graph_boost_seed_source": null,
+      "graph_boost_seed_ids": null,
+      "routing_boost_applied": null,
+      "routing_boosted_count": null,
+      "query_text": "For the envoy's Get 'Em directive in Starfinder 2e, does the \"Increase the damage by 1 at 5th, 10th, 15th, and 20th levels\" clause apply to both the initial Strike when you Lead by Example and the subsequent damage, or only to the subsequent Strikes?",
+      "document_id": "sf2e-playercore-PZO22001-HC-Player-Core-000",
+      "chapter_routing_top_chapters": null,
+      "expanded_expected_chunk_ids": null,
+      "expanded_added_chunks": null,
+      "expanded_expected_found": null,
+      "expanded_expected_rank": null,
+      "baseline_expected_rank": null,
+      "baseline_expected_found": null
+    }
+  ]
+}

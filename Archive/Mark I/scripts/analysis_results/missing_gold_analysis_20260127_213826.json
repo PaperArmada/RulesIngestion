@@ -1,0 +1,231 @@
+{
+  "timestamp": "2026-01-27T21:38:26.269789",
+  "summary": {
+    "total_gold": 28,
+    "found": 17,
+    "missing": 13,
+    "found_pct": 60.714285714285715,
+    "missing_pct": 46.42857142857143
+  },
+  "root_cause_breakdown": {
+    "QUERY_MISMATCH": 5,
+    "LOW_OVERLAP": 8
+  },
+  "missing_chunks": [
+    {
+      "query_id": "blind_001_01",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-330-363::/page/6/Text/2",
+      "chunk_text_preview": "**GUST OF WIND **[two-actions] **SPELL 1**\n\n**AIR** **CONCENTRATE** **MANIPULATE**\n\n**Traditions** a",
+      "root_cause": "QUERY_MISMATCH",
+      "root_cause_details": "Zero token overlap between chunk (68 tokens) and expansion (10 tokens)",
+      "token_overlap_count": 0,
+      "token_overlap_ratio": 0.0,
+      "semantic_rank": 267,
+      "semantic_score": 0.5884653925895691,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": []
+    },
+    {
+      "query_id": "blind_001_01",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/7/Text/7",
+      "chunk_text_preview": "Some spells, such as *dispel magic*, can be used to eliminate  the effects of other spells. At least",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 1 tokens overlap (10.0%) - expansion needs more specific terms",
+      "token_overlap_count": 1,
+      "token_overlap_ratio": 0.1,
+      "semantic_rank": 548,
+      "semantic_score": 0.5756439566612244,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "counteract"
+      ]
+    },
+    {
+      "query_id": "blind_001_02",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/24",
+      "chunk_text_preview": "**GUARDED THOUGHTS** **FEAT 9**",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 1 tokens overlap (7.1%) - expansion needs more specific terms",
+      "token_overlap_count": 1,
+      "token_overlap_ratio": 0.07142857142857142,
+      "semantic_rank": 988,
+      "semantic_score": 0.5788239240646362,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "feat"
+      ]
+    },
+    {
+      "query_id": "blind_001_02",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/8",
+      "chunk_text_preview": "Through sheer will, you call forth a tangible weapon forged  from the essence of stars. This weapon ",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 3 tokens overlap (21.4%) - expansion needs more specific terms",
+      "token_overlap_count": 3,
+      "token_overlap_ratio": 0.21428571428571427,
+      "semantic_rank": 467,
+      "semantic_score": 0.6175965666770935,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "solarian",
+        "solar",
+        "weapon"
+      ]
+    },
+    {
+      "query_id": "blind_001_02",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/28",
+      "chunk_text_preview": "**PSYCHIC MASTERY** **FEAT 9**",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 1 tokens overlap (7.1%) - expansion needs more specific terms",
+      "token_overlap_count": 1,
+      "token_overlap_ratio": 0.07142857142857142,
+      "semantic_rank": 98,
+      "semantic_score": 0.6633197069168091,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "feat"
+      ]
+    },
+    {
+      "query_id": "blind_001_02",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/1/Text/12",
+      "chunk_text_preview": "Damayas tend to be tall and graceful with delicate features and  are traditionally pushed toward art",
+      "root_cause": "QUERY_MISMATCH",
+      "root_cause_details": "Zero token overlap between chunk (50 tokens) and expansion (14 tokens)",
+      "token_overlap_count": 0,
+      "token_overlap_ratio": 0.0,
+      "semantic_rank": 360,
+      "semantic_score": 0.6326608657836914,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": []
+    },
+    {
+      "query_id": "blind_001_03",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/34",
+      "chunk_text_preview": "Your ability to control and empower technological devices",
+      "root_cause": "QUERY_MISMATCH",
+      "root_cause_details": "Zero token overlap between chunk (5 tokens) and expansion (13 tokens)",
+      "token_overlap_count": 0,
+      "token_overlap_ratio": 0.0,
+      "semantic_rank": 289,
+      "semantic_score": 0.4730251729488373,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": []
+    },
+    {
+      "query_id": "blind_001_04",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/12/Text/44",
+      "chunk_text_preview": "**Trigger** A creature misses you with a melee Strike.",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 2 tokens overlap (12.5%) - expansion needs more specific terms",
+      "token_overlap_count": 2,
+      "token_overlap_ratio": 0.125,
+      "semantic_rank": 54,
+      "semantic_score": 0.6233351230621338,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "strike",
+        "creature"
+      ]
+    },
+    {
+      "query_id": "blind_001_04",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/13/SectionHeader/37",
+      "chunk_text_preview": "**SIDESTEP **[reaction] **FEAT 8**",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 1 tokens overlap (6.2%) - expansion needs more specific terms",
+      "token_overlap_count": 1,
+      "token_overlap_ratio": 0.0625,
+      "semantic_rank": 402,
+      "semantic_score": 0.5793019533157349,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "feat"
+      ]
+    },
+    {
+      "query_id": "blind_001_06",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/18",
+      "chunk_text_preview": "**Frequency** once per day",
+      "root_cause": "QUERY_MISMATCH",
+      "root_cause_details": "Zero token overlap between chunk (3 tokens) and expansion (15 tokens)",
+      "token_overlap_count": 0,
+      "token_overlap_ratio": 0.0,
+      "semantic_rank": 21993,
+      "semantic_score": 0.34944602847099304,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": []
+    },
+    {
+      "query_id": "blind_001_06",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/8",
+      "chunk_text_preview": "You make a well placed shot or unleash a hail of fire to cover  your allies. Make a ranged Strike ag",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 2 tokens overlap (13.3%) - expansion needs more specific terms",
+      "token_overlap_count": 2,
+      "token_overlap_ratio": 0.13333333333333333,
+      "semantic_rank": 129,
+      "semantic_score": 0.5991591811180115,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "fire",
+        "ranged"
+      ]
+    },
+    {
+      "query_id": "blind_001_06",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/20",
+      "chunk_text_preview": "of things once recovered. You Stand and Interact to draw a  weapon or grab an unattended weapon.",
+      "root_cause": "QUERY_MISMATCH",
+      "root_cause_details": "Zero token overlap between chunk (9 tokens) and expansion (15 tokens)",
+      "token_overlap_count": 0,
+      "token_overlap_ratio": 0.0,
+      "semantic_rank": 2970,
+      "semantic_score": 0.5199833512306213,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": []
+    },
+    {
+      "query_id": "blind_001_06",
+      "chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/19",
+      "chunk_text_preview": "**Trigger** You regain consciousness after being unconscious. Even when you're downed, you get right",
+      "root_cause": "LOW_OVERLAP",
+      "root_cause_details": "Only 1 tokens overlap (6.7%) - expansion needs more specific terms",
+      "token_overlap_count": 1,
+      "token_overlap_ratio": 0.06666666666666667,
+      "semantic_rank": 4196,
+      "semantic_score": 0.5070620179176331,
+      "in_term_index": true,
+      "in_section_index": false,
+      "in_bigram_index": true,
+      "overlapping_tokens": [
+        "back"
+      ]
+    }
+  ]
+}

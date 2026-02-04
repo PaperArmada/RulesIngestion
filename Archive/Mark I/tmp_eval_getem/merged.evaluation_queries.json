@@ -1,0 +1,17 @@
+{
+  "document": "merged",
+  "queries": [
+    {
+      "id": "custom::get-em-directive::rule.question",
+      "query_text": "For the envoy's Get 'Em directive in Starfinder 2e, does the \"Increase the damage by 1 at 5th, 10th, 15th, and 20th levels\" clause apply to both the initial Strike when you Lead by Example and the subsequent damage, or only to the subsequent Strikes?",
+      "query_text_short": "For the envoy's Get 'Em directive in Starfinder 2e, does the \"Increase the damage by 1 at 5th, 10th, 15th, and 20th levels\" clause apply to both the initial Strike when you Lead by Example and the subsequent damage, or only to the subsequent Strikes?",
+      "query_type": "rule.question",
+      "content_kind": "rule",
+      "hypothetical_answer": "",
+      "expected_chunk_ids": [
+        "sf2e-playercore-PZO22001-HC-Player-Core-000::/page/0/Text/5"
+      ],
+      "document_id": "sf2e-playercore-PZO22001-HC-Player-Core-000"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "run_id": "2026-01-25_19-16-02",
+  "model_id": "nomic-embed-text-v2",
+  "ruleset_id": null,
+  "document_id": null,
+  "document_ids": [
+    "merged"
+  ],
+  "chunk_source": "enriched",
+  "chunk_count": 23248,
+  "query_count": 1,
+  "evaluated_queries": 1,
+  "baseline_mode": null,
+  "coverage": 1.0,
+  "mrr": 4.9531923324582696e-05,
+  "hit_rates": {
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "hit@10": 0.0
+  },
+  "routing_scores": null,
+  "coverage_expanded": null,
+  "mrr_expanded": null,
+  "hit_rates_expanded": null,
+  "cross_book_contamination": {
+    "contamination@1": 1.0,
+    "contamination@3": 1.0,
+    "contamination@5": 1.0,
+    "contamination@10": 1.0
+  },
+  "graph_boost": {
+    "enabled": false,
+    "value": 0.0,
+    "depth": 1,
+    "top_k": null,
+    "source": "expected",
+    "seed_top_n": 1,
+    "same_kind_only": false,
+    "decay": 1.0
+  },
+  "chapter_routing": {
+    "enabled": false,
+    "top_n": null,
+    "embedding_source": "summary",
+    "chapter_count": 550,
+    "avg_allowed_chunks": null,
+    "rerank_enabled": false,
+    "rerank_source": "none",
+    "rerank_changed_queries": null,
+    "rerank_total_queries": null,
+    "rerank_change_rate": null,
+    "expected_recall": null
+  },
+  "routing_prior": {
+    "enabled": false,
+    "prior_boost": 0.0,
+    "prior_pool_multiplier": 1.0,
+    "seeded_boost": false,
+    "seeded_boost_source": null
+  },
+  "traversal_eval": {
+    "enabled": false,
+    "baseline": null,
+    "delta": null
+  },
+  "timings_ms": {
+    "embedding": 0,
+    "query_embedding": 95,
+    "answer_embedding": 0,
+    "evaluation_strict": 36,
+    "evaluation_expanded": 0,
+    "total": 12490
+  }
+}
