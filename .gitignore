@@ -21,6 +21,23 @@ build/
 coverage/
 *.log
 .env*
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.env*
 
 __pycache__/
 *.pyc
@@ -83,7 +100,9 @@ models--BAAI--bge-m3/
 /StatblockGenerator/
 /RulesLawyer/
 /CardGenerator/
-
+/RulesIngestion/
+/Archive/Mark I/experiments
+/Archive/Mark I/Rules/
 # Note: Active service directories are managed by .cursorignore for better Cursor access
 # DungeonMindServer/
 # StoreGenerator/
