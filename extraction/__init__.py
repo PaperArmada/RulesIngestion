@@ -1,20 +1,15 @@
 """
-Stage A extraction: PDF → MarkerStream → Chunk[].
+Stage A extraction — Mark III placeholder.
 
-Document identity (A-DOC): one Logical Document per (ruleset_id, book_id); provenance on every Chunk.
-Public API: run_extraction, MarkerBlock, Chunk, DropRecord, ExtractionResult, LogicalDocument, DocumentPart.
+Marker-centric extraction (PDF → MarkerStream → Chunk[]) has been moved to
+Archive/marker-era/extraction/. That pipeline is not normative for Mark III.
+
+Mark III Stage A will produce prose (authored text) with textual provenance;
+see Docs/Design/STAGE_A_PROSE_RECONSTRUCTION.md and RULES_INGESTION_MARK_III_OVERVIEW.md.
+
+To run the archived Marker-era pipeline from repo root:
+
+  PYTHONPATH=Archive/marker-era uv run python -m extraction.run <pdf_path> --output-dir <dir> ...
 """
 
-from extraction.chunker import ExtractionResult
-from extraction.run import run_extraction
-from extraction.schemas import Chunk, DocumentPart, DropRecord, LogicalDocument, MarkerBlock
-
-__all__ = [
-    "Chunk",
-    "DocumentPart",
-    "DropRecord",
-    "ExtractionResult",
-    "LogicalDocument",
-    "MarkerBlock",
-    "run_extraction",
-]
+__all__: list[str] = []

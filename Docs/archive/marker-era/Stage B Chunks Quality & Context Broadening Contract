@@ -1,0 +1,366 @@
+> This document reflects a Marker-first ingestion model and is not normative for Mark III.
+
+# Stage B — Chunk Quality & Context Broadening Contract
+
+**Chunk → EvidenceChunk**
+
+---
+
+## Purpose
+
+Stage B exists to solve a single, critical failure mode:
+
+> **Weak, under-contextualized chunks that cannot meaningfully embed or discriminate similar concepts.**
+
+Stage A guarantees _correctness and provenance_.  
+Stage B guarantees _semantic usability_.
+
+This stage converts raw Chunks into **EvidenceChunks** that are:
+
+- broad enough to encode meaning,
+- coherent enough to avoid ambiguity,
+- constrained enough to preserve authority boundaries.
+
+If Stage B fails, retrieval may appear to work while systematically missing gold.
+
+---
+
+## Inputs
+
+### Required Inputs
+
+- `Chunk[]` from Stage A (immutable)
+- `MarkerStream` (read-only reference)
+- `doc_id`, `ruleset_id`, `book_id`
+- extractor and schema versions
+
+### Required Metadata from Stage A
+
+- normalized `block_type`
+- structural attachment surface
+- bounding boxes and spans
+- structural side-channel outputs (containers + empty structural content)
+
+---
+
+## Outputs
+
+### B1 — EvidenceChunk[]
+
+An **EvidenceChunk** is the smallest self-contained unit of explanation, definition, or rule that is suitable for retrieval and grounding.
+
+Each EvidenceChunk MUST:
+
+- preserve full provenance to all source Chunks,
+- represent a single coherent semantic unit,
+- meet semantic mass and coherence thresholds defined below.
+
+EvidenceChunks are immutable once emitted.
+
+---
+
+## Determinism Constraints
+
+1. Identical input Chunks ⇒ identical EvidenceChunks.
+2. Grouping rules are deterministic, order-independent, and finite.
+3. No learned models, similarity heuristics, or LLMs are permitted.
+4. EvidenceChunk IDs are derived deterministically from:
+
+(doc_hash, sorted(source_chunk_ids), grouping_rule_id)
+
+---
+
+## Hard Invariants
+
+### B-INV-0: Semantic Eligibility (New)
+
+Only **semantically eligible Chunks** may contribute to EvidenceChunks.
+
+Eligible block types:
+
+{ Text, Heading, List }
+
+Conditionally eligible:
+
+{ Table } — only when explicitly allowlisted for tabular semantics
+
+Explicitly ineligible:
+
+- structural containers (Page, ListGroup, TableGroup, FigureGroup)
+- empty structural content
+- form scaffolding
+- index-only or navigation content
+
+Ineligible Chunks MUST NOT participate in EvidenceChunk formation.
+
+---
+
+### B-INV-1: Provenance Closure
+
+Every EvidenceChunk MUST include:
+
+- `source_chunk_ids[]` (≥ 1)
+- for each source chunk:
+  - original `chunk_id`
+  - `(page_index, span_start, span_end)`
+
+No synthesized or inferred text is permitted.
+
+---
+
+### B-INV-2: Semantic Mass (By EvidenceChunk Kind)
+
+EvidenceChunks are classified as either **Prose** or **Tabular**.
+
+#### Prose EvidenceChunks (Primary)
+
+All MUST hold:
+
+- `min_chars ≥ 300`
+- `min_tokens ≥ 80`
+- `sentence_count ≥ 2`
+
+Exceptions require explicit allowlisting (e.g., axioms, glossary entries).
+
+#### Tabular EvidenceChunks (Allowlisted Only)
+
+All MUST hold:
+
+- ≥ N rows OR ≥ M distinct keys (configurable, deterministic)
+- unified table identity (single table/figure group)
+- explicit tabular grouping provenance
+
+Character count alone is insufficient.
+
+---
+
+### B-INV-3: Structural Coherence
+
+All source chunks in an EvidenceChunk MUST satisfy at least one:
+
+- same CDS structural path prefix, OR
+- same table/figure identity, OR
+- consecutive blocks under the same heading, OR
+- part of a single rule/procedure section
+
+No EvidenceChunk may span unrelated sections.
+
+---
+
+### B-INV-4: Boundary Discipline
+
+EvidenceChunks MUST NOT cross:
+
+- chapter boundaries,
+- rule/procedure boundaries,
+- mutually exclusive layout tiers (e.g., sidebar + core text).
+
+Grouping must stop immediately at such boundaries.
+
+---
+
+### B-INV-5: Explicit Grouping Attribution
+
+Each EvidenceChunk MUST record:
+
+- `grouping_rule_id` (finite, named, versioned),
+- `grouping_stop_reason`:
+  - boundary_encountered
+  - size_threshold_hit
+  - block_type_mismatch
+  - end_of_section
+
+This metadata is required for debugging and rollback.
+
+---
+
+### B-INV-6: Structural Purity (New)
+
+For **Prose EvidenceChunks**:
+
+- All source chunks MUST belong to exactly **one CDS leaf path**.
+
+For **Tabular EvidenceChunks**:
+
+- At most one parent + one child CDS path is allowed.
+
+Violations are hard failures.
+
+---
+
+## Allowed Grouping Rules (Closed Set)
+
+Stage B may ONLY use:
+
+1. **Heading Span Grouping**  
+   Merge consecutive eligible chunks under the same heading.
+
+2. **Paragraph Run Grouping**  
+   Merge consecutive text blocks without structural breaks.
+
+3. **Table / Figure Consolidation**  
+   Merge all chunks belonging to the same table/figure.
+
+4. **Rule Block Expansion**  
+   Expand a detected rule or definition to include its immediate explanation.
+
+No other grouping strategies are permitted.
+
+---
+
+## Failure Modes
+
+### FM-B1: Under-Contextualization
+
+Chunks too small to embed meaningfully.
+
+### FM-B2: Over-Broadening
+
+Multiple ideas bundled into one EvidenceChunk.
+
+### FM-B3: Boundary Violation
+
+Evidence crosses structural or authority boundaries.
+
+### FM-B4: Semantic Void Padding
+
+Large chunks composed primarily of non-semantic content.
+
+---
+
+## Metrics
+
+### M-B1: EvidenceChunk Size Distribution (Prose)
+
+- p10_chars ≥ 300
+- median_chars ∈ [500, 1200]
+
+---
+
+### M-B2: Fragment Rate
+
+EvidenceChunks below minimum thresholds / total EvidenceChunks
+
+**Gate:** ≤ 0.02
+
+---
+
+### M-B3: Over-Broad Rate
+
+EvidenceChunks > max_chars (e.g., 2000) / total
+
+**Gate:** ≤ 0.05
+
+---
+
+### M-B4: Structural Coherence Violations
+
+Count of B-INV-3 or B-INV-6 violations.
+
+**Gate:** 0
+
+---
+
+### M-B5: Grouping Rule Coverage
+
+Distribution of `grouping_rule_id`.
+
+**Gate:** No single rule > 80% unless explicitly justified.
+
+---
+
+### M-B6: Grouping Stop-Reason Distribution (New)
+
+Frequency of `grouping_stop_reason`.
+
+**Gate:**
+
+- `size_threshold_hit` must be rare.
+- Dominance indicates overly permissive grouping.
+
+---
+
+### M-B7: Gold Coverage & Quality Lift
+
+For benchmark gold:
+
+- gold EvidenceChunk exists,
+- meets semantic mass thresholds,
+- median gold chunk size ≥ Stage A baseline.
+
+**Gate:** No regression + measurable lift.
+
+---
+
+### M-B8: Near-Tie Risk Proxy
+
+For each query:
+
+delta = score(gold) - score(nearest_non_gold)
+
+**Gate:** Median delta improves vs Stage A.
+
+---
+
+## Gates — Proceed to Stage C Only If
+
+ALL are true:
+
+- Semantic eligibility enforced (B-INV-0)
+- M-B1 through M-B8 within bounds
+- No gold evidence lost or degraded
+
+---
+
+## Stop-the-Line Conditions
+
+- Any EvidenceChunk without full provenance
+- Any boundary or structural purity violation
+- Fragment or over-broad rates above thresholds
+- Gold separability regression
+
+---
+
+## Benchmark Alignment (50-Query / 6-Batch)
+
+### EA-B1: Gold Evidence Integrity
+
+All gold EvidenceChunks must:
+
+- exist,
+- meet semantic mass requirements,
+- preserve full explanatory span.
+
+---
+
+### EA-B2: Discriminative Lift Audit
+
+Track change in near-tie frequency and inversion rate.
+Stage B is successful only if discrimination improves.
+
+---
+
+## Authority Legibility Policy
+
+Stage B does **not** assign authority.
+
+It MUST:
+
+- preserve all CDS/PSC attachment surfaces,
+- never invent layout tiers or voice,
+- keep missing signals explicit.
+
+Authority constraints are applied downstream only.
+
+---
+
+## Outcome
+
+Stage B ensures EvidenceChunks are:
+
+- semantically meaningful,
+- structurally disciplined,
+- embedding-worthy.
+
+If Stage B passes, retrieval has a legitimate chance.
+If Stage B fails, downstream success is impossible.

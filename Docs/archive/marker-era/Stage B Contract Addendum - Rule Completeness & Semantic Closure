@@ -1,0 +1,186 @@
+> This document reflects a Marker-first ingestion model and is not normative for Mark III.
+
+# Stage B Contract Addendum — Rule Completeness & Semantic Closure
+**Applies to:** `rule_block` EvidenceChunks  
+**Status:** Normative Extension (Non-Optional)
+
+---
+
+## Purpose
+
+This addendum introduces a **hard correctness guarantee** for Stage B:
+
+> **Stage B must not emit semantically incomplete rule blocks.**
+
+A rule definition that omits its outcome clauses (e.g., Success, Failure, Critical Success, Critical Failure) is **invalid**, regardless of size, provenance, or structural coherence.
+
+This addendum closes a class of systematic retrieval failures where gold evidence exists but is unreachable because rule semantics were split across EvidenceChunks.
+
+---
+
+## Scope
+
+This addendum applies **only** to EvidenceChunks with:
+
+- `grouping_rule_id == rule_block`
+- `kind == Prose`
+
+It does **not** affect:
+- prose-only narrative chunks,
+- tabular EvidenceChunks,
+- glossary entries or axioms (explicitly allowlisted elsewhere).
+
+---
+
+## New Invariant
+
+### B-INV-R1: Rule Semantic Closure (Hard)
+
+A `rule_block` EvidenceChunk MUST be **semantically closed** before it may be emitted.
+
+A rule block is considered *semantically closed* if and only if **all required outcome clauses belonging to that rule are included**.
+
+Outcome clauses include, but are not limited to:
+- Success
+- Failure
+- Critical Success
+- Critical Failure
+- Conditional outcome variants (as authored)
+
+Partial rule blocks are **invalid artifacts**.
+
+---
+
+## Allowed Stop Conditions for `rule_block`
+
+For EvidenceChunks with `grouping_rule_id == rule_block`, grouping MAY stop **only** for the following reasons:
+
+1. **boundary_encountered**
+   - A new rule header begins
+   - A new trained action / feat / spell header begins
+   - A chapter or section boundary is reached
+
+2. **end_of_section**
+   - No additional compatible chunks remain in the section
+
+3. **block_type_mismatch**
+   - A non-prose, non-rule-compatible block is encountered
+   - The block is explicitly ineligible under Stage B semantic eligibility rules
+
+---
+
+## Forbidden Stop Conditions for `rule_block`
+
+The following stop reasons are **illegal** for `rule_block` EvidenceChunks *unless semantic closure has already been satisfied*:
+
+- `size_threshold_hit`
+
+If semantic closure has not been reached:
+- size limits MUST be ignored
+- grouping MUST continue
+- over-size is preferable to semantic truncation
+
+---
+
+## Rule Completeness Detection (Deterministic)
+
+Stage B MUST deterministically detect rule completeness using **document-local cues only**, including:
+
+- Explicit outcome labels (e.g., “Success”, “Failure”, etc.)
+- Ordered outcome patterns following the rule header
+- Known ruleset outcome schemas (fixed, versioned patterns)
+
+No learned models or similarity checks are permitted.
+
+Completeness detection must be:
+- deterministic
+- explainable
+- versioned alongside grouping rules
+
+---
+
+## EvidenceChunk Metadata Extension
+
+Each `rule_block` EvidenceChunk MUST include:
+
+```json
+{
+  "rule_semantically_closed": true | false,
+  "missing_outcomes": [] | ["Failure", "Critical Failure"]
+}
+
+Emission is permitted only if:
+
+rule_semantically_closed == true
+
+Metrics & Gates
+New Metric: M-B9 — Rule Truncation Rate
+
+rule_truncation_rate =
+  count(rule_block chunks where size_threshold_hit occurred before semantic closure)
+  / total rule_block EvidenceChunks
+
+Gate: rule_truncation_rate == 0
+
+Any non-zero value is a stop-the-line failure.
+M-B6 Interaction Update
+
+For rule_block EvidenceChunks:
+
+    size_threshold_hit MUST NOT be counted as a valid stop reason
+
+    Any occurrence is automatically a contract violation
+
+This refines, not replaces, M-B6.
+Failure Modes Prevented
+
+This addendum explicitly prevents:
+
+    Partial rules being embedded
+
+    Outcome clauses orphaned from rule definitions
+
+    Queries about failure/success missing gold evidence
+
+    False “gold exists but unreachable” diagnostics
+
+    Grounding forced to infer missing rule semantics
+
+Determinism & Backward Compatibility
+
+    This addendum introduces no new nondeterminism
+
+    Grouping behavior changes are deterministic and auditable
+
+    Historical runs must be explicitly versioned as pre-addendum
+
+This is a breaking change in correctness semantics and must increment:
+
+    stage_b_contract_version
+
+Principle
+
+    Size is an optimization constraint.
+    Rule completeness is a correctness constraint.
+
+Correctness always dominates optimization.
+Outcome
+
+After this addendum:
+
+    Every rule_block EvidenceChunk represents a complete, answerable rule
+
+    Retrieval failures reflect recall issues, not semantic truncation
+
+    Grounding is no longer forced to compensate for broken inputs
+
+This addendum is mandatory for any system claiming rule-level correctness.
+
+
+---
+
+If you want, the next logical step is to:
+- update **Stage B’s M-B6 definition** to explicitly exclude rule blocks, or
+- design a **one-time audit tool** that flags historical truncated rule blocks so you can measure the lift this change produces.
+
+This was a very good catch.
