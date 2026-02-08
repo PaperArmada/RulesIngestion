@@ -1,14 +1,15 @@
 """
-Stage B — Evidence Binding (Minimal Segmenter).
+Stage B — Evidence Binding.
 
 Converts a SurfaceAST into a flat list of EvidenceUnits with structural
-provenance.  Intentionally naive — no merging heuristics, no semantic
-interpretation.  The goal is to discover failure modes, not optimise.
+provenance.
 
 Rules:
   - Each leaf node (paragraph, table, list, callout, image_ref) → one EvidenceUnit.
-  - Heading nodes → one heading-type EvidenceUnit AND structural_path context
-    for their children.
+  - Heading nodes are **absorbed**: the heading text is prepended to the first
+    child unit's text (separated by " — ").  Headings still extend structural_path
+    for all children.  No standalone heading-type EvidenceUnits are emitted.
+    If a heading has no children, it emits a heading-type unit as a fallback.
   - Tables are never split.
   - Consecutive paragraphs under the same heading stay as separate units.
   - Monotonic ordering_key across the entire page.
@@ -18,6 +19,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -27,6 +29,86 @@ import blake3
 from extraction.schemas import EvidenceUnit, GateDiagnostic, SurfaceAST, SurfaceASTNode
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Index-page detection
+# ---------------------------------------------------------------------------
+
+# Pattern: "word, 123" or "word 123" at the end of a line — typical index entry
+_INDEX_ENTRY_RE = re.compile(r",?\s+\d{1,4}\s*$")
+# Same pattern but for scanning individual lines within multi-line paragraphs
+_INDEX_LINE_RE = re.compile(r",?\s+\d{1,4}\s*$", re.MULTILINE)
+
+# Known index/glossary section headings (case-insensitive)
+_INDEX_HEADING_TITLES = {"index", "glossary", "appendix: index"}
+
+# Thresholds for index-page classification
+_INDEX_MIN_CHILDREN = 30           # index pages are dense (path A: flat)
+_INDEX_MAX_MEDIAN_CHARS = 60       # entries are very short (path A: flat)
+_INDEX_ENTRY_HIT_RATIO = 0.40     # ≥40% match page-ref pattern
+_INDEX_LINE_HIT_RATIO = 0.40      # ≥40% of lines match (path B: merged)
+_INDEX_MIN_LINES = 30             # minimum line count (path B: merged)
+
+
+def _is_index_page(root: SurfaceASTNode) -> bool:
+    """Deterministic classifier: is this AST an index/glossary page?
+
+    Two detection paths:
+
+    Path A (flat structure, e.g. p377-382):
+      1. No heading children.
+      2. At least _INDEX_MIN_CHILDREN paragraph children.
+      3. Median text length ≤ _INDEX_MAX_MEDIAN_CHARS.
+      4. ≥ _INDEX_ENTRY_HIT_RATIO of children match page-reference pattern.
+
+    Path B (headed structure, e.g. p376):
+      1. Exactly one heading child whose title is a known index heading.
+      2. All content under that heading; split into lines.
+      3. ≥ _INDEX_MIN_LINES total lines.
+      4. ≥ _INDEX_LINE_HIT_RATIO of lines match page-reference pattern.
+    """
+    children = root.children
+    if not children:
+        return False
+
+    headings = [c for c in children if c.node_type == "heading"]
+
+    # --- Path B: single known index heading ---
+    if len(headings) == 1 and len(children) == 1:
+        heading = headings[0]
+        title = heading.text.strip().lower()
+        if title in _INDEX_HEADING_TITLES:
+            # Collect all text from children under this heading
+            all_text = "\n".join(
+                c.text.strip() for c in heading.children
+                if c.text.strip()
+            )
+            lines = [ln for ln in all_text.split("\n") if ln.strip()]
+            if len(lines) >= _INDEX_MIN_LINES:
+                hits = sum(1 for ln in lines if _INDEX_LINE_RE.search(ln))
+                hit_ratio = hits / len(lines)
+                if hit_ratio >= _INDEX_LINE_HIT_RATIO:
+                    return True
+
+    # --- Path A: flat structure (no headings) ---
+    if headings:
+        return False
+
+    paragraphs = [c for c in children if c.node_type == "paragraph"]
+    if len(paragraphs) < _INDEX_MIN_CHILDREN:
+        return False
+
+    lengths = sorted(len(c.text.strip()) for c in paragraphs)
+    median_len = lengths[len(lengths) // 2]
+    if median_len > _INDEX_MAX_MEDIAN_CHARS:
+        return False
+
+    hits = sum(1 for c in paragraphs if _INDEX_ENTRY_RE.search(c.text.strip()))
+    hit_ratio = hits / len(paragraphs)
+    if hit_ratio < _INDEX_ENTRY_HIT_RATIO:
+        return False
+
+    return True
 
 # Map AST node_type → EvidenceUnit unit_type
 _NODE_TYPE_TO_UNIT_TYPE = {
@@ -54,46 +136,65 @@ def _walk_ast(
     units: list[EvidenceUnit],
     counter: list[int],          # mutable single-element list for monotonic key
     page_fingerprint: str,
+    pending_heading: list[tuple[str, int, int]] | None = None,
 ) -> None:
-    """Depth-first walk, emitting EvidenceUnits for each meaningful node."""
+    """Depth-first walk, emitting EvidenceUnits for each meaningful node.
+
+    pending_heading: carries a list of (heading_text, line_start, line_end) tuples
+    from ancestor headings that have not yet been absorbed into a child unit.
+    The first child unit encountered absorbs all pending headings.
+    """
+    if pending_heading is None:
+        pending_heading = []
+
     if node.node_type == "root":
         for child in node.children:
-            _walk_ast(child, path, units, counter, page_fingerprint)
+            _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+        # If any headings were never absorbed (heading with no children at end of page),
+        # emit them as fallback heading-type units.
+        _flush_pending_headings(pending_heading, path, units, counter, page_fingerprint)
         return
 
     if node.node_type == "heading":
-        # Emit a heading-type EvidenceUnit
-        if node.text.strip():
-            unit_type = "heading"
-            text = node.text.strip()
-            content_hash = blake3.blake3(text.encode("utf-8")).hexdigest()
-            unit = EvidenceUnit(
-                unit_id=_make_unit_id(text, path),
-                unit_type=unit_type,
-                text=text,
-                structural_path=list(path),
-                ordering_key=counter[0],
-                page_fingerprint=page_fingerprint,
-                content_hash=content_hash,
-                source_line_start=node.source_line_start,
-                source_line_end=node.source_line_end,
-                anomaly_flags=[],
-            )
-            counter[0] += 1
-            units.append(unit)
+        heading_text = node.text.strip()
+        if not heading_text:
+            for child in node.children:
+                _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+            return
 
-        # Headings extend the path for their children
-        child_path = path + [node.text.strip()] if node.text.strip() else path
-        for child in node.children:
-            _walk_ast(child, child_path, units, counter, page_fingerprint)
+        # Extend structural path for children
+        child_path = path + [heading_text]
+
+        if node.children:
+            # Heading has children: absorb into first child.
+            # Push heading text as pending; first leaf consumes it.
+            pending_heading.append((heading_text, node.source_line_start, node.source_line_end))
+            for child in node.children:
+                _walk_ast(child, child_path, units, counter, page_fingerprint, pending_heading)
+        else:
+            # Childless heading: push as pending so the next sibling (if any)
+            # absorbs it. If nothing absorbs it, _flush emits it.
+            pending_heading.append((heading_text, node.source_line_start, node.source_line_end))
         return
 
-    # Leaf node: emit one EvidenceUnit
+    # Leaf node: emit one EvidenceUnit, absorbing any pending headings.
     text = node.text.strip()
     if not text:
         return
 
     unit_type = _NODE_TYPE_TO_UNIT_TYPE.get(node.node_type, "prose")
+
+    # Absorb pending heading(s): prepend to text, extend source line range
+    line_start = node.source_line_start
+    line_end = node.source_line_end
+    if pending_heading:
+        heading_parts = [h[0] for h in pending_heading]
+        prefix = " — ".join(heading_parts)
+        text = f"{prefix} — {text}"
+        # Source range extends back to the earliest pending heading
+        line_start = min(line_start, min(h[1] for h in pending_heading))
+        pending_heading.clear()
+
     content_hash = blake3.blake3(text.encode("utf-8")).hexdigest()
 
     anomaly_flags: list[str] = []
@@ -112,8 +213,8 @@ def _walk_ast(
         ordering_key=counter[0],
         page_fingerprint=page_fingerprint,
         content_hash=content_hash,
-        source_line_start=node.source_line_start,
-        source_line_end=node.source_line_end,
+        source_line_start=line_start,
+        source_line_end=line_end,
         anomaly_flags=anomaly_flags,
     )
     counter[0] += 1
@@ -121,7 +222,38 @@ def _walk_ast(
 
     # If the leaf somehow has children (shouldn't, but defensive), recurse
     for child in node.children:
-        _walk_ast(child, path, units, counter, page_fingerprint)
+        _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+
+
+def _flush_pending_headings(
+    pending_heading: list[tuple[str, int, int]],
+    path: list[str],
+    units: list[EvidenceUnit],
+    counter: list[int],
+    page_fingerprint: str,
+) -> None:
+    """Emit any remaining pending headings as fallback heading-type units.
+
+    This handles edge cases like a heading at the very end of a page with no
+    subsequent content to absorb it.
+    """
+    for heading_text, line_start, line_end in pending_heading:
+        content_hash = blake3.blake3(heading_text.encode("utf-8")).hexdigest()
+        unit = EvidenceUnit(
+            unit_id=_make_unit_id(heading_text, path),
+            unit_type="heading",
+            text=heading_text,
+            structural_path=list(path),
+            ordering_key=counter[0],
+            page_fingerprint=page_fingerprint,
+            content_hash=content_hash,
+            source_line_start=line_start,
+            source_line_end=line_end,
+            anomaly_flags=["unabsorbed_heading"],
+        )
+        counter[0] += 1
+        units.append(unit)
+    pending_heading.clear()
 
 
 # ---------------------------------------------------------------------------
@@ -175,6 +307,30 @@ def run_stage_b(
     Returns:
         StageBResult with EvidenceUnits and gate diagnostics.
     """
+    # Index-page detection: skip unit emission entirely
+    if _is_index_page(ast.root):
+        logger.info(
+            "Stage B: index page detected (%d AST nodes) — dropping all units",
+            ast.node_count,
+        )
+        result = StageBResult(
+            units=[],
+            gate_diagnostics=[
+                GateDiagnostic(
+                    gate_name="index_page",
+                    passed=True,
+                    detail={
+                        "classified_as": "index",
+                        "node_count": ast.node_count,
+                        "note": "index/glossary page — no EvidenceUnits emitted",
+                    },
+                )
+            ],
+        )
+        if out_dir is not None:
+            _write_artifacts(out_dir, result)
+        return result
+
     units: list[EvidenceUnit] = []
     counter = [0]  # mutable for closure
 

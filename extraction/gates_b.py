@@ -211,8 +211,16 @@ def gate_unit_size(
     *,
     min_chars: int = MIN_UNIT_CHARS,
     max_chars: int = MAX_UNIT_CHARS,
+    undersized_fail_ratio: float = 1.0,
 ) -> GateDiagnostic:
-    """Unit size bounds gate: flag units shorter than *min_chars* or longer than *max_chars*."""
+    """Unit size bounds gate: flag units outside [min_chars, max_chars].
+
+    - Oversized (> max_chars): always FAIL (segmentation failure).
+    - Undersized (< min_chars): by default WARN only. If undersized_fail_ratio < 1.0
+      and the fraction of units that are undersized exceeds that ratio, the gate FAILs
+      (substrate dominated by non-evidential atoms). E.g. undersized_fail_ratio=0.5
+      → fail when more than half of units on the page are undersized.
+    """
     undersized: list[dict] = []
     oversized: list[dict] = []
 
@@ -233,24 +241,39 @@ def gate_unit_size(
                 "text_preview": u.text[:80],
             })
 
-    # Undersized is a warning, not a gate failure.
-    # Oversized is a gate failure (indicates segmentation problem).
+    # Oversized: always fail.
     passed = len(oversized) == 0
+
+    # Undersized: fail when fraction exceeds threshold (if threshold < 1.0).
+    undersized_ratio = len(undersized) / len(units) if units else 0.0
+    if undersized_fail_ratio < 1.0 and undersized_ratio > undersized_fail_ratio:
+        passed = False
+
     detail = {
         "total_units": len(units),
         "min_chars": min_chars,
         "max_chars": max_chars,
         "undersized_count": len(undersized),
         "oversized_count": len(oversized),
+        "undersized_ratio": round(undersized_ratio, 4),
+        "undersized_fail_ratio": undersized_fail_ratio,
         "undersized": undersized[:10],
         "oversized": oversized[:10],
     }
 
     if not passed:
-        logger.warning(
-            "Unit size gate FAILED: %d oversized units", len(oversized)
-        )
-    if undersized:
+        if oversized:
+            logger.warning(
+                "Unit size gate FAILED: %d oversized units", len(oversized)
+            )
+        if undersized_fail_ratio < 1.0 and undersized_ratio > undersized_fail_ratio:
+            logger.warning(
+                "Unit size gate FAILED: undersized ratio %.2f > %.2f (%d undersized)",
+                undersized_ratio,
+                undersized_fail_ratio,
+                len(undersized),
+            )
+    if undersized and passed:
         logger.info("Unit size gate: %d undersized units (warning only)", len(undersized))
 
     return GateDiagnostic(gate_name="unit_size", passed=passed, detail=detail)
@@ -265,11 +288,16 @@ def run_stage_b_gates(
     *,
     ast_dict: dict[str, Any] | None = None,
     is_standalone: bool = False,
+    undersized_fail_ratio: float = 1.0,
 ) -> list[GateDiagnostic]:
-    """Run all four Stage B gates on a list of EvidenceUnits."""
+    """Run all four Stage B gates on a list of EvidenceUnits.
+
+    undersized_fail_ratio: when < 1.0, unit_size gate FAILs if the fraction of
+    undersized units on the page exceeds this ratio (default 1.0 = warning only).
+    """
     return [
         gate_orphan(units, ast_dict=ast_dict, is_standalone=is_standalone),
         gate_bleed(units),
         gate_table_integrity(units),
-        gate_unit_size(units),
+        gate_unit_size(units, undersized_fail_ratio=undersized_fail_ratio),
     ]

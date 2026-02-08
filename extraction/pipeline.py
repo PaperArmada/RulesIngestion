@@ -75,7 +75,7 @@ def run_stage_b_on_result(
         ast_dict=ast_dict,
         is_standalone=(page_index == 0),
     )
-    stage_b_result.gate_diagnostics = diagnostics
+    stage_b_result.gate_diagnostics = stage_b_result.gate_diagnostics + diagnostics
 
     # Write artifacts (including gate diagnostics)
     _write_stage_b_artifacts(out_dir, stage_b_result)
