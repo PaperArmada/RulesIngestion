@@ -1,6 +1,76 @@
 {
-  "StageARecord": "See spec",
-  "SurfaceAST": "See spec",
-  "EvidenceUnit": "See spec",
-  "GraphDelta": "See spec"
+  "StageARecord": {
+    "description": "Raw model envelope for a single page OCR run.",
+    "fields": {
+      "page_fingerprint": "str — blake3 hex digest of rendered page image",
+      "source_pdf": "str — absolute path to source PDF",
+      "page_index": "int — 0-based page index",
+      "model_id": "str — model identifier (e.g. deepseek-ai/DeepSeek-OCR-2)",
+      "prompt": "str — prompt sent to the model",
+      "raw_markdown": "str — verbatim model output",
+      "inference_elapsed_sec": "float — model inference time",
+      "content_hash": "str — blake3 hex digest of raw_markdown"
+    },
+    "implementation": "extraction/schemas.py::StageARecord"
+  },
+  "SurfaceASTNode": {
+    "description": "Structural tree node in the page surface AST.",
+    "fields": {
+      "node_type": "Literal[heading, paragraph, table, list, callout, sidebar, footnote, image_ref, root]",
+      "level": "int — heading level (1-6), 0 for non-headings",
+      "text": "str — verbatim content",
+      "children": "list[SurfaceASTNode]",
+      "source_line_start": "int — 0-based start line in raw markdown",
+      "source_line_end": "int — exclusive end line"
+    },
+    "implementation": "extraction/schemas.py::SurfaceASTNode"
+  },
+  "SurfaceAST": {
+    "description": "Top-level container for a page's structural AST.",
+    "fields": {
+      "page_fingerprint": "str — links back to PageFingerprint",
+      "content_hash": "str — blake3 of deterministic JSON serialisation",
+      "root": "SurfaceASTNode",
+      "node_count": "int",
+      "table_count": "int"
+    },
+    "implementation": "extraction/schemas.py::SurfaceAST"
+  },
+  "EvidenceUnit": {
+    "description": "Prose-bound provenance unit. The only admissible input to Stage C.",
+    "fields": {
+      "unit_id": "str — blake3(text + '|' + structural_path_joined)",
+      "unit_type": "Literal[prose, table, list, callout, heading]",
+      "text": "str — verbatim",
+      "structural_path": "list[str] — heading ancestry from AST root",
+      "ordering_key": "int — total monotonic order",
+      "page_fingerprint": "str — upstream Stage A identity",
+      "content_hash": "str — blake3 of text",
+      "source_line_start": "int — back-pointer to raw markdown",
+      "source_line_end": "int",
+      "anomaly_flags": "list[str] — e.g. oversized, no_heading_parent, undersized"
+    },
+    "implementation": "extraction/schemas.py::EvidenceUnit"
+  },
+  "PageFingerprint": {
+    "description": "Rendered page image identity.",
+    "fields": {
+      "image_path": "str",
+      "fingerprint": "str — blake3 hex digest of image bytes",
+      "source_pdf": "str",
+      "page_index": "int",
+      "dpi": "int — render resolution (default 200)"
+    },
+    "implementation": "extraction/schemas.py::PageFingerprint"
+  },
+  "GateDiagnostic": {
+    "description": "Result of a single quality gate check.",
+    "fields": {
+      "gate_name": "str",
+      "passed": "bool",
+      "detail": "dict[str, Any]"
+    },
+    "implementation": "extraction/schemas.py::GateDiagnostic"
+  },
+  "GraphDelta": "Deferred — Stage C. Will be designed against real EvidenceUnits per Mark III sequence."
 }

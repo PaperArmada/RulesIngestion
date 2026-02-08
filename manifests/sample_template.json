@@ -1,0 +1,37 @@
+[
+  {
+    "pdf": "/absolute/path/to/BrutalPage1.pdf",
+    "page": 0,
+    "label": "brutal_alien_core_intro"
+  },
+  {
+    "pdf": "/absolute/path/to/book.pdf",
+    "page": 42,
+    "label": "spell_page",
+    "_comment": "A representative spell page"
+  },
+  {
+    "pdf": "/absolute/path/to/book.pdf",
+    "page": 100,
+    "label": "feat_page",
+    "_comment": "A representative feat page"
+  },
+  {
+    "pdf": "/absolute/path/to/book.pdf",
+    "page": 55,
+    "label": "dense_rules_procedure",
+    "_comment": "A dense rules procedure page"
+  },
+  {
+    "pdf": "/absolute/path/to/book.pdf",
+    "page": 200,
+    "label": "sidebar_heavy",
+    "_comment": "A sidebar-heavy page"
+  },
+  {
+    "pdf": "/absolute/path/to/book.pdf",
+    "page": 250,
+    "label": "table_appendix",
+    "_comment": "A table appendix page"
+  }
+]
