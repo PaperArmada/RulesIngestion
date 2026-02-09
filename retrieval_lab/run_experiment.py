@@ -1,0 +1,636 @@
+"""
+CLI entry point: load config, load substrate, ground gold, embed per model, score, persist, report.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import numpy as np
+
+# Bootstrap paths for model_registry (RulesIngestion Archive) and benchmark_store (DungeonMindServer)
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_RULES_INGESTION_ROOT = _SCRIPT_DIR.parent
+_REPO_ROOT = _RULES_INGESTION_ROOT.parent
+_ARCHIVE_MARK_I = _RULES_INGESTION_ROOT / "Archive" / "Mark I"
+_DUNGEONMIND_SERVER = _REPO_ROOT / "DungeonMindServer"
+if str(_ARCHIVE_MARK_I) not in sys.path:
+    sys.path.insert(0, str(_ARCHIVE_MARK_I))
+if _DUNGEONMIND_SERVER.exists() and str(_DUNGEONMIND_SERVER) not in sys.path:
+    sys.path.insert(0, str(_DUNGEONMIND_SERVER))
+
+from retrieval_lab.config import ExperimentConfig
+from retrieval_lab.gold_grounding import (
+    flatten_query_batches,
+    ground_queries_corpus_semantic,
+    ground_queries_page_anchored,
+)
+from retrieval_lab.metrics import score_retrieval
+from retrieval_lab.report import write_report_artifacts
+from retrieval_lab.store import (
+    fetch_cached_embeddings,
+    save_cached_embeddings,
+    save_embedding_run_metadata,
+    save_experiment,
+    substrate_run_id,
+)
+from retrieval_lab.substrate_loader import load_evidence_units, merge_units_by_heading, units_by_page
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Models that require trust_remote_code=True when loading (HuggingFace custom code).
+MODELS_REQUIRING_TRUST_REMOTE_CODE = frozenset({
+    "nomic-embed-text-v2",
+    "bge-m3",
+    "gte-multilingual-base",
+})
+
+
+def _load_model_registry():
+    try:
+        from evaluation.model_registry import MODEL_REGISTRY, load_model, encode_texts
+        return load_model, encode_texts, MODEL_REGISTRY
+    except ImportError as e:
+        logger.error("Failed to import evaluation.model_registry. Ensure Archive/Mark I/evaluation is on path: %s", e)
+        raise
+
+
+def _expanded_text(corpus: List[Dict[str, Any]], id_to_index: Dict[str, int], center_id: str, n: int) -> str:
+    """Build one expanded chunk: prev_n + center + next_n in document order."""
+    idx = id_to_index.get(center_id)
+    if idx is None:
+        return next((c.get("text", "") for c in corpus if c.get("id") == center_id), "")
+    start = max(0, idx - n)
+    end = min(len(corpus), idx + n + 1)
+    parts = [corpus[j].get("text", "").strip() for j in range(start, end) if corpus[j].get("text")]
+    return "\n\n".join(p for p in parts if p)
+
+
+def _build_expanded_texts(
+    corpus: List[Dict[str, Any]],
+    id_to_index: Dict[str, int],
+    center_ids: List[str],
+    n: int,
+) -> List[str]:
+    """Expanded text for each center_id (same order)."""
+    return [_expanded_text(corpus, id_to_index, cid, n) for cid in center_ids]
+
+
+def _run_embed_only(config: ExperimentConfig) -> str:
+    """Embed substrate once per model; save to MongoDB and disk. No queries or report."""
+    config.resolve_paths(Path.cwd())
+    config.validate(embed_only=True)
+    load_model_fn, encode_texts_fn, MODEL_REGISTRY = _load_model_registry()
+    logger.info("Loading substrate from %s", config.substrate_path)
+    corpus = load_evidence_units(
+        config.substrate_path,
+        config.document_id,
+        min_chars=getattr(config, "min_chars", None),
+    )
+    if not corpus:
+        raise ValueError("Corpus is empty; no EvidenceUnits found.")
+    if getattr(config, "merge_chunks", False):
+        corpus = merge_units_by_heading(
+            corpus,
+            max_chars=getattr(config, "merge_max_chars", 2000),
+        )
+    corpus_ids = [c["id"] for c in corpus]
+    corpus_texts = [c["text"] for c in corpus]
+    run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
+    logger.info("Corpus: %d units, run_id=%s", len(corpus), run_id)
+    mongo_uri = config.mongo_uri
+    output_dir = Path(config.output_dir) / f"embed_{run_id}"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "embeddings").mkdir(exist_ok=True)
+    for model_id in config.models:
+        model_name = MODEL_REGISTRY[model_id].model_name if model_id in MODEL_REGISTRY else model_id
+        logger.info("Embedding model: %s (%s)", model_id, model_name)
+        # In embed-only we always compute (no cache read) so we never block on MongoDB when it's down.
+        trust_remote = config.trust_remote_code or (model_id in MODELS_REQUIRING_TRUST_REMOTE_CODE)
+        model = load_model_fn(model_name, trust_remote_code=trust_remote)
+        corpus_embeddings = encode_texts_fn(model, corpus_texts, batch_size=config.batch_size)
+        records = [
+            {"run_id": run_id, "model_id": model_id, "chunk_id": uid, "embedding": corpus_embeddings[i].tolist()}
+            for i, uid in enumerate(corpus_ids)
+        ]
+        save_cached_embeddings(run_id, model_id, records, mongo_uri, clear_existing=True)
+        save_embedding_run_metadata(run_id, model_id, len(corpus_ids), mongo_uri)
+        np.save(output_dir / "embeddings" / f"{model_id}_corpus.npy", corpus_embeddings)
+    index_path = output_dir / "embeddings" / "corpus_index.json"
+    index_path.write_text(
+        json.dumps(
+            {"run_id": run_id, "substrate_version": config.substrate_version, "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)}},
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    logger.info("Embed-only complete. run_id=%s", run_id)
+    return run_id
+
+
+def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = None) -> str:
+    """Full eval: load or use existing embeddings, run queries, score, report."""
+    config.resolve_paths(Path.cwd())
+    embed_only = False
+    eval_only = eval_only_run_id is not None
+    config.validate(embed_only=embed_only, eval_only=eval_only)
+    retrieval_mode = config.retrieval_mode
+
+    # Load substrate (needed for corpus order and grounding)
+    logger.info("Loading substrate from %s", config.substrate_path)
+    corpus = load_evidence_units(
+        config.substrate_path,
+        config.document_id,
+        min_chars=getattr(config, "min_chars", None),
+    )
+    if not corpus:
+        raise ValueError("Corpus is empty; no EvidenceUnits found.")
+    if getattr(config, "merge_chunks", False):
+        corpus = merge_units_by_heading(
+            corpus,
+            max_chars=getattr(config, "merge_max_chars", 2000),
+        )
+    corpus_ids = [c["id"] for c in corpus]
+    corpus_texts = [c["text"] for c in corpus]
+    units_by_page_map = units_by_page(corpus)
+    if eval_only_run_id:
+        run_id = eval_only_run_id
+        logger.info("Eval-only: using run_id=%s (no embedding)", run_id)
+    else:
+        run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
+    logger.info("Corpus: %d units, run_id=%s", len(corpus), run_id)
+
+    # Load and flatten queries
+    flat_queries, _ = flatten_query_batches(config.query_batches)
+    if not flat_queries:
+        raise ValueError("No queries loaded from query_batches.")
+    logger.info("Loaded %d queries", len(flat_queries))
+
+    # Determine grounding mode: if all source_page are null, use corpus-wide semantic per model
+    use_semantic_grounding = all(
+        (q.get("source_page") is None) and not (q.get("gold_unit_ids"))
+        for q in flat_queries
+    )
+    grounded_queries: List[Dict[str, Any]] = []
+    grounding_audit: List[Dict[str, Any]] = []
+    if not use_semantic_grounding:
+        grounded_queries, grounding_audit = ground_queries_page_anchored(
+            flat_queries,
+            units_by_page_map,
+            threshold=config.gold_jaccard_threshold,
+        )
+        logger.info("Gold grounding: page-anchored; grounded %d queries", sum(1 for q in grounded_queries if q.get("gold_unit_ids")))
+    else:
+        if retrieval_mode == "bm25":
+            raise ValueError("BM25 mode requires gold_unit_ids or source_page; semantic grounding requires embeddings.")
+        logger.info("Gold grounding: corpus-wide semantic (per model)")
+
+    experiment_ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    experiment_id = f"{config.experiment_name}_{experiment_ts}"
+    output_dir = Path(config.output_dir) / experiment_id
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "embeddings").mkdir(exist_ok=True)
+
+    results_by_model: Dict[str, Dict[str, Any]] = {}
+    per_query_by_model: Dict[str, List[Dict[str, Any]]] = {}
+    retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]] = {}
+    all_grounding_audit: List[Dict[str, Any]] = grounding_audit.copy()
+    mongo_uri = config.mongo_uri
+    id_to_text = {u["id"]: u.get("text", "") for u in corpus}
+    id_to_index = {u["id"]: idx for idx, u in enumerate(corpus)}
+
+    if retrieval_mode == "bm25":
+        if getattr(config, "expand_context", False):
+            logger.warning("Expand context is not supported for BM25 mode; skipping.")
+        from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank
+
+        t0 = time.perf_counter()
+        bm25 = build_bm25_index(corpus_texts)
+        max_k = max(config.top_k)
+        ranked_lists, score_lists = bm25_rank(bm25, corpus_ids, grounded_queries, max_k)
+        scoring_time_sec = time.perf_counter() - t0
+
+        metrics = score_retrieval(
+            grounded_queries,
+            ranked_lists,
+            score_lists,
+            config.top_k,
+        )
+
+        query_reviews = []
+        for i, q in enumerate(grounded_queries):
+            pq = metrics.per_query[i]
+            retrieved = []
+            for r, (cid, sc) in enumerate(zip(ranked_lists[i], score_lists[i]), start=1):
+                retrieved.append({
+                    "rank": r,
+                    "chunk_id": cid,
+                    "score": round(sc, 4),
+                    "text": id_to_text.get(cid, ""),
+                })
+            query_reviews.append({
+                "query_id": q.get("id", ""),
+                "question": q.get("question", ""),
+                "expected_answer_summary": q.get("expected_answer_summary", ""),
+                "gold_unit_ids": list(q.get("gold_unit_ids") or []),
+                "first_gold_rank": pq.get("first_gold_rank"),
+                "failure_type": pq.get("failure_type", ""),
+                "retrieved": retrieved,
+            })
+            top3_ids = ranked_lists[i][:3]
+            top3_scores = [round(s, 3) for s in score_lists[i][:3]]
+            logger.info(
+                "[bm25] query_id=%s top3=%s scores=%s first_gold_rank=%s failure_type=%s",
+                q.get("id", ""),
+                top3_ids,
+                top3_scores,
+                pq.get("first_gold_rank"),
+                pq.get("failure_type", ""),
+            )
+        retrieved_chunks_by_model["bm25"] = query_reviews
+        logger.info("Model bm25: retrieval done for %d queries; review in retrieved_chunks.json", len(grounded_queries))
+
+        results_by_model["bm25"] = {
+            "recall_at_k": metrics.recall_at_k,
+            "hit_at_k": metrics.hit_at_k,
+            "mrr": metrics.mrr,
+            "gold_in_candidates": metrics.gold_in_candidates,
+            "grounding_coverage": metrics.grounding_coverage,
+            "answer_similarity_at_k": metrics.answer_similarity_at_k,
+            "failure_counts": metrics.failure_counts,
+            "per_suite": metrics.per_suite,
+            "embedding_time_sec": 0.0,
+            "scoring_time_sec": scoring_time_sec,
+        }
+        per_query_by_model["bm25"] = metrics.per_query
+    else:
+        load_model_fn, encode_texts_fn, MODEL_REGISTRY = _load_model_registry()
+
+        bm25_ranked_lists: Optional[List[List[str]]] = None
+        bm25_score_lists: Optional[List[List[float]]] = None
+        if retrieval_mode == "hybrid":
+            from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank, reciprocal_rank_fusion
+            logger.info("Hybrid mode: building BM25 index for RRF fusion")
+            bm25 = build_bm25_index(corpus_texts)
+            max_k_hybrid = max(config.top_k)
+            bm25_ranked_lists, bm25_score_lists = bm25_rank(
+                bm25, corpus_ids, grounded_queries, max_k_hybrid
+            )
+
+        for model_id in config.models:
+            if model_id not in MODEL_REGISTRY:
+                logger.warning("Model %s not in registry; using as model_name for SentenceTransformer", model_id)
+                model_name = model_id
+            else:
+                model_name = MODEL_REGISTRY[model_id].model_name
+            logger.info("Processing model: %s (%s)", model_id, model_name)
+
+            # Load model once per model_id
+            trust_remote = config.trust_remote_code or (model_id in MODELS_REQUIRING_TRUST_REMOTE_CODE)
+            model = load_model_fn(model_name, trust_remote_code=trust_remote)
+
+            # Load or compute corpus embeddings (eval-only: must be cached from MongoDB or disk)
+            t0 = time.perf_counter()
+            cached = fetch_cached_embeddings(run_id, model_id, mongo_uri) if (eval_only_run_id or config.reuse_embeddings) else None
+            if cached and len(cached) == len(corpus_ids):
+                id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
+                corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
+                logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
+            else:
+                # Eval-only fallback: load from disk. Try embed_{run_id} first, then any experiment dir with matching run_id.
+                embed_dir = Path(config.output_dir) / f"embed_{run_id}"
+                npy_path = embed_dir / "embeddings" / f"{model_id}_corpus.npy"
+                index_path = embed_dir / "embeddings" / "corpus_index.json"
+                if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
+                    # Full runs write to experiment_id/embeddings/, not embed_{run_id}. Search for matching run_id.
+                    for subdir in Path(config.output_dir).iterdir():
+                        if not subdir.is_dir():
+                            continue
+                        idx_path = subdir / "embeddings" / "corpus_index.json"
+                        if not idx_path.exists():
+                            continue
+                        try:
+                            index_data = json.loads(idx_path.read_text(encoding="utf-8"))
+                            if index_data.get("run_id") == run_id:
+                                npy_path = subdir / "embeddings" / f"{model_id}_corpus.npy"
+                                index_path = idx_path
+                                if npy_path.exists():
+                                    logger.info("Eval-only: found embeddings for run_id=%s in %s", run_id, subdir.name)
+                                    break
+                        except (json.JSONDecodeError, OSError):
+                            continue
+                if eval_only_run_id and npy_path.exists() and index_path.exists():
+                    loaded = np.load(npy_path)
+                    index_data = json.loads(index_path.read_text(encoding="utf-8"))
+                    unit_id_to_index = index_data.get("unit_id_to_index", {})
+                    try:
+                        corpus_embeddings = np.array(
+                            [loaded[unit_id_to_index[uid]] for uid in corpus_ids],
+                            dtype=np.float32,
+                        )
+                    except KeyError as e:
+                        raise ValueError(
+                            f"Eval-only: corpus mismatch for run_id={run_id} (missing unit in embed index). {e}"
+                        ) from e
+                    logger.info("Loaded %d embeddings from disk (%s)", len(corpus_embeddings), npy_path)
+                elif eval_only_run_id:
+                    raise ValueError(
+                        f"Eval-only: no cached embeddings for run_id={run_id} model_id={model_id}. "
+                        "Run embed step first (without --run-id), or start MongoDB and re-run embed to populate cache."
+                    )
+                else:
+                    corpus_embeddings = encode_texts_fn(model, corpus_texts, batch_size=config.batch_size)
+                    if mongo_uri:
+                        records = [
+                            {"run_id": run_id, "model_id": model_id, "chunk_id": uid, "embedding": corpus_embeddings[i].tolist()}
+                            for i, uid in enumerate(corpus_ids)
+                        ]
+                        save_cached_embeddings(run_id, model_id, records, mongo_uri, clear_existing=True)
+                        save_embedding_run_metadata(run_id, model_id, len(corpus_ids), mongo_uri)
+                    np.save(output_dir / "embeddings" / f"{model_id}_corpus.npy", corpus_embeddings)
+                    if model_id == config.models[0]:
+                        (output_dir / "embeddings").mkdir(exist_ok=True)
+                        index_path = output_dir / "embeddings" / "corpus_index.json"
+                        index_path.write_text(
+                            json.dumps(
+                                {"run_id": run_id, "substrate_version": config.substrate_version, "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)}},
+                                indent=2,
+                            ),
+                            encoding="utf-8",
+                        )
+            embedding_time_sec = time.perf_counter() - t0
+
+            # Grounding: semantic per model or use pre-grounding
+            if use_semantic_grounding:
+                summary_texts = [(q.get("expected_answer_summary") or "").strip() for q in flat_queries]
+                summary_embeddings = encode_texts_fn(model, summary_texts, batch_size=config.batch_size)
+                grounded_queries, all_grounding_audit = ground_queries_corpus_semantic(
+                    flat_queries,
+                    summary_embeddings,
+                    corpus_embeddings,
+                    corpus_ids,
+                    top_n=config.gold_semantic_top_n,
+                )
+
+            # Query embeddings and retrieval
+            query_texts = [q.get("question") or q.get("expected_answer_summary") or "" for q in grounded_queries]
+            query_embeddings = encode_texts_fn(model, query_texts, batch_size=config.batch_size)
+            t1 = time.perf_counter()
+            q_norm = query_embeddings / (np.linalg.norm(query_embeddings, axis=1, keepdims=True) + 1e-9)
+            c_norm = corpus_embeddings / (np.linalg.norm(corpus_embeddings, axis=1, keepdims=True) + 1e-9)
+            sim = np.dot(q_norm, c_norm.T)
+            max_k = max(config.top_k)
+            ranked_lists = []
+            score_lists = []
+            for i in range(len(grounded_queries)):
+                row = sim[i]
+                top_indices = np.argsort(row)[::-1][:max_k]
+                ranked_lists.append([corpus_ids[j] for j in top_indices])
+                score_lists.append([float(row[j]) for j in top_indices])
+
+            # Optional: expand top-k with prev/next context, re-embed, re-rank
+            if getattr(config, "expand_context", False):
+                n_ctx = getattr(config, "expand_context_n", 1)
+                logger.info("Expand context (n=%d) and re-rank for %d queries", n_ctx, len(grounded_queries))
+                for i in range(len(grounded_queries)):
+                    center_ids = ranked_lists[i][:max_k]
+                    expanded_texts = _build_expanded_texts(corpus, id_to_index, center_ids, n_ctx)
+                    expanded_emb = encode_texts_fn(model, expanded_texts, batch_size=config.batch_size)
+                    q_emb = query_embeddings[i : i + 1]
+                    scores = np.dot(q_emb, expanded_emb.T).flatten()
+                    new_order = np.argsort(scores)[::-1]
+                    ranked_lists[i] = [center_ids[j] for j in new_order]
+                    score_lists[i] = [float(scores[j]) for j in new_order]
+
+            # Hybrid: fuse dense + BM25 via RRF
+            if retrieval_mode == "hybrid" and bm25_ranked_lists is not None:
+                from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
+                rankings_per_query = [
+                    [ranked_lists[i], bm25_ranked_lists[i]]
+                    for i in range(len(grounded_queries))
+                ]
+                ranked_lists, score_lists = reciprocal_rank_fusion(
+                    rankings_per_query, k=60, max_k=max_k
+                )
+                logger.info("Fused dense + BM25 with RRF (k=60) for model %s", model_id)
+
+            scoring_time_sec = time.perf_counter() - t1
+
+            metrics = score_retrieval(
+                grounded_queries,
+                ranked_lists,
+                score_lists,
+                config.top_k,
+                query_embeddings=query_embeddings,
+                corpus_embeddings=corpus_embeddings,
+                corpus_ids=corpus_ids,
+            )
+            # Per-query retrieval review: full chunk text for manual inspection
+            use_expanded = getattr(config, "expand_context", False)
+            query_reviews = []
+            for i, q in enumerate(grounded_queries):
+                pq = metrics.per_query[i]
+                retrieved = []
+                for r, (cid, sc) in enumerate(zip(ranked_lists[i], score_lists[i]), start=1):
+                    text = (
+                        _expanded_text(corpus, id_to_index, cid, getattr(config, "expand_context_n", 1))
+                        if use_expanded
+                        else id_to_text.get(cid, "")
+                    )
+                    retrieved.append({
+                        "rank": r,
+                        "chunk_id": cid,
+                        "score": round(sc, 4),
+                        "text": text,
+                    })
+                query_reviews.append({
+                    "query_id": q.get("id", ""),
+                    "question": q.get("question", ""),
+                    "expected_answer_summary": q.get("expected_answer_summary", ""),
+                    "gold_unit_ids": list(q.get("gold_unit_ids") or []),
+                    "first_gold_rank": pq.get("first_gold_rank"),
+                    "failure_type": pq.get("failure_type", ""),
+                    "retrieved": retrieved,
+                })
+                # Log one line per query: query_id, top-3 chunk_ids, first_gold_rank, failure_type
+                top3_ids = ranked_lists[i][:3]
+                top3_scores = [round(s, 3) for s in score_lists[i][:3]]
+                logger.info(
+                    "[%s] query_id=%s top3=%s scores=%s first_gold_rank=%s failure_type=%s",
+                    model_id,
+                    q.get("id", ""),
+                    top3_ids,
+                    top3_scores,
+                    pq.get("first_gold_rank"),
+                    pq.get("failure_type", ""),
+                )
+            retrieved_chunks_by_model[model_id] = query_reviews
+            logger.info("Model %s: retrieval done for %d queries; review in retrieved_chunks.json", model_id, len(grounded_queries))
+
+            results_by_model[model_id] = {
+                "recall_at_k": metrics.recall_at_k,
+                "hit_at_k": metrics.hit_at_k,
+                "mrr": metrics.mrr,
+                "gold_in_candidates": metrics.gold_in_candidates,
+                "grounding_coverage": metrics.grounding_coverage,
+                "answer_similarity_at_k": metrics.answer_similarity_at_k,
+                "failure_counts": metrics.failure_counts,
+                "per_suite": metrics.per_suite,
+                "embedding_time_sec": embedding_time_sec,
+                "scoring_time_sec": scoring_time_sec,
+            }
+            per_query_by_model[model_id] = metrics.per_query
+
+    grounded_count = sum(1 for q in grounded_queries if (q.get("gold_unit_ids")))
+    grounding_summary = {
+        "total_queries": len(grounded_queries),
+        "grounded": grounded_count,
+        "ungrounded": len(grounded_queries) - grounded_count,
+        "method": "corpus_wide_semantic" if use_semantic_grounding else "page_anchored",
+    }
+    corpus_stats = {
+        "unit_count": len(corpus),
+        "page_count": len(units_by_page_map),
+    }
+    model_list = config.models if config.models else ["bm25"]
+    config_dict = {
+        "substrate_path": config.substrate_path,
+        "document_id": config.document_id,
+        "substrate_version": config.substrate_version,
+        "run_id": run_id,
+        "models": model_list,
+        "query_batch_paths": config.query_batches,
+        "top_k": config.top_k,
+        "retrieval_mode": config.retrieval_mode,
+        "expand_context": getattr(config, "expand_context", False),
+        "expand_context_n": getattr(config, "expand_context_n", 1),
+    }
+    experiment_doc = {
+        "experiment_id": experiment_id,
+        "experiment_name": config.experiment_name,
+        "created_at": datetime.now(timezone.utc),
+        "config": config_dict,
+        "corpus_stats": corpus_stats,
+        "grounding_summary": grounding_summary,
+        "results": results_by_model,
+        "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
+        "frozen": False,
+    }
+    try:
+        save_experiment(experiment_doc, mongo_uri)
+        logger.info("Saved experiment to MongoDB: %s", experiment_id)
+    except Exception as e:
+        logger.warning("Could not save experiment to MongoDB: %s", e)
+    paths = write_report_artifacts(
+        output_dir,
+        experiment_id,
+        config.experiment_name,
+        config_dict,
+        corpus_stats,
+        grounding_summary,
+        results_by_model,
+        all_grounding_audit,
+        per_query_by_model,
+        experiment_doc,
+        retrieved_chunks_by_model=retrieved_chunks_by_model,
+    )
+    logger.info("Report written to %s", paths.get("REPORT.md"))
+    if retrieved_chunks_by_model:
+        logger.info("Retrieved chunks (for manual review): %s", paths.get("retrieved_chunks.json"))
+    return experiment_id
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Retrieval Lab: embed substrate (once) and/or run retrieval evals over EvidenceUnits.",
+    )
+    parser.add_argument("--config", type=str, help="Path to experiment YAML config")
+    parser.add_argument("--substrate", type=str, help="Substrate path (overrides config)")
+    parser.add_argument("--document-id", type=str, default="DnD_PHB_5.5", help="Document ID for substrate")
+    parser.add_argument(
+        "--substrate-version",
+        type=str,
+        default=None,
+        help="Substrate version (e.g. v1, 20260208). Run_id becomes retrieval_lab_{document_id}_{version}. Re-embed only when extraction changes.",
+    )
+    parser.add_argument("--batches", type=str, nargs="+", help="Query batch JSON paths (overrides config)")
+    parser.add_argument("--models", type=str, nargs="+", help="Model IDs (overrides config)")
+    parser.add_argument("--top-k", type=str, default="1,3,5,10,20", help="Comma-separated top-k values")
+    parser.add_argument("--output", type=str, help="Output directory (overrides config)")
+    parser.add_argument("--reuse-embeddings", action="store_true", default=True, help="Use MongoDB cache for embeddings")
+    parser.add_argument("--no-reuse-embeddings", action="store_false", dest="reuse_embeddings")
+    parser.add_argument("--mongo-uri", type=str, default=None, help="MongoDB URI (default: MONGODB_URI env)")
+    parser.add_argument(
+        "--embed-only",
+        action="store_true",
+        help="Only embed the substrate (all models); save to MongoDB. Do not run queries or report. Re-run when extraction/substrate changes.",
+    )
+    parser.add_argument(
+        "--run-id",
+        type=str,
+        default=None,
+        help="Eval-only: use this embedding run_id (no embedding). Requires embeddings already in MongoDB for this run_id and all --models.",
+    )
+    parser.add_argument(
+        "--trust-remote-code",
+        action="store_true",
+        help="Pass trust_remote_code=True when loading models (required for nomic-embed-text-v2, bge-m3, gte-multilingual-base).",
+    )
+    args = parser.parse_args()
+
+    if args.config:
+        config = ExperimentConfig.from_yaml(Path(args.config))
+    else:
+        if not args.substrate or not args.models:
+            parser.error("Without --config, --substrate and --models are required")
+        if not args.embed_only and not args.run_id and not args.batches:
+            parser.error("Without --embed-only or --run-id, --batches is required")
+        config = ExperimentConfig(
+            experiment_name="retrieval_lab_run",
+            substrate_path=args.substrate,
+            document_id=args.document_id,
+            query_batches=args.batches or [],
+            models=args.models,
+            top_k=[int(x) for x in args.top_k.split(",") if x.strip()],
+            output_dir=args.output or "out/retrieval_lab/experiments",
+            mongo_uri=args.mongo_uri,
+            reuse_embeddings=args.reuse_embeddings,
+            substrate_version=args.substrate_version,
+            trust_remote_code=args.trust_remote_code,
+        )
+    if args.substrate:
+        config.substrate_path = args.substrate
+    if args.batches:
+        config.query_batches = args.batches
+    if args.models:
+        config.models = args.models
+    if args.top_k:
+        config.top_k = [int(x) for x in args.top_k.split(",") if x.strip()]
+    if args.output:
+        config.output_dir = args.output
+    if args.mongo_uri is not None:
+        config.mongo_uri = args.mongo_uri
+    if args.substrate_version is not None:
+        config.substrate_version = args.substrate_version
+    if args.trust_remote_code:
+        config.trust_remote_code = True
+
+    if args.embed_only:
+        run_id = _run_embed_only(config)
+        print(f"Embed-only done. run_id={run_id}")
+        return
+
+    experiment_id = _run_experiment(config, eval_only_run_id=args.run_id)
+    print(f"Done. Experiment ID: {experiment_id}")
+
+
+if __name__ == "__main__":
+    main()

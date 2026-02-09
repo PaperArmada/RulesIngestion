@@ -25,7 +25,10 @@ sys.path.insert(0, str(REPO_ROOT))
 from extraction.ast_parser import parse_markdown_to_ast  # noqa: E402
 from extraction.gates_a import run_stage_a_gates          # noqa: E402
 from extraction.gates_b import run_stage_b_gates          # noqa: E402
-from extraction.orphan_header import run_orphan_header_pass  # noqa: E402
+from extraction.orphan_header import (  # noqa: E402
+    _ORPHAN_PROMPT_PATH,
+    run_orphan_header_pass,
+)
 from extraction.schemas import EvidenceUnit               # noqa: E402
 from extraction.stage_b import run_stage_b                # noqa: E402
 
@@ -172,6 +175,8 @@ def main() -> None:
     prompt_path = OUT_DIR / "DnD5eBrutalChapters" / "ORPHAN_HEADER_PROMPT.md"
     if not prompt_path.exists():
         prompt_path = OUT_DIR / "ORPHAN_HEADER_PROMPT.md"
+    if not prompt_path.exists() and _ORPHAN_PROMPT_PATH.exists():
+        prompt_path = _ORPHAN_PROMPT_PATH
     if os.environ.get("OPENAI_API_KEY"):
         try:
             orphan_header_results = run_orphan_header_pass(OUT_DIR, prompt_path=prompt_path)

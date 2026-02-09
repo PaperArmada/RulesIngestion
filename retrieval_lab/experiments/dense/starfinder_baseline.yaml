@@ -1,0 +1,26 @@
+# Dense retrieval baseline — Starfinder Player Core (reuse existing embeddings).
+# Embeddings: embed_retrieval_lab_StarFinderPlayerCore_v2 (all-mpnet-base-v2).
+# Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/dense/starfinder_baseline.yaml --run-id retrieval_lab_StarFinderPlayerCore_v2
+retrieval_mode: dense
+experiment_name: "starfinder_dense_baseline"
+substrate_path: "out/mark3_evaluation/StarFinderPlayerCore"
+document_id: "StarFinderPlayerCore"
+substrate_version: "v2"
+query_batches:
+  - "evals/retrieval/StarFinderPlayerCore/batch_001.json"
+  - "evals/retrieval/StarFinderPlayerCore/batch_002_state.json"
+  - "evals/retrieval/StarFinderPlayerCore/batch_003_grounding.json"
+  - "evals/retrieval/StarFinderPlayerCore/batch_004_temporal.json"
+  - "evals/retrieval/StarFinderPlayerCore/batch_005_constraints.json"
+  - "evals/retrieval/StarFinderPlayerCore/batch_006_conceptual.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+expand_context: true
+expand_context_n: 1
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+reuse_embeddings: true
+gold_semantic_top_n: 5
+gold_jaccard_threshold: 0.15
+batch_size: 16

@@ -42,7 +42,7 @@
       "unit_id": "str — blake3(text + '|' + structural_path_joined)",
       "unit_type": "Literal[prose, table, list, callout, heading]",
       "text": "str — verbatim",
-      "structural_path": "list[str] — heading ancestry from AST root",
+      "structural_path": "list[str] — heading ancestry from AST root, or LLM-assigned heading for orphan pages",
       "ordering_key": "int — total monotonic order",
       "page_fingerprint": "str — upstream Stage A identity",
       "content_hash": "str — blake3 of text",
@@ -68,7 +68,7 @@
     "fields": {
       "gate_name": "str",
       "passed": "bool",
-      "detail": "dict[str, Any]"
+      "detail": "dict[str, Any] — may include 'note' for exemptions (single-unit, image+caption, standalone)"
     },
     "implementation": "extraction/schemas.py::GateDiagnostic"
   },

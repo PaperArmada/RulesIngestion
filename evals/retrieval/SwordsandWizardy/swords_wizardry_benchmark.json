@@ -1,0 +1,277 @@
+[
+  {
+    "id": "sw_q01",
+    "question": "How many first\u2011level spells are in a beginning magic\u2011user's spellbook in Swords & Wizardry Core?",
+    "answer": "In S&W Core a new magic\u2011user doesn\u2019t automatically start with all eight 1st\u2011level spells.  Instead the number of spells in their spellbook is limited by the Intelligence table: the player checks the minimum and maximum spells known for their Intelligence and then rolls their Learn Spell chance for each 1st\u2011level spell to see which ones are successfully learned.  This means a beginning spellbook can contain anywhere from only a few to the maximum allowed spells depending on Intelligence and luck\u3010234770225896033\u2020L200-L255\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1"
+    ]
+  },
+  {
+    "id": "sw_q02",
+    "question": "When generating a random treasure hoard in S&W, what happens if your trade\u2011out rolls exceed the hoard\u2019s gold piece value?",
+    "answer": "The trade\u2011out table allows you to exchange part of a hoard\u2019s gold value for gems, jewels or magic items.  If your trade\u2011out rolls end up exchanging more value than the original gold total, you don\u2019t subtract anything \u2013 the hoard simply becomes a \"Major\" treasure.  You keep all of the rolled trade\u2011out items and the original gold value as well\u3010115102481356123\u2020L171-L180\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "53855dbc43b7b246c8b65d020244fede6b83741a2065012389812069cfd26eb8",
+      "14909bb5bba2137fdfe4cb242bdf696474efa8fa8b1b6f5722f477da4ce030fc",
+      "43622ad982f4a62de87ee6e7f8567f2216a46eeddb05efa572c15eab9d07e0be"
+    ]
+  },
+  {
+    "id": "sw_q03",
+    "question": "Is there a mathematical formula or budget behind the class abilities in S&W White Box?",
+    "answer": "No.  Swords & Wizardry White Box classes weren\u2019t built from a modern balancing algorithm.  The game is a retroclone of 1974 D&D and its classes were designed to emulate the feel of OD&D rather than follow a point\u2011buy formula or equal power budget\u3010781072687742388\u2020L170-L185\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "077628cd712b0eb11aff3fbe1d74774f4f7ee2a2402bab8a7bbc9a942df9202e",
+      "d1512851a1fc4f613daa86515ce133886c6eadfc7d37b512d283add0d9366f7e",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ]
+  },
+  {
+    "id": "sw_q04",
+    "question": "How often can a magic\u2011user prepare new spells in Swords & Wizardry?  Can they re\u2011prepare spells during the day?",
+    "answer": "The core rules don\u2019t explicitly state a limit, so most tables follow the tradition that a magic\u2011user can prepare spells once per day after sleeping and studying.  Some referees allow re\u2011preparing spells if there is time: for example a wizard might spend one turn per spell level to re\u2011memorise a spell, but this is a house rule and exposes the character to wandering monsters\u3010750143294925256\u2020L164-L192\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
+    ]
+  },
+  {
+    "id": "sw_q05",
+    "question": "In the Turn Undead table, what does a \u2018T\u2019 result mean compared to a number?",
+    "answer": "A number on the Turn Undead table is the minimum roll on 1d20 needed to turn that undead; the cleric must meet or beat that number.  The letter \u2018T\u2019 means the undead is automatically turned without rolling, while \u2018D\u2019 indicates automatic destruction.  For example, a 1st\u2011level cleric automatically turns zombies (T) but must roll to turn ghouls or wights\u3010767001204131419\u2020L176-L185\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "a76ffccffe2043de228154619f617d008896781b8d389ec34590ebb0da4b083e",
+      "871a7deaaced8254560bc4dd87a925c74b96f789c3afd917a17f19b6ba2fbbc8",
+      "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
+    ]
+  },
+  {
+    "id": "sw_q06",
+    "question": "Does a first\u2011level cleric get to cast spells in Swords & Wizardry?",
+    "answer": "No.  In Swords & Wizardry a cleric does not gain spell slots until 2nd level.  This differs from Labyrinth Lord (and later editions) where a 1st\u2011level cleric begins with spells\u301091111277217397\u2020L210-L212\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "6743dcf07ad1f1e13fafb100641284bd861cb5d034e6176ee74e1547e5fb77ca",
+      "9a3aff9d7dac337dbed28e86358ba34f52527c0a2ca216507c294bedd1a89b13"
+    ]
+  },
+  {
+    "id": "sw_q07",
+    "question": "How do the experience point tables differ between Swords & Wizardry and Labyrinth Lord?",
+    "answer": "Labyrinth Lord\u2019s level tables end in an odd number (for example a fighter needs 2,501 XP to reach 2nd level).  Swords & Wizardry rounds these numbers \u2013 the same fighter needs 2,500 XP instead.  The difference reflects that LL closely follows the B/X totals while S&W simplifies them\u301091111277217397\u2020L213-L215\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "ddab1b1bfb1bbe579de2bda996a5e1505521b084014253ffda9620296bca56ad",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42"
+    ]
+  },
+  {
+    "id": "sw_q08",
+    "question": "What are the main differences in race/class options and ability score bonuses between Swords & Wizardry and Labyrinth Lord?",
+    "answer": "S&W separates race and class: humans and non\u2011humans choose a class independently and non\u2011humans may multiclass.  Labyrinth Lord uses race\u2011as\u2011class.  LL uses a unified attribute bonus table with bonuses from \u20133 to +3 that apply to all classes.  S&W follows OD&D by having separate tables for each attribute with smaller bonuses; only fighters get strength bonuses to hit and damage by default\u301091111277217397\u2020L193-L207\u3011\u301091111277217397\u2020L198-L205\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "bab992a985c36a670942de91044a2a31fd33177fadb292e2dd031cb7de4b6647",
+      "bf402d7c0ad22a5bf5b7e4c151c12ac7b2fa02eabb84b9d74d69671cb5de242a",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd"
+    ]
+  },
+  {
+    "id": "sw_q09",
+    "question": "Can humans dual\u2011class in Swords & Wizardry?",
+    "answer": "Yes.  Swords & Wizardry allows human characters to abandon their original class and begin progressing in a new class, thereby dual\u2011classing, whereas Labyrinth Lord does not mention this option\u301091111277217397\u2020L216-L217\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571",
+      "f2f6fb417845a21cbb7aec7ba268ee58a7d140df6b0ff9c7fbb20a176b06f31a",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ]
+  },
+  {
+    "id": "sw_q10",
+    "question": "Does Swords & Wizardry impose minimum ability scores to qualify for a class?",
+    "answer": "No.  S&W dispenses with minimum attribute requirements entirely.  Labyrinth Lord retains minimum scores for each class.  In S&W high attributes still grant positive experience bonuses (up to +15%), and high wisdom provides an XP bonus regardless of class\u301091111277217397\u2020L219-L223\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "da6e7409fbce08b0b6c91b8f0769c6697f5b107adc4fb47ff439e338bf95352b"
+    ]
+  },
+  {
+    "id": "sw_q11",
+    "question": "How are starting spells determined for magic\u2011users in S&W compared to Labyrinth Lord?",
+    "answer": "Labyrinth Lord magic\u2011users and elves begin play knowing two 1st\u2011level spells and one 2nd\u2011level spell.  In Swords & Wizardry, the magic\u2011user checks each of the eight basic 1st\u2011level spells against their Learn Spell chance to see which they know.  The character may end up with fewer than the maximum allowed by their Intelligence\u301091111277217397\u2020L224-L228\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
+    ]
+  },
+  {
+    "id": "sw_q12",
+    "question": "What dice are used for thief skills and saving throws in S&W as compared to Labyrinth Lord?",
+    "answer": "Labyrinth Lord uses a d20 roll for thief skill checks.  Swords & Wizardry resolves most saving throws and thief skills using percentile dice except for Hear Noise, which uses a d6\u301091111277217397\u2020L229-L231\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "8faf75fb39c23bc4ff781c6aa7ab147cae8a171249526212d867481a77e20fa4",
+      "65c7e822e23cedd2ff1573e206bc620fb59c4c315b628ca629ef6aafea05f919",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff"
+    ]
+  },
+  {
+    "id": "sw_q13",
+    "question": "How does the combat sequence in Swords & Wizardry differ from Labyrinth Lord\u2019s phase system?",
+    "answer": "Both games use group initiative, but Labyrinth Lord divides each round into phases (spell casting, missile attacks, melee, and movement) and completes all phases for one side before the other side acts.  Swords & Wizardry\u2019s standard sequence resolves all actions for a side at once.  There is also an optional alternate sequence in S&W that handles actions by phase with order determined by Dexterity\u301091111277217397\u2020L252-L260\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74"
+    ]
+  },
+  {
+    "id": "sw_q14",
+    "question": "How does Swords & Wizardry handle characters at 0 hit points and healing compared to Labyrinth Lord?",
+    "answer": "In Labyrinth Lord a creature dies when reduced to 0 hit points.  Swords & Wizardry treats 0 hp as unconsciousness: the character bleeds out at 1 hp per round and dies when negative hit points equal their level.  Healing also differs: LL characters regain 1d3 hp per full day of rest, while S&W characters regain 1 hp per day but heal to full after four weeks of rest\u301091111277217397\u2020L291-L296\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "aac3607a2a256c3f0c41b7952ac6aaaff0ad7a5386a204dd1f4b808d9e1a8bfd",
+      "b196bd64e57674b88b88a92287e87d35e16e89ef4fc0e20cdb4528cbfd0ff5fc",
+      "2b1af49fe5fb97c8f97f6601b6e6fc99252e4e55dd0e5c0cbc7ea4090f3c4564"
+    ]
+  },
+  {
+    "id": "sw_q15",
+    "question": "What rule does Swords & Wizardry use for firing missile weapons into melee?",
+    "answer": "When firing into a melee in S&W, a successful attack does not automatically hit your intended target.  Instead, the target of a hit is chosen randomly among all creatures in the melee, including allies.  Labyrinth Lord provides no explicit rule for firing into melee\u301091111277217397\u2020L273-L275\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ]
+  },
+  {
+    "id": "sw_q16",
+    "question": "The S&W Light rules list the thief\u2019s Armor Class as 12[7]; is this correct?",
+    "answer": "No.  Tenkar\u2019s Tavern clarified that the line for the thief\u2019s AC is a typo: it should read AC 7[12] (descending AC first with ascending AC in brackets).  The reversed numbers in the printed S&W Light booklet are an error\u3010319006729373824\u2020L41-L47\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "9f2bba6138fc606bd977d932e654c99d75fe2e674b2b5763b0b7a03827f237fe",
+      "00c38e678bf75f0bea756b6b789ff5516eccbce19c77fa1cf78366915d87a6a9",
+      "7db4d4afe306fc33660eae6488aae33cccdd777bea2f35c509cc72e7dfd5b7cd"
+    ]
+  },
+  {
+    "id": "sw_q17",
+    "question": "Does S&W Light assume readers already know the full Swords & Wizardry rules?",
+    "answer": "No.  The four\u2011page S&W Light rules do not require prior knowledge of Swords & Wizardry.  They presume players are familiar with role\u2011playing games in general but there is no assumption that they have read other S&W rulebooks\u3010319006729373824\u2020L50-L57\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "bbdd05e9f826099bbdc66393c7d18d58d9fe71dc9505227c230c5d8ca4d6dd2e",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "f21857f3a071a722ca1e6023f7d54087bc7fc34999a33252dc3fe06c2ed512bf"
+    ]
+  },
+  {
+    "id": "sw_q18",
+    "question": "Why doesn\u2019t S&W Light include a full table of ability score bonuses?",
+    "answer": "Because the bonuses in S&W Light are very small.  Characters never gain more than a +1 bonus from an ability score in these streamlined rules, so a table was omitted to save space\u3010319006729373824\u2020L59-L65\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "3b02e1aa31a77f06e16cfcdbda686d05c5539a8dafdd6743dca1794d7e9d09dd",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6"
+    ]
+  },
+  {
+    "id": "sw_q19",
+    "question": "What die is used for Hit Dice in S&W Light?  The book doesn\u2019t seem to say.",
+    "answer": "S&W Light uses only d6s and d20s.  Hit Dice are d6s, so a monster or character with 3 HD rolls three six\u2011sided dice for hit points.  \u2018HD\u2019 simply means the number of d6s rolled\u3010319006729373824\u2020L68-L77\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "72c9cb4c3664129f8d55a9f984815348b45236f156378ba890d0cdb8747d547b",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff",
+      "b97acd4300e80a3763215753ef7ff4e9e8857947cae11a15d3402af08396c4a7"
+    ]
+  },
+  {
+    "id": "sw_q20",
+    "question": "Do magic\u2011users in S&W Light start with a weapon?  If so, what?",
+    "answer": "Yes.  The S&W Light magic\u2011user should receive a dagger or staff as a starting weapon.  The equipment section omits this in error, but the clarification states that the magic\u2011user should get one of those simple weapons\u3010319006729373824\u2020L81-L86\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "505570226a08fa84d5909c600b0d51ab055e68d2667ddef83d4a15b5dc8694ca",
+      "2204546ca0a1b2493fa71aa3469002a220c1a4c416412dc444f35b1a5292f7e4"
+    ]
+  },
+  {
+    "id": "sw_q21",
+    "question": "Does casting a spell in S&W Light require a roll or skill test?",
+    "answer": "No.  Casting a spell in S&W Light does not require any kind of success roll.  A spell only fails or is lost if the caster is interrupted or takes damage during casting\u3010319006729373824\u2020L88-L93\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ]
+  },
+  {
+    "id": "sw_q22",
+    "question": "How do surprise and initiative work in Swords & Wizardry Complete?",
+    "answer": "If one side is surprised, the other side gets a free action or attack before initiative is rolled.  After this surprise round, initiative is determined normally and each side acts in order.  Surprise therefore grants a single free action rather than an entire round\u3010371582203323234\u2020L39-L54\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18"
+    ]
+  },
+  {
+    "id": "sw_q23",
+    "question": "Can a character fire a missile weapon and make a melee attack in the same round in S&W Complete?",
+    "answer": "No.  The combat sequence in S&W Complete allows each combatant one action per round.  A character may move and fire a missile weapon (or move and fight in melee) but cannot both fire a missile and make a melee attack in the same round.  Only a half\u2011move can be combined with a single attack\u3010371582203323234\u2020L56-L69\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ]
+  },
+  {
+    "id": "sw_q24",
+    "question": "What happens to a spell being cast if the caster takes damage in Swords & Wizardry Complete?",
+    "answer": "If a spellcaster is struck or otherwise disrupted while casting a spell in S&W Complete, the spell is lost for the day.  The caster must prepare it again before it can be used\u3010371582203323234\u2020L71-L83\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ]
+  },
+  {
+    "id": "sw_q25",
+    "question": "Is Swords & Wizardry compatible with 1st\u2011edition AD&D modules and other OSR adventures?",
+    "answer": "Yes.  Swords & Wizardry was designed to be compatible with original and first\u2011edition D&D material.  Players report that it runs old modules well.  Other retroclones like OSRIC or Labyrinth Lord may hew even more closely to AD&D, but converting material to S&W is straightforward\u3010338419238901263\u2020L185-L213\u3011.",
+    "source_page": "",
+    "gold_unit_ids": [
+      "45867b8a886906180e12ee67f9b0e5048bac6672b43323a0da396ab66613a8b2",
+      "5dbeb0ddcaf04e28e9aaff2ef8cb09bf3c9da4eb8f5d69e19d7aa7a3e086db90",
+      "a852155fe85845eb48075e1d4b254f82137b260eda411339a1b03e755433ab2e"
+    ]
+  }
+]

@@ -1,9 +1,10 @@
 """
-Mark III Pipeline — top-level orchestrator for Stage A and Stage B.
+Mark III Pipeline — top-level orchestrator for Stage A, Stage B, and Stage A'.
 
 Provides:
   - run_a_only()       — Stage A only (prose reconstruction + gates)
   - run_a_b()          — Stage A + Stage B (segmentation + evidence binding)
+  - run_a_b_aprime()   — Stage A + Stage B + Stage A' (enrichment for retrieval)
   - run_stage_b_on_result() — Stage B from a pre-existing StageAResult
 
 Each function writes all artifacts to the output directory and returns
@@ -18,7 +19,9 @@ from pathlib import Path
 from typing import Any
 
 from extraction.gates_b import run_stage_b_gates
+from extraction.schemas import EvidenceUnit
 from extraction.stage_a import StageAResult, run_stage_a
+from extraction.stage_a_prime import StageAPrimeResult, run_stage_a_prime
 from extraction.stage_b import StageBResult, run_stage_b
 
 logger = logging.getLogger(__name__)
@@ -147,6 +150,114 @@ def run_a_b(
     )
 
     return combined
+
+
+def run_a_b_aprime(
+    pdf_path: Path,
+    page_index: int,
+    out_dir: Path,
+    *,
+    book_id: str | None = None,
+    dpi: int = 200,
+    skip_ocr: bool = False,
+    raw_markdown_override: str | None = None,
+    model: str = "gpt-5-mini",
+    openai_client: Any | None = None,
+    concurrency: int = 10,
+) -> dict[str, Any]:
+    """Run Stage A + Stage B + Stage A' on a single page.
+
+    Stage A' enriches EvidenceUnits with retrieval-only annotations (non-evidence).
+    """
+    out_dir = Path(out_dir).resolve()
+    bid = book_id or pdf_path.stem
+
+    combined = run_a_b(
+        pdf_path,
+        page_index,
+        out_dir,
+        dpi=dpi,
+        skip_ocr=skip_ocr,
+        raw_markdown_override=raw_markdown_override,
+    )
+
+    units_raw = combined.get("stage_b", {}).get("units", [])
+    if not units_raw:
+        logger.info("Stage A': no units to enrich (page %d)", page_index)
+        combined["stage_a_prime"] = {
+            "enrichments": {},
+            "gates_passed": True,
+            "gate_details": [],
+            "run_manifest": {},
+        }
+        return combined
+
+    units = [EvidenceUnit.from_dict(u) for u in units_raw]
+    a_prime_result = run_stage_a_prime(
+        units,
+        out_dir,
+        book_id=bid,
+        model=model,
+        openai_client=openai_client,
+        concurrency=concurrency,
+    )
+
+    enrichments_dict = {
+        uid: enr.model_dump()
+        for uid, enr in a_prime_result.enrichments
+    }
+    write_stage_a_prime_artifacts(out_dir, a_prime_result)
+
+    combined["stage_a_prime"] = {
+        "enrichments": enrichments_dict,
+        "gates_passed": a_prime_result.gates_passed,
+        "gate_details": [g.to_dict() for g in a_prime_result.gate_diagnostics],
+        "run_manifest": a_prime_result.run_manifest,
+    }
+    combined["all_gates_passed"] = (
+        combined["all_gates_passed"] and a_prime_result.gates_passed
+    )
+
+    logger.info(
+        "Pipeline A+B+A' complete: %s page %d  A'=%s",
+        pdf_path.name,
+        page_index,
+        "PASS" if a_prime_result.gates_passed else "FAIL",
+    )
+    return combined
+
+
+def write_stage_a_prime_artifacts(out_dir: Path, result: StageAPrimeResult) -> None:
+    """Write Stage A' output artifacts (enrichments, run manifest, gate diagnostics)."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    enrichments_dict = {
+        uid: enr.model_dump()
+        for uid, enr in result.enrichments
+    }
+
+    enrich_path = out_dir / "stageAPrime.enrichments.json"
+    enrich_path.write_text(
+        json.dumps(enrichments_dict, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    manifest_path = out_dir / "stageAPrime.run_manifest.json"
+    manifest_path.write_text(
+        json.dumps(result.run_manifest, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    diag_path = out_dir / "stageAPrime.gate_diagnostics.json"
+    diag_path.write_text(
+        json.dumps(
+            [g.to_dict() for g in result.gate_diagnostics],
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    logger.info("Stage A' artifacts written to %s", out_dir)
 
 
 def _write_stage_b_artifacts(out_dir: Path, result: StageBResult) -> None:

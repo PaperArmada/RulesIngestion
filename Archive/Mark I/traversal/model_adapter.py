@@ -2,7 +2,7 @@
 Provider-agnostic LLM interface for query expansion.
 
 Supports:
-- OpenAI (GPT-5.2, GPT-4o-mini, GPT-4o) via Responses API
+- OpenAI (GPT-5.2, GPT-5-mini, GPT-5) via Responses API
 - Anthropic (Claude Haiku, Claude Sonnet)
 - Google (Gemini Flash)
 - Local models (via OpenAI-compatible API)

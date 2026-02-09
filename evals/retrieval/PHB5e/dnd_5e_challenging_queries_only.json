@@ -1,0 +1,84 @@
+{
+  "ruleset": "dnd5e",
+  "purpose": "Challenging queries only \u2014 top-50 retrieval for gold curation",
+  "notes": "Subset of dnd_5_e_equivalent_rag_eval_queries with empty gold_unit_ids.",
+  "batches": [
+    {
+      "batch_id": "challenging",
+      "suite": "mixed",
+      "queries": [
+        {
+          "id": "dnd5e_blind_001_03",
+          "suite_tags": [
+            "constraint"
+          ],
+          "source_page": null,
+          "question": "Can a feature that absorbs lightning damage be used to power a device or mechanism?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "No. Such features only function within their defined combat or defensive scope unless explicitly stated otherwise."
+        },
+        {
+          "id": "dnd5e_blind_001_09",
+          "suite_tags": [
+            "constraint"
+          ],
+          "source_page": null,
+          "question": "Can a racial trait that prevents death be used more than once per day?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "Only if no usage limit is stated; otherwise follow the listed frequency."
+        },
+        {
+          "id": "dnd5e_blind_001_10",
+          "suite_tags": [
+            "conceptual",
+            "comparison"
+          ],
+          "source_page": null,
+          "question": "What\u2019s the difference between two racial features that both prevent death at 0 HP?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "They differ in trigger timing, frequency, and reset conditions."
+        },
+        {
+          "id": "dnd5e_grounding_003_01",
+          "suite_tags": [
+            "scope"
+          ],
+          "source_page": null,
+          "question": "Does advantage from flanking persist after an ally moves away?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "No. It applies only while the positional condition is met."
+        },
+        {
+          "id": "dnd5e_temporal_004_02",
+          "suite_tags": [
+            "temporal"
+          ],
+          "source_page": null,
+          "question": "When does ongoing damage apply\u2014start or end of turn?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "Typically at the end of the affected creature\u2019s turn."
+        },
+        {
+          "id": "dnd5e_conceptual_006_01",
+          "suite_tags": [
+            "conceptual"
+          ],
+          "source_page": null,
+          "question": "Why would you look at multiple conditions together instead of one at a time?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "Conditions often interact or escalate; grouping them clarifies their relationships."
+        },
+        {
+          "id": "dnd5e_conceptual_006_02",
+          "suite_tags": [
+            "conceptual"
+          ],
+          "source_page": null,
+          "question": "What is a subclass in character-building terms?",
+          "gold_unit_ids": [],
+          "expected_answer_summary": "A subclass is a specialization that defines a character\u2019s mechanics and theme within a class."
+        }
+      ]
+    }
+  ]
+}

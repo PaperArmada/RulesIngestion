@@ -32,7 +32,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from extraction.gates_b import run_stage_b_gates
 from extraction.orphan_header import discover_orphans, run_orphan_header_pass
-from extraction.pipeline import run_a_b
+from extraction.pipeline import run_a_b, run_a_b_aprime
 from extraction.schemas import EvidenceUnit
 
 logger = logging.getLogger(__name__)
@@ -132,6 +132,12 @@ def main() -> None:
         default=0,
         help="Resume from this page index (0-based). Load results from existing page dirs for pages 0..start_page-1.",
     )
+    parser.add_argument(
+        "--stage",
+        choices=["ab", "ab+aprime"],
+        default="ab",
+        help="ab = Stage A+B only; ab+aprime = A+B then Stage A' enrichment per page (requires OPENAI_API_KEY).",
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging.")
     args = parser.parse_args()
 
@@ -192,9 +198,16 @@ def main() -> None:
         print(f"[{page_index + 1}/{num_pages}] {label} ...", end=" ", flush=True)
         t0 = time.perf_counter()
         try:
-            combined = run_a_b(pdf_path, page_index, page_out, dpi=args.dpi)
+            if args.stage == "ab+aprime":
+                combined = run_a_b_aprime(
+                    pdf_path, page_index, page_out,
+                    dpi=args.dpi,
+                    book_id=stem,
+                )
+            else:
+                combined = run_a_b(pdf_path, page_index, page_out, dpi=args.dpi)
             elapsed = time.perf_counter() - t0
-            results.append({
+            result_entry = {
                 "label": label,
                 "pdf": str(pdf_path),
                 "page": page_index,
@@ -214,10 +227,21 @@ def main() -> None:
                     "gate_details": combined["stage_b"]["gate_details"],
                 },
                 "all_gates_passed": combined["all_gates_passed"],
-            })
+            }
+            if "stage_a_prime" in combined:
+                result_entry["stage_a_prime"] = {
+                    "gates_passed": combined["stage_a_prime"]["gates_passed"],
+                    "enrichment_count": len(combined["stage_a_prime"].get("enrichments", {})),
+                }
+            results.append(result_entry)
+            a_prime_suffix = ""
+            if "stage_a_prime" in combined:
+                ap = combined["stage_a_prime"]
+                a_prime_suffix = f"  A'={'PASS' if ap['gates_passed'] else 'FAIL'}"
             print(f"{elapsed:.1f}s  A={'PASS' if combined['stage_a']['gates_passed'] else 'FAIL'}  "
                   f"B={'PASS' if combined['stage_b']['gates_passed'] else 'FAIL'}  "
-                  f"units={len(combined['stage_b']['units'])}  salvage={combined['stage_b']['salvage_score']:.2f}")
+                  f"units={len(combined['stage_b']['units'])}  salvage={combined['stage_b']['salvage_score']:.2f}"
+                  f"{a_prime_suffix}")
         except Exception as e:
             elapsed = time.perf_counter() - t0
             results.append({

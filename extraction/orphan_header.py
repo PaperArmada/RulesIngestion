@@ -18,6 +18,9 @@ import re
 from pathlib import Path
 from typing import Any
 
+# Canonical prompt location (source-controlled); any eval_dir can override with local ORPHAN_HEADER_PROMPT.md
+_ORPHAN_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "ORPHAN_HEADER_PROMPT.md"
+
 
 def ast_has_heading(obj: object) -> bool:
     """Return True if AST (or subtree) contains any node with node_type 'heading'."""
@@ -172,11 +175,12 @@ async def _run_orphan_header_pass_async(
     if prompt_path is None:
         prompt_path = eval_dir / "ORPHAN_HEADER_PROMPT.md"
     if not prompt_path.exists():
-        fallback = eval_dir.parent / "DnD5eBrutalChapters" / "ORPHAN_HEADER_PROMPT.md"
-        if fallback.exists():
-            prompt_path = fallback
+        if _ORPHAN_PROMPT_PATH.exists():
+            prompt_path = _ORPHAN_PROMPT_PATH
         else:
-            raise FileNotFoundError(f"ORPHAN_HEADER_PROMPT.md not found: {prompt_path}")
+            raise FileNotFoundError(
+                f"ORPHAN_HEADER_PROMPT.md not found: {prompt_path} or {_ORPHAN_PROMPT_PATH}"
+            )
 
     template = load_prompt_template(prompt_path)
     orphans = discover_orphans(eval_dir)

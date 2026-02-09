@@ -1,0 +1,15 @@
+# Sparse (BM25) retrieval baseline — PHB 5e.
+# Same substrate as dense. No embedding step.
+# Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/sparse/phb_bm25.yaml
+retrieval_mode: bm25
+experiment_name: "phb_bm25_baseline"
+substrate_path: "out/mark3_evaluation/DnD_PHB_5.5"
+document_id: "DnD_PHB_5.5"
+substrate_version: "v2"
+query_batches:
+  - "evals/retrieval/PHB5e/dnd_5_e_equivalent_rag_eval_queries.json"
+models: []
+top_k: [1, 3, 5, 10, 20]
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+gold_jaccard_threshold: 0.15
