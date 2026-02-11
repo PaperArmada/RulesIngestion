@@ -18,6 +18,7 @@
   },
   "queries": [
     {
+      "tier": "T2",
       "id": "batch_002_01",
       "source_page": 413,
       "question": "What penalties do I have while prone?",
@@ -37,6 +38,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_02",
       "source_page": 413,
       "question": "Can I use Stealth to Hide while I'm prone?",
@@ -56,6 +58,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_03",
       "source_page": 413,
       "question": "What changes when I gain the wounded condition?",
@@ -75,6 +78,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_04",
       "source_page": 413,
       "question": "If I'm dying and taking persistent damage, what happens during my turn?",
@@ -98,6 +102,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_05",
       "source_page": 413,
       "question": "Does the concealed condition stack with cover?",
@@ -118,6 +123,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_06",
       "source_page": 413,
       "question": "What penalties apply while blinded?",
@@ -137,6 +143,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_07",
       "source_page": 402,
       "question": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
@@ -157,6 +164,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_002_08",
       "source_page": 413,
       "question": "Can I crawl while prone and does it provoke?",

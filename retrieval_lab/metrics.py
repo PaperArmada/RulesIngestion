@@ -24,6 +24,7 @@ class QueryResult:
     recall_at_k: Dict[int, float]  # k -> fraction of gold found in top-k
     failure_type: str  # "hit", "retrieval_miss", "rank_miss", "grounding_failure"
     suite: str = "default"
+    tier: str = "T1"  # R8 gold tier (T1-T5)
     answer_similarity_at_k: Optional[Dict[int, float]] = None  # k -> mean sim of top-k to query
 
 
@@ -60,6 +61,7 @@ def compute_query_result(
     gold_unit_ids: List[str],
     top_k_list: List[int],
     suite: str = "default",
+    tier: str = "T1",
     query_embedding: Optional[np.ndarray] = None,
     corpus_embeddings: Optional[np.ndarray] = None,
     corpus_id_to_index: Optional[Dict[str, int]] = None,
@@ -109,6 +111,7 @@ def compute_query_result(
         recall_at_k=recall_at_k,
         failure_type=failure_type,
         suite=suite,
+        tier=tier,
         answer_similarity_at_k=answer_similarity_at_k,
     )
 
@@ -126,6 +129,7 @@ class MetricsResult:
     failure_counts: Dict[str, int] = field(default_factory=dict)
     per_query: List[Dict[str, Any]] = field(default_factory=list)
     per_suite: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    per_tier: Dict[str, Dict[str, Any]] = field(default_factory=dict)  # R8 gold tier taxonomy
     candidate_set_size: int = 0
 
 
@@ -153,6 +157,7 @@ def score_retrieval(
     for i, q in enumerate(grounded_queries):
         gold = list(q.get("gold_unit_ids") or [])
         suite = q.get("_suite", "default")
+        tier = q.get("_tier", q.get("tier", "T1"))
         q_emb = query_embeddings[i] if query_embeddings is not None and i < query_embeddings.shape[0] else None
         r = compute_query_result(
             query_id=q.get("id", ""),
@@ -161,6 +166,7 @@ def score_retrieval(
             gold_unit_ids=gold,
             top_k_list=top_k_list,
             suite=suite,
+            tier=tier,
             query_embedding=q_emb,
             corpus_embeddings=corpus_embeddings,
             corpus_id_to_index=corpus_id_to_index,
@@ -209,6 +215,24 @@ def score_retrieval(
         d["recall_at_k"] = {k: v / nn for k, v in d["recall_at_k"].items()}
         d["hit_at_k"] = {k: v / nn for k, v in d["hit_at_k"].items()}
         del d["rr_sum"]
+    # Per-tier aggregates (R8 gold taxonomy)
+    per_tier: Dict[str, Dict[str, Any]] = {}
+    for r in per_query_results:
+        t = r.tier
+        if t not in per_tier:
+            per_tier[t] = {"recall_at_k": {}, "hit_at_k": {}, "mrr": 0.0, "n": 0, "rr_sum": 0.0}
+        per_tier[t]["n"] = per_tier[t]["n"] + 1
+        if r.first_gold_rank is not None:
+            per_tier[t]["rr_sum"] = per_tier[t]["rr_sum"] + 1.0 / r.first_gold_rank
+        for k in top_k_list:
+            per_tier[t]["recall_at_k"][k] = per_tier[t]["recall_at_k"].get(k, 0) + r.recall_at_k[k]
+            per_tier[t]["hit_at_k"][k] = per_tier[t]["hit_at_k"].get(k, 0) + (1 if r.in_top_k[k] else 0)
+    for t, d in per_tier.items():
+        nn = d["n"]
+        d["mrr"] = d["rr_sum"] / nn if nn else 0.0
+        d["recall_at_k"] = {k: v / nn for k, v in d["recall_at_k"].items()}
+        d["hit_at_k"] = {k: v / nn for k, v in d["hit_at_k"].items()}
+        del d["rr_sum"]
     per_query_serialized = []
     for r in per_query_results:
         per_query_serialized.append({
@@ -216,6 +240,7 @@ def score_retrieval(
             "first_gold_rank": r.first_gold_rank,
             "failure_type": r.failure_type,
             "suite": r.suite,
+            "tier": r.tier,
             "in_top_k": r.in_top_k,
             "recall_at_k": r.recall_at_k,
             "answer_similarity_at_k": r.answer_similarity_at_k,
@@ -230,5 +255,6 @@ def score_retrieval(
         failure_counts=failure_counts,
         per_query=per_query_serialized,
         per_suite=per_suite,
+        per_tier=per_tier,
         candidate_set_size=len(corpus_ids) if corpus_ids else 0,
     )

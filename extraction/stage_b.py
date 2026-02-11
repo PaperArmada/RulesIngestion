@@ -136,6 +136,7 @@ def _walk_ast(
     units: list[EvidenceUnit],
     counter: list[int],          # mutable single-element list for monotonic key
     page_fingerprint: str,
+    content_version: str = "",
     pending_heading: list[tuple[str, int, int]] | None = None,
 ) -> None:
     """Depth-first walk, emitting EvidenceUnits for each meaningful node.
@@ -149,17 +150,17 @@ def _walk_ast(
 
     if node.node_type == "root":
         for child in node.children:
-            _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+            _walk_ast(child, path, units, counter, page_fingerprint, content_version, pending_heading)
         # If any headings were never absorbed (heading with no children at end of page),
         # emit them as fallback heading-type units.
-        _flush_pending_headings(pending_heading, path, units, counter, page_fingerprint)
+        _flush_pending_headings(pending_heading, path, units, counter, page_fingerprint, content_version)
         return
 
     if node.node_type == "heading":
         heading_text = node.text.strip()
         if not heading_text:
             for child in node.children:
-                _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+                _walk_ast(child, path, units, counter, page_fingerprint, content_version, pending_heading)
             return
 
         # Extend structural path for children
@@ -170,7 +171,7 @@ def _walk_ast(
             # Push heading text as pending; first leaf consumes it.
             pending_heading.append((heading_text, node.source_line_start, node.source_line_end))
             for child in node.children:
-                _walk_ast(child, child_path, units, counter, page_fingerprint, pending_heading)
+                _walk_ast(child, child_path, units, counter, page_fingerprint, content_version, pending_heading)
         else:
             # Childless heading: push as pending so the next sibling (if any)
             # absorbs it. If nothing absorbs it, _flush emits it.
@@ -216,13 +217,14 @@ def _walk_ast(
         source_line_start=line_start,
         source_line_end=line_end,
         anomaly_flags=anomaly_flags,
+        content_version=content_version,
     )
     counter[0] += 1
     units.append(unit)
 
     # If the leaf somehow has children (shouldn't, but defensive), recurse
     for child in node.children:
-        _walk_ast(child, path, units, counter, page_fingerprint, pending_heading)
+        _walk_ast(child, path, units, counter, page_fingerprint, content_version, pending_heading)
 
 
 def _flush_pending_headings(
@@ -231,6 +233,7 @@ def _flush_pending_headings(
     units: list[EvidenceUnit],
     counter: list[int],
     page_fingerprint: str,
+    content_version: str = "",
 ) -> None:
     """Emit any remaining pending headings as fallback heading-type units.
 
@@ -250,6 +253,7 @@ def _flush_pending_headings(
             source_line_start=line_start,
             source_line_end=line_end,
             anomaly_flags=["unabsorbed_heading"],
+            content_version=content_version,
         )
         counter[0] += 1
         units.append(unit)
@@ -297,6 +301,8 @@ class StageBResult:
 def run_stage_b(
     ast: SurfaceAST,
     out_dir: Path | None = None,
+    *,
+    content_version: str = "",
 ) -> StageBResult:
     """Execute Stage B segmentation on a SurfaceAST.
 
@@ -334,7 +340,7 @@ def run_stage_b(
     units: list[EvidenceUnit] = []
     counter = [0]  # mutable for closure
 
-    _walk_ast(ast.root, [], units, counter, ast.page_fingerprint)
+    _walk_ast(ast.root, [], units, counter, ast.page_fingerprint, content_version)
 
     logger.info(
         "Stage B: %d EvidenceUnits from %d AST nodes",

@@ -41,7 +41,13 @@ from retrieval_lab.store import (
     save_experiment,
     substrate_run_id,
 )
-from retrieval_lab.substrate_loader import load_evidence_units, merge_units_by_heading, units_by_page
+from retrieval_lab.substrate_loader import (
+    load_evidence_units,
+    merge_enrichments_into_corpus,
+    merge_units_by_heading,
+    units_by_page,
+)
+from retrieval_lab.config import ParentFetchConfig
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -84,6 +90,35 @@ def _build_expanded_texts(
     return [_expanded_text(corpus, id_to_index, cid, n) for cid in center_ids]
 
 
+def _apply_unit_type_boost(
+    ranked_lists: List[List[str]],
+    score_lists: List[List[float]],
+    corpus: List[Dict[str, Any]],
+    grounded_queries: List[Dict[str, Any]],
+    boost: float,
+) -> None:
+    """R9: Apply soft boost when query-type heuristic matches unit_type. Modifies score_lists in place."""
+    if boost <= 0:
+        return
+    id_to_unit_type: Dict[str, str] = {c["id"]: c.get("unit_type", "unknown") for c in corpus}
+    table_list_types = frozenset({"table", "list"})
+    for i, q in enumerate(grounded_queries):
+        text = (q.get("question") or q.get("expected_answer_summary") or "").lower()
+        prefer_table_list = any(k in text for k in ("table", "list of", "requirements"))
+        prefer_prose = any(k in text for k in ("how does", "explain"))
+        for j, cid in enumerate(ranked_lists[i]):
+            ut = id_to_unit_type.get(cid, "unknown")
+            if prefer_table_list and ut in table_list_types:
+                score_lists[i][j] += boost
+            elif prefer_prose and ut not in table_list_types:
+                score_lists[i][j] += boost
+        # Re-sort by score descending
+        pairs = list(zip(ranked_lists[i], score_lists[i]))
+        pairs.sort(key=lambda x: x[1], reverse=True)
+        ranked_lists[i] = [p[0] for p in pairs]
+        score_lists[i] = [p[1] for p in pairs]
+
+
 def _run_embed_only(config: ExperimentConfig) -> str:
     """Embed substrate once per model; save to MongoDB and disk. No queries or report."""
     config.resolve_paths(Path.cwd())
@@ -102,6 +137,7 @@ def _run_embed_only(config: ExperimentConfig) -> str:
             corpus,
             max_chars=getattr(config, "merge_max_chars", 2000),
         )
+    corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
     corpus_ids = [c["id"] for c in corpus]
     corpus_texts = [c["text"] for c in corpus]
     run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
@@ -158,6 +194,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             corpus,
             max_chars=getattr(config, "merge_max_chars", 2000),
         )
+    corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
     corpus_ids = [c["id"] for c in corpus]
     corpus_texts = [c["text"] for c in corpus]
     units_by_page_map = units_by_page(corpus)
@@ -216,6 +253,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         bm25 = build_bm25_index(corpus_texts)
         max_k = max(config.top_k)
         ranked_lists, score_lists = bm25_rank(bm25, corpus_ids, grounded_queries, max_k)
+        boost = getattr(config, "unit_type_boost", 0.0)
+        if boost > 0:
+            _apply_unit_type_boost(ranked_lists, score_lists, corpus, grounded_queries, boost)
         scoring_time_sec = time.perf_counter() - t0
 
         metrics = score_retrieval(
@@ -226,6 +266,11 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         )
 
         query_reviews = []
+        pf_policy = ParentFetchConfig(
+            depth=getattr(config, "parent_fetch_depth", 1),
+            char_cap=getattr(config, "parent_fetch_cap", 2000),
+            enabled=getattr(config, "parent_fetch_enabled", False),
+        )
         for i, q in enumerate(grounded_queries):
             pq = metrics.per_query[i]
             retrieved = []
@@ -236,6 +281,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                     "score": round(sc, 4),
                     "text": id_to_text.get(cid, ""),
                 })
+            if pf_policy.enabled:
+                from retrieval_lab.parent_fetch import fetch_parent_context
+                retrieved = fetch_parent_context(retrieved, corpus, pf_policy)
             query_reviews.append({
                 "query_id": q.get("id", ""),
                 "question": q.get("question", ""),
@@ -267,6 +315,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             "answer_similarity_at_k": metrics.answer_similarity_at_k,
             "failure_counts": metrics.failure_counts,
             "per_suite": metrics.per_suite,
+            "per_tier": metrics.per_tier,
             "embedding_time_sec": 0.0,
             "scoring_time_sec": scoring_time_sec,
         }
@@ -276,7 +325,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
 
         bm25_ranked_lists: Optional[List[List[str]]] = None
         bm25_score_lists: Optional[List[List[float]]] = None
-        if retrieval_mode == "hybrid":
+        if retrieval_mode in ("hybrid", "hybrid+rerank"):
             from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank, reciprocal_rank_fusion
             logger.info("Hybrid mode: building BM25 index for RRF fusion")
             bm25 = build_bm25_index(corpus_texts)
@@ -410,17 +459,69 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                     ranked_lists[i] = [center_ids[j] for j in new_order]
                     score_lists[i] = [float(scores[j]) for j in new_order]
 
-            # Hybrid: fuse dense + BM25 via RRF
-            if retrieval_mode == "hybrid" and bm25_ranked_lists is not None:
+            # Hybrid: fuse dense + BM25 via RRF (R7: k from policy/config)
+            if retrieval_mode in ("hybrid", "hybrid+rerank") and bm25_ranked_lists is not None:
                 from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
+                policy = config.get_policy(config.document_id)
+                rrf_k = policy.fusion_k
                 rankings_per_query = [
                     [ranked_lists[i], bm25_ranked_lists[i]]
                     for i in range(len(grounded_queries))
                 ]
                 ranked_lists, score_lists = reciprocal_rank_fusion(
-                    rankings_per_query, k=60, max_k=max_k
+                    rankings_per_query, k=rrf_k, max_k=max_k
                 )
-                logger.info("Fused dense + BM25 with RRF (k=60) for model %s", model_id)
+                logger.info("Fused dense + BM25 with RRF (k=%d) for model %s", rrf_k, model_id)
+
+            # R11: Cross-encoder re-ranking (opt-in or hybrid+rerank mode)
+            reranker_model = getattr(config, "reranker", None)
+            if retrieval_mode == "hybrid+rerank" and not reranker_model:
+                reranker_model = "cross-encoder/ms-marco-MiniLM-L6-v2"
+            if reranker_model and retrieval_mode in ("hybrid", "hybrid+rerank"):
+                from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
+                r_model = load_cross_encoder(reranker_model)
+                rerank_top_k = max(config.top_k)
+                for i in range(len(grounded_queries)):
+                    q_text = grounded_queries[i].get("question") or grounded_queries[i].get("expected_answer_summary") or ""
+                    top_50_ids = ranked_lists[i][:50]
+                    top_50_candidates = [
+                        {"chunk_id": cid, "text": id_to_text.get(cid, "")}
+                        for cid in top_50_ids
+                    ]
+                    reranked = rerank_candidates(q_text, top_50_candidates, r_model, top_k=rerank_top_k)
+                    ranked_lists[i] = [r["chunk_id"] for r in reranked]
+                    score_lists[i] = [r.get("rerank_score", 0.0) for r in reranked]
+                logger.info("Reranked hybrid top-50 to top-%d with %s", rerank_top_k, reranker_model)
+
+            # R6: Co-retrieval hints expansion (opt-in)
+            if getattr(config, "co_retrieval_expand", False):
+                topic_to_ids: Dict[str, List[str]] = {}
+                for c in corpus:
+                    tags = c.get("topic_tags", [])
+                    uid = c.get("id", "")
+                    if uid:
+                        for t in tags:
+                            if t not in topic_to_ids:
+                                topic_to_ids[t] = []
+                            topic_to_ids[t].append(uid)
+                for i in range(len(grounded_queries)):
+                    seen = set(ranked_lists[i])
+                    for cid in ranked_lists[i][:max_k]:
+                        u = next((c for c in corpus if c.get("id") == cid), None)
+                        if not u:
+                            continue
+                        for hint in u.get("co_retrieval_hints", []):
+                            rt = hint.get("related_topic", "")
+                            for hid in topic_to_ids.get(rt, [])[:5]:
+                                if hid not in seen:
+                                    seen.add(hid)
+                                    ranked_lists[i].append(hid)
+                                    score_lists[i].append(0.0)
+
+            # R9: Unit-type soft boost (opt-in)
+            boost = getattr(config, "unit_type_boost", 0.0)
+            if boost > 0:
+                _apply_unit_type_boost(ranked_lists, score_lists, corpus, grounded_queries, boost)
 
             scoring_time_sec = time.perf_counter() - t1
 
@@ -435,6 +536,11 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             )
             # Per-query retrieval review: full chunk text for manual inspection
             use_expanded = getattr(config, "expand_context", False)
+            pf_policy = ParentFetchConfig(
+                depth=getattr(config, "parent_fetch_depth", 1),
+                char_cap=getattr(config, "parent_fetch_cap", 2000),
+                enabled=getattr(config, "parent_fetch_enabled", False),
+            )
             query_reviews = []
             for i, q in enumerate(grounded_queries):
                 pq = metrics.per_query[i]
@@ -451,6 +557,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                         "score": round(sc, 4),
                         "text": text,
                     })
+                if pf_policy.enabled:
+                    from retrieval_lab.parent_fetch import fetch_parent_context
+                    retrieved = fetch_parent_context(retrieved, corpus, pf_policy)
                 query_reviews.append({
                     "query_id": q.get("id", ""),
                     "question": q.get("question", ""),
@@ -484,6 +593,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 "answer_similarity_at_k": metrics.answer_similarity_at_k,
                 "failure_counts": metrics.failure_counts,
                 "per_suite": metrics.per_suite,
+                "per_tier": metrics.per_tier,
                 "embedding_time_sec": embedding_time_sec,
                 "scoring_time_sec": scoring_time_sec,
             }
@@ -584,6 +694,10 @@ def main() -> None:
         action="store_true",
         help="Pass trust_remote_code=True when loading models (required for nomic-embed-text-v2, bge-m3, gte-multilingual-base).",
     )
+    parser.add_argument("--parent-fetch-depth", type=int, default=1, help="R2: Parent-fetch structural_path depth")
+    parser.add_argument("--parent-fetch-cap", type=int, default=2000, help="R2: Parent-fetch char cap per scope")
+    parser.add_argument("--parent-fetch", action="store_true", dest="parent_fetch_enabled", help="R2: Enable parent-fetch enrichment")
+    parser.add_argument("--reranker", type=str, default=None, help="R11: Cross-encoder model name (e.g. cross-encoder/ms-marco-MiniLM-L6-v2). Re-rank hybrid top-50 to top-10.")
     args = parser.parse_args()
 
     if args.config:
@@ -622,6 +736,14 @@ def main() -> None:
         config.substrate_version = args.substrate_version
     if args.trust_remote_code:
         config.trust_remote_code = True
+    if hasattr(args, "parent_fetch_depth"):
+        config.parent_fetch_depth = args.parent_fetch_depth
+    if hasattr(args, "parent_fetch_cap"):
+        config.parent_fetch_cap = args.parent_fetch_cap
+    if hasattr(args, "parent_fetch_enabled") and args.parent_fetch_enabled:
+        config.parent_fetch_enabled = True
+    if hasattr(args, "reranker") and args.reranker:
+        config.reranker = args.reranker
 
     if args.embed_only:
         run_id = _run_embed_only(config)

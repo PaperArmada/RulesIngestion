@@ -17,6 +17,7 @@
   },
   "queries": [
     {
+      "tier": "T3",
       "id": "batch_004_01",
       "source_page": 403,
       "question": "When in my turn does the dying recovery check happen—start or end?",
@@ -36,6 +37,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_004_02",
       "source_page": 415,
       "question": "When do I take persistent damage—start or end of my turn?",
@@ -55,6 +57,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_004_03",
       "source_page": 406,
       "question": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
@@ -74,6 +77,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_004_04",
       "source_page": 138,
       "question": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
@@ -92,6 +96,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_004_05",
       "source_page": 406,
       "question": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
@@ -111,6 +116,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_004_06",
       "source_page": 428,
       "question": "Does the multiple attack penalty reset at the start or end of my turn?",

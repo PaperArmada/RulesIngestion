@@ -202,6 +202,36 @@ def merge_units_by_heading(
     return merged
 
 
+def merge_enrichments_into_corpus(
+    corpus: List[Dict[str, Any]],
+    phb_dir: str | Path,
+) -> List[Dict[str, Any]]:
+    """R6: Merge topic_tags and co_retrieval_hints from stageAPrime.enrichments.json into corpus.
+
+    Enrichments are keyed by unit_id. Mutates corpus items in place and returns corpus.
+    """
+    phb_path = Path(phb_dir)
+    enrichments_file = "stageAPrime.enrichments.json"
+    id_to_enr: Dict[str, Dict[str, Any]] = {}
+    for f in phb_path.rglob(enrichments_file):
+        if f.name != enrichments_file:
+            continue
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+            for uid, enr in (data if isinstance(data, dict) else {}).items():
+                if isinstance(enr, dict) and uid not in id_to_enr:
+                    id_to_enr[uid] = enr
+        except Exception as e:
+            logger.warning("Could not load enrichments from %s: %s", f, e)
+    for u in corpus:
+        uid = u.get("id", "")
+        enr = id_to_enr.get(uid)
+        if enr:
+            u["topic_tags"] = enr.get("topic_tags", [])
+            u["co_retrieval_hints"] = enr.get("co_retrieval_hints", [])
+    return corpus
+
+
 def units_by_page(corpus: List[Dict[str, Any]]) -> Dict[int, List[Dict[str, Any]]]:
     """Group corpus items by page number for page-anchored gold grounding."""
     by_page: Dict[int, List[Dict[str, Any]]] = {}

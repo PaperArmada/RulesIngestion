@@ -145,7 +145,20 @@ def generate_report(
             h10 = su.get("hit_at_k", {}).get(10, 0)
             lines.append(f"| {suite_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {n} |")
         lines.append("")
-    lines.extend(["---", "", "## 5. Failure Analysis", ""])
+    lines.extend(["---", "", "## 5. Per-Tier Breakdown (R8 Gold Taxonomy)", ""])
+    if first_model_result and first_model_result.get("per_tier"):
+        lines.append("| Tier | MRR | R@5 | H@5 | R@10 | H@10 | N |")
+        lines.append("|------|-----|-----|-----|------|------|---|")
+        for tier_name, ti in sorted(first_model_result["per_tier"].items()):
+            n = ti.get("n", 0)
+            mrr = ti.get("mrr", 0)
+            r5 = ti.get("recall_at_k", {}).get(5, 0)
+            h5 = ti.get("hit_at_k", {}).get(5, 0)
+            r10 = ti.get("recall_at_k", {}).get(10, 0)
+            h10 = ti.get("hit_at_k", {}).get(10, 0)
+            lines.append(f"| {tier_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {n} |")
+        lines.append("")
+    lines.extend(["---", "", "## 6. Failure Analysis", ""])
     lines.append("| Model | hit | retrieval_miss | rank_miss | grounding_failure |")
     lines.append("|-------|-----|----------------|-----------|-------------------|")
     for model_id, res in results_by_model.items():
@@ -154,7 +167,7 @@ def generate_report(
             f"| {model_id} | {fc.get('hit', 0)} | {fc.get('retrieval_miss', 0)} | "
             f"{fc.get('rank_miss', 0)} | {fc.get('grounding_failure', 0)} |"
         )
-    lines.extend(["", "---", "", "## 6. Gold Grounding Audit", ""])
+    lines.extend(["", "---", "", "## 7. Gold Grounding Audit", ""])
     lines.append("Sample (first 10): query_id, method, count.")
     for entry in grounding_audit[:10]:
         lines.append(f"- `{entry.get('query_id', '')}`: {entry.get('method', '')}, count={entry.get('count', 0)}")

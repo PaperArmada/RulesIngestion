@@ -70,6 +70,7 @@ class StageARecord:
     raw_markdown: str         # verbatim model output
     inference_elapsed_sec: float
     content_hash: str         # blake3 of raw_markdown
+    content_version: str = ""  # e.g. "deepseek-ai/DeepSeek-OCR-2-dpi200"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -81,6 +82,7 @@ class StageARecord:
             "raw_markdown": self.raw_markdown,
             "inference_elapsed_sec": self.inference_elapsed_sec,
             "content_hash": self.content_hash,
+            "content_version": self.content_version,
         }
 
 
@@ -184,21 +186,26 @@ class SurfaceAST:
 
 @dataclass
 class EvidenceUnit:
-    """Prose-bound provenance unit.  The only admissible input to Stage C."""
+    """Prose-bound provenance unit.  The only admissible input to Stage C (Graph Construction)."""
 
     unit_id: str              # blake3(text + "|" + structural_path_joined)
     unit_type: Literal["prose", "table", "list", "callout", "heading"]
     text: str                 # verbatim
     structural_path: list[str]   # heading ancestry from AST root
     ordering_key: int            # total monotonic order
-    page_fingerprint: str        # upstream Stage A identity
+    page_fingerprint: str        # upstream Stage A identity (primary; first page for joins)
     content_hash: str            # blake3 of text
     source_line_start: int       # back-pointer to raw markdown
     source_line_end: int
     anomaly_flags: list[str] = field(default_factory=list)
+    content_version: str = ""    # e.g. "deepseek-ai/DeepSeek-OCR-2-dpi200"
+    # R3: Cross-page joins
+    page_fingerprints: list[str] = field(default_factory=list)  # expanded for joined units
+    table_group_id: str | None = None  # blake3(header_row_hash + "|" + structural_path)
+    join_metadata: dict[str, Any] | None = None  # e.g. {"join_type": "paragraph", "merged_unit_id": "..."}
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        out: dict[str, Any] = {
             "unit_id": self.unit_id,
             "unit_type": self.unit_type,
             "text": self.text,
@@ -209,7 +216,15 @@ class EvidenceUnit:
             "source_line_start": self.source_line_start,
             "source_line_end": self.source_line_end,
             "anomaly_flags": self.anomaly_flags,
+            "content_version": self.content_version,
         }
+        if self.page_fingerprints:
+            out["page_fingerprints"] = self.page_fingerprints
+        if self.table_group_id is not None:
+            out["table_group_id"] = self.table_group_id
+        if self.join_metadata is not None:
+            out["join_metadata"] = self.join_metadata
+        return out
 
     @staticmethod
     def from_dict(d: dict[str, Any]) -> EvidenceUnit:
@@ -224,4 +239,8 @@ class EvidenceUnit:
             source_line_start=d["source_line_start"],
             source_line_end=d["source_line_end"],
             anomaly_flags=d.get("anomaly_flags", []),
+            content_version=d.get("content_version", ""),
+            page_fingerprints=d.get("page_fingerprints", []),
+            table_group_id=d.get("table_group_id"),
+            join_metadata=d.get("join_metadata"),
         )

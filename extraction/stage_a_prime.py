@@ -29,8 +29,8 @@ from extraction.schemas_a_prime import (
 
 logger = logging.getLogger(__name__)
 
-_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "A_PRIME_PROMPT_V1.md"
-PROMPT_ID = "A_PRIME_PROMPT_V1"
+_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "A_PRIME_PROMPT_V2.md"
+PROMPT_ID = "A_PRIME_PROMPT_V2"
 
 
 def _load_prompt_template() -> str:

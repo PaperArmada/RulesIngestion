@@ -15,6 +15,26 @@ except ImportError:
 
 
 @dataclass
+class ParentFetchConfig:
+    """R2: Configuration for parent-fetch enrichment of retrieval results."""
+
+    depth: int = 1
+    char_cap: int = 2000
+    enabled: bool = False
+
+
+@dataclass
+class RetrievalPolicy:
+    """R7: Per-corpus retrieval policy (mode, fusion, reranker, parent-fetch)."""
+
+    corpus_id: str
+    mode: str = "hybrid"
+    fusion_k: int = 60  # RRF constant k
+    parent_fetch_config: Optional[ParentFetchConfig] = None
+    reranker: Optional[str] = None
+
+
+@dataclass
 class ExperimentConfig:
     """Configuration for a single retrieval lab experiment."""
 
@@ -48,6 +68,26 @@ class ExperimentConfig:
     # Requires re-embed when toggled (new substrate_version).
     merge_chunks: bool = False
     merge_max_chars: int = 2000
+    # R7: RRF fusion constant k (default 60). Overridden by per-corpus policy if set.
+    rrf_k: int = 60
+    # R7: Per-corpus retrieval policies (corpus_id -> RetrievalPolicy). Optional.
+    retrieval_policies: Optional[Dict[str, RetrievalPolicy]] = None
+    # R9: Unit-type soft boost. Add delta to score when query-type heuristic matches unit_type (0=off).
+    unit_type_boost: float = 0.0
+    # R2: Parent-fetch enrichment (depth, char_cap, enabled).
+    parent_fetch_depth: int = 1
+    parent_fetch_cap: int = 2000
+    parent_fetch_enabled: bool = False
+    # R11: Cross-encoder reranker model name (optional). When set, re-rank hybrid top-50 to top-10.
+    reranker: Optional[str] = None
+    # R6: Expand candidate set using co_retrieval_hints (when hint.related_topic matches unit topic_tags).
+    co_retrieval_expand: bool = False
+
+    def get_policy(self, corpus_id: str) -> RetrievalPolicy:
+        """Get retrieval policy for corpus. Falls back to default policy from config."""
+        if self.retrieval_policies and corpus_id in self.retrieval_policies:
+            return self.retrieval_policies[corpus_id]
+        return RetrievalPolicy(corpus_id=corpus_id, mode=self.retrieval_mode, fusion_k=self.rrf_k)
 
     def resolve_paths(self, base_dir: Optional[Path] = None) -> None:
         """Resolve substrate_path and query_batches relative to base_dir (typically cwd)."""
@@ -82,8 +122,8 @@ class ExperimentConfig:
                 raise ValueError(f"query batch file not found: {p}")
         if not self.top_k:
             raise ValueError("top_k must be non-empty")
-        if self.retrieval_mode not in ("dense", "hybrid", "bm25"):
-            raise ValueError("retrieval_mode must be 'dense', 'hybrid', or 'bm25'")
+        if self.retrieval_mode not in ("dense", "hybrid", "hybrid+rerank", "bm25"):
+            raise ValueError("retrieval_mode must be 'dense', 'hybrid', 'hybrid+rerank', or 'bm25'")
 
     @classmethod
     def from_yaml(cls, path: Path, base_dir: Optional[Path] = None) -> "ExperimentConfig":
@@ -125,7 +165,41 @@ class ExperimentConfig:
             min_chars=int(data["min_chars"]) if data.get("min_chars") is not None else None,
             merge_chunks=bool(data.get("merge_chunks", False)),
             merge_max_chars=int(data.get("merge_max_chars", 2000)),
+            rrf_k=int(data.get("rrf_k", 60)),
+            retrieval_policies=_parse_retrieval_policies(data.get("retrieval_policies")),
+            unit_type_boost=float(data.get("unit_type_boost", 0.0)),
+            parent_fetch_depth=int(data.get("parent_fetch_depth", 1)),
+            parent_fetch_cap=int(data.get("parent_fetch_cap", 2000)),
+            parent_fetch_enabled=bool(data.get("parent_fetch_enabled", False)),
+            reranker=str(data["reranker"]) if data.get("reranker") else None,
+            co_retrieval_expand=bool(data.get("co_retrieval_expand", False)),
         )
+
+
+def _parse_retrieval_policies(data: Any) -> Optional[Dict[str, RetrievalPolicy]]:
+    """Parse retrieval_policies from YAML dict. Keys are corpus_id."""
+    if not data or not isinstance(data, dict):
+        return None
+    out: Dict[str, RetrievalPolicy] = {}
+    for corpus_id, raw in data.items():
+        if not isinstance(raw, dict):
+            continue
+        pf = raw.get("parent_fetch_config")
+        parent_fetch = None
+        if isinstance(pf, dict):
+            parent_fetch = ParentFetchConfig(
+                depth=int(pf.get("depth", 1)),
+                char_cap=int(pf.get("char_cap", 2000)),
+                enabled=bool(pf.get("enabled", False)),
+            )
+        out[str(corpus_id)] = RetrievalPolicy(
+            corpus_id=str(corpus_id),
+            mode=str(raw.get("mode", "hybrid")),
+            fusion_k=int(raw.get("fusion_k", raw.get("fusion_alpha", 60))),
+            parent_fetch_config=parent_fetch,
+            reranker=str(raw["reranker"]) if raw.get("reranker") else None,
+        )
+    return out if out else None
 
 
 def resolve_model_id(model_id: str, registry: Optional[Dict[str, Any]] = None) -> str:

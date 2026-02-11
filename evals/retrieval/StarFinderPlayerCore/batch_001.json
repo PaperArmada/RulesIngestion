@@ -9,6 +9,7 @@
   },
   "queries": [
     {
+      "tier": "T1",
       "id": "blind_001_01",
       "source_page": 49,
       "question": "What abilities can cancel out Vent Gas when a Barathu uses it?",
@@ -21,6 +22,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_02",
       "source_page": 60,
       "question": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
@@ -32,6 +34,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_03",
       "source_page": 90,
       "question": "Can I use Redirect Current to power up a console?",
@@ -46,6 +49,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_04",
       "source_page": 111,
       "question": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
@@ -57,6 +61,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_05",
       "source_page": 396,
       "question": "I don't really understand perception?",
@@ -71,6 +76,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_06",
       "source_page": 157,
       "question": "I need help deciding between Covering Fire or I'll be back as my 6th level feat I'm playing an Android",
@@ -83,6 +89,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_07",
       "source_page": 175,
       "question": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy within reach leaves a square during a move action?",
@@ -95,6 +102,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_08",
       "source_page": 45,
       "question": "Do Androids with Revivification Protocol need to make recovery checks?",
@@ -107,6 +115,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_09",
       "source_page": 83,
       "question": "Can a Shirren use Undying more than once per day?",
@@ -118,6 +127,7 @@
       ]
     },
     {
+      "tier": "T1",
       "id": "blind_001_10",
       "source_page": 45,
       "question": "What's the difference between Android Revivification Protocol and Shirren Undying?",

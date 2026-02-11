@@ -101,6 +101,7 @@ def run_stage_a(
             raw_markdown=raw_markdown_override,
             inference_elapsed_sec=0.0,
             content_hash=content_hash,
+            content_version=f"override-dpi{dpi}",
         )
     else:
         ocr_out_dir = out_dir / "ocr_raw"
@@ -109,6 +110,7 @@ def run_stage_a(
             page_index,
             fingerprint.fingerprint,
             ocr_out_dir,
+            dpi=dpi,
         )
 
     # 3. Parse raw markdown into SurfaceAST

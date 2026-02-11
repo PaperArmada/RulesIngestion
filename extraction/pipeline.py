@@ -18,7 +18,8 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from extraction.gates_b import run_stage_b_gates
+from extraction.cross_page_join import run_join_pass
+from extraction.gates_b import gate_cross_page_join_rate, run_stage_b_gates
 from extraction.schemas import EvidenceUnit
 from extraction.stage_a import StageAResult, run_stage_a
 from extraction.stage_a_prime import StageAPrimeResult, run_stage_a_prime
@@ -50,6 +51,18 @@ def run_a_only(
     )
 
 
+def run_join_pass_and_gate(
+    units_by_page: list[list[EvidenceUnit]],
+) -> tuple[list[EvidenceUnit], list[Any]]:
+    """R3: Run cross-page join pass on units by page, then run cross_page_join gate.
+
+    Returns (joined_units, [gate_cross_page_join_rate diagnostic]).
+    """
+    joined = run_join_pass(units_by_page)
+    diag = [gate_cross_page_join_rate(joined)]
+    return joined, diag
+
+
 def run_stage_b_on_result(
     stage_a_result: StageAResult,
     out_dir: Path,
@@ -69,7 +82,8 @@ def run_stage_b_on_result(
     out_dir = Path(out_dir).resolve()
 
     # Run segmenter
-    stage_b_result = run_stage_b(stage_a_result.ast, out_dir=None)
+    content_version = stage_a_result.record.content_version
+    stage_b_result = run_stage_b(stage_a_result.ast, out_dir=None, content_version=content_version)
 
     # Run Stage B gates (pass AST for image+caption exemption, standalone for page 0)
     ast_dict = stage_a_result.ast.to_dict()

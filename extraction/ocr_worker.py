@@ -36,6 +36,7 @@ def run_ocr(
     page_fingerprint: str,
     out_dir: Path,
     *,
+    dpi: int = 200,
     timeout: int = SUBPROCESS_TIMEOUT_SEC,
 ) -> StageARecord:
     """Run DeepSeek OCR on a single PDF page via the venv subprocess.
@@ -121,6 +122,7 @@ def run_ocr(
         content_hash[:16],
     )
 
+    content_version = f"{model_id}-dpi{dpi}"
     return StageARecord(
         page_fingerprint=page_fingerprint,
         source_pdf=str(pdf_path.resolve()),
@@ -130,4 +132,5 @@ def run_ocr(
         raw_markdown=raw_markdown,
         inference_elapsed_sec=round(inference_sec, 3),
         content_hash=content_hash,
+        content_version=content_version,
     )

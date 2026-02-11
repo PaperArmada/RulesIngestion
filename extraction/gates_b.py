@@ -279,6 +279,34 @@ def gate_unit_size(
     return GateDiagnostic(gate_name="unit_size", passed=passed, detail=detail)
 
 
+def gate_cross_page_join_rate(
+    units: list[EvidenceUnit],
+    *,
+    fail_threshold: float = 0.30,
+) -> GateDiagnostic:
+    """R3: Cross-page join rate gate. Fails if >fail_threshold of units have cross_page_join in anomaly_flags.
+
+    High join rate may indicate over-aggressive merging or structural issues.
+    """
+    join_count = sum(1 for u in units if "cross_page_join" in u.anomaly_flags)
+    total = len(units)
+    rate = join_count / total if total else 0.0
+    passed = rate <= fail_threshold
+    detail = {
+        "total_units": total,
+        "cross_page_join_count": join_count,
+        "cross_page_join_rate": round(rate, 4),
+        "fail_threshold": fail_threshold,
+    }
+    if not passed:
+        logger.warning(
+            "Cross-page join gate FAILED: %.1f%% of units joined (threshold %.0f%%)",
+            rate * 100,
+            fail_threshold * 100,
+        )
+    return GateDiagnostic(gate_name="cross_page_join_rate", passed=passed, detail=detail)
+
+
 # ---------------------------------------------------------------------------
 # Convenience: run all Stage B gates
 # ---------------------------------------------------------------------------
@@ -289,15 +317,20 @@ def run_stage_b_gates(
     ast_dict: dict[str, Any] | None = None,
     is_standalone: bool = False,
     undersized_fail_ratio: float = 1.0,
+    include_cross_page_join_gate: bool = False,
 ) -> list[GateDiagnostic]:
-    """Run all four Stage B gates on a list of EvidenceUnits.
+    """Run Stage B gates on a list of EvidenceUnits.
 
     undersized_fail_ratio: when < 1.0, unit_size gate FAILs if the fraction of
     undersized units on the page exceeds this ratio (default 1.0 = warning only).
+    include_cross_page_join_gate: when True, add R3 cross_page_join_rate gate (for joined corpus).
     """
-    return [
+    diag = [
         gate_orphan(units, ast_dict=ast_dict, is_standalone=is_standalone),
         gate_bleed(units),
         gate_table_integrity(units),
         gate_unit_size(units, undersized_fail_ratio=undersized_fail_ratio),
     ]
+    if include_cross_page_join_gate:
+        diag.append(gate_cross_page_join_rate(units))
+    return diag

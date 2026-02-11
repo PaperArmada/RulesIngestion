@@ -73,12 +73,20 @@ class MechanicAtom(BaseModel):
         return v
 
 
-class APrimeEnrichment(BaseModel):
-    """A_PRIME_V1 enrichment payload. Retrieval-only; never admissible as evidence."""
+class CoRetrievalHint(BaseModel):
+    """R6: Hint for co-retrieval. R10 exception annotation uses relationship='exception_to'."""
 
-    enrichment_version: Literal["A_PRIME_V1"] = "A_PRIME_V1"
+    related_topic: str
+    relationship: Literal["prerequisite", "exception_to", "modifies", "requires_context"]
+    confidence: Literal["explicit", "strong_inference"]
+
+
+class APrimeEnrichment(BaseModel):
+    """A_PRIME enrichment payload. Retrieval-only; never admissible as evidence."""
+
+    enrichment_version: Literal["A_PRIME_V1", "A_PRIME_V2"] = "A_PRIME_V2"
     model_id: str = ""
-    prompt_id: Literal["A_PRIME_PROMPT_V1"] = "A_PRIME_PROMPT_V1"
+    prompt_id: Literal["A_PRIME_PROMPT_V1", "A_PRIME_PROMPT_V2"] = "A_PRIME_PROMPT_V2"
     input_fingerprint: str = ""
     created_at: str = ""  # ISO-8601
     authority: Literal["none"] = "none"
@@ -89,6 +97,7 @@ class APrimeEnrichment(BaseModel):
     summary_1s: str = ""
     summary_3b: str = ""
     topic_tags: list[str] = []
+    co_retrieval_hints: list[CoRetrievalHint] = []
     mechanic_atoms: list[MechanicAtom] = []
     questions_answered: list[str] = []
     lexical_anchors: list[str] = []

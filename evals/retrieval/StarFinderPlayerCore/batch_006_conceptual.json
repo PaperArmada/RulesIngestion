@@ -16,6 +16,7 @@
   },
   "queries": [
     {
+      "tier": "T3",
       "id": "batch_006_01",
       "source_page": 436,
       "question": "Why would I look at several conditions together instead of one at a time?",
@@ -34,6 +35,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_006_02",
       "source_page": 175,
       "question": "What is an archetype in character-building terms?",
@@ -52,6 +54,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_006_03",
       "source_page": 335,
       "question": "Do spells always have visible or sensory effects when cast?",
@@ -72,6 +75,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_006_04",
       "source_page": 182,
       "question": "How do conditions that share a theme relate to each other?",
@@ -90,6 +94,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_006_05",
       "source_page": 31,
       "question": "What is the purpose of the Frequency and Trigger entries on an ability block?",

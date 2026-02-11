@@ -9,7 +9,8 @@
       "prompt": "str — prompt sent to the model",
       "raw_markdown": "str — verbatim model output",
       "inference_elapsed_sec": "float — model inference time",
-      "content_hash": "str — blake3 hex digest of raw_markdown"
+      "content_hash": "str — blake3 hex digest of raw_markdown",
+      "content_version": "str — e.g. deepseek-ai/DeepSeek-OCR-2-dpi200"
     },
     "implementation": "extraction/schemas.py::StageARecord"
   },
@@ -37,7 +38,7 @@
     "implementation": "extraction/schemas.py::SurfaceAST"
   },
   "EvidenceUnit": {
-    "description": "Prose-bound provenance unit. The only admissible input to Stage C.",
+    "description": "Prose-bound provenance unit. The only admissible input to Stage C (Graph Construction).",
     "fields": {
       "unit_id": "str — blake3(text + '|' + structural_path_joined)",
       "unit_type": "Literal[prose, table, list, callout, heading]",
@@ -48,7 +49,11 @@
       "content_hash": "str — blake3 of text",
       "source_line_start": "int — back-pointer to raw markdown",
       "source_line_end": "int",
-      "anomaly_flags": "list[str] — e.g. oversized, no_heading_parent, undersized"
+      "anomaly_flags": "list[str] — e.g. oversized, no_heading_parent, undersized, cross_page_join",
+      "content_version": "str — e.g. deepseek-ai/DeepSeek-OCR-2-dpi200",
+      "page_fingerprints": "list[str] — R3 expanded for joined units",
+      "table_group_id": "str | None — R3 blake3(header_row_hash + '|' + structural_path)",
+      "join_metadata": "dict | None — R3 e.g. join_type, merged_unit_id"
     },
     "implementation": "extraction/schemas.py::EvidenceUnit"
   },

@@ -17,6 +17,7 @@
   },
   "queries": [
     {
+      "tier": "T3",
       "id": "batch_005_01",
       "source_page": 175,
       "question": "What restrictions apply when I choose a target for an effect—can I target undetected creatures or only those that match certain criteria?",
@@ -32,6 +33,7 @@
       "notes": "Constraint: targeting restrictions from core rules."
     },
     {
+      "tier": "T3",
       "id": "batch_005_02",
       "source_page": 183,
       "question": "When I'm grabbed, what am I prevented from doing?",
@@ -52,6 +54,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_005_03",
       "source_page": 76,
       "question": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
@@ -70,6 +73,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_005_04",
       "source_page": 375,
       "question": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
@@ -85,6 +89,7 @@
       "notes": "Constraint: illusion scope—what it cannot do."
     },
     {
+      "tier": "T3",
       "id": "batch_005_05",
       "source_page": 381,
       "question": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
@@ -103,6 +108,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_005_06",
       "source_page": 100,
       "question": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
@@ -121,6 +127,7 @@
       ]
     },
     {
+      "tier": "T3",
       "id": "batch_005_07",
       "source_page": 59,
       "question": "Does Sure Footing let me ignore the movement restriction from being grabbed?",

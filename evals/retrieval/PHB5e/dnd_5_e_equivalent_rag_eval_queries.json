@@ -9,6 +9,7 @@
       "queries": [
         {
           "id": "dnd5e_blind_001_01",
+          "tier": "T1",
           "suite_tags": [
             "conceptual",
             "constraint"
@@ -24,6 +25,7 @@
         },
         {
           "id": "dnd5e_blind_001_02",
+          "tier": "T1",
           "suite_tags": [
             "conceptual"
           ],
@@ -40,6 +42,7 @@
         },
         {
           "id": "dnd5e_blind_001_03",
+          "tier": "T1",
           "suite_tags": [
             "constraint"
           ],
@@ -50,6 +53,7 @@
         },
         {
           "id": "dnd5e_blind_001_04",
+          "tier": "T1",
           "suite_tags": [
             "state",
             "constraint"
@@ -65,6 +69,7 @@
         },
         {
           "id": "dnd5e_blind_001_05",
+          "tier": "T1",
           "suite_tags": [
             "conceptual"
           ],
@@ -78,6 +83,7 @@
         },
         {
           "id": "dnd5e_blind_001_06",
+          "tier": "T1",
           "suite_tags": [
             "conceptual"
           ],
@@ -93,6 +99,7 @@
         },
         {
           "id": "dnd5e_blind_001_07",
+          "tier": "T1",
           "suite_tags": [
             "temporal",
             "constraint"
@@ -108,6 +115,7 @@
         },
         {
           "id": "dnd5e_blind_001_08",
+          "tier": "T1",
           "suite_tags": [
             "state",
             "temporal"
@@ -123,6 +131,7 @@
         },
         {
           "id": "dnd5e_blind_001_09",
+          "tier": "T1",
           "suite_tags": [
             "constraint"
           ],
@@ -137,6 +146,7 @@
         },
         {
           "id": "dnd5e_blind_001_10",
+          "tier": "T1",
           "suite_tags": [
             "conceptual",
             "comparison"
@@ -158,6 +168,7 @@
       "queries": [
         {
           "id": "dnd5e_state_002_01",
+          "tier": "T2",
           "suite_tags": [
             "state"
           ],
@@ -171,6 +182,7 @@
         },
         {
           "id": "dnd5e_state_002_02",
+          "tier": "T2",
           "suite_tags": [
             "state"
           ],
@@ -185,6 +197,7 @@
         },
         {
           "id": "dnd5e_state_002_03",
+          "tier": "T2",
           "suite_tags": [
             "state"
           ],
@@ -201,6 +214,7 @@
         },
         {
           "id": "dnd5e_state_002_04",
+          "tier": "T2",
           "suite_tags": [
             "state",
             "temporal"
@@ -215,6 +229,7 @@
         },
         {
           "id": "dnd5e_state_002_05",
+          "tier": "T2",
           "suite_tags": [
             "state",
             "constraint"
@@ -229,6 +244,7 @@
         },
         {
           "id": "dnd5e_state_002_06",
+          "tier": "T2",
           "suite_tags": [
             "state"
           ],
@@ -242,6 +258,7 @@
         },
         {
           "id": "dnd5e_state_002_07",
+          "tier": "T2",
           "suite_tags": [
             "state"
           ],
@@ -255,6 +272,7 @@
         },
         {
           "id": "dnd5e_state_002_08",
+          "tier": "T2",
           "suite_tags": [
             "state",
             "temporal"
@@ -275,6 +293,7 @@
       "queries": [
         {
           "id": "dnd5e_grounding_003_01",
+          "tier": "T2",
           "suite_tags": [
             "scope"
           ],
@@ -285,6 +304,7 @@
         },
         {
           "id": "dnd5e_grounding_003_02",
+          "tier": "T2",
           "suite_tags": [
             "temporal"
           ],
@@ -298,6 +318,7 @@
         },
         {
           "id": "dnd5e_grounding_003_03",
+          "tier": "T2",
           "suite_tags": [
             "constraint"
           ],
@@ -311,6 +332,7 @@
         },
         {
           "id": "dnd5e_grounding_003_04",
+          "tier": "T2",
           "suite_tags": [
             "constraint",
             "temporal"
@@ -332,6 +354,7 @@
       "queries": [
         {
           "id": "dnd5e_temporal_004_01",
+          "tier": "T3",
           "suite_tags": [
             "temporal"
           ],
@@ -345,6 +368,7 @@
         },
         {
           "id": "dnd5e_temporal_004_02",
+          "tier": "T3",
           "suite_tags": [
             "temporal"
           ],
@@ -367,6 +391,7 @@
       "queries": [
         {
           "id": "dnd5e_constraint_005_01",
+          "tier": "T3",
           "suite_tags": [
             "constraint"
           ],
@@ -380,6 +405,7 @@
         },
         {
           "id": "dnd5e_constraint_005_02",
+          "tier": "T3",
           "suite_tags": [
             "constraint",
             "state"
@@ -401,6 +427,7 @@
       "queries": [
         {
           "id": "dnd5e_conceptual_006_01",
+          "tier": "T3",
           "suite_tags": [
             "conceptual"
           ],
@@ -413,6 +440,7 @@
         },
         {
           "id": "dnd5e_conceptual_006_02",
+          "tier": "T3",
           "suite_tags": [
             "conceptual"
           ],

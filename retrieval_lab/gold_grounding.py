@@ -175,9 +175,12 @@ def ground_queries_corpus_semantic(
 
 
 def _normalize_query(q: Dict[str, Any]) -> Dict[str, Any]:
-    """Ensure expected_answer_summary exists; use 'answer' if present."""
+    """Ensure expected_answer_summary exists; use 'answer' if present.
+    Ensure tier exists for R8 taxonomy; default T1 if absent."""
     if "expected_answer_summary" not in q or q["expected_answer_summary"] is None:
         q["expected_answer_summary"] = q.get("answer") or ""
+    if "tier" not in q or q["tier"] is None or str(q["tier"]).strip() == "":
+        q["tier"] = "T1"
     return q
 
 
@@ -205,6 +208,7 @@ def flatten_query_batches(batch_paths: List[str]) -> Tuple[List[Dict[str, Any]],
                     q = _normalize_query(dict(q))
                     q["_batch_id"] = batch_id
                     q["_suite"] = suite
+                    q["_tier"] = q.get("tier", "T1")
                     flat.append(q)
                 if suite not in suites_seen:
                     suites_seen.append(suite)
@@ -213,6 +217,7 @@ def flatten_query_batches(batch_paths: List[str]) -> Tuple[List[Dict[str, Any]],
                 q = _normalize_query(dict(q))
                 q["_batch_id"] = data.get("metadata", {}).get("batch_id", "")
                 q["_suite"] = "default"
+                q["_tier"] = q.get("tier", "T1")
                 flat.append(q)
             if "default" not in suites_seen:
                 suites_seen.append("default")
@@ -221,6 +226,7 @@ def flatten_query_batches(batch_paths: List[str]) -> Tuple[List[Dict[str, Any]],
                 q = _normalize_query(dict(q))
                 q["_batch_id"] = ""
                 q["_suite"] = "default"
+                q["_tier"] = q.get("tier", "T1")
                 flat.append(q)
             if "default" not in suites_seen:
                 suites_seen.append("default")

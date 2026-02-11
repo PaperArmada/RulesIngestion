@@ -18,6 +18,7 @@
   },
   "queries": [
     {
+      "tier": "T2",
       "id": "batch_003_01",
       "source_page": 417,
       "question": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
@@ -36,6 +37,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_02",
       "source_page": 15,
       "question": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
@@ -55,6 +57,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_03",
       "source_page": 406,
       "question": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
@@ -74,6 +77,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_04",
       "source_page": 406,
       "question": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
@@ -92,6 +96,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_05",
       "source_page": 41,
       "question": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
@@ -110,6 +115,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_06",
       "source_page": 15,
       "question": "What exact condition must be true to use your one reaction per round?",
@@ -129,6 +135,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_07",
       "source_page": 406,
       "question": "Can you use more than one reaction in response to the same trigger?",
@@ -147,6 +154,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_08",
       "source_page": 428,
       "question": "What does 'reaction' mean in Starfinder rules terms?",
@@ -166,6 +174,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_09",
       "source_page": 5,
       "question": "Where does the book tell you to look for the complete definition of a bolded term?",
@@ -184,6 +193,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_10",
       "source_page": 403,
       "question": "When in your turn does the dying recovery check happen?",
@@ -203,6 +213,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_11",
       "source_page": 15,
       "question": "Does a free action with a trigger use up your one reaction per round?",
@@ -222,6 +233,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_12",
       "source_page": 15,
       "question": "Can you use a reaction when it's not your turn?",
@@ -240,6 +252,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_13",
       "source_page": 406,
       "question": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
@@ -258,6 +271,7 @@
       ]
     },
     {
+      "tier": "T2",
       "id": "batch_003_14",
       "source_page": 5,
       "question": "If the text is ambiguous, where does the book say to look?",

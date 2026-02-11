@@ -26,11 +26,10 @@ Safety, correctness, and authority are enforced by **contracts and provenance**,
 
 Mark III's ingestion spine is intentionally shallow and deterministic (outside of simple orphan heading work):
 
-- **Stage A — Extraction (PDF Normalization)**
-- **Stage B — Prose Reconstruction (Authorial Surface)**
-- **Stage C — Evidence Binding (Prose Partitioning + Provenance)**
+- **Stage A — Extraction and Prose Reconstruction (PDF → images → OCR → AST)**
+- **Stage B — Evidence Binding (AST → EvidenceUnits with provenance)**
 
-Stages A through C together produce the **only admissible input** to semantic reasoning. They are fully deterministic and do not involve LLM interpretation.
+Stages A and B together produce the **only admissible input** to semantic reasoning. They are fully deterministic and do not involve LLM interpretation.
 
 ### 2.2 Retrieval Baseline (Post-Ingestion)
 
@@ -44,23 +43,23 @@ These baselines measure what raw, unadorned EvidenceUnits achieve — the floor 
 
 ### 2.3 Enrichment & Graph Construction
 
-- **Stage D — LLM Enrichment (Retrieval-only annotations)**
+- **Stage A′ (A-Prime) — LLM Enrichment (Retrieval-only annotations)** — standard pipeline stage
 - Retrieval baseline update (measure enrichment impact vs. §2.2 baselines)
-- **Stage E — Graph Construction (Semantic Lifting)**
+- **Stage C — Graph Construction (Semantic Lifting)**
 
-Stage D must never create facts or authority. Stage E is strictly derivative of EvidenceUnits.
+Stage A′ must never create facts or authority. Stage C is strictly derivative of EvidenceUnits.
 
 ### 2.4 Evaluation
 
-- **Stage F — Retrieval Evaluation (Gold sets, metrics, regression)**
+- **Retrieval Lab — Retrieval Evaluation (Gold sets, metrics, regression)**
 
-Stage F measures retrieval and grounding honestly across corpora and suites, including regression comparisons across all retrieval modes and pipeline stages.
+Retrieval Lab measures retrieval and grounding honestly across corpora and suites, including regression comparisons across all retrieval modes and pipeline stages.
 
 ### 2.5 Answer Synthesis (Optional, Downstream)
 
 Answer synthesis is a downstream consumer that must respect Mark III authority boundaries:
 
-- Constrained by admissible evidence from Stages C and E
+- Constrained by admissible evidence from Stages B and C
 - Must refuse when grounded support is not admissible
 
 ---
@@ -105,7 +104,7 @@ Normalize all source inputs into canonical page images.
 
 ---
 
-### 3.3 OCR / Transcription Worker (Stage B Producer)
+### 3.3 OCR / Transcription Worker (Stage A Producer)
 
 **Responsibility**
 
@@ -113,9 +112,9 @@ Reconstruct the authored surface of a page.
 
 **Outputs (per page)**
 
-- `stageB.page.json` — raw model envelope
-- `stageB.surface.md` — verbatim markdown
-- `stageB.surface.ast.json` — deterministic structural AST
+- `stageA.page.json` — raw model envelope
+- `stageA.surface.md` — verbatim markdown
+- `stageA.surface.ast.json` — deterministic structural AST
 
 **Critical Rule**
 
@@ -123,7 +122,7 @@ Only the AST may be consumed downstream. Raw text exists solely for audit and re
 
 ---
 
-### 3.4 Evidence Binder (Stage C Producer)
+### 3.4 Evidence Binder (Stage B Producer)
 
 **Responsibility**
 
@@ -131,7 +130,7 @@ Partition authored prose into EvidenceUnits and bind each unit to explicit prove
 
 **Outputs**
 
-- `stageC.evidence_units.json`
+- `stageB.evidence_units.json`
 - gate diagnostics
 
 ---
@@ -149,7 +148,7 @@ Run Dense, Sparse (BM25), and Hybrid retrieval evaluation over raw EvidenceUnits
 
 ---
 
-### 3.6 Enrichment Worker (Stage D Producer)
+### 3.6 Enrichment Worker (Stage A′ Producer)
 
 **Responsibility**
 
@@ -167,7 +166,7 @@ Enrichment is **non-evidence** and must never be treated as authoritative.
 
 ---
 
-### 3.7 Graph Builder (Stage E Producer)
+### 3.7 Graph Builder (Stage C Producer)
 
 **Responsibility**
 
@@ -183,7 +182,7 @@ Derive semantic structure from EvidenceUnits with full provenance.
 
 ---
 
-### 3.8 Benchmark Harness (Stage F)
+### 3.8 Benchmark Harness (Retrieval Lab)
 
 **Responsibility**
 
@@ -243,7 +242,7 @@ Normalize PDF inputs into canonical page images with stable provenance.
 
 ---
 
-## 5. Stage B — Prose Reconstruction Contract
+## 5. Stage A — Prose Reconstruction Contract
 
 ### 5.1 Purpose
 
@@ -270,9 +269,9 @@ Reconstruct what the author intended a human reader to read, without semantic in
 
 ---
 
-## 6. Stage C — Evidence Binding Contract
+## 6. Stage B — Evidence Binding Contract
 
-(Stage C replaces all "chunking" and "broadening" concepts.)
+(Stage B replaces all "chunking" and "broadening" concepts.)
 
 ### 6.1 Purpose
 
@@ -322,7 +321,7 @@ Each EvidenceUnit includes:
 
 ### 7.1 Purpose
 
-Establish retrieval performance baselines over raw, unenriched EvidenceUnits from Stages A–C. These baselines are the measurement floor against which all subsequent enrichment (Stage D) and graph construction (Stage E) are evaluated.
+Establish retrieval performance baselines over raw, unenriched EvidenceUnits from Stages A–B. These baselines are the measurement floor against which all subsequent enrichment (Stage A′) and graph construction (Stage C) are evaluated.
 
 ### 7.2 Modes
 
@@ -342,9 +341,9 @@ No enrichment or LLM-derived fields are present at this stage. Baselines measure
 
 ---
 
-## 8. Stage D — LLM Enrichment Contract (Retrieval-only)
+## 8. Stage A′ — LLM Enrichment Contract (Retrieval-only)
 
-Stage D is a **retrieval index augmentation** stage that annotates EvidenceUnits with non-authoritative semantic scaffolding.
+Stage A′ (A-Prime) is a **standard** retrieval index augmentation stage that annotates EvidenceUnits with non-authoritative semantic scaffolding.
 
 ### 8.1 Purpose
 
@@ -355,23 +354,23 @@ Improve retrieval recall and ranking for:
 - negative-space query shapes
 - cases where key semantics span multiple sentences
 
-Stage D exists to reduce dependence on neighbor expansion and to make dense retrieval less brittle.
+Stage A′ exists to reduce dependence on neighbor expansion and to make dense retrieval less brittle.
 
 ### 8.2 Hard Wall: Non-Evidence
 
-All Stage D outputs are tagged:
+All Stage A′ outputs are tagged:
 
 - `authority = none`
 - `source = llm_annotation`
 - `admissibility = non_evidence`
-- `stage_e_visibility = hidden`
+- `stage_c_visibility = hidden`
 - `citation_policy = never_cite`
 
-Stage D fields are never admissible evidence and are ignored by Stage E.
+Stage A′ fields are never admissible evidence and are ignored by Stage C (Graph Construction).
 
 ### 8.3 Output Schema (Versioned)
 
-Stage D attaches `evidence_unit.enrichment` with:
+Stage A′ attaches `evidence_unit.enrichment` with:
 
 - short neutral summaries
 - controlled topic tags
@@ -383,7 +382,7 @@ All schema expansions must be versioned.
 
 ### 8.4 Determinism & Caching
 
-Stage D must be deterministic at the pipeline level:
+Stage A′ must be deterministic at the pipeline level:
 
 - fixed prompt version and model id
 - cached by a stable `input_fingerprint`
@@ -391,11 +390,11 @@ Stage D must be deterministic at the pipeline level:
 
 ### 8.5 Retrieval Baseline Update
 
-After Stage D enrichment is applied, retrieval baselines from §7 are re-run to measure the impact of enrichment. The delta between §7 baselines and post-enrichment metrics quantifies the value of LLM annotations.
+After Stage A′ enrichment is applied, retrieval baselines from §7 are re-run to measure the impact of enrichment. The delta between §7 baselines and post-enrichment metrics quantifies the value of LLM annotations.
 
 ---
 
-## 9. Stage E — Graph Construction Contract
+## 9. Stage C — Graph Construction Contract
 
 ### 9.1 Purpose
 
@@ -421,11 +420,11 @@ Derive semantic structure from EvidenceUnits with full provenance.
 - Canonical ID stability
 - Partition invariants
 
-Stage E may include additional admissibility gates (scalar delta completeness, authority tier filtering, trait definition closure), but may not infer missing rules.
+Stage C may include additional admissibility gates (scalar delta completeness, authority tier filtering, trait definition closure), but may not infer missing rules.
 
 ---
 
-## 10. Stage F — Retrieval Evaluation Contract
+## 10. Retrieval Lab — Retrieval Evaluation Contract
 
 ### 10.1 Purpose
 
@@ -442,7 +441,7 @@ Measure retrieval and grounding honestly across corpora and suites.
 
 - benchmark reports per corpus and suite
 - gold audits: keep/add/remove
-- regression comparisons across retrieval modes and pipeline stages (§7 baseline vs. post-Stage D vs. post-Stage E)
+- regression comparisons across retrieval modes and pipeline stages (§7 baseline vs. post-Stage A′ vs. post-Stage C)
 
 ---
 
@@ -454,7 +453,7 @@ Produce user-facing answers constrained by admissible evidence.
 
 ### 11.2 Hard Rule
 
-If Stage E cannot ground the claim, answer synthesis must refuse or explicitly qualify.
+If Stage C cannot ground the claim, answer synthesis must refuse or explicitly qualify.
 
 ### 11.3 Allowed
 
@@ -464,21 +463,20 @@ If Stage E cannot ground the claim, answer synthesis must refuse or explicitly q
 
 ### 11.4 Forbidden
 
-- citing Stage D fields
+- citing Stage A′ fields
 - inventing rules
 
 ---
 
 ## 12. Brutal Pages Benchmark Integration
 
-Brutal Pages is the primary regression harness for Stages A, B, and C.
+Brutal Pages is the primary regression harness for Stages A and B.
 
 ### 12.1 Run Modes
 
 - A-only: render fidelity
-- A+B: surface fidelity
-- A+B+C: segmentation and provenance (includes orphan header pass when enabled)
-- A+B+C+E: end-to-end deltas (secondary)
+- A+B: surface fidelity and evidence binding (includes orphan header pass when enabled)
+- A+B+C: end-to-end deltas including graph construction (secondary)
 
 ### 12.2 Per-Page Outputs
 
@@ -499,9 +497,9 @@ Mark III does not hide this.
 
 Instead:
 
-- Stage B outputs are content-addressed
-- Stage C/E artifacts embed upstream hashes
-- Any graph is reproducible by pinning Stage B hash
+- Stage A outputs are content-addressed
+- Stage B/C artifacts embed upstream hashes
+- Any graph is reproducible by pinning Stage A hash
 
 This replaces Marker's spatial determinism with **prose transcript determinism**.
 
@@ -549,9 +547,23 @@ It treats authored text as immutable ground truth, binds it to provenance determ
 
 The pipeline is structured in two phases:
 
-1. **Deterministic ingestion** (Stages A → B → C) produces EvidenceUnits with full provenance. Retrieval baselines are established over these raw units.
-2. **LLM enrichment and graph construction** (Stages D → E) augment retrieval and derive semantic structure. Retrieval baselines are re-measured after each stage to quantify impact.
+1. **Deterministic ingestion** (Stages A → B) produces EvidenceUnits with full provenance. Retrieval baselines are established over these raw units.
+2. **LLM enrichment and graph construction** (Stage A′ → Stage C) augment retrieval and derive semantic structure. Retrieval baselines are re-measured after each stage to quantify impact.
 
-Stage F provides honest, comprehensive evaluation across all pipeline stages and retrieval modes.
+Retrieval Lab provides honest, comprehensive evaluation across all pipeline stages and retrieval modes.
 
 This architecture is intentional and non-negotiable.
+
+---
+
+## Appendix A: Naming History
+
+This document uses implementation stage names. For reference, the mapping from earlier design doc numbering:
+
+| Implementation Stage | Responsibility                    | Earlier Design Doc Name |
+| -------------------- | --------------------------------- | ----------------------- |
+| Stage A              | Extraction + Prose Reconstruction | Stages A + B            |
+| Stage B              | Evidence Binding                  | Stage C                 |
+| Stage A′             | LLM Enrichment (retrieval-only)   | Stage D                 |
+| Stage C              | Graph Construction                | Stage E                 |
+| Retrieval Lab        | Retrieval Evaluation              | Stage F                 |

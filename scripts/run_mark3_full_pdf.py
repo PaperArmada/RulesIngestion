@@ -32,7 +32,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from extraction.gates_b import run_stage_b_gates
 from extraction.orphan_header import discover_orphans, run_orphan_header_pass
-from extraction.pipeline import run_a_b, run_a_b_aprime
+from extraction.pipeline import run_a_b, run_a_b_aprime, run_join_pass_and_gate
 from extraction.schemas import EvidenceUnit
 
 logger = logging.getLogger(__name__)
@@ -135,8 +135,8 @@ def main() -> None:
     parser.add_argument(
         "--stage",
         choices=["ab", "ab+aprime"],
-        default="ab",
-        help="ab = Stage A+B only; ab+aprime = A+B then Stage A' enrichment per page (requires OPENAI_API_KEY).",
+        default="ab+aprime",
+        help="ab = Stage A+B only; ab+aprime = A+B then Stage A' enrichment (default, standard path). Requires OPENAI_API_KEY for A'.",
     )
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging.")
     args = parser.parse_args()
@@ -318,6 +318,7 @@ def main() -> None:
                     source_line_start=unit.source_line_start,
                     source_line_end=unit.source_line_end,
                     anomaly_flags=[f for f in unit.anomaly_flags if f != "no_heading_parent"],
+                    content_version=unit.content_version,
                 ))
             stage_b_data["units"] = [u.to_dict() for u in updated_units]
             units_path.write_text(
@@ -363,6 +364,42 @@ def main() -> None:
         result["all_gates_passed"] = (
             result.get("stage_a") and result["stage_a"]["gates_passed"] and gates_passed
         )
+
+    # ─── R3: Cross-page join pass (multi-page only) ─────────────────────
+    units_by_page: list[list] = []
+    for r in sorted(results, key=lambda x: x.get("page", 0)):
+        if r.get("error"):
+            continue
+        label = r["label"]
+        page_dir = out_base / label
+        units_path = page_dir / "stageB.evidence_units.json"
+        if not units_path.exists():
+            continue
+        stage_b_data = json.loads(units_path.read_text(encoding="utf-8"))
+        page_units = [EvidenceUnit.from_dict(u) for u in stage_b_data.get("units", [])]
+        units_by_page.append(page_units)
+    join_diagnostics: list = []
+    if len(units_by_page) >= 2:
+        joined_units, join_diagnostics = run_join_pass_and_gate(units_by_page)
+        join_gate_passed = all(g.passed for g in join_diagnostics)
+        print(f"Cross-page join pass: {len(joined_units)} units, gate={'PASS' if join_gate_passed else 'FAIL'}")
+        joined_path = out_base / "joined.evidence_units.json"
+        joined_path.write_text(
+            json.dumps({"units": [u.to_dict() for u in joined_units]}, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        for gn in ["cross_page_join_rate"]:
+            if gn not in b_gate_names:
+                b_gate_names.append(gn)
+        for r in results:
+            if r.get("error"):
+                continue
+            if r.get("stage_b"):
+                for g in join_diagnostics:
+                    r["stage_b"].setdefault("gate_details", []).append(g.to_dict())
+                if not join_gate_passed:
+                    r["stage_b"]["gates_passed"] = False
+                    r["all_gates_passed"] = False
 
     # ─── Evaluation report ─────────────────────────────────────────────
     valid = [r for r in results if r.get("error") is None]
