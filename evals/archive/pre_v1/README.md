@@ -10,4 +10,4 @@ For each archived bundle placed here, include:
 - Summary and comparison reports
 - README with reproduction steps
 
-**Canonical baseline:** See [Docs/v1/baseline_manifest.md](../../Docs/v1/baseline_manifest.md) and [evals/v1_baseline/README.md](../../v1_baseline/README.md).
+**Canonical baseline:** See [Docs/Design/v1/baseline_manifest.md](../../Docs/Design/v1/baseline_manifest.md) and [evals/v1_baseline/README.md](../../v1_baseline/README.md).

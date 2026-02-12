@@ -2,13 +2,13 @@
 
 Deterministic rulebook extraction and retrieval pipeline (Stage A, Stage B, Retrieval Lab).
 
-**Start here:** [Docs/v1/architecture_overview.md](Docs/v1/architecture_overview.md)
+**Start here:** [Docs/Design/v1/architecture_overview.md](Docs/Design/v1/architecture_overview.md)
 
 - **Stage A:** Extraction + prose reconstruction (SurfaceAST).
 - **Stage B:** Evidence binding (EvidenceUnits).
 - **Retrieval Lab:** Eval and comparison over EvidenceUnits (baseline, dual-list fusion, pairing).
 
-See [Docs/v1/baseline_manifest.md](Docs/v1/baseline_manifest.md) for baseline reproducibility and [Docs/v1/retrieval_lab_v1.md](Docs/v1/retrieval_lab_v1.md) for running evals.
+See [Docs/Design/v1/baseline_manifest.md](Docs/Design/v1/baseline_manifest.md) for baseline reproducibility and [Docs/Design/v1/retrieval_lab_v1.md](Docs/Design/v1/retrieval_lab_v1.md) for running evals.
 
 ## Setup
 
