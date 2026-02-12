@@ -1,0 +1,27 @@
+# A1.2: PHB hybrid with dual-list fusion (Index_U canonical + Index_F sym_w3_m6).
+# Baseline vs dual-list fusion per spec: Docs/Design/decision_lock_in_and_next_spec.md
+retrieval_mode: hybrid
+experiment_name: "phb_hybrid_dual_list_fusion"
+substrate_path: "out/mark3_evaluation/DnD_PHB_5.5"
+document_id: "DnD_PHB_5.5"
+substrate_version: "v2"
+query_batches:
+  - "evals/retrieval/PHB5e/dnd_5_e_equivalent_rag_eval_queries.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+output_dir: "out/retrieval_lab/stage_a_and_b"
+mongo_uri: null
+reuse_embeddings: true
+gold_semantic_top_n: 5
+gold_jaccard_threshold: 0.15
+batch_size: 16
+# A1.2 dual-list fusion
+dual_list_fusion: true
+dual_list_ku: 12
+dual_list_kf: 12
+dual_list_kfinal: 10
+dual_list_qu: 6
+dual_list_family_window: 3
+dual_list_family_max_units: 6
+dual_list_family_direction: "symmetric"

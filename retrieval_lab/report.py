@@ -20,7 +20,9 @@ def _glossary_md() -> str:
 | **Hit@k** | Fraction of queries where at least one gold unit appears in top-k | Whether *any* relevant evidence surfaces per question. Simpler than recall. |
 | **MRR** | Mean over queries of 1/rank of first gold hit; 0 if no gold in list | How high the first relevant result ranks. 1.0 = gold always at rank 1. |
 | **Gold-in-Candidates** | Fraction of queries where any gold unit appears anywhere in the full ranked list | Ceiling check: if gold never appears, retrieval cannot succeed regardless of k. |
+| **Gold-in-Candidates (True Ceiling)** | Same as Gold-in-Candidates, but excludes `no_gold_defined` queries from denominator | Better estimate of retriever ceiling after benchmark hygiene separation. |
 | **Grounding Coverage** | Fraction of queries where gold grounding found at least one EvidenceUnit | Measures eval set quality (and extraction coverage), not retrieval quality. |
+| **Full-Set Hit@k** | Fraction of grounded queries where *all* gold units appear within top-k | Compositional retrieval metric; critical for multi-unit T2/T3 questions. |
 | **Answer Similarity@k** | Mean cosine similarity between the query (expected_answer_summary) embedding and the embeddings of the top-k retrieved units | Model-agnostic relevance signal when gold IDs are uncertain (e.g. corpus-wide semantic grounding). |
 | **Candidate Set Size** | Total number of EvidenceUnits in the corpus | Context for interpreting recall: larger corpus = harder retrieval problem. |
 
@@ -32,6 +34,15 @@ def _glossary_md() -> str:
 | **retrieval_miss** | Gold EvidenceUnit(s) exist but none appear in top-k for any k tested. |
 | **rank_miss** | Gold was retrieved but ranked below the maximum k (e.g. beyond top-20). |
 | **grounding_failure** | No EvidenceUnit could be mapped as gold for this query (eval set or extraction issue). |
+
+### Failure Buckets (Phase-0 Contract)
+
+| Bucket | Meaning |
+|--------|---------|
+| **no_gold_defined** | Query has no gold units (`gold_unit_ids` empty): benchmark hygiene/annotation issue. |
+| **gold_not_in_candidates** | Gold exists but never appears in ranked list: candidate ceiling failure. |
+| **gold_in_candidates_but_low_rank** | Gold appears only below max-k: ranking depth issue. |
+| **grounding_or_answer_failure_after_retrieval** | Gold was retrievable but downstream grounding/answer stage failed. |
 
 ### When to Worry
 
@@ -101,13 +112,16 @@ def generate_report(
     ])
     # Table: model | MRR | Gold-in-Cand | R@k | H@k for every k in config
     top_k = config.get("top_k", [1, 3, 5, 10, 20])
-    header = "| Model | MRR | Gold-in-Cand |"
+    header = "| Model | MRR | Gold-in-Cand | Gold-in-Cand(True) | FSH@10 |"
     for k in top_k:
         header += f" R@{k} | H@{k} |"
     lines.append(header)
-    lines.append("|" + "---|" * (3 + len(top_k) * 2) + "")
+    lines.append("|" + "---|" * (5 + len(top_k) * 2) + "")
     for model_id, res in results_by_model.items():
-        row = f"| {model_id} | {res.get('mrr', 0):.4f} | {res.get('gold_in_candidates', 0):.4f} |"
+        row = (
+            f"| {model_id} | {res.get('mrr', 0):.4f} | {res.get('gold_in_candidates', 0):.4f} | "
+            f"{res.get('gold_in_candidates_true_ceiling', 0):.4f} | {res.get('full_set_hit_at_k', {}).get(10, 0):.4f} |"
+        )
         for k in top_k:
             r = res.get("recall_at_k", {})
             h = res.get("hit_at_k", {})
@@ -119,12 +133,15 @@ def generate_report(
         lines.append("")
         lines.append(f"- **MRR:** {res.get('mrr', 0):.4f}")
         lines.append(f"- **Gold-in-candidates:** {res.get('gold_in_candidates', 0):.4f}")
+        lines.append(f"- **Gold-in-candidates (true ceiling):** {res.get('gold_in_candidates_true_ceiling', 0):.4f}")
         lines.append(f"- **Grounding coverage:** {res.get('grounding_coverage', 0):.4f}")
         lines.append("- **Recall@k:** " + json.dumps(res.get("recall_at_k", {})))
         lines.append("- **Hit@k:** " + json.dumps(res.get("hit_at_k", {})))
+        lines.append("- **Full-set hit@k:** " + json.dumps(res.get("full_set_hit_at_k", {})))
         if res.get("answer_similarity_at_k"):
             lines.append("- **Answer similarity@k:** " + json.dumps(res["answer_similarity_at_k"]))
         lines.append("- **Failure counts:** " + json.dumps(res.get("failure_counts", {})))
+        lines.append("- **Failure buckets:** " + json.dumps(res.get("failure_bucket_counts", {})))
         if res.get("embedding_time_sec") is not None:
             lines.append(f"- **Embedding time (s):** {res['embedding_time_sec']:.2f}")
         if res.get("scoring_time_sec") is not None:
@@ -134,8 +151,8 @@ def generate_report(
     # Per-suite table for first model (same structure for all)
     first_model_result = next(iter(results_by_model.values()), None) if results_by_model else None
     if first_model_result and first_model_result.get("per_suite"):
-        lines.append("| Suite | MRR | R@5 | H@5 | R@10 | H@10 | N |")
-        lines.append("|-------|-----|-----|-----|------|------|---|")
+        lines.append("| Suite | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | N |")
+        lines.append("|-------|-----|-----|-----|------|------|--------|---|")
         for suite_name, su in first_model_result["per_suite"].items():
             n = su.get("n", 0)
             mrr = su.get("mrr", 0)
@@ -143,12 +160,13 @@ def generate_report(
             h5 = su.get("hit_at_k", {}).get(5, 0)
             r10 = su.get("recall_at_k", {}).get(10, 0)
             h10 = su.get("hit_at_k", {}).get(10, 0)
-            lines.append(f"| {suite_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {n} |")
+            fsh10 = su.get("full_set_hit_at_k", {}).get(10, 0)
+            lines.append(f"| {suite_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {n} |")
         lines.append("")
     lines.extend(["---", "", "## 5. Per-Tier Breakdown (R8 Gold Taxonomy)", ""])
     if first_model_result and first_model_result.get("per_tier"):
-        lines.append("| Tier | MRR | R@5 | H@5 | R@10 | H@10 | N |")
-        lines.append("|------|-----|-----|-----|------|------|---|")
+        lines.append("| Tier | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | N |")
+        lines.append("|------|-----|-----|-----|------|------|--------|---|")
         for tier_name, ti in sorted(first_model_result["per_tier"].items()):
             n = ti.get("n", 0)
             mrr = ti.get("mrr", 0)
@@ -156,7 +174,8 @@ def generate_report(
             h5 = ti.get("hit_at_k", {}).get(5, 0)
             r10 = ti.get("recall_at_k", {}).get(10, 0)
             h10 = ti.get("hit_at_k", {}).get(10, 0)
-            lines.append(f"| {tier_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {n} |")
+            fsh10 = ti.get("full_set_hit_at_k", {}).get(10, 0)
+            lines.append(f"| {tier_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {n} |")
         lines.append("")
     lines.extend(["---", "", "## 6. Failure Analysis", ""])
     lines.append("| Model | hit | retrieval_miss | rank_miss | grounding_failure |")
@@ -166,6 +185,15 @@ def generate_report(
         lines.append(
             f"| {model_id} | {fc.get('hit', 0)} | {fc.get('retrieval_miss', 0)} | "
             f"{fc.get('rank_miss', 0)} | {fc.get('grounding_failure', 0)} |"
+        )
+    lines.extend(["", "### Failure Buckets", ""])
+    lines.append("| Model | no_gold_defined | gold_not_in_candidates | gold_in_candidates_but_low_rank | grounding_or_answer_failure_after_retrieval |")
+    lines.append("|-------|------------------|------------------------|----------------------------------|----------------------------------------------|")
+    for model_id, res in results_by_model.items():
+        fb = res.get("failure_bucket_counts", {})
+        lines.append(
+            f"| {model_id} | {fb.get('no_gold_defined', 0)} | {fb.get('gold_not_in_candidates', 0)} | "
+            f"{fb.get('gold_in_candidates_but_low_rank', 0)} | {fb.get('grounding_or_answer_failure_after_retrieval', 0)} |"
         )
     lines.extend(["", "---", "", "## 7. Gold Grounding Audit", ""])
     lines.append("Sample (first 10): query_id, method, count.")

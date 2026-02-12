@@ -82,6 +82,32 @@ class ExperimentConfig:
     reranker: Optional[str] = None
     # R6: Expand candidate set using co_retrieval_hints (when hint.related_topic matches unit topic_tags).
     co_retrieval_expand: bool = False
+    # Phase-0 metric contract and guardrails.
+    guardrail_t1_mrr_drop_max: float = 0.02
+    # A1: retrieval-only clause-family projection substrate.
+    clause_family_projection: bool = False
+    clause_family_window: int = 2
+    clause_family_max_units: int = 6
+    clause_family_direction: str = "symmetric"
+    # B1: deterministic cross-reference sidecar expansion.
+    crossref_sidecar_expand: bool = False
+    crossref_expand_top_k: int = 10
+    crossref_expand_per_hit: int = 2
+    crossref_expand_total_cap: int = 20
+    # H7: minimal deterministic A′ co-retrieval hint generation.
+    a_prime_generate_minimal: bool = False
+    # A1.2: dual-list fusion (Index_U canonical + Index_F clause-family).
+    dual_list_fusion: bool = False
+    dual_list_ku: int = 12
+    dual_list_kf: int = 12
+    dual_list_kfinal: int = 10
+    dual_list_qu: int = 6
+    dual_list_family_window: int = 3
+    dual_list_family_max_units: int = 6
+    dual_list_family_direction: str = "symmetric"
+    # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
+    dependency_pairing_expand: bool = False
+    dependency_pairing_emax: int = 6
 
     def get_policy(self, corpus_id: str) -> RetrievalPolicy:
         """Get retrieval policy for corpus. Falls back to default policy from config."""
@@ -173,6 +199,26 @@ class ExperimentConfig:
             parent_fetch_enabled=bool(data.get("parent_fetch_enabled", False)),
             reranker=str(data["reranker"]) if data.get("reranker") else None,
             co_retrieval_expand=bool(data.get("co_retrieval_expand", False)),
+            guardrail_t1_mrr_drop_max=float(data.get("guardrail_t1_mrr_drop_max", 0.02)),
+            clause_family_projection=bool(data.get("clause_family_projection", False)),
+            clause_family_window=int(data.get("clause_family_window", 2)),
+            clause_family_max_units=int(data.get("clause_family_max_units", 6)),
+            clause_family_direction=str(data.get("clause_family_direction", "symmetric")),
+            crossref_sidecar_expand=bool(data.get("crossref_sidecar_expand", False)),
+            crossref_expand_top_k=int(data.get("crossref_expand_top_k", 10)),
+            crossref_expand_per_hit=int(data.get("crossref_expand_per_hit", 2)),
+            crossref_expand_total_cap=int(data.get("crossref_expand_total_cap", 20)),
+            a_prime_generate_minimal=bool(data.get("a_prime_generate_minimal", False)),
+            dual_list_fusion=bool(data.get("dual_list_fusion", False)),
+            dual_list_ku=int(data.get("dual_list_ku", 12)),
+            dual_list_kf=int(data.get("dual_list_kf", 12)),
+            dual_list_kfinal=int(data.get("dual_list_kfinal", 10)),
+            dual_list_qu=int(data.get("dual_list_qu", 6)),
+            dual_list_family_window=int(data.get("dual_list_family_window", 3)),
+            dual_list_family_max_units=int(data.get("dual_list_family_max_units", 6)),
+            dual_list_family_direction=str(data.get("dual_list_family_direction", "symmetric")),
+            dependency_pairing_expand=bool(data.get("dependency_pairing_expand", False)),
+            dependency_pairing_emax=int(data.get("dependency_pairing_emax", 6)),
         )
 
 
