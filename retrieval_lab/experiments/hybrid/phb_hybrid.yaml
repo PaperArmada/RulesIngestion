@@ -1,4 +1,6 @@
 # Hybrid retrieval (dense + BM25, RRF fusion) — PHB 5e.
+# BASELINE for comparison only; NOT the production default.
+# Production default: phb_hybrid_dual_list_fusion.yaml (dual-list fusion).
 # Same substrate as dense. Embed once with dense config, then run with this config and --run-id.
 retrieval_mode: hybrid
 experiment_name: "phb_hybrid"

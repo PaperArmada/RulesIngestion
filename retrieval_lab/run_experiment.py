@@ -328,6 +328,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             "B1 dependency pairing enabled: %d units with delta/exception→base edges",
             len(pairing_edges),
         )
+    pairing_instrumentation_by_model: Dict[str, Any] = {}
 
     if retrieval_mode == "bm25":
         if getattr(config, "expand_context", False):
@@ -356,14 +357,44 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         # B1 replacement: dependency pairing expansion (BM25 path).
         if getattr(config, "dependency_pairing_expand", False) and pairing_edges:
             emax = getattr(config, "dependency_pairing_emax", 6)
+            pairing_provenance: List[List[Dict[str, Any]]] = []
             for i in range(len(grounded_queries)):
-                ranked_lists[i], score_lists[i], _ = expand_ranked_with_pairing_edges(
+                ranked_lists[i], score_lists[i], prov = expand_ranked_with_pairing_edges(
                     ranked_ids=ranked_lists[i],
                     score_list=score_lists[i],
                     pairing_edges=pairing_edges,
                     expand_top_k=getattr(config, "crossref_expand_top_k", 10),
                     Emax=emax,
                 )
+                pairing_provenance.append(prov)
+            # v1 instrumentation: per-query pairing stats (BM25 path).
+            gold_by_idx = [(q.get("gold_unit_ids") or []) for q in grounded_queries]
+            top_k_val = 10
+            per_query_pairing = []
+            for i, (q, prov) in enumerate(zip(grounded_queries, pairing_provenance)):
+                gold_ids = set(gold_by_idx[i])
+                top10 = set(ranked_lists[i][:top_k_val])
+                triggers_fired = len(set(p.get("anchor_id") for p in prov))
+                candidates_added = len(prov)
+                gold_added = sum(1 for p in prov if p.get("chunk_id") in gold_ids)
+                added_entered_top10 = sum(1 for p in prov if p.get("chunk_id") in top10)
+                per_query_pairing.append({
+                    "query_id": q.get("id", ""),
+                    "pairing_triggers_fired": triggers_fired,
+                    "candidates_added_by_pairing": candidates_added,
+                    "gold_added_by_pairing": gold_added,
+                    "added_entered_top10": added_entered_top10,
+                })
+            pairing_instrumentation_by_model["bm25"] = {
+                "per_query": per_query_pairing,
+                "summary": {
+                    "total_queries": len(grounded_queries),
+                    "total_triggers_fired": sum(p["pairing_triggers_fired"] for p in per_query_pairing),
+                    "total_candidates_added": sum(p["candidates_added_by_pairing"] for p in per_query_pairing),
+                    "total_gold_added": sum(p["gold_added_by_pairing"] for p in per_query_pairing),
+                    "total_added_entered_top10": sum(p["added_entered_top10"] for p in per_query_pairing),
+                },
+            }
 
         ranked_source_id_lists = [
             [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
@@ -720,14 +751,43 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
             if getattr(config, "dependency_pairing_expand", False) and pairing_edges:
                 emax = getattr(config, "dependency_pairing_emax", 6)
+                pairing_provenance_hybrid: List[List[Dict[str, Any]]] = []
                 for i in range(len(grounded_queries)):
-                    ranked_lists[i], score_lists[i], _ = expand_ranked_with_pairing_edges(
+                    ranked_lists[i], score_lists[i], prov = expand_ranked_with_pairing_edges(
                         ranked_ids=ranked_lists[i],
                         score_list=score_lists[i],
                         pairing_edges=pairing_edges,
                         expand_top_k=getattr(config, "crossref_expand_top_k", 10),
                         Emax=emax,
                     )
+                    pairing_provenance_hybrid.append(prov)
+                # v1 instrumentation: per-query pairing stats (hybrid path).
+                top_k_val = 10
+                per_query_pairing_hybrid = []
+                for i, (q, prov) in enumerate(zip(grounded_queries, pairing_provenance_hybrid)):
+                    gold_ids = set(q.get("gold_unit_ids") or [])
+                    top10 = set(ranked_lists[i][:top_k_val])
+                    triggers_fired = len(set(p.get("anchor_id") for p in prov))
+                    candidates_added = len(prov)
+                    gold_added = sum(1 for p in prov if p.get("chunk_id") in gold_ids)
+                    added_entered_top10 = sum(1 for p in prov if p.get("chunk_id") in top10)
+                    per_query_pairing_hybrid.append({
+                        "query_id": q.get("id", ""),
+                        "pairing_triggers_fired": triggers_fired,
+                        "candidates_added_by_pairing": candidates_added,
+                        "gold_added_by_pairing": gold_added,
+                        "added_entered_top10": added_entered_top10,
+                    })
+                pairing_instrumentation_by_model[model_id] = {
+                    "per_query": per_query_pairing_hybrid,
+                    "summary": {
+                        "total_queries": len(grounded_queries),
+                        "total_triggers_fired": sum(p["pairing_triggers_fired"] for p in per_query_pairing_hybrid),
+                        "total_candidates_added": sum(p["candidates_added_by_pairing"] for p in per_query_pairing_hybrid),
+                        "total_gold_added": sum(p["gold_added_by_pairing"] for p in per_query_pairing_hybrid),
+                        "total_added_entered_top10": sum(p["added_entered_top10"] for p in per_query_pairing_hybrid),
+                    },
+                }
 
             # R9: Unit-type soft boost (opt-in)
             boost = getattr(config, "unit_type_boost", 0.0)
@@ -877,6 +937,15 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         retrieved_chunks_by_model=retrieved_chunks_by_model,
     )
     logger.info("Report written to %s", paths.get("REPORT.md"))
+    # v1: pairing instrumentation (required; emit even when 0 so dashboard/tests can rely on it).
+    pairing_payload: Dict[str, Any] = {
+        "enabled": getattr(config, "dependency_pairing_expand", False),
+        "by_model": pairing_instrumentation_by_model,
+    }
+    (output_dir / "pairing_instrumentation.json").write_text(
+        json.dumps(pairing_payload, indent=2),
+        encoding="utf-8",
+    )
     if retrieved_chunks_by_model:
         logger.info("Retrieved chunks (for manual review): %s", paths.get("retrieved_chunks.json"))
     return experiment_id

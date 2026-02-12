@@ -6,6 +6,8 @@ Stage A extraction is high-fidelity (minimal prose/structure loss). Benchmark re
 
 Clause-family projection variants demonstrate a strong compositional lift (especially on T2) but can introduce T1 regressions depending on parameterization. The current “sidecar” edge mechanism fires and adds candidates, but adds **zero gold** because it links sibling neighbors rather than true dependency pairs.
 
+**Update (post-run):** Dual-list fusion (Index_U + Index_F, quota interleave) is now the **PHB default baseline** for this stage. It delivered 0 T1 regressions, higher T1 MRR, and doubled T2 Full-set@10; see § Findings and baseline update.
+
 ---
 
 ## One decision to lock in
@@ -16,7 +18,7 @@ Clause-family projection variants demonstrate a strong compositional lift (espec
 2) **Keep `sym_w1_m4` as the “safe projection” if you need a single default.**  
    `sym_w1_m4` provides conservative local context expansion while minimizing T1 regressions.
 
-3) **Implement A1.2 dual-list fusion as the production path.**  
+3) **Implement A1.2 dual-list fusion as the production path (now PHB default baseline).**  
    Retrieve from both:
    - the **canonical EvidenceUnit** index (precision / first-hit protection)
    - the **clause-family projection** index (coverage / composition)
@@ -148,12 +150,70 @@ Tag expansions:
 
 ## Recommended next run order (lowest noise)
 
-1) Baseline vs Dual-list fusion (with `sym_w3_m6` as Index_F)
-2) Add pairing edges expansion on top of fusion
-3) Evaluate:
-   - T1 regression count
-   - T2 Hit@10 and Full-set@10
-   - Overall MRR
+1) ~~Baseline vs Dual-list fusion (with `sym_w3_m6` as Index_F)~~ **Done.**
+2) ~~Add pairing edges expansion on top of fusion~~ **Done.**
+3) Evaluate: T1 regression count, T2 Hit@10 and Full-set@10, overall MRR — **see Findings below.**
+
+---
+
+## Findings and baseline update (post-run)
+
+**Run:** Baseline (phb_hybrid) vs Dual-list fusion (sym_w3_m6) vs Dual-list + pairing.  
+**Comparison:** `out/retrieval_lab/stage_a_and_b/COMPARISON_BASELINE_DUAL_LIST_PAIRING.md`
+
+### Result summary
+
+| Experiment          | MRR    | T1 MRR | T1 regressions | T2 Hit@10 | T2 Full-set@10 |
+|---------------------|--------|--------|----------------|-----------|-----------------|
+| Baseline (hybrid)   | 0.4898 | 0.6400 | —              | 0.6667    | 0.0909          |
+| Dual-list fusion    | 0.4912 | 0.6700 | **0**          | 0.6667    | **0.1818**      |
+| Dual-list + pairing | 0.4912 | 0.6700 | **0**          | 0.6667    | **0.1818**      |
+
+Dual-list fusion did exactly what we wanted: it **protected T1 completely** (0 regressions), **improved T1 ordering** (MRR 0.64 → 0.67), and **doubled T2 Full-set@10** (0.0909 → 0.1818) while keeping overall MRR flat-to-slightly-up (0.4898 → 0.4912). That’s a Pareto improvement on the things we care about.
+
+### Baseline policy
+
+**Dual-list fusion is now the PHB default retrieval policy for this stage.**  
+Consume clause-family through **fusion** (Index_U + Index_F, quota interleave), not replacement. The earlier sweep showed “aggressive family-only” can win on T2 but introduces regressions; fusion captures the gain without the cost.
+
+### What the numbers imply
+
+- **T2 Hit@10 flat, Full-set@10 doubled:** We were already finding “some gold” in top-10 for most T2 queries; we weren’t finding the **complete set** of required evidence. So the gain is on **compositional coverage**, not “better retrieval of the first relevant clause.” Full-set@10 (or a GoldCoverage@10-style metric) is the right primary KPI for T2 going forward; Hit@10 is too coarse once you’re consistently getting some gold.
+- **Pairing edges not moving metrics:** In this eval slice pairing didn’t show up — either triggers didn’t fire much, the expansion cap kept adds out of top-10, or the affected queries were already solved by fusion. That’s “not exercised / not needed here,” not evidence pairing is wrong. Pairing may still matter for broader corpora or for the “ongoing damage/unconscious” class when the relevant rule isn’t in the same page/heading neighborhood where families help.
+
+### Interpretation check
+
+T2 Full-set@10: 0.0909 → 0.1818 is 1/11 → 2/11 for 11 grounded T2 queries. Real gain.
+
+### Next steps (minimal, high signal)
+
+**A) Promote dual-list fusion as the PHB default.**  
+Use dual-list fusion (sym_w3_m6, Qu=6, Kfinal=10) as the baseline config for PHB retrieval experiments. **Done as policy; config default in lab to follow.**
+
+**B) Instrument pairing.**  
+Metrics alone won’t show whether pairing is working. For the pairing run, log per query:
+
+- number of pairing triggers fired
+- number of candidates added by pairing
+- whether any added candidate was gold
+- whether any added candidate entered top-10
+- whether pairing caused dedupe interactions (added a unit already present via family)
+
+If “pairing fired 0 times” → refine triggers.  
+If “pairing fired, added units, but never gold” → resolution is wrong (like the earlier sidecar).  
+If “pairing added gold but not top-10” → adjust cap or integrate pairing earlier in candidate assembly.
+
+**C) Treat Full-set@10 as primary T2 metric.**  
+Use Full-set@10 (or GoldCoverage@10) as the main T2 KPI; keep Hit@10 as secondary.
+
+### Discussion: pairing as bonus recall vs composition guarantee
+
+Do we want pairing edges to be:
+
+1. **Purely “bonus recall”** — only add candidates to the pool; no rank guarantee.
+2. **A “composition guarantee”** — ensure base+delta / base+exception **co-appear** whenever one appears (e.g. apply pairing after retrieval but before final top-10 truncation, with a rule that paired units are inserted immediately after the triggering candidate, deterministic, capped).
+
+Option (2) would make pairing visible in reported metrics more often. Open for next iteration.
 
 ---
 

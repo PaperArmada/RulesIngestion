@@ -1,21 +1,5 @@
-# Stage A Contract — Prose Reconstruction (Authorial Surface)
+# Stage A Contract — Deprecated
 
-This contract defines the authoritative outputs and invariants for Stage A.
-
-## Purpose
-Reconstruct authored prose with maximum fidelity. No semantics.
-
-## Artifacts
-- StageARecord (raw model envelope)
-- SurfaceAST (deterministic structural tree)
-
-## Invariants
-- Fidelity: No paraphrasing or inference
-- Ordering: Total, stable order
-- Structure-only: No semantic interpretation
-
-## Gates
-- Coverage
-- Ordering sanity
-- Table parse
-- Stability
+**Deprecated by:** [Docs/v1/stage_a_contract.md](../v1/stage_a_contract.md)  
+**Reason:** Canonical Stage A contract moved to v1.  
+**Archived copy:** [Docs/archive/pre_v1/STAGE_A_CONTRACT.md](../archive/pre_v1/STAGE_A_CONTRACT.md)

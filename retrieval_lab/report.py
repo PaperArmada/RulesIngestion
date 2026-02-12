@@ -260,6 +260,15 @@ def write_report_artifacts(
         json.dumps(results_by_model, indent=2),
         encoding="utf-8",
     )
+    # First-class failure bucket summary (v1: every run produces this).
+    failure_buckets = {
+        model_id: res.get("failure_bucket_counts", {})
+        for model_id, res in results_by_model.items()
+    }
+    (output_dir / "failure_buckets.json").write_text(
+        json.dumps(failure_buckets, indent=2),
+        encoding="utf-8",
+    )
     per_query_path = output_dir / "per_query.json"
     per_query_path.write_text(
         json.dumps(per_query_by_model, indent=2),
@@ -282,6 +291,7 @@ def write_report_artifacts(
     result = {
         "REPORT.md": report_path,
         "metrics.json": metrics_path,
+        "failure_buckets.json": output_dir / "failure_buckets.json",
         "per_query.json": per_query_path,
         "grounding_audit.json": audit_path,
         "experiment.json": exp_path,

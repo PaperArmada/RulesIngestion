@@ -1,5 +1,5 @@
 # A1.2: PHB hybrid with dual-list fusion (Index_U canonical + Index_F sym_w3_m6).
-# Baseline vs dual-list fusion per spec: Docs/Design/decision_lock_in_and_next_spec.md
+# PRODUCTION DEFAULT for PHB. Baseline for comparison: phb_hybrid.yaml.
 retrieval_mode: hybrid
 experiment_name: "phb_hybrid_dual_list_fusion"
 substrate_path: "out/mark3_evaluation/DnD_PHB_5.5"

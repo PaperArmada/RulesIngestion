@@ -42,7 +42,8 @@ def t1_regression_count(baseline_pq: List[Dict], other_pq: List[Dict]) -> int:
     by_id_b = {q["query_id"]: q for q in baseline_pq if q.get("tier") == "T1"}
     by_id_o = {q["query_id"]: q for q in other_pq if q.get("tier") == "T1"}
     regressions = 0
-    for qid, b in by_id_b.items():
+    for qid in sorted(by_id_b.keys()):
+        b = by_id_b[qid]
         o = by_id_o.get(qid)
         if o is None:
             continue
