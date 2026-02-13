@@ -1,7 +1,7 @@
 # B1: PHB hybrid with deterministic cross-reference sidecar expansion.
 retrieval_mode: hybrid
 experiment_name: "phb_hybrid_crossref_sidecar"
-substrate_path: "out/mark3_evaluation/DnD_PHB_5.5"
+substrate_path: "out/DnD_PHB_5.5"
 document_id: "DnD_PHB_5.5"
 substrate_version: "v2"
 query_batches:

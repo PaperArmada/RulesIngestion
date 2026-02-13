@@ -3,7 +3,7 @@
 # Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/hybrid/starfinder_hybrid.yaml --run-id retrieval_lab_StarFinderPlayerCore_v2
 retrieval_mode: hybrid
 experiment_name: "starfinder_hybrid"
-substrate_path: "out/mark3_evaluation/StarFinderPlayerCore"
+substrate_path: "out/StarFinderPlayerCore"
 document_id: "StarFinderPlayerCore"
 substrate_version: "v2"
 query_batches:

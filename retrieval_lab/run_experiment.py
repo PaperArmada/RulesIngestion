@@ -36,15 +36,13 @@ from retrieval_lab.metrics import score_retrieval
 from retrieval_lab.projection import build_clause_family_projection
 from retrieval_lab.report import write_report_artifacts
 from retrieval_lab.crossref_sidecar import (
-    build_crossref_sidecar,
     build_minimal_a_prime_hints,
-    expand_ranked_with_sidecar,
 )
 from retrieval_lab.dual_list_fusion import fuse_dual_list
-from retrieval_lab.pairing_edges import (
-    build_dependency_pairing_edges,
-    expand_ranked_with_pairing_edges,
-)
+from retrieval_lab.orchestration.config_access import read_expansion_config, read_run_flags
+from retrieval_lab.orchestration.expansion_pipeline import apply_post_retrieval_expansion
+from retrieval_lab.orchestration.eval_runner import prepare_expansion_indices
+from retrieval_lab.orchestration.cli import apply_cli_overrides
 from retrieval_lab.store import (
     fetch_cached_embeddings,
     save_cached_embeddings,
@@ -190,25 +188,27 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     eval_only = eval_only_run_id is not None
     config.validate(embed_only=embed_only, eval_only=eval_only)
     retrieval_mode = config.retrieval_mode
+    flags = read_run_flags(config)
+    expansion_cfg = read_expansion_config(config)
 
     # Load substrate (needed for corpus order and grounding)
     logger.info("Loading substrate from %s", config.substrate_path)
     corpus = load_evidence_units(
         config.substrate_path,
         config.document_id,
-        min_chars=getattr(config, "min_chars", None),
+        min_chars=flags.min_chars,
     )
     if not corpus:
         raise ValueError("Corpus is empty; no EvidenceUnits found.")
-    if getattr(config, "merge_chunks", False):
+    if flags.merge_chunks:
         corpus = merge_units_by_heading(
             corpus,
-            max_chars=getattr(config, "merge_max_chars", 2000),
+            max_chars=flags.merge_max_chars,
         )
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
 
     # H7: Minimal deterministic A′ hints generated in-memory when enrichments are absent.
-    if getattr(config, "a_prime_generate_minimal", False):
+    if flags.a_prime_generate_minimal:
         generated_hints = build_minimal_a_prime_hints(corpus)
         for unit in corpus:
             uid = unit.get("id", "")
@@ -223,21 +223,21 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     grounding_units_by_page_map = units_by_page(canonical_corpus)
 
     # A1: Retrieval-only clause-family projection substrate (skip when A1.2 dual-list fusion is used).
-    use_dual_list_fusion = getattr(config, "dual_list_fusion", False)
-    if getattr(config, "clause_family_projection", False) and not use_dual_list_fusion:
+    use_dual_list_fusion = flags.dual_list_fusion
+    if flags.clause_family_projection and not use_dual_list_fusion:
         corpus = build_clause_family_projection(
             canonical_corpus,
-            window=getattr(config, "clause_family_window", 2),
-            max_units=getattr(config, "clause_family_max_units", 6),
-            direction=getattr(config, "clause_family_direction", "symmetric"),
+            window=flags.clause_family_window,
+            max_units=flags.clause_family_max_units,
+            direction=flags.clause_family_direction,
         )
         logger.info(
             "Clause-family projection enabled: %d canonical units -> %d projection units (window=%d max_units=%d direction=%s)",
             len(canonical_corpus),
             len(corpus),
-            getattr(config, "clause_family_window", 2),
-            getattr(config, "clause_family_max_units", 6),
-            getattr(config, "clause_family_direction", "symmetric"),
+            flags.clause_family_window,
+            flags.clause_family_max_units,
+            flags.clause_family_direction,
         )
 
     corpus_ids = [c["id"] for c in corpus]
@@ -261,9 +261,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     if use_dual_list_fusion:
         family_corpus = build_clause_family_projection(
             canonical_corpus,
-            window=getattr(config, "dual_list_family_window", 3),
-            max_units=getattr(config, "dual_list_family_max_units", 6),
-            direction=getattr(config, "dual_list_family_direction", "symmetric"),
+            window=flags.dual_list_family_window,
+            max_units=flags.dual_list_family_max_units,
+            direction=flags.dual_list_family_direction,
         )
         family_corpus_ids = [c["id"] for c in family_corpus]
         for c in family_corpus:
@@ -271,7 +271,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 (c.get("source_unit_ids") or [c["id"]])[0] if c.get("source_unit_ids") else c["id"]
             )
             family_id_to_anchor_unit_id[c["id"]] = anchor
-        run_id_family = run_id + f"_family_w{getattr(config, 'dual_list_family_window', 3)}_m{getattr(config, 'dual_list_family_max_units', 6)}"
+        run_id_family = run_id + f"_family_w{flags.dual_list_family_window}_m{flags.dual_list_family_max_units}"
         logger.info(
             "A1.2 dual-list fusion: %d canonical, %d family; run_id_family=%s",
             len(corpus_ids),
@@ -317,13 +317,15 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     mongo_uri = config.mongo_uri
     id_to_text = {u["id"]: u.get("text", "") for u in corpus}
     id_to_index = {u["id"]: idx for idx, u in enumerate(corpus)}
-    crossref_sidecar: Dict[str, List[str]] = {}
-    if getattr(config, "crossref_sidecar_expand", False):
-        crossref_sidecar = build_crossref_sidecar(corpus)
+    crossref_sidecar, pairing_edges = prepare_expansion_indices(
+        corpus=corpus,
+        canonical_corpus=canonical_corpus,
+        crossref_enabled=expansion_cfg.crossref_sidecar_expand,
+        pairing_enabled=expansion_cfg.dependency_pairing_expand,
+    )
+    if crossref_sidecar:
         logger.info("Crossref sidecar enabled: %d units with deterministic edges", len(crossref_sidecar))
-    pairing_edges: Dict[str, List[tuple]] = {}
-    if getattr(config, "dependency_pairing_expand", False):
-        pairing_edges = build_dependency_pairing_edges(canonical_corpus)
+    if pairing_edges:
         logger.info(
             "B1 dependency pairing enabled: %d units with delta/exception→base edges",
             len(pairing_edges),
@@ -343,58 +345,16 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         if boost > 0:
             _apply_unit_type_boost(ranked_lists, score_lists, corpus, grounded_queries, boost)
 
-        # B1: deterministic crossref sidecar expansion.
-        if getattr(config, "crossref_sidecar_expand", False) and crossref_sidecar:
-            for i in range(len(grounded_queries)):
-                ranked_lists[i], score_lists[i], _ = expand_ranked_with_sidecar(
-                    ranked_ids=ranked_lists[i],
-                    score_list=score_lists[i],
-                    sidecar=crossref_sidecar,
-                    expand_top_k=getattr(config, "crossref_expand_top_k", 10),
-                    expand_per_hit=getattr(config, "crossref_expand_per_hit", 2),
-                    total_cap=getattr(config, "crossref_expand_total_cap", 20),
-                )
-        # B1 replacement: dependency pairing expansion (BM25 path).
-        if getattr(config, "dependency_pairing_expand", False) and pairing_edges:
-            emax = getattr(config, "dependency_pairing_emax", 6)
-            pairing_provenance: List[List[Dict[str, Any]]] = []
-            for i in range(len(grounded_queries)):
-                ranked_lists[i], score_lists[i], prov = expand_ranked_with_pairing_edges(
-                    ranked_ids=ranked_lists[i],
-                    score_list=score_lists[i],
-                    pairing_edges=pairing_edges,
-                    expand_top_k=getattr(config, "crossref_expand_top_k", 10),
-                    Emax=emax,
-                )
-                pairing_provenance.append(prov)
-            # v1 instrumentation: per-query pairing stats (BM25 path).
-            gold_by_idx = [(q.get("gold_unit_ids") or []) for q in grounded_queries]
-            top_k_val = 10
-            per_query_pairing = []
-            for i, (q, prov) in enumerate(zip(grounded_queries, pairing_provenance)):
-                gold_ids = set(gold_by_idx[i])
-                top10 = set(ranked_lists[i][:top_k_val])
-                triggers_fired = len(set(p.get("anchor_id") for p in prov))
-                candidates_added = len(prov)
-                gold_added = sum(1 for p in prov if p.get("chunk_id") in gold_ids)
-                added_entered_top10 = sum(1 for p in prov if p.get("chunk_id") in top10)
-                per_query_pairing.append({
-                    "query_id": q.get("id", ""),
-                    "pairing_triggers_fired": triggers_fired,
-                    "candidates_added_by_pairing": candidates_added,
-                    "gold_added_by_pairing": gold_added,
-                    "added_entered_top10": added_entered_top10,
-                })
-            pairing_instrumentation_by_model["bm25"] = {
-                "per_query": per_query_pairing,
-                "summary": {
-                    "total_queries": len(grounded_queries),
-                    "total_triggers_fired": sum(p["pairing_triggers_fired"] for p in per_query_pairing),
-                    "total_candidates_added": sum(p["candidates_added_by_pairing"] for p in per_query_pairing),
-                    "total_gold_added": sum(p["gold_added_by_pairing"] for p in per_query_pairing),
-                    "total_added_entered_top10": sum(p["added_entered_top10"] for p in per_query_pairing),
-                },
-            }
+        ranked_lists, score_lists, pairing_payload = apply_post_retrieval_expansion(
+            ranked_lists=ranked_lists,
+            score_lists=score_lists,
+            grounded_queries=grounded_queries,
+            crossref_sidecar=crossref_sidecar,
+            pairing_edges=pairing_edges,
+            config=expansion_cfg,
+        )
+        if pairing_payload:
+            pairing_instrumentation_by_model["bm25"] = pairing_payload
 
         ranked_source_id_lists = [
             [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
@@ -412,9 +372,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
 
         query_reviews = []
         pf_policy = ParentFetchConfig(
-            depth=getattr(config, "parent_fetch_depth", 1),
-            char_cap=getattr(config, "parent_fetch_cap", 2000),
-            enabled=getattr(config, "parent_fetch_enabled", False),
+            depth=flags.parent_fetch_depth,
+            char_cap=flags.parent_fetch_cap,
+            enabled=flags.parent_fetch_enabled,
         )
         for i, q in enumerate(grounded_queries):
             pq = metrics.per_query[i]
@@ -614,11 +574,11 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
 
             if use_dual_list_fusion and family_embeddings is not None:
                 # A1.2 dual-list fusion: retrieve from Index_U and Index_F, then fuse.
-                Ku = getattr(config, "dual_list_ku", 12)
-                Kf = getattr(config, "dual_list_kf", 12)
-                Kfinal = getattr(config, "dual_list_kfinal", 10)
-                Qu = getattr(config, "dual_list_qu", 6)
-                family_params_str = f"sym_w{getattr(config, 'dual_list_family_window', 3)}_m{getattr(config, 'dual_list_family_max_units', 6)}"
+                Ku = flags.dual_list_ku
+                Kf = flags.dual_list_kf
+                Kfinal = flags.dual_list_kfinal
+                Qu = flags.dual_list_qu
+                family_params_str = f"sym_w{flags.dual_list_family_window}_m{flags.dual_list_family_max_units}"
                 c_norm_u = corpus_embeddings / (np.linalg.norm(corpus_embeddings, axis=1, keepdims=True) + 1e-9)
                 c_norm_f = family_embeddings / (np.linalg.norm(family_embeddings, axis=1, keepdims=True) + 1e-9)
                 sim_u = np.dot(q_norm, c_norm_u.T)
@@ -653,8 +613,8 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                     score_lists.append([float(row[j]) for j in top_indices])
 
             # Optional: expand top-k with prev/next context, re-embed, re-rank
-            if getattr(config, "expand_context", False):
-                n_ctx = getattr(config, "expand_context_n", 1)
+            if flags.expand_context:
+                n_ctx = flags.expand_context_n
                 logger.info("Expand context (n=%d) and re-rank for %d queries", n_ctx, len(grounded_queries))
                 for i in range(len(grounded_queries)):
                     center_ids = ranked_lists[i][:max_k]
@@ -701,7 +661,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 logger.info("Reranked hybrid top-50 to top-%d with %s", rerank_top_k, reranker_model)
 
             # R6: Co-retrieval hints expansion (opt-in)
-            if getattr(config, "co_retrieval_expand", False):
+            if flags.co_retrieval_expand:
                 topic_to_ids: Dict[str, List[str]] = {}
                 for c in corpus:
                     tags = c.get("topic_tags", [])
@@ -714,7 +674,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 for i in range(len(grounded_queries)):
                     seen = set(ranked_lists[i])
                     added = 0
-                    total_cap = max(0, getattr(config, "crossref_expand_total_cap", 20))
+                    total_cap = max(0, expansion_cfg.crossref_expand_total_cap)
                     for cid in ranked_lists[i][:max_k]:
                         if added >= total_cap:
                             break
@@ -725,7 +685,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                             if added >= total_cap:
                                 break
                             rt = hint.get("related_topic", "")
-                            per_hit = max(0, getattr(config, "crossref_expand_per_hit", 2))
+                            per_hit = max(0, expansion_cfg.crossref_expand_per_hit)
                             for hid in topic_to_ids.get(rt, [])[:5]:
                                 if added >= total_cap or per_hit <= 0:
                                     break
@@ -736,61 +696,19 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                                     added += 1
                                     per_hit -= 1
 
-            # B1: deterministic crossref sidecar expansion.
-            if getattr(config, "crossref_sidecar_expand", False) and crossref_sidecar:
-                for i in range(len(grounded_queries)):
-                    ranked_lists[i], score_lists[i], _ = expand_ranked_with_sidecar(
-                        ranked_ids=ranked_lists[i],
-                        score_list=score_lists[i],
-                        sidecar=crossref_sidecar,
-                        expand_top_k=getattr(config, "crossref_expand_top_k", 10),
-                        expand_per_hit=getattr(config, "crossref_expand_per_hit", 2),
-                        total_cap=getattr(config, "crossref_expand_total_cap", 20),
-                    )
-
-            # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
-            if getattr(config, "dependency_pairing_expand", False) and pairing_edges:
-                emax = getattr(config, "dependency_pairing_emax", 6)
-                pairing_provenance_hybrid: List[List[Dict[str, Any]]] = []
-                for i in range(len(grounded_queries)):
-                    ranked_lists[i], score_lists[i], prov = expand_ranked_with_pairing_edges(
-                        ranked_ids=ranked_lists[i],
-                        score_list=score_lists[i],
-                        pairing_edges=pairing_edges,
-                        expand_top_k=getattr(config, "crossref_expand_top_k", 10),
-                        Emax=emax,
-                    )
-                    pairing_provenance_hybrid.append(prov)
-                # v1 instrumentation: per-query pairing stats (hybrid path).
-                top_k_val = 10
-                per_query_pairing_hybrid = []
-                for i, (q, prov) in enumerate(zip(grounded_queries, pairing_provenance_hybrid)):
-                    gold_ids = set(q.get("gold_unit_ids") or [])
-                    top10 = set(ranked_lists[i][:top_k_val])
-                    triggers_fired = len(set(p.get("anchor_id") for p in prov))
-                    candidates_added = len(prov)
-                    gold_added = sum(1 for p in prov if p.get("chunk_id") in gold_ids)
-                    added_entered_top10 = sum(1 for p in prov if p.get("chunk_id") in top10)
-                    per_query_pairing_hybrid.append({
-                        "query_id": q.get("id", ""),
-                        "pairing_triggers_fired": triggers_fired,
-                        "candidates_added_by_pairing": candidates_added,
-                        "gold_added_by_pairing": gold_added,
-                        "added_entered_top10": added_entered_top10,
-                    })
-                pairing_instrumentation_by_model[model_id] = {
-                    "per_query": per_query_pairing_hybrid,
-                    "summary": {
-                        "total_queries": len(grounded_queries),
-                        "total_triggers_fired": sum(p["pairing_triggers_fired"] for p in per_query_pairing_hybrid),
-                        "total_candidates_added": sum(p["candidates_added_by_pairing"] for p in per_query_pairing_hybrid),
-                        "total_gold_added": sum(p["gold_added_by_pairing"] for p in per_query_pairing_hybrid),
-                        "total_added_entered_top10": sum(p["added_entered_top10"] for p in per_query_pairing_hybrid),
-                    },
-                }
+            ranked_lists, score_lists, pairing_payload = apply_post_retrieval_expansion(
+                ranked_lists=ranked_lists,
+                score_lists=score_lists,
+                grounded_queries=grounded_queries,
+                crossref_sidecar=crossref_sidecar,
+                pairing_edges=pairing_edges,
+                config=expansion_cfg,
+            )
+            if pairing_payload:
+                pairing_instrumentation_by_model[model_id] = pairing_payload
 
             # R9: Unit-type soft boost (opt-in)
-            boost = getattr(config, "unit_type_boost", 0.0)
+            boost = flags.unit_type_boost
             if boost > 0:
                 _apply_unit_type_boost(ranked_lists, score_lists, corpus, grounded_queries, boost)
 
@@ -810,11 +728,11 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 corpus_ids=corpus_ids,
             )
             # Per-query retrieval review: full chunk text for manual inspection
-            use_expanded = getattr(config, "expand_context", False)
+            use_expanded = flags.expand_context
             pf_policy = ParentFetchConfig(
-                depth=getattr(config, "parent_fetch_depth", 1),
-                char_cap=getattr(config, "parent_fetch_cap", 2000),
-                enabled=getattr(config, "parent_fetch_enabled", False),
+                depth=flags.parent_fetch_depth,
+                char_cap=flags.parent_fetch_cap,
+                enabled=flags.parent_fetch_enabled,
             )
             query_reviews = []
             for i, q in enumerate(grounded_queries):
@@ -822,7 +740,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 retrieved = []
                 for r, (cid, sc) in enumerate(zip(ranked_lists[i], score_lists[i]), start=1):
                     text = (
-                        _expanded_text(corpus, id_to_index, cid, getattr(config, "expand_context_n", 1))
+                        _expanded_text(corpus, id_to_index, cid, flags.expand_context_n)
                         if use_expanded
                         else id_to_text.get(cid, "")
                     )
@@ -898,14 +816,14 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "query_batch_paths": config.query_batches,
         "top_k": config.top_k,
         "retrieval_mode": config.retrieval_mode,
-        "expand_context": getattr(config, "expand_context", False),
-        "expand_context_n": getattr(config, "expand_context_n", 1),
-        "clause_family_projection": getattr(config, "clause_family_projection", False),
-        "crossref_sidecar_expand": getattr(config, "crossref_sidecar_expand", False),
-        "co_retrieval_expand": getattr(config, "co_retrieval_expand", False),
-        "a_prime_generate_minimal": getattr(config, "a_prime_generate_minimal", False),
-        "dual_list_fusion": getattr(config, "dual_list_fusion", False),
-        "dependency_pairing_expand": getattr(config, "dependency_pairing_expand", False),
+        "expand_context": flags.expand_context,
+        "expand_context_n": flags.expand_context_n,
+        "clause_family_projection": flags.clause_family_projection,
+        "crossref_sidecar_expand": expansion_cfg.crossref_sidecar_expand,
+        "co_retrieval_expand": flags.co_retrieval_expand,
+        "a_prime_generate_minimal": flags.a_prime_generate_minimal,
+        "dual_list_fusion": flags.dual_list_fusion,
+        "dependency_pairing_expand": expansion_cfg.dependency_pairing_expand,
     }
     experiment_doc = {
         "experiment_id": experiment_id,
@@ -939,7 +857,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     logger.info("Report written to %s", paths.get("REPORT.md"))
     # v1: pairing instrumentation (required; emit even when 0 so dashboard/tests can rely on it).
     pairing_payload: Dict[str, Any] = {
-        "enabled": getattr(config, "dependency_pairing_expand", False),
+        "enabled": expansion_cfg.dependency_pairing_expand,
         "by_model": pairing_instrumentation_by_model,
     }
     (output_dir / "pairing_instrumentation.json").write_text(
@@ -1026,56 +944,7 @@ def main() -> None:
             substrate_version=args.substrate_version,
             trust_remote_code=args.trust_remote_code,
         )
-    if args.substrate:
-        config.substrate_path = args.substrate
-    if args.batches:
-        config.query_batches = args.batches
-    if args.models:
-        config.models = args.models
-    if args.top_k:
-        config.top_k = [int(x) for x in args.top_k.split(",") if x.strip()]
-    if args.output:
-        config.output_dir = args.output
-    if args.mongo_uri is not None:
-        config.mongo_uri = args.mongo_uri
-    if args.substrate_version is not None:
-        config.substrate_version = args.substrate_version
-    if args.trust_remote_code:
-        config.trust_remote_code = True
-    if hasattr(args, "parent_fetch_depth"):
-        config.parent_fetch_depth = args.parent_fetch_depth
-    if hasattr(args, "parent_fetch_cap"):
-        config.parent_fetch_cap = args.parent_fetch_cap
-    if hasattr(args, "parent_fetch_enabled") and args.parent_fetch_enabled:
-        config.parent_fetch_enabled = True
-    if hasattr(args, "reranker") and args.reranker:
-        config.reranker = args.reranker
-    if getattr(args, "clause_family_projection", False):
-        config.clause_family_projection = True
-    if getattr(args, "crossref_sidecar_expand", False):
-        config.crossref_sidecar_expand = True
-    if hasattr(args, "crossref_expand_top_k"):
-        config.crossref_expand_top_k = args.crossref_expand_top_k
-    if hasattr(args, "crossref_expand_per_hit"):
-        config.crossref_expand_per_hit = args.crossref_expand_per_hit
-    if hasattr(args, "crossref_expand_total_cap"):
-        config.crossref_expand_total_cap = args.crossref_expand_total_cap
-    if getattr(args, "a_prime_generate_minimal", False):
-        config.a_prime_generate_minimal = True
-    if getattr(args, "dual_list_fusion", False):
-        config.dual_list_fusion = True
-    if hasattr(args, "dual_list_ku"):
-        config.dual_list_ku = args.dual_list_ku
-    if hasattr(args, "dual_list_kf"):
-        config.dual_list_kf = args.dual_list_kf
-    if hasattr(args, "dual_list_kfinal"):
-        config.dual_list_kfinal = args.dual_list_kfinal
-    if hasattr(args, "dual_list_qu"):
-        config.dual_list_qu = args.dual_list_qu
-    if getattr(args, "dependency_pairing_expand", False):
-        config.dependency_pairing_expand = True
-    if hasattr(args, "dependency_pairing_emax"):
-        config.dependency_pairing_emax = args.dependency_pairing_emax
+    apply_cli_overrides(config, args)
 
     if args.embed_only:
         run_id = _run_embed_only(config)

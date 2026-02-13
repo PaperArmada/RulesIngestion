@@ -16,9 +16,9 @@
 
 | Book / Corpus     | Document ID   | Substrate path (relative to repo root)     | Version | Extraction inputs |
 |------------------|---------------|--------------------------------------------|---------|--------------------|
-| D&D 5e PHB       | DnD_PHB_5.5   | `out/mark3_evaluation/DnD_PHB_5.5`         | v2      | Mark III pipeline: Stage A (extraction + prose reconstruction), Stage B (evidence binding). |
-| Starfinder 2e PC | (see evals)   | (see retrieval_lab experiments)            | —       | Same pipeline where available. |
-| Swords & Wizardry| (see evals)   | (see retrieval_lab experiments)            | —       | Same pipeline where available. |
+| D&D 5e PHB       | DnD_PHB_5.5   | `out/DnD_PHB_5.5`                          | v1/v2   | Stage A (extraction + prose reconstruction), Stage B (evidence binding). |
+| Starfinder 2e PC | StarFinderPlayerCore | `out/StarFinderPlayerCore`     | v1/v2   | Same pipeline. |
+| Swords & Wizardry| Swords&Wizardry | `out/Swords&Wizardry`                    | v1      | Same pipeline. |
 
 For v1 baseline comparison, the canonical corpus used is **DnD_PHB_5.5** (6999 units, 379 pages per baseline run).
 

@@ -3,7 +3,7 @@
 # Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/sparse/swords_wizardry_bm25.yaml
 retrieval_mode: bm25
 experiment_name: "swords_wizardry_bm25_baseline"
-substrate_path: "out/mark3_evaluation/Swords&Wizardry"
+substrate_path: "out/Swords&Wizardry"
 document_id: "Swords&Wizardry"
 substrate_version: "v3_merged2000_min200"
 min_chars: 200

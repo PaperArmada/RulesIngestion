@@ -2,7 +2,7 @@
 # Instrumented; benefit not yet proven. See Docs/Design/v1/adr/ADR-004.md.
 retrieval_mode: hybrid
 experiment_name: "phb_hybrid_dual_list_fusion_plus_pairing"
-substrate_path: "out/mark3_evaluation/DnD_PHB_5.5"
+substrate_path: "out/DnD_PHB_5.5"
 document_id: "DnD_PHB_5.5"
 substrate_version: "v2"
 query_batches:

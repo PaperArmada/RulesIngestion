@@ -3,7 +3,7 @@
 # Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/sparse/starfinder_bm25.yaml
 retrieval_mode: bm25
 experiment_name: "starfinder_bm25_baseline"
-substrate_path: "out/mark3_evaluation/StarFinderPlayerCore"
+substrate_path: "out/StarFinderPlayerCore"
 document_id: "StarFinderPlayerCore"
 substrate_version: "v2"
 query_batches:

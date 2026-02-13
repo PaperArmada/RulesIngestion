@@ -1,0 +1,1068 @@
+{
+  "all-mpnet-base-v2": [
+    {
+      "query_id": "dnd5e_blind_001_01",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.3333333333333333,
+        "5": 0.6666666666666666,
+        "10": 1.0,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5728,
+        "3": 0.5313,
+        "5": 0.5137,
+        "10": 0.4478,
+        "20": 0.3404
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_02",
+      "first_gold_rank": 2,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 5,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.2,
+        "5": 0.2,
+        "10": 0.2,
+        "20": 0.4
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5271,
+        "3": 0.4745,
+        "5": 0.4741,
+        "10": 0.4667,
+        "20": 0.4253
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_03",
+      "first_gold_rank": null,
+      "failure_type": "grounding_failure",
+      "failure_bucket": "no_gold_defined",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 0,
+      "gold_in_candidates": false,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4687,
+        "3": 0.4585,
+        "5": 0.3479,
+        "10": 0.319,
+        "20": 0.2855
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_04",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.3333333333333333,
+        "5": 0.3333333333333333,
+        "10": 0.3333333333333333,
+        "20": 0.3333333333333333
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4494,
+        "3": 0.4317,
+        "5": 0.4009,
+        "10": 0.4041,
+        "20": 0.3491
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_05",
+      "first_gold_rank": null,
+      "failure_type": "retrieval_miss",
+      "failure_bucket": "gold_not_in_candidates",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 2,
+      "gold_in_candidates": false,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.6047,
+        "3": 0.4755,
+        "5": 0.417,
+        "10": 0.3804,
+        "20": 0.3556
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_06",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 4,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.25,
+        "3": 0.25,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4159,
+        "3": 0.2698,
+        "5": 0.2359,
+        "10": 0.2353,
+        "20": 0.1904
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_07",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.3333333333333333,
+        "5": 0.3333333333333333,
+        "10": 0.6666666666666666,
+        "20": 0.6666666666666666
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4543,
+        "3": 0.4029,
+        "5": 0.3312,
+        "10": 0.3263,
+        "20": 0.2358
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_08",
+      "first_gold_rank": 5,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.3333333333333333,
+        "10": 0.3333333333333333,
+        "20": 0.6666666666666666
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5181,
+        "3": 0.4107,
+        "5": 0.3585,
+        "10": 0.2835,
+        "20": 0.2566
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_09",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.3333333333333333,
+        "5": 0.3333333333333333,
+        "10": 0.6666666666666666,
+        "20": 0.6666666666666666
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5139,
+        "3": 0.516,
+        "5": 0.4204,
+        "10": 0.3754,
+        "20": 0.3714
+      }
+    },
+    {
+      "query_id": "dnd5e_blind_001_10",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "blind",
+      "tier": "T1",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.3333333333333333,
+        "5": 0.3333333333333333,
+        "10": 0.6666666666666666,
+        "20": 0.6666666666666666
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4929,
+        "3": 0.4179,
+        "5": 0.34,
+        "10": 0.3128,
+        "20": 0.2772
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_01",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.5,
+        "3": 0.5,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.6083,
+        "3": 0.4319,
+        "5": 0.4932,
+        "10": 0.3981,
+        "20": 0.3602
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_02",
+      "first_gold_rank": 2,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.6666666666666666,
+        "5": 1.0,
+        "10": 1.0,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5192,
+        "3": 0.4588,
+        "5": 0.4633,
+        "10": 0.4002,
+        "20": 0.2876
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_03",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 5,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.2,
+        "3": 0.4,
+        "5": 0.4,
+        "10": 0.6,
+        "20": 0.8
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5636,
+        "3": 0.6035,
+        "5": 0.595,
+        "10": 0.5296,
+        "20": 0.3635
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_04",
+      "first_gold_rank": null,
+      "failure_type": "retrieval_miss",
+      "failure_bucket": "gold_not_in_candidates",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": false,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.6347,
+        "3": 0.5483,
+        "5": 0.497,
+        "10": 0.3848,
+        "20": 0.3422
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_05",
+      "first_gold_rank": 2,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.5,
+        "5": 0.5,
+        "10": 1.0,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4765,
+        "3": 0.5001,
+        "5": 0.4809,
+        "10": 0.4497,
+        "20": 0.3732
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_06",
+      "first_gold_rank": 16,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.6404,
+        "3": 0.6209,
+        "5": 0.5395,
+        "10": 0.4914,
+        "20": 0.4301
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_07",
+      "first_gold_rank": 4,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5424,
+        "3": 0.3864,
+        "5": 0.3695,
+        "10": 0.2952,
+        "20": 0.2382
+      }
+    },
+    {
+      "query_id": "dnd5e_state_002_08",
+      "first_gold_rank": 3,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "state",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.5,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4214,
+        "3": 0.4266,
+        "5": 0.3958,
+        "10": 0.3595,
+        "20": 0.3285
+      }
+    },
+    {
+      "query_id": "dnd5e_grounding_003_01",
+      "first_gold_rank": null,
+      "failure_type": "grounding_failure",
+      "failure_bucket": "no_gold_defined",
+      "suite": "grounding",
+      "tier": "T2",
+      "gold_count": 0,
+      "gold_in_candidates": false,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.3686,
+        "3": 0.3243,
+        "5": 0.32,
+        "10": 0.2797,
+        "20": 0.2668
+      }
+    },
+    {
+      "query_id": "dnd5e_grounding_003_02",
+      "first_gold_rank": 9,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "grounding",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.581,
+        "3": 0.5471,
+        "5": 0.5291,
+        "10": 0.4527,
+        "20": 0.4185
+      }
+    },
+    {
+      "query_id": "dnd5e_grounding_003_03",
+      "first_gold_rank": 4,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "grounding",
+      "tier": "T2",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5886,
+        "3": 0.4217,
+        "5": 0.4069,
+        "10": 0.3696,
+        "20": 0.3218
+      }
+    },
+    {
+      "query_id": "dnd5e_grounding_003_04",
+      "first_gold_rank": 12,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "grounding",
+      "tier": "T2",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.6666666666666666
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5141,
+        "3": 0.4447,
+        "5": 0.3529,
+        "10": 0.315,
+        "20": 0.2556
+      }
+    },
+    {
+      "query_id": "dnd5e_temporal_004_01",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "temporal",
+      "tier": "T3",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.5,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.629,
+        "3": 0.4317,
+        "5": 0.4195,
+        "10": 0.4225,
+        "20": 0.3475
+      }
+    },
+    {
+      "query_id": "dnd5e_temporal_004_02",
+      "first_gold_rank": 3,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "temporal",
+      "tier": "T3",
+      "gold_count": 5,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.2,
+        "5": 0.2,
+        "10": 0.2,
+        "20": 0.2
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.4913,
+        "3": 0.307,
+        "5": 0.2857,
+        "10": 0.3154,
+        "20": 0.3104
+      }
+    },
+    {
+      "query_id": "dnd5e_constraint_005_01",
+      "first_gold_rank": 2,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "constraint",
+      "tier": "T3",
+      "gold_count": 2,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.5,
+        "5": 0.5,
+        "10": 0.5,
+        "20": 0.5
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5393,
+        "3": 0.5277,
+        "5": 0.5202,
+        "10": 0.4515,
+        "20": 0.4295
+      }
+    },
+    {
+      "query_id": "dnd5e_constraint_005_02",
+      "first_gold_rank": 1,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "constraint",
+      "tier": "T3",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": true,
+        "3": true,
+        "5": true,
+        "10": true,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.3333333333333333,
+        "3": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "10": 0.6666666666666666,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.7446,
+        "3": 0.698,
+        "5": 0.6756,
+        "10": 0.5543,
+        "20": 0.4367
+      }
+    },
+    {
+      "query_id": "dnd5e_conceptual_006_01",
+      "first_gold_rank": 15,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "conceptual",
+      "tier": "T3",
+      "gold_count": 1,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 1.0
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "answer_similarity_at_k": {
+        "1": 0.392,
+        "3": 0.3196,
+        "5": 0.2793,
+        "10": 0.2381,
+        "20": 0.2372
+      }
+    },
+    {
+      "query_id": "dnd5e_conceptual_006_02",
+      "first_gold_rank": 16,
+      "failure_type": "hit",
+      "failure_bucket": "success",
+      "suite": "conceptual",
+      "tier": "T3",
+      "gold_count": 3,
+      "gold_in_candidates": true,
+      "in_top_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": true
+      },
+      "recall_at_k": {
+        "1": 0.0,
+        "3": 0.0,
+        "5": 0.0,
+        "10": 0.0,
+        "20": 0.3333333333333333
+      },
+      "full_set_hit_at_k": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false,
+        "20": false
+      },
+      "answer_similarity_at_k": {
+        "1": 0.5968,
+        "3": 0.5057,
+        "5": 0.505,
+        "10": 0.4911,
+        "20": 0.4549
+      }
+    }
+  ]
+}

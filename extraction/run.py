@@ -86,6 +86,27 @@ def _split_structural_blocks(
     return content, structural
 
 
+def _run_profile_blocks(pdf_path: Path, output_dir: Path, profile: str) -> tuple[list[dict], int]:
+    """Run OCR profile and return raw blocks + inferred page count."""
+    if profile == "surya":
+        _log(f"[extraction] Running Surya on {pdf_path.name} ...")
+        blocks, num_pages_surya = run_surya(pdf_path, output_dir)
+        num_pages = _pdf_page_count_from_metadata(pdf_path) or num_pages_surya or _infer_num_pages(blocks)
+        return blocks, num_pages
+    if profile == "deepseek_ocr2":
+        _log(f"[extraction] Running DeepSeek OCR 2 on {pdf_path.name} ...")
+        blocks, num_pages_ds = run_deepseek_ocr2(pdf_path, output_dir)
+        num_pages = _pdf_page_count_from_metadata(pdf_path) or num_pages_ds or _infer_num_pages(blocks)
+        return blocks, num_pages
+
+    _log(f"[extraction] Running Marker on {pdf_path.name} ...")
+    marker_dir = run_marker(pdf_path, output_dir)
+    raw = load_marker_json(marker_dir)
+    blocks = raw_to_blocks(raw)
+    num_pages = _pdf_page_count_from_metadata(pdf_path) or _infer_num_pages(blocks)
+    return blocks, num_pages
+
+
 def _prepend_drop_records(
     result: ExtractionResult,
     extra: list[DropRecord],
@@ -152,20 +173,7 @@ def _run_single(
 ) -> ExtractionResult:
     """Single-PDF path: one LogicalDocument, one DocumentPart."""
     source_pdf_id = Path(pdf_path).stem
-    if profile == "surya":
-        _log(f"[extraction] Running Surya on {pdf_path.name} ...")
-        blocks, num_pages_surya = run_surya(pdf_path, output_dir)
-        num_pages = _pdf_page_count_from_metadata(pdf_path) or num_pages_surya or _infer_num_pages(blocks)
-    elif profile == "deepseek_ocr2":
-        _log(f"[extraction] Running DeepSeek OCR 2 on {pdf_path.name} ...")
-        blocks, num_pages_ds = run_deepseek_ocr2(pdf_path, output_dir)
-        num_pages = _pdf_page_count_from_metadata(pdf_path) or num_pages_ds or _infer_num_pages(blocks)
-    else:
-        _log(f"[extraction] Running Marker on {pdf_path.name} ...")
-        marker_dir = run_marker(pdf_path, output_dir)
-        raw = load_marker_json(marker_dir)
-        blocks = raw_to_blocks(raw)
-        num_pages = _pdf_page_count_from_metadata(pdf_path) or _infer_num_pages(blocks)
+    blocks, num_pages = _run_profile_blocks(pdf_path, output_dir, profile)
     pdf_hash = pdf_content_hash(pdf_path)
     logical_doc, document_part = build_logical_document_single_pdf(
         ruleset_id=ruleset_id,
@@ -218,17 +226,7 @@ def _run_multi(
     for i, p in enumerate(pdf_paths):
         _log(f"[extraction] Processing PDF {i + 1}/{total}: {p.name} ...")
         part_out = output_dir / f"part_{i}_{p.stem}"
-        if profile == "surya":
-            blocks, num_pages_surya = run_surya(p, part_out)
-            num_pages = _pdf_page_count_from_metadata(p) or num_pages_surya or _infer_num_pages(blocks)
-        elif profile == "deepseek_ocr2":
-            blocks, num_pages_ds = run_deepseek_ocr2(p, part_out)
-            num_pages = _pdf_page_count_from_metadata(p) or num_pages_ds or _infer_num_pages(blocks)
-        else:
-            marker_dir = run_marker(p, part_out)
-            raw = load_marker_json(marker_dir)
-            blocks = raw_to_blocks(raw)
-            num_pages = _pdf_page_count_from_metadata(p) or _infer_num_pages(blocks)
+        blocks, num_pages = _run_profile_blocks(p, part_out, profile)
         pdf_hash = pdf_content_hash(p)
         source_pdf_id = p.stem
         parts_spec.append((source_pdf_id, pdf_hash, num_pages))
@@ -247,6 +245,8 @@ def _run_multi(
     for blocks_i, part in zip(all_blocks, document_parts):
         if profile == "surya":
             stream_parts.append(surya_blocks_to_marker_stream(blocks_i, logical_doc.logical_doc_id, part))
+        elif profile == "deepseek_ocr2":
+            stream_parts.append(deepseek_blocks_to_marker_stream(blocks_i, logical_doc.logical_doc_id, part))
         else:
             stream_parts.append(blocks_to_marker_stream(blocks_i, logical_doc.logical_doc_id, part))
 

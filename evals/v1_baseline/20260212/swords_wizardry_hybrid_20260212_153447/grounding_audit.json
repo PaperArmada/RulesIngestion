@@ -1,0 +1,252 @@
+[
+  {
+    "query_id": "sw_q01",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q02",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "53855dbc43b7b246c8b65d020244fede6b83741a2065012389812069cfd26eb8",
+      "14909bb5bba2137fdfe4cb242bdf696474efa8fa8b1b6f5722f477da4ce030fc",
+      "43622ad982f4a62de87ee6e7f8567f2216a46eeddb05efa572c15eab9d07e0be"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q03",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "077628cd712b0eb11aff3fbe1d74774f4f7ee2a2402bab8a7bbc9a942df9202e",
+      "d1512851a1fc4f613daa86515ce133886c6eadfc7d37b512d283add0d9366f7e",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q04",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q05",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "a76ffccffe2043de228154619f617d008896781b8d389ec34590ebb0da4b083e",
+      "871a7deaaced8254560bc4dd87a925c74b96f789c3afd917a17f19b6ba2fbbc8",
+      "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q06",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "6743dcf07ad1f1e13fafb100641284bd861cb5d034e6176ee74e1547e5fb77ca",
+      "9a3aff9d7dac337dbed28e86358ba34f52527c0a2ca216507c294bedd1a89b13"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q07",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "ddab1b1bfb1bbe579de2bda996a5e1505521b084014253ffda9620296bca56ad",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q08",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "bab992a985c36a670942de91044a2a31fd33177fadb292e2dd031cb7de4b6647",
+      "bf402d7c0ad22a5bf5b7e4c151c12ac7b2fa02eabb84b9d74d69671cb5de242a",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q09",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571",
+      "f2f6fb417845a21cbb7aec7ba268ee58a7d140df6b0ff9c7fbb20a176b06f31a",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q10",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "da6e7409fbce08b0b6c91b8f0769c6697f5b107adc4fb47ff439e338bf95352b"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q11",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q12",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "8faf75fb39c23bc4ff781c6aa7ab147cae8a171249526212d867481a77e20fa4",
+      "65c7e822e23cedd2ff1573e206bc620fb59c4c315b628ca629ef6aafea05f919",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q13",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q14",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "aac3607a2a256c3f0c41b7952ac6aaaff0ad7a5386a204dd1f4b808d9e1a8bfd",
+      "b196bd64e57674b88b88a92287e87d35e16e89ef4fc0e20cdb4528cbfd0ff5fc",
+      "2b1af49fe5fb97c8f97f6601b6e6fc99252e4e55dd0e5c0cbc7ea4090f3c4564"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q15",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q16",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "9f2bba6138fc606bd977d932e654c99d75fe2e674b2b5763b0b7a03827f237fe",
+      "00c38e678bf75f0bea756b6b789ff5516eccbce19c77fa1cf78366915d87a6a9",
+      "7db4d4afe306fc33660eae6488aae33cccdd777bea2f35c509cc72e7dfd5b7cd"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q17",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "bbdd05e9f826099bbdc66393c7d18d58d9fe71dc9505227c230c5d8ca4d6dd2e",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "f21857f3a071a722ca1e6023f7d54087bc7fc34999a33252dc3fe06c2ed512bf"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q18",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "3b02e1aa31a77f06e16cfcdbda686d05c5539a8dafdd6743dca1794d7e9d09dd",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q19",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "72c9cb4c3664129f8d55a9f984815348b45236f156378ba890d0cdb8747d547b",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff",
+      "b97acd4300e80a3763215753ef7ff4e9e8857947cae11a15d3402af08396c4a7"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q20",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "505570226a08fa84d5909c600b0d51ab055e68d2667ddef83d4a15b5dc8694ca",
+      "2204546ca0a1b2493fa71aa3469002a220c1a4c416412dc444f35b1a5292f7e4"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q21",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q22",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q23",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q24",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "count": 3
+  },
+  {
+    "query_id": "sw_q25",
+    "method": "prefilled",
+    "gold_unit_ids": [
+      "45867b8a886906180e12ee67f9b0e5048bac6672b43323a0da396ab66613a8b2",
+      "5dbeb0ddcaf04e28e9aaff2ef8cb09bf3c9da4eb8f5d69e19d7aa7a3e086db90",
+      "a852155fe85845eb48075e1d4b254f82137b260eda411339a1b03e755433ab2e"
+    ],
+    "count": 3
+  }
+]

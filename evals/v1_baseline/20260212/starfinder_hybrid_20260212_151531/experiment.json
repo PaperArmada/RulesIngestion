@@ -1,0 +1,227 @@
+{
+  "experiment_id": "starfinder_hybrid_20260212_151531",
+  "experiment_name": "starfinder_hybrid",
+  "created_at": "2026-02-12T15:19:11.945183+00:00",
+  "config": {
+    "substrate_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/out/StarFinderPlayerCore",
+    "document_id": "StarFinderPlayerCore",
+    "substrate_version": "v1",
+    "run_id": "retrieval_lab_StarFinderPlayerCore_v1",
+    "models": [
+      "all-mpnet-base-v2"
+    ],
+    "query_batch_paths": [
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_001.json",
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_002_state.json",
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_003_grounding.json",
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_004_temporal.json",
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_005_constraints.json",
+      "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/StarFinderPlayerCore/batch_006_conceptual.json"
+    ],
+    "top_k": [
+      1,
+      3,
+      5,
+      10,
+      20
+    ],
+    "retrieval_mode": "hybrid",
+    "expand_context": false,
+    "expand_context_n": 1,
+    "clause_family_projection": false,
+    "crossref_sidecar_expand": false,
+    "co_retrieval_expand": false,
+    "a_prime_generate_minimal": false,
+    "dual_list_fusion": false,
+    "dependency_pairing_expand": false
+  },
+  "corpus_stats": {
+    "unit_count": 13162,
+    "page_count": 36
+  },
+  "grounding_summary": {
+    "total_queries": 50,
+    "grounded": 47,
+    "ungrounded": 3,
+    "method": "page_anchored"
+  },
+  "results": {
+    "all-mpnet-base-v2": {
+      "recall_at_k": {
+        "1": 0.19,
+        "3": 0.3383333333333334,
+        "5": 0.4623333333333333,
+        "10": 0.5623333333333334,
+        "20": 0.5973333333333334
+      },
+      "hit_at_k": {
+        "1": 0.32,
+        "3": 0.5,
+        "5": 0.66,
+        "10": 0.72,
+        "20": 0.72
+      },
+      "full_set_hit_at_k": {
+        "1": 0.0851063829787234,
+        "3": 0.23404255319148937,
+        "5": 0.3404255319148936,
+        "10": 0.44680851063829785,
+        "20": 0.5106382978723404
+      },
+      "mrr": 0.44085714285714284,
+      "gold_in_candidates": 0.72,
+      "gold_in_candidates_true_ceiling": 0.7659574468085106,
+      "grounding_coverage": 0.94,
+      "answer_similarity_at_k": {
+        "1": 0.5953,
+        "3": 0.5427,
+        "5": 0.5072,
+        "10": 0.4568,
+        "20": 0.405
+      },
+      "failure_counts": {
+        "hit": 36,
+        "retrieval_miss": 11,
+        "grounding_failure": 3
+      },
+      "failure_bucket_counts": {
+        "success": 36,
+        "gold_not_in_candidates": 11,
+        "no_gold_defined": 3
+      },
+      "per_suite": {
+        "default": {
+          "recall_at_k": {
+            "1": 0.19,
+            "3": 0.33833333333333326,
+            "5": 0.4623333333333333,
+            "10": 0.5623333333333332,
+            "20": 0.5973333333333334
+          },
+          "hit_at_k": {
+            "1": 0.32,
+            "3": 0.5,
+            "5": 0.66,
+            "10": 0.72,
+            "20": 0.72
+          },
+          "full_set_hit_at_k": {
+            "10": 0.44680851063829785,
+            "20": 0.5106382978723404,
+            "3": 0.23404255319148937,
+            "5": 0.3404255319148936,
+            "1": 0.0851063829787234
+          },
+          "mrr": 0.44085714285714284,
+          "n": 50,
+          "n_grounded": 47
+        }
+      },
+      "per_tier": {
+        "T1": {
+          "recall_at_k": {
+            "1": 0.1,
+            "3": 0.13333333333333333,
+            "5": 0.21999999999999997,
+            "10": 0.2533333333333333,
+            "20": 0.2866666666666667
+          },
+          "hit_at_k": {
+            "1": 0.3,
+            "3": 0.4,
+            "5": 0.6,
+            "10": 0.6,
+            "20": 0.6
+          },
+          "full_set_hit_at_k": {},
+          "mrr": 0.37833333333333335,
+          "n": 10,
+          "n_grounded": 10
+        },
+        "T2": {
+          "recall_at_k": {
+            "1": 0.20454545454545456,
+            "3": 0.29924242424242425,
+            "5": 0.47348484848484856,
+            "10": 0.625,
+            "20": 0.6742424242424242
+          },
+          "hit_at_k": {
+            "1": 0.36363636363636365,
+            "3": 0.5,
+            "5": 0.6818181818181818,
+            "10": 0.7272727272727273,
+            "20": 0.7272727272727273
+          },
+          "full_set_hit_at_k": {
+            "10": 0.5,
+            "20": 0.6363636363636364,
+            "3": 0.13636363636363635,
+            "5": 0.3181818181818182,
+            "1": 0.045454545454545456
+          },
+          "mrr": 0.4674242424242424,
+          "n": 22,
+          "n_grounded": 22
+        },
+        "T3": {
+          "recall_at_k": {
+            "1": 0.2222222222222222,
+            "3": 0.5,
+            "5": 0.5833333333333334,
+            "10": 0.6574074074074074,
+            "20": 0.675925925925926
+          },
+          "hit_at_k": {
+            "1": 0.2777777777777778,
+            "3": 0.5555555555555556,
+            "5": 0.6666666666666666,
+            "10": 0.7777777777777778,
+            "20": 0.7777777777777778
+          },
+          "full_set_hit_at_k": {
+            "3": 0.5333333333333333,
+            "5": 0.6,
+            "10": 0.6666666666666666,
+            "20": 0.6666666666666666,
+            "1": 0.2
+          },
+          "mrr": 0.44312169312169314,
+          "n": 18,
+          "n_grounded": 15
+        }
+      },
+      "embedding_time_sec": 215.91111511200143,
+      "scoring_time_sec": 0.02634240299812518
+    }
+  },
+  "per_suite_results": {
+    "default": {
+      "recall_at_k": {
+        "1": 0.19,
+        "3": 0.33833333333333326,
+        "5": 0.4623333333333333,
+        "10": 0.5623333333333332,
+        "20": 0.5973333333333334
+      },
+      "hit_at_k": {
+        "1": 0.32,
+        "3": 0.5,
+        "5": 0.66,
+        "10": 0.72,
+        "20": 0.72
+      },
+      "full_set_hit_at_k": {
+        "10": 0.44680851063829785,
+        "20": 0.5106382978723404,
+        "3": 0.23404255319148937,
+        "5": 0.3404255319148936,
+        "1": 0.0851063829787234
+      },
+      "mrr": 0.44085714285714284,
+      "n": 50,
+      "n_grounded": 47
+    }
+  },
+  "frozen": false
+}

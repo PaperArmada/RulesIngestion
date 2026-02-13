@@ -1,0 +1,7 @@
+{
+  "all-mpnet-base-v2": {
+    "success": 36,
+    "gold_not_in_candidates": 11,
+    "no_gold_defined": 3
+  }
+}

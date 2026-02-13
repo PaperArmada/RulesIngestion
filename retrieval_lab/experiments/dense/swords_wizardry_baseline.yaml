@@ -4,7 +4,7 @@
 # 3) Nominated gold workflow: see evals/retrieval/SwordsandWizardy/MANUAL_REVIEW.md
 retrieval_mode: dense
 experiment_name: "swords_wizardry_dense_baseline"
-substrate_path: "out/mark3_evaluation/Swords&Wizardry"
+substrate_path: "out/Swords&Wizardry"
 document_id: "Swords&Wizardry"
 substrate_version: "v3_merged2000_min200"
 min_chars: 200

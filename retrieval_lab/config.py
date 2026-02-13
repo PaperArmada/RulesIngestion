@@ -35,6 +35,32 @@ class RetrievalPolicy:
 
 
 @dataclass
+class CrossrefConfig:
+    enabled: bool = False
+    expand_top_k: int = 10
+    expand_per_hit: int = 2
+    expand_total_cap: int = 20
+
+
+@dataclass
+class DualListConfig:
+    enabled: bool = False
+    ku: int = 12
+    kf: int = 12
+    kfinal: int = 10
+    qu: int = 6
+    family_window: int = 3
+    family_max_units: int = 6
+    family_direction: str = "symmetric"
+
+
+@dataclass
+class PairingConfig:
+    enabled: bool = False
+    emax: int = 6
+
+
+@dataclass
 class ExperimentConfig:
     """Configuration for a single retrieval lab experiment."""
 
@@ -108,6 +134,10 @@ class ExperimentConfig:
     # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
     dependency_pairing_expand: bool = False
     dependency_pairing_emax: int = 6
+    # Grouped options (wave-2 structure). Flat keys remain authoritative for backward compatibility.
+    crossref: CrossrefConfig = field(default_factory=CrossrefConfig)
+    dual_list: DualListConfig = field(default_factory=DualListConfig)
+    pairing: PairingConfig = field(default_factory=PairingConfig)
 
     def get_policy(self, corpus_id: str) -> RetrievalPolicy:
         """Get retrieval policy for corpus. Falls back to default policy from config."""
@@ -128,6 +158,10 @@ class ExperimentConfig:
             raise ValueError("substrate_path is required")
         if not Path(self.substrate_path).exists():
             raise ValueError(f"substrate_path does not exist: {self.substrate_path}")
+        if self.retrieval_mode not in ("dense", "hybrid", "hybrid+rerank", "bm25"):
+            raise ValueError("retrieval_mode must be 'dense', 'hybrid', 'hybrid+rerank', or 'bm25'")
+        if self.retrieval_mode == "bm25" and self.dual_list_fusion:
+            raise ValueError("dual_list_fusion is not supported in bm25 mode")
         if not self.models and self.retrieval_mode != "bm25":
             raise ValueError("models must be non-empty")
         if embed_only:
@@ -148,8 +182,8 @@ class ExperimentConfig:
                 raise ValueError(f"query batch file not found: {p}")
         if not self.top_k:
             raise ValueError("top_k must be non-empty")
-        if self.retrieval_mode not in ("dense", "hybrid", "hybrid+rerank", "bm25"):
-            raise ValueError("retrieval_mode must be 'dense', 'hybrid', 'hybrid+rerank', or 'bm25'")
+        if self.dual_list_fusion and self.dual_list_kfinal < max(self.top_k):
+            raise ValueError("dual_list_kfinal must be >= max(top_k) when dual_list_fusion is enabled")
 
     @classmethod
     def from_yaml(cls, path: Path, base_dir: Optional[Path] = None) -> "ExperimentConfig":
@@ -170,7 +204,10 @@ class ExperimentConfig:
             top_k = [int(x) for x in top_k_raw]
         else:
             top_k = [int(x) for x in str(top_k_raw).split(",") if x.strip()]
-        return cls(
+        crossref = _parse_crossref(data)
+        dual_list = _parse_dual_list(data)
+        pairing = _parse_pairing(data)
+        cfg = cls(
             experiment_name=str(data.get("experiment_name", "unnamed_experiment")),
             substrate_path=str(data.get("substrate_path", "")),
             document_id=str(data.get("document_id", "")),
@@ -204,22 +241,26 @@ class ExperimentConfig:
             clause_family_window=int(data.get("clause_family_window", 2)),
             clause_family_max_units=int(data.get("clause_family_max_units", 6)),
             clause_family_direction=str(data.get("clause_family_direction", "symmetric")),
-            crossref_sidecar_expand=bool(data.get("crossref_sidecar_expand", False)),
-            crossref_expand_top_k=int(data.get("crossref_expand_top_k", 10)),
-            crossref_expand_per_hit=int(data.get("crossref_expand_per_hit", 2)),
-            crossref_expand_total_cap=int(data.get("crossref_expand_total_cap", 20)),
+            crossref_sidecar_expand=crossref.enabled,
+            crossref_expand_top_k=crossref.expand_top_k,
+            crossref_expand_per_hit=crossref.expand_per_hit,
+            crossref_expand_total_cap=crossref.expand_total_cap,
             a_prime_generate_minimal=bool(data.get("a_prime_generate_minimal", False)),
-            dual_list_fusion=bool(data.get("dual_list_fusion", False)),
-            dual_list_ku=int(data.get("dual_list_ku", 12)),
-            dual_list_kf=int(data.get("dual_list_kf", 12)),
-            dual_list_kfinal=int(data.get("dual_list_kfinal", 10)),
-            dual_list_qu=int(data.get("dual_list_qu", 6)),
-            dual_list_family_window=int(data.get("dual_list_family_window", 3)),
-            dual_list_family_max_units=int(data.get("dual_list_family_max_units", 6)),
-            dual_list_family_direction=str(data.get("dual_list_family_direction", "symmetric")),
-            dependency_pairing_expand=bool(data.get("dependency_pairing_expand", False)),
-            dependency_pairing_emax=int(data.get("dependency_pairing_emax", 6)),
+            dual_list_fusion=dual_list.enabled,
+            dual_list_ku=dual_list.ku,
+            dual_list_kf=dual_list.kf,
+            dual_list_kfinal=dual_list.kfinal,
+            dual_list_qu=dual_list.qu,
+            dual_list_family_window=dual_list.family_window,
+            dual_list_family_max_units=dual_list.family_max_units,
+            dual_list_family_direction=dual_list.family_direction,
+            dependency_pairing_expand=pairing.enabled,
+            dependency_pairing_emax=pairing.emax,
+            crossref=crossref,
+            dual_list=dual_list,
+            pairing=pairing,
         )
+        return cfg
 
 
 def _parse_retrieval_policies(data: Any) -> Optional[Dict[str, RetrievalPolicy]]:
@@ -246,6 +287,61 @@ def _parse_retrieval_policies(data: Any) -> Optional[Dict[str, RetrievalPolicy]]
             reranker=str(raw["reranker"]) if raw.get("reranker") else None,
         )
     return out if out else None
+
+
+def _parse_crossref(data: Dict[str, Any]) -> CrossrefConfig:
+    raw = data.get("crossref")
+    if isinstance(raw, dict):
+        return CrossrefConfig(
+            enabled=bool(raw.get("enabled", data.get("crossref_sidecar_expand", False))),
+            expand_top_k=int(raw.get("expand_top_k", data.get("crossref_expand_top_k", 10))),
+            expand_per_hit=int(raw.get("expand_per_hit", data.get("crossref_expand_per_hit", 2))),
+            expand_total_cap=int(raw.get("expand_total_cap", data.get("crossref_expand_total_cap", 20))),
+        )
+    return CrossrefConfig(
+        enabled=bool(data.get("crossref_sidecar_expand", False)),
+        expand_top_k=int(data.get("crossref_expand_top_k", 10)),
+        expand_per_hit=int(data.get("crossref_expand_per_hit", 2)),
+        expand_total_cap=int(data.get("crossref_expand_total_cap", 20)),
+    )
+
+
+def _parse_dual_list(data: Dict[str, Any]) -> DualListConfig:
+    raw = data.get("dual_list")
+    if isinstance(raw, dict):
+        return DualListConfig(
+            enabled=bool(raw.get("enabled", data.get("dual_list_fusion", False))),
+            ku=int(raw.get("ku", data.get("dual_list_ku", 12))),
+            kf=int(raw.get("kf", data.get("dual_list_kf", 12))),
+            kfinal=int(raw.get("kfinal", data.get("dual_list_kfinal", 10))),
+            qu=int(raw.get("qu", data.get("dual_list_qu", 6))),
+            family_window=int(raw.get("family_window", data.get("dual_list_family_window", 3))),
+            family_max_units=int(raw.get("family_max_units", data.get("dual_list_family_max_units", 6))),
+            family_direction=str(raw.get("family_direction", data.get("dual_list_family_direction", "symmetric"))),
+        )
+    return DualListConfig(
+        enabled=bool(data.get("dual_list_fusion", False)),
+        ku=int(data.get("dual_list_ku", 12)),
+        kf=int(data.get("dual_list_kf", 12)),
+        kfinal=int(data.get("dual_list_kfinal", 10)),
+        qu=int(data.get("dual_list_qu", 6)),
+        family_window=int(data.get("dual_list_family_window", 3)),
+        family_max_units=int(data.get("dual_list_family_max_units", 6)),
+        family_direction=str(data.get("dual_list_family_direction", "symmetric")),
+    )
+
+
+def _parse_pairing(data: Dict[str, Any]) -> PairingConfig:
+    raw = data.get("pairing")
+    if isinstance(raw, dict):
+        return PairingConfig(
+            enabled=bool(raw.get("enabled", data.get("dependency_pairing_expand", False))),
+            emax=int(raw.get("emax", data.get("dependency_pairing_emax", 6))),
+        )
+    return PairingConfig(
+        enabled=bool(data.get("dependency_pairing_expand", False)),
+        emax=int(data.get("dependency_pairing_emax", 6)),
+    )
 
 
 def resolve_model_id(model_id: str, registry: Optional[Dict[str, Any]] = None) -> str:

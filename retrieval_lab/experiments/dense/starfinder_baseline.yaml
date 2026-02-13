@@ -3,7 +3,7 @@
 # Run: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/dense/starfinder_baseline.yaml --run-id retrieval_lab_StarFinderPlayerCore_v2
 retrieval_mode: dense
 experiment_name: "starfinder_dense_baseline"
-substrate_path: "out/mark3_evaluation/StarFinderPlayerCore"
+substrate_path: "out/StarFinderPlayerCore"
 document_id: "StarFinderPlayerCore"
 substrate_version: "v2"
 query_batches:

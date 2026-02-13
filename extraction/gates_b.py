@@ -29,6 +29,22 @@ MIN_UNIT_CHARS = 20
 MAX_UNIT_CHARS = 5000
 
 
+def _run_core_gates(
+    units: list[EvidenceUnit],
+    *,
+    ast_dict: dict[str, Any] | None,
+    is_standalone: bool,
+    undersized_fail_ratio: float,
+) -> list[GateDiagnostic]:
+    """Run the contract-mandated Stage B gates in a stable order."""
+    return [
+        gate_orphan(units, ast_dict=ast_dict, is_standalone=is_standalone),
+        gate_bleed(units),
+        gate_table_integrity(units),
+        gate_unit_size(units, undersized_fail_ratio=undersized_fail_ratio),
+    ]
+
+
 def gate_orphan(
     units: list[EvidenceUnit],
     *,
@@ -325,12 +341,12 @@ def run_stage_b_gates(
     undersized units on the page exceeds this ratio (default 1.0 = warning only).
     include_cross_page_join_gate: when True, add R3 cross_page_join_rate gate (for joined corpus).
     """
-    diag = [
-        gate_orphan(units, ast_dict=ast_dict, is_standalone=is_standalone),
-        gate_bleed(units),
-        gate_table_integrity(units),
-        gate_unit_size(units, undersized_fail_ratio=undersized_fail_ratio),
-    ]
+    diag = _run_core_gates(
+        units,
+        ast_dict=ast_dict,
+        is_standalone=is_standalone,
+        undersized_fail_ratio=undersized_fail_ratio,
+    )
     if include_cross_page_join_gate:
         diag.append(gate_cross_page_join_rate(units))
     return diag
