@@ -244,3 +244,175 @@ class EvidenceUnit:
             table_group_id=d.get("table_group_id"),
             join_metadata=d.get("join_metadata"),
         )
+
+
+# ---------------------------------------------------------------------------
+# Legacy Stage A compatibility schemas (Chunker/MarkerStream path)
+# ---------------------------------------------------------------------------
+
+SpanLocality = Literal["page", "block"]
+
+
+@dataclass
+class DocumentPart:
+    """Physical PDF contribution for multi-part logical documents."""
+
+    document_part_id: str
+    logical_doc_id: str
+    source_pdf_id: str
+    part_index: int
+    page_offset: int
+    num_pages: int = 0
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "document_part_id": self.document_part_id,
+            "logical_doc_id": self.logical_doc_id,
+            "source_pdf_id": self.source_pdf_id,
+            "part_index": self.part_index,
+            "page_offset": self.page_offset,
+            "num_pages": self.num_pages,
+        }
+
+
+@dataclass
+class LogicalDocument:
+    """Authoritative ingestion unit for Stage A extraction pipelines."""
+
+    logical_doc_id: str
+    ruleset_id: str
+    book_id: str
+    document_parts: list[DocumentPart] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "logical_doc_id": self.logical_doc_id,
+            "ruleset_id": self.ruleset_id,
+            "book_id": self.book_id,
+            "document_parts": [p.to_dict() for p in self.document_parts],
+        }
+
+
+@dataclass(frozen=True)
+class MarkerBlock:
+    """Raw extraction block emitted by OCR/marker runners."""
+
+    doc_id: str
+    page_index: int
+    text: str
+    bbox: tuple[float, float, float, float]
+    raw_block_type: str
+    block_ordinal: int
+    section_hierarchy: dict[str, Any] = field(default_factory=dict)
+    logical_doc_id: str = ""
+    document_part_id: str = ""
+    source_pdf_id: str = ""
+    source_pdf_page_index: int = -1
+    logical_page_index: int = -1
+
+    def to_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {
+            "doc_id": self.doc_id,
+            "page_index": self.page_index,
+            "text": self.text,
+            "bbox": list(self.bbox) if self.bbox else [],
+            "raw_block_type": self.raw_block_type,
+            "block_ordinal": self.block_ordinal,
+            "section_hierarchy": self.section_hierarchy,
+            "logical_doc_id": self.logical_doc_id or self.doc_id,
+            "document_part_id": self.document_part_id or self.doc_id,
+            "source_pdf_id": self.source_pdf_id or self.doc_id,
+            "source_pdf_page_index": self.source_pdf_page_index if self.source_pdf_page_index >= 0 else self.page_index,
+            "logical_page_index": self.logical_page_index if self.logical_page_index >= 0 else self.page_index,
+        }
+        return out
+
+    @property
+    def effective_logical_doc_id(self) -> str:
+        return self.logical_doc_id or self.doc_id
+
+    @property
+    def effective_logical_page_index(self) -> int:
+        return self.logical_page_index if self.logical_page_index >= 0 else self.page_index
+
+
+@dataclass
+class ProvenanceSpan:
+    """Source span with explicit locality."""
+
+    start: int
+    end: int
+    locality: SpanLocality
+
+    def __post_init__(self) -> None:
+        if self.start < 0 or self.end <= self.start:
+            raise ValueError(f"Invalid span: start={self.start}, end={self.end}")
+
+
+@dataclass
+class Chunk:
+    """Intentional extraction chunk used by retrieval broadening paths."""
+
+    chunk_id: str
+    doc_id: str
+    page_index: int
+    section_path: list[str]
+    block_type: str
+    text: str
+    span_start: int
+    span_end: int
+    span_locality: SpanLocality
+    bbox: tuple[float, float, float, float]
+    block_ordinals: list[int]
+    structural_metadata: dict[str, Any] = field(default_factory=dict)
+    logical_doc_id: str = ""
+    document_part_id: str = ""
+    source_pdf_id: str = ""
+    source_pdf_page_index: int = -1
+    logical_page_index: int = -1
+
+    def __post_init__(self) -> None:
+        if self.span_start < 0 or self.span_end <= self.span_start:
+            raise ValueError(f"Invalid span: span_start={self.span_start}, span_end={self.span_end}")
+        if not self.text.strip():
+            raise ValueError("Chunk text must be non-empty after normalization")
+
+    def to_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {
+            "chunk_id": self.chunk_id,
+            "doc_id": self.doc_id,
+            "page_index": self.page_index,
+            "section_path": self.section_path,
+            "block_type": self.block_type,
+            "text": self.text,
+            "span_start": self.span_start,
+            "span_end": self.span_end,
+            "span_locality": self.span_locality,
+            "bbox": list(self.bbox) if self.bbox else [],
+            "block_ordinals": self.block_ordinals,
+            "structural_metadata": self.structural_metadata,
+            "logical_doc_id": self.logical_doc_id or self.doc_id,
+            "document_part_id": self.document_part_id or self.doc_id,
+            "source_pdf_id": self.source_pdf_id or self.doc_id,
+            "source_pdf_page_index": self.source_pdf_page_index if self.source_pdf_page_index >= 0 else self.page_index,
+            "logical_page_index": self.logical_page_index if self.logical_page_index >= 0 else self.page_index,
+        }
+        return out
+
+
+@dataclass
+class DropRecord:
+    """Explicit record for dropped blocks in extraction/chunker pipelines."""
+
+    reason_code: str
+    page_index: int
+    block_reference: str
+    source_pdf_id: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "reason_code": self.reason_code,
+            "page_index": self.page_index,
+            "block_reference": self.block_reference,
+            "source_pdf_id": self.source_pdf_id,
+        }
