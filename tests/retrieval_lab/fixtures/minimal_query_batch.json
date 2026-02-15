@@ -1,0 +1,20 @@
+{
+  "batches": [
+    {
+      "batch_id": "minimal-batch",
+      "suite": "default",
+      "queries": [
+        {
+          "id": "q1",
+          "question": "What is initiative?",
+          "expected_answer_summary": "Initiative determines turn order.",
+          "source_page": 1,
+          "gold_unit_ids": [
+            "u1"
+          ],
+          "tier": "T1"
+        }
+      ]
+    }
+  ]
+}

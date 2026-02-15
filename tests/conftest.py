@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import blake3
 import pytest
+from pathlib import Path
 
 from extraction.schemas import EvidenceUnit, SurfaceAST, SurfaceASTNode
 
@@ -62,4 +63,24 @@ def simple_surface_ast() -> SurfaceAST:
         root=root,
         node_count=4,
         table_count=0,
+    )
+
+
+@pytest.fixture
+def query_batch_minimal_path() -> Path:
+    return (
+        Path(__file__).resolve().parent
+        / "retrieval_lab"
+        / "fixtures"
+        / "minimal_query_batch.json"
+    )
+
+
+@pytest.fixture
+def substrate_minimal_path() -> Path:
+    return (
+        Path(__file__).resolve().parent
+        / "retrieval_lab"
+        / "fixtures"
+        / "minimal_substrate"
     )

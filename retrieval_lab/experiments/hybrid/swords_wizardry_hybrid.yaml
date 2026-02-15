@@ -5,8 +5,8 @@ retrieval_mode: hybrid
 experiment_name: "swords_wizardry_hybrid"
 substrate_path: "out/Swords&Wizardry"
 document_id: "Swords&Wizardry"
-substrate_version: "v3_merged2000_min200"
-min_chars: 200
+substrate_version: "v3_merged2000_min100"
+min_chars: 100  # retain meaningful short chunks (e.g. p37 "D"=destroyed, Turn Undead Variant; p14/p37 cleric caveats); for p37 full grouping use min_chars=20 (see page_37_turn_undead_chunks.md)
 merge_chunks: true
 merge_max_chars: 2000
 query_batches:

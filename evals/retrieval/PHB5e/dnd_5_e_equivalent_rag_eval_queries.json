@@ -108,7 +108,8 @@
           "question": "If I have a feat that grants a reaction when a creature leaves my reach, can I use it without any other prerequisites?",
           "gold_unit_ids": [
             "a605d1ff7524201f3435fe6a3d24c1dfd0329a4e34e13ab882b4e29f8b144984",
-            "c98669ca1dabc3d8d30197d2153e44ad8bb1682f3e858830ceafa9078e8b9f24",
+            "f19eebb29581bd923698f0898c059f9150993cf26d8f4c3a80840a2862231509",
+            "ecf9651d7250a40a0317be3ee6dc167879768e16cfdfa4e3c4d34a39ee8e0e64",
             "1ba9ffacfcf657b5f063b8e060557bf6a2acf814fc303550920987708877e716"
           ],
           "expected_answer_summary": "Yes, if the feat grants the reaction directly and its trigger conditions are met."

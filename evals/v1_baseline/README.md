@@ -1,6 +1,6 @@
 # v1 Baseline Suite
 
-**Purpose:** Reproducible baseline runs across all books for Stage A/B v1. Substrate is Stage A + B output only. "Baseline" refers to the outputs under this directory (or a dated subdirectory), not ad-hoc older runs.
+**Purpose:** Reproducible C-first baseline runs across all books for Stage A/B v1. Substrate is Stage A + B output only. "Baseline" refers to the outputs under this directory (or a dated subdirectory), not ad-hoc older runs.
 
 ## Substrate (Stage A + B output)
 
@@ -16,11 +16,11 @@ Ensure these directories exist and contain Stage A + B output (e.g. per-page `st
 
 ## Suite definition
 
-- **PHB:** `phb_hybrid.yaml` (baseline) and `phb_hybrid_dual_list_fusion.yaml` (production). Optional: `phb_hybrid_dual_list_fusion_plus_pairing.yaml` for comparison.
-- **Starfinder:** `starfinder_hybrid.yaml` (baseline) and `starfinder_hybrid_dual_list_fusion.yaml` (production).
-- **S&W:** `swords_wizardry_hybrid.yaml` (baseline) and `swords_wizardry_hybrid_dual_list_fusion.yaml` (production).
+Baseline process defaults to **C** (raw-first merge-rerank), with optional A/B comparators:
 
-Dual-list fusion uses **Index_U** (unit embeddings) and **Index_F** (clause-family windowed text). Unit embeddings are produced by the baseline hybrid run; family embeddings are computed and cached (MongoDB or run output) the first time you run the dual-list config for that corpus.
+- **A:** raw-only (`merge_chunks=false`)
+- **B:** merged-only (`merge_chunks=true`)
+- **C (default):** raw-first merge-rerank + monotonic safeguards
 
 ## Fresh baselines (all books, end-to-end)
 
@@ -32,75 +32,61 @@ From **RulesIngestion** repo root, with `uv` and dependencies installed (`uv syn
 ./evals/v1_baseline/run_baseline_suite.sh
 ```
 
-This runs hybrid retrieval (embed + eval) for all three books into `evals/v1_baseline/<YYYYMMDD>/`, using `--substrate-version v1` so run IDs are stable. For each book it runs baseline hybrid then dual-list fusion; the first dual-list run for a book generates and caches family (Index_F) embeddings.
+This runs hybrid retrieval (embed + eval) for all three books into `evals/v1_baseline/<YYYYMMDD>/`, using `--substrate-version v1` so run IDs are stable. By default it runs **A/B/C** per corpus with **C as the canonical baseline mode**.
 
-### Manual: step by step
+To run only C:
 
-1. **Output directory** (optional; configs default to `out/retrieval_lab/stage_a_and_b` or `experiments`). For a dated baseline:
-   ```bash
-   export BASELINE_DATE=$(date +%Y%m%d)
-   mkdir -p evals/v1_baseline/$BASELINE_DATE
-   ```
+```bash
+uv run python -m evals.v1_baseline.run_baseline_suite \
+  --out-dir evals/v1_baseline/$(date +%Y%m%d) \
+  --version v1 \
+  --c-only
+```
 
-2. **PHB — baseline (hybrid, no dual-list)**
-   ```bash
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/phb_hybrid.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   ```
+### Manual: direct suite invocation
 
-3. **PHB — dual-list fusion (production default)**
-   ```bash
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/phb_hybrid_dual_list_fusion.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   ```
-   Embeddings are reused from step 2 (same substrate + version).
+```bash
+export BASELINE_DATE=$(date +%Y%m%d)
+uv run python -m evals.v1_baseline.run_baseline_suite \
+  --out-dir evals/v1_baseline/$BASELINE_DATE \
+  --version v1
+```
 
-4. **Starfinder — baseline then dual-list**
-   ```bash
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/starfinder_hybrid.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/starfinder_hybrid_dual_list_fusion.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   ```
-   Dual-list run reuses unit embeddings and computes/caches family embeddings on first run.
+## Baseline defaults
 
-5. **Swords & Wizardry — baseline then dual-list**
-   ```bash
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/swords_wizardry_hybrid.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   uv run python -m retrieval_lab.run_experiment \
-     --config retrieval_lab/experiments/hybrid/swords_wizardry_hybrid_dual_list_fusion.yaml \
-     --output evals/v1_baseline/$BASELINE_DATE \
-     --substrate-version v1
-   ```
-   Same as Starfinder: dual-list computes family embeddings on first run.
-
-6. **Comparison report (PHB baseline vs dual-list vs pairing)**  
-   After runs, if you have baseline, dual-list, and pairing experiment dirs:
-   ```bash
-   uv run python -m retrieval_lab.compare_baseline_dual_list_pairing \
-     --baseline evals/v1_baseline/$BASELINE_DATE/phb_hybrid_<timestamp> \
-     --dual-list evals/v1_baseline/$BASELINE_DATE/phb_hybrid_dual_list_fusion_<timestamp> \
-     --pairing evals/v1_baseline/$BASELINE_DATE/phb_hybrid_dual_list_fusion_plus_pairing_<timestamp> \
-     --output evals/v1_baseline/$BASELINE_DATE/COMPARISON_BASELINE_DUAL_LIST_PAIRING.md
-   ```
-
-## Default config per corpus
-
-| Corpus | Default config (production) | Baseline for comparison |
-|--------|-----------------------------|--------------------------|
-| PHB | phb_hybrid_dual_list_fusion.yaml | phb_hybrid.yaml |
-| Starfinder | starfinder_hybrid_dual_list_fusion.yaml | starfinder_hybrid.yaml |
-| S&W | swords_wizardry_hybrid_dual_list_fusion.yaml | swords_wizardry_hybrid.yaml |
+| Corpus | Base config | Baseline mode |
+|--------|-------------|---------------|
+| PHB | `phb_hybrid.yaml` | **C** (`phb_hybrid_c_raw_first_merge_rerank_*`) |
+| Starfinder | `starfinder_hybrid.yaml` | **C** (`starfinder_hybrid_c_raw_first_merge_rerank_*`) |
+| S&W | `swords_wizardry_hybrid.yaml` | **C** (`swords_wizardry_hybrid_c_raw_first_merge_rerank_*`) |
 
 See [Docs/Design/v1/retrieval_lab_v1.md](../../Docs/Design/v1/retrieval_lab_v1.md) for full run options, two-step (embed-only then eval), and regression policy.
+
+## Integrity artifacts
+
+The matrix runner emits per-config integrity artifacts:
+
+- `integrity_<config>.json`
+- `integrity_<config>.md`
+
+Key command options:
+
+```bash
+uv run python -m evals.v1_baseline.run_baseline_suite \
+  --out-dir evals/v1_baseline/$(date +%Y%m%d) \
+  --version v1 \
+  --gating-integrity-policy strict
+```
+
+The suite writes `baseline_process_summary.json` containing run IDs and key A/B/C metrics per corpus.
+
+## Expansion -> gating promotion checklist
+
+A candidate expansion batch is promotable only when all checks pass:
+
+1. Integrity checks pass in strict mode on the promoted subset.
+2. Required-set metrics are stable or improved on gating suite:
+   - RequiredFullSetHit@10 non-regressing beyond accepted tolerance.
+   - Rank-of-last-required mean not materially worse without compensating coverage gain.
+3. Failure-bucket classifier does not indicate unacceptable regressions for protected tiers.
+4. Reproduction on another machine yields matching integrity status and near-identical metrics.

@@ -18,11 +18,15 @@ def _glossary_md() -> str:
 |--------|----------------------|----------------|
 | **Recall@k** | (Number of gold units found in top-k) / (Total gold units per query), averaged over queries | Fraction of relevant evidence discoverable in the first k results. Higher is better. |
 | **Hit@k** | Fraction of queries where at least one gold unit appears in top-k | Whether *any* relevant evidence surfaces per question. Simpler than recall. |
+| **nDCG@k** | Discounted cumulative gain normalized by ideal DCG using binary relevance in top-k | Ranking quality metric that rewards placing relevant evidence earlier. |
 | **MRR** | Mean over queries of 1/rank of first gold hit; 0 if no gold in list | How high the first relevant result ranks. 1.0 = gold always at rank 1. |
 | **Gold-in-Candidates** | Fraction of queries where any gold unit appears anywhere in the full ranked list | Ceiling check: if gold never appears, retrieval cannot succeed regardless of k. |
 | **Gold-in-Candidates (True Ceiling)** | Same as Gold-in-Candidates, but excludes `no_gold_defined` queries from denominator | Better estimate of retriever ceiling after benchmark hygiene separation. |
 | **Grounding Coverage** | Fraction of queries where gold grounding found at least one EvidenceUnit | Measures eval set quality (and extraction coverage), not retrieval quality. |
-| **Full-Set Hit@k** | Fraction of grounded queries where *all* gold units appear within top-k | Compositional retrieval metric; critical for multi-unit T2/T3 questions. |
+| **Full-Set Hit@k** | Fraction of grounded queries where *all* (required + supporting) gold units appear within top-k | Legacy compositional metric; preserved for backwards comparability. |
+| **Required Recall@k** | Fraction of required gold units found in top-k, averaged over queries | Contract metric for correctness-critical evidence coverage. |
+| **Required Full-Set Hit@k** | Fraction of queries where all required gold units appear within top-k | Primary composition-complete metric for correctness gates. |
+| **Rank-of-Last-Required** | 1-based rank where final required unit appears; null when incomplete | Depth needed to satisfy required citation set. Lower is better. |
 | **Answer Similarity@k** | Mean cosine similarity between the query (expected_answer_summary) embedding and the embeddings of the top-k retrieved units | Model-agnostic relevance signal when gold IDs are uncertain (e.g. corpus-wide semantic grounding). |
 | **Candidate Set Size** | Total number of EvidenceUnits in the corpus | Context for interpreting recall: larger corpus = harder retrieval problem. |
 
@@ -39,7 +43,7 @@ def _glossary_md() -> str:
 
 | Bucket | Meaning |
 |--------|---------|
-| **no_gold_defined** | Query has no gold units (`gold_unit_ids` empty): benchmark hygiene/annotation issue. |
+| **no_gold_defined** | Query has no required gold units (`required_gold` or legacy fallback empty): benchmark hygiene/annotation issue. |
 | **gold_not_in_candidates** | Gold exists but never appears in ranked list: candidate ceiling failure. |
 | **gold_in_candidates_but_low_rank** | Gold appears only below max-k: ranking depth issue. |
 | **grounding_or_answer_failure_after_retrieval** | Gold was retrievable but downstream grounding/answer stage failed. |
@@ -52,6 +56,32 @@ def _glossary_md() -> str:
 """
 
 
+def _classify_outcome(*, current: Dict[str, Any], baseline: Optional[Dict[str, int]]) -> str:
+    """Classify run movement using failure-bucket and retrieval metric deltas."""
+    if not baseline:
+        return "insufficient_baseline"
+    current_fb = current.get("failure_bucket_counts", {})
+    delta_gold_not_in_candidates = int(current_fb.get("gold_not_in_candidates", 0)) - int(
+        baseline.get("gold_not_in_candidates", 0)
+    )
+    req_fsh10 = float(current.get("required_full_set_hit_at_k", {}).get(10, 0.0))
+    full_fsh10 = float(current.get("full_set_hit_at_k", {}).get(10, 0.0))
+    mrr = float(current.get("mrr", 0.0))
+    # These baseline metric mirrors are optional and may be injected by callers later.
+    baseline_mrr = float(current.get("baseline_mrr", mrr))
+    baseline_req_fsh10 = float(current.get("baseline_required_full_set_hit_at_10", req_fsh10))
+    baseline_full_fsh10 = float(current.get("baseline_full_set_hit_at_10", full_fsh10))
+    coverage_gain = (delta_gold_not_in_candidates < 0) or ((req_fsh10 - baseline_req_fsh10) > 0.0)
+    rank_regression = (mrr - baseline_mrr) < 0.0
+    if coverage_gain and rank_regression:
+        return "fragment_repair_signal"
+    if coverage_gain:
+        return "coverage_gain"
+    if abs(mrr - baseline_mrr) > 0.0 or abs(full_fsh10 - baseline_full_fsh10) > 0.0:
+        return "rank_shuffle_only"
+    return "no_material_change"
+
+
 def generate_report(
     experiment_id: str,
     experiment_name: str,
@@ -62,6 +92,8 @@ def generate_report(
     grounding_audit: List[Dict[str, Any]],
     per_query_by_model: Dict[str, List[Dict[str, Any]]],
     created_at: str,
+    baseline_failure_buckets: Optional[Dict[str, Dict[str, int]]] = None,
+    stage_timing_sec: Optional[Dict[str, float]] = None,
 ) -> str:
     """
     Generate the main REPORT.md content as a string.
@@ -104,6 +136,14 @@ def generate_report(
             "For S&W: fill `gold_unit_ids` in `nominated_gold_per_query.json`, run `apply_nominated_gold_sw.py`, then re-run for benchmark metrics.",
             "",
         ])
+    if stage_timing_sec:
+        lines.extend([
+            "### Stage Timings (seconds)",
+            "",
+        ])
+        for key, value in stage_timing_sec.items():
+            lines.append(f"- **{key}:** {value:.3f}")
+        lines.append("")
     lines.extend([
         "---",
         "",
@@ -112,21 +152,55 @@ def generate_report(
     ])
     # Table: model | MRR | Gold-in-Cand | R@k | H@k for every k in config
     top_k = config.get("top_k", [1, 3, 5, 10, 20])
-    header = "| Model | MRR | Gold-in-Cand | Gold-in-Cand(True) | FSH@10 |"
+    header = "| Model | MRR | nDCG@10 | Gold-in-Cand | Gold-in-Cand(True) | FSH@10 | ReqFSH@10 | RankLastReqMean | Outcome |"
     for k in top_k:
         header += f" R@{k} | H@{k} |"
     lines.append(header)
-    lines.append("|" + "---|" * (5 + len(top_k) * 2) + "")
+    lines.append("|" + "---|" * (9 + len(top_k) * 2) + "")
     for model_id, res in results_by_model.items():
+        outcome = _classify_outcome(current=res, baseline=(baseline_failure_buckets or {}).get(model_id))
         row = (
-            f"| {model_id} | {res.get('mrr', 0):.4f} | {res.get('gold_in_candidates', 0):.4f} | "
-            f"{res.get('gold_in_candidates_true_ceiling', 0):.4f} | {res.get('full_set_hit_at_k', {}).get(10, 0):.4f} |"
+            f"| {model_id} | {res.get('mrr', 0):.4f} | {res.get('ndcg_at_k', {}).get(10, 0):.4f} | {res.get('gold_in_candidates', 0):.4f} | "
+            f"{res.get('gold_in_candidates_true_ceiling', 0):.4f} | {res.get('full_set_hit_at_k', {}).get(10, 0):.4f} | "
+            f"{res.get('required_full_set_hit_at_k', {}).get(10, 0):.4f} | {res.get('rank_of_last_required_mean', 0):.3f} | {outcome} |"
         )
         for k in top_k:
             r = res.get("recall_at_k", {})
             h = res.get("hit_at_k", {})
             row += f" {r.get(k, 0):.4f} | {h.get(k, 0):.4f} |"
         lines.append(row)
+    raw_merge_models = {
+        model_id: res.get("raw_merge_rerank_diagnostics", {})
+        for model_id, res in results_by_model.items()
+        if res.get("raw_merge_rerank_diagnostics")
+    }
+    if raw_merge_models:
+        lines.extend([
+            "",
+            "### Raw-First Merge-Rerank Diagnostics",
+            "",
+            "| Model | Monotonic rank violations | Raw top-N missing in final top-K |",
+            "|-------|---------------------------|----------------------------------|",
+        ])
+        for model_id, diag in raw_merge_models.items():
+            lines.append(
+                f"| {model_id} | {int(diag.get('monotonic_rank_violations_total', 0))} | "
+                f"{int(diag.get('raw_top_missing_in_final_topk_total', 0))} |"
+            )
+        lines.extend([
+            "",
+            "### Hypothesis Snapshot",
+            "",
+            "- **H1 (ceiling vs merged-only):** Requires comparative A/B/C runs; inspect `gold_in_candidates_true_ceiling` across reports.",
+            "- **H2 (MRR/first-hit vs raw-only):** Requires comparative A/B/C runs; inspect `mrr` and per-query `first_gold_rank` deltas.",
+            "- **H3 (no-demotion):** "
+            + (
+                "Supported (0 monotonic rank violations in this run)."
+                if all(int(d.get("monotonic_rank_violations_total", 1)) == 0 for d in raw_merge_models.values())
+                else "Not supported (violations observed; review diagnostics)."
+            ),
+            "",
+        ])
     lines.extend(["", "---", "", "## 3. Per-Model Detail", ""])
     for model_id, res in results_by_model.items():
         lines.append(f"### {model_id}")
@@ -137,7 +211,11 @@ def generate_report(
         lines.append(f"- **Grounding coverage:** {res.get('grounding_coverage', 0):.4f}")
         lines.append("- **Recall@k:** " + json.dumps(res.get("recall_at_k", {})))
         lines.append("- **Hit@k:** " + json.dumps(res.get("hit_at_k", {})))
+        lines.append("- **nDCG@k:** " + json.dumps(res.get("ndcg_at_k", {})))
         lines.append("- **Full-set hit@k:** " + json.dumps(res.get("full_set_hit_at_k", {})))
+        lines.append("- **Required recall@k:** " + json.dumps(res.get("required_recall_at_k", {})))
+        lines.append("- **Required full-set hit@k:** " + json.dumps(res.get("required_full_set_hit_at_k", {})))
+        lines.append(f"- **Rank-of-last-required (mean):** {res.get('rank_of_last_required_mean', 0):.3f}")
         if res.get("answer_similarity_at_k"):
             lines.append("- **Answer similarity@k:** " + json.dumps(res["answer_similarity_at_k"]))
         lines.append("- **Failure counts:** " + json.dumps(res.get("failure_counts", {})))
@@ -151,8 +229,8 @@ def generate_report(
     # Per-suite table for first model (same structure for all)
     first_model_result = next(iter(results_by_model.values()), None) if results_by_model else None
     if first_model_result and first_model_result.get("per_suite"):
-        lines.append("| Suite | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | N |")
-        lines.append("|-------|-----|-----|-----|------|------|--------|---|")
+        lines.append("| Suite | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | ReqFSH@10 | N |")
+        lines.append("|-------|-----|-----|-----|------|------|--------|-----------|---|")
         for suite_name, su in first_model_result["per_suite"].items():
             n = su.get("n", 0)
             mrr = su.get("mrr", 0)
@@ -161,12 +239,13 @@ def generate_report(
             r10 = su.get("recall_at_k", {}).get(10, 0)
             h10 = su.get("hit_at_k", {}).get(10, 0)
             fsh10 = su.get("full_set_hit_at_k", {}).get(10, 0)
-            lines.append(f"| {suite_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {n} |")
+            req_fsh10 = su.get("required_full_set_hit_at_k", {}).get(10, 0)
+            lines.append(f"| {suite_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {req_fsh10:.4f} | {n} |")
         lines.append("")
     lines.extend(["---", "", "## 5. Per-Tier Breakdown (R8 Gold Taxonomy)", ""])
     if first_model_result and first_model_result.get("per_tier"):
-        lines.append("| Tier | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | N |")
-        lines.append("|------|-----|-----|-----|------|------|--------|---|")
+        lines.append("| Tier | MRR | R@5 | H@5 | R@10 | H@10 | FSH@10 | ReqFSH@10 | N |")
+        lines.append("|------|-----|-----|-----|------|------|--------|-----------|---|")
         for tier_name, ti in sorted(first_model_result["per_tier"].items()):
             n = ti.get("n", 0)
             mrr = ti.get("mrr", 0)
@@ -175,7 +254,8 @@ def generate_report(
             r10 = ti.get("recall_at_k", {}).get(10, 0)
             h10 = ti.get("hit_at_k", {}).get(10, 0)
             fsh10 = ti.get("full_set_hit_at_k", {}).get(10, 0)
-            lines.append(f"| {tier_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {n} |")
+            req_fsh10 = ti.get("required_full_set_hit_at_k", {}).get(10, 0)
+            lines.append(f"| {tier_name} | {mrr:.4f} | {r5:.4f} | {h5:.4f} | {r10:.4f} | {h10:.4f} | {fsh10:.4f} | {req_fsh10:.4f} | {n} |")
         lines.append("")
     lines.extend(["---", "", "## 6. Failure Analysis", ""])
     lines.append("| Model | hit | retrieval_miss | rank_miss | grounding_failure |")
@@ -195,6 +275,28 @@ def generate_report(
             f"| {model_id} | {fb.get('no_gold_defined', 0)} | {fb.get('gold_not_in_candidates', 0)} | "
             f"{fb.get('gold_in_candidates_but_low_rank', 0)} | {fb.get('grounding_or_answer_failure_after_retrieval', 0)} |"
         )
+    if baseline_failure_buckets:
+        lines.extend(["", "### Failure Bucket Delta vs Baseline", ""])
+        lines.append("| Model | no_gold_defined | gold_not_in_candidates | gold_in_candidates_but_low_rank | grounding_or_answer_failure_after_retrieval |")
+        lines.append("|-------|------------------|------------------------|----------------------------------|----------------------------------------------|")
+        for model_id, res in results_by_model.items():
+            current = res.get("failure_bucket_counts", {})
+            baseline = baseline_failure_buckets.get(model_id, {})
+
+            def _delta(bucket: str) -> int:
+                return int(current.get(bucket, 0)) - int(baseline.get(bucket, 0))
+
+            lines.append(
+                f"| {model_id} | {_delta('no_gold_defined')} | {_delta('gold_not_in_candidates')} | "
+                f"{_delta('gold_in_candidates_but_low_rank')} | {_delta('grounding_or_answer_failure_after_retrieval')} |"
+            )
+        lines.extend(["", "### Outcome Classification", ""])
+        lines.append("| Model | Outcome |")
+        lines.append("|-------|---------|")
+        for model_id, res in results_by_model.items():
+            lines.append(
+                f"| {model_id} | {_classify_outcome(current=res, baseline=baseline_failure_buckets.get(model_id))} |"
+            )
     lines.extend(["", "---", "", "## 7. Gold Grounding Audit", ""])
     lines.append("Sample (first 10): query_id, method, count.")
     for entry in grounding_audit[:10]:
@@ -242,6 +344,12 @@ def write_report_artifacts(
     created_at = experiment_doc.get("created_at", datetime.now(timezone.utc).isoformat())
     if hasattr(created_at, "isoformat"):
         created_at = created_at.isoformat()
+    baseline_failure_buckets = experiment_doc.get("baseline_failure_buckets") or {}
+    for model_id, res in results_by_model.items():
+        res["outcome_classification"] = _classify_outcome(
+            current=res,
+            baseline=baseline_failure_buckets.get(model_id),
+        )
     report_md = generate_report(
         experiment_id=experiment_id,
         experiment_name=experiment_name,
@@ -252,6 +360,8 @@ def write_report_artifacts(
         grounding_audit=grounding_audit,
         per_query_by_model=per_query_by_model,
         created_at=created_at,
+        baseline_failure_buckets=baseline_failure_buckets,
+        stage_timing_sec=experiment_doc.get("stage_timing_sec"),
     )
     report_path = output_dir / "REPORT.md"
     report_path.write_text(report_md, encoding="utf-8")

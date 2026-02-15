@@ -6,7 +6,9 @@ from __future__ import annotations
 
 import json
 import logging
+import random
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -28,6 +30,8 @@ from retrieval_lab.config import ExperimentConfig
 from retrieval_lab.gold_grounding import (
     flatten_query_batches,
     ground_queries_page_anchored,
+    persist_resolved_gold_to_batch_files,
+    resolve_gold_locations_to_current_corpus,
 )
 from retrieval_lab.projection import build_clause_family_projection
 from retrieval_lab.report import write_report_artifacts
@@ -47,6 +51,7 @@ from retrieval_lab.store import (
     substrate_run_id,
 )
 from retrieval_lab.substrate_loader import (
+    fold_under_threshold_into_adjacent,
     load_evidence_units,
     merge_enrichments_into_corpus,
     merge_units_by_heading,
@@ -62,6 +67,47 @@ MODELS_REQUIRING_TRUST_REMOTE_CODE = frozenset({
     "bge-m3",
     "gte-multilingual-base",
 })
+
+
+def _set_seed(seed: Optional[int]) -> None:
+    if seed is None:
+        return
+    random.seed(seed)
+    np.random.seed(seed)
+    try:
+        import torch  # type: ignore
+
+        torch.manual_seed(seed)
+    except Exception:
+        # Torch is optional for some runs; keep seeding best-effort.
+        pass
+
+
+def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Dict[str, Any]]:
+    if not baseline_metrics_path:
+        return {}
+    path = Path(baseline_metrics_path)
+    if not path.exists():
+        logger.warning("baseline_metrics_path not found: %s", baseline_metrics_path)
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        logger.warning("baseline_metrics_path is not valid JSON: %s", baseline_metrics_path)
+        return {}
+    out: Dict[str, Dict[str, Any]] = {}
+    if isinstance(payload, dict):
+        for model_id, metrics in payload.items():
+            if isinstance(metrics, dict):
+                fb = metrics.get("failure_bucket_counts", {})
+                if isinstance(fb, dict):
+                    out[model_id] = {
+                        "failure_bucket_counts": {k: int(v) for k, v in fb.items() if isinstance(v, (int, float))},
+                        "mrr": float(metrics.get("mrr", 0.0)),
+                        "full_set_hit_at_10": float((metrics.get("full_set_hit_at_k") or {}).get("10", (metrics.get("full_set_hit_at_k") or {}).get(10, 0.0))),
+                        "required_full_set_hit_at_10": float((metrics.get("required_full_set_hit_at_k") or {}).get("10", (metrics.get("required_full_set_hit_at_k") or {}).get(10, 0.0))),
+                    }
+    return out
 
 
 def _load_model_registry():
@@ -129,13 +175,12 @@ def _run_embed_only(config: ExperimentConfig) -> str:
     config.validate(embed_only=True)
     load_model_fn, encode_texts_fn, MODEL_REGISTRY = _load_model_registry()
     logger.info("Loading substrate from %s", config.substrate_path)
-    corpus = load_evidence_units(
-        config.substrate_path,
-        config.document_id,
-        min_chars=getattr(config, "min_chars", None),
-    )
+    corpus = load_evidence_units(config.substrate_path, config.document_id)
     if not corpus:
         raise ValueError("Corpus is empty; no EvidenceUnits found.")
+    min_chars = getattr(config, "min_chars", None)
+    if min_chars is not None:
+        corpus = fold_under_threshold_into_adjacent(corpus, min_chars)
     if getattr(config, "merge_chunks", False):
         corpus = merge_units_by_heading(
             corpus,
@@ -183,23 +228,23 @@ def _prepare_experiment_corpus_context(
 ) -> Dict[str, Any]:
     """Load corpus, apply projection options, and prepare run identifiers."""
     logger.info("Loading substrate from %s", config.substrate_path)
-    corpus = load_evidence_units(
-        config.substrate_path,
-        config.document_id,
-        min_chars=flags.min_chars,
-    )
-    if not corpus:
+    raw_corpus = load_evidence_units(config.substrate_path, config.document_id)
+    if not raw_corpus:
         raise ValueError("Corpus is empty; no EvidenceUnits found.")
+    folded_corpus = raw_corpus
+    if flags.min_chars is not None:
+        folded_corpus = fold_under_threshold_into_adjacent(raw_corpus, flags.min_chars)
+    canonical_corpus = folded_corpus
     if flags.merge_chunks:
-        corpus = merge_units_by_heading(
-            corpus,
+        canonical_corpus = merge_units_by_heading(
+            folded_corpus,
             max_chars=flags.merge_max_chars,
         )
-    corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
+    canonical_corpus = merge_enrichments_into_corpus(canonical_corpus, config.substrate_path)
 
     if flags.a_prime_generate_minimal:
-        generated_hints = build_minimal_a_prime_hints(corpus)
-        for unit in corpus:
+        generated_hints = build_minimal_a_prime_hints(canonical_corpus)
+        for unit in canonical_corpus:
             uid = unit.get("id", "")
             if uid in generated_hints:
                 if not unit.get("topic_tags"):
@@ -207,10 +252,10 @@ def _prepare_experiment_corpus_context(
                 if not unit.get("co_retrieval_hints"):
                     unit["co_retrieval_hints"] = generated_hints[uid].get("co_retrieval_hints", [])
 
-    canonical_corpus = corpus
     grounding_units_by_page_map = units_by_page(canonical_corpus)
 
     use_dual_list_fusion = flags.dual_list_fusion
+    corpus = canonical_corpus
     if flags.clause_family_projection and not use_dual_list_fusion:
         corpus = build_clause_family_projection(
             canonical_corpus,
@@ -268,6 +313,7 @@ def _prepare_experiment_corpus_context(
     return {
         "corpus": corpus,
         "canonical_corpus": canonical_corpus,
+        "folded_corpus": folded_corpus,
         "grounding_units_by_page_map": grounding_units_by_page_map,
         "corpus_ids": corpus_ids,
         "corpus_texts": corpus_texts,
@@ -284,12 +330,37 @@ def _prepare_experiment_corpus_context(
 def _load_and_ground_queries(
     config: ExperimentConfig,
     retrieval_mode: str,
+    folded_corpus: List[Dict[str, Any]],
+    canonical_corpus: List[Dict[str, Any]],
     grounding_units_by_page_map: Dict[str, List[Dict[str, Any]]],
 ) -> Dict[str, Any]:
     """Load queries and resolve gold grounding strategy."""
     flat_queries, _ = flatten_query_batches(config.query_batches)
     if not flat_queries:
         raise ValueError("No queries loaded from query_batches.")
+
+    flat_queries, gold_resolution_summary = resolve_gold_locations_to_current_corpus(
+        flat_queries,
+        folded_corpus=folded_corpus,
+        merged_corpus=canonical_corpus,
+    )
+    logger.info(
+        "Gold location resolution: total=%d with_locations=%d resolved_nonempty=%d resolved_empty=%d legacy_only=%d",
+        gold_resolution_summary["queries_total"],
+        gold_resolution_summary["queries_with_gold_locations"],
+        gold_resolution_summary["queries_resolved_nonempty"],
+        gold_resolution_summary["queries_resolved_empty"],
+        gold_resolution_summary["queries_legacy_only"],
+    )
+    if gold_resolution_summary["queries_with_gold_locations"] > 0:
+        cwd = Path.cwd()
+        n_updated = persist_resolved_gold_to_batch_files(
+            config.query_batches,
+            flat_queries,
+            cwd,
+        )
+        if n_updated:
+            logger.info("Persisted resolved gold to %d batch file(s)", n_updated)
     logger.info("Loaded %d queries", len(flat_queries))
 
     use_semantic_grounding = all(
@@ -315,6 +386,7 @@ def _load_and_ground_queries(
         "grounded_queries": grounded_queries,
         "grounding_audit": grounding_audit,
         "use_semantic_grounding": use_semantic_grounding,
+        "gold_resolution_summary": gold_resolution_summary,
     }
 
 
@@ -324,12 +396,15 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     embed_only = False
     eval_only = eval_only_run_id is not None
     config.validate(embed_only=embed_only, eval_only=eval_only)
+    _set_seed(config.seed)
     retrieval_mode = config.retrieval_mode
+    t_stage_start = time.perf_counter()
     flags = read_run_flags(config)
     expansion_cfg = read_expansion_config(config)
     context = _prepare_experiment_corpus_context(config, flags, eval_only_run_id)
     corpus = context["corpus"]
     canonical_corpus = context["canonical_corpus"]
+    folded_corpus = context["folded_corpus"]
     grounding_units_by_page_map = context["grounding_units_by_page_map"]
     corpus_ids = context["corpus_ids"]
     corpus_texts = context["corpus_texts"]
@@ -341,11 +416,21 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     family_id_to_anchor_unit_id = context["family_id_to_anchor_unit_id"]
     run_id_family = context["run_id_family"]
 
-    grounding_context = _load_and_ground_queries(config, retrieval_mode, grounding_units_by_page_map)
+    grounding_context = _load_and_ground_queries(
+        config,
+        retrieval_mode,
+        folded_corpus,
+        canonical_corpus,
+        grounding_units_by_page_map,
+    )
     flat_queries = grounding_context["flat_queries"]
     grounded_queries = grounding_context["grounded_queries"]
     grounding_audit = grounding_context["grounding_audit"]
     use_semantic_grounding = grounding_context["use_semantic_grounding"]
+    gold_resolution_summary = grounding_context["gold_resolution_summary"]
+    stage_timing_sec: Dict[str, float] = {
+        "load_corpus_and_projection": time.perf_counter() - t_stage_start
+    }
 
     experiment_ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     experiment_id = f"{config.experiment_name}_{experiment_ts}"
@@ -374,6 +459,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         )
     pairing_instrumentation_by_model: Dict[str, Any] = {}
 
+    t_retrieval = time.perf_counter()
     if retrieval_mode == "bm25":
         bm25_out = run_bm25_mode(
             config=config,
@@ -435,6 +521,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         retrieved_chunks_by_model = dense_out["retrieved_chunks_by_model"]
         all_grounding_audit = dense_out["all_grounding_audit"]
         pairing_instrumentation_by_model = dense_out["pairing_instrumentation_by_model"]
+    stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
 
     grounded_count = sum(1 for q in grounded_queries if (q.get("gold_unit_ids")))
     grounding_summary = {
@@ -442,6 +529,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "grounded": grounded_count,
         "ungrounded": len(grounded_queries) - grounded_count,
         "method": "corpus_wide_semantic" if use_semantic_grounding else "page_anchored",
+        "gold_resolution_summary": gold_resolution_summary,
     }
     corpus_stats = {
         "unit_count": len(corpus),
@@ -457,6 +545,25 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "query_batch_paths": config.query_batches,
         "top_k": config.top_k,
         "retrieval_mode": config.retrieval_mode,
+        "seed": config.seed,
+        "bm25_tokenizer_mode": config.bm25_tokenizer_mode,
+        "bm25_k1": config.bm25_k1,
+        "bm25_b": config.bm25_b,
+        "bm25_query_mode": config.bm25_query_mode,
+        "bm25_query_weight_question": config.bm25_query_weight_question,
+        "bm25_query_weight_summary": config.bm25_query_weight_summary,
+        "two_stage_retrieval": config.two_stage_retrieval,
+        "stage1_admission_k": config.stage1_admission_k,
+        "stage1_query_mode": config.stage1_query_mode,
+        "stage2_query_mode": config.stage2_query_mode,
+        "stage2_rerank_method": config.stage2_rerank_method,
+        "raw_first_merge_rerank": getattr(config, "raw_first_merge_rerank", False),
+        "raw_stage1_admission_k": getattr(config, "raw_stage1_admission_k", 100),
+        "raw_merge_rerank_top_k": getattr(config, "raw_merge_rerank_top_k", 20),
+        "raw_merge_score_floor": getattr(config, "raw_merge_score_floor", True),
+        "raw_merge_rank_floor": getattr(config, "raw_merge_rank_floor", True),
+        "raw_merge_coverage_bonus": getattr(config, "raw_merge_coverage_bonus", 0.0),
+        "baseline_metrics_path": config.baseline_metrics_path,
         "expand_context": flags.expand_context,
         "expand_context_n": flags.expand_context_n,
         "clause_family_projection": flags.clause_family_projection,
@@ -474,14 +581,35 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "corpus_stats": corpus_stats,
         "grounding_summary": grounding_summary,
         "results": results_by_model,
+        "stage_timing_sec": stage_timing_sec,
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }
-    try:
-        save_experiment(experiment_doc, mongo_uri)
-        logger.info("Saved experiment to MongoDB: %s", experiment_id)
-    except Exception as e:
-        logger.warning("Could not save experiment to MongoDB: %s", e)
+    baseline_metrics = _load_baseline_metrics(config.baseline_metrics_path)
+    baseline_failure_buckets = {
+        model_id: model_payload.get("failure_bucket_counts", {})
+        for model_id, model_payload in baseline_metrics.items()
+    }
+    if baseline_failure_buckets:
+        experiment_doc["baseline_failure_buckets"] = baseline_failure_buckets
+    for model_id, res in results_by_model.items():
+        baseline = baseline_metrics.get(model_id, {})
+        if baseline:
+            res["baseline_mrr"] = float(baseline.get("mrr", res.get("mrr", 0.0)))
+            res["baseline_full_set_hit_at_10"] = float(
+                baseline.get("full_set_hit_at_10", (res.get("full_set_hit_at_k") or {}).get(10, 0.0))
+            )
+            res["baseline_required_full_set_hit_at_10"] = float(
+                baseline.get("required_full_set_hit_at_10", (res.get("required_full_set_hit_at_k") or {}).get(10, 0.0))
+            )
+    if mongo_uri:
+        try:
+            save_experiment(experiment_doc, mongo_uri)
+            logger.info("Saved experiment to MongoDB: %s", experiment_id)
+        except Exception as e:
+            logger.warning("Could not save experiment to MongoDB: %s", e)
+    else:
+        logger.info("MongoDB persistence disabled (mongo_uri not set); skipping save_experiment.")
     paths = write_report_artifacts(
         output_dir,
         experiment_id,

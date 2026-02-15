@@ -34,9 +34,23 @@ def run_bm25_mode(
     from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank
 
     t0 = time.perf_counter()
-    bm25 = build_bm25_index(corpus_texts)
+    bm25 = build_bm25_index(
+        corpus_texts,
+        tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
+        k1=float(getattr(config, "bm25_k1", 1.5)),
+        b=float(getattr(config, "bm25_b", 0.75)),
+    )
     max_k = max(config.top_k)
-    ranked_lists, score_lists = bm25_rank(bm25, corpus_ids, grounded_queries, max_k)
+    ranked_lists, score_lists = bm25_rank(
+        bm25,
+        corpus_ids,
+        grounded_queries,
+        max_k,
+        tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
+        query_mode=getattr(config, "bm25_query_mode", "question_only"),
+        question_weight=int(getattr(config, "bm25_query_weight_question", 1)),
+        summary_weight=int(getattr(config, "bm25_query_weight_summary", 1)),
+    )
     boost = flags.unit_type_boost
     if boost > 0:
         apply_unit_type_boost_fn(ranked_lists, score_lists, corpus, grounded_queries, boost)
@@ -112,7 +126,11 @@ def run_bm25_mode(
         "results": {
             "recall_at_k": metrics.recall_at_k,
             "hit_at_k": metrics.hit_at_k,
+            "ndcg_at_k": metrics.ndcg_at_k,
             "full_set_hit_at_k": metrics.full_set_hit_at_k,
+            "required_recall_at_k": metrics.required_recall_at_k,
+            "required_full_set_hit_at_k": metrics.required_full_set_hit_at_k,
+            "rank_of_last_required_mean": metrics.rank_of_last_required_mean,
             "mrr": metrics.mrr,
             "gold_in_candidates": metrics.gold_in_candidates,
             "gold_in_candidates_true_ceiling": metrics.gold_in_candidates_true_ceiling,

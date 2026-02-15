@@ -22,12 +22,19 @@ class QueryResult:
     first_gold_rank: Optional[int]  # 1-based; None if no gold in list
     in_top_k: Dict[int, bool]  # k -> whether at least one gold in top-k
     recall_at_k: Dict[int, float]  # k -> fraction of gold found in top-k
+    ndcg_at_k: Dict[int, float]  # k -> normalized discounted cumulative gain (binary relevance)
     full_set_hit_at_k: Dict[int, bool]  # k -> whether all gold units found in top-k
     failure_type: str  # "hit", "retrieval_miss", "rank_miss", "grounding_failure"
     failure_bucket: str  # phase-0 bucket taxonomy
     suite: str = "default"
     tier: str = "T1"  # R8 gold tier (T1-T5)
     answer_similarity_at_k: Optional[Dict[int, float]] = None  # k -> mean sim of top-k to query
+    required_gold_ids: List[str] = field(default_factory=list)
+    supporting_gold_ids: List[str] = field(default_factory=list)
+    mode: str = "single_cite"
+    required_recall_at_k: Dict[int, float] = field(default_factory=dict)
+    required_full_set_hit_at_k: Dict[int, bool] = field(default_factory=dict)
+    rank_of_last_required: Optional[int] = None
 
 
 def _candidate_source_sets(
@@ -87,6 +94,42 @@ def _full_set_hit_at_k(candidate_sources: List[set[str]], gold_ids: List[str], k
     return gold_set.issubset(found)
 
 
+def _rank_of_last_required(candidate_sources: List[set[str]], required_ids: List[str]) -> Optional[int]:
+    """1-based rank at which all required IDs have appeared; None if incomplete."""
+    if not required_ids:
+        return None
+    remaining = set(required_ids)
+    for i, source_ids in enumerate(candidate_sources, start=1):
+        remaining -= source_ids
+        if not remaining:
+            return i
+    return None
+
+
+def _dcg_at_k(candidate_sources: List[set[str]], gold_ids: List[str], k: int) -> float:
+    """Binary DCG where rel_i=1 iff candidate at rank i contains at least one gold source id."""
+    if k <= 0:
+        return 0.0
+    gold_set = set(gold_ids)
+    dcg = 0.0
+    for idx, source_ids in enumerate(candidate_sources[:k], start=1):
+        rel = 1.0 if source_ids.intersection(gold_set) else 0.0
+        if rel > 0:
+            dcg += rel / np.log2(idx + 1)
+    return float(dcg)
+
+
+def _ideal_dcg_at_k(gold_count: int, k: int) -> float:
+    """IDCG for binary relevance with at most one gain per rank."""
+    if gold_count <= 0 or k <= 0:
+        return 0.0
+    ideal_hits = min(gold_count, k)
+    idcg = 0.0
+    for idx in range(1, ideal_hits + 1):
+        idcg += 1.0 / np.log2(idx + 1)
+    return float(idcg)
+
+
 def compute_query_result(
     query_id: str,
     ranked_ids: List[str],
@@ -100,18 +143,34 @@ def compute_query_result(
     query_embedding: Optional[np.ndarray] = None,
     corpus_embeddings: Optional[np.ndarray] = None,
     corpus_id_to_index: Optional[Dict[str, int]] = None,
+    required_gold_ids: Optional[List[str]] = None,
+    supporting_gold_ids: Optional[List[str]] = None,
+    mode: str = "single_cite",
 ) -> QueryResult:
     """
     Compute per-query metrics and failure classification.
     If query_embedding and corpus_embeddings are provided, answer_similarity@k is computed.
     """
     candidate_sources = _candidate_source_sets(ranked_ids, candidate_source_ids)
-    in_top_k = {k: _hit_at_k(candidate_sources, gold_unit_ids, k) for k in top_k_list}
-    recall_at_k = {k: _recall_at_k(candidate_sources, gold_unit_ids, k) for k in top_k_list}
-    full_set_hit_at_k = {k: _full_set_hit_at_k(candidate_sources, gold_unit_ids, k) for k in top_k_list}
-    first_rank = _first_gold_rank(candidate_sources, gold_unit_ids)
+    all_gold = list(dict.fromkeys(gold_unit_ids))
+    req_gold = list(dict.fromkeys(required_gold_ids or all_gold))
+    sup_gold = list(dict.fromkeys(supporting_gold_ids or []))
+    in_top_k = {k: _hit_at_k(candidate_sources, req_gold, k) for k in top_k_list}
+    recall_at_k = {k: _recall_at_k(candidate_sources, req_gold, k) for k in top_k_list}
+    ndcg_at_k = {}
+    for k in top_k_list:
+        idcg = _ideal_dcg_at_k(len(req_gold), k)
+        if idcg <= 0:
+            ndcg_at_k[k] = 0.0
+            continue
+        ndcg_at_k[k] = _dcg_at_k(candidate_sources, req_gold, k) / idcg
+    full_set_hit_at_k = {k: _full_set_hit_at_k(candidate_sources, all_gold, k) for k in top_k_list}
+    required_recall_at_k = {k: _recall_at_k(candidate_sources, req_gold, k) for k in top_k_list}
+    required_full_set_hit_at_k = {k: _full_set_hit_at_k(candidate_sources, req_gold, k) for k in top_k_list}
+    first_rank = _first_gold_rank(candidate_sources, req_gold)
+    rank_of_last_required = _rank_of_last_required(candidate_sources, req_gold)
     max_k = max(top_k_list) if top_k_list else 0
-    if not gold_unit_ids:
+    if not req_gold:
         failure_type = "grounding_failure"
         failure_bucket = "no_gold_defined"
     elif first_rank is None:
@@ -149,16 +208,23 @@ def compute_query_result(
         query_id=query_id,
         ranked_ids=ranked_ids,
         scores=scores,
-        gold_unit_ids=gold_unit_ids,
+        gold_unit_ids=all_gold,
         first_gold_rank=first_rank,
         in_top_k=in_top_k,
         recall_at_k=recall_at_k,
+        ndcg_at_k=ndcg_at_k,
         full_set_hit_at_k=full_set_hit_at_k,
         failure_type=failure_type,
         failure_bucket=failure_bucket,
         suite=suite,
         tier=tier,
         answer_similarity_at_k=answer_similarity_at_k,
+        required_gold_ids=req_gold,
+        supporting_gold_ids=sup_gold,
+        mode=mode,
+        required_recall_at_k=required_recall_at_k,
+        required_full_set_hit_at_k=required_full_set_hit_at_k,
+        rank_of_last_required=rank_of_last_required,
     )
 
 
@@ -168,7 +234,11 @@ class MetricsResult:
 
     recall_at_k: Dict[int, float] = field(default_factory=dict)
     hit_at_k: Dict[int, float] = field(default_factory=dict)
+    ndcg_at_k: Dict[int, float] = field(default_factory=dict)
     full_set_hit_at_k: Dict[int, float] = field(default_factory=dict)
+    required_recall_at_k: Dict[int, float] = field(default_factory=dict)
+    required_full_set_hit_at_k: Dict[int, float] = field(default_factory=dict)
+    rank_of_last_required_mean: float = 0.0
     mrr: float = 0.0
     gold_in_candidates: float = 0.0
     gold_in_candidates_true_ceiling: float = 0.0
@@ -206,6 +276,9 @@ def score_retrieval(
     per_query_results = []
     for i, q in enumerate(grounded_queries):
         gold = list(q.get("gold_unit_ids") or [])
+        required_gold = list(q.get("_required_gold") or q.get("required_gold") or gold)
+        supporting_gold = list(q.get("_supporting_gold") or q.get("supporting_gold") or [])
+        mode = str(q.get("_mode") or q.get("mode") or "single_cite")
         suite = q.get("_suite", "default")
         tier = q.get("_tier", q.get("tier", "T1"))
         q_emb = query_embeddings[i] if query_embeddings is not None and i < query_embeddings.shape[0] else None
@@ -226,22 +299,37 @@ def score_retrieval(
             query_embedding=q_emb,
             corpus_embeddings=corpus_embeddings,
             corpus_id_to_index=corpus_id_to_index,
+            required_gold_ids=required_gold,
+            supporting_gold_ids=supporting_gold,
+            mode=mode,
         )
         per_query_results.append(r)
     n = len(per_query_results)
     if n == 0:
-        return MetricsResult(candidate_set_size=corpus_ids or 0)
+        return MetricsResult(candidate_set_size=len(corpus_ids) if corpus_ids else 0)
     recall_at_k = {}
     hit_at_k = {}
+    ndcg_at_k = {}
     full_set_hit_at_k = {}
+    required_recall_at_k = {}
+    required_full_set_hit_at_k = {}
     grounded_results = [r for r in per_query_results if len(r.gold_unit_ids) > 0]
+    required_grounded_results = [r for r in per_query_results if len(r.required_gold_ids) > 0]
     grounded_n = len(grounded_results)
+    required_grounded_n = len(required_grounded_results)
     for k in top_k_list:
         recall_at_k[k] = sum(r.recall_at_k[k] for r in per_query_results) / n
         hit_at_k[k] = sum(1 for r in per_query_results if r.in_top_k[k]) / n
+        ndcg_at_k[k] = sum(r.ndcg_at_k[k] for r in per_query_results) / n
+        required_recall_at_k[k] = sum(r.required_recall_at_k[k] for r in per_query_results) / n
         full_set_hit_at_k[k] = (
             sum(1 for r in grounded_results if r.full_set_hit_at_k[k]) / grounded_n
             if grounded_n
+            else 0.0
+        )
+        required_full_set_hit_at_k[k] = (
+            sum(1 for r in required_grounded_results if r.required_full_set_hit_at_k[k]) / required_grounded_n
+            if required_grounded_n
             else 0.0
         )
     rr_sum = 0.0
@@ -249,6 +337,12 @@ def score_retrieval(
         if r.first_gold_rank is not None:
             rr_sum += 1.0 / r.first_gold_rank
     mrr = rr_sum / n
+    rank_of_last_required_vals = [r.rank_of_last_required for r in required_grounded_results if r.rank_of_last_required is not None]
+    rank_of_last_required_mean = (
+        float(sum(rank_of_last_required_vals) / len(rank_of_last_required_vals))
+        if rank_of_last_required_vals
+        else 0.0
+    )
     gold_in_candidates = sum(1 for r in per_query_results if r.first_gold_rank is not None) / n
     grounded_count = sum(1 for q in grounded_queries if (q.get("gold_unit_ids") or []))
     grounding_coverage = grounded_count / n if n else 0.0
@@ -272,28 +366,39 @@ def score_retrieval(
                 "recall_at_k": {},
                 "hit_at_k": {},
                 "full_set_hit_at_k": {},
+                "required_full_set_hit_at_k": {},
+                "ndcg_at_k": {},
                 "mrr": 0.0,
                 "n": 0,
                 "n_grounded": 0,
+                "n_required_grounded": 0,
                 "rr_sum": 0.0,
             }
         per_suite[su]["n"] = per_suite[su]["n"] + 1
         if r.gold_unit_ids:
             per_suite[su]["n_grounded"] = per_suite[su]["n_grounded"] + 1
+        if r.required_gold_ids:
+            per_suite[su]["n_required_grounded"] = per_suite[su]["n_required_grounded"] + 1
         if r.first_gold_rank is not None:
             per_suite[su]["rr_sum"] = per_suite[su]["rr_sum"] + 1.0 / r.first_gold_rank
         for k in top_k_list:
             per_suite[su]["recall_at_k"][k] = per_suite[su]["recall_at_k"].get(k, 0) + r.recall_at_k[k]
             per_suite[su]["hit_at_k"][k] = per_suite[su]["hit_at_k"].get(k, 0) + (1 if r.in_top_k[k] else 0)
+            per_suite[su]["ndcg_at_k"][k] = per_suite[su]["ndcg_at_k"].get(k, 0) + r.ndcg_at_k[k]
             if r.gold_unit_ids and r.full_set_hit_at_k[k]:
                 per_suite[su]["full_set_hit_at_k"][k] = per_suite[su]["full_set_hit_at_k"].get(k, 0) + 1
+            if r.required_gold_ids and r.required_full_set_hit_at_k[k]:
+                per_suite[su]["required_full_set_hit_at_k"][k] = per_suite[su]["required_full_set_hit_at_k"].get(k, 0) + 1
     for su, d in per_suite.items():
         nn = d["n"]
         ng = d["n_grounded"]
+        nrg = d["n_required_grounded"]
         d["mrr"] = d["rr_sum"] / nn if nn else 0.0
         d["recall_at_k"] = {k: v / nn for k, v in d["recall_at_k"].items()}
         d["hit_at_k"] = {k: v / nn for k, v in d["hit_at_k"].items()}
+        d["ndcg_at_k"] = {k: v / nn for k, v in d["ndcg_at_k"].items()}
         d["full_set_hit_at_k"] = {k: v / ng for k, v in d["full_set_hit_at_k"].items()} if ng else {}
+        d["required_full_set_hit_at_k"] = {k: v / nrg for k, v in d["required_full_set_hit_at_k"].items()} if nrg else {}
         del d["rr_sum"]
     # Per-tier aggregates (R8 gold taxonomy)
     per_tier: Dict[str, Dict[str, Any]] = {}
@@ -304,28 +409,39 @@ def score_retrieval(
                 "recall_at_k": {},
                 "hit_at_k": {},
                 "full_set_hit_at_k": {},
+                "required_full_set_hit_at_k": {},
+                "ndcg_at_k": {},
                 "mrr": 0.0,
                 "n": 0,
                 "n_grounded": 0,
+                "n_required_grounded": 0,
                 "rr_sum": 0.0,
             }
         per_tier[t]["n"] = per_tier[t]["n"] + 1
         if r.gold_unit_ids:
             per_tier[t]["n_grounded"] = per_tier[t]["n_grounded"] + 1
+        if r.required_gold_ids:
+            per_tier[t]["n_required_grounded"] = per_tier[t]["n_required_grounded"] + 1
         if r.first_gold_rank is not None:
             per_tier[t]["rr_sum"] = per_tier[t]["rr_sum"] + 1.0 / r.first_gold_rank
         for k in top_k_list:
             per_tier[t]["recall_at_k"][k] = per_tier[t]["recall_at_k"].get(k, 0) + r.recall_at_k[k]
             per_tier[t]["hit_at_k"][k] = per_tier[t]["hit_at_k"].get(k, 0) + (1 if r.in_top_k[k] else 0)
+            per_tier[t]["ndcg_at_k"][k] = per_tier[t]["ndcg_at_k"].get(k, 0) + r.ndcg_at_k[k]
             if r.gold_unit_ids and r.full_set_hit_at_k[k]:
                 per_tier[t]["full_set_hit_at_k"][k] = per_tier[t]["full_set_hit_at_k"].get(k, 0) + 1
+            if r.required_gold_ids and r.required_full_set_hit_at_k[k]:
+                per_tier[t]["required_full_set_hit_at_k"][k] = per_tier[t]["required_full_set_hit_at_k"].get(k, 0) + 1
     for t, d in per_tier.items():
         nn = d["n"]
         ng = d["n_grounded"]
+        nrg = d["n_required_grounded"]
         d["mrr"] = d["rr_sum"] / nn if nn else 0.0
         d["recall_at_k"] = {k: v / nn for k, v in d["recall_at_k"].items()}
         d["hit_at_k"] = {k: v / nn for k, v in d["hit_at_k"].items()}
+        d["ndcg_at_k"] = {k: v / nn for k, v in d["ndcg_at_k"].items()}
         d["full_set_hit_at_k"] = {k: v / ng for k, v in d["full_set_hit_at_k"].items()} if ng else {}
+        d["required_full_set_hit_at_k"] = {k: v / nrg for k, v in d["required_full_set_hit_at_k"].items()} if nrg else {}
         del d["rr_sum"]
     per_query_serialized = []
     for r in per_query_results:
@@ -336,11 +452,18 @@ def score_retrieval(
             "failure_bucket": r.failure_bucket,
             "suite": r.suite,
             "tier": r.tier,
+            "mode": r.mode,
             "gold_count": len(r.gold_unit_ids),
+            "required_gold_count": len(r.required_gold_ids),
+            "supporting_gold_count": len(r.supporting_gold_ids),
             "gold_in_candidates": r.first_gold_rank is not None,
             "in_top_k": r.in_top_k,
             "recall_at_k": r.recall_at_k,
+            "ndcg_at_k": r.ndcg_at_k,
             "full_set_hit_at_k": r.full_set_hit_at_k,
+            "required_recall_at_k": r.required_recall_at_k,
+            "required_full_set_hit_at_k": r.required_full_set_hit_at_k,
+            "rank_of_last_required": r.rank_of_last_required,
             "answer_similarity_at_k": r.answer_similarity_at_k,
         })
     no_gold = failure_bucket_counts.get("no_gold_defined", 0)
@@ -354,7 +477,11 @@ def score_retrieval(
     return MetricsResult(
         recall_at_k=recall_at_k,
         hit_at_k=hit_at_k,
+        ndcg_at_k=ndcg_at_k,
         full_set_hit_at_k=full_set_hit_at_k,
+        required_recall_at_k=required_recall_at_k,
+        required_full_set_hit_at_k=required_full_set_hit_at_k,
+        rank_of_last_required_mean=rank_of_last_required_mean,
         mrr=mrr,
         gold_in_candidates=gold_in_candidates,
         gold_in_candidates_true_ceiling=gold_in_candidates_true_ceiling,

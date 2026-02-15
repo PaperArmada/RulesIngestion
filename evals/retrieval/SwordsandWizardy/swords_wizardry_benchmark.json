@@ -2,26 +2,183 @@
   {
     "id": "sw_q01",
     "tier": "T1",
-    "question": "How many first\u2011level spells are in a beginning magic\u2011user's spellbook in Swords & Wizardry Core?",
-    "answer": "In S&W Core a new magic\u2011user doesn\u2019t automatically start with all eight 1st\u2011level spells.  Instead the number of spells in their spellbook is limited by the Intelligence table: the player checks the minimum and maximum spells known for their Intelligence and then rolls their Learn Spell chance for each 1st\u2011level spell to see which ones are successfully learned.  This means a beginning spellbook can contain anywhere from only a few to the maximum allowed spells depending on Intelligence and luck\u3010234770225896033\u2020L200-L255\u3011.",
-    "source_page": "",
+    "question": "If the rules don't cover something in Swords & Wizardry, are we supposed to find the closest matching rule, or just let the referee make a call?",
+    "answer": "You let the referee make the call. Swords & Wizardry is a free-form game with few rules; the Referee is explicitly responsible for situations the rules don't cover and for making fair evaluations of what characters do. The rules are guidelines for things like combat, experience, movement, and healing\u2014not a complete procedure for every situation. The game expects you and the Referee to work together: players say what their characters do, the Referee describes the world and what happens. The Referee's discretion overrides the rules; the book says to use common sense and that 'making up' a lot on the spot is normal. So you're not required to hunt for a closest-matching rule; the Referee can rule either by analogy to an existing rule or by fiat, and the table can use house rules. Finding a close rule is optional guidance, not an obligation.",
+    "source_page": "8, 28, 39, 64",
     "gold_unit_ids": [
-      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
-      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
-      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1"
-    ]
+      "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f",
+      "5f1b9f29321888b16cc355f91a2a6f1488d3a12b34adfe7afd12283cc88fed3c",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "8e2798835bd70dca5bfc1f51ec3fffc4d97f8f4815e081962e6cce138644b011",
+      "3ca49064802e9fde97dc4e2df03052c7a1828d5fd0107a953dc78fcc5ee845b1"
+    ],
+    "gold_locations": {
+      "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f": {
+        "page": 39,
+        "structural_path": [
+          "REMEMBER"
+        ],
+        "source_unit_ids": [
+          "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f"
+        ]
+      },
+      "5f1b9f29321888b16cc355f91a2a6f1488d3a12b34adfe7afd12283cc88fed3c": {
+        "page": 64,
+        "structural_path": [
+          "CHAPTER 7: RUNNING THE GAME"
+        ],
+        "source_unit_ids": [
+          "44840e62f0e81558d2cf0c94a5a1b57257a531d683241991b2540c3c31af5fca",
+          "b519887c0ad13ed53b956d45bf10f58ed483d138064378e09af583a84f925f41",
+          "603f6aeb1f8ca6569b7cb30dc17351c6ff170a5563467f535fdb1bf00001375a",
+          "72aa7ea484c02493bba292edcc75335228f36c59ed1b346f6430611d90749329"
+        ]
+      },
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a": {
+        "page": 8,
+        "structural_path": [
+          "CHAPTER 1: GETTING STARTED"
+        ],
+        "source_unit_ids": [
+          "788fef5f6116701b6268c1d9af475be381cc56bd74d3604f2cd389e7039db18b",
+          "341a9169430c44ccc48c0685b76620f0d13a38e26f030842cf3ed2daeb53e6ef"
+        ]
+      },
+      "8e2798835bd70dca5bfc1f51ec3fffc4d97f8f4815e081962e6cce138644b011": {
+        "page": 8,
+        "structural_path": [
+          "About the Alternate Rules"
+        ],
+        "source_unit_ids": [
+          "a5e8c5ab76b1c733f9ee12f3d970766c0898bce69d38c63687e3182be57ce709",
+          "cf63918d12876ef333d878f137d15d3a39ba642afac318a1ddf3186040c0d692"
+        ]
+      },
+      "3ca49064802e9fde97dc4e2df03052c7a1828d5fd0107a953dc78fcc5ee845b1": {
+        "page": 28,
+        "structural_path": [
+          "CHAPTER 5: PLAYING THE GAME"
+        ],
+        "source_unit_ids": [
+          "b0be1928b995c5dcb3471bbf744da48791e74d076e02d9ea66d6d91d4a8a276e",
+          "78d98f3055d75fbe074269405d592e641215897f19a5a5ffd9e26ae522055495"
+        ]
+      }
+    },
+    "required_gold": [
+      "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f",
+      "5f1b9f29321888b16cc355f91a2a6f1488d3a12b34adfe7afd12283cc88fed3c"
+    ],
+    "supporting_gold": [
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "8e2798835bd70dca5bfc1f51ec3fffc4d97f8f4815e081962e6cce138644b011",
+      "3ca49064802e9fde97dc4e2df03052c7a1828d5fd0107a953dc78fcc5ee845b1"
+    ],
+    "required_gold_rationale": {
+      "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f": "REMEMBER: Referee responsible for situations not covered; fair evaluations; not players vs Referee.",
+      "5f1b9f29321888b16cc355f91a2a6f1488d3a12b34adfe7afd12283cc88fed3c": "CHAPTER 7: Referee's discretion overrides rules; common sense; improvisation; few rules."
+    },
+    "expected_answer_summary": "Let the referee make the call; rules are guidelines, Referee handles uncovered situations and discretion overrides.",
+    "_gold_note": "Good candidate for HYDE vocabulary (referee discretion, free-form, common sense, improvisation).",
+    "_required_gold": [
+      "6fd78baab36d066ad3bb78fd2a796f3d041df0aeda688eda5a31a868019a203f",
+      "5f1b9f29321888b16cc355f91a2a6f1488d3a12b34adfe7afd12283cc88fed3c"
+    ],
+    "_supporting_gold": [
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "8e2798835bd70dca5bfc1f51ec3fffc4d97f8f4815e081962e6cce138644b011",
+      "3ca49064802e9fde97dc4e2df03052c7a1828d5fd0107a953dc78fcc5ee845b1"
+    ],
+    "_mode": "single_cite"
   },
   {
-    "id": "sw_q02",
+    "id": "sw_q02a",
     "tier": "T1",
-    "question": "When generating a random treasure hoard in S&W, what happens if your trade\u2011out rolls exceed the hoard\u2019s gold piece value?",
-    "answer": "The trade\u2011out table allows you to exchange part of a hoard\u2019s gold value for gems, jewels or magic items.  If your trade\u2011out rolls end up exchanging more value than the original gold total, you don\u2019t subtract anything \u2013 the hoard simply becomes a \"Major\" treasure.  You keep all of the rolled trade\u2011out items and the original gold value as well\u3010115102481356123\u2020L171-L180\u3011.",
-    "source_page": "",
+    "question": "How is treasure typically divided among the party in S&W?",
+    "answer": "The Splitting the Take variant suggests totaling the gp value of the loot and dividing it equally among the participants, with each getting an equal share. Many Referees rule that treasure must be shared with NPCs getting either a full or half share depending on their level. It is also customary for fallen (dead) comrades to still get a share of the take, to be given to their next of kin.",
+    "source_page": "121",
     "gold_unit_ids": [
-      "53855dbc43b7b246c8b65d020244fede6b83741a2065012389812069cfd26eb8",
-      "14909bb5bba2137fdfe4cb242bdf696474efa8fa8b1b6f5722f477da4ce030fc",
-      "43622ad982f4a62de87ee6e7f8567f2216a46eeddb05efa572c15eab9d07e0be"
-    ]
+      "45e3835e48fa1f33677f419c05140355b3a99916144c409b21a228bdcabab0ad"
+    ],
+    "gold_locations": {
+      "45e3835e48fa1f33677f419c05140355b3a99916144c409b21a228bdcabab0ad": {
+        "page": 120,
+        "structural_path": [
+          "Splitting the Take (Variant)"
+        ],
+        "source_unit_ids": [
+          "45e3835e48fa1f33677f419c05140355b3a99916144c409b21a228bdcabab0ad"
+        ]
+      }
+    },
+    "required_gold": [
+      "45e3835e48fa1f33677f419c05140355b3a99916144c409b21a228bdcabab0ad"
+    ],
+    "supporting_gold": [],
+    "expected_answer_summary": "Total gp and divide equally; NPCs full or half share; fallen comrades get share for next of kin.",
+    "_required_gold": [
+      "sw_q02a_split"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite",
+    "required_gold_rationale": {}
+  },
+  {
+    "id": "sw_q02b",
+    "tier": "T1",
+    "question": "Are the S&W treasure tables mandatory?",
+    "answer": "No. The treasure tables are merely guidelines. You can place specific items if you desire, omit gems, jewelry, or magic items and leave the treasure at coins only. The tables are there only to help when wanted.",
+    "source_page": "125",
+    "gold_unit_ids": ["4c5c67d2f28ba92396429ec5449affd8c806b5f573781d9b469c30f3cdc830f0"],
+    "gold_locations": {
+      "4c5c67d2f28ba92396429ec5449affd8c806b5f573781d9b469c30f3cdc830f0": {
+        "page": 124,
+        "structural_path": ["Treasure Tables by Value"],
+        "source_unit_ids": ["09b3bd6439c19ecec3803333c3edc95f2808cdd84aa0d57bf239a39ce972ac37"]
+      }
+    },
+    "required_gold": ["4c5c67d2f28ba92396429ec5449affd8c806b5f573781d9b469c30f3cdc830f0"],
+    "supporting_gold": [],
+    "expected_answer_summary": "No. Tables are guidelines; you can place specific items or leave treasure as coins only.",
+    "_required_gold": [
+      "sw_q02b_guidelines"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite",
+    "required_gold_rationale": {}
+  },
+  {
+    "id": "sw_q02c",
+    "tier": "T1",
+    "question": "What's the relationship between treasure value and experience in S&W?",
+    "answer": "The monetary value of a treasure ought to be about 2\u20133 times the monster's value in experience points. Treasure is one of the ways the game reflects what a character has done and is used in awarding experience points.",
+    "source_page": "121",
+    "gold_unit_ids": [
+      "8f856f284d64bd664c389c8eb8f71fc3bf0067e674626eea6e6c4ec73c329e4a"
+    ],
+    "gold_locations": {
+      "8f856f284d64bd664c389c8eb8f71fc3bf0067e674626eea6e6c4ec73c329e4a": {
+        "page": 120,
+        "structural_path": [
+          "CHAPTER 9: TREASURE"
+        ],
+        "source_unit_ids": [
+          "ba792ff5863b60a2ddc777407986db48668becbe8e1ebee55a6d01a5570e2a53",
+          "017d46ac93975d983f926c056e5c6792574bba153debebb36015fc9ae556c806"
+        ]
+      }
+    },
+    "required_gold": [
+      "8f856f284d64bd664c389c8eb8f71fc3bf0067e674626eea6e6c4ec73c329e4a"
+    ],
+    "supporting_gold": [],
+    "expected_answer_summary": "Treasure value should be about 2\u20133\u00d7 monster XP value; treasure used for awarding XP.",
+    "_required_gold": [
+      "sw_q02c_ch9"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite",
+    "required_gold_rationale": {}
   },
   {
     "id": "sw_q03",
@@ -33,79 +190,439 @@
       "077628cd712b0eb11aff3fbe1d74774f4f7ee2a2402bab8a7bbc9a942df9202e",
       "d1512851a1fc4f613daa86515ce133886c6eadfc7d37b512d283add0d9366f7e",
       "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
-    ]
+    ],
+    "expected_answer_summary": "No.  Swords & Wizardry White Box classes weren\u2019t built from a modern balancing algorithm.  The game is a retroclone of 1974 D&D and its classes were designed to emulate the feel of OD&D rather than follow a point\u2011buy formula or equal power budget\u3010781072687742388\u2020L170-L185\u3011.",
+    "_required_gold": [
+      "077628cd712b0eb11aff3fbe1d74774f4f7ee2a2402bab8a7bbc9a942df9202e",
+      "d1512851a1fc4f613daa86515ce133886c6eadfc7d37b512d283add0d9366f7e",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q04",
     "tier": "T1",
-    "question": "How often can a magic\u2011user prepare new spells in Swords & Wizardry?  Can they re\u2011prepare spells during the day?",
-    "answer": "The core rules don\u2019t explicitly state a limit, so most tables follow the tradition that a magic\u2011user can prepare spells once per day after sleeping and studying.  Some referees allow re\u2011preparing spells if there is time: for example a wizard might spend one turn per spell level to re\u2011memorise a spell, but this is a house rule and exposes the character to wandering monsters\u3010750143294925256\u2020L164-L192\u3011.",
-    "source_page": "",
+    "question": "How often can a magic-user prepare new spells in Swords & Wizardry? Can they re-prepare spells during the day?",
+    "answer": "Magic-users don't automatically know every spell\u2014they have a spellbook that may only contain some of the spells on the standard lists. From that book they 'prepare' spells: they press a spell formula into memory, and that uses one of their daily 'slots' (how many slots they get is on the class table by level). Once a prepared spell is cast, it's gone from their mind and they have to prepare it again to cast it another time. They can prepare the same spell in multiple slots if they want (e.g. Magic Missile in two slots = two castings). When can they re-prepare during the day? In the normal combat sequence, they start preparing at the beginning of a round and cast when their side has initiative; in a later round they can spend that round preparing a different spell (or the same one again if they have an open slot). In the alternative combat sequence it's explicit: after the spell goes off at the start of the round, the caster may spend the rest of the round preparing a new spell\u2014or moving, or even fighting. So yes, they can re-prepare during the day, round by round as the rules allow. One caveat: if the caster takes damage while preparing a spell, that spell is lost and they don't get to cast it. Spell scrolls found on adventures can be copied into the spellbook.",
+    "source_page": "19, 34, 40",
     "gold_unit_ids": [
-      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
       "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
-      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
-    ]
+      "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f"
+    ],
+    "gold_locations": {
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330": {
+        "page": 19,
+        "structural_path": [
+          "Weapon and Armor Restrictions:"
+        ],
+        "source_unit_ids": [
+          "2a1a04da3e21412212d4b4748fcb7144b004317a9ea6f14870c6b824e6f2c208",
+          "3f312816e61ba8115c4e0247c663b640e7da5f5db14d776cd37e060494fc0f08",
+          "766c9d49fc63a74e39b719b1fa8f1abcd498bece7ad36a97cabc0a48c6a06206"
+        ]
+      },
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5": {
+        "page": 34,
+        "structural_path": [
+          "SPELLS"
+        ],
+        "source_unit_ids": [
+          "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5"
+        ]
+      },
+      "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f": {
+        "page": 40,
+        "structural_path": [
+          "CHAPTER 6: SPELLS & MAGIC"
+        ],
+        "source_unit_ids": [
+          "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f"
+        ]
+      }
+    },
+    "required_gold": [
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330": "Page 19: Magic-user Class Abilities (weapons/armor, Spell Casting)\u2014spellbook, prepare into memory, slots, re-prepare.",
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5": "Page 34: When casting/preparing happens in the round; can prepare in melee; alternative sequence.",
+      "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f": "Page 40: Three phases (memorized \u2192 prepared \u2192 cast); normal vs alternative sequence and when you can prepare again."
+    },
+    "expected_answer_summary": "Magic-users prepare from spellbook into slots; after casting they can re-prepare round by round as combat sequence allows; damage while preparing loses the spell.",
+    "_required_gold": [
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "2033676e416f4bad15071ba62ae04b569790667a36f43ec55870c084cb23ea3f"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q05",
     "tier": "T1",
     "question": "In the Turn Undead table, what does a \u2018T\u2019 result mean compared to a number?",
-    "answer": "A number on the Turn Undead table is the minimum roll on 1d20 needed to turn that undead; the cleric must meet or beat that number.  The letter \u2018T\u2019 means the undead is automatically turned without rolling, while \u2018D\u2019 indicates automatic destruction.  For example, a 1st\u2011level cleric automatically turns zombies (T) but must roll to turn ghouls or wights\u3010767001204131419\u2020L176-L185\u3011.",
-    "source_page": "",
+    "answer": "A number on the Turn Undead table is the minimum roll on 1d20 needed to turn that undead; the cleric must meet or beat that number. The letter \u2018T\u2019 means the undead is automatically turned without rolling, while \u2018D\u2019 indicates automatic destruction.",
+    "source_page": "37",
     "gold_unit_ids": [
-      "a76ffccffe2043de228154619f617d008896781b8d389ec34590ebb0da4b083e",
-      "871a7deaaced8254560bc4dd87a925c74b96f789c3afd917a17f19b6ba2fbbc8",
+      "78994bd0839a79be1845ccc2393c79b8a9666e0e62c074047f6cc78ad7c8a3e1",
+      "40fcba2c5d7f632fcd2dc1e4c31f693c9d7d5be25666fcad7094a7ba60910f67",
       "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
-    ]
+    ],
+    "gold_locations": {
+      "78994bd0839a79be1845ccc2393c79b8a9666e0e62c074047f6cc78ad7c8a3e1": {
+        "page": 37,
+        "structural_path": [
+          "Turning the Undead"
+        ],
+        "source_unit_ids": [
+          "3c818d5a383a85b567bd74766c3e8185c81006ccceb4cc74f5b851a5cff45dfc",
+          "251df129be8a9a7e81f90be97285e6e0b533b97ba10481884a422ce1714a49b2",
+          "fd308a05f84a2debbadab2c77bf0aaad9a39286d785144f48cb591240c39ce5f"
+        ]
+      },
+      "40fcba2c5d7f632fcd2dc1e4c31f693c9d7d5be25666fcad7094a7ba60910f67": {
+        "page": 37,
+        "structural_path": [
+          "Turning the Undead"
+        ],
+        "source_unit_ids": [
+          "63c627fc0abd6ebfe1660507a3274f2da826d3c9e5aa8be8a9353911ee8377ae"
+        ]
+      },
+      "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38": {
+        "page": 37,
+        "structural_path": [
+          "Chaotic Clerics and the Undead"
+        ],
+        "source_unit_ids": [
+          "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
+        ]
+      }
+    },
+    "required_gold": [
+      "78994bd0839a79be1845ccc2393c79b8a9666e0e62c074047f6cc78ad7c8a3e1",
+      "40fcba2c5d7f632fcd2dc1e4c31f693c9d7d5be25666fcad7094a7ba60910f67",
+      "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {},
+    "expected_answer_summary": "A number on the Turn Undead table is the minimum roll on 1d20 needed to turn that undead; the cleric must meet or beat that number. The letter \u2018T\u2019 means the undead is automatically turned without rolling, while \u2018D\u2019 indicates automatic destruction.",
+    "_required_gold": [
+      "78994bd0839a79be1845ccc2393c79b8a9666e0e62c074047f6cc78ad7c8a3e1",
+      "40fcba2c5d7f632fcd2dc1e4c31f693c9d7d5be25666fcad7094a7ba60910f67",
+      "c330a9767c44b9b7502ad44f84b202e44aad2fd7c867c0bce4af1ed4c2fa4c38"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q06",
     "tier": "T1",
     "question": "Does a first\u2011level cleric get to cast spells in Swords & Wizardry?",
-    "answer": "No.  In Swords & Wizardry a cleric does not gain spell slots until 2nd level.  This differs from Labyrinth Lord (and later editions) where a 1st\u2011level cleric begins with spells\u301091111277217397\u2020L210-L212\u3011.",
-    "source_page": "",
+    "answer": "No. In Swords & Wizardry a cleric does not gain spell slots until 2nd level.",
+    "source_page": "14, 37",
     "gold_unit_ids": [
-      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
-      "6743dcf07ad1f1e13fafb100641284bd861cb5d034e6176ee74e1547e5fb77ca",
-      "9a3aff9d7dac337dbed28e86358ba34f52527c0a2ca216507c294bedd1a89b13"
-    ]
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "gold_locations": {
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": {
+        "page": 14,
+        "structural_path": [
+          "Cleric Advancement Table"
+        ],
+        "source_unit_ids": [
+          "f9e2fd34acff7c64bcb22f86af57afaa725591b29ab2bcf4f295f648c75812e5",
+          "9c0aeba392af88c57913564ebabad0c461b298126b53cefbaec9b4cd3157c1b7"
+        ]
+      }
+    },
+    "required_gold": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": "Page 14: Cleric Advancement Table; Level 1 has no spell slots. Page 37 (Turn Undead Variant) caveat may apply."
+    },
+    "_gold_note": "Page 37 Turn Undead (Variant) text is below min_chars=100; main evidence is p.14 table.",
+    "expected_answer_summary": "No. In Swords & Wizardry a cleric does not gain spell slots until 2nd level.",
+    "_required_gold": [
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q07",
     "tier": "T1",
-    "question": "How do the experience point tables differ between Swords & Wizardry and Labyrinth Lord?",
-    "answer": "Labyrinth Lord\u2019s level tables end in an odd number (for example a fighter needs 2,501 XP to reach 2nd level).  Swords & Wizardry rounds these numbers \u2013 the same fighter needs 2,500 XP instead.  The difference reflects that LL closely follows the B/X totals while S&W simplifies them\u301091111277217397\u2020L213-L215\u3011.",
-    "source_page": "",
+    "question": "How do experience points and level advancement work in Swords & Wizardry?",
+    "answer": "Characters earn experience points from defeating monsters and treasure. Each class has its own advancement table with the XP total needed per level: Cleric (p.14), Fighter (p.16), Magic-User (p.18), and Elf variant (p.22). S&W uses rounded advancement numbers; the Scale of Advancement section (p.65) explains how these totals work and that the referee may adjust the pace.",
+    "source_page": "14, 16, 18, 22, 65",
     "gold_unit_ids": [
-      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
-      "ddab1b1bfb1bbe579de2bda996a5e1505521b084014253ffda9620296bca56ad",
-      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42"
-    ]
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "gold_locations": {
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff": {
+        "page": 18,
+        "structural_path": [
+          "THE MAGIC-USER"
+        ],
+        "source_unit_ids": [
+          "25f0a13f17aaab1c081b9697940358af9c3604ddf6f40e0def4ca0ae9b5db412"
+        ]
+      },
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42": {
+        "page": 65,
+        "structural_path": [
+          "Scale of Advancement"
+        ],
+        "source_unit_ids": [
+          "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42"
+        ]
+      },
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": {
+        "page": 14,
+        "structural_path": [
+          "Cleric Advancement Table"
+        ],
+        "source_unit_ids": [
+          "f9e2fd34acff7c64bcb22f86af57afaa725591b29ab2bcf4f295f648c75812e5",
+          "9c0aeba392af88c57913564ebabad0c461b298126b53cefbaec9b4cd3157c1b7"
+        ]
+      }
+    },
+    "required_gold": [
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff": "Page 18: Magic-User advancement/XP table.",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42": "Page 65 (Scale of Advancement): Explains how advancement totals work and that the referee may adjust the pace.",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": "Page 14: Cleric Advancement Table."
+    },
+    "expected_answer_summary": "Characters earn experience points from defeating monsters and treasure. Each class has its own advancement table with the XP total needed per level: Cleric (p.14), Fighter (p.16), Magic-User (p.18), and Elf variant (p.22). S&W uses rounded advancement numbers; the Scale of Advancement section (p.65) explains how these totals work and that the referee may adjust the pace.",
+    "_required_gold": [
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q08",
     "tier": "T1",
-    "question": "What are the main differences in race/class options and ability score bonuses between Swords & Wizardry and Labyrinth Lord?",
-    "answer": "S&W separates race and class: humans and non\u2011humans choose a class independently and non\u2011humans may multiclass.  Labyrinth Lord uses race\u2011as\u2011class.  LL uses a unified attribute bonus table with bonuses from \u20133 to +3 that apply to all classes.  S&W follows OD&D by having separate tables for each attribute with smaller bonuses; only fighters get strength bonuses to hit and damage by default\u301091111277217397\u2020L193-L207\u3011\u301091111277217397\u2020L198-L205\u3011.",
-    "source_page": "",
+    "question": "How do race, class, and ability score bonuses work in Swords & Wizardry?",
+    "answer": "S&W separates race and class: humans and non-humans choose a class independently, and non-humans (e.g. elves) may multiclass. Ability score bonuses use separate tables per attribute with relatively small bonuses; by default only fighters get strength bonuses to hit and damage. An optional rule (Universal Attribute Bonus) can extend attribute bonuses more broadly.",
+    "source_page": "9, 12, 14, 16, 18, 20, 21, 22, 23",
     "gold_unit_ids": [
-      "bab992a985c36a670942de91044a2a31fd33177fadb292e2dd031cb7de4b6647",
-      "bf402d7c0ad22a5bf5b7e4c151c12ac7b2fa02eabb84b9d74d69671cb5de242a",
-      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd"
-    ]
+      "6cb5aa92c8e617961213e4c7092b38012e4be41ab0e8a52f1f300d462402d328",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "b4227417c3b0df276feeff54a9c52cde83e2ee5b2a2bbf3ca3d16dd7888a90ac",
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d",
+      "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1"
+    ],
+    "gold_locations": {
+      "6cb5aa92c8e617961213e4c7092b38012e4be41ab0e8a52f1f300d462402d328": {
+        "page": 21,
+        "structural_path": [
+          "Elven Abilities"
+        ],
+        "source_unit_ids": [
+          "6dbe795d6dbd9e868334c3abfef62633de80a65113982ec1e35bc7fb67b19328",
+          "e290c1f492dea6e4f1ab992b9f057e32dcc039281e46a524a25da6807da544f2",
+          "05d086853e970ceb22df98f8fe969d377d86aa721cb66102f7bd622d240338e8",
+          "77ab045cb25ec24ed7068fa61d88e1319ee561246f9599be45f04d72e778b7ac"
+        ]
+      },
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd": {
+        "page": 12,
+        "structural_path": [
+          "Alternate Rule: Universal Attribute Bonus"
+        ],
+        "source_unit_ids": [
+          "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd"
+        ]
+      },
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6": {
+        "page": 9,
+        "structural_path": [
+          "Attribute Scores"
+        ],
+        "source_unit_ids": [
+          "9b8bb70990753c45548e373a339c12f2a3884a86a79f06f778cad7cb7b084b81",
+          "d48a28431e81681f5de1643a8721358dceabfdbe73a32451b424be99a6b22250",
+          "5ae08d03fe95c32b1956fe1e77d14cb03672ac470c3e95efe178097df2947e37"
+        ]
+      },
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": {
+        "page": 14,
+        "structural_path": [
+          "Cleric Advancement Table"
+        ],
+        "source_unit_ids": [
+          "f9e2fd34acff7c64bcb22f86af57afaa725591b29ab2bcf4f295f648c75812e5",
+          "9c0aeba392af88c57913564ebabad0c461b298126b53cefbaec9b4cd3157c1b7"
+        ]
+      },
+      "b4227417c3b0df276feeff54a9c52cde83e2ee5b2a2bbf3ca3d16dd7888a90ac": {
+        "page": 18,
+        "structural_path": [
+          "THE MAGIC-USER"
+        ],
+        "source_unit_ids": [
+          "5f43ac8f65ecc3c1e0c97dc1b6c737abbd496c942616be2840a331697b855e92"
+        ]
+      },
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff": {
+        "page": 18,
+        "structural_path": [
+          "THE MAGIC-USER"
+        ],
+        "source_unit_ids": [
+          "25f0a13f17aaab1c081b9697940358af9c3604ddf6f40e0def4ca0ae9b5db412"
+        ]
+      },
+      "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d": {
+        "page": 20,
+        "structural_path": [
+          "THE DWARF"
+        ],
+        "source_unit_ids": [
+          "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d"
+        ]
+      },
+      "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1": {
+        "page": 23,
+        "structural_path": [
+          "THE HALFLING"
+        ],
+        "source_unit_ids": [
+          "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1"
+        ]
+      }
+    },
+    "required_gold": [
+      "6cb5aa92c8e617961213e4c7092b38012e4be41ab0e8a52f1f300d462402d328",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "b4227417c3b0df276feeff54a9c52cde83e2ee5b2a2bbf3ca3d16dd7888a90ac",
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d",
+      "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "6cb5aa92c8e617961213e4c7092b38012e4be41ab0e8a52f1f300d462402d328": "Page 21 (Elven Abilities): Race and class separate; non-humans choose class and may multiclass.",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd": "Page 12 (Universal Attribute Bonus): Optional attribute bonus rule.",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6": "Page 9 (Attribute Scores): Default ability score and bonus rules.",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f": "Page 14: Cleric class.",
+      "b4227417c3b0df276feeff54a9c52cde83e2ee5b2a2bbf3ca3d16dd7888a90ac": "Page 18: Magic-User class.",
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff": "Page 18: Magic-User class.",
+      "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d": "Page 20: Dwarf race.",
+      "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1": "Page 23: Halfling race."
+    },
+    "expected_answer_summary": "S&W separates race and class: humans and non-humans choose a class independently, and non-humans (e.g. elves) may multiclass. Ability score bonuses use separate tables per attribute with relatively small bonuses; by default only fighters get strength bonuses to hit and damage. An optional rule (Universal Attribute Bonus) can extend attribute bonuses more broadly.",
+    "_required_gold": [
+      "6cb5aa92c8e617961213e4c7092b38012e4be41ab0e8a52f1f300d462402d328",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "c11d8ea6db4c8d18ec07a1a2ba0bc842bc613e5243c5adfab74d9f4e18f3fe5f",
+      "b4227417c3b0df276feeff54a9c52cde83e2ee5b2a2bbf3ca3d16dd7888a90ac",
+      "20590803363e37ad5e8220d18cab59df074bcd37010efb6d00ae41817644bfff",
+      "36acdc730eeb0f10966c35d208ac990eb815c80e5593ce271fcaf57c7206904d",
+      "468bdf4b6a146c187550292acbb91f273b3da9e28bae43db2f24111d3a1eafe1"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q09",
     "tier": "T1",
     "question": "Can humans dual\u2011class in Swords & Wizardry?",
-    "answer": "Yes.  Swords & Wizardry allows human characters to abandon their original class and begin progressing in a new class, thereby dual\u2011classing, whereas Labyrinth Lord does not mention this option\u301091111277217397\u2020L216-L217\u3011.",
-    "source_page": "",
+    "answer": "The book does not specify and emphasizes that the Referee is free to invent or allow other character classes. So the answer depends on your game's referee.",
+    "source_page": "8, 14, 19, 65",
     "gold_unit_ids": [
       "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571",
-      "f2f6fb417845a21cbb7aec7ba268ee58a7d140df6b0ff9c7fbb20a176b06f31a",
-      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
-    ]
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a"
+    ],
+    "gold_locations": {
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571": {
+        "page": 14,
+        "structural_path": [
+          "CHAPTER 2: CHARACTER CLASSES"
+        ],
+        "source_unit_ids": [
+          "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571"
+        ]
+      },
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330": {
+        "page": 19,
+        "structural_path": [
+          "Weapon and Armor Restrictions:"
+        ],
+        "source_unit_ids": [
+          "2a1a04da3e21412212d4b4748fcb7144b004317a9ea6f14870c6b824e6f2c208",
+          "3f312816e61ba8115c4e0247c663b640e7da5f5db14d776cd37e060494fc0f08",
+          "766c9d49fc63a74e39b719b1fa8f1abcd498bece7ad36a97cabc0a48c6a06206"
+        ]
+      },
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42": {
+        "page": 65,
+        "structural_path": [
+          "Scale of Advancement"
+        ],
+        "source_unit_ids": [
+          "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42"
+        ]
+      },
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a": {
+        "page": 8,
+        "structural_path": [
+          "CHAPTER 1: GETTING STARTED"
+        ],
+        "source_unit_ids": [
+          "788fef5f6116701b6268c1d9af475be381cc56bd74d3604f2cd389e7039db18b",
+          "341a9169430c44ccc48c0685b76620f0d13a38e26f030842cf3ed2daeb53e6ef"
+        ]
+      }
+    },
+    "required_gold": [
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571"
+    ],
+    "supporting_gold": [
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a"
+    ],
+    "required_gold_rationale": {
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571": "Page 14 (CHAPTER 2: CHARACTER CLASSES): States that the Referee is free to invent or allow other character classes; the book does not specify dual-classing."
+    },
+    "_gold_note": "One primary gold chunk (p.14); p.8 (Rule Number One), p.19, and p.65 are supporting. P.8 states the Referee may modify the rules and gaps are left on purpose; p.65 adds referee-as-ultimate-judge.",
+    "expected_answer_summary": "The book does not specify and emphasizes that the Referee is free to invent or allow other character classes. So the answer depends on your game's referee.",
+    "_required_gold": [
+      "a16103efd51352f6afae4bd4126d96f035d639a5619ae1b5f77de641d7558571"
+    ],
+    "_supporting_gold": [
+      "88dee658a8b1a0e3eff192f0f1021f8cb0a62e8ee54693b03ce079222152d330",
+      "abc6c1540c59bf5a81a713e74bcfad0c80aefefff4f67c798474159aa64b4f42",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a"
+    ],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q10",
@@ -117,7 +634,15 @@
       "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
       "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
       "da6e7409fbce08b0b6c91b8f0769c6697f5b107adc4fb47ff439e338bf95352b"
-    ]
+    ],
+    "expected_answer_summary": "No.  S&W dispenses with minimum attribute requirements entirely.  Labyrinth Lord retains minimum scores for each class.  In S&W high attributes still grant positive experience bonuses (up to +15%), and high wisdom provides an XP bonus regardless of class\u301091111277217397\u2020L219-L223\u3011.",
+    "_required_gold": [
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "da6e7409fbce08b0b6c91b8f0769c6697f5b107adc4fb47ff439e338bf95352b"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q11",
@@ -129,7 +654,15 @@
       "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
       "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1",
       "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
-    ]
+    ],
+    "expected_answer_summary": "Labyrinth Lord magic\u2011users and elves begin play knowing two 1st\u2011level spells and one 2nd\u2011level spell.  In Swords & Wizardry, the magic\u2011user checks each of the eight basic 1st\u2011level spells against their Learn Spell chance to see which they know.  The character may end up with fewer than the maximum allowed by their Intelligence\u301091111277217397\u2020L224-L228\u3011.",
+    "_required_gold": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "2a10c4b29da448541d8cd17329af12260889fdfc0cd5f28aede7b9309c5614a1",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q12",
@@ -141,7 +674,15 @@
       "8faf75fb39c23bc4ff781c6aa7ab147cae8a171249526212d867481a77e20fa4",
       "65c7e822e23cedd2ff1573e206bc620fb59c4c315b628ca629ef6aafea05f919",
       "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff"
-    ]
+    ],
+    "expected_answer_summary": "Labyrinth Lord uses a d20 roll for thief skill checks.  Swords & Wizardry resolves most saving throws and thief skills using percentile dice except for Hear Noise, which uses a d6\u301091111277217397\u2020L229-L231\u3011.",
+    "_required_gold": [
+      "8faf75fb39c23bc4ff781c6aa7ab147cae8a171249526212d867481a77e20fa4",
+      "65c7e822e23cedd2ff1573e206bc620fb59c4c315b628ca629ef6aafea05f919",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q13",
@@ -153,7 +694,15 @@
       "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
       "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18",
       "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74"
-    ]
+    ],
+    "expected_answer_summary": "Both games use group initiative, but Labyrinth Lord divides each round into phases (spell casting, missile attacks, melee, and movement) and completes all phases for one side before the other side acts.  Swords & Wizardry\u2019s standard sequence resolves all actions for a side at once.  There is also an optional alternate sequence in S&W that handles actions by phase with order determined by Dexterity\u301091111277217397\u2020L252-L260\u3011.",
+    "_required_gold": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q14",
@@ -165,7 +714,15 @@
       "aac3607a2a256c3f0c41b7952ac6aaaff0ad7a5386a204dd1f4b808d9e1a8bfd",
       "b196bd64e57674b88b88a92287e87d35e16e89ef4fc0e20cdb4528cbfd0ff5fc",
       "2b1af49fe5fb97c8f97f6601b6e6fc99252e4e55dd0e5c0cbc7ea4090f3c4564"
-    ]
+    ],
+    "expected_answer_summary": "In Labyrinth Lord a creature dies when reduced to 0 hit points.  Swords & Wizardry treats 0 hp as unconsciousness: the character bleeds out at 1 hp per round and dies when negative hit points equal their level.  Healing also differs: LL characters regain 1d3 hp per full day of rest, while S&W characters regain 1 hp per day but heal to full after four weeks of rest\u301091111277217397\u2020L291-L296\u3011.",
+    "_required_gold": [
+      "aac3607a2a256c3f0c41b7952ac6aaaff0ad7a5386a204dd1f4b808d9e1a8bfd",
+      "b196bd64e57674b88b88a92287e87d35e16e89ef4fc0e20cdb4528cbfd0ff5fc",
+      "2b1af49fe5fb97c8f97f6601b6e6fc99252e4e55dd0e5c0cbc7ea4090f3c4564"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q15",
@@ -177,7 +734,15 @@
       "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
       "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
       "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
-    ]
+    ],
+    "expected_answer_summary": "When firing into a melee in S&W, a successful attack does not automatically hit your intended target.  Instead, the target of a hit is chosen randomly among all creatures in the melee, including allies.  Labyrinth Lord provides no explicit rule for firing into melee\u301091111277217397\u2020L273-L275\u3011.",
+    "_required_gold": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q16",
@@ -189,7 +754,15 @@
       "9f2bba6138fc606bd977d932e654c99d75fe2e674b2b5763b0b7a03827f237fe",
       "00c38e678bf75f0bea756b6b789ff5516eccbce19c77fa1cf78366915d87a6a9",
       "7db4d4afe306fc33660eae6488aae33cccdd777bea2f35c509cc72e7dfd5b7cd"
-    ]
+    ],
+    "expected_answer_summary": "No.  Tenkar\u2019s Tavern clarified that the line for the thief\u2019s AC is a typo: it should read AC 7[12] (descending AC first with ascending AC in brackets).  The reversed numbers in the printed S&W Light booklet are an error\u3010319006729373824\u2020L41-L47\u3011.",
+    "_required_gold": [
+      "9f2bba6138fc606bd977d932e654c99d75fe2e674b2b5763b0b7a03827f237fe",
+      "00c38e678bf75f0bea756b6b789ff5516eccbce19c77fa1cf78366915d87a6a9",
+      "7db4d4afe306fc33660eae6488aae33cccdd777bea2f35c509cc72e7dfd5b7cd"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q17",
@@ -201,7 +774,15 @@
       "bbdd05e9f826099bbdc66393c7d18d58d9fe71dc9505227c230c5d8ca4d6dd2e",
       "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
       "f21857f3a071a722ca1e6023f7d54087bc7fc34999a33252dc3fe06c2ed512bf"
-    ]
+    ],
+    "expected_answer_summary": "No.  The four\u2011page S&W Light rules do not require prior knowledge of Swords & Wizardry.  They presume players are familiar with role\u2011playing games in general but there is no assumption that they have read other S&W rulebooks\u3010319006729373824\u2020L50-L57\u3011.",
+    "_required_gold": [
+      "bbdd05e9f826099bbdc66393c7d18d58d9fe71dc9505227c230c5d8ca4d6dd2e",
+      "a58dcf46d2c8b35f306c79904d8fe69e613699fda2f20dcb54a0c19376a0307a",
+      "f21857f3a071a722ca1e6023f7d54087bc7fc34999a33252dc3fe06c2ed512bf"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q18",
@@ -213,7 +794,15 @@
       "3b02e1aa31a77f06e16cfcdbda686d05c5539a8dafdd6743dca1794d7e9d09dd",
       "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
       "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6"
-    ]
+    ],
+    "expected_answer_summary": "Because the bonuses in S&W Light are very small.  Characters never gain more than a +1 bonus from an ability score in these streamlined rules, so a table was omitted to save space\u3010319006729373824\u2020L59-L65\u3011.",
+    "_required_gold": [
+      "3b02e1aa31a77f06e16cfcdbda686d05c5539a8dafdd6743dca1794d7e9d09dd",
+      "9739ca95903f3e0a563e26a28db9bfb974bdc1ed43ad883cf654b9fdfa0e6edd",
+      "cdac8ce5f9132fb26aa2ac6096f36c1c4c715f9e169ab03419035ab33e2014f6"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q19",
@@ -225,7 +814,15 @@
       "72c9cb4c3664129f8d55a9f984815348b45236f156378ba890d0cdb8747d547b",
       "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff",
       "b97acd4300e80a3763215753ef7ff4e9e8857947cae11a15d3402af08396c4a7"
-    ]
+    ],
+    "expected_answer_summary": "S&W Light uses only d6s and d20s.  Hit Dice are d6s, so a monster or character with 3 HD rolls three six\u2011sided dice for hit points.  \u2018HD\u2019 simply means the number of d6s rolled\u3010319006729373824\u2020L68-L77\u3011.",
+    "_required_gold": [
+      "72c9cb4c3664129f8d55a9f984815348b45236f156378ba890d0cdb8747d547b",
+      "547ce995cbb8fc1d78a3c695aeadcb57361631d8c3d99854d9de5534ddd30eff",
+      "b97acd4300e80a3763215753ef7ff4e9e8857947cae11a15d3402af08396c4a7"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q20",
@@ -237,7 +834,15 @@
       "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
       "505570226a08fa84d5909c600b0d51ab055e68d2667ddef83d4a15b5dc8694ca",
       "2204546ca0a1b2493fa71aa3469002a220c1a4c416412dc444f35b1a5292f7e4"
-    ]
+    ],
+    "expected_answer_summary": "Yes.  The S&W Light magic\u2011user should receive a dagger or staff as a starting weapon.  The equipment section omits this in error, but the clarification states that the magic\u2011user should get one of those simple weapons\u3010319006729373824\u2020L81-L86\u3011.",
+    "_required_gold": [
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da",
+      "505570226a08fa84d5909c600b0d51ab055e68d2667ddef83d4a15b5dc8694ca",
+      "2204546ca0a1b2493fa71aa3469002a220c1a4c416412dc444f35b1a5292f7e4"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q21",
@@ -249,7 +854,15 @@
       "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
       "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
       "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
-    ]
+    ],
+    "expected_answer_summary": "No.  Casting a spell in S&W Light does not require any kind of success roll.  A spell only fails or is lost if the caster is interrupted or takes damage during casting\u3010319006729373824\u2020L88-L93\u3011.",
+    "_required_gold": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q22",
@@ -261,7 +874,15 @@
       "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
       "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74",
       "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18"
-    ]
+    ],
+    "expected_answer_summary": "If one side is surprised, the other side gets a free action or attack before initiative is rolled.  After this surprise round, initiative is determined normally and each side acts in order.  Surprise therefore grants a single free action rather than an entire round\u3010371582203323234\u2020L39-L54\u3011.",
+    "_required_gold": [
+      "56e8be7e2956116e3a6a5cfe58e52d0f6588a3812a0ef1b68e67962e7d5cdc9a",
+      "5764075320967058672db817e5deb982ec0e267c860b22f9e0391af457016a74",
+      "edf300608d358a2c8dbc0e90a0d32ec1a203ec332ad85ca7b0635b09b68d3f18"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q23",
@@ -273,7 +894,15 @@
       "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
       "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
       "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
-    ]
+    ],
+    "expected_answer_summary": "No.  The combat sequence in S&W Complete allows each combatant one action per round.  A character may move and fire a missile weapon (or move and fight in melee) but cannot both fire a missile and make a melee attack in the same round.  Only a half\u2011move can be combined with a single attack\u3010371582203323234\u2020L56-L69\u3011.",
+    "_required_gold": [
+      "6d13541db4752963b94eb3a22c62b9c15c2535ce718d9c116613e5381f200e2d",
+      "d64b1b1a49b3241f6cf48d2ede3e7c6ea0975335f7ef6f6b1452307a8acd6b37",
+      "36591985e0a5480b537bc787e593e153795bc4377f9585881ca8d33283e458dc"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q24",
@@ -285,7 +914,15 @@
       "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
       "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
       "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
-    ]
+    ],
+    "expected_answer_summary": "If a spellcaster is struck or otherwise disrupted while casting a spell in S&W Complete, the spell is lost for the day.  The caster must prepare it again before it can be used\u3010371582203323234\u2020L71-L83\u3011.",
+    "_required_gold": [
+      "724fcd7ed190ce981af4936a4a2fdadb1237e0e680ed440f67eb7472e06945a5",
+      "65b6eb064917ee2cc936241c3c33a91b8fe8f1a8f85414f7e518e7062d858bdc",
+      "99f4ffc41cc33cab72015295161b34d7bb3781036a122e98de2ddad2f69712da"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   },
   {
     "id": "sw_q25",
@@ -297,6 +934,14 @@
       "45867b8a886906180e12ee67f9b0e5048bac6672b43323a0da396ab66613a8b2",
       "5dbeb0ddcaf04e28e9aaff2ef8cb09bf3c9da4eb8f5d69e19d7aa7a3e086db90",
       "a852155fe85845eb48075e1d4b254f82137b260eda411339a1b03e755433ab2e"
-    ]
+    ],
+    "expected_answer_summary": "Yes.  Swords & Wizardry was designed to be compatible with original and first\u2011edition D&D material.  Players report that it runs old modules well.  Other retroclones like OSRIC or Labyrinth Lord may hew even more closely to AD&D, but converting material to S&W is straightforward\u3010338419238901263\u2020L185-L213\u3011.",
+    "_required_gold": [
+      "45867b8a886906180e12ee67f9b0e5048bac6672b43323a0da396ab66613a8b2",
+      "5dbeb0ddcaf04e28e9aaff2ef8cb09bf3c9da4eb8f5d69e19d7aa7a3e086db90",
+      "a852155fe85845eb48075e1d4b254f82137b260eda411339a1b03e755433ab2e"
+    ],
+    "_supporting_gold": [],
+    "_mode": "single_cite"
   }
 ]

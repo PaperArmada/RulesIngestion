@@ -1,0 +1,22 @@
+{
+  "units": [
+    {
+      "unit_id": "u1",
+      "unit_type": "prose",
+      "text": "Initiative determines turn order in combat.",
+      "structural_path": [
+        "Combat",
+        "Initiative"
+      ]
+    },
+    {
+      "unit_id": "u2",
+      "unit_type": "prose",
+      "text": "A turn contains movement and actions.",
+      "structural_path": [
+        "Combat",
+        "TurnOrder"
+      ]
+    }
+  ]
+}

@@ -29,7 +29,6 @@ def _parse_page_from_dir_name(dir_name: str, document_id: str) -> int | None:
 def load_evidence_units(
     phb_dir: str | Path,
     document_id: str,
-    min_chars: int | None = None,
 ) -> List[Dict[str, Any]]:
     """
     Load all EvidenceUnits from page directories under phb_dir.
@@ -38,16 +37,13 @@ def load_evidence_units(
     multi-PDF layout (phb_dir / PDF_stem / PDF_stem_p0 / stageB...).
     Returns a flat list of chunk-like dicts: id, text, page, structural_path, unit_type, document_id.
 
-    If min_chars is set, units with len(text) < min_chars are excluded (reduces noise from
-    spell header lines and key-value metadata; see Docs/Learnings/LEARNINGS-SnW-Tiny-Chunks-Root-Cause-2026.md).
-    When using min_chars the corpus changes, so re-embed is required (new run_id).
+    All units are loaded; no filtering by size. Call fold_under_threshold_into_adjacent(corpus, min_chars)
+    after load if you want small units folded into adjacent ones instead of dropped.
     """
     phb_path = Path(phb_dir)
     if not phb_path.is_dir():
         raise FileNotFoundError(f"Substrate directory not found: {phb_path}")
     corpus: List[Dict[str, Any]] = []
-    skipped = 0
-    # Find all dirs that contain stageB.evidence_units.json (one or two levels deep)
     units_file_name = "stageB.evidence_units.json"
     page_dirs = sorted(
         [f.parent for f in phb_path.rglob(units_file_name) if f.name == units_file_name and f.parent.is_dir()],
@@ -59,7 +55,6 @@ def load_evidence_units(
             continue
         page_num = _parse_page_from_dir_name(page_dir.name, document_id)
         if page_num is None:
-            # Fallback: try any _pN pattern
             match = re.search(r"_p(\d+)$", page_dir.name)
             page_num = int(match.group(1)) if match else -1
         data = json.loads(units_file.read_text(encoding="utf-8"))
@@ -67,9 +62,6 @@ def load_evidence_units(
         for u in units:
             unit_id = u.get("unit_id", "")
             text = u.get("text", "")
-            if min_chars is not None and len(text) < min_chars:
-                skipped += 1
-                continue
             structural_path = u.get("structural_path", [])
             unit_type = u.get("unit_type", "unknown")
             corpus.append({
@@ -80,9 +72,132 @@ def load_evidence_units(
                 "unit_type": unit_type,
                 "document_id": document_id,
             })
-    if min_chars is not None and skipped:
-        logger.info("Substrate filter min_chars=%d: excluded %d units, kept %d", min_chars, skipped, len(corpus))
     return corpus
+
+
+def _combined_unit_id(unit_ids: List[str]) -> str:
+    """Deterministic id for a merged unit: SHA-256 of sorted constituent ids."""
+    return hashlib.sha256("|".join(sorted(unit_ids)).encode("utf-8")).hexdigest()
+
+
+def fold_under_threshold_into_adjacent(
+    corpus: List[Dict[str, Any]],
+    min_chars: int,
+    separator: str = " — ",
+) -> List[Dict[str, Any]]:
+    """
+    Fold units with len(text) < min_chars into an adjacent unit on the same page.
+    No evidence is dropped: small units are merged into the next unit on the same
+    page, or into the previous unit when they are trailing on a page.
+
+    Walk corpus in order. When a unit is under threshold, defer it (pending). When
+    a unit is at or above threshold, merge any same-page pending into it (prepend),
+    then emit. At end, merge any remaining pending into the last emitted unit per page.
+
+    Merged units get id = SHA-256(sorted constituent ids) and source_unit_ids list.
+    """
+    if not corpus:
+        return []
+    if min_chars <= 0:
+        return corpus
+
+    result: List[Dict[str, Any]] = []
+    last_emitted_index_per_page: Dict[int, int] = {}
+    pending: List[Dict[str, Any]] = []  # small units (page, path, unit) to fold into next or previous
+
+    def merge_into(
+        base: Dict[str, Any],
+        extra_units: List[Dict[str, Any]],
+        prepend: bool,
+    ) -> Dict[str, Any]:
+        extra_texts = [u.get("text", "") for u in extra_units]
+        extra_ids = [u.get("id", "") for u in extra_units]
+        all_ids = extra_ids + [base.get("id", "")] if prepend else [base.get("id", "")] + extra_ids
+        combined_text = (
+            separator.join(extra_texts) + separator + base.get("text", "")
+            if prepend
+            else base.get("text", "") + separator + separator.join(extra_texts)
+        )
+        return {
+            "id": _combined_unit_id(all_ids),
+            "text": combined_text,
+            "page": base.get("page", -1),
+            "structural_path": base.get("structural_path", []),
+            "unit_type": base.get("unit_type", "unknown"),
+            "document_id": base.get("document_id", ""),
+            "source_unit_ids": all_ids,
+        }
+    # Optional: preserve existing source_unit_ids on base when merging
+    def merge_into_existing(
+        base: Dict[str, Any],
+        extra_units: List[Dict[str, Any]],
+        append: bool,
+    ) -> Dict[str, Any]:
+        base_ids = base.get("source_unit_ids") or [base.get("id", "")]
+        extra_ids = [u.get("id", "") for u in extra_units]
+        extra_texts = [u.get("text", "") for u in extra_units]
+        all_ids = base_ids + extra_ids if append else extra_ids + base_ids
+        base_text = base.get("text", "")
+        combined_text = (
+            base_text + separator + separator.join(extra_texts)
+            if append
+            else separator.join(extra_texts) + separator + base_text
+        )
+        return {
+            **base,
+            "id": _combined_unit_id(all_ids),
+            "text": combined_text,
+            "source_unit_ids": all_ids,
+        }
+
+    for u in corpus:
+        text = u.get("text", "")
+        page = u.get("page", -1)
+        if len(text) < min_chars:
+            pending.append(u)
+            continue
+        # Non-small: merge any same-page pending into this unit (prepend), then emit
+        same_page_pending = [p for p in pending if p.get("page") == page]
+        pending = [p for p in pending if p.get("page") != page]
+        if same_page_pending:
+            u = merge_into(u, same_page_pending, prepend=True)
+        else:
+            u = dict(u)
+            u["source_unit_ids"] = [u.get("id", "")]
+        result.append(u)
+        last_emitted_index_per_page[page] = len(result) - 1
+
+    # Flush pending: merge into last emitted unit per page (append)
+    by_page: Dict[int, List[Dict[str, Any]]] = {}
+    for p in pending:
+        pg = p.get("page", -1)
+        by_page.setdefault(pg, []).append(p)
+    for page, units in by_page.items():
+        idx = last_emitted_index_per_page.get(page)
+        if idx is not None:
+            result[idx] = merge_into_existing(result[idx], units, append=True)
+        else:
+            # Entire page was small: emit one combined unit
+            combined_text = separator.join(u.get("text", "") for u in units)
+            all_ids = [u.get("id", "") for u in units]
+            template = units[0]
+            result.append({
+                "id": _combined_unit_id(all_ids),
+                "text": combined_text,
+                "page": page,
+                "structural_path": template.get("structural_path", []),
+                "unit_type": template.get("unit_type", "unknown"),
+                "document_id": template.get("document_id", ""),
+                "source_unit_ids": all_ids,
+            })
+            last_emitted_index_per_page[page] = len(result) - 1
+
+    folded_count = sum(1 for u in result if len(u.get("source_unit_ids", [])) > 1)
+    logger.info(
+        "Fold under threshold (min_chars=%d): %d units → %d units (%d with folded content)",
+        min_chars, len(corpus), len(result), folded_count,
+    )
+    return result
 
 
 def _structural_path_key(unit: Dict[str, Any]) -> Tuple[int, str]:
@@ -133,14 +248,18 @@ def merge_units_by_heading(
         """Flush a buffer of units sharing the same heading into one or more merged chunks."""
         if not buf:
             return
-        # Single unit → pass through (keep original id and type)
+        # Single unit → pass through (keep original id and type; preserve source_unit_ids from fold if present)
         if len(buf) == 1:
             out = dict(buf[0])
-            out["source_unit_ids"] = [buf[0]["id"]]
+            if "source_unit_ids" not in out or not out["source_unit_ids"]:
+                out["source_unit_ids"] = [buf[0]["id"]]
             merged.append(out)
             return
 
         # Multiple units → merge with size cap
+        # Table-with-caption: if adding a table would overflow and the last part is a short
+        # caption (<= table_caption_max), keep caption with the table instead of with prose.
+        table_caption_max = 100
         parts: List[str] = []
         current_ids: List[str] = []
         current_len = 0
@@ -149,14 +268,25 @@ def merge_units_by_heading(
             text = u.get("text", "")
             addition_len = len(text) + (len(separator) if parts else 0)
             if parts and (current_len + addition_len) > max_chars:
-                # Flush current accumulator as a merged chunk
-                _emit(parts, current_ids, buf[0])
-                parts = []
-                current_ids = []
-                current_len = 0
-            parts.append(text)
-            current_ids.append(u["id"])
-            current_len += addition_len
+                if (
+                    u.get("unit_type") == "table"
+                    and len(parts) > 0
+                    and len(parts[-1]) <= table_caption_max
+                ):
+                    # Flush prose up to (but not including) last part; merge last part with table
+                    _emit(parts[:-1], current_ids[:-1], buf[0])
+                    parts = [parts[-1], text]
+                    current_ids = [current_ids[-1], u["id"]]
+                    current_len = len(parts[0]) + len(separator) + len(parts[1])
+                else:
+                    _emit(parts, current_ids, buf[0])
+                    parts = [text]
+                    current_ids = [u["id"]]
+                    current_len = len(text)
+            else:
+                parts.append(text)
+                current_ids.append(u["id"])
+                current_len += addition_len
 
         if parts:
             _emit(parts, current_ids, buf[0])

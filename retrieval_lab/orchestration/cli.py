@@ -6,6 +6,8 @@ from typing import Any
 
 
 def apply_cli_overrides(config: Any, args: Any) -> None:
+    if hasattr(args, "experiment_name") and args.experiment_name:
+        config.experiment_name = args.experiment_name
     if args.substrate:
         config.substrate_path = args.substrate
     if args.batches:
@@ -14,6 +16,16 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.models = args.models
     if args.top_k:
         config.top_k = [int(x) for x in args.top_k.split(",") if x.strip()]
+    if hasattr(args, "rrf_k") and args.rrf_k is not None:
+        config.rrf_k = args.rrf_k
+    if hasattr(args, "merge_chunks") and args.merge_chunks is not None:
+        config.merge_chunks = args.merge_chunks
+    if hasattr(args, "merge_max_chars") and args.merge_max_chars is not None:
+        config.merge_max_chars = args.merge_max_chars
+    if hasattr(args, "min_chars") and args.min_chars is not None:
+        config.min_chars = args.min_chars
+    if hasattr(args, "seed"):
+        config.seed = args.seed
     if args.output:
         config.output_dir = args.output
     if args.mongo_uri is not None:
@@ -56,3 +68,39 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.dependency_pairing_expand = True
     if hasattr(args, "dependency_pairing_emax"):
         config.dependency_pairing_emax = args.dependency_pairing_emax
+    if hasattr(args, "bm25_tokenizer_mode"):
+        config.bm25_tokenizer_mode = args.bm25_tokenizer_mode
+    if hasattr(args, "bm25_k1"):
+        config.bm25_k1 = args.bm25_k1
+    if hasattr(args, "bm25_b"):
+        config.bm25_b = args.bm25_b
+    if hasattr(args, "bm25_query_mode"):
+        config.bm25_query_mode = args.bm25_query_mode
+    if hasattr(args, "bm25_query_weight_question"):
+        config.bm25_query_weight_question = args.bm25_query_weight_question
+    if hasattr(args, "bm25_query_weight_summary"):
+        config.bm25_query_weight_summary = args.bm25_query_weight_summary
+    if getattr(args, "two_stage_retrieval", False):
+        config.two_stage_retrieval = True
+    if hasattr(args, "stage1_admission_k"):
+        config.stage1_admission_k = args.stage1_admission_k
+    if hasattr(args, "stage1_query_mode"):
+        config.stage1_query_mode = args.stage1_query_mode
+    if hasattr(args, "stage2_query_mode"):
+        config.stage2_query_mode = args.stage2_query_mode
+    if hasattr(args, "stage2_rerank_method"):
+        config.stage2_rerank_method = args.stage2_rerank_method
+    if getattr(args, "raw_first_merge_rerank", False):
+        config.raw_first_merge_rerank = True
+    if hasattr(args, "raw_stage1_admission_k"):
+        config.raw_stage1_admission_k = args.raw_stage1_admission_k
+    if hasattr(args, "raw_merge_rerank_top_k"):
+        config.raw_merge_rerank_top_k = args.raw_merge_rerank_top_k
+    if hasattr(args, "raw_merge_score_floor") and args.raw_merge_score_floor is not None:
+        config.raw_merge_score_floor = args.raw_merge_score_floor
+    if hasattr(args, "raw_merge_rank_floor") and args.raw_merge_rank_floor is not None:
+        config.raw_merge_rank_floor = args.raw_merge_rank_floor
+    if hasattr(args, "raw_merge_coverage_bonus") and args.raw_merge_coverage_bonus is not None:
+        config.raw_merge_coverage_bonus = args.raw_merge_coverage_bonus
+    if hasattr(args, "baseline_metrics") and args.baseline_metrics:
+        config.baseline_metrics_path = args.baseline_metrics

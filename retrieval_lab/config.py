@@ -84,6 +84,8 @@ class ExperimentConfig:
     gold_jaccard_threshold: float = 0.15
     # Embedding batch size
     batch_size: int = 16
+    # Optional seed for reproducibility in harness runs.
+    seed: Optional[int] = None
     # Expand top-k with context then re-rank: append prev/next N chunks (document order), re-embed, re-rank.
     expand_context: bool = False
     expand_context_n: int = 1
@@ -96,6 +98,32 @@ class ExperimentConfig:
     merge_max_chars: int = 2000
     # R7: RRF fusion constant k (default 60). Overridden by per-corpus policy if set.
     rrf_k: int = 60
+    # BM25 tuning knobs.
+    bm25_tokenizer_mode: str = "basic"  # basic | hyphenated
+    bm25_k1: float = 1.5
+    bm25_b: float = 0.75
+    bm25_query_mode: str = "question_only"  # question_only | question_plus_summary | weighted
+    bm25_query_weight_question: int = 1
+    bm25_query_weight_summary: int = 1
+    # Two-stage retrieval: Stage1 admission (expanded query), Stage2 rerank (strict query).
+    two_stage_retrieval: bool = False
+    stage1_admission_k: int = 100
+    stage1_query_mode: str = "question_plus_summary"  # question_only | question_plus_summary | weighted
+    stage2_query_mode: str = "question_only"  # question_only | question_plus_summary | weighted
+    stage2_rerank_method: str = "dense"  # dense | cross_encoder
+    # Raw-first merge-rerank policy:
+    # 1) retrieve + rerank on unmerged units
+    # 2) promote to merged candidates
+    # 3) rerank merged candidates
+    raw_first_merge_rerank: bool = False
+    raw_stage1_admission_k: int = 100
+    raw_merge_rerank_top_k: int = 20
+    # If enabled, final merged score is floored by normalized best raw score.
+    raw_merge_score_floor: bool = True
+    # If enabled, enforce deadline-style rank floor using best raw rank as deadline.
+    raw_merge_rank_floor: bool = True
+    # Optional bonus applied to merged candidates that include more admitted raw sources.
+    raw_merge_coverage_bonus: float = 0.0
     # R7: Per-corpus retrieval policies (corpus_id -> RetrievalPolicy). Optional.
     retrieval_policies: Optional[Dict[str, RetrievalPolicy]] = None
     # R9: Unit-type soft boost. Add delta to score when query-type heuristic matches unit_type (0=off).
@@ -134,6 +162,8 @@ class ExperimentConfig:
     # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
     dependency_pairing_expand: bool = False
     dependency_pairing_emax: int = 6
+    # Optional path to baseline metrics.json for report delta section.
+    baseline_metrics_path: Optional[str] = None
     # Grouped options (wave-2 structure). Flat keys remain authoritative for backward compatibility.
     crossref: CrossrefConfig = field(default_factory=CrossrefConfig)
     dual_list: DualListConfig = field(default_factory=DualListConfig)
@@ -151,6 +181,8 @@ class ExperimentConfig:
         self.substrate_path = str((base / self.substrate_path).resolve())
         self.query_batches = [str((base / p).resolve()) for p in self.query_batches]
         self.output_dir = str((base / self.output_dir).resolve())
+        if self.baseline_metrics_path:
+            self.baseline_metrics_path = str((base / self.baseline_metrics_path).resolve())
 
     def validate(self, embed_only: bool = False, eval_only: bool = False) -> None:
         """Raise ValueError if config is invalid. Use embed_only=True or eval_only=True for single-step validation."""
@@ -160,8 +192,45 @@ class ExperimentConfig:
             raise ValueError(f"substrate_path does not exist: {self.substrate_path}")
         if self.retrieval_mode not in ("dense", "hybrid", "hybrid+rerank", "bm25"):
             raise ValueError("retrieval_mode must be 'dense', 'hybrid', 'hybrid+rerank', or 'bm25'")
+        if self.retrieval_mode == "hybrid+rerank" and not self.reranker:
+            raise ValueError("retrieval_mode='hybrid+rerank' requires reranker")
         if self.retrieval_mode == "bm25" and self.dual_list_fusion:
             raise ValueError("dual_list_fusion is not supported in bm25 mode")
+        if self.bm25_tokenizer_mode not in ("basic", "hyphenated"):
+            raise ValueError("bm25_tokenizer_mode must be 'basic' or 'hyphenated'")
+        if self.bm25_query_mode not in ("question_only", "question_plus_summary", "weighted"):
+            raise ValueError("bm25_query_mode must be 'question_only', 'question_plus_summary', or 'weighted'")
+        if self.bm25_k1 <= 0:
+            raise ValueError("bm25_k1 must be > 0")
+        if not (0 <= self.bm25_b <= 1):
+            raise ValueError("bm25_b must be in [0, 1]")
+        if self.bm25_query_weight_question < 1 or self.bm25_query_weight_summary < 1:
+            raise ValueError("bm25 query weights must be >= 1")
+        if self.stage1_query_mode not in ("question_only", "question_plus_summary", "weighted"):
+            raise ValueError("stage1_query_mode must be 'question_only', 'question_plus_summary', or 'weighted'")
+        if self.stage2_query_mode not in ("question_only", "question_plus_summary", "weighted"):
+            raise ValueError("stage2_query_mode must be 'question_only', 'question_plus_summary', or 'weighted'")
+        if self.stage2_rerank_method not in ("dense", "cross_encoder"):
+            raise ValueError("stage2_rerank_method must be 'dense' or 'cross_encoder'")
+        if self.stage1_admission_k < 1:
+            raise ValueError("stage1_admission_k must be >= 1")
+        if self.two_stage_retrieval and self.retrieval_mode == "bm25":
+            raise ValueError("two_stage_retrieval is currently supported only for dense/hybrid retrieval modes")
+        if self.two_stage_retrieval and self.stage2_rerank_method == "cross_encoder" and not self.reranker:
+            raise ValueError("two_stage_retrieval with stage2_rerank_method='cross_encoder' requires reranker")
+        if self.raw_first_merge_rerank:
+            if self.retrieval_mode not in ("hybrid", "hybrid+rerank"):
+                raise ValueError("raw_first_merge_rerank requires retrieval_mode='hybrid' or 'hybrid+rerank'")
+            if self.merge_chunks:
+                raise ValueError("raw_first_merge_rerank requires merge_chunks=false (raw substrate admission)")
+            if self.raw_stage1_admission_k < 1:
+                raise ValueError("raw_stage1_admission_k must be >= 1")
+            if self.raw_merge_rerank_top_k < 1:
+                raise ValueError("raw_merge_rerank_top_k must be >= 1")
+            if self.raw_merge_rerank_top_k < max(self.top_k):
+                raise ValueError("raw_merge_rerank_top_k must be >= max(top_k)")
+            if self.raw_merge_coverage_bonus < 0:
+                raise ValueError("raw_merge_coverage_bonus must be >= 0")
         if not self.models and self.retrieval_mode != "bm25":
             raise ValueError("models must be non-empty")
         if embed_only:
@@ -223,8 +292,26 @@ class ExperimentConfig:
             gold_semantic_top_n=int(data.get("gold_semantic_top_n", 5)),
             gold_jaccard_threshold=float(data.get("gold_jaccard_threshold", 0.15)),
             batch_size=int(data.get("batch_size", 16)),
+            seed=int(data["seed"]) if data.get("seed") is not None else None,
             expand_context=bool(data.get("expand_context", False)),
             expand_context_n=int(data.get("expand_context_n", 1)),
+            bm25_tokenizer_mode=str(data.get("bm25_tokenizer_mode", "basic")),
+            bm25_k1=float(data.get("bm25_k1", 1.5)),
+            bm25_b=float(data.get("bm25_b", 0.75)),
+            bm25_query_mode=str(data.get("bm25_query_mode", "question_only")),
+            bm25_query_weight_question=int(data.get("bm25_query_weight_question", 1)),
+            bm25_query_weight_summary=int(data.get("bm25_query_weight_summary", 1)),
+            two_stage_retrieval=bool(data.get("two_stage_retrieval", False)),
+            stage1_admission_k=int(data.get("stage1_admission_k", 100)),
+            stage1_query_mode=str(data.get("stage1_query_mode", "question_plus_summary")),
+            stage2_query_mode=str(data.get("stage2_query_mode", "question_only")),
+            stage2_rerank_method=str(data.get("stage2_rerank_method", "dense")),
+            raw_first_merge_rerank=bool(data.get("raw_first_merge_rerank", False)),
+            raw_stage1_admission_k=int(data.get("raw_stage1_admission_k", 100)),
+            raw_merge_rerank_top_k=int(data.get("raw_merge_rerank_top_k", 20)),
+            raw_merge_score_floor=bool(data.get("raw_merge_score_floor", True)),
+            raw_merge_rank_floor=bool(data.get("raw_merge_rank_floor", True)),
+            raw_merge_coverage_bonus=float(data.get("raw_merge_coverage_bonus", 0.0)),
             min_chars=int(data["min_chars"]) if data.get("min_chars") is not None else None,
             merge_chunks=bool(data.get("merge_chunks", False)),
             merge_max_chars=int(data.get("merge_max_chars", 2000)),
@@ -256,6 +343,7 @@ class ExperimentConfig:
             dual_list_family_direction=dual_list.family_direction,
             dependency_pairing_expand=pairing.enabled,
             dependency_pairing_emax=pairing.emax,
+            baseline_metrics_path=str(data["baseline_metrics_path"]) if data.get("baseline_metrics_path") else None,
             crossref=crossref,
             dual_list=dual_list,
             pairing=pairing,

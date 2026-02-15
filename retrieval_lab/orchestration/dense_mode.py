@@ -15,13 +15,85 @@ from retrieval_lab.dual_list_fusion import fuse_dual_list
 from retrieval_lab.gold_grounding import ground_queries_corpus_semantic
 from retrieval_lab.metrics import score_retrieval
 from retrieval_lab.orchestration.expansion_pipeline import apply_post_retrieval_expansion
+from retrieval_lab.sparse_retrieval import build_query_text
 from retrieval_lab.store import (
     fetch_cached_embeddings,
     save_cached_embeddings,
     save_embedding_run_metadata,
 )
+from retrieval_lab.substrate_loader import merge_units_by_heading
 
 logger = logging.getLogger(__name__)
+
+
+def _rerank_candidates_dense(
+    *,
+    query_embeddings: np.ndarray,
+    corpus_embeddings: np.ndarray,
+    corpus_ids: List[str],
+    ranked_lists: List[List[str]],
+    stage1_admission_k: int,
+    final_k: int,
+) -> tuple[List[List[str]], List[List[float]]]:
+    """Dense rerank over Stage1-admitted candidates only."""
+    id_to_idx = {cid: i for i, cid in enumerate(corpus_ids)}
+    reranked_lists: List[List[str]] = []
+    reranked_scores: List[List[float]] = []
+    for i, candidate_ids in enumerate(ranked_lists):
+        admitted = candidate_ids[:stage1_admission_k]
+        if not admitted:
+            reranked_lists.append([])
+            reranked_scores.append([])
+            continue
+        scores = []
+        q_vec = query_embeddings[i]
+        for cid in admitted:
+            idx = id_to_idx.get(cid)
+            if idx is None:
+                scores.append((cid, float("-inf")))
+            else:
+                scores.append((cid, float(np.dot(q_vec, corpus_embeddings[idx]))))
+        scores.sort(key=lambda x: x[1], reverse=True)
+        trimmed = scores[:final_k]
+        reranked_lists.append([cid for cid, _ in trimmed])
+        reranked_scores.append([score for _, score in trimmed])
+    return reranked_lists, reranked_scores
+
+
+def _minmax_normalize(values: Dict[str, float]) -> Dict[str, float]:
+    if not values:
+        return {}
+    lo = min(values.values())
+    hi = max(values.values())
+    if hi <= lo:
+        return {k: 1.0 for k in values}
+    denom = hi - lo
+    return {k: (v - lo) / denom for k, v in values.items()}
+
+
+def _rank_deadline_order(
+    ordered_ids: List[str],
+    score_by_id: Dict[str, float],
+    deadline_by_id: Dict[str, int],
+) -> tuple[List[str], int]:
+    """Apply earliest-deadline-aware ordering while preferring higher score.
+
+    Each candidate has a deadline = best raw rank. We greedily place one item per
+    position; if any item has deadline <= current position, we must place one of
+    those urgent items now to avoid avoidable demotion.
+    """
+    remaining = list(ordered_ids)
+    pos = 1
+    final: List[str] = []
+    while remaining:
+        urgent = [cid for cid in remaining if deadline_by_id.get(cid, 10**9) <= pos]
+        pool = urgent if urgent else remaining
+        pick = max(pool, key=lambda cid: (score_by_id.get(cid, float("-inf")), -deadline_by_id.get(cid, 10**9)))
+        final.append(pick)
+        remaining.remove(pick)
+        pos += 1
+    violations = sum(1 for idx, cid in enumerate(final, start=1) if idx > deadline_by_id.get(cid, 10**9))
+    return final, violations
 
 
 def _load_or_compute_corpus_embeddings(
@@ -39,48 +111,49 @@ def _load_or_compute_corpus_embeddings(
 ) -> Dict[str, Any]:
     """Resolve corpus embeddings from cache/disk or compute and persist."""
     t0 = time.perf_counter()
-    cached = fetch_cached_embeddings(run_id, model_id, mongo_uri) if (eval_only_run_id or config.reuse_embeddings) else None
-    if cached and len(cached) == len(corpus_ids):
-        id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
-        corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
-        logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
-    else:
-        embed_dir = Path(config.output_dir) / f"embed_{run_id}"
-        npy_path = embed_dir / "embeddings" / f"{model_id}_corpus.npy"
-        index_path = embed_dir / "embeddings" / "corpus_index.json"
-        if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
-            for subdir in Path(config.output_dir).iterdir():
-                if not subdir.is_dir():
-                    continue
-                idx_path = subdir / "embeddings" / "corpus_index.json"
-                if not idx_path.exists():
-                    continue
-                try:
-                    index_data = json.loads(idx_path.read_text(encoding="utf-8"))
-                    if index_data.get("run_id") == run_id:
-                        npy_path = subdir / "embeddings" / f"{model_id}_corpus.npy"
-                        index_path = idx_path
-                        if npy_path.exists():
-                            unit_id_to_index = index_data.get("unit_id_to_index", {})
-                            if all(uid in unit_id_to_index for uid in corpus_ids):
-                                logger.info("Eval-only: found compatible embeddings for run_id=%s in %s", run_id, subdir.name)
-                                break
-                except (json.JSONDecodeError, OSError):
-                    continue
-        if eval_only_run_id and npy_path.exists() and index_path.exists():
-            loaded = np.load(npy_path)
-            index_data = json.loads(index_path.read_text(encoding="utf-8"))
-            unit_id_to_index = index_data.get("unit_id_to_index", {})
+    embed_dir = Path(config.output_dir) / f"embed_{run_id}"
+    npy_path = embed_dir / "embeddings" / f"{model_id}_corpus.npy"
+    index_path = embed_dir / "embeddings" / "corpus_index.json"
+    if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
+        for subdir in Path(config.output_dir).iterdir():
+            if not subdir.is_dir():
+                continue
+            idx_path = subdir / "embeddings" / "corpus_index.json"
+            if not idx_path.exists():
+                continue
             try:
-                corpus_embeddings = np.array(
-                    [loaded[unit_id_to_index[uid]] for uid in corpus_ids],
-                    dtype=np.float32,
-                )
-            except KeyError as e:
-                raise ValueError(
-                    f"Eval-only: corpus mismatch for run_id={run_id} (missing unit in embed index). {e}"
-                ) from e
-            logger.info("Loaded %d embeddings from disk (%s)", len(corpus_embeddings), npy_path)
+                index_data = json.loads(idx_path.read_text(encoding="utf-8"))
+                if index_data.get("run_id") == run_id:
+                    npy_path = subdir / "embeddings" / f"{model_id}_corpus.npy"
+                    index_path = idx_path
+                    if npy_path.exists():
+                        unit_id_to_index = index_data.get("unit_id_to_index", {})
+                        if all(uid in unit_id_to_index for uid in corpus_ids):
+                            logger.info("Eval-only: found compatible embeddings for run_id=%s in %s", run_id, subdir.name)
+                            break
+            except (json.JSONDecodeError, OSError):
+                continue
+
+    if eval_only_run_id and npy_path.exists() and index_path.exists():
+        loaded = np.load(npy_path)
+        index_data = json.loads(index_path.read_text(encoding="utf-8"))
+        unit_id_to_index = index_data.get("unit_id_to_index", {})
+        try:
+            corpus_embeddings = np.array(
+                [loaded[unit_id_to_index[uid]] for uid in corpus_ids],
+                dtype=np.float32,
+            )
+        except KeyError as e:
+            raise ValueError(
+                f"Eval-only: corpus mismatch for run_id={run_id} (missing unit in embed index). {e}"
+            ) from e
+        logger.info("Loaded %d embeddings from disk (%s)", len(corpus_embeddings), npy_path)
+    else:
+        cached = fetch_cached_embeddings(run_id, model_id, mongo_uri) if ((eval_only_run_id or config.reuse_embeddings) and mongo_uri) else None
+        if cached and len(cached) == len(corpus_ids):
+            id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
+            corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
+            logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
         elif eval_only_run_id:
             raise ValueError(
                 f"Eval-only: no cached embeddings for run_id={run_id} model_id={model_id}. "
@@ -131,7 +204,7 @@ def _load_or_compute_family_embeddings(
         return None
 
     family_corpus_texts = [c.get("text", "") for c in family_corpus]
-    cached_f = fetch_cached_embeddings(run_id_family, model_id, mongo_uri) if (eval_only_run_id or config.reuse_embeddings) else None
+    cached_f = fetch_cached_embeddings(run_id_family, model_id, mongo_uri) if ((eval_only_run_id or config.reuse_embeddings) and mongo_uri) else None
     if cached_f and len(cached_f) == len(family_corpus_ids):
         id_to_emb_f = {r["chunk_id"]: r["embedding"] for r in cached_f}
         family_embeddings = np.array(
@@ -165,6 +238,7 @@ def _run_ranking_pipeline(
     corpus_embeddings: np.ndarray,
     id_to_text: Dict[str, str],
     id_to_index: Dict[str, int],
+    id_to_source_ids: Dict[str, List[str]],
     grounded_queries: List[Dict[str, Any]],
     flat_queries: List[Dict[str, Any]],
     use_semantic_grounding: bool,
@@ -191,11 +265,28 @@ def _run_ranking_pipeline(
             top_n=config.gold_semantic_top_n,
         )
 
-    query_texts = [q.get("question") or q.get("expected_answer_summary") or "" for q in grounded_queries]
-    query_embeddings = encode_texts_fn(model, query_texts, batch_size=config.batch_size)
+    use_two_stage = bool(getattr(flags, "two_stage_retrieval", False))
+    stage1_query_mode = getattr(flags, "stage1_query_mode", "question_plus_summary")
+    stage2_query_mode = getattr(flags, "stage2_query_mode", "question_only")
+    stage1_admission_k = int(getattr(flags, "stage1_admission_k", 100))
+    stage2_rerank_method = getattr(flags, "stage2_rerank_method", "dense")
+    question_weight = int(getattr(config, "bm25_query_weight_question", 1))
+    summary_weight = int(getattr(config, "bm25_query_weight_summary", 1))
+
+    query_texts_stage1 = [
+        build_query_text(
+            q,
+            mode=(stage1_query_mode if use_two_stage else "question_only"),
+            question_weight=question_weight,
+            summary_weight=summary_weight,
+        )
+        for q in grounded_queries
+    ]
+    query_embeddings_stage1 = encode_texts_fn(model, query_texts_stage1, batch_size=config.batch_size)
     t1 = time.perf_counter()
-    q_norm = query_embeddings / (np.linalg.norm(query_embeddings, axis=1, keepdims=True) + 1e-9)
+    q_norm = query_embeddings_stage1 / (np.linalg.norm(query_embeddings_stage1, axis=1, keepdims=True) + 1e-9)
     max_k = max(config.top_k)
+    retrieval_cutoff = max(max_k, stage1_admission_k if use_two_stage else max_k)
     ranked_lists = []
     score_lists = []
 
@@ -234,7 +325,7 @@ def _run_ranking_pipeline(
         sim = np.dot(q_norm, c_norm.T)
         for i in range(len(grounded_queries)):
             row = sim[i]
-            top_indices = np.argsort(row)[::-1][:max_k]
+            top_indices = np.argsort(row)[::-1][:retrieval_cutoff]
             ranked_lists.append([corpus_ids[j] for j in top_indices])
             score_lists.append([float(row[j]) for j in top_indices])
 
@@ -260,28 +351,210 @@ def _run_ranking_pipeline(
             for i in range(len(grounded_queries))
         ]
         ranked_lists, score_lists = reciprocal_rank_fusion(
-            rankings_per_query, k=rrf_k, max_k=max_k
+            rankings_per_query, k=rrf_k, max_k=retrieval_cutoff
         )
         logger.info("Fused dense + BM25 with RRF (k=%d) for model %s", rrf_k, model_id)
 
     reranker_model = getattr(config, "reranker", None)
     if config.retrieval_mode == "hybrid+rerank" and not reranker_model:
         reranker_model = "cross-encoder/ms-marco-MiniLM-L6-v2"
-    if reranker_model and config.retrieval_mode in ("hybrid", "hybrid+rerank"):
-        from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
-        r_model = load_cross_encoder(reranker_model)
-        rerank_top_k = max(config.top_k)
+    if use_two_stage:
+        query_texts_stage2 = [
+            build_query_text(
+                q,
+                mode=stage2_query_mode,
+                question_weight=question_weight,
+                summary_weight=summary_weight,
+            )
+            for q in grounded_queries
+        ]
+        query_embeddings_stage2 = encode_texts_fn(model, query_texts_stage2, batch_size=config.batch_size)
+        if stage2_rerank_method == "cross_encoder":
+            if not reranker_model:
+                raise ValueError("two_stage_retrieval with cross_encoder requires reranker")
+            from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
+
+            r_model = load_cross_encoder(reranker_model)
+            for i in range(len(grounded_queries)):
+                admitted_ids = ranked_lists[i][:stage1_admission_k]
+                admitted_candidates = [{"chunk_id": cid, "text": id_to_text.get(cid, "")} for cid in admitted_ids]
+                reranked = rerank_candidates(
+                    query_texts_stage2[i],
+                    admitted_candidates,
+                    r_model,
+                    top_k=max_k,
+                )
+                ranked_lists[i] = [r["chunk_id"] for r in reranked]
+                score_lists[i] = [r.get("rerank_score", 0.0) for r in reranked]
+            logger.info(
+                "Two-stage retrieval: Stage1 admission k=%d, Stage2 cross-encoder rerank top-%d",
+                stage1_admission_k,
+                max_k,
+            )
+        else:
+            ranked_lists, score_lists = _rerank_candidates_dense(
+                query_embeddings=query_embeddings_stage2,
+                corpus_embeddings=corpus_embeddings,
+                corpus_ids=corpus_ids,
+                ranked_lists=ranked_lists,
+                stage1_admission_k=stage1_admission_k,
+                final_k=max_k,
+            )
+            logger.info(
+                "Two-stage retrieval: Stage1 admission k=%d, Stage2 dense rerank top-%d",
+                stage1_admission_k,
+                max_k,
+            )
+        query_embeddings = query_embeddings_stage2
+    else:
+        if reranker_model and config.retrieval_mode in ("hybrid", "hybrid+rerank"):
+            from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
+            r_model = load_cross_encoder(reranker_model)
+            rerank_top_k = max(config.top_k)
+            for i in range(len(grounded_queries)):
+                q_text = grounded_queries[i].get("question") or grounded_queries[i].get("expected_answer_summary") or ""
+                top_50_ids = ranked_lists[i][:50]
+                top_50_candidates = [
+                    {"chunk_id": cid, "text": id_to_text.get(cid, "")}
+                    for cid in top_50_ids
+                ]
+                reranked = rerank_candidates(q_text, top_50_candidates, r_model, top_k=rerank_top_k)
+                ranked_lists[i] = [r["chunk_id"] for r in reranked]
+                score_lists[i] = [r.get("rerank_score", 0.0) for r in reranked]
+            logger.info("Reranked hybrid top-50 to top-%d with %s", rerank_top_k, reranker_model)
+        query_embeddings = query_embeddings_stage1
+
+    ranked_source_id_lists: Optional[List[List[List[str]]]] = None
+    final_id_to_text = dict(id_to_text)
+    raw_merge_diagnostics: Dict[str, Any] = {}
+
+    if flags.raw_first_merge_rerank:
+        merged_corpus = merge_units_by_heading(
+            corpus,
+            max_chars=flags.merge_max_chars,
+        )
+        merged_by_id = {u["id"]: u for u in merged_corpus}
+        source_to_merged: Dict[str, str] = {}
+        for mu in merged_corpus:
+            for src in mu.get("source_unit_ids", [mu["id"]]):
+                source_to_merged[src] = mu["id"]
+            final_id_to_text[mu["id"]] = mu.get("text", "")
+
+        final_cutoff = max(max(config.top_k), flags.raw_merge_rerank_top_k)
+        merged_ranked_lists: List[List[str]] = []
+        merged_score_lists: List[List[float]] = []
+        merged_source_lists: List[List[List[str]]] = []
+        per_query_diag: List[Dict[str, Any]] = []
+        total_violations = 0
+        total_raw_top_missing = 0
+
         for i in range(len(grounded_queries)):
-            q_text = grounded_queries[i].get("question") or grounded_queries[i].get("expected_answer_summary") or ""
-            top_50_ids = ranked_lists[i][:50]
-            top_50_candidates = [
-                {"chunk_id": cid, "text": id_to_text.get(cid, "")}
-                for cid in top_50_ids
+            raw_limit = min(flags.raw_stage1_admission_k, len(ranked_lists[i]))
+            admitted_ids = ranked_lists[i][:raw_limit]
+            admitted_scores = score_lists[i][:raw_limit]
+            if not admitted_ids:
+                merged_ranked_lists.append([])
+                merged_score_lists.append([])
+                merged_source_lists.append([])
+                per_query_diag.append({
+                    "query_id": grounded_queries[i].get("id", ""),
+                    "admitted_raw_count": 0,
+                    "merged_candidate_count": 0,
+                    "monotonic_rank_violations": 0,
+                    "raw_top_missing_in_final_topk": 0,
+                })
+                continue
+
+            agg: Dict[str, Dict[str, Any]] = {}
+            for raw_rank, (cid, sc) in enumerate(zip(admitted_ids, admitted_scores), start=1):
+                mid = source_to_merged.get(cid, cid)
+                rec = agg.setdefault(
+                    mid,
+                    {"best_raw_rank": raw_rank, "best_raw_score": float(sc), "covered_sources": set()},
+                )
+                if raw_rank < rec["best_raw_rank"]:
+                    rec["best_raw_rank"] = raw_rank
+                if float(sc) > rec["best_raw_score"]:
+                    rec["best_raw_score"] = float(sc)
+                rec["covered_sources"].add(cid)
+
+            candidate_ids = list(agg.keys())
+            candidate_texts = [final_id_to_text.get(cid, "") for cid in candidate_ids]
+            merged_emb = encode_texts_fn(model, candidate_texts, batch_size=config.batch_size)
+            q_vec = query_embeddings[i : i + 1]
+            merged_sim = np.dot(q_vec, merged_emb.T).flatten()
+
+            best_raw_score_by_id = {cid: float(agg[cid]["best_raw_score"]) for cid in candidate_ids}
+            normalized_raw = _minmax_normalize(best_raw_score_by_id)
+            final_score_by_id: Dict[str, float] = {}
+            best_raw_rank_by_id = {cid: int(agg[cid]["best_raw_rank"]) for cid in candidate_ids}
+
+            for j, cid in enumerate(candidate_ids):
+                score_val = float(merged_sim[j])
+                if flags.raw_merge_score_floor:
+                    score_val = max(score_val, float(normalized_raw.get(cid, 0.0)))
+                if flags.raw_merge_coverage_bonus > 0:
+                    merged_sources = merged_by_id.get(cid, {}).get("source_unit_ids", [cid])
+                    denom = max(1, len(merged_sources))
+                    coverage = len(agg[cid]["covered_sources"]) / denom
+                    score_val += flags.raw_merge_coverage_bonus * coverage
+                final_score_by_id[cid] = score_val
+
+            initial_order = sorted(
+                candidate_ids,
+                key=lambda cid: (final_score_by_id[cid], -best_raw_rank_by_id[cid]),
+                reverse=True,
+            )
+            if flags.raw_merge_rank_floor:
+                ordered_ids, violations = _rank_deadline_order(
+                    initial_order,
+                    score_by_id=final_score_by_id,
+                    deadline_by_id=best_raw_rank_by_id,
+                )
+            else:
+                ordered_ids = initial_order
+                violations = 0
+            total_violations += violations
+
+            ordered_ids = ordered_ids[:final_cutoff]
+            ordered_scores = [float(final_score_by_id[cid]) for cid in ordered_ids]
+            ordered_sources = [
+                list(merged_by_id.get(cid, {}).get("source_unit_ids", [cid])) for cid in ordered_ids
             ]
-            reranked = rerank_candidates(q_text, top_50_candidates, r_model, top_k=rerank_top_k)
-            ranked_lists[i] = [r["chunk_id"] for r in reranked]
-            score_lists[i] = [r.get("rerank_score", 0.0) for r in reranked]
-        logger.info("Reranked hybrid top-50 to top-%d with %s", rerank_top_k, reranker_model)
+            merged_ranked_lists.append(ordered_ids)
+            merged_score_lists.append(ordered_scores)
+            merged_source_lists.append(ordered_sources)
+
+            raw_top_ids = set(admitted_ids[: max(config.top_k)])
+            final_top_sources = set()
+            for srcs in ordered_sources[: max(config.top_k)]:
+                final_top_sources.update(srcs)
+            raw_top_missing = len([rid for rid in raw_top_ids if rid not in final_top_sources])
+            total_raw_top_missing += raw_top_missing
+            per_query_diag.append({
+                "query_id": grounded_queries[i].get("id", ""),
+                "admitted_raw_count": raw_limit,
+                "merged_candidate_count": len(candidate_ids),
+                "monotonic_rank_violations": violations,
+                "raw_top_missing_in_final_topk": raw_top_missing,
+                "best_raw_rank_by_merged_id": best_raw_rank_by_id,
+            })
+
+        ranked_lists = merged_ranked_lists
+        score_lists = merged_score_lists
+        ranked_source_id_lists = merged_source_lists
+        raw_merge_diagnostics = {
+            "enabled": True,
+            "monotonic_rank_violations_total": total_violations,
+            "raw_top_missing_in_final_topk_total": total_raw_top_missing,
+            "per_query": per_query_diag,
+        }
+        logger.info(
+            "Raw-first merge-rerank enabled: queries=%d total_violations=%d raw_top_missing_total=%d",
+            len(grounded_queries),
+            total_violations,
+            total_raw_top_missing,
+        )
 
     if flags.co_retrieval_expand:
         topic_to_ids: Dict[str, List[str]] = {}
@@ -331,12 +604,21 @@ def _run_ranking_pipeline(
     if boost > 0:
         apply_unit_type_boost_fn(ranked_lists, score_lists, corpus, grounded_queries, boost)
 
+    if ranked_source_id_lists is None:
+        ranked_source_id_lists = [
+            [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
+            for i in range(len(ranked_lists))
+        ]
+
     return {
         "grounded_queries": grounded_queries,
         "all_grounding_audit": all_grounding_audit,
         "query_embeddings": query_embeddings,
         "ranked_lists": ranked_lists,
         "score_lists": score_lists,
+        "ranked_source_id_lists": ranked_source_id_lists,
+        "final_id_to_text": final_id_to_text,
+        "raw_merge_diagnostics": raw_merge_diagnostics,
         "pairing_payload": pairing_payload,
         "scoring_time_sec": time.perf_counter() - t1,
     }
@@ -357,20 +639,25 @@ def _build_metrics_and_reviews(
     query_embeddings: np.ndarray,
     ranked_lists: List[List[str]],
     score_lists: List[List[float]],
+    ranked_source_id_lists: Optional[List[List[List[str]]]],
     embedding_time_sec: float,
     scoring_time_sec: float,
     expanded_text_fn: Any,
+    final_id_to_text: Optional[Dict[str, str]] = None,
+    raw_merge_diagnostics: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Score retrieval outputs and assemble query-review artifacts."""
+    text_map = final_id_to_text or id_to_text
+    source_lists = ranked_source_id_lists or [
+        [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
+        for i in range(len(ranked_lists))
+    ]
     metrics = score_retrieval(
         grounded_queries,
         ranked_lists,
         score_lists,
         config.top_k,
-        ranked_source_id_lists=[
-            [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
-            for i in range(len(ranked_lists))
-        ],
+        ranked_source_id_lists=source_lists,
         query_embeddings=query_embeddings,
         corpus_embeddings=corpus_embeddings,
         corpus_ids=corpus_ids,
@@ -389,7 +676,7 @@ def _build_metrics_and_reviews(
             text = (
                 expanded_text_fn(corpus, id_to_index, cid, flags.expand_context_n)
                 if use_expanded
-                else id_to_text.get(cid, "")
+                else text_map.get(cid, "")
             )
             retrieved.append({
                 "rank": r,
@@ -421,11 +708,15 @@ def _build_metrics_and_reviews(
             pq.get("failure_type", ""),
         )
 
-    return {
+    out = {
         "results": {
             "recall_at_k": metrics.recall_at_k,
             "hit_at_k": metrics.hit_at_k,
+            "ndcg_at_k": metrics.ndcg_at_k,
             "full_set_hit_at_k": metrics.full_set_hit_at_k,
+            "required_recall_at_k": metrics.required_recall_at_k,
+            "required_full_set_hit_at_k": metrics.required_full_set_hit_at_k,
+            "rank_of_last_required_mean": metrics.rank_of_last_required_mean,
             "mrr": metrics.mrr,
             "gold_in_candidates": metrics.gold_in_candidates,
             "gold_in_candidates_true_ceiling": metrics.gold_in_candidates_true_ceiling,
@@ -441,6 +732,9 @@ def _build_metrics_and_reviews(
         "per_query": metrics.per_query,
         "query_reviews": query_reviews,
     }
+    if raw_merge_diagnostics:
+        out["results"]["raw_merge_rerank_diagnostics"] = raw_merge_diagnostics
+    return out
 
 
 def run_dense_mode(
@@ -488,10 +782,27 @@ def run_dense_mode(
     if config.retrieval_mode in ("hybrid", "hybrid+rerank"):
         from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank
         logger.info("Hybrid mode: building BM25 index for RRF fusion")
-        bm25 = build_bm25_index(corpus_texts)
-        max_k_hybrid = max(config.top_k)
+        bm25 = build_bm25_index(
+            corpus_texts,
+            tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
+            k1=float(getattr(config, "bm25_k1", 1.5)),
+            b=float(getattr(config, "bm25_b", 0.75)),
+        )
+        max_k_hybrid = max(
+            max(config.top_k),
+            int(getattr(config, "stage1_admission_k", 100))
+            if bool(getattr(config, "two_stage_retrieval", False))
+            else max(config.top_k),
+        )
         bm25_ranked_lists, _ = bm25_rank(
-            bm25, corpus_ids, grounded_queries, max_k_hybrid
+            bm25,
+            corpus_ids,
+            grounded_queries,
+            max_k_hybrid,
+            tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
+            query_mode=getattr(config, "bm25_query_mode", "question_only"),
+            question_weight=int(getattr(config, "bm25_query_weight_question", 1)),
+            summary_weight=int(getattr(config, "bm25_query_weight_summary", 1)),
         )
 
     for model_id in config.models:
@@ -545,6 +856,7 @@ def run_dense_mode(
             corpus_embeddings=corpus_embeddings,
             id_to_text=id_to_text,
             id_to_index=id_to_index,
+            id_to_source_ids=id_to_source_ids,
             grounded_queries=grounded_queries,
             flat_queries=flat_queries,
             use_semantic_grounding=use_semantic_grounding,
@@ -578,9 +890,12 @@ def run_dense_mode(
             query_embeddings=rank_out["query_embeddings"],
             ranked_lists=rank_out["ranked_lists"],
             score_lists=rank_out["score_lists"],
+            ranked_source_id_lists=rank_out.get("ranked_source_id_lists"),
             embedding_time_sec=embedding_time_sec,
             scoring_time_sec=rank_out["scoring_time_sec"],
             expanded_text_fn=expanded_text_fn,
+            final_id_to_text=rank_out.get("final_id_to_text"),
+            raw_merge_diagnostics=rank_out.get("raw_merge_diagnostics"),
         )
         retrieved_chunks_by_model[model_id] = model_out["query_reviews"]
         logger.info("Model %s: retrieval done for %d queries; review in retrieved_chunks.json", model_id, len(grounded_queries))

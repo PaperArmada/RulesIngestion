@@ -32,6 +32,17 @@ class RunFlags:
     parent_fetch_cap: int
     parent_fetch_enabled: bool
     co_retrieval_expand: bool
+    two_stage_retrieval: bool
+    stage1_admission_k: int
+    stage1_query_mode: str
+    stage2_query_mode: str
+    stage2_rerank_method: str
+    raw_first_merge_rerank: bool
+    raw_stage1_admission_k: int
+    raw_merge_rerank_top_k: int
+    raw_merge_score_floor: bool
+    raw_merge_rank_floor: bool
+    raw_merge_coverage_bonus: float
 
 
 def read_run_flags(config: object) -> RunFlags:
@@ -59,6 +70,17 @@ def read_run_flags(config: object) -> RunFlags:
         parent_fetch_cap=int(getattr(config, "parent_fetch_cap", 2000)),
         parent_fetch_enabled=bool(getattr(config, "parent_fetch_enabled", False)),
         co_retrieval_expand=bool(getattr(config, "co_retrieval_expand", False)),
+        two_stage_retrieval=bool(getattr(config, "two_stage_retrieval", False)),
+        stage1_admission_k=int(getattr(config, "stage1_admission_k", 100)),
+        stage1_query_mode=str(getattr(config, "stage1_query_mode", "question_plus_summary")),
+        stage2_query_mode=str(getattr(config, "stage2_query_mode", "question_only")),
+        stage2_rerank_method=str(getattr(config, "stage2_rerank_method", "dense")),
+        raw_first_merge_rerank=bool(getattr(config, "raw_first_merge_rerank", False)),
+        raw_stage1_admission_k=int(getattr(config, "raw_stage1_admission_k", 100)),
+        raw_merge_rerank_top_k=int(getattr(config, "raw_merge_rerank_top_k", 20)),
+        raw_merge_score_floor=bool(getattr(config, "raw_merge_score_floor", True)),
+        raw_merge_rank_floor=bool(getattr(config, "raw_merge_rank_floor", True)),
+        raw_merge_coverage_bonus=float(getattr(config, "raw_merge_coverage_bonus", 0.0)),
     )
 
 

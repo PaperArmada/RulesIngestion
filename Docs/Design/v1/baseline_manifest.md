@@ -58,3 +58,36 @@ For v1 baseline comparison, the canonical corpus used is **DnD_PHB_5.5** (6999 u
 - **Stage A:** Given the same input (PDF page, OCR/model output), Stage A produces byte-identical structural outputs (SurfaceAST, prose blocks) when iteration order over structures is fixed. Deterministic replay requires same Python version and dependency versions.
 - **Stage B:** Given the same Stage A artifacts (and same config), Stage B produces byte-identical EvidenceUnit outputs when all dict/set iteration uses stable sort keys (document_id, page, structural_path, ordering_key, unit_id).
 - **Retrieval Lab:** Given the same corpus (substrate), config, and embedding cache, Retrieval Lab produces identical rankings and metrics. Stable ordering and dedupe rules (EvidenceUnit preferred over family anchor when both exist) ensure reproducible results.
+
+---
+
+## 6. Promotion Policy (Expansion -> Gating)
+
+### Tracks
+
+- **Gating track:** small, hand-audited, merge-blocking.
+- **Expansion track:** larger trend-only pool used to mine candidates.
+
+### Promotion requirements
+
+1. Candidate batch passes integrity checker in strict mode.
+2. Candidate batch carries explicit benchmark semantics:
+   - `required_gold`
+   - `supporting_gold`
+   - `mode` (`single_cite | multi_required | multi_supported`)
+3. Required-set retrieval metrics are non-regressing on protected suites/tiers.
+4. Outcome classification is reviewed:
+   - `coverage_gain`
+   - `rank_shuffle_only`
+   - `fragment_repair_signal`
+5. Reproducibility check passes using documented command path on another machine.
+
+### Reference execution
+
+```bash
+uv run python -m evals.v1_baseline.run_baseline_suite \
+  --out-dir evals/v1_baseline/$(date +%Y%m%d) \
+  --version v1 \
+  --gating-integrity-policy strict \
+  --expansion-integrity-policy warn
+```

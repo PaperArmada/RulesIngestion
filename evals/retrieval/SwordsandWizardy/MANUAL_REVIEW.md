@@ -55,3 +55,22 @@ uv run python -m retrieval_lab.run_experiment \
 ```
 
 New report: `out/retrieval_lab/experiments/swords_wizardry_baseline_<new_timestamp>/REPORT.md`.
+
+---
+
+## Gold locations (canonical gold definition)
+
+`gold_unit_ids` are derived chunk IDs and can change when chunk construction changes.
+Each benchmark query should include **`gold_locations`** as the canonical definition of gold:
+`{gold_id: { "page": N, "structural_path": [...], "source_unit_ids": [...] }}`.
+At run time, the retrieval pipeline automatically resolves `gold_locations` to current
+chunk IDs for the active corpus (load → fold → merge), then uses those resolved IDs for
+grounding and metrics.
+
+- **page**: 1-based page number in the source PDF (from substrate directory name).
+- **structural_path**: Heading path (e.g. `["CHAPTER 7: RUNNING THE GAME"]`) from the evidence unit.
+- **source_unit_ids**: Original source IDs that map forward into the current merged chunk.
+
+When curating or editing benchmark gold, always keep `gold_locations` populated. You can
+still run `scripts/resolve_sw_gold_to_corpus.py` to write resolved IDs back into the benchmark
+file for inspection/debugging, but normal experiment runs do not require this pre-step.

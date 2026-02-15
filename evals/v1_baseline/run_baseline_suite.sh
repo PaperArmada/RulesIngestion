@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run fresh v1 baselines for all books (PHB, Starfinder, S&W).
+# Run fresh v1 C-first baselines for all books (PHB, Starfinder, S&W).
 # Substrate: out/DnD_PHB_5.5, out/StarFinderPlayerCore, out/Swords&Wizardry.
 # Output: evals/v1_baseline/<YYYYMMDD>/
 set -euo pipefail

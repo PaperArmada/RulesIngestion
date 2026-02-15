@@ -8,7 +8,12 @@ import numpy as np
 
 from retrieval_lab.orchestration.config_access import read_run_flags
 from retrieval_lab.store import save_cached_embeddings, save_embedding_run_metadata, substrate_run_id
-from retrieval_lab.substrate_loader import load_evidence_units, merge_enrichments_into_corpus, merge_units_by_heading
+from retrieval_lab.substrate_loader import (
+    fold_under_threshold_into_adjacent,
+    load_evidence_units,
+    merge_enrichments_into_corpus,
+    merge_units_by_heading,
+)
 
 
 def run_embed_only(
@@ -22,9 +27,11 @@ def run_embed_only(
 ) -> str:
     """Embed substrate and persist vectors. Logic mirrors run_experiment legacy path."""
     flags = read_run_flags(config)
-    corpus = load_evidence_units(config.substrate_path, config.document_id, min_chars=flags.min_chars)
+    corpus = load_evidence_units(config.substrate_path, config.document_id)
     if not corpus:
         raise ValueError("Corpus is empty; no EvidenceUnits found.")
+    if flags.min_chars is not None:
+        corpus = fold_under_threshold_into_adjacent(corpus, flags.min_chars)
     if flags.merge_chunks:
         corpus = merge_units_by_heading(corpus, max_chars=flags.merge_max_chars)
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
