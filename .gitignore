@@ -133,3 +133,6 @@ serviceAccountKey.json
 # Mark III manifests (contain local absolute paths)
 manifests/*.json
 !manifests/sample_template.json
+
+# v1_baseline run outputs (reports, metrics, audits); keep directory and scripts
+evals/v1_baseline/20[0-9][0-9]*/
