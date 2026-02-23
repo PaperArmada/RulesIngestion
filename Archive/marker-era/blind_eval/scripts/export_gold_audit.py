@@ -22,6 +22,9 @@ from pathlib import Path
 from typing import Any
 
 
+# Rules folder is at DungeonOverMind/Rules (sibling of RulesIngestion)
+_RULES_ROOT = Path(__file__).resolve().parents[5] / "Rules"
+
 # Chunk ID format: {document_id}::/page/N/BlockType/M
 CHUNK_ID_PATH_RE = re.compile(r"^(.+?)::(/page/\d+/[^/]+/\d+)$")
 
@@ -203,7 +206,7 @@ def main() -> None:
     parser.add_argument(
         "--enriched",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json",
         help="Path to merged.enriched.json",
     )
     parser.add_argument(

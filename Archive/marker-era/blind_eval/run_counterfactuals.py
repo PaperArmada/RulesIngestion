@@ -49,6 +49,10 @@ def print_report(results: list[CounterfactualResult]) -> None:
             print(f"  Queries that flipped miss→hit: {best.queries_affected[:10]}{'...' if len(best.queries_affected) > 10 else ''}")
 
 
+# Rules folder is at DungeonOverMind/Rules (sibling of RulesIngestion)
+_RULES_ROOT = Path(__file__).resolve().parents[5] / "Rules"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Run counterfactual validation (Phase 2) for failure classes A–E"
@@ -56,13 +60,13 @@ def main() -> None:
     parser.add_argument(
         "--graph",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json",
         help="Path to merged graph JSON",
     )
     parser.add_argument(
         "--enriched",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json",
         help="Path to merged enriched chunks JSON",
     )
     parser.add_argument(

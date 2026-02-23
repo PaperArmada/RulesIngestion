@@ -152,6 +152,10 @@ def print_distribution_report(data: Dict[str, Any]) -> None:
     print("=" * 60)
 
 
+# Rules folder is at DungeonOverMind/Rules (sibling of RulesIngestion)
+_RULES_ROOT = Path(__file__).resolve().parents[5] / "Rules"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Run failure taxonomy on blind eval batches (label each miss A–E)"
@@ -159,13 +163,13 @@ def main() -> None:
     parser.add_argument(
         "--graph",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json",
         help="Path to merged graph JSON",
     )
     parser.add_argument(
         "--enriched",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json",
         help="Path to merged enriched chunks JSON",
     )
     parser.add_argument(

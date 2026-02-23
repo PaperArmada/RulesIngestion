@@ -19,6 +19,10 @@ from typing import Any
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+# Rules folder is at DungeonOverMind/Rules (sibling of RulesIngestion)
+_DUNGEON_OVERMIND_ROOT = Path(__file__).resolve().parents[5]
+_RULES_ROOT = _DUNGEON_OVERMIND_ROOT / "Rules"
+
 from traversal import TraversalIndex, retrieve_candidates, TraversalConfig, build_config
 
 
@@ -238,13 +242,13 @@ def main():
     parser.add_argument(
         "--graph",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.graph.json",
         help="Path to graph JSON",
     )
     parser.add_argument(
         "--enriched",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json",
         help="Path to enriched chunks JSON",
     )
     

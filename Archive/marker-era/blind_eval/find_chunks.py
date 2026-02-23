@@ -83,6 +83,10 @@ def format_chunk(chunk: dict[str, Any], verbose: bool = False) -> str:
     return "\n".join(lines)
 
 
+# Rules folder is at DungeonOverMind/Rules (sibling of RulesIngestion)
+_RULES_ROOT = Path(__file__).resolve().parents[5] / "Rules"
+
+
 def main():
     parser = argparse.ArgumentParser(description="Find chunks for blind eval")
     parser.add_argument("--page", type=int, help="Page number to search")
@@ -90,7 +94,7 @@ def main():
     parser.add_argument(
         "--enriched",
         type=Path,
-        default=Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json"),
+        default=_RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_19-16-02/enriched/merged.enriched.json",
         help="Path to enriched chunks JSON",
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Show more details")
@@ -104,10 +108,10 @@ def main():
     # Try to find the enriched file
     enriched_path = args.enriched
     if not enriched_path.exists():
-        # Try common locations
+        # Try common locations under Rules root
         alternatives = [
-            Path("Rules/StarFinder2e/PlayerCore/outputs/runs/2026-01-25_13-30-10/enriched/merged.enriched.json"),
-            Path("Rules/StarFinder2e/PlayerCore/outputs/enriched/merged.enriched.json"),
+            _RULES_ROOT / "StarFinder2e/PlayerCore/outputs/runs/2026-01-25_13-30-10/enriched/merged.enriched.json",
+            _RULES_ROOT / "StarFinder2e/PlayerCore/outputs/enriched/merged.enriched.json",
         ]
         for alt in alternatives:
             if alt.exists():

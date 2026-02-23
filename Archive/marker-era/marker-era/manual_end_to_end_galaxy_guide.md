@@ -113,14 +113,14 @@ uv run python merge_enriched_outputs.py \
 From `DungeonMindServer/`, generate LLM summaries + summary embeddings:
 ```
 uv run python -m ruleslawyer.evaluation_harness \
-  --queries-dir ../RulesIngestion/Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/enriched \
+  --queries-dir ../Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/enriched \
   --model-id nomic-embed-text-v2 \
   --embedding-run-id <timestamp> \
   --chapter-summary-only \
   --chapter-summary-llm \
-  --chapter-summary-output ../RulesIngestion/Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/reports/chapters-llm/chapter_summaries_llm.json \
+  --chapter-summary-output ../Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/reports/chapters-llm/chapter_summaries_llm.json \
   --chapter-summary-embed \
-  --chapter-summary-embedding-output ../RulesIngestion/Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/reports/chapters-llm/chapter_summary_embeddings_llm_nomic-embed-text-v2.json \
+  --chapter-summary-embedding-output ../Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/reports/chapters-llm/chapter_summary_embeddings_llm_nomic-embed-text-v2.json \
   --trust-remote-code
 ```
 
@@ -129,7 +129,7 @@ From `DungeonMindServer/`, run retrieval evaluation using the summary embeddings
 If you need traversal metrics for this run, run step 4 (edge-eval) first.
 ```
 uv run python -m ruleslawyer.evaluation_harness \
-  --queries-dir ../RulesIngestion/Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/enriched \
+  --queries-dir ../Rules/StarFinder2e/GalaxyGuide/outputs/runs/<timestamp>/enriched \
   --best-practice-boost \
   --model-id nomic-embed-text-v2 \
   --embedding-run-id <timestamp> \
