@@ -1,0 +1,760 @@
+[
+  {
+    "id": "sw_rev_u01a_player_vs_referee_control",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "During play, what decisions do the players control vs what decisions does the Referee control?",
+    "answer": "Players declare actions for their characters; the Referee describes the world and determines what happens as a result.",
+    "expected_answer_summary": "Players decide and describe their characters\u2019 actions and choices; the Referee describes the world and adjudicates outcomes.",
+    "source_page": "33",
+    "gold_unit_ids": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "gold_locations": {
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": {
+        "page": 33,
+        "structural_path": [
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+        ]
+      }
+    },
+    "required_gold": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u01_roles_and_authority",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u01b_referee_rulings_and_authority",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "When the rules are unclear or don\u2019t cover a situation, who decides, and what guidance does the book give for making a ruling?",
+    "answer": "The Referee interprets the rules and makes a ruling when needed; consistency matters more than exhaustive procedure.",
+    "expected_answer_summary": "The Referee is in charge, interprets rules, and makes rulings when needed; the rules are guidelines and not exhaustive.",
+    "source_page": "73",
+    "gold_unit_ids": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "gold_locations": {
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": {
+        "page": 73,
+        "structural_path": [],
+        "source_unit_ids": [
+          "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+        ]
+      }
+    },
+    "required_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": "States Referee is in charge of the game, decides results of player decisions, interprets rules, and provides the key guidance: rules are guidelines; no rule for everything; when in doubt, make a ruling."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u01_roles_and_authority",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u02a_dice_notation_and_percentiles",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How do you read dice notation (d6, d20, d%) and roll percentile (d100) dice in this ruleset?",
+    "answer": "Dice notation (dN) and percentile rolling (d100) are defined in the Dice section.",
+    "expected_answer_summary": "Dice are expressed as dN; percentile (d100) uses two d10s per the notation section.",
+    "source_page": "5",
+    "gold_unit_ids": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380"
+    ],
+    "gold_locations": {
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380": {
+        "page": 5,
+        "structural_path": [
+          "DICE"
+        ],
+        "source_unit_ids": [
+          "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380"
+        ]
+      }
+    },
+    "required_gold": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380": "Defines dice notation and how percentile dice (d100) are rolled and interpreted."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u02_uncertainty_core_mechanic",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u02b_saving_throw_resolution",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How do saving throws work (what do you roll, what target number do you compare to, and what counts as success)?",
+    "answer": "Saving throws are resolved by rolling a d20 and succeeding on a result \u2265 the target number defined by class/level.",
+    "expected_answer_summary": "Roll a d20; success is meeting or exceeding the target number (by class/level); monsters have listed targets.",
+    "source_page": "34",
+    "gold_unit_ids": [
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+    ],
+    "gold_locations": {
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": {
+        "page": 34,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+        ]
+      }
+    },
+    "required_gold": [
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": "Defines saving throw roll procedure (roll d20; succeed on result \u2265 target number; targets by class/level; monsters have listed targets)."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u02_uncertainty_core_mechanic",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u02c_initiative_and_surprise_resolution",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How are initiative and surprise resolved (what do you roll, who rolls, and how do you interpret the result)?",
+    "answer": "Initiative and surprise are resolved with d6 rolls and thresholds described in the combat procedure.",
+    "expected_answer_summary": "Each side rolls a d6 for initiative (high wins). Surprise is determined by d6 with low results indicating surprise.",
+    "source_page": "35",
+    "gold_unit_ids": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+    ],
+    "gold_locations": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382"
+        ]
+      },
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+        ]
+      }
+    },
+    "required_gold": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise)."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u02_uncertainty_core_mechanic",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u03a_time_units_turn_vs_round",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What are the core procedural time units (turn, combat round), how long is each, and what are they used for?",
+    "answer": "The rules define turn and combat round as distinct time units with defined durations and uses.",
+    "expected_answer_summary": "A turn is used for exploration procedures; a combat round is used for combat procedures; each has a defined duration.",
+    "source_page": "33",
+    "gold_unit_ids": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ],
+    "gold_locations": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b"
+        ]
+      },
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+        ]
+      }
+    },
+    "required_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat).",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat)."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u03_time_progression_model",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u03b_movement_rates_per_turn_and_round",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How is movement measured in exploration vs combat (movement per turn vs per combat round)?",
+    "answer": "Movement rates are given per exploration turn and per combat round; use the movement tables/guidelines.",
+    "expected_answer_summary": "Movement tables specify distances per turn for exploration and per round for combat.",
+    "source_page": "32",
+    "gold_unit_ids": [
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e"
+    ],
+    "gold_locations": {
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7": {
+        "page": 32,
+        "structural_path": [
+          "Indoor, Underground, and City Movement"
+        ],
+        "source_unit_ids": [
+          "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7"
+        ]
+      },
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e": {
+        "page": 32,
+        "structural_path": [
+          "Indoor, Underground, and City Movement"
+        ],
+        "source_unit_ids": [
+          "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e"
+        ]
+      }
+    },
+    "required_gold": [
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7": "Shows how turns/rounds are applied in procedures by giving movement rates per turn and combat movement per round (including different contexts like underground vs wilderness).",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e": "Shows how turns/rounds are applied in procedures by giving movement rates per turn and combat movement per round (including different contexts like underground vs wilderness)."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u03_time_progression_model",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u03c_combat_round_sequence_loop",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What is the step-by-step combat round sequence, and what causes play to advance to the next step/round?",
+    "answer": "Combat is resolved by repeating a defined round sequence until the fight ends.",
+    "expected_answer_summary": "Combat proceeds as a repeating round sequence; each round resolves phases in order and repeats until combat ends.",
+    "source_page": "35, 33",
+    "gold_unit_ids": [
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ],
+    "gold_locations": {
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c"
+        ]
+      },
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+        ]
+      },
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b"
+        ]
+      },
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+        ]
+      }
+    },
+    "required_gold": [
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+    ],
+    "supporting_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ],
+    "required_gold_rationale": {
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends)."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u03_time_progression_model",
+    "supporting_gold_rationale": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat).",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat)."
+    },
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+    ],
+    "_supporting_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+    ]
+  },
+  {
+    "id": "sw_rev_u03d_mass_combat_time_scale_optional",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "In mass combat, does the game use a different round/time scale? If so, what is it?",
+    "answer": "Mass combat can redefine rounds to 5\u201310 minutes; treat it as a special-case time scale.",
+    "expected_answer_summary": "Mass combat uses longer rounds (5\u201310 minutes) as a special-case time scale, with initiative still controlling ordering.",
+    "source_page": "88",
+    "gold_unit_ids": [
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ],
+    "gold_locations": {
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb": {
+        "page": 88,
+        "structural_path": [
+          "INITIATIVE AND COMBAT ROUNDS"
+        ],
+        "source_unit_ids": [
+          "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+        ]
+      }
+    },
+    "required_gold": [
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb": "Adds the special-case mass-combat time scale where rounds become 5\u201310 minutes and initiative controls move/attack ordering at that scale."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u03_time_progression_model",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u04a_actions_by_combat_phase_baseline",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "In the default combat procedure, what can a character do in a round and in what order are actions resolved (movement/missiles vs melee/spells)?",
+    "answer": "The default combat round is phase-structured: movement/missiles first, then melee/spells; resolve actions in that order.",
+    "expected_answer_summary": "Rounds resolve in phases: movement/missiles, then melee/spells; action choices are constrained by phase order.",
+    "source_page": "35",
+    "gold_unit_ids": [
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "gold_locations": {
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      }
+    },
+    "required_gold": [
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u04_player_actions_in_combat",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u04b_spell_declaration_and_interrupt_rules",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What are the key limits on casting spells in combat (when must spells be declared, and what can interrupt or prevent the spell)?",
+    "answer": "Spellcasting in combat is constrained by declaration timing (before initiative) and interruption rules.",
+    "expected_answer_summary": "Spells must be declared before initiative; interruption can cause the spell to be lost depending on the rule.",
+    "source_page": "35",
+    "gold_unit_ids": [
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "gold_locations": {
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": {
+        "page": 35,
+        "structural_path": [
+          "2. DECLARE SPELLS"
+        ],
+        "source_unit_ids": [
+          "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+        ]
+      },
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      }
+    },
+    "required_gold": [
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "supporting_gold": [
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "required_gold_rationale": {
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": "States the timing rule that spells must be declared before the initiative roll and explains the interruption/losing-a-spell consequence when damaged before casting."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u04_player_actions_in_combat",
+    "supporting_gold_rationale": {
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds."
+    },
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "_supporting_gold": [
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ]
+  },
+  {
+    "id": "sw_rev_u04c_optional_variant_initiative_methods",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "Does the book offer optional or variant initiative/action-order methods? If so, what is the alternate sequence?",
+    "answer": "The rules include optional action-order variants that redefine the phase sequence (e.g., Dex-based ordering).",
+    "expected_answer_summary": "Optional variants (e.g., Dex-based order) change the sequencing of spells/missiles/melee/movement.",
+    "source_page": "36",
+    "gold_unit_ids": [
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+    ],
+    "gold_locations": {
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+        ]
+      }
+    },
+    "required_gold": [
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u04_player_actions_in_combat",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u05a_character_attributes_to_record",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What core character attributes must be rolled/recorded to play correctly (e.g., ability scores)?",
+    "answer": "Characters roll and record attribute scores; these stats are used for bonuses/effects and must be tracked.",
+    "expected_answer_summary": "Attribute scores are rolled and have game effects; they must be recorded on the character sheet.",
+    "source_page": "6",
+    "gold_unit_ids": [
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ],
+    "gold_locations": {
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a": {
+        "page": 6,
+        "structural_path": [
+          "ROLL ATTRIBUTE SCORES"
+        ],
+        "source_unit_ids": [
+          "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584",
+          "23621d0b42efc739ef058050295aa3e85ac39ac817ed9578e007aaba2a9dd273"
+        ]
+      }
+    },
+    "required_gold": [
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a": "Shows that attribute scores are rolled and have defined game effects; supports that these stats are tracked and recorded."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u05_what_must_be_tracked",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u05b_encumbrance_weight_and_movement_tracking",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What encumbrance/weight must be tracked (including coin weight), and how does that tracking affect movement?",
+    "answer": "Encumbrance requires tracking carried weight (including coins) and impacts movement speed.",
+    "expected_answer_summary": "Track carried weight (including coin/gem weights) and apply encumbrance to determine movement rates.",
+    "source_page": "32, 95",
+    "gold_unit_ids": [
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+    ],
+    "gold_locations": {
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": {
+        "page": 32,
+        "structural_path": [
+          "WEIGHT AND MOVEMENT"
+        ],
+        "source_unit_ids": [
+          "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6"
+        ]
+      },
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+        ]
+      }
+    },
+    "required_gold": [
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u05_what_must_be_tracked",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u05c_light_sources_duration_tracking",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What exploration consumables (like torches/lantern oil) have explicit durations, and what must be tracked about them?",
+    "answer": "Track light source durations (e.g., torches, lantern oil) as consumable state during exploration.",
+    "expected_answer_summary": "Light sources have explicit durations; tracking time/remaining fuel is required for correct exploration play.",
+    "source_page": "29",
+    "gold_unit_ids": [
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+    ],
+    "gold_locations": {
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8"
+        ]
+      },
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+        ]
+      }
+    },
+    "required_gold": [
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u05_what_must_be_tracked",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u05d_treasure_to_xp_tracking",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How is treasure converted into XP, and what must be tracked to award XP correctly?",
+    "answer": "XP awards require tracking treasure recovered, since gp converts to experience.",
+    "expected_answer_summary": "Gold recovered translates to XP; track treasure totals (and relevant bonuses) to compute XP awards.",
+    "source_page": "33",
+    "gold_unit_ids": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "gold_locations": {
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": {
+        "page": 33,
+        "structural_path": [
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+        ]
+      }
+    },
+    "required_gold": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": "Defines treasure-to-XP tracking (gp \u2192 XP), XP bonuses, and procedural time units (turn and combat round) that must be tracked for correct play."
+    },
+    "_rewrite_note": "micro-bundle rewrite: required_gold = minimal anchor set for operationalization; supporting_gold = optional context",
+    "_parent_atomic": "sw_rev_u05_what_must_be_tracked",
+    "_mode": "single_cite",
+    "_status": "draft_micro",
+    "_required_gold": [
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "_supporting_gold": []
+  }
+]
