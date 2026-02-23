@@ -61,6 +61,43 @@ class PairingConfig:
 
 
 @dataclass
+class OnlyAddFusionConfig:
+    """Only-add fusion policy for query enhancement multi-query runs.
+
+    Goal: expansions can increase candidate coverage without evicting (or demoting)
+    the locked-in baseline prefix.
+    """
+
+    # Safety invariant: should be >= max(top_k) for your evaluation.
+    baseline_keep_n: int = 20
+    variant_k_per_query: int = 20
+    # Admission pool size for only-add fusion. Keep evaluation top-k unchanged; only the pool grows.
+    admission_cutoff: int = 50
+    # Number of baseline items to hard-lock at the front of the final ranking.
+    # Diagnostic knob: set < max(top_k) to allow tail rerank to move new candidates into top-20
+    # while still keeping the very top stable (e.g. lock top-10, evaluate top-20).
+    prefix_lock_n: int = 20
+    # Optional diagnostic: rerank the tail segment (positions prefix_lock_n+1..admission_cutoff).
+    # none | lexical | cross_encoder | cascade (lexical then cross_encoder if still missing @eval_k)
+    tail_rerank: str = "none"
+    # Limit rerank compute: only rerank the first R tail items after the lock.
+    tail_rerank_window: int = 50
+    # If set, appended candidates are assigned scores below the baseline band.
+    append_score_band: float = 1e-6
+    # Future: rerank union with baseline locks. Not enabled by default.
+    rerank_union: bool = False
+
+
+@dataclass
+class QueryEnhancementConfig:
+    enabled: bool = False
+    profile_path: str = ""
+    mode: str = "none"  # none | dict | llm | llm+dict | decompose
+    fusion_mode: str = "only_add"  # only_add | rrf | union_rerank
+    only_add: OnlyAddFusionConfig = field(default_factory=OnlyAddFusionConfig)
+
+
+@dataclass
 class ExperimentConfig:
     """Configuration for a single retrieval lab experiment."""
 
@@ -168,6 +205,8 @@ class ExperimentConfig:
     crossref: CrossrefConfig = field(default_factory=CrossrefConfig)
     dual_list: DualListConfig = field(default_factory=DualListConfig)
     pairing: PairingConfig = field(default_factory=PairingConfig)
+    # Query enhancement (pre-retrieval expansion/decomposition).
+    query_enhancement: QueryEnhancementConfig = field(default_factory=QueryEnhancementConfig)
 
     def get_policy(self, corpus_id: str) -> RetrievalPolicy:
         """Get retrieval policy for corpus. Falls back to default policy from config."""
@@ -183,6 +222,8 @@ class ExperimentConfig:
         self.output_dir = str((base / self.output_dir).resolve())
         if self.baseline_metrics_path:
             self.baseline_metrics_path = str((base / self.baseline_metrics_path).resolve())
+        if self.query_enhancement.profile_path:
+            self.query_enhancement.profile_path = str((base / self.query_enhancement.profile_path).resolve())
 
     def validate(self, embed_only: bool = False, eval_only: bool = False) -> None:
         """Raise ValueError if config is invalid. Use embed_only=True or eval_only=True for single-step validation."""
@@ -253,6 +294,43 @@ class ExperimentConfig:
             raise ValueError("top_k must be non-empty")
         if self.dual_list_fusion and self.dual_list_kfinal < max(self.top_k):
             raise ValueError("dual_list_kfinal must be >= max(top_k) when dual_list_fusion is enabled")
+        qe = self.query_enhancement
+        if qe.enabled:
+            if qe.mode not in ("none", "dict", "llm", "llm+dict", "decompose"):
+                raise ValueError(f"query_enhancement.mode must be none/dict/llm/llm+dict/decompose, got {qe.mode!r}")
+            if qe.fusion_mode not in ("only_add", "rrf", "union_rerank"):
+                raise ValueError(
+                    f"query_enhancement.fusion_mode must be only_add/rrf/union_rerank, got {qe.fusion_mode!r}"
+                )
+            if qe.mode != "none" and not qe.profile_path:
+                raise ValueError("query_enhancement.profile_path required when mode != 'none'")
+            if qe.profile_path and not Path(qe.profile_path).exists():
+                raise ValueError(f"query_enhancement.profile_path not found: {qe.profile_path}")
+            if qe.fusion_mode == "only_add":
+                oa = qe.only_add
+                if oa.baseline_keep_n < 1:
+                    raise ValueError("query_enhancement.only_add.baseline_keep_n must be >= 1")
+                if oa.variant_k_per_query < 1:
+                    raise ValueError("query_enhancement.only_add.variant_k_per_query must be >= 1")
+                if oa.admission_cutoff < 0:
+                    raise ValueError("query_enhancement.only_add.admission_cutoff must be >= 0 (0 uses default cutoff)")
+                if oa.append_score_band < 0:
+                    raise ValueError("query_enhancement.only_add.append_score_band must be >= 0")
+                if oa.prefix_lock_n < 1:
+                    raise ValueError("query_enhancement.only_add.prefix_lock_n must be >= 1")
+                if oa.prefix_lock_n > oa.baseline_keep_n:
+                    raise ValueError("query_enhancement.only_add.prefix_lock_n must be <= baseline_keep_n")
+                if oa.tail_rerank not in ("none", "lexical", "cross_encoder", "cascade"):
+                    raise ValueError("query_enhancement.only_add.tail_rerank must be none/lexical/cross_encoder/cascade")
+                if oa.tail_rerank_window < 1:
+                    raise ValueError("query_enhancement.only_add.tail_rerank_window must be >= 1")
+                eval_k = max(self.top_k) if self.top_k else 0
+                if eval_k and oa.baseline_keep_n < eval_k:
+                    raise ValueError(
+                        f"query_enhancement.only_add.baseline_keep_n must be >= max(top_k)={eval_k} for only_add safety"
+                    )
+                if oa.admission_cutoff and oa.admission_cutoff < oa.baseline_keep_n:
+                    raise ValueError("query_enhancement.only_add.admission_cutoff must be >= baseline_keep_n (or 0)")
 
     @classmethod
     def from_yaml(cls, path: Path, base_dir: Optional[Path] = None) -> "ExperimentConfig":
@@ -276,6 +354,7 @@ class ExperimentConfig:
         crossref = _parse_crossref(data)
         dual_list = _parse_dual_list(data)
         pairing = _parse_pairing(data)
+        query_enhancement = _parse_query_enhancement(data)
         cfg = cls(
             experiment_name=str(data.get("experiment_name", "unnamed_experiment")),
             substrate_path=str(data.get("substrate_path", "")),
@@ -347,6 +426,7 @@ class ExperimentConfig:
             crossref=crossref,
             dual_list=dual_list,
             pairing=pairing,
+            query_enhancement=query_enhancement,
         )
         return cfg
 
@@ -430,6 +510,32 @@ def _parse_pairing(data: Dict[str, Any]) -> PairingConfig:
         enabled=bool(data.get("dependency_pairing_expand", False)),
         emax=int(data.get("dependency_pairing_emax", 6)),
     )
+
+
+def _parse_query_enhancement(data: Dict[str, Any]) -> QueryEnhancementConfig:
+    raw = data.get("query_enhancement")
+    if isinstance(raw, dict):
+        raw_only_add = raw.get("only_add")
+        only_add_cfg = OnlyAddFusionConfig()
+        if isinstance(raw_only_add, dict):
+            only_add_cfg = OnlyAddFusionConfig(
+                baseline_keep_n=int(raw_only_add.get("baseline_keep_n", only_add_cfg.baseline_keep_n)),
+                variant_k_per_query=int(raw_only_add.get("variant_k_per_query", only_add_cfg.variant_k_per_query)),
+                admission_cutoff=int(raw_only_add.get("admission_cutoff", only_add_cfg.admission_cutoff)),
+                prefix_lock_n=int(raw_only_add.get("prefix_lock_n", only_add_cfg.prefix_lock_n)),
+                tail_rerank=str(raw_only_add.get("tail_rerank", only_add_cfg.tail_rerank)),
+                tail_rerank_window=int(raw_only_add.get("tail_rerank_window", only_add_cfg.tail_rerank_window)),
+                append_score_band=float(raw_only_add.get("append_score_band", only_add_cfg.append_score_band)),
+                rerank_union=bool(raw_only_add.get("rerank_union", only_add_cfg.rerank_union)),
+            )
+        return QueryEnhancementConfig(
+            enabled=bool(raw.get("enabled", False)),
+            profile_path=str(raw.get("profile_path", "")),
+            mode=str(raw.get("mode", "none")),
+            fusion_mode=str(raw.get("fusion_mode", "only_add")),
+            only_add=only_add_cfg,
+        )
+    return QueryEnhancementConfig()
 
 
 def resolve_model_id(model_id: str, registry: Optional[Dict[str, Any]] = None) -> str:

@@ -38,7 +38,7 @@ from retrieval_lab.report import write_report_artifacts
 from retrieval_lab.crossref_sidecar import (
     build_minimal_a_prime_hints,
 )
-from retrieval_lab.orchestration.config_access import read_expansion_config, read_run_flags
+from retrieval_lab.orchestration.config_access import read_expansion_config, read_query_enhancement_config, read_run_flags
 from retrieval_lab.orchestration.eval_runner import prepare_expansion_indices
 from retrieval_lab.orchestration.cli import apply_cli_overrides
 from retrieval_lab.orchestration.bm25_mode import run_bm25_mode
@@ -108,6 +108,55 @@ def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Di
                         "required_full_set_hit_at_10": float((metrics.get("required_full_set_hit_at_k") or {}).get("10", (metrics.get("required_full_set_hit_at_k") or {}).get(10, 0.0))),
                     }
     return out
+
+
+def _load_baseline_failure_types(
+    *,
+    baseline_metrics_path: Optional[str],
+    retrieval_mode: str,
+    models: List[str],
+) -> Optional[Dict[str, str]]:
+    """Optional: load per-query baseline failure types for conditional enhancement.
+
+    Intended use: avoid spending QE cycles on already-strong queries. We only enhance
+    failure buckets that baseline couldn't solve (retrieval_miss / rank_miss), and
+    we can split behavior between those buckets.
+
+    Expects baseline_metrics_path to be a metrics.json inside a baseline run directory,
+    with a sibling per_query.json.
+    """
+    if not baseline_metrics_path:
+        return None
+    metrics_path = Path(baseline_metrics_path)
+    per_query_path = metrics_path.with_name("per_query.json")
+    if not per_query_path.exists():
+        return None
+    try:
+        payload = json.loads(per_query_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        logger.warning("baseline per_query.json is not valid JSON: %s", per_query_path)
+        return None
+    if not isinstance(payload, dict):
+        return None
+
+    if retrieval_mode == "bm25":
+        key = "bm25"
+    else:
+        # Baseline per_query is keyed by model_id; use first configured model if present.
+        key = models[0] if models else next(iter(payload.keys()), "")
+    per_query = payload.get(key)
+    if not isinstance(per_query, list):
+        return None
+
+    by_id: Dict[str, str] = {}
+    for row in per_query:
+        if not isinstance(row, dict):
+            continue
+        qid = str(row.get("query_id") or "")
+        ft = str(row.get("failure_type") or "")
+        if qid and ft in ("retrieval_miss", "rank_miss"):
+            by_id[qid] = ft
+    return by_id
 
 
 def _load_model_registry():
@@ -401,6 +450,21 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     t_stage_start = time.perf_counter()
     flags = read_run_flags(config)
     expansion_cfg = read_expansion_config(config)
+    qe_flags = read_query_enhancement_config(config)
+    qe_profile = None
+    qe_cache = None
+    if qe_flags.enabled and qe_flags.mode != "none" and qe_flags.profile_path:
+        from retrieval_lab.query_enhancement.profile import load_profile, validate_profile
+        from retrieval_lab.query_enhancement.cache import QueryEnhancementCache
+        qe_profile = load_profile(qe_flags.profile_path)
+        errors = validate_profile(qe_profile)
+        if errors:
+            raise ValueError(f"Query enhancement profile validation failed: {errors}")
+        qe_cache = QueryEnhancementCache(qe_profile.cache.cache_dir, enabled=qe_profile.cache.enabled)
+        logger.info(
+            "Query enhancement enabled: mode=%s fusion=%s profile=%s hash=%s",
+            qe_flags.mode, qe_flags.fusion_mode, qe_profile.profile_id, qe_profile.compute_hash()[:16],
+        )
     context = _prepare_experiment_corpus_context(config, flags, eval_only_run_id)
     corpus = context["corpus"]
     canonical_corpus = context["canonical_corpus"]
@@ -431,6 +495,18 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     stage_timing_sec: Dict[str, float] = {
         "load_corpus_and_projection": time.perf_counter() - t_stage_start
     }
+
+    baseline_failure_types = _load_baseline_failure_types(
+        baseline_metrics_path=config.baseline_metrics_path,
+        retrieval_mode=retrieval_mode,
+        models=config.models,
+    )
+    if baseline_failure_types is not None:
+        logger.info(
+            "Conditional QE enabled from baseline failures: %d/%d queries eligible for enhancement",
+            len(baseline_failure_types),
+            len(grounded_queries),
+        )
 
     experiment_ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     experiment_id = f"{config.experiment_name}_{experiment_ts}"
@@ -474,6 +550,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             crossref_sidecar=crossref_sidecar,
             pairing_edges=pairing_edges,
             apply_unit_type_boost_fn=_apply_unit_type_boost,
+            qe_profile=qe_profile,
+            qe_mode=qe_flags.mode if qe_flags.enabled else "none",
+            qe_fusion_mode=qe_flags.fusion_mode if qe_flags.enabled else "only_add",
+            qe_only_add=qe_flags.only_add if qe_flags.enabled else None,
+            qe_enhance_query_ids=baseline_failure_types,
+            qe_cache=qe_cache,
         )
         results_by_model["bm25"] = bm25_out["results"]
         per_query_by_model["bm25"] = bm25_out["per_query"]
@@ -515,6 +597,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             build_expanded_texts_fn=_build_expanded_texts,
             expanded_text_fn=_expanded_text,
             apply_unit_type_boost_fn=_apply_unit_type_boost,
+            qe_profile=qe_profile,
+            qe_mode=qe_flags.mode if qe_flags.enabled else "none",
+            qe_fusion_mode=qe_flags.fusion_mode if qe_flags.enabled else "only_add",
+            qe_only_add=qe_flags.only_add if qe_flags.enabled else None,
+            qe_enhance_query_ids=baseline_failure_types,
+            qe_cache=qe_cache,
         )
         results_by_model = dense_out["results_by_model"]
         per_query_by_model = dense_out["per_query_by_model"]
@@ -522,6 +610,65 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         all_grounding_audit = dense_out["all_grounding_audit"]
         pairing_instrumentation_by_model = dense_out["pairing_instrumentation_by_model"]
     stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
+
+    # Diagnostics: failure rescue rate vs baseline + head stability (top-K equality) vs baseline.
+    tail_rerank_diagnostics: Dict[str, Dict[str, Any]] = {}
+    if config.baseline_metrics_path:
+        try:
+            baseline_per_query = json.loads(Path(config.baseline_metrics_path).with_name("per_query.json").read_text(encoding="utf-8"))
+        except Exception:
+            baseline_per_query = None
+        try:
+            baseline_chunks_path = Path(config.baseline_metrics_path).with_name("retrieved_chunks.json")
+            baseline_retrieved = json.loads(baseline_chunks_path.read_text(encoding="utf-8")) if baseline_chunks_path.exists() else None
+        except Exception:
+            baseline_retrieved = None
+
+        if isinstance(baseline_per_query, dict) and retrieved_chunks_by_model:
+            eval_k = max(config.top_k) if config.top_k else 0
+            prefix_lock_n = int(getattr(qe_flags.only_add, "prefix_lock_n", eval_k or 20))
+            for model_id, cur_rows in per_query_by_model.items():
+                base_rows = baseline_per_query.get(model_id)
+                if not isinstance(base_rows, list) or not isinstance(cur_rows, list):
+                    continue
+                base_by_qid = {str(r.get("query_id")): r for r in base_rows if isinstance(r, dict) and r.get("query_id")}
+                cur_by_qid = {str(r.get("query_id")): r for r in cur_rows if isinstance(r, dict) and r.get("query_id")}
+                failures = 0
+                rescued = 0
+                for qid, br in base_by_qid.items():
+                    ft = str(br.get("failure_type") or "")
+                    if ft not in ("retrieval_miss", "rank_miss"):
+                        continue
+                    failures += 1
+                    cr = cur_by_qid.get(qid, {})
+                    if str(cr.get("failure_type") or "") == "hit":
+                        rescued += 1
+
+                head_total = 0
+                head_equal = 0
+                if isinstance(baseline_retrieved, dict):
+                    base_chunks = ((baseline_retrieved.get("by_model") or {}).get(model_id) if model_id != "bm25" else (baseline_retrieved.get("by_model") or {}).get("bm25"))
+                    cur_chunks = (retrieved_chunks_by_model.get(model_id) if model_id in retrieved_chunks_by_model else (retrieved_chunks_by_model.get("bm25") if model_id == "bm25" else None))
+                    if isinstance(base_chunks, list) and isinstance(cur_chunks, list):
+                        base_top = {str(r.get("query_id")): [x.get("chunk_id") for x in (r.get("retrieved") or [])[:prefix_lock_n]] for r in base_chunks if isinstance(r, dict)}
+                        cur_top = {str(r.get("query_id")): [x.get("chunk_id") for x in (r.get("retrieved") or [])[:prefix_lock_n]] for r in cur_chunks if isinstance(r, dict)}
+                        for qid, btop in base_top.items():
+                            if not qid or qid not in cur_top:
+                                continue
+                            head_total += 1
+                            if btop == cur_top[qid]:
+                                head_equal += 1
+
+                tail_rerank_diagnostics[model_id] = {
+                    "baseline_failures": failures,
+                    "rescued_failures": rescued,
+                    "rescued_pct": (rescued / failures) if failures else 0.0,
+                    "head_stability_total": head_total,
+                    "head_stability_equal": head_equal,
+                    "head_stability_rate": (head_equal / head_total) if head_total else None,
+                    "eval_k": eval_k,
+                    "prefix_lock_n": prefix_lock_n,
+                }
 
     grounded_count = sum(1 for q in grounded_queries if (q.get("gold_unit_ids")))
     grounding_summary = {
@@ -572,6 +719,23 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "a_prime_generate_minimal": flags.a_prime_generate_minimal,
         "dual_list_fusion": flags.dual_list_fusion,
         "dependency_pairing_expand": expansion_cfg.dependency_pairing_expand,
+        "query_enhancement": {
+            "enabled": qe_flags.enabled,
+            "mode": qe_flags.mode,
+            "fusion_mode": qe_flags.fusion_mode,
+            "profile_id": qe_profile.profile_id if qe_profile else "",
+            "profile_hash": qe_profile.compute_hash()[:16] if qe_profile else "",
+            "only_add": {
+                "baseline_keep_n": qe_flags.only_add.baseline_keep_n,
+                "variant_k_per_query": qe_flags.only_add.variant_k_per_query,
+                "admission_cutoff": qe_flags.only_add.admission_cutoff,
+                "prefix_lock_n": getattr(qe_flags.only_add, "prefix_lock_n", qe_flags.only_add.baseline_keep_n),
+                "tail_rerank": getattr(qe_flags.only_add, "tail_rerank", "none"),
+                "tail_rerank_window": getattr(qe_flags.only_add, "tail_rerank_window", 50),
+                "append_score_band": qe_flags.only_add.append_score_band,
+                "rerank_union": qe_flags.only_add.rerank_union,
+            },
+        },
     }
     experiment_doc = {
         "experiment_id": experiment_id,
@@ -585,6 +749,11 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }
+    if tail_rerank_diagnostics:
+        experiment_doc["tail_rerank_diagnostics"] = tail_rerank_diagnostics
+        for model_id, res in results_by_model.items():
+            if model_id in tail_rerank_diagnostics:
+                res["tail_rerank_diagnostics"] = tail_rerank_diagnostics[model_id]
     baseline_metrics = _load_baseline_metrics(config.baseline_metrics_path)
     baseline_failure_buckets = {
         model_id: model_payload.get("failure_bucket_counts", {})
@@ -610,6 +779,20 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             logger.warning("Could not save experiment to MongoDB: %s", e)
     else:
         logger.info("MongoDB persistence disabled (mongo_uri not set); skipping save_experiment.")
+    enhancement_attribution = None
+    if qe_profile is not None and qe_flags.mode != "none":
+        from retrieval_lab.query_enhancement.attribution import compute_enhancement_attribution
+        first_model = next(iter(results_by_model), None)
+        if first_model:
+            enhancement_attribution = compute_enhancement_attribution(
+                ranked_lists=[],
+                baseline_ranked_lists=None,
+                grounded_queries=grounded_queries,
+            )
+            enhancement_attribution["enhancement_mode"] = qe_flags.mode
+            enhancement_attribution["profile_id"] = qe_profile.profile_id
+            experiment_doc["enhancement_attribution"] = enhancement_attribution
+
     paths = write_report_artifacts(
         output_dir,
         experiment_id,
@@ -622,6 +805,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         per_query_by_model,
         experiment_doc,
         retrieved_chunks_by_model=retrieved_chunks_by_model,
+        enhancement_attribution=enhancement_attribution,
     )
     logger.info("Report written to %s", paths.get("REPORT.md"))
     # v1: pairing instrumentation (required; emit even when 0 so dashboard/tests can rely on it).

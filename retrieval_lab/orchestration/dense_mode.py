@@ -53,7 +53,8 @@ def _rerank_candidates_dense(
                 scores.append((cid, float("-inf")))
             else:
                 scores.append((cid, float(np.dot(q_vec, corpus_embeddings[idx]))))
-        scores.sort(key=lambda x: x[1], reverse=True)
+        # Deterministic tie-break by doc_id.
+        scores.sort(key=lambda x: (-x[1], x[0]))
         trimmed = scores[:final_k]
         reranked_lists.append([cid for cid, _ in trimmed])
         reranked_scores.append([score for _, score in trimmed])
@@ -112,7 +113,8 @@ def _load_or_compute_corpus_embeddings(
     """Resolve corpus embeddings from cache/disk or compute and persist."""
     t0 = time.perf_counter()
     embed_dir = Path(config.output_dir) / f"embed_{run_id}"
-    npy_path = embed_dir / "embeddings" / f"{model_id}_corpus.npy"
+    safe_model_id = str(model_id).replace("/", "__")
+    npy_path = embed_dir / "embeddings" / f"{safe_model_id}_corpus.npy"
     index_path = embed_dir / "embeddings" / "corpus_index.json"
     if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
         for subdir in Path(config.output_dir).iterdir():
@@ -124,7 +126,8 @@ def _load_or_compute_corpus_embeddings(
             try:
                 index_data = json.loads(idx_path.read_text(encoding="utf-8"))
                 if index_data.get("run_id") == run_id:
-                    npy_path = subdir / "embeddings" / f"{model_id}_corpus.npy"
+                    safe_model_id = str(model_id).replace("/", "__")
+                    npy_path = subdir / "embeddings" / f"{safe_model_id}_corpus.npy"
                     index_path = idx_path
                     if npy_path.exists():
                         unit_id_to_index = index_data.get("unit_id_to_index", {})
@@ -168,9 +171,9 @@ def _load_or_compute_corpus_embeddings(
                 ]
                 save_cached_embeddings(run_id, model_id, records, mongo_uri, clear_existing=True)
                 save_embedding_run_metadata(run_id, model_id, len(corpus_ids), mongo_uri)
-            np.save(output_dir / "embeddings" / f"{model_id}_corpus.npy", corpus_embeddings)
+            (output_dir / "embeddings").mkdir(exist_ok=True)
+            np.save(output_dir / "embeddings" / f"{safe_model_id}_corpus.npy", corpus_embeddings)
             if model_id == config.models[0]:
-                (output_dir / "embeddings").mkdir(exist_ok=True)
                 index_path = output_dir / "embeddings" / "corpus_index.json"
                 index_path.write_text(
                     json.dumps(
@@ -221,7 +224,9 @@ def _load_or_compute_family_embeddings(
         ]
         save_cached_embeddings(run_id_family, model_id, records_f, mongo_uri, clear_existing=True)
         save_embedding_run_metadata(run_id_family, model_id, len(family_corpus_ids), mongo_uri)
-    np.save(output_dir / "embeddings" / f"{model_id}_family.npy", family_embeddings)
+    safe_model_id = str(model_id).replace("/", "__")
+    (output_dir / "embeddings").mkdir(exist_ok=True)
+    np.save(output_dir / "embeddings" / f"{safe_model_id}_family.npy", family_embeddings)
     return family_embeddings
 
 
@@ -252,6 +257,12 @@ def _run_ranking_pipeline(
     pairing_edges: Dict[str, Any],
     build_expanded_texts_fn: Any,
     apply_unit_type_boost_fn: Any,
+    qe_profile: Any = None,
+    qe_mode: str = "none",
+    qe_fusion_mode: str = "only_add",
+    qe_only_add: Any = None,
+    qe_enhance_query_ids: Any = None,
+    qe_cache: Any = None,
 ) -> Dict[str, Any]:
     """Run query encoding, ranking, reranking, and post-retrieval expansions."""
     if use_semantic_grounding:
@@ -282,15 +293,197 @@ def _run_ranking_pipeline(
         )
         for q in grounded_queries
     ]
+
+    use_qe = qe_profile is not None and qe_mode != "none"
+    qe_expansion_logs: Optional[List[Any]] = None
+    qe_fusion_debug: Optional[List[Dict[str, Any]]] = None
+    if use_qe:
+        from retrieval_lab.query_enhancement.multi_query import (
+            expand_query_texts,
+            expand_query_texts_per_query_modes,
+            fuse_only_add,
+            fuse_multi_query_rankings,
+            fuse_union_rerank,
+        )
+        baseline_failure_types = qe_enhance_query_ids if isinstance(qe_enhance_query_ids, dict) else None
+        if qe_mode == "decompose":
+            # Tier-gated decomposition: only apply to T2/T3; keep T1 stable.
+            per_query_modes: List[str] = []
+            for q in grounded_queries:
+                tier = str(q.get("tier") or q.get("_tier") or "T1")
+                if tier not in ("T2", "T3"):
+                    per_query_modes.append("none")
+                    continue
+                if baseline_failure_types is not None:
+                    qid = str(q.get("id", ""))
+                    # Recommended policy: decomposition only for retrieval_miss.
+                    per_query_modes.append("decompose" if (qid and baseline_failure_types.get(qid) == "retrieval_miss") else "none")
+                elif qe_enhance_query_ids is not None:
+                    qid = str(q.get("id", ""))
+                    per_query_modes.append("decompose" if (qid and qid in qe_enhance_query_ids) else "none")
+                else:
+                    per_query_modes.append("decompose")
+            expanded_groups, qe_expansion_logs = expand_query_texts_per_query_modes(
+                query_texts_stage1, per_query_modes, qe_profile, cache=qe_cache,
+            )
+        else:
+            expanded_groups, qe_expansion_logs = expand_query_texts(
+                query_texts_stage1, qe_profile, qe_mode, cache=qe_cache,
+            )
+        n_expanded = sum(len(g) for g in expanded_groups)
+        logger.info("Query enhancement (%s): %d queries -> %d total variants", qe_mode, len(query_texts_stage1), n_expanded)
+
     query_embeddings_stage1 = encode_texts_fn(model, query_texts_stage1, batch_size=config.batch_size)
     t1 = time.perf_counter()
-    q_norm = query_embeddings_stage1 / (np.linalg.norm(query_embeddings_stage1, axis=1, keepdims=True) + 1e-9)
     max_k = max(config.top_k)
     retrieval_cutoff = max(max_k, stage1_admission_k if use_two_stage else max_k)
     ranked_lists = []
     score_lists = []
 
-    if use_dual_list_fusion and family_embeddings is not None:
+    if use_qe:
+        all_variant_texts = [qt for group in expanded_groups for qt in group]
+        all_variant_embeddings = encode_texts_fn(model, all_variant_texts, batch_size=config.batch_size)
+        all_v_norm = all_variant_embeddings / (np.linalg.norm(all_variant_embeddings, axis=1, keepdims=True) + 1e-9)
+        c_norm = corpus_embeddings / (np.linalg.norm(corpus_embeddings, axis=1, keepdims=True) + 1e-9)
+        all_sim = np.dot(all_v_norm, c_norm.T)
+
+        # Determine fusion knobs (defaults when qe_only_add is None).
+        eval_k = max(config.top_k)
+        baseline_keep_n = int(getattr(qe_only_add, "baseline_keep_n", eval_k))
+        baseline_keep_n = max(baseline_keep_n, eval_k)
+        variant_k_per_query = int(getattr(qe_only_add, "variant_k_per_query", 20))
+        admission_cutoff = int(getattr(qe_only_add, "admission_cutoff", 0))
+        prefix_lock_n = int(getattr(qe_only_add, "prefix_lock_n", baseline_keep_n))
+        tail_rerank = str(getattr(qe_only_add, "tail_rerank", "none"))
+        tail_rerank_window = int(getattr(qe_only_add, "tail_rerank_window", 50))
+        append_score_band = float(getattr(qe_only_add, "append_score_band", 1e-6))
+
+        # Only-add safety: enlarge admission pool so variants can add without evicting baseline@eval_k.
+        admission_cutoff_eff = admission_cutoff if admission_cutoff > 0 else max(50, retrieval_cutoff)
+        admission_cutoff_eff = max(admission_cutoff_eff, baseline_keep_n)
+        if use_two_stage:
+            admission_cutoff_eff = max(admission_cutoff_eff, stage1_admission_k)
+
+        corpus_ids_arr = np.asarray(corpus_ids, dtype=object)
+
+        baseline_ranked_lists: List[List[str]] = []
+        baseline_score_lists: List[List[float]] = []
+        variant_ranked_lists: List[List[List[str]]] = []
+        variant_score_lists: List[List[List[float]]] = []
+        variant_maps_for_logs: List[Dict[str, List[str]]] = []
+
+        offset = 0
+        for group in expanded_groups:
+            if not group:
+                baseline_ranked_lists.append([])
+                baseline_score_lists.append([])
+                variant_ranked_lists.append([])
+                variant_score_lists.append([])
+                variant_maps_for_logs.append({})
+                continue
+
+            # Baseline retrieval:
+            # - Dense/hybrid: q0 row is the original query embedding.
+            # - Hybrid safety: baseline must be the *full hybrid(q0)* output (dense+BM25 RRF).
+            row0 = all_sim[offset]
+            order0 = np.lexsort((corpus_ids_arr, -row0))
+            # For hybrid baseline B, dense(q0) must match the baseline pipeline input to RRF.
+            # Baseline pipeline uses dense top-`retrieval_cutoff` (typically max(top_k)).
+            dense_limit = retrieval_cutoff if (config.retrieval_mode in ("hybrid", "hybrid+rerank") and bm25_ranked_lists is not None) else admission_cutoff_eff
+            top0 = order0[:dense_limit]
+            dense_base_ids = [corpus_ids[j] for j in top0]
+            dense_base_scores = [float(row0[j]) for j in top0]
+            offset += 1
+
+            if config.retrieval_mode in ("hybrid", "hybrid+rerank") and bm25_ranked_lists is not None:
+                from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
+                policy = config.get_policy(config.document_id)
+                rrf_k = policy.fusion_k
+                qi = len(baseline_ranked_lists)
+                fused_ids, fused_scores = reciprocal_rank_fusion(
+                    [[dense_base_ids, bm25_ranked_lists[qi]]],
+                    k=rrf_k,
+                    # IMPORTANT: baseline B must match the baseline hybrid pipeline output.
+                    # Using a larger max_k here can change the top-20 due to RRF tie interactions.
+                    max_k=retrieval_cutoff,
+                )
+                base_ids = fused_ids[0]
+                base_scores = fused_scores[0]
+            else:
+                base_ids = dense_base_ids
+                base_scores = dense_base_scores
+
+            baseline_ranked_lists.append(base_ids)
+            baseline_score_lists.append(base_scores)
+
+            # Variant retrieval (q1..qm rows).
+            v_rankings: List[List[str]] = []
+            v_scores: List[List[float]] = []
+            v_map: Dict[str, List[str]] = {}
+            for variant_text in group[1:]:
+                row = all_sim[offset]
+                order = np.lexsort((corpus_ids_arr, -row))
+                top = order[:variant_k_per_query]
+                ids = [corpus_ids[j] for j in top]
+                scs = [float(row[j]) for j in top]
+                v_rankings.append(ids)
+                v_scores.append(scs)
+                v_map[variant_text] = ids
+                offset += 1
+            variant_ranked_lists.append(v_rankings)
+            variant_score_lists.append(v_scores)
+            variant_maps_for_logs.append(v_map)
+
+        if qe_fusion_mode == "only_add":
+            ranked_lists, score_lists, debug = fuse_only_add(
+                baseline_ranked_lists=baseline_ranked_lists,
+                baseline_score_lists=baseline_score_lists,
+                variant_ranked_lists=variant_ranked_lists,
+                variant_score_lists=variant_score_lists,
+                baseline_keep_n=baseline_keep_n,
+                admission_cutoff=admission_cutoff_eff,
+                append_score_band=append_score_band,
+            )
+            qe_fusion_debug = [
+                {
+                    **debug[i],
+                    "fusion_mode": "only_add",
+                    "variants": variant_maps_for_logs[i],
+                    "prefix_lock_n": prefix_lock_n,
+                    "tail_rerank": tail_rerank,
+                    "tail_rerank_window": tail_rerank_window,
+                }
+                for i in range(len(debug))
+            ]
+        elif qe_fusion_mode == "union_rerank":
+            per_expansion_rankings = [
+                [baseline_ranked_lists[i]] + (variant_ranked_lists[i] or [])
+                for i in range(len(baseline_ranked_lists))
+            ]
+            per_expansion_scores = [
+                [baseline_score_lists[i]] + (variant_score_lists[i] or [])
+                for i in range(len(baseline_score_lists))
+            ]
+            ranked_lists, score_lists = fuse_union_rerank(
+                per_expansion_rankings=per_expansion_rankings,
+                per_expansion_scores=per_expansion_scores,
+                admission_cutoff=admission_cutoff_eff,
+            )
+        else:
+            per_expansion_rankings = [
+                [baseline_ranked_lists[i]] + (variant_ranked_lists[i] or [])
+                for i in range(len(baseline_ranked_lists))
+            ]
+            policy = config.get_policy(config.document_id)
+            ranked_lists, score_lists = fuse_multi_query_rankings(
+                per_expansion_rankings, rrf_k=policy.fusion_k,
+            )
+
+        # Use original query embeddings for downstream reranking
+        q_norm = query_embeddings_stage1 / (np.linalg.norm(query_embeddings_stage1, axis=1, keepdims=True) + 1e-9)
+        logger.info("Multi-query fusion complete: mode=%s queries=%d", qe_fusion_mode, len(ranked_lists))
+    elif use_dual_list_fusion and family_embeddings is not None:
+        q_norm = query_embeddings_stage1 / (np.linalg.norm(query_embeddings_stage1, axis=1, keepdims=True) + 1e-9)
         Ku = flags.dual_list_ku
         Kf = flags.dual_list_kf
         Kfinal = flags.dual_list_kfinal
@@ -321,11 +514,15 @@ def _run_ranking_pipeline(
             score_lists.append(fused_scores)
         logger.info("A1.2 dual-list fusion applied (Ku=%d Kf=%d Kfinal=%d Qu=%d)", Ku, Kf, Kfinal, Qu)
     else:
+        q_norm = query_embeddings_stage1 / (np.linalg.norm(query_embeddings_stage1, axis=1, keepdims=True) + 1e-9)
         c_norm = corpus_embeddings / (np.linalg.norm(corpus_embeddings, axis=1, keepdims=True) + 1e-9)
         sim = np.dot(q_norm, c_norm.T)
+        corpus_ids_arr = np.asarray(corpus_ids, dtype=object)
         for i in range(len(grounded_queries)):
             row = sim[i]
-            top_indices = np.argsort(row)[::-1][:retrieval_cutoff]
+            # Deterministic tie-break by doc_id (score desc, doc_id lexical).
+            order = np.lexsort((corpus_ids_arr, -row))
+            top_indices = order[:retrieval_cutoff]
             ranked_lists.append([corpus_ids[j] for j in top_indices])
             score_lists.append([float(row[j]) for j in top_indices])
 
@@ -338,11 +535,20 @@ def _run_ranking_pipeline(
             expanded_emb = encode_texts_fn(model, expanded_texts, batch_size=config.batch_size)
             q_emb = query_embeddings[i : i + 1]
             scores = np.dot(q_emb, expanded_emb.T).flatten()
-            new_order = np.argsort(scores)[::-1]
+            # Deterministic tie-break by center_id.
+            center_arr = np.asarray(center_ids, dtype=object)
+            new_order = np.lexsort((center_arr, -scores))
             ranked_lists[i] = [center_ids[j] for j in new_order]
             score_lists[i] = [float(scores[j]) for j in new_order]
 
-    if config.retrieval_mode in ("hybrid", "hybrid+rerank") and bm25_ranked_lists is not None:
+    # Hybrid fusion step:
+    # If QE only_add is active, baseline already used hybrid(q0) and only-add is applied into that set.
+    # Do not re-fuse (it would reintroduce demotions).
+    if (
+        config.retrieval_mode in ("hybrid", "hybrid+rerank")
+        and bm25_ranked_lists is not None
+        and not (use_qe and qe_fusion_mode == "only_add")
+    ):
         from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
         policy = config.get_policy(config.document_id)
         rrf_k = policy.fusion_k
@@ -604,13 +810,142 @@ def _run_ranking_pipeline(
     if boost > 0:
         apply_unit_type_boost_fn(ranked_lists, score_lists, corpus, grounded_queries, boost)
 
+    # Diagnostic: rerank tail segment (positions prefix_lock_n+1..admission_cutoff), then enforce prefix lock.
+    if use_qe and qe_fusion_mode == "only_add" and qe_fusion_debug is not None and tail_rerank != "none":
+        from retrieval_lab.query_enhancement.multi_query import lexical_rerank_tail_segment
+
+        locked_prefixes = [
+            (d.get("baseline_topN", []) or [])[:prefix_lock_n]
+            for d in qe_fusion_debug
+        ]
+        eligible = None
+        if isinstance(qe_enhance_query_ids, dict):
+            eligible = [
+                str(q.get("id", "")) in qe_enhance_query_ids
+                for q in grounded_queries
+            ]
+        elif isinstance(qe_enhance_query_ids, set):
+            eligible = [
+                str(q.get("id", "")) in qe_enhance_query_ids
+                for q in grounded_queries
+            ]
+        if tail_rerank == "lexical":
+            ranked_lists, score_lists = lexical_rerank_tail_segment(
+                ranked_lists=ranked_lists,
+                score_lists=score_lists,
+                query_texts=query_texts_stage1,
+                id_to_text=final_id_to_text,
+                locked_prefixes=locked_prefixes,
+                admission_cutoff=admission_cutoff_eff,
+                rerank_window=tail_rerank_window,
+                eligible=eligible,
+            )
+        elif tail_rerank in ("cross_encoder", "cascade"):
+            # Optional cascade: lexical first, then cross-encoder only for remaining failures (eval-only).
+            if tail_rerank == "cascade":
+                ranked_lists, score_lists = lexical_rerank_tail_segment(
+                    ranked_lists=ranked_lists,
+                    score_lists=score_lists,
+                    query_texts=query_texts_stage1,
+                    id_to_text=final_id_to_text,
+                    locked_prefixes=locked_prefixes,
+                    admission_cutoff=admission_cutoff_eff,
+                    rerank_window=tail_rerank_window,
+                    eligible=eligible,
+                )
+            from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
+
+            reranker_model = getattr(config, "reranker", None) or "cross-encoder/ms-marco-MiniLM-L6-v2"
+            r_model = load_cross_encoder(reranker_model)
+            for i in range(len(grounded_queries)):
+                if eligible is not None and (i >= len(eligible) or not eligible[i]):
+                    continue
+                if tail_rerank == "cascade":
+                    gold = set(grounded_queries[i].get("gold_unit_ids") or [])
+                    if gold:
+                        first = None
+                        for rr, cid in enumerate(ranked_lists[i][:eval_k], start=1):
+                            if cid in gold:
+                                first = rr
+                                break
+                        if first is not None:
+                            continue
+                ids0 = ranked_lists[i] or []
+                sc0 = score_lists[i] or []
+                n0 = min(len(ids0), len(sc0))
+                ids0 = ids0[:n0]
+                sc0 = sc0[:n0]
+                score_by_id = {cid: float(sc) for cid, sc in zip(ids0, sc0)}
+
+                locked = locked_prefixes[i] if i < len(locked_prefixes) else []
+                locked_set = set(locked)
+                tail_all = [cid for cid in ids0 if cid not in locked_set]
+                tail_cap = max(0, admission_cutoff_eff - len(locked))
+                tail = tail_all[:tail_cap]
+                tail_rest = tail_all[tail_cap:]
+
+                tail_rerank_ids = tail[: max(1, tail_rerank_window)]
+                tail_hold = tail[max(1, tail_rerank_window) :]
+                tail_candidates = [{"chunk_id": cid, "text": final_id_to_text.get(cid, "")} for cid in tail_rerank_ids]
+                q_text = query_texts_stage1[i] if i < len(query_texts_stage1) else (grounded_queries[i].get("question") or "")
+                reranked = rerank_candidates(q_text, tail_candidates, r_model, top_k=len(tail_candidates))
+                tail_sorted = [r["chunk_id"] for r in reranked]
+                tail_scores_by_id = {r["chunk_id"]: float(r.get("rerank_score", 0.0)) for r in reranked}
+
+                new_ids = (
+                    locked
+                    + tail_sorted
+                    + [cid for cid in tail_hold if cid not in set(tail_sorted)]
+                    + [cid for cid in tail_rest if cid not in set(tail_sorted)]
+                )
+                new_scores = (
+                    [score_by_id.get(cid, 0.0) for cid in locked]
+                    + [tail_scores_by_id.get(cid, 0.0) for cid in tail_sorted]
+                    + [score_by_id.get(cid, 0.0) for cid in tail_hold if cid not in set(tail_sorted)]
+                    + [score_by_id.get(cid, 0.0) for cid in tail_rest if cid not in set(tail_sorted)]
+                )
+                ranked_lists[i] = new_ids
+                score_lists[i] = new_scores
+
+    # Enforce baseline lock *after* downstream stages that can reorder candidates.
+    if use_qe and qe_fusion_mode == "only_add" and qe_fusion_debug is not None:
+        from retrieval_lab.query_enhancement.multi_query import lock_prefix
+
+        locked_prefixes = [
+            (d.get("baseline_topN", []) or [])[:prefix_lock_n]
+            for d in qe_fusion_debug
+        ]
+        # If a downstream stage promoted IDs (e.g., raw-first merge-rerank), map raw locked IDs
+        # to their merged candidate IDs when possible.
+        if ranked_source_id_lists is not None:
+            mapped: List[List[str]] = []
+            for i in range(len(locked_prefixes)):
+                raw_locked = locked_prefixes[i] or []
+                # ranked_source_id_lists[i][pos] = list of source ids covered by candidate at ranked_lists[i][pos]
+                src_lists = ranked_source_id_lists[i] if i < len(ranked_source_id_lists) else []
+                cand_ids = ranked_lists[i] if i < len(ranked_lists) else []
+                raw_to_cand: Dict[str, str] = {}
+                for cid, srcs in zip(cand_ids, src_lists):
+                    for src in (srcs or []):
+                        if src not in raw_to_cand:
+                            raw_to_cand[src] = cid
+                mapped_locked = [raw_to_cand[r] for r in raw_locked if r in raw_to_cand]
+                mapped.append(mapped_locked if mapped_locked else raw_locked)
+            locked_prefixes = mapped
+        if locked_prefixes and len(locked_prefixes) == len(ranked_lists):
+            ranked_lists, score_lists = lock_prefix(
+                ranked_lists=ranked_lists,
+                score_lists=score_lists,
+                locked_prefixes=locked_prefixes,
+            )
+
     if ranked_source_id_lists is None:
         ranked_source_id_lists = [
             [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
             for i in range(len(ranked_lists))
         ]
 
-    return {
+    result = {
         "grounded_queries": grounded_queries,
         "all_grounding_audit": all_grounding_audit,
         "query_embeddings": query_embeddings,
@@ -622,6 +957,11 @@ def _run_ranking_pipeline(
         "pairing_payload": pairing_payload,
         "scoring_time_sec": time.perf_counter() - t1,
     }
+    if qe_expansion_logs is not None:
+        result["qe_expansion_logs"] = qe_expansion_logs
+    if qe_fusion_debug is not None:
+        result["qe_fusion_debug"] = qe_fusion_debug
+    return result
 
 
 def _build_metrics_and_reviews(
@@ -645,6 +985,7 @@ def _build_metrics_and_reviews(
     expanded_text_fn: Any,
     final_id_to_text: Optional[Dict[str, str]] = None,
     raw_merge_diagnostics: Optional[Dict[str, Any]] = None,
+    qe_fusion_debug: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """Score retrieval outputs and assemble query-review artifacts."""
     text_map = final_id_to_text or id_to_text
@@ -687,7 +1028,7 @@ def _build_metrics_and_reviews(
         if pf_policy.enabled:
             from retrieval_lab.parent_fetch import fetch_parent_context
             retrieved = fetch_parent_context(retrieved, corpus, pf_policy)
-        query_reviews.append({
+        review_entry: Dict[str, Any] = {
             "query_id": q.get("id", ""),
             "question": q.get("question", ""),
             "expected_answer_summary": q.get("expected_answer_summary", ""),
@@ -695,7 +1036,15 @@ def _build_metrics_and_reviews(
             "first_gold_rank": pq.get("first_gold_rank"),
             "failure_type": pq.get("failure_type", ""),
             "retrieved": retrieved,
-        })
+        }
+        if qe_fusion_debug is not None and i < len(qe_fusion_debug):
+            gold = set(q.get("gold_unit_ids") or [])
+            baseline_top = set((qe_fusion_debug[i].get("baseline_topN") or []))
+            final_admitted = set((qe_fusion_debug[i].get("final_admitted") or []))
+            qe_fusion_debug[i]["baseline_gold_in_candidates"] = bool(gold & baseline_top)
+            qe_fusion_debug[i]["new_gold_added_by_variants"] = sorted(list((gold & final_admitted) - baseline_top))
+            review_entry["qe_fusion"] = qe_fusion_debug[i]
+        query_reviews.append(review_entry)
         top3_ids = ranked_lists[i][:3]
         top3_scores = [round(s, 3) for s in score_lists[i][:3]]
         logger.info(
@@ -767,6 +1116,12 @@ def run_dense_mode(
     build_expanded_texts_fn: Any,
     expanded_text_fn: Any,
     apply_unit_type_boost_fn: Any,
+    qe_profile: Any = None,
+    qe_mode: str = "none",
+    qe_fusion_mode: str = "only_add",
+    qe_only_add: Any = None,
+    qe_enhance_query_ids: Any = None,
+    qe_cache: Any = None,
 ) -> Dict[str, Any]:
     """Run dense/hybrid retrieval for all configured embedding models."""
     results_by_model: Dict[str, Dict[str, Any]] = {}
@@ -870,6 +1225,12 @@ def run_dense_mode(
             pairing_edges=pairing_edges,
             build_expanded_texts_fn=build_expanded_texts_fn,
             apply_unit_type_boost_fn=apply_unit_type_boost_fn,
+            qe_profile=qe_profile,
+            qe_mode=qe_mode,
+            qe_fusion_mode=qe_fusion_mode,
+            qe_only_add=qe_only_add,
+            qe_enhance_query_ids=qe_enhance_query_ids,
+            qe_cache=qe_cache,
         )
         grounded_queries = rank_out["grounded_queries"]
         all_grounding_audit = rank_out["all_grounding_audit"]
@@ -896,6 +1257,7 @@ def run_dense_mode(
             expanded_text_fn=expanded_text_fn,
             final_id_to_text=rank_out.get("final_id_to_text"),
             raw_merge_diagnostics=rank_out.get("raw_merge_diagnostics"),
+            qe_fusion_debug=rank_out.get("qe_fusion_debug"),
         )
         retrieved_chunks_by_model[model_id] = model_out["query_reviews"]
         logger.info("Model %s: retrieval done for %d queries; review in retrieved_chunks.json", model_id, len(grounded_queries))

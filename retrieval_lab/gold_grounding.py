@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
@@ -71,7 +72,39 @@ def _normalize_gold_fields(q: Dict[str, Any]) -> Dict[str, Any]:
 def _path_key(unit: Dict[str, Any]) -> Tuple[int, str]:
     page = int(unit.get("page", -1))
     structural_path = unit.get("structural_path") or []
-    return page, " > ".join(str(x) for x in structural_path)
+    return page, _normalize_structural_path(structural_path)
+
+
+def _normalize_structural_path(structural_path: Any) -> str:
+    """Normalize structural_path for robust benchmark→corpus matching.
+
+    Mark III substrates may have OCR-case variance (e.g. ALL CAPS headings) and
+    inconsistent whitespace. Benchmarks may use title case. We normalize to a
+    case-insensitive, whitespace-collapsed join key.
+    """
+    if not structural_path:
+        return ""
+    return " > ".join(_normalize_structural_path_parts(structural_path))
+
+
+def _normalize_structural_path_parts(structural_path: Any) -> list[str]:
+    if not structural_path:
+        return []
+    raw_parts = structural_path if isinstance(structural_path, list) else [structural_path]
+    parts: list[str] = []
+    for raw in raw_parts:
+        s = re.sub(r"\s+", " ", str(raw)).strip()
+        if s:
+            parts.append(s.casefold())
+    return parts
+
+
+def _is_suffix_path(shorter: list[str], longer: list[str]) -> bool:
+    if not shorter:
+        return False
+    if len(shorter) > len(longer):
+        return False
+    return longer[-len(shorter) :] == shorter
 
 
 def build_original_to_merged(
@@ -140,8 +173,35 @@ def resolve_gold_ids_for_query(
         structural_path = loc.get("structural_path") or []
         if page is None or not structural_path:
             return []
-        key = (int(page), " > ".join(str(x) for x in structural_path))
-        return [unit_id for unit_id, unit in merged_by_id.items() if _path_key(unit) == key]
+        target_page = int(page)
+        target_parts = _normalize_structural_path_parts(structural_path)
+        if not target_parts:
+            return []
+        matches: list[str] = []
+        for unit_id, unit in merged_by_id.items():
+            if int(unit.get("page", -1)) != target_page:
+                continue
+            unit_parts = _normalize_structural_path_parts(unit.get("structural_path") or [])
+            if not unit_parts:
+                continue
+            if unit_parts == target_parts:
+                matches.append(unit_id)
+                continue
+            # Substrate often has fewer structural_path levels than benchmarks
+            # (e.g. ["DICE"] vs ["Player Guide", "DICE"]).
+            if _is_suffix_path(unit_parts, target_parts) or _is_suffix_path(target_parts, unit_parts):
+                matches.append(unit_id)
+        if matches:
+            return matches
+        # Fallback: some substrates produce units with no heading parent at all on a page
+        # (structural_path=[]). If the benchmark provides a heading but we can't match it,
+        # prefer returning the unheaded units on that page rather than returning nothing.
+        return [
+            unit_id
+            for unit_id, unit in merged_by_id.items()
+            if int(unit.get("page", -1)) == target_page
+            and not _normalize_structural_path_parts(unit.get("structural_path") or [])
+        ]
 
     def add_chunk(new_id: str, old_id: str) -> None:
         if new_id in seen_new:

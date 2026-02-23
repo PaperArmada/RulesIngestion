@@ -93,3 +93,63 @@ def read_expansion_config(config: object) -> ExpansionConfig:
         dependency_pairing_expand=bool(getattr(config, "dependency_pairing_expand", False)),
         dependency_pairing_emax=int(getattr(config, "dependency_pairing_emax", 6)),
     )
+
+
+@dataclass
+class OnlyAddFusionFlags:
+    baseline_keep_n: int
+    variant_k_per_query: int
+    admission_cutoff: int
+    prefix_lock_n: int
+    tail_rerank: str
+    tail_rerank_window: int
+    append_score_band: float
+    rerank_union: bool
+
+
+@dataclass
+class QueryEnhancementFlags:
+    enabled: bool
+    profile_path: str
+    mode: str
+    fusion_mode: str
+    only_add: OnlyAddFusionFlags
+
+
+def read_query_enhancement_config(config: object) -> QueryEnhancementFlags:
+    qe = getattr(config, "query_enhancement", None)
+    if qe is not None:
+        oa = getattr(qe, "only_add", None)
+        only_add = OnlyAddFusionFlags(
+            baseline_keep_n=int(getattr(oa, "baseline_keep_n", 20)),
+            variant_k_per_query=int(getattr(oa, "variant_k_per_query", 20)),
+            admission_cutoff=int(getattr(oa, "admission_cutoff", 50)),
+            prefix_lock_n=int(getattr(oa, "prefix_lock_n", 20)),
+            tail_rerank=str(getattr(oa, "tail_rerank", "none")),
+            tail_rerank_window=int(getattr(oa, "tail_rerank_window", 50)),
+            append_score_band=float(getattr(oa, "append_score_band", 1e-6)),
+            rerank_union=bool(getattr(oa, "rerank_union", False)),
+        )
+        return QueryEnhancementFlags(
+            enabled=bool(getattr(qe, "enabled", False)),
+            profile_path=str(getattr(qe, "profile_path", "")),
+            mode=str(getattr(qe, "mode", "none")),
+            fusion_mode=str(getattr(qe, "fusion_mode", "only_add")),
+            only_add=only_add,
+        )
+    return QueryEnhancementFlags(
+        enabled=False,
+        profile_path="",
+        mode="none",
+        fusion_mode="only_add",
+        only_add=OnlyAddFusionFlags(
+            baseline_keep_n=20,
+            variant_k_per_query=20,
+            admission_cutoff=50,
+            prefix_lock_n=20,
+            tail_rerank="none",
+            tail_rerank_window=50,
+            append_score_band=1e-6,
+            rerank_union=False,
+        ),
+    )

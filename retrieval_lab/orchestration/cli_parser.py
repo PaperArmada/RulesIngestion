@@ -88,4 +88,32 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.set_defaults(raw_merge_rank_floor=None)
     parser.add_argument("--raw-merge-coverage-bonus", type=float, default=None, help="Optional bonus for merged candidates covering more admitted raw sources")
     parser.add_argument("--baseline-metrics", type=str, default=None, help="Optional baseline metrics.json path for failure-bucket delta reporting")
+    parser.add_argument("--enhancement-mode", type=str, choices=["none", "dict", "llm", "llm+dict", "decompose"], default=None, help="Query enhancement mode (overrides config)")
+    parser.add_argument("--enhancement-profile", type=str, default=None, help="Path to QueryExpansionProfile JSON (overrides config)")
+    parser.add_argument(
+        "--enhancement-fusion-mode",
+        type=str,
+        choices=["only_add", "rrf", "union_rerank"],
+        default=None,
+        help="Query enhancement fusion policy (overrides config). Default for QE runs is only_add.",
+    )
+    parser.add_argument(
+        "--onlyadd-prefix-lock-n",
+        type=int,
+        default=None,
+        help="only_add: hard-lock this many baseline items at the front (diagnostic knob).",
+    )
+    parser.add_argument(
+        "--onlyadd-tail-rerank",
+        type=str,
+        choices=["none", "lexical", "cross_encoder", "cascade"],
+        default=None,
+        help="only_add: rerank tail segment (positions prefix_lock_n+1..admission_cutoff). Diagnostic knob.",
+    )
+    parser.add_argument(
+        "--onlyadd-tail-rerank-window",
+        type=int,
+        default=None,
+        help="only_add: rerank window size (R). Only rerank positions prefix_lock_n+1..prefix_lock_n+R.",
+    )
     return parser

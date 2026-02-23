@@ -90,13 +90,23 @@ def _render_prompt(
 
 
 def _validate_surface_forms_substrings(enrichment: APrimeEnrichment, verbatim_text: str) -> None:
-    """Raise ValueError if any surface_form is not a substring of verbatim_text."""
+    """Filter mechanic_atoms whose surface_forms are not substrings of verbatim_text.
+
+    Atoms with hallucinated surface_forms are dropped with a warning rather than
+    aborting the entire enrichment — a single bad atom should not kill the page.
+    """
+    clean: list = []
     for atom in enrichment.mechanic_atoms:
-        for sf in atom.surface_forms:
-            if sf not in verbatim_text:
-                raise ValueError(
-                    f"surface_form {sf!r} is not a substring of verbatim_text"
-                )
+        bad = [sf for sf in atom.surface_forms if sf not in verbatim_text]
+        if bad:
+            logger.warning(
+                "Dropping mechanic_atom (type=%s): surface_form(s) not in verbatim_text: %s",
+                atom.type,
+                bad,
+            )
+        else:
+            clean.append(atom)
+    enrichment.mechanic_atoms = clean
 
 
 def _responses_parse_sync(
@@ -234,7 +244,7 @@ def run_stage_a_prime(
     out_dir: Path,
     *,
     book_id: str,
-    model: str = "gpt-5-mini",
+    model: str = "gpt-5.2",
     openai_client: Any | None = None,
     concurrency: int = 10,
 ) -> StageAPrimeResult:

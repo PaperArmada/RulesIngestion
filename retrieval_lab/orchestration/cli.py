@@ -104,3 +104,19 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.raw_merge_coverage_bonus = args.raw_merge_coverage_bonus
     if hasattr(args, "baseline_metrics") and args.baseline_metrics:
         config.baseline_metrics_path = args.baseline_metrics
+    if getattr(args, "enhancement_mode", None) is not None:
+        config.query_enhancement.enabled = args.enhancement_mode != "none"
+        config.query_enhancement.mode = args.enhancement_mode
+    if getattr(args, "enhancement_profile", None) is not None:
+        config.query_enhancement.profile_path = args.enhancement_profile
+        if not config.query_enhancement.enabled and config.query_enhancement.mode == "none":
+            config.query_enhancement.enabled = True
+            config.query_enhancement.mode = "dict"
+    if getattr(args, "enhancement_fusion_mode", None) is not None:
+        config.query_enhancement.fusion_mode = args.enhancement_fusion_mode
+    if getattr(args, "onlyadd_prefix_lock_n", None) is not None:
+        config.query_enhancement.only_add.prefix_lock_n = int(args.onlyadd_prefix_lock_n)
+    if getattr(args, "onlyadd_tail_rerank", None) is not None:
+        config.query_enhancement.only_add.tail_rerank = str(args.onlyadd_tail_rerank)
+    if getattr(args, "onlyadd_tail_rerank_window", None) is not None:
+        config.query_enhancement.only_add.tail_rerank_window = int(args.onlyadd_tail_rerank_window)

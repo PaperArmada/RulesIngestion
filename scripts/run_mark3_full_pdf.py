@@ -114,6 +114,9 @@ def load_existing_result(
 
 
 def main() -> None:
+    # Load .env.development from DungeonOverMind root before anything uses OPENAI_API_KEY.
+    _load_env_development()
+
     import argparse
     parser = argparse.ArgumentParser(
         description="Run Stage A+B on all pages of a PDF and write evaluation report."

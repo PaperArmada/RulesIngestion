@@ -20,15 +20,44 @@ if [[ ! -f "$MINIMAL_SCRIPT" ]]; then
   exit 1
 fi
 
-if [[ ! -d "$VENV_DIR" ]]; then
-  echo "Creating $VENV_DIR with transformers==4.46.3..."
-  uv venv "$VENV_DIR"
-  # Install only what we need for the minimal script (no marker-pdf).
+# Python 3.12 has stable wheels for torch, transformers, tokenizers, etc.
+# 3.13+ lacks prebuilt wheels for many ML packages, forcing broken sdist builds.
+PYTHON_BIN="$(which python3.12 2>/dev/null || echo "")"
+if [[ -z "$PYTHON_BIN" ]]; then
+  echo "python3.12 not found. Installing via uv..."
+  uv python install 3.12
+  PYTHON_BIN="$(uv python find 3.12)"
+fi
+
+_install_deps() {
   uv pip install --python "$VENV_DIR/bin/python" \
     "torch" "torchvision" \
     "transformers>=4.46.0,<4.47.0" \
-    "tokenizers" "pillow" "pymupdf" "einops" "addict" "easydict" "safetensors" "huggingface-hub"
+    "tokenizers" \
+    "pillow" "pymupdf" "einops" "addict" "easydict" "safetensors" "huggingface-hub"
+}
+
+# Detect if venv exists but is wrong Python version (e.g. 3.14 after OS reinstall).
+if [[ -d "$VENV_DIR" ]]; then
+  VENV_PYTHON_VER="$("$VENV_DIR/bin/python" --version 2>&1)"
+  if [[ "$VENV_PYTHON_VER" != *"3.12"* ]]; then
+    echo "DeepSeek venv is $VENV_PYTHON_VER — rebuilding with Python 3.12..."
+    rm -rf "$VENV_DIR"
+  fi
+fi
+
+if [[ ! -d "$VENV_DIR" ]]; then
+  echo "Creating $VENV_DIR with Python 3.12 + transformers==4.46.x..."
+  uv venv --python "$PYTHON_BIN" "$VENV_DIR"
+  _install_deps
   echo "Done. Installed transformers 4.46.x."
+else
+  # Venv exists and is Python 3.12; ensure core deps are present.
+  if ! "$VENV_DIR/bin/python" -c "import transformers; import fitz" 2>/dev/null; then
+    echo "DeepSeek venv incomplete. Reinstalling all deps..."
+    _install_deps
+    echo "Done."
+  fi
 fi
 
 exec "$VENV_DIR/bin/python" "$MINIMAL_SCRIPT" "$@"

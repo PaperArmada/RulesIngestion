@@ -94,6 +94,7 @@ def generate_report(
     created_at: str,
     baseline_failure_buckets: Optional[Dict[str, Dict[str, int]]] = None,
     stage_timing_sec: Optional[Dict[str, float]] = None,
+    enhancement_attribution: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Generate the main REPORT.md content as a string.
@@ -144,6 +145,68 @@ def generate_report(
         for key, value in stage_timing_sec.items():
             lines.append(f"- **{key}:** {value:.3f}")
         lines.append("")
+    qe_cfg = config.get("query_enhancement", {})
+    if qe_cfg.get("enabled"):
+        lines.extend([
+            "### Query Enhancement",
+            "",
+            f"- **Mode:** {qe_cfg.get('mode', 'none')}",
+            f"- **Fusion mode:** {qe_cfg.get('fusion_mode', 'only_add')}",
+            f"- **Profile:** {qe_cfg.get('profile_id', 'N/A')}",
+            f"- **Profile hash:** {qe_cfg.get('profile_hash', 'N/A')}",
+            "",
+        ])
+        if qe_cfg.get("fusion_mode") == "only_add":
+            oa = qe_cfg.get("only_add", {}) or {}
+            lines.extend([
+                "### Query Enhancement (only_add policy)",
+                "",
+                f"- **baseline_keep_n:** {oa.get('baseline_keep_n', 'N/A')}",
+                f"- **variant_k_per_query:** {oa.get('variant_k_per_query', 'N/A')}",
+                f"- **admission_cutoff:** {oa.get('admission_cutoff', 'N/A')} (0 means default)",
+                f"- **prefix_lock_n:** {oa.get('prefix_lock_n', 'N/A')}",
+                f"- **tail_rerank:** {oa.get('tail_rerank', 'none')}",
+                f"- **tail_rerank_window:** {oa.get('tail_rerank_window', 'N/A')}",
+                f"- **append_score_band:** {oa.get('append_score_band', 'N/A')}",
+                "",
+            ])
+            # Optional diagnostics injected by run_experiment when baseline_metrics_path is provided.
+            diag = None
+            # Prefer the first model's diagnostics if present.
+            first_model_id = next(iter(results_by_model.keys()), None) if results_by_model else None
+            if first_model_id:
+                diag = (results_by_model.get(first_model_id, {}) or {}).get("tail_rerank_diagnostics")
+            if isinstance(diag, dict):
+                rescued = int(diag.get("rescued_failures", 0))
+                failures = int(diag.get("baseline_failures", 0))
+                rescued_pct = float(diag.get("rescued_pct", 0.0))
+                hs = diag.get("head_stability_rate")
+                hs_str = f"{float(hs):.3f}" if isinstance(hs, (int, float)) else "N/A"
+                lines.extend([
+                    "### Tail Rerank Diagnostics (vs baseline)",
+                    "",
+                    f"- **% failures rescued by tail rerank:** {rescued}/{failures} ({rescued_pct:.3f})",
+                    f"- **Head stability rate (top-{int(diag.get('prefix_lock_n', 0))} equal):** {hs_str}",
+                    "",
+                ])
+        if enhancement_attribution:
+            lines.extend([
+                "### Enhancement Attribution",
+                "",
+                f"- **Queries enhanced:** {enhancement_attribution.get('n_queries', 0)}",
+                f"- **Median candidate set size:** {enhancement_attribution.get('median_candidate_set_size', 'N/A')}",
+            ])
+            ci = enhancement_attribution.get("candidate_inflation_median")
+            if ci is not None:
+                lines.append(f"- **Candidate inflation (median):** {ci:.2f}x")
+                lines.append(f"- **Candidate inflation (p95):** {enhancement_attribution.get('candidate_inflation_p95', 'N/A'):.2f}x")
+            lines.extend([
+                f"- **Gold from original only:** {enhancement_attribution.get('gold_from_original_only', 0)}",
+                f"- **Gold from expansion:** {enhancement_attribution.get('gold_from_expansion', 0)}",
+                f"- **Expansion contribution:** {enhancement_attribution.get('expansion_contribution_pct', 0):.1f}%",
+                "",
+            ])
+
     lines.extend([
         "---",
         "",
@@ -333,6 +396,7 @@ def write_report_artifacts(
     per_query_by_model: Dict[str, List[Dict[str, Any]]],
     experiment_doc: Dict[str, Any],
     retrieved_chunks_by_model: Optional[Dict[str, List[Dict[str, Any]]]] = None,
+    enhancement_attribution: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Path]:
     """
     Write REPORT.md, metrics.json, per_query.json, grounding_audit.json, experiment.json,
@@ -362,6 +426,7 @@ def write_report_artifacts(
         created_at=created_at,
         baseline_failure_buckets=baseline_failure_buckets,
         stage_timing_sec=experiment_doc.get("stage_timing_sec"),
+        enhancement_attribution=enhancement_attribution,
     )
     report_path = output_dir / "REPORT.md"
     report_path.write_text(report_md, encoding="utf-8")

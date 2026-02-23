@@ -7,10 +7,13 @@ Schema version: A_PRIME_V1. See Docs/Design/stage_a_prime_contract.md.
 
 from __future__ import annotations
 
+import logging
 from typing import Any, Literal
 
 import blake3
 from pydantic import BaseModel, field_validator
+
+logger = logging.getLogger(__name__)
 
 from extraction.schemas import EvidenceUnit
 
@@ -53,15 +56,21 @@ class MechanicAtom(BaseModel):
     @field_validator("surface_forms")
     @classmethod
     def surface_forms_length(cls, v: list[str]) -> list[str]:
-        if not (1 <= len(v) <= 4):
-            raise ValueError("surface_forms must have 1-4 items")
+        if len(v) == 0:
+            raise ValueError("surface_forms must have at least 1 item")
+        if len(v) > 4:
+            logger.warning("surface_forms has %d items; truncating to 4", len(v))
+            v = v[:4]
         return v
 
     @field_validator("paraphrases")
     @classmethod
     def paraphrases_length(cls, v: list[str]) -> list[str]:
-        if not (1 <= len(v) <= 3):
-            raise ValueError("paraphrases must have 1-3 items")
+        if len(v) == 0:
+            raise ValueError("paraphrases must have at least 1 item")
+        if len(v) > 3:
+            logger.warning("paraphrases has %d items; truncating to 3", len(v))
+            v = v[:3]
         return v
 
     @field_validator("risk_flags")
@@ -119,43 +128,49 @@ class APrimeEnrichment(BaseModel):
         for line in lines:
             content = line.lstrip("-*•").strip()
             n = len(content.split())
-            if not (4 <= n <= 18):
-                raise ValueError(f"each summary_3b bullet must be 4-18 words, got {n}")
+            if n < 3 or n > 18:
+                logger.warning("summary_3b bullet has %d words (expected 3-18): %r", n, content[:80])
         return v
 
     @field_validator("topic_tags")
     @classmethod
     def topic_tags_vocabulary(cls, v: list[str]) -> list[str]:
-        if not (0 <= len(v) <= 6):
-            raise ValueError("topic_tags must have 0-6 items")
-        for tag in v:
-            if tag not in TOPIC_TAGS_VOCABULARY:
-                raise ValueError(f"topic_tag must be in allowed vocabulary: got {tag!r}")
+        filtered = [t for t in v if t in TOPIC_TAGS_VOCABULARY]
+        dropped = [t for t in v if t not in TOPIC_TAGS_VOCABULARY]
+        if dropped:
+            logger.warning("topic_tags: dropped %d unknown tag(s): %s", len(dropped), dropped)
+        v = filtered[:6]  # enforce 0-6 cap after filtering
         return v
 
     @field_validator("mechanic_atoms")
     @classmethod
     def mechanic_atoms_length(cls, v: list[MechanicAtom]) -> list[MechanicAtom]:
         if len(v) > 8:
-            raise ValueError("mechanic_atoms must have 0-8 items")
+            logger.warning("mechanic_atoms count is %d (schema suggested 0-8); keeping all", len(v))
         return v
 
     @field_validator("questions_answered")
     @classmethod
     def questions_answered_length_and_words(cls, v: list[str]) -> list[str]:
-        if not (1 <= len(v) <= 10):
-            raise ValueError("questions_answered must have 1-10 items")
+        if len(v) == 0:
+            raise ValueError("questions_answered must have at least 1 item")
+        if len(v) > 10:
+            logger.warning("questions_answered count is %d (schema suggested 1-10); keeping all", len(v))
         for q in v:
             n = len(q.split())
             if not (5 <= n <= 18):
-                raise ValueError(f"each question must be 5-18 words, got {n}")
+                logger.warning("question has %d words (expected 5-18): %r", n, q[:80])
         return v
 
     @field_validator("lexical_anchors")
     @classmethod
     def lexical_anchors_length(cls, v: list[str]) -> list[str]:
-        if not (1 <= len(v) <= 20):
-            raise ValueError("lexical_anchors must have 1-20 items")
+        _MAX = 40
+        if len(v) == 0:
+            raise ValueError("lexical_anchors must have at least 1 item")
+        if len(v) > _MAX:
+            logger.warning("lexical_anchors overflowed (%d items); truncating to %d", len(v), _MAX)
+            v = v[:_MAX]
         return v
 
     def model_dump_json_dict(self) -> dict[str, Any]:
