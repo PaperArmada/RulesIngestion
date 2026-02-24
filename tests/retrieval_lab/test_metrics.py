@@ -75,3 +75,42 @@ def test_compute_query_result_rank_of_last_required() -> None:
     assert result.rank_of_last_required == 3
     assert result.required_full_set_hit_at_k[2] is False
     assert result.required_full_set_hit_at_k[3] is True
+
+
+def test_merged_gold_id_matches_when_candidate_source_includes_merged_id() -> None:
+    """Regression: gold IDs are merged corpus IDs; candidate_source_ids must include the
+    merged id (cid) so that scoring matches. Without [cid] in the source set, gold at rank 1
+    is wrongly classified as retrieval_miss."""
+    merged_id = "61d87c8ac0a7262fa5282dc58f5b73ad0312dd7bf29aade835c8ee922b4aac86"
+    source_only_ids = ["abc123", "def456"]  # pre-merge extraction IDs
+
+    grounded = [
+        {
+            "id": "q1",
+            "gold_unit_ids": [merged_id],
+            "_required_gold": [merged_id],
+            "_suite": "default",
+            "_tier": "T1",
+        }
+    ]
+    ranked_lists = [[merged_id, "other_unit"]]
+    score_lists = [[0.72, 0.35]]
+    top_k_list = [1, 3, 10]
+
+    # Bug: candidate_source_ids only had source_unit_ids (no merged id) -> gold never matches
+    source_lists_bug = [[source_only_ids, ["other_unit"]]]
+    metrics_bug = score_retrieval(
+        grounded, ranked_lists, score_lists, top_k_list,
+        ranked_source_id_lists=source_lists_bug,
+    )
+    assert metrics_bug.per_query[0]["failure_type"] == "retrieval_miss"
+    assert metrics_bug.per_query[0]["first_gold_rank"] is None
+
+    # Fix: include merged id in each candidate's source set -> gold at rank 1 matches
+    source_lists_fixed = [[[merged_id] + source_only_ids, ["other_unit"]]]
+    metrics_fixed = score_retrieval(
+        grounded, ranked_lists, score_lists, top_k_list,
+        ranked_source_id_lists=source_lists_fixed,
+    )
+    assert metrics_fixed.per_query[0]["failure_type"] == "hit"
+    assert metrics_fixed.per_query[0]["first_gold_rank"] == 1

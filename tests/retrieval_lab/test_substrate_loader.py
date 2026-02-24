@@ -53,3 +53,37 @@ def test_fold_under_threshold_into_adjacent_prepends_and_appends() -> None:
     assert len(folded[0]["source_unit_ids"]) == 3
     assert folded[1]["text"] == "Another long unit."
     assert folded[1]["source_unit_ids"] == ["big2"]
+
+
+def test_merge_units_by_heading_keeps_table_as_standalone_chunk() -> None:
+    corpus = [
+        {
+            "id": "p1",
+            "text": "Class progression intro.",
+            "page": 10,
+            "structural_path": ["Cleric"],
+            "unit_type": "prose",
+            "document_id": "TestDoc",
+        },
+        {
+            "id": "t1",
+            "text": "<table><tr><td>Level</td><td>Slots</td></tr><tr><td>1</td><td>1</td></tr></table>",
+            "page": 10,
+            "structural_path": ["Cleric"],
+            "unit_type": "table",
+            "document_id": "TestDoc",
+        },
+        {
+            "id": "p2",
+            "text": "Table footnote and clarifications.",
+            "page": 10,
+            "structural_path": ["Cleric"],
+            "unit_type": "prose",
+            "document_id": "TestDoc",
+        },
+    ]
+    merged = merge_units_by_heading(corpus, max_chars=60)
+    assert len(merged) == 3
+    assert [u["unit_type"] for u in merged] == ["prose", "table", "prose"]
+    assert merged[1]["id"] == "t1"
+    assert merged[1]["source_unit_ids"] == ["t1"]
