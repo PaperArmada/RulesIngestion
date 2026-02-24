@@ -64,6 +64,8 @@ def load_evidence_units(
             text = u.get("text", "")
             structural_path = u.get("structural_path", [])
             unit_type = u.get("unit_type", "unknown")
+            join_metadata = u.get("join_metadata") or {}
+            table_title = (join_metadata.get("table_title") or "").strip()
             corpus.append({
                 "id": unit_id,
                 "text": text,
@@ -71,6 +73,8 @@ def load_evidence_units(
                 "structural_path": structural_path,
                 "unit_type": unit_type,
                 "document_id": document_id,
+                "join_metadata": join_metadata,
+                "table_title": table_title,
             })
     return corpus
 
@@ -126,6 +130,8 @@ def fold_under_threshold_into_adjacent(
             "unit_type": base.get("unit_type", "unknown"),
             "document_id": base.get("document_id", ""),
             "source_unit_ids": all_ids,
+            "join_metadata": base.get("join_metadata", {}),
+            "table_title": base.get("table_title", ""),
         }
     # Optional: preserve existing source_unit_ids on base when merging
     def merge_into_existing(
@@ -189,6 +195,8 @@ def fold_under_threshold_into_adjacent(
                 "unit_type": template.get("unit_type", "unknown"),
                 "document_id": template.get("document_id", ""),
                 "source_unit_ids": all_ids,
+                "join_metadata": template.get("join_metadata", {}),
+                "table_title": template.get("table_title", ""),
             })
             last_emitted_index_per_page[page] = len(result) - 1
 
@@ -228,7 +236,9 @@ def merge_units_by_heading(
     flush the current chunk and start a new one (still under the same heading).
 
     Units with an empty ``structural_path`` (orphans, tables, images) pass
-    through unmerged.
+    through unmerged. In addition, table units are treated as hard boundaries
+    even under non-empty heading paths: they are emitted as standalone chunks
+    and never folded into surrounding prose chunks.
 
     The merged chunk gets:
     - ``id``: deterministic SHA-256 of the sorted constituent unit ids.
@@ -244,45 +254,45 @@ def merge_units_by_heading(
 
     merged: List[Dict[str, Any]] = []
 
+    def _emit_passthrough(unit: Dict[str, Any]) -> None:
+        """Emit one unit unchanged, preserving pre-existing source ids when present."""
+        out = dict(unit)
+        if "source_unit_ids" not in out or not out["source_unit_ids"]:
+            out["source_unit_ids"] = [unit.get("id", "")]
+        merged.append(out)
+
     def _flush(buf: List[Dict[str, Any]]) -> None:
         """Flush a buffer of units sharing the same heading into one or more merged chunks."""
         if not buf:
             return
         # Single unit → pass through (keep original id and type; preserve source_unit_ids from fold if present)
         if len(buf) == 1:
-            out = dict(buf[0])
-            if "source_unit_ids" not in out or not out["source_unit_ids"]:
-                out["source_unit_ids"] = [buf[0]["id"]]
-            merged.append(out)
+            _emit_passthrough(buf[0])
             return
 
         # Multiple units → merge with size cap
-        # Table-with-caption: if adding a table would overflow and the last part is a short
-        # caption (<= table_caption_max), keep caption with the table instead of with prose.
-        table_caption_max = 100
+        # Table units are hard boundaries: keep them as standalone chunks even when
+        # they share heading ancestry with surrounding prose.
         parts: List[str] = []
         current_ids: List[str] = []
         current_len = 0
 
         for u in buf:
+            if u.get("unit_type") == "table":
+                if parts:
+                    _emit(parts, current_ids, buf[0])
+                    parts = []
+                    current_ids = []
+                    current_len = 0
+                _emit_passthrough(u)
+                continue
             text = u.get("text", "")
             addition_len = len(text) + (len(separator) if parts else 0)
             if parts and (current_len + addition_len) > max_chars:
-                if (
-                    u.get("unit_type") == "table"
-                    and len(parts) > 0
-                    and len(parts[-1]) <= table_caption_max
-                ):
-                    # Flush prose up to (but not including) last part; merge last part with table
-                    _emit(parts[:-1], current_ids[:-1], buf[0])
-                    parts = [parts[-1], text]
-                    current_ids = [current_ids[-1], u["id"]]
-                    current_len = len(parts[0]) + len(separator) + len(parts[1])
-                else:
-                    _emit(parts, current_ids, buf[0])
-                    parts = [text]
-                    current_ids = [u["id"]]
-                    current_len = len(text)
+                _emit(parts, current_ids, buf[0])
+                parts = [text]
+                current_ids = [u["id"]]
+                current_len = len(text)
             else:
                 parts.append(text)
                 current_ids.append(u["id"])
@@ -305,6 +315,8 @@ def merge_units_by_heading(
             "unit_type": "merged" if len(unit_ids) > 1 else template.get("unit_type", "unknown"),
             "document_id": template.get("document_id", ""),
             "source_unit_ids": list(unit_ids),
+            "join_metadata": template.get("join_metadata", {}),
+            "table_title": template.get("table_title", ""),
         })
 
     # Walk corpus in order, grouping consecutive same-heading units

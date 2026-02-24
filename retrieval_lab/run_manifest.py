@@ -1,0 +1,72 @@
+from __future__ import annotations
+
+import hashlib
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+
+def _sha256_file(path: Path, *, chunk_size: int = 1024 * 1024) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        while True:
+            chunk = f.read(chunk_size)
+            if not chunk:
+                break
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _safe_file_record(path_str: str) -> Dict[str, Any]:
+    p = Path(path_str)
+    if not path_str:
+        return {"path": "", "exists": False}
+    if not p.exists():
+        return {"path": str(p), "exists": False}
+    try:
+        st = p.stat()
+        return {
+            "path": str(p),
+            "exists": True,
+            "size_bytes": int(st.st_size),
+            "mtime_epoch": float(st.st_mtime),
+            "sha256": _sha256_file(p),
+        }
+    except Exception as e:
+        return {"path": str(p), "exists": True, "error": str(e)}
+
+
+def build_run_manifest(
+    *,
+    experiment_id: str,
+    argv: List[str],
+    config_dict: Dict[str, Any],
+    source_config_path: Optional[str] = None,
+    query_batch_paths: Optional[List[str]] = None,
+    enhancement_profile_path: Optional[str] = None,
+) -> Dict[str, Any]:
+    now = datetime.now(timezone.utc).isoformat()
+    query_batch_paths = query_batch_paths or list(config_dict.get("query_batch_paths") or [])
+
+    env_subset = {
+        "cwd": str(Path.cwd()),
+        "python": os.environ.get("PYTHON", ""),
+        "openai_api_key_present": bool(os.environ.get("OPENAI_API_KEY")),
+    }
+
+    manifest = {
+        "version": "retrieval_lab_manifest_v1",
+        "created_at": now,
+        "experiment_id": experiment_id,
+        "command": {"argv": list(argv)},
+        "inputs": {
+            "config_yaml": _safe_file_record(source_config_path or ""),
+            "query_batches": [_safe_file_record(p) for p in query_batch_paths],
+            "enhancement_profile": _safe_file_record(enhancement_profile_path or ""),
+        },
+        "config": config_dict,
+        "env": env_subset,
+    }
+    return manifest
+

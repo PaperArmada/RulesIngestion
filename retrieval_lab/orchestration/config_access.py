@@ -43,6 +43,7 @@ class RunFlags:
     raw_merge_score_floor: bool
     raw_merge_rank_floor: bool
     raw_merge_coverage_bonus: float
+    embedding_enrichment_profile: str | None
 
 
 def read_run_flags(config: object) -> RunFlags:
@@ -81,6 +82,7 @@ def read_run_flags(config: object) -> RunFlags:
         raw_merge_score_floor=bool(getattr(config, "raw_merge_score_floor", True)),
         raw_merge_rank_floor=bool(getattr(config, "raw_merge_rank_floor", True)),
         raw_merge_coverage_bonus=float(getattr(config, "raw_merge_coverage_bonus", 0.0)),
+        embedding_enrichment_profile=getattr(config, "embedding_enrichment_profile", None),
     )
 
 

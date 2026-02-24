@@ -95,6 +95,8 @@ def generate_report(
     baseline_failure_buckets: Optional[Dict[str, Dict[str, int]]] = None,
     stage_timing_sec: Optional[Dict[str, float]] = None,
     enhancement_attribution: Optional[Dict[str, Any]] = None,
+    benchmark_lint: Optional[Dict[str, Any]] = None,
+    answer_evaluation: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Generate the main REPORT.md content as a string.
@@ -206,6 +208,54 @@ def generate_report(
                 f"- **Expansion contribution:** {enhancement_attribution.get('expansion_contribution_pct', 0):.1f}%",
                 "",
             ])
+
+    if isinstance(benchmark_lint, dict):
+        n_issues = int(benchmark_lint.get("n_issues", 0) or 0)
+        by_code = benchmark_lint.get("by_code") if isinstance(benchmark_lint.get("by_code"), dict) else {}
+        lines.extend([
+            "### Benchmark lint (minimal-anchor hygiene)",
+            "",
+            f"- **Issues:** {n_issues}",
+            f"- **By code:** {json.dumps(by_code)}",
+            "",
+            "Artifacts: `benchmark_lint.json`",
+            "",
+        ])
+
+    if isinstance(answer_evaluation, dict) and bool(answer_evaluation.get("enabled")):
+        lines.extend(["### Answer evaluation (generation + citations)", ""])
+        if bool(answer_evaluation.get("skipped")):
+            lines.extend([
+                f"- **Status:** skipped ({answer_evaluation.get('reason', 'unknown')})",
+                "",
+            ])
+        else:
+            lines.extend([
+                f"- **LLM:** {answer_evaluation.get('llm_model_id', '')}",
+                f"- **Eval top-k:** {answer_evaluation.get('eval_top_k', '')}",
+                f"- **Max queries:** {answer_evaluation.get('max_queries', '')}",
+                "",
+            ])
+            by_model = answer_evaluation.get("by_retrieval_model") or {}
+            if isinstance(by_model, dict) and by_model:
+                lines.extend([
+                    "| Retrieval model | N | Refusal rate | Refusal accuracy | Required cited mean | Invalid cite mean |",
+                    "|-----------------|---:|------------:|-----------------:|--------------------:|------------------:|",
+                ])
+                for rid, payload in by_model.items():
+                    summ = (payload or {}).get("summary", {}) if isinstance(payload, dict) else {}
+                    n = int(summ.get("n_queries", 0) or 0)
+                    refusal_rate = float(summ.get("refusal_rate", 0.0) or 0.0)
+                    refusal_acc = summ.get("refusal_accuracy")
+                    required_mean = summ.get("required_cited_rate_mean")
+                    invalid_mean = float(summ.get("invalid_citation_rate_mean", 0.0) or 0.0)
+                    refusal_acc_str = f"{float(refusal_acc):.3f}" if isinstance(refusal_acc, (int, float)) else "N/A"
+                    required_mean_str = f"{float(required_mean):.3f}" if isinstance(required_mean, (int, float)) else "N/A"
+                    lines.append(
+                        f"| {rid} | {n} | {refusal_rate:.3f} | {refusal_acc_str} | {required_mean_str} | {invalid_mean:.3f} |"
+                    )
+                lines.append("")
+            lines.extend(["Artifacts: `answer_eval.json`", ""])
 
     lines.extend([
         "---",
@@ -397,10 +447,13 @@ def write_report_artifacts(
     experiment_doc: Dict[str, Any],
     retrieved_chunks_by_model: Optional[Dict[str, List[Dict[str, Any]]]] = None,
     enhancement_attribution: Optional[Dict[str, Any]] = None,
+    grounded_queries: Optional[List[Dict[str, Any]]] = None,
+    corpus: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Path]:
     """
     Write REPORT.md, metrics.json, per_query.json, grounding_audit.json, experiment.json,
-    and optionally retrieved_chunks.json (per-query retrieved chunk text for manual review) to output_dir.
+    and optionally retrieved_chunks.json (per-query retrieved chunk text for manual review)
+    and forensics artifacts (gold_not_in_candidates bundles, miss classification, heatmap) to output_dir.
     Returns dict of artifact name -> path.
     """
     output_dir = Path(output_dir)
@@ -427,6 +480,8 @@ def write_report_artifacts(
         baseline_failure_buckets=baseline_failure_buckets,
         stage_timing_sec=experiment_doc.get("stage_timing_sec"),
         enhancement_attribution=enhancement_attribution,
+        benchmark_lint=experiment_doc.get("benchmark_lint"),
+        answer_evaluation=experiment_doc.get("answer_evaluation"),
     )
     report_path = output_dir / "REPORT.md"
     report_path.write_text(report_md, encoding="utf-8")
@@ -478,4 +533,39 @@ def write_report_artifacts(
             encoding="utf-8",
         )
         result["retrieved_chunks.json"] = chunks_path
+
+    # Forensics: gold_not_in_candidates bundles + miss classification + heatmap stub.
+    if (
+        grounded_queries is not None
+        and corpus is not None
+        and retrieved_chunks_by_model
+        and per_query_by_model
+    ):
+        try:
+            from retrieval_lab.forensics import build_forensics_artifacts
+
+            forensics = build_forensics_artifacts(
+                per_query_by_model=per_query_by_model,
+                retrieved_chunks_by_model=retrieved_chunks_by_model,
+                grounded_queries=grounded_queries,
+                corpus=corpus,
+            )
+            (output_dir / "forensics_bundles.json").write_text(
+                json.dumps(forensics.get("by_model", {}), indent=2),
+                encoding="utf-8",
+            )
+            (output_dir / "miss_classification.json").write_text(
+                json.dumps(forensics.get("miss_classification", {}), indent=2),
+                encoding="utf-8",
+            )
+            (output_dir / "gold_retrievability_heatmap.json").write_text(
+                json.dumps(forensics.get("gold_retrievability_heatmap", []), indent=2),
+                encoding="utf-8",
+            )
+            result["forensics_bundles.json"] = output_dir / "forensics_bundles.json"
+            result["miss_classification.json"] = output_dir / "miss_classification.json"
+            result["gold_retrievability_heatmap.json"] = output_dir / "gold_retrievability_heatmap.json"
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning("Forensics artifacts failed (non-fatal): %s", e)
     return result

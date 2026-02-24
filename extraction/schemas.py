@@ -203,6 +203,7 @@ class EvidenceUnit:
     page_fingerprints: list[str] = field(default_factory=list)  # expanded for joined units
     table_group_id: str | None = None  # blake3(header_row_hash + "|" + structural_path)
     join_metadata: dict[str, Any] | None = None  # e.g. {"join_type": "paragraph", "merged_unit_id": "..."}
+    source_unit_ids: list[str] = field(default_factory=list)  # provenance for join conservation checks
 
     def to_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {
@@ -224,6 +225,8 @@ class EvidenceUnit:
             out["table_group_id"] = self.table_group_id
         if self.join_metadata is not None:
             out["join_metadata"] = self.join_metadata
+        if self.source_unit_ids:
+            out["source_unit_ids"] = self.source_unit_ids
         return out
 
     @staticmethod
@@ -243,6 +246,7 @@ class EvidenceUnit:
             page_fingerprints=d.get("page_fingerprints", []),
             table_group_id=d.get("table_group_id"),
             join_metadata=d.get("join_metadata"),
+            source_unit_ids=d.get("source_unit_ids", []),
         )
 
 

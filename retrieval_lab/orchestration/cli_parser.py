@@ -19,6 +19,12 @@ def build_cli_parser() -> argparse.ArgumentParser:
         default=None,
         help="Substrate version (e.g. v1, 20260208). Run_id becomes retrieval_lab_{document_id}_{version}. Re-embed only when extraction changes.",
     )
+    parser.add_argument(
+        "--embedding-enrichment-profile",
+        type=str,
+        default=None,
+        help="Embedding text profile: baseline (text only) | path | type | table_title | topic_tags | co_retrieval_hints | page | full. Run_id gets _embed_{profile} suffix.",
+    )
     parser.add_argument("--batches", type=str, nargs="+", help="Query batch JSON paths (overrides config)")
     parser.add_argument("--models", type=str, nargs="+", help="Model IDs (overrides config)")
     parser.add_argument("--top-k", type=str, default="1,3,5,10,20", help="Comma-separated top-k values")
@@ -88,6 +94,12 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.set_defaults(raw_merge_rank_floor=None)
     parser.add_argument("--raw-merge-coverage-bonus", type=float, default=None, help="Optional bonus for merged candidates covering more admitted raw sources")
     parser.add_argument("--baseline-metrics", type=str, default=None, help="Optional baseline metrics.json path for failure-bucket delta reporting")
+    parser.add_argument("--answer-eval", action="store_true", help="Run answer-generation evaluation pass (OpenAI; writes answer_eval.json)")
+    parser.add_argument("--answer-model", type=str, default=None, help="Answer-eval LLM model id (e.g. gpt-4o-mini)")
+    parser.add_argument("--answer-top-k", type=int, default=None, help="Answer-eval uses top-k retrieved EvidenceUnits (default: max(top_k))")
+    parser.add_argument("--answer-max-queries", type=int, default=None, help="Answer-eval max queries (deterministic: sorted by query_id)")
+    parser.add_argument("--answer-max-chars-per-unit", type=int, default=None, help="Answer-eval evidence truncation per unit (chars)")
+    parser.add_argument("--answer-eval-models", type=str, default=None, help="Comma-separated retrieval model IDs to evaluate (default: first model only)")
     parser.add_argument("--enhancement-mode", type=str, choices=["none", "dict", "llm", "llm+dict", "decompose"], default=None, help="Query enhancement mode (overrides config)")
     parser.add_argument("--enhancement-profile", type=str, default=None, help="Path to QueryExpansionProfile JSON (overrides config)")
     parser.add_argument(

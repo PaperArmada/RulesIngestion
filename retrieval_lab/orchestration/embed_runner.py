@@ -6,6 +6,7 @@ from typing import Any, Dict, Iterable
 
 import numpy as np
 
+from retrieval_lab.embedding_enrichment import build_embedding_text
 from retrieval_lab.orchestration.config_access import read_run_flags
 from retrieval_lab.store import save_cached_embeddings, save_embedding_run_metadata, substrate_run_id
 from retrieval_lab.substrate_loader import (
@@ -37,8 +38,12 @@ def run_embed_only(
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
 
     corpus_ids = [c["id"] for c in corpus]
-    corpus_texts = [c["text"] for c in corpus]
-    run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
+    embed_profile = getattr(config, "embedding_enrichment_profile", None) or ""
+    corpus_texts = [build_embedding_text(c, embed_profile or None) for c in corpus]
+    substrate_version = config.substrate_version
+    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
+        substrate_version = (substrate_version or "") + "_embed_" + str(embed_profile).strip()
+    run_id = substrate_run_id(config.document_id, corpus_ids, substrate_version)
 
     for model_id in config.models:
         model_name = model_registry[model_id].model_name if model_id in model_registry else model_id

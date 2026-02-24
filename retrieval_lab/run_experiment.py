@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import random
 import sys
 import time
@@ -50,6 +51,7 @@ from retrieval_lab.store import (
     save_experiment,
     substrate_run_id,
 )
+from retrieval_lab.embedding_enrichment import build_embedding_text
 from retrieval_lab.substrate_loader import (
     fold_under_threshold_into_adjacent,
     load_evidence_units,
@@ -237,8 +239,12 @@ def _run_embed_only(config: ExperimentConfig) -> str:
         )
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
     corpus_ids = [c["id"] for c in corpus]
-    corpus_texts = [c["text"] for c in corpus]
-    run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
+    embed_profile = getattr(config, "embedding_enrichment_profile", None) or ""
+    corpus_texts = [build_embedding_text(c, embed_profile or None) for c in corpus]
+    substrate_version = config.substrate_version
+    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
+        substrate_version = (substrate_version or "") + "_embed_" + str(embed_profile).strip()
+    run_id = substrate_run_id(config.document_id, corpus_ids, substrate_version)
     logger.info("Corpus: %d units, run_id=%s", len(corpus), run_id)
     mongo_uri = config.mongo_uri
     output_dir = Path(config.output_dir) / f"embed_{run_id}"
@@ -322,16 +328,20 @@ def _prepare_experiment_corpus_context(
         )
 
     corpus_ids = [c["id"] for c in corpus]
-    corpus_texts = [c["text"] for c in corpus]
+    embed_profile = getattr(flags, "embedding_enrichment_profile", None) or ""
+    corpus_texts = [build_embedding_text(c, embed_profile or None) for c in corpus]
     id_to_source_ids: Dict[str, List[str]] = {
         c["id"]: list(c.get("source_unit_ids", [c["id"]])) for c in corpus
     }
 
+    substrate_version = config.substrate_version
+    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
+        substrate_version = (substrate_version or "") + "_embed_" + str(embed_profile).strip()
     if eval_only_run_id:
         run_id = eval_only_run_id
         logger.info("Eval-only: using run_id=%s (no embedding)", run_id)
     else:
-        run_id = substrate_run_id(config.document_id, corpus_ids, config.substrate_version)
+        run_id = substrate_run_id(config.document_id, corpus_ids, substrate_version)
     logger.info("Corpus: %d units, run_id=%s", len(corpus), run_id)
 
     family_corpus: Optional[List[Dict[str, Any]]] = None
@@ -513,6 +523,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     output_dir = Path(config.output_dir) / experiment_id
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "embeddings").mkdir(exist_ok=True)
+    benchmark_lint_summary: Optional[Dict[str, Any]] = None
 
     results_by_model: Dict[str, Dict[str, Any]] = {}
     per_query_by_model: Dict[str, List[Dict[str, Any]]] = {}
@@ -534,6 +545,24 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             len(pairing_edges),
         )
     pairing_instrumentation_by_model: Dict[str, Any] = {}
+
+    # Benchmark linting (minimal-anchor hygiene).
+    try:
+        from retrieval_lab.benchmark_lint import lint_flat_queries
+
+        benchmark_lint_summary = lint_flat_queries(flat_queries)
+        (output_dir / "benchmark_lint.json").write_text(
+            json.dumps(benchmark_lint_summary, indent=2),
+            encoding="utf-8",
+        )
+        if int(benchmark_lint_summary.get("n_issues", 0)) > 0:
+            logger.warning(
+                "Benchmark lint: %d issue(s). See %s",
+                int(benchmark_lint_summary.get("n_issues", 0)),
+                output_dir / "benchmark_lint.json",
+            )
+    except Exception as e:
+        logger.warning("Benchmark lint failed (non-fatal): %s", e)
 
     t_retrieval = time.perf_counter()
     if retrieval_mode == "bm25":
@@ -610,6 +639,62 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         all_grounding_audit = dense_out["all_grounding_audit"]
         pairing_instrumentation_by_model = dense_out["pairing_instrumentation_by_model"]
     stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
+
+    # Optional: answer-generation evaluation pass (OpenAI-backed).
+    answer_eval_payload: Optional[Dict[str, Any]] = None
+    if getattr(config, "answer_evaluation", None) is not None and config.answer_evaluation.enabled:
+        if not os.environ.get("OPENAI_API_KEY"):
+            logger.warning("Answer evaluation enabled but OPENAI_API_KEY is not set; skipping.")
+            answer_eval_payload = {"enabled": True, "skipped": True, "reason": "missing_openai_api_key"}
+        else:
+            try:
+                from retrieval_lab.answer_eval.evaluate import evaluate_answers_for_model
+                from retrieval_lab.answer_eval.openai_generator import OpenAIAnswerGenerator
+
+                ae = config.answer_evaluation
+                eval_top_k = int(ae.eval_top_k) if int(ae.eval_top_k) > 0 else (max(config.top_k) if config.top_k else 20)
+                eval_models = list(ae.eval_models or [])
+                if not eval_models:
+                    # Default: evaluate the first retrieval model only (cost-bounded).
+                    first = next(iter(retrieved_chunks_by_model.keys()), None)
+                    eval_models = [first] if first else []
+
+                gen = OpenAIAnswerGenerator(model_id=ae.llm_model_id)
+                per_model: Dict[str, Any] = {}
+                for model_id in eval_models:
+                    if not model_id:
+                        continue
+                    qr = retrieved_chunks_by_model.get(model_id)
+                    if not isinstance(qr, list):
+                        continue
+                    per_model[model_id] = evaluate_answers_for_model(
+                        query_reviews=qr,
+                        grounded_queries=grounded_queries,
+                        top_k=eval_top_k,
+                        generator=gen,
+                        max_queries=int(ae.max_queries),
+                        max_chars_per_unit=int(ae.max_chars_per_unit),
+                    )
+                    # Attach summary into metrics payload for easy inspection.
+                    if model_id in results_by_model:
+                        results_by_model[model_id]["answer_eval_summary"] = per_model[model_id].get("summary", {})
+
+                answer_eval_payload = {
+                    "enabled": True,
+                    "skipped": False,
+                    "llm_model_id": ae.llm_model_id,
+                    "eval_top_k": eval_top_k,
+                    "max_queries": int(ae.max_queries),
+                    "eval_models": eval_models,
+                    "by_retrieval_model": per_model,
+                }
+                (output_dir / "answer_eval.json").write_text(
+                    json.dumps(answer_eval_payload, indent=2),
+                    encoding="utf-8",
+                )
+            except Exception as e:
+                logger.warning("Answer evaluation failed (non-fatal): %s", e, exc_info=True)
+                answer_eval_payload = {"enabled": True, "skipped": True, "reason": f"error:{e}"}
 
     # Diagnostics: failure rescue rate vs baseline + head stability (top-K equality) vs baseline.
     tail_rerank_diagnostics: Dict[str, Dict[str, Any]] = {}
@@ -749,6 +834,10 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }
+    if benchmark_lint_summary is not None:
+        experiment_doc["benchmark_lint"] = benchmark_lint_summary
+    if answer_eval_payload is not None:
+        experiment_doc["answer_evaluation"] = answer_eval_payload
     if tail_rerank_diagnostics:
         experiment_doc["tail_rerank_diagnostics"] = tail_rerank_diagnostics
         for model_id, res in results_by_model.items():
@@ -806,6 +895,8 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         experiment_doc,
         retrieved_chunks_by_model=retrieved_chunks_by_model,
         enhancement_attribution=enhancement_attribution,
+        grounded_queries=grounded_queries,
+        corpus=corpus,
     )
     logger.info("Report written to %s", paths.get("REPORT.md"))
     # v1: pairing instrumentation (required; emit even when 0 so dashboard/tests can rely on it).
@@ -819,6 +910,25 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     )
     if retrieved_chunks_by_model:
         logger.info("Retrieved chunks (for manual review): %s", paths.get("retrieved_chunks.json"))
+
+    # Run manifest: file hashes + exact argv for reproducibility.
+    try:
+        from retrieval_lab.run_manifest import build_run_manifest
+
+        manifest = build_run_manifest(
+            experiment_id=experiment_id,
+            argv=list(sys.argv),
+            config_dict=config_dict,
+            source_config_path=getattr(config, "source_config_path", None),
+            query_batch_paths=list(config.query_batches),
+            enhancement_profile_path=(qe_flags.profile_path if qe_flags.enabled else None),
+        )
+        (output_dir / "manifest.json").write_text(
+            json.dumps(manifest, indent=2),
+            encoding="utf-8",
+        )
+    except Exception as e:
+        logger.warning("Failed to write manifest.json (non-fatal): %s", e)
     return experiment_id
 
 

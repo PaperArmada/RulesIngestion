@@ -32,6 +32,8 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.mongo_uri = args.mongo_uri
     if args.substrate_version is not None:
         config.substrate_version = args.substrate_version
+    if getattr(args, "embedding_enrichment_profile", None) is not None:
+        config.embedding_enrichment_profile = args.embedding_enrichment_profile
     if args.trust_remote_code:
         config.trust_remote_code = True
     if hasattr(args, "parent_fetch_depth"):
@@ -104,6 +106,30 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.raw_merge_coverage_bonus = args.raw_merge_coverage_bonus
     if hasattr(args, "baseline_metrics") and args.baseline_metrics:
         config.baseline_metrics_path = args.baseline_metrics
+    if getattr(args, "answer_eval", False):
+        config.answer_evaluation.enabled = True
+    if getattr(args, "answer_model", None) is not None:
+        config.answer_evaluation.llm_model_id = str(args.answer_model or "")
+        if not config.answer_evaluation.enabled:
+            config.answer_evaluation.enabled = True
+    if getattr(args, "answer_top_k", None) is not None:
+        config.answer_evaluation.eval_top_k = int(args.answer_top_k or 0)
+        if not config.answer_evaluation.enabled:
+            config.answer_evaluation.enabled = True
+    if getattr(args, "answer_max_queries", None) is not None:
+        config.answer_evaluation.max_queries = int(args.answer_max_queries)
+        if not config.answer_evaluation.enabled:
+            config.answer_evaluation.enabled = True
+    if getattr(args, "answer_max_chars_per_unit", None) is not None:
+        config.answer_evaluation.max_chars_per_unit = int(args.answer_max_chars_per_unit)
+        if not config.answer_evaluation.enabled:
+            config.answer_evaluation.enabled = True
+    if getattr(args, "answer_eval_models", None) is not None and args.answer_eval_models:
+        config.answer_evaluation.eval_models = [
+            s.strip() for s in str(args.answer_eval_models).split(",") if s.strip()
+        ]
+        if not config.answer_evaluation.enabled:
+            config.answer_evaluation.enabled = True
     if getattr(args, "enhancement_mode", None) is not None:
         config.query_enhancement.enabled = args.enhancement_mode != "none"
         config.query_enhancement.mode = args.enhancement_mode

@@ -323,9 +323,187 @@ def gate_cross_page_join_rate(
     return GateDiagnostic(gate_name="cross_page_join_rate", passed=passed, detail=detail)
 
 
+def gate_join_unit_id_conservation(
+    stage_b_units: list[EvidenceUnit],
+    joined_units: list[EvidenceUnit],
+) -> GateDiagnostic:
+    """Fail if any Stage B unit_id is not represented in joined provenance."""
+    stage_ids = {u.unit_id for u in stage_b_units}
+    represented_ids: set[str] = set()
+    for u in joined_units:
+        represented_ids.update(u.source_unit_ids or [u.unit_id])
+    missing = sorted(stage_ids - represented_ids)
+    passed = len(missing) == 0
+    detail = {
+        "stage_b_unit_count": len(stage_ids),
+        "represented_unit_count": len(represented_ids),
+        "missing_unit_count": len(missing),
+        "missing_unit_ids": missing[:100],
+    }
+    if not passed:
+        logger.warning("Join unit_id conservation FAILED: missing=%d", len(missing))
+    return GateDiagnostic(gate_name="join_unit_id_conservation", passed=passed, detail=detail)
+
+
+def gate_join_page_fingerprint_conservation(
+    stage_b_units: list[EvidenceUnit],
+    joined_units: list[EvidenceUnit],
+) -> GateDiagnostic:
+    """Fail if any Stage B page fingerprint is not represented in joined output."""
+    stage_fps = {u.page_fingerprint for u in stage_b_units if u.page_fingerprint}
+    joined_fps: set[str] = set()
+    for u in joined_units:
+        if u.page_fingerprint:
+            joined_fps.add(u.page_fingerprint)
+        joined_fps.update(fp for fp in (u.page_fingerprints or []) if fp)
+    missing = sorted(stage_fps - joined_fps)
+    passed = len(missing) == 0
+    detail = {
+        "stage_b_fingerprint_count": len(stage_fps),
+        "joined_fingerprint_count": len(joined_fps),
+        "missing_fingerprint_count": len(missing),
+        "missing_fingerprints": missing[:100],
+    }
+    if not passed:
+        logger.warning("Join page_fingerprint conservation FAILED: missing=%d", len(missing))
+    return GateDiagnostic(gate_name="join_page_fingerprint_conservation", passed=passed, detail=detail)
+
+
+def gate_join_table_unit_conservation(
+    stage_b_units: list[EvidenceUnit],
+    joined_units: list[EvidenceUnit],
+) -> GateDiagnostic:
+    """Fail if any Stage B table unit_id is not represented in joined provenance."""
+    stage_table_ids = {u.unit_id for u in stage_b_units if u.unit_type == "table"}
+    represented_ids: set[str] = set()
+    for u in joined_units:
+        represented_ids.update(u.source_unit_ids or [u.unit_id])
+    missing = sorted(stage_table_ids - represented_ids)
+    passed = len(missing) == 0
+    detail = {
+        "stage_b_table_unit_count": len(stage_table_ids),
+        "missing_table_unit_count": len(missing),
+        "missing_table_unit_ids": missing[:100],
+    }
+    if not passed:
+        logger.warning("Join table conservation FAILED: missing_tables=%d", len(missing))
+    return GateDiagnostic(gate_name="join_table_unit_conservation", passed=passed, detail=detail)
+
+
+def run_join_conservation_gates(
+    units_by_page: list[list[EvidenceUnit]],
+    joined_units: list[EvidenceUnit],
+) -> list[GateDiagnostic]:
+    """Run fail-closed conservation gates for cross-page join output."""
+    stage_b_units = [u for page_units in units_by_page for u in page_units]
+    return [
+        gate_join_unit_id_conservation(stage_b_units, joined_units),
+        gate_join_page_fingerprint_conservation(stage_b_units, joined_units),
+        gate_join_table_unit_conservation(stage_b_units, joined_units),
+    ]
+
+
 # ---------------------------------------------------------------------------
 # Convenience: run all Stage B gates
 # ---------------------------------------------------------------------------
+
+def gate_toc_binding_coverage(
+    units: list[EvidenceUnit],
+    *,
+    warn_threshold: float = 0.80,
+    fail_threshold: float = 0.50,
+) -> GateDiagnostic:
+    """TOC binding coverage gate: what fraction of units received TOC-derived paths?
+
+    Checks for the 'toc_structural_path' anomaly flag set during TOC binding.
+    Warn if < warn_threshold, fail if < fail_threshold.
+    """
+    if not units:
+        return GateDiagnostic(
+            gate_name="toc_binding_coverage",
+            passed=True,
+            detail={"total_units": 0, "note": "no units"},
+        )
+
+    toc_bound = sum(1 for u in units if "toc_structural_path" in u.anomaly_flags)
+    total = len(units)
+    coverage = toc_bound / total
+    passed = coverage >= fail_threshold
+    warned = coverage < warn_threshold
+
+    detail = {
+        "total_units": total,
+        "toc_bound_count": toc_bound,
+        "coverage": round(coverage, 4),
+        "warn_threshold": warn_threshold,
+        "fail_threshold": fail_threshold,
+        "warned": warned,
+    }
+
+    if not passed:
+        logger.warning(
+            "TOC binding coverage FAILED: %.1f%% bound (threshold %.0f%%)",
+            coverage * 100, fail_threshold * 100,
+        )
+    elif warned:
+        logger.info(
+            "TOC binding coverage WARN: %.1f%% bound (threshold %.0f%%)",
+            coverage * 100, warn_threshold * 100,
+        )
+
+    return GateDiagnostic(gate_name="toc_binding_coverage", passed=passed, detail=detail)
+
+
+def gate_orphan_after_toc(
+    units: list[EvidenceUnit],
+    *,
+    warn_threshold: float = 0.05,
+    fail_threshold: float = 0.15,
+) -> GateDiagnostic:
+    """Post-TOC orphan gate: how many units still have empty structural_path after TOC binding?
+
+    Should be near zero — only front-matter / index pages should remain orphaned.
+    Warn if > warn_threshold, fail if > fail_threshold.
+    """
+    if not units:
+        return GateDiagnostic(
+            gate_name="orphan_after_toc",
+            passed=True,
+            detail={"total_units": 0, "note": "no units"},
+        )
+
+    orphans = [u for u in units if not u.structural_path]
+    total = len(units)
+    orphan_rate = len(orphans) / total
+    passed = orphan_rate <= fail_threshold
+    warned = orphan_rate > warn_threshold
+
+    detail = {
+        "total_units": total,
+        "orphan_count": len(orphans),
+        "orphan_rate": round(orphan_rate, 4),
+        "warn_threshold": warn_threshold,
+        "fail_threshold": fail_threshold,
+        "warned": warned,
+        "sample_orphans": [
+            {"unit_id": u.unit_id[:16], "text_preview": u.text[:80]}
+            for u in orphans[:10]
+        ],
+    }
+
+    if not passed:
+        logger.warning(
+            "Orphan-after-TOC gate FAILED: %.1f%% orphans (threshold %.0f%%)",
+            orphan_rate * 100, fail_threshold * 100,
+        )
+    elif warned:
+        logger.info(
+            "Orphan-after-TOC gate WARN: %.1f%% orphans (threshold %.0f%%)",
+            orphan_rate * 100, warn_threshold * 100,
+        )
+
+    return GateDiagnostic(gate_name="orphan_after_toc", passed=passed, detail=detail)
+
 
 def run_stage_b_gates(
     units: list[EvidenceUnit],

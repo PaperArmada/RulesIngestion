@@ -168,6 +168,9 @@ def apply_joins(
             flags = list(u_n.anomaly_flags)
             if "cross_page_join" not in flags:
                 flags.append("cross_page_join")
+            source_ids_n = u_n.source_unit_ids or [u_n.unit_id]
+            source_ids_n1 = u_n1.source_unit_ids or [u_n1.unit_id]
+            combined_source_ids = list(dict.fromkeys(source_ids_n + source_ids_n1))
             merged = EvidenceUnit(
                 unit_id=u_n.unit_id,
                 unit_type=u_n.unit_type,
@@ -186,10 +189,29 @@ def apply_joins(
                     "join_type": join_type,
                     "merged_unit_id": u_n1.unit_id,
                 },
+                source_unit_ids=combined_source_ids,
             )
             result.append(merged)
         else:
-            result.append(u)
+            result.append(
+                EvidenceUnit(
+                    unit_id=u.unit_id,
+                    unit_type=u.unit_type,
+                    text=u.text,
+                    structural_path=u.structural_path,
+                    ordering_key=u.ordering_key,
+                    page_fingerprint=u.page_fingerprint,
+                    page_fingerprints=u.page_fingerprints or [u.page_fingerprint],
+                    content_hash=u.content_hash,
+                    source_line_start=u.source_line_start,
+                    source_line_end=u.source_line_end,
+                    anomaly_flags=u.anomaly_flags,
+                    content_version=u.content_version,
+                    table_group_id=u.table_group_id,
+                    join_metadata=u.join_metadata,
+                    source_unit_ids=u.source_unit_ids or [u.unit_id],
+                )
+            )
     return result
 
 
@@ -224,6 +246,7 @@ def assign_table_group_ids(units: list[EvidenceUnit]) -> list[EvidenceUnit]:
             content_version=u.content_version,
             table_group_id=table_group_id,
             join_metadata=u.join_metadata,
+            source_unit_ids=u.source_unit_ids or [u.unit_id],
         )
         result.append(updated)
     return result

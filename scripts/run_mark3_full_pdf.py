@@ -30,10 +30,20 @@ import fitz  # pymupdf
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from extraction.gates_b import run_stage_b_gates
+from extraction.gates_b import (
+    gate_orphan_after_toc,
+    gate_toc_binding_coverage,
+    run_stage_b_gates,
+)
 from extraction.orphan_header import discover_orphans, run_orphan_header_pass
 from extraction.pipeline import run_a_b, run_a_b_aprime, run_join_pass_and_gate
 from extraction.schemas import EvidenceUnit
+from extraction.toc_binder import run_toc_binding_pass
+from extraction.toc_parser import (
+    detect_toc_pages,
+    reconstruct_hierarchy,
+    write_toc_artifacts,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -111,6 +121,39 @@ def load_existing_result(
         else None,
         "all_gates_passed": raw.get("all_gates_passed", False),
     }
+
+
+def _load_units_by_page_from_artifacts(
+    out_base: Path,
+    stem: str,
+) -> tuple[list[list[EvidenceUnit]], list[dict[str, int | str]]]:
+    """Load Stage B units directly from page artifacts (source of truth for join input)."""
+    page_entries: list[tuple[int, str, list[EvidenceUnit]]] = []
+    for page_dir in out_base.iterdir():
+        if not page_dir.is_dir():
+            continue
+        page_num = _parse_page_number(page_dir.name)
+        if page_num is None:
+            continue
+        if not page_dir.name.startswith(f"{stem}_p"):
+            continue
+        units_path = page_dir / "stageB.evidence_units.json"
+        if not units_path.exists():
+            continue
+        stage_b_data = json.loads(units_path.read_text(encoding="utf-8"))
+        units = [EvidenceUnit.from_dict(u) for u in stage_b_data.get("units", [])]
+        page_entries.append((page_num, page_dir.name, units))
+    page_entries.sort(key=lambda x: x[0])
+    units_by_page = [entry[2] for entry in page_entries]
+    page_manifest = [
+        {
+            "page": entry[0],
+            "label": entry[1],
+            "unit_count": len(entry[2]),
+        }
+        for entry in page_entries
+    ]
+    return units_by_page, page_manifest
 
 
 def main() -> None:
@@ -362,38 +405,91 @@ def main() -> None:
             )
 
         # Refresh result for evaluation report
-        result["stage_b"]["gates_passed"] = gates_passed
-        result["stage_b"]["gate_details"] = [g.to_dict() for g in diagnostics]
+        if result.get("stage_b") is None:
+            result["stage_b"] = {
+                "unit_count": len(units),
+                "gates_passed": gates_passed,
+                "salvage_score": 1.0,
+                "gate_details": [g.to_dict() for g in diagnostics],
+            }
+        else:
+            result["stage_b"]["gates_passed"] = gates_passed
+            result["stage_b"]["gate_details"] = [g.to_dict() for g in diagnostics]
         result["all_gates_passed"] = (
             result.get("stage_a") and result["stage_a"]["gates_passed"] and gates_passed
         )
 
+    # ─── TOC structural enrichment pass ──────────────────────────────────
+    toc_enrichment_summary: dict = {}
+    try:
+        toc_detection = detect_toc_pages(out_base, stem)
+        if toc_detection.found:
+            print(f"TOC detected on page(s) {toc_detection.toc_pages} "
+                  f"(score={toc_detection.score:.2f}, entries={len(toc_detection.entries)})")
+            if os.environ.get("OPENAI_API_KEY"):
+                toc_tree, hierarchy_method = reconstruct_hierarchy(toc_detection.entries)
+                print(f"TOC hierarchy: {hierarchy_method} ({sum(len(n.all_nodes_flat()) for n in toc_tree)} nodes)")
+                write_toc_artifacts(out_base, toc_detection, toc_tree, hierarchy_method)
+                toc_enrichment_summary = run_toc_binding_pass(out_base, stem, toc_tree, num_pages)
+                bound = toc_enrichment_summary.get("total_units_bound", 0)
+                unbound = toc_enrichment_summary.get("total_units_unbound", 0)
+                captions = toc_enrichment_summary.get("total_table_captions", 0)
+                print(f"TOC binding: {bound} bound, {unbound} unbound, {captions} table captions")
+            else:
+                write_toc_artifacts(out_base, toc_detection)
+                print("TOC hierarchy: skipped (OPENAI_API_KEY not set)")
+        else:
+            write_toc_artifacts(out_base, toc_detection)
+            print(f"TOC detection: not found (best_score={toc_detection.score:.2f})")
+    except Exception as e:
+        logger.warning("TOC enrichment pass failed: %s", e)
+        print(f"TOC enrichment: skipped ({e})")
+
     # ─── R3: Cross-page join pass (multi-page only) ─────────────────────
-    units_by_page: list[list] = []
-    for r in sorted(results, key=lambda x: x.get("page", 0)):
-        if r.get("error"):
-            continue
-        label = r["label"]
-        page_dir = out_base / label
-        units_path = page_dir / "stageB.evidence_units.json"
-        if not units_path.exists():
-            continue
-        stage_b_data = json.loads(units_path.read_text(encoding="utf-8"))
-        page_units = [EvidenceUnit.from_dict(u) for u in stage_b_data.get("units", [])]
-        units_by_page.append(page_units)
+    units_by_page, join_input_manifest = _load_units_by_page_from_artifacts(out_base, stem)
     join_diagnostics: list = []
     if len(units_by_page) >= 2:
         joined_units, join_diagnostics = run_join_pass_and_gate(units_by_page)
         join_gate_passed = all(g.passed for g in join_diagnostics)
-        print(f"Cross-page join pass: {len(joined_units)} units, gate={'PASS' if join_gate_passed else 'FAIL'}")
+        input_unit_count = sum(len(p) for p in units_by_page)
+        print(
+            f"Cross-page join pass: input={input_unit_count} joined={len(joined_units)} "
+            f"gate={'PASS' if join_gate_passed else 'FAIL'}"
+        )
         joined_path = out_base / "joined.evidence_units.json"
         joined_path.write_text(
             json.dumps({"units": [u.to_dict() for u in joined_units]}, indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
-        for gn in ["cross_page_join_rate"]:
-            if gn not in b_gate_names:
-                b_gate_names.append(gn)
+        join_diag_by_name = {d.gate_name: d.to_dict() for d in join_diagnostics}
+        join_manifest = {
+            "input_page_count": len(units_by_page),
+            "input_unit_count": input_unit_count,
+            "joined_unit_count": len(joined_units),
+            "join_gate_passed": join_gate_passed,
+            "join_input_pages": join_input_manifest,
+            "diagnostics": join_diag_by_name,
+        }
+        join_manifest_path = out_base / "join_manifest.json"
+        join_manifest_path.write_text(
+            json.dumps(join_manifest, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        print(f"Join manifest: {join_manifest_path}")
+
+        # TOC coverage gates (run on joined corpus)
+        if toc_enrichment_summary:
+            toc_cov_gate = gate_toc_binding_coverage(joined_units)
+            orphan_after_gate = gate_orphan_after_toc(joined_units)
+            join_diagnostics.extend([toc_cov_gate, orphan_after_gate])
+            join_gate_passed = join_gate_passed and toc_cov_gate.passed and orphan_after_gate.passed
+            cov = toc_cov_gate.detail.get("coverage", 0)
+            orph = orphan_after_gate.detail.get("orphan_rate", 0)
+            print(
+                f"TOC gates: coverage={cov:.1%} ({'PASS' if toc_cov_gate.passed else 'FAIL'})  "
+                f"orphan_after_toc={orph:.1%} ({'PASS' if orphan_after_gate.passed else 'FAIL'})"
+            )
+
         for r in results:
             if r.get("error"):
                 continue
@@ -422,7 +518,18 @@ def main() -> None:
         a_rates[gn] = passed / len(valid) if valid else 0.0
 
     # Stage B gate aggregates
-    b_gate_names = ["orphan", "bleed", "table_integrity", "unit_size"]
+    b_gate_names = [
+        "orphan",
+        "bleed",
+        "table_integrity",
+        "unit_size",
+        "cross_page_join_rate",
+        "join_unit_id_conservation",
+        "join_page_fingerprint_conservation",
+        "join_table_unit_conservation",
+        "toc_binding_coverage",
+        "orphan_after_toc",
+    ]
     b_rates: dict[str, float] = {}
     for gn in b_gate_names:
         passed = sum(
@@ -476,6 +583,11 @@ def main() -> None:
         "stage_a_failed_pages": stage_a_failed,
         "stage_b_failed_pages": stage_b_failed,
         "orphan_header_results": orphan_header_results,
+        "toc_enrichment": {
+            "total_units_bound": toc_enrichment_summary.get("total_units_bound", 0),
+            "total_units_unbound": toc_enrichment_summary.get("total_units_unbound", 0),
+            "total_table_captions": toc_enrichment_summary.get("total_table_captions", 0),
+        } if toc_enrichment_summary else None,
     }
 
     report_json_path = out_base / "evaluation_report.json"

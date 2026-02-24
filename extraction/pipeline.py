@@ -19,7 +19,11 @@ from pathlib import Path
 from typing import Any
 
 from extraction.cross_page_join import run_join_pass
-from extraction.gates_b import gate_cross_page_join_rate, run_stage_b_gates
+from extraction.gates_b import (
+    gate_cross_page_join_rate,
+    run_join_conservation_gates,
+    run_stage_b_gates,
+)
 from extraction.schemas import EvidenceUnit
 from extraction.stage_a import StageAResult, run_stage_a
 from extraction.stage_a_prime import StageAPrimeResult, run_stage_a_prime
@@ -56,10 +60,10 @@ def run_join_pass_and_gate(
 ) -> tuple[list[EvidenceUnit], list[Any]]:
     """R3: Run cross-page join pass on units by page, then run cross_page_join gate.
 
-    Returns (joined_units, [gate_cross_page_join_rate diagnostic]).
+    Returns joined units and join diagnostics (rate + conservation gates).
     """
     joined = run_join_pass(units_by_page)
-    diag = [gate_cross_page_join_rate(joined)]
+    diag = [gate_cross_page_join_rate(joined)] + run_join_conservation_gates(units_by_page, joined)
     return joined, diag
 
 

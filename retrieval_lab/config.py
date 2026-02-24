@@ -98,6 +98,26 @@ class QueryEnhancementConfig:
 
 
 @dataclass
+class AnswerEvaluationConfig:
+    """Optional: answer-generation evaluation pass after retrieval.
+
+    This is intended for benchmark harnessing, not production.
+    """
+
+    enabled: bool = False
+    # OpenAI model identifier (e.g., "gpt-4o-mini"). Required when enabled=True.
+    llm_model_id: str = ""
+    # Evaluate over top-k retrieved EvidenceUnits (0 => use max(experiment.top_k)).
+    eval_top_k: int = 0
+    # Deterministic subset size (sorted by query_id).
+    max_queries: int = 20
+    # Truncate evidence text for prompt size control.
+    max_chars_per_unit: int = 1200
+    # Which retrieval models to evaluate (empty => first model only).
+    eval_models: List[str] = field(default_factory=list)
+
+
+@dataclass
 class ExperimentConfig:
     """Configuration for a single retrieval lab experiment."""
 
@@ -106,6 +126,8 @@ class ExperimentConfig:
     document_id: str
     query_batches: List[str]
     models: List[str]
+    # Absolute path to YAML config file when loaded from YAML (optional; used for manifests).
+    source_config_path: Optional[str] = None
     retrieval_mode: str = "dense"
     top_k: List[int] = field(default_factory=lambda: [1, 3, 5, 10, 20])
     output_dir: str = "out/retrieval_lab/experiments"
@@ -201,12 +223,17 @@ class ExperimentConfig:
     dependency_pairing_emax: int = 6
     # Optional path to baseline metrics.json for report delta section.
     baseline_metrics_path: Optional[str] = None
+    # Embedding metadata enrichment: baseline (text only) | path | type | table_title | topic_tags | co_retrieval_hints | page | full.
+    # When set, run_id gets _embed_{profile} suffix so embeddings are recomputed per profile.
+    embedding_enrichment_profile: Optional[str] = None
     # Grouped options (wave-2 structure). Flat keys remain authoritative for backward compatibility.
     crossref: CrossrefConfig = field(default_factory=CrossrefConfig)
     dual_list: DualListConfig = field(default_factory=DualListConfig)
     pairing: PairingConfig = field(default_factory=PairingConfig)
     # Query enhancement (pre-retrieval expansion/decomposition).
     query_enhancement: QueryEnhancementConfig = field(default_factory=QueryEnhancementConfig)
+    # Optional response generation evaluation pass.
+    answer_evaluation: AnswerEvaluationConfig = field(default_factory=AnswerEvaluationConfig)
 
     def get_policy(self, corpus_id: str) -> RetrievalPolicy:
         """Get retrieval policy for corpus. Falls back to default policy from config."""
@@ -224,6 +251,8 @@ class ExperimentConfig:
             self.baseline_metrics_path = str((base / self.baseline_metrics_path).resolve())
         if self.query_enhancement.profile_path:
             self.query_enhancement.profile_path = str((base / self.query_enhancement.profile_path).resolve())
+        if self.source_config_path:
+            self.source_config_path = str((base / self.source_config_path).resolve())
 
     def validate(self, embed_only: bool = False, eval_only: bool = False) -> None:
         """Raise ValueError if config is invalid. Use embed_only=True or eval_only=True for single-step validation."""
@@ -332,6 +361,10 @@ class ExperimentConfig:
                 if oa.admission_cutoff and oa.admission_cutoff < oa.baseline_keep_n:
                     raise ValueError("query_enhancement.only_add.admission_cutoff must be >= baseline_keep_n (or 0)")
 
+        ae = self.answer_evaluation
+        if ae.enabled and not ae.llm_model_id.strip():
+            raise ValueError("answer_evaluation.llm_model_id is required when answer_evaluation.enabled=true")
+
     @classmethod
     def from_yaml(cls, path: Path, base_dir: Optional[Path] = None) -> "ExperimentConfig":
         """Load config from a YAML file."""
@@ -341,7 +374,9 @@ class ExperimentConfig:
         if not resolved.exists():
             raise FileNotFoundError(f"Config file not found: {resolved}")
         data = yaml.safe_load(resolved.read_text(encoding="utf-8"))
-        return cls.from_dict(data or {}, base_dir=resolved.parent)
+        cfg = cls.from_dict(data or {}, base_dir=resolved.parent)
+        cfg.source_config_path = str(resolved)
+        return cfg
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any], base_dir: Optional[Path] = None) -> "ExperimentConfig":
@@ -355,6 +390,7 @@ class ExperimentConfig:
         dual_list = _parse_dual_list(data)
         pairing = _parse_pairing(data)
         query_enhancement = _parse_query_enhancement(data)
+        answer_evaluation = _parse_answer_evaluation(data)
         cfg = cls(
             experiment_name=str(data.get("experiment_name", "unnamed_experiment")),
             substrate_path=str(data.get("substrate_path", "")),
@@ -423,10 +459,12 @@ class ExperimentConfig:
             dependency_pairing_expand=pairing.enabled,
             dependency_pairing_emax=pairing.emax,
             baseline_metrics_path=str(data["baseline_metrics_path"]) if data.get("baseline_metrics_path") else None,
+            embedding_enrichment_profile=(str(data.get("embedding_enrichment_profile") or "").strip() or None),
             crossref=crossref,
             dual_list=dual_list,
             pairing=pairing,
             query_enhancement=query_enhancement,
+            answer_evaluation=answer_evaluation,
         )
         return cfg
 
@@ -536,6 +574,25 @@ def _parse_query_enhancement(data: Dict[str, Any]) -> QueryEnhancementConfig:
             only_add=only_add_cfg,
         )
     return QueryEnhancementConfig()
+
+
+def _parse_answer_evaluation(data: Dict[str, Any]) -> AnswerEvaluationConfig:
+    raw = data.get("answer_evaluation")
+    if isinstance(raw, dict):
+        eval_models = raw.get("eval_models") or []
+        if isinstance(eval_models, str):
+            eval_models = [s.strip() for s in eval_models.split(",") if s.strip()]
+        if not isinstance(eval_models, list):
+            eval_models = []
+        return AnswerEvaluationConfig(
+            enabled=bool(raw.get("enabled", False)),
+            llm_model_id=str(raw.get("llm_model_id", raw.get("model_id", ""))),
+            eval_top_k=int(raw.get("eval_top_k", 0)),
+            max_queries=int(raw.get("max_queries", 20)),
+            max_chars_per_unit=int(raw.get("max_chars_per_unit", 1200)),
+            eval_models=[str(x) for x in eval_models if str(x).strip()],
+        )
+    return AnswerEvaluationConfig()
 
 
 def resolve_model_id(model_id: str, registry: Optional[Dict[str, Any]] = None) -> str:

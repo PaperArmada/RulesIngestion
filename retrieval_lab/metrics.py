@@ -456,6 +456,8 @@ def score_retrieval(
             "gold_count": len(r.gold_unit_ids),
             "required_gold_count": len(r.required_gold_ids),
             "supporting_gold_count": len(r.supporting_gold_ids),
+            "gold_unit_ids": r.gold_unit_ids,
+            "required_gold_ids": r.required_gold_ids,
             "gold_in_candidates": r.first_gold_rank is not None,
             "in_top_k": r.in_top_k,
             "recall_at_k": r.recall_at_k,

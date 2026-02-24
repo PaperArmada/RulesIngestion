@@ -941,7 +941,7 @@ def _run_ranking_pipeline(
 
     if ranked_source_id_lists is None:
         ranked_source_id_lists = [
-            [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
+            [[cid] + id_to_source_ids.get(cid, []) for cid in ranked_lists[i]]
             for i in range(len(ranked_lists))
         ]
 
@@ -990,7 +990,7 @@ def _build_metrics_and_reviews(
     """Score retrieval outputs and assemble query-review artifacts."""
     text_map = final_id_to_text or id_to_text
     source_lists = ranked_source_id_lists or [
-        [id_to_source_ids.get(cid, [cid]) for cid in ranked_lists[i]]
+        [[cid] + id_to_source_ids.get(cid, []) for cid in ranked_lists[i]]
         for i in range(len(ranked_lists))
     ]
     metrics = score_retrieval(
