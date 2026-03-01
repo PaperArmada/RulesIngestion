@@ -1,0 +1,2300 @@
+{
+  "metadata": {
+    "batch_ids": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006"
+    ],
+    "source": "marker-era blind_eval StarFinderPlayerCore",
+    "merged_at": "2026-02-28T18:09:50.398082+00:00",
+    "query_count": 50,
+    "current_run_id": "retrieval_lab_StarFinderPlayerCore_3c35ef696820"
+  },
+  "queries": [
+    {
+      "id": "blind_001_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What abilities can cancel out Vent Gas when a Barathu uses it?",
+      "expected_answer_summary": "Gust of Wind can blow away the gas cloud. Dispel Magic could counter it if it's magical. Alternative senses (scent, precise senses) can detect through concealment.",
+      "source_page": 49,
+      "notes": "Tests: Vent Gas definition + wind spells + dispel mechanics + sense abilities",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/9/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-330-363::/page/6/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/7/Text/7"
+      ],
+      "gold_unit_ids": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
+      "_required_gold": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
+      "_supporting_gold": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
+      "gold_locations": {
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5": {
+          "page": 7,
+          "structural_path": [
+            "COUNTERACTING"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
+      "expected_answer_summary": "Lashunta feats: Guarded Thoughts (mental protection), Psychic Mastery (enhanced telepathy). Solarian feats at level 9 from class table. Synergies with telepathy + melee combat style.",
+      "source_page": 60,
+      "notes": "HARD: Requires cross-chapter retrieval. Tests if system can gather ancestry feats + class feats + understand synergies.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/24",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/28",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/2/Table/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/8"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "50f8543fc760103ba758d98a9164e4e7c82916bec494050bfa841173933d7524": {
+          "page": 7,
+          "structural_path": [
+            "SOLARIAN FEATS BY NAME"
+          ],
+          "source_unit_ids": [
+            "7aea73183f4f77b0919d0cb8286293be9293a7082e08eb0814180276b2c6ca39",
+            "2f95549f7a8c389b412184450f8b4d1e765be8002dacdff2e022f7a251c0ef94"
+          ]
+        },
+        "f38fe045c2f372704a1443a7ad6c29bf56ce708136e07bf46d885a0e031b06e7": {
+          "page": 2,
+          "structural_path": [
+            "LASHUNTA ANCESTRY FEATS"
+          ],
+          "source_unit_ids": [
+            "ce007760efd894866c10ada7a5296e0709311fc235d86db429445a2c3d317bdb",
+            "fce715cafd8c72bb2a0d6495c83c621e34ef69f5dd3aeff45a0f8046fc4db3cb"
+          ]
+        },
+        "f4146f329d6b04217c1a566576f262dc4837c7c41f05bad73214eee1e7542729": {
+          "page": 4,
+          "structural_path": [
+            "STELLAR PARTITION 9TH"
+          ],
+          "source_unit_ids": [
+            "50b61c220884cc110003b1a77811c4bc18b85e173f40283d675134a3d9c18a12",
+            "200d5da9019a083d688da5afdd47dbcea01c8d3fe028e180511a9e547d1ecc4a"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can I use Redirect Current to power up a console?",
+      "expected_answer_summary": "Redirect Current is triggered by taking electricity damage and redirects it. To power devices, you'd need a different ability like the one that lets you 'use to power technological devices'.",
+      "source_page": 90,
+      "notes": "Tests: Ability lookup + understanding of what Redirect Current actually does vs powering devices",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/34"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "631182b5c982bc04e247847dd48f9e1235beb2b8b6c804a83552dfd086014dd6": {
+          "page": 16,
+          "structural_path": [
+            "ELECTRICAL SHIELDING"
+          ],
+          "source_unit_ids": [
+            "64d9d86d488776deb01d84039b9ff2fbb2e3950324a7b076d7c958067c886968",
+            "75ff0f5222c6e1910ad5793bf5575d0ac475a51506cb8ef00449deaaed71684a",
+            "97c6a713aca6f9b5d38baaae99c5ce1b36215ab773c573fe51528d5ba6528ab2",
+            "a174a4ec1b1e002574350bef8cc20dea9fd0a2bfa805eb820f23ed413cf2364d",
+            "c504b919dacb5875a21effc55c3b13a8df2af343456f9db8ca2f93479bd3a697",
+            "e302df6430108333452b6164167a9e367c4aa8dac936f3bce687642f9cb7b59e",
+            "d9012702b60baa33356d2d00669c9fc31c377e23d7619979b58f2c58679cf4ee",
+            "7c9d71662a99efa9d12bb6b0ff0dac18cf577a9ead5497f0804eb1e3076823e4",
+            "9f86cfbd0dab255937509288f1291abaa916e54f389eb22f22f6fb4190e4c994",
+            "19f283350bc40cdee3cb0c6b1655a19e5cba671d6daaa35b51e22740937a4f17",
+            "dfd49bb0c0f1faa122c3d67b3a22fd9717dfc0359df401f59a9f3dd14d9eb58f",
+            "ffda2cd07ea936fcdeb1001369a0746bd5eb44a964e86095a8b53c014d11ed70",
+            "26ec4889326bf64d8fdd2a695a35aa6dcc25bd5de41f2eb55cad0695ddf2b0e2"
+          ]
+        },
+        "8ed348fae82675c0b4d711a2be2d0b3a4f01076e8a5a9c31f0860f8db32a9e76": {
+          "page": 16,
+          "structural_path": [
+            "LIVING BATTERY"
+          ],
+          "source_unit_ids": [
+            "004c2f54f6356b8c015db9de8e55e8122c508480dcce732efcd2518421f9a784",
+            "4a39c8b075a13031435abfa53e4169dd5908bdf7481ddeb839d29fa1c0b63e06"
+          ]
+        },
+        "da1eee7ab153ce4c022b79ab6440816bcde83c6f4d0b6fb2c2e462a8c33f010d": {
+          "page": 9,
+          "structural_path": [
+            "ELECTRICAL ENGINEER"
+          ],
+          "source_unit_ids": [
+            "8d694aacf054a9f2f478dba4e255ca3e9a0a5b413979c5f6fb1df2de5b1f4937",
+            "7dbda18ec9a8be495449eb93afd62333d688132c4bf1349d86e97d359bae62b9",
+            "cf91932d501947a3f147c873b9f24cd42830690a97cb9c7d90c7ca1b3dd78809",
+            "47cfac047d024d3e9b468ce9fc3138abe1ab63f6147aeeddb4e6b7f681412a95"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
+      "expected_answer_summary": "Sidestep triggers when 'a creature misses you'. Robots are creatures (with tech trait) so YES. Inanimate objects are NOT creatures, so NO. The answer depends on whether it's a creature-robot or an inanimate hazard.",
+      "source_page": 111,
+      "notes": "AMBIGUOUS: Tests creature vs object distinction. Good edge case.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/13/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/12/Text/44",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-232-249::/page/4/Text/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/9"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "5979c9644983ed269a06c866753d0a421d4fe850075b8c58b0d327339a915436": {
+          "page": 13,
+          "structural_path": [
+            "ENVOY"
+          ],
+          "source_unit_ids": [
+            "74578ffc0ef4cf7d48649c6736586a5c8c2ae014010e2bd1e90852455ce06ab8",
+            "bdec2af17da2b9f89b8c1fcc9c73774cb56768d25343e019bae844f391940f4a",
+            "f9d02158c7211d3c768b2c32757a17f5e9eff61320f022e6b444f9d343e20ad1"
+          ]
+        },
+        "9d7b93c4b14347aa16612be5565b52277c9332ee080027803ccdbd87332e9d5b": {
+          "page": 4,
+          "structural_path": [
+            "OBJECT IMMUNITIES"
+          ],
+          "source_unit_ids": [
+            "cc469aeee8e6d4e67f7017be4a736fd736bec42ad36ad5de15272411c189db02",
+            "ca6572e873cd562f05a0694a0b305b66be3fb1a76744df363c24d7ac48263c3f"
+          ]
+        },
+        "9800f8f445647fc0bce89788a8bce3829cc1d7c07470f0ade2a2959e02c5e1f0": {
+          "page": 1,
+          "structural_path": [
+            "SUMMON UNDEAD"
+          ],
+          "source_unit_ids": [
+            "36498d01b6bb1053a56d6b6d3ec004430f8bcd66b7fce3a84932ae18b7000a08",
+            "951db056ede64195ffe435fb8b7f08666aea6ec05af1e8c16e02f40eb3fe467d",
+            "cc0cff819082bde996b633afbb9a737aa821073e1cd38ea443eaee19b2e6f455",
+            "18a069e9d7b287e0b6c183c0da01d1219fa06ffb2889c52d31353c25e4de1187",
+            "743ac2a817b9c31b6a28d11b3b59686a714d516c5a86f90204d7a3252e6ed907",
+            "42534ae10ab02412b8b2ec91dd8b5803b41de7e6de2d9487aa17617ce9ceaca9",
+            "16e89268a3fc0a1c11537d267931768ee4c0498adf95aabf3f28b41944564545",
+            "2fd04092b81d701e51d1e80ae7ff4c39013b3e90f748bf6b7f686f0220a74077",
+            "5858d6f43456839f04f3f15950ad1ffe21bacdedef52ce444e9006d8edf55b9e",
+            "01ffb324e5ad84ef238d437388ddda69fc3b5e94e874196198c30c72567da7e4",
+            "c40f84ee8b5c9c64b8f51d8644cddbd007996c93ec03e2405be1e88aa04cb02c",
+            "5686c950ab9cec0d48b768547a36325b2539d750913d251d525092f03150fd22",
+            "f6e9826387f13593306970d36d30eb06558609e211aac94a97f0eb66e49137be",
+            "2fd04092b81d701e51d1e80ae7ff4c39013b3e90f748bf6b7f686f0220a74077",
+            "10655d7508e948f017ac1e2dd9d258dec7d370ab6a4dc21868d1e8bc40915de0",
+            "01ffb324e5ad84ef238d437388ddda69fc3b5e94e874196198c30c72567da7e4",
+            "c40f84ee8b5c9c64b8f51d8644cddbd007996c93ec03e2405be1e88aa04cb02c",
+            "15c2d85136d51bef65bbbb1a20c808303906dfc4bed068d1884275a6f1072c81",
+            "f6e9826387f13593306970d36d30eb06558609e211aac94a97f0eb66e49137be",
+            "224f2da9558bed7a528e90ad74223e1093931d41fbc56fec1317fbfcd0983de1",
+            "5e2dd7ae79ea3fc6125c4c606f8267904290b11a33f239b170ce3b7b6d0d2c90",
+            "601d39a56fccd47f9622dd58ecfa096247d94d0dad98d2fca35397c145b37ef8",
+            "b6d6878cf94dfec970ffe78a414d4686acb317eae415fc6432c5033d82d6ba2c",
+            "312b1ca2bac94031138b02c35762e5f6296e09555cd09878b8844927520d8b9a"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "I don't really understand perception?",
+      "expected_answer_summary": "Perception measures awareness of your environment. Check = d20 + Wis + proficiency + bonuses/penalties. Used for noticing things (Seek), social situations (Sense Motive), and initiative in encounters. Perception DC = 10 + total modifier.",
+      "source_page": 396,
+      "notes": "VAGUE: Tests handling of broad conceptual questions. Should retrieve foundational rules.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/SectionHeader/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/22",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/23",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/5"
+      ],
+      "gold_unit_ids": [
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
+      ],
+      "required_gold": [
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381": {
+          "page": 8,
+          "structural_path": [
+            "PERCEPTION"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_06",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "I need help deciding between Covering Fire or I'll be back as my 6th level feat I'm playing an Android",
+      "expected_answer_summary": "Covering Fire: Ranged Strike (1 action) or Area/Auto-Fire (2 actions) to suppress target and give ally -2 penalty protection. Active team support. I'll Be Back: Free action 1/day when you wake from unconscious - Stand and draw weapon immediately. Recovery insurance. Choice depends on playstyle: team support (Covering Fire) vs personal resilience (I'll Be Back).",
+      "source_page": 157,
+      "notes": "COMPARISON: Tests retrieval of two feats for decision-making. Android mentioned but not directly relevant to feat choice.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/5",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/8",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/15",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/18",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/19",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/20"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04": {
+          "page": 7,
+          "structural_path": [
+            "SOLDIER"
+          ],
+          "source_unit_ids": [
+            "6c9004c1aef3cba34a11ff9227dadaefade7c157e8323bbf8950d04a51de1390",
+            "3885a35e0687db936d21e8fae1d6354da604a5e69207b5aeb9ac2a624a718a4f"
+          ]
+        },
+        "a9f3f41442e4a7edfdf21b88d46f06f1d59a1b2092ff6ba648b10eba60a5a466": {
+          "page": 5,
+          "structural_path": [
+            "SOLDIER"
+          ],
+          "source_unit_ids": [
+            "583816df5e3b70104b586703489459b739b72876d137f4b692cbc19ee40268c1",
+            "05bcc2d139981e75a08a8f10795e05cce6440bce3d26cc942a557f801c2f0d52",
+            "d79646673df09e8f6595838605ec7c5c927e0f73d757c14fb1c6395882d62025",
+            "f3a943f9fa70e5f0fc94e1fe14a3cbb586a0810225131d44cef1572237bb2a6b",
+            "745dc7d3d3f979bef0c183e31c72a58c467ccecb59481ef2451cbbd469f0487b",
+            "4a7669e19580e5133d5d4e9e8df13d76d4296e6bedaa377a1a276109469bcc67",
+            "ec4965b71c8dae2d060da5b6bb0a1f14c52a4bb050722f27701fc60083622802",
+            "cc9809b7fd597a741513ce3b3d244864f4286a66eb920a7c422d3810d8e545c7"
+          ]
+        },
+        "426cf38f230bc762663f63340dc2fa1d6c47f47002ce9b75008315f940746c65": {
+          "page": 6,
+          "structural_path": [
+            "YOU'LL HAVE TO GO THROUGH ME!"
+          ],
+          "source_unit_ids": [
+            "bae6f620375bc64dbd78b9aecf8fb3ba0fad4d6aee312710afb6dba7e915165f",
+            "52e76205c6dcb20008152f450fa4360cb61045fb51c180560e608c75d57e894f"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_07",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy within reach leaves a square during a move action?",
+      "expected_answer_summary": "Yes. Nimbus Surge triggers when a creature within reach 'leaves a square during a move action it's using'. Solar Nimbus feat grants Nimbus Surge reaction but without attunement benefits (no graviton/photon bonuses).",
+      "source_page": 175,
+      "notes": "EDGE CASE: Tests feat interaction + trigger conditions. Solar Nimbus grants reaction but strips attunement bonuses.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/SectionHeader/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/4",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/SectionHeader/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/Text/46"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165": {
+          "page": 3,
+          "structural_path": [
+            "ATTUNED SOLARIAN"
+          ],
+          "source_unit_ids": [
+            "4af474c31e2cfa9adc4e0068f6295a2e7bea34ea70d71b2003a60b6cb6d966b2",
+            "66e544180d231369ffc71ccb20b1a137fc132f32dc218be7b7ed60638d550913",
+            "101a2a1609c307bea156feaddd13d2f44c673db04c61ff52614136ce9eddce1d"
+          ]
+        },
+        "dbcf0aeabd57daf0f6dddd7083b4ddb67e930ac58b4a7260fef65f7121390f91": {
+          "page": 7,
+          "structural_path": [
+            "ATTUNED CYCLE FLOURISH SOLARIAN"
+          ],
+          "source_unit_ids": [
+            "76ed4438c83475b736083bd187918621bc3c0d2ac19e729eb7c321db98b0f280",
+            "6c3ff9594225437dac76c3caae74a974edaafe869f89f8b009c641061643286c",
+            "ef7ec79becf6ecad097ce082289307b41685b6734d3a431de41f8fa783c2aa4f",
+            "9e6506de2f5c4666022a3c9d319297650e18725336705c094a01e829c018cb91",
+            "dfc30ae5c231c2411136ac5b8787729a18b62633e1963903c3cd681389e1f08b",
+            "b32e1428b082b4088486db3685035e51c05a4c72b119dd1dcf0bb4ef2e3b17a7"
+          ]
+        },
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c": {
+          "page": 8,
+          "structural_path": [
+            "REACTIVE STRIKE"
+          ],
+          "source_unit_ids": [
+            "bd4dc77a2d9ab16ffa5a24c3432806acd27fb66de6fb11c693a91ecd1a550038",
+            "77e6e74fdcb004271e0295f50a741100a61c390e7ab6309b6ead85a9260158f9"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_08",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Do Androids with Revivification Protocol need to make recovery checks?",
+      "expected_answer_summary": "No. Revivification Protocol triggers 'when you are about to attempt a recovery check'. Instead of rolling, you auto-revive to 1 HP and lose dying/unconscious. The ability replaces the recovery check.",
+      "source_page": 45,
+      "notes": "RULES INTERACTION: Tests understanding of triggered abilities that replace normal mechanics. Android-specific feat.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/SectionHeader/3",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4"
+      ],
+      "gold_unit_ids": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469": {
+          "page": 15,
+          "structural_path": [
+            "RECOVERY CHECKS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_09",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can a Shirren use Undying more than once per day?",
+      "expected_answer_summary": "Need to check if Undying has a frequency limit. The feat text says 'You have died once before' suggesting narrative limitation, but no explicit 'once per day' frequency listed. May be unlimited use.",
+      "source_page": 83,
+      "notes": "FREQUENCY CHECK: Tests if system retrieves feat to check for frequency limitations. Shirren-specific feat.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51"
+      ],
+      "gold_unit_ids": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
+      ],
+      "_required_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
+      ],
+      "_supporting_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
+      ],
+      "gold_locations": {
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2": {
+          "page": 0,
+          "structural_path": [
+            "ARMOR UPGRADES",
+            "LIMITED ARMOR UPGRADES"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "blind_001_10",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What's the difference between Android Revivification Protocol and Shirren Undying?",
+      "expected_answer_summary": "Both restore to 1 HP and remove dying/unconscious. Revivification Protocol (Android, Feat 13): Triggers before recovery check, replaces it. Undying (Shirren, Feat 17): Triggers when you would otherwise perish. Both increase wounded. Key difference: trigger timing (before check vs at death) and level requirement (13 vs 17).",
+      "source_page": 45,
+      "notes": "COMPARISON: Tests cross-ancestry feat comparison. Requires retrieving both feats and identifying similarities/differences.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592": {
+          "page": 5,
+          "structural_path": [
+            "ANDROID"
+          ],
+          "source_unit_ids": [
+            "c5d3d4f71522328af2ccc713a91bd1511444d9cc88e7b1ff29b883ae506b4b28",
+            "a1eddfbbe6756d35907d0539abaf462d37cd577be474e704a68b328b37aed9a6"
+          ]
+        },
+        "758292bad59c6287b997fff6a9618035980fe774048141309e58bf78345d9529": {
+          "page": 11,
+          "structural_path": [
+            "SHIRREN"
+          ],
+          "source_unit_ids": [
+            "4b270ed656910c8bff4610db8beee3c72b9736116ff734a43884a1d8e95b86aa",
+            "c36820f20b13c72ef1b6182afcba156763375fd6fd4f27109c0bf5b9dd3d76d7",
+            "f0f59d775ff157a1bdf9585c137bacd8c0203863de6bb5dbd64509c46cf6843a",
+            "1269a629fa88cdbd47e5c6e339e85b170cb8ccd2f20a87b744db561d3e2bfae2"
+          ]
+        },
+        "352eae4d2df7c4bc78cde8ebb87c635476300335851ce89587affdceea6ecce6": {
+          "page": 4,
+          "structural_path": [
+            "RENEWED ANDROID"
+          ],
+          "source_unit_ids": [
+            "79544b21421dc09388b53a7ed6e88940cbcb76651b75482add326b9776e64861",
+            "a9e9eaa2626ce0b487652328c2686cc2ee2b28a4053d0a2f3117d856a2604701"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What penalties do I have while prone?",
+      "expected_answer_summary": "Prone: You're off-guard (-2 circumstance penalty to AC) and take -2 circumstance penalty to attack rolls. Limited to Crawl and Stand move actions. Standing ends prone.",
+      "source_page": 413,
+      "notes": "Tests: State definition \u2192 modifiers extraction + derived state (off-guard)",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/13/Text/96",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "gold_unit_ids": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436": {
+          "page": 15,
+          "structural_path": [
+            "PRONE"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can I use Stealth to Hide while I'm prone?",
+      "expected_answer_summary": "Yes. Hide requires cover/greater cover or concealment. Prone doesn't prevent Hide. Prone only limits you to Crawl and Stand for movement actions, not other actions.",
+      "source_page": 413,
+      "notes": "Tests: State \u2192 action feasibility check. Prone restricts move actions, not general actions.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/25/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "gold_unit_ids": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436": {
+          "page": 15,
+          "structural_path": [
+            "PRONE"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What changes when I gain the wounded condition?",
+      "expected_answer_summary": "Wounded increases your dying value when you gain dying condition. If you gain dying while wounded, increase dying by your wounded value. Wounded ends when restored to full HP and rest 10 minutes, or via Treat Wounds.",
+      "source_page": 413,
+      "notes": "Tests: State acquisition \u2192 behavioral changes. Wounded modifies dying acquisition.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/23",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/24"
+      ],
+      "gold_unit_ids": [
+        "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0"
+      ],
+      "required_gold": [
+        "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0": {
+          "page": 16,
+          "structural_path": [
+            "Wounded"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If I'm dying and taking persistent damage, what happens during my turn?",
+      "expected_answer_summary": "Start of turn: attempt recovery check (dying). End of turn: take persistent damage. If persistent damage keeps you at/below 0 HP, increase dying by 1. Dangerous: dying recovery happens first, then persistent damage can undo recovery.",
+      "source_page": 413,
+      "notes": "HARD: Tests multiple simultaneous states + temporal ordering. Critical interaction between dying recovery and persistent damage timing.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4"
+      ],
+      "gold_unit_ids": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469": {
+          "page": 15,
+          "structural_path": [
+            "RECOVERY CHECKS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does the concealed condition stack with cover?",
+      "expected_answer_summary": "They don't 'stack' additively. Concealed imposes DC 5 flat check before attack roll. Cover gives +2 AC/Reflex bonus (standard) or +4 (greater). Both can apply - attacker must pass flat check AND beat higher AC.",
+      "source_page": 413,
+      "notes": "Tests: Understanding of different defensive mechanics (flat check vs AC bonus). Both apply but affect different parts of attack resolution.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/2/Text/6",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Table/10"
+      ],
+      "gold_unit_ids": [
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13",
+        "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791"
+      ],
+      "required_gold": [
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13"
+      ],
+      "supporting_gold": [
+        "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791"
+      ],
+      "_required_gold": [
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13"
+      ],
+      "_supporting_gold": [
+        "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791"
+      ],
+      "gold_locations": {
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13": {
+          "page": 2,
+          "structural_path": [
+            "CONCEALED"
+          ]
+        },
+        "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791": {
+          "page": 11,
+          "structural_path": [
+            "CONDITIONS APPENDIX",
+            "CONCEALED"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_06",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What penalties apply while blinded?",
+      "expected_answer_summary": "Blinded: Can't see. All terrain is difficult. Auto-fail Perception checks requiring vision. -4 status penalty to Perception if vision is your only precise sense. Immune to visual effects. You're off-guard. Overrides dazzled.",
+      "source_page": 413,
+      "notes": "Tests: Condition \u2192 multiple modifiers + derived states (off-guard, difficult terrain)",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/10"
+      ],
+      "gold_unit_ids": [
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70",
+        "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf"
+      ],
+      "required_gold": [
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70"
+      ],
+      "supporting_gold": [
+        "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf"
+      ],
+      "_required_gold": [
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70"
+      ],
+      "_supporting_gold": [
+        "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf"
+      ],
+      "gold_locations": {
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70": {
+          "page": 11,
+          "structural_path": [
+            "CONDITIONS APPENDIX",
+            "BLINDED"
+          ]
+        },
+        "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf": {
+          "page": 0,
+          "structural_path": [
+            "PERCEPTION AND DETECTION",
+            "DARKNESS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_07",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
+      "expected_answer_summary": "No. Nonlethal damage that reduces you to 0 HP knocks you unconscious but you don't gain dying. You remain unconscious with 0 HP instead. Different state transition than lethal damage.",
+      "source_page": 402,
+      "notes": "Tests: Damage type alters state acquisition rules. Nonlethal \u2192 unconscious (not dying).",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/ListItem/10",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/14/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-250-267::/page/6/Text/17"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90": {
+          "page": 14,
+          "structural_path": [
+            "GETTING KNOCKED OUT"
+          ],
+          "source_unit_ids": [
+            "1560c92619e013c2e638881831ee8992059768ff23d3da34bae2bb68b215979e",
+            "e4d11b8368b0f9a96189dde881aa88e1d6c9ea69a4f6a0265f9f742ba191d99e",
+            "2f8599dc2391965cbba00dee7931bea5828b79c2a4e41351b732a5022919bf5c"
+          ]
+        },
+        "61b46bab7be558297b6929c6aa963735f98fb63b41c2ca6c77f21cae8e0b165f": {
+          "page": 12,
+          "structural_path": [
+            "DEATH AND DYING RULES"
+          ],
+          "source_unit_ids": [
+            "d7aee398b0c48558728a70c9b11c8c552bddddfa59c7f6900256bc7d7e247516",
+            "6c74b81d98e9fed36fe0a6cbdd66288f864d6fc6bd6465742de911bc2d185963"
+          ]
+        },
+        "c4d129cdd2dfa9509a150ed31962465c2d2eb5a92a416d1ae829a96db870adb3": {
+          "page": 16,
+          "structural_path": [
+            "HEROIC RECOVERY"
+          ],
+          "source_unit_ids": [
+            "c4fe71c5969fe79046f649836be62d2c32fafd9c6b163b6c60a5fe8bdab69d84",
+            "2011badd020454ac8dd61cb982563004fea129e8a8f9cc6ffdb7ac594511caf4",
+            "bc10eeb5ac10998333eae68817345f0921062b9b300f24e7088e73477e8a930e"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_002_08",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can I crawl while prone and does it provoke?",
+      "expected_answer_summary": "Yes, Crawl is available while prone (moves 5 feet, requires Speed 10+). Crawl has the move trait, so it triggers reactions that respond to move actions (like Attack of Opportunity).",
+      "source_page": 413,
+      "notes": "Tests: State \u2192 available actions + action traits \u2192 triggers. Prone explicitly allows Crawl.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/17",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6"
+      ],
+      "gold_unit_ids": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436": {
+          "page": 15,
+          "structural_path": [
+            "PRONE"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
+      "expected_answer_summary": "Off-guard from flanking is situational: the creature is off-guard to melee attacks from creatures that are flanking it. It applies only while flanked; when the ally moves away the creature is no longer flanked so the penalty ends.",
+      "source_page": 417,
+      "notes": "A. Scope: rule applies only when condition (flanking) is met; no persistence clause.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/11/Text/7"
+      ],
+      "gold_unit_ids": [
+        "1fdc41999f031dfc8b9c253df6559c0d28a60d93b9481b83fbf803a12a27098a"
+      ],
+      "required_gold": [
+        "1fdc41999f031dfc8b9c253df6559c0d28a60d93b9481b83fbf803a12a27098a"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "1fdc41999f031dfc8b9c253df6559c0d28a60d93b9481b83fbf803a12a27098a"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "1fdc41999f031dfc8b9c253df6559c0d28a60d93b9481b83fbf803a12a27098a": {
+          "page": 14,
+          "structural_path": [
+            "OFF-GUARD"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
+      "expected_answer_summary": "Frequency limits how often you can use the ability; Trigger says when a reaction/free action can be used. 'Until the end of your next turn' is duration of the effect once you use the ability\u2014it's one effect per use, not re-applied every time the trigger fires.",
+      "source_page": 15,
+      "notes": "A. Scope: duration applies to single use; Frequency governs how often you can use.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/19"
+      ],
+      "gold_unit_ids": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "_required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "_supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "gold_locations": {
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
+          "page": 1,
+          "structural_path": []
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "expected_answer_summary": "Aid applies only to an ally. Requirements: the ally is willing to accept your aid, and you've prepared to help. You try to help your ally with a task\u2014target is explicitly an ally.",
+      "source_page": 406,
+      "notes": "A. Target scope: core rule states ally; not enemies or self.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/10"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c": {
+          "page": 2,
+          "structural_path": [
+            "AID"
+          ],
+          "source_unit_ids": [
+            "e7cc544247aaeca6b9dfce2b74c35f7deda4aa951bfad724e30c3282aec5e272",
+            "3f4f977ef5950a245193f719afa5a995489157dbf4437207ab31b8d5fdf5a240"
+          ]
+        },
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37": {
+          "page": 3,
+          "structural_path": [
+            "AID DETAILS"
+          ],
+          "source_unit_ids": [
+            "2e9255376dd79b3050252f545e548639ed997cc43e982ab19d2fd9df8bcb157a",
+            "6506b8d3961da90091a6526cd9e4c67ff2f5b2837bd2bb4b3440108b24afb2f7"
+          ]
+        },
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437": {
+          "page": 12,
+          "structural_path": [
+            "EFFECTS",
+            "TARGETS"
+          ],
+          "source_unit_ids": [
+            "956e62f474d3e0c92243a431abd6c97e2b54f51a034f0265b9da3d186869f9a6",
+            "d4b6f7e9eccbd953b953425e4b9fb6df0ad769e8142012f6c7e2aedb0e04efb7",
+            "4363c038e0787b5ffc50c5157a9591606ae85f6bd246261481a22e5235a2abee"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
+      "expected_answer_summary": "You can use only one action in response to a given trigger. If you had a reaction and a free action that both had the same trigger, you would choose one to use.",
+      "source_page": 406,
+      "notes": "B. Authority: explicit rule\u2014one action per trigger; resolves conflict.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "gold_unit_ids": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "_required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "_supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "gold_locations": {
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
+          "page": 1,
+          "structural_path": []
+        },
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46": {
+          "page": 1,
+          "structural_path": [
+            "Free Actions"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "expected_answer_summary": "Enhanced Nanite Surge (feat) lets you use Nanite Surge with a frequency of once per 10 minutes, rather than once per hour. It replaces the frequency for that use, not adds an extra use.",
+      "source_page": 41,
+      "notes": "B. Override: 'rather than' indicates replacement of the base frequency.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/4/SectionHeader/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/36"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "2a9adb804c349575eae16c542651fb4f5cb47c4eb75a1487c271b6c11cfab4a6": {
+          "page": 4,
+          "structural_path": [
+            "NANITE SURGE"
+          ],
+          "source_unit_ids": [
+            "47f38fe704faf8f6a4041c246307b50cdf4f20729743d5a55fc5314086cc008f",
+            "dd7a83f447650521af2b65bf4889e2631d36c87007a1c857e07e08d3b6d3e3ac",
+            "1eb66f5a52ef7d738d870cd2bde48679ff917919a9fc2ad49560bf2c9bb6b1af",
+            "f2c186d63b03af71e891abb697dda56791d6fb4927811dbd9acf26083d66f338"
+          ]
+        },
+        "9d73437bf597fe66360f981fd997c57d03bf671e6097848de4850f2a314dfdd2": {
+          "page": 2,
+          "structural_path": [
+            "DUO-ENHANCERS"
+          ],
+          "source_unit_ids": [
+            "9e2c62ef5495121528213a075faa197d097a814c0ccbdcf5caabc2a831f6f4b6",
+            "c0693fd178ab1097f80798c9fe903c56c185fc167817d09c88c4b866231c6e94",
+            "c33f2d8e0140c5d95641492ba0c8414dadcbf93a7f519a12228c6848d5d994b2",
+            "0afe68071e03c82fa9d823811c7f4e8f4c1c26a85dace4952e4c10b12643abf8",
+            "64dd33787f74889dfa66772a3e0fee7462d4180dfbcd579d693166d25c37752e",
+            "1d12b57aafe8925db4c8f7e7561839ad7402caa5d6b1b8eabc702f2e1ac5c1b6",
+            "3c0f086252a8ce1ea941341b64d3654e748e07db88167f6c434c55c89b77d0d4",
+            "366fc89a25abce80b65ed2c55419de1c706bdaf8001cacd082d643b5151cf0cf",
+            "af75bbee96bac4af4d20ff2d2fa1a03a1949a7c3ea9e698ea09921d616c5d56d",
+            "a5ad6011230d7f1b641b68f75b8b7d0831054b1f49be2e8fc387e58535d84d19",
+            "fff75209fb27a7da8e29aba535f7288bc723e2ef23f1cfbd7aada99fc46197ca",
+            "d4b5114a5ede23f084c626221ebbd404a6d0abd69472e1b721f576e99794775e"
+          ]
+        },
+        "280f6ab21cb530e0bb41dce8dba0e53af6b7e89560a76885091033b429570a6d": {
+          "page": 5,
+          "structural_path": [
+            "ANDROID CONCENTRATE"
+          ],
+          "source_unit_ids": [
+            "b9ac1dbf00685beb9c132d81833cde3668694e33f3731eb4b5b6ea7fdb53df4e",
+            "83470c902715b3d45549d79baf6dd4c36682e86162e891f7b8adccd82816a72b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_06",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What exact condition must be true to use your one reaction per round?",
+      "expected_answer_summary": "You get one reaction per round. You can use it only when its specific trigger is fulfilled. So the condition is: (1) you haven't used your reaction yet this round, and (2) the trigger for that reaction has occurred.",
+      "source_page": 15,
+      "notes": "C. Conditions: trigger must be met; one per round.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "gold_unit_ids": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "_required_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "_supporting_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "gold_locations": {
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5": {
+          "page": 4,
+          "structural_path": [
+            "REACTIONS IN ENCOUNTERS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_07",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can you use more than one reaction in response to the same trigger?",
+      "expected_answer_summary": "No. You can use only one action in response to a given trigger. So even if multiple reactions could fire on the same trigger, you choose one.",
+      "source_page": 406,
+      "notes": "C. Trigger multiplicity: one action per trigger.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "gold_unit_ids": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "_required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "_supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
+      "gold_locations": {
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
+          "page": 1,
+          "structural_path": []
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_08",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What does 'reaction' mean in Starfinder rules terms?",
+      "expected_answer_summary": "Reaction ([reaction]): an action you can use even when it's not your turn. You get one reaction per round, and you can use it only when its specific trigger is fulfilled.",
+      "source_page": 428,
+      "notes": "D. Definitions: rules definition, not colloquial.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86": {
+          "page": 1,
+          "structural_path": [
+            "Reactions"
+          ],
+          "source_unit_ids": [
+            "239b493f2d08c4a313ac95aafdeb808767b8f642538be9c52c497762a894c2d6",
+            "b4eec26407c4e61f504a363b79a7b2cdf8680c6cc6d60d193fa33f799bb98aca"
+          ]
+        },
+        "e63d6b366f27fb5cee020f062cb8af378087c4181a2f369aed8e6fcaeff81b2d": {
+          "page": 1,
+          "structural_path": [
+            "\\( ^{*} \\)"
+          ],
+          "source_unit_ids": [
+            "9e38de655de5510e74bbf8a0a8668473210a05363a87d7da0a25509967821efc",
+            "cce1ac08cf4e1e38f1116af6936fb1ba0e2d0bf50f911e99d1536680bd52e607"
+          ]
+        },
+        "f19fe016da4a2b83b1deb8a58fc75b9394c4a813b6413e9046c6f5b4f0553901": {
+          "page": 8,
+          "structural_path": [
+            "ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "8db945ab658241625a1c3742b491d42980bf40c10117ba7f5fc80d0becae6b28",
+            "40d818751b5dd043b0eba318bf3cdd5d547058dab8bcf349cc07ba697731691d",
+            "78a818fbfc3443d6f18b9bc68ac908545b5f6f466a3d1eea619aebde490ef42c"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_09",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Where does the book tell you to look for the complete definition of a bolded term?",
+      "expected_answer_summary": "New concepts are presented in bold. The complete game rules are defined in later chapters, and the Glossary and Index in the back of the book will help you find the specific rules you need.",
+      "source_page": 5,
+      "notes": "D. Authorial guidance: later chapters + Glossary & Index.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "gold_unit_ids": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "_required_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "_supporting_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "gold_locations": {
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c": {
+          "page": 0,
+          "structural_path": [
+            "APPENDICES"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_10",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When in your turn does the dying recovery check happen?",
+      "expected_answer_summary": "Many things happen at the start of your turn. When you're dying, you must attempt a recovery check at the start of your turn each round. So the dying recovery check happens at the start of your turn.",
+      "source_page": 403,
+      "notes": "E. Procedure: start of turn; explicit in dying condition.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "gold_unit_ids": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_supporting_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "gold_locations": {
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469": {
+          "page": 15,
+          "structural_path": [
+            "RECOVERY CHECKS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_11",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does a free action with a trigger use up your one reaction per round?",
+      "expected_answer_summary": "No. Free actions with triggers can be used at any time, but they don't use up your 1 reaction per round. Reactions use your one reaction per round; free actions do not.",
+      "source_page": 15,
+      "notes": "E. Procedure: free action with trigger \u2260 reaction; doesn't consume reaction.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/5/Text/43",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334": {
+          "page": 1,
+          "structural_path": [
+            "Subordinate Actions"
+          ],
+          "source_unit_ids": [
+            "3c32241949db83e0ff73bb5e840f109d1afefad2cdef695b0fd4ae36e6f8b5a9",
+            "83fda10fa6bc2a04dca42910bceb5642d4c72597edc929fecf7cb6ee8a6eca10",
+            "be76cc683021827923db99443827af40e5fdf1e230d287ffb640803130c0d170"
+          ]
+        },
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86": {
+          "page": 1,
+          "structural_path": [
+            "Reactions"
+          ],
+          "source_unit_ids": [
+            "239b493f2d08c4a313ac95aafdeb808767b8f642538be9c52c497762a894c2d6",
+            "b4eec26407c4e61f504a363b79a7b2cdf8680c6cc6d60d193fa33f799bb98aca"
+          ]
+        },
+        "d139c04d86b3c0b1f8f00ff1ba345d2778b3f2dc9fe93d85075a1edc73f240f8": {
+          "page": 0,
+          "structural_path": [
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "3f511a1e344f0427231def063bc529a947a82fcc5356f750274779f31e314437"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_12",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can you use a reaction when it's not your turn?",
+      "expected_answer_summary": "Yes. Reactions can be used even when it's not your turn. You only get one per round and only when the trigger is fulfilled.",
+      "source_page": 15,
+      "notes": "E. Procedure: reaction explicitly usable when not your turn.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12"
+      ],
+      "gold_unit_ids": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "_required_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "_supporting_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
+      "gold_locations": {
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5": {
+          "page": 4,
+          "structural_path": [
+            "REACTIONS IN ENCOUNTERS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_13",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
+      "expected_answer_summary": "It illustrates the rule. The rule states you can use only one action in response to a given trigger. The example ('if you had a reaction and a free action that both had a trigger of...') is clarifying that you choose one\u2014it doesn't add or change the rule.",
+      "source_page": 406,
+      "notes": "F. Examples: example illustrates one-action-per-trigger; doesn't override.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1"
+      ],
+      "gold_unit_ids": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "_required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "_supporting_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
+      "gold_locations": {
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
+          "page": 1,
+          "structural_path": []
+        },
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46": {
+          "page": 1,
+          "structural_path": [
+            "Free Actions"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_003_14",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If the text is ambiguous, where does the book say to look?",
+      "expected_answer_summary": "The introduction says the complete game rules are in later chapters and the Glossary and Index in the back will help you find the specific rules you need. So for ambiguity, look to later chapters and the Glossary & Index.",
+      "source_page": 5,
+      "notes": "F. Silence/ambiguity: authorial guidance to later chapters and Glossary & Index.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19"
+      ],
+      "gold_unit_ids": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "_required_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "_supporting_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
+      "gold_locations": {
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c": {
+          "page": 0,
+          "structural_path": [
+            "APPENDICES"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When in my turn does the dying recovery check happen\u2014start or end?",
+      "expected_answer_summary": "At the start of your turn each round when you're dying, you must attempt a recovery check. Many things happen at the start of your turn; the dying check is one of them.",
+      "source_page": 403,
+      "notes": "Temporal: recovery check at start of turn.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21"
+      ],
+      "gold_unit_ids": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "_supporting_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "gold_locations": {
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469": {
+          "page": 15,
+          "structural_path": [
+            "RECOVERY CHECKS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When do I take persistent damage\u2014start or end of my turn?",
+      "expected_answer_summary": "You take persistent damage at the end of each of your turns (not immediately when you get it). After you take the damage you can attempt the flat check to end it.",
+      "source_page": 415,
+      "notes": "Temporal: persistent damage at end of turn.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10": {
+          "page": 4,
+          "structural_path": [
+            "STEP 3: END YOUR TURN"
+          ],
+          "source_unit_ids": [
+            "6633eb3641f067959665b59faf6726ea4432dcb1a95e52726213c62eb6d8f24f",
+            "9854a9863c0757f750feff887435200624f38ec0976b574b9f05ca9d366e596d",
+            "ae4b7f7e12cf02530d0e8d5a74531c0b71fae1710f117017f4e884f0418e0492"
+          ]
+        },
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4": {
+          "page": 15,
+          "structural_path": [
+            "PERSISTENT DAMAGE"
+          ],
+          "source_unit_ids": [
+            "1c31b103be5f4a1a8788bfa837b17611bd2a61393c9b9355ab3c5e2403c716b6",
+            "346be7c51784994f52506c2629df488c208dd0d24bcb224f441073d8240d1588",
+            "3ad24de908bc1176e0c15cc37bac1f70a2adb09288f49850a81e3df7e974e839",
+            "4a3acd6ed585bff059962dd677b69fc4745242fe854c5613644e65490bbdeb36",
+            "4e6bf1746ec75f2f6bc3145726b8563a543b0e2a26cfd42124f97598420acf26",
+            "bb5856d4616a884a84aeea7dfb0bb549f0d7c94e8fb4cc1eda1484c4643bc9bc",
+            "0ec6033c5abf4cfe0786c7cfe82d1c64ab2748fcbd504c96b4b9e2712b8c8146",
+            "e009e87483d165bf218bbb7b96bed424b8ee9f531fff9f52a93977971fa6cd12",
+            "1b0668820dae8669c9b93469a3f910d687cb919b2d374f6d00ca5c76000b34c4",
+            "1749267c1f3ee79dbc110ee436c308221a264bfb9cac6c2457881dd8e63aac80",
+            "c37179b6e400db8f7690d4eb57848e67d5d5f7cac74aa60d67b3bdc038e7d44d",
+            "eac5523de7ba087bc05703d751059a92f15e1201c4af7476f38ae5c376f34c20",
+            "30d1b0529c1578b12da3326f2abc5a54a6c93b4f29df240e223e176b54148ec1",
+            "1c50b7cb5d2597f9e21f0032aafde0c1e078d30109f2adfbe7a94725d881d169",
+            "06511397642d84edc004b224f4d4ce14e8b560c5bcea16c1d9dbee0122c7360e",
+            "7a4d44902e9149986902c8e19d4a50f3e4c7bc69454ed1835a0c4375432f2d16",
+            "9a90405c283565533ee4afd5ea25e2396f25a4dc8bfa8a90f612d26dd0688a54",
+            "47b318a9191df3e770d4c0b1c5cf59e5ce44cafd88af679e2a32d5fe1d502afb",
+            "3e1b3a41b3d911b0e91ddb0783ecf7da0138b94b35296e8578be1649abce3d4d",
+            "57cbd4d97454a51d676bb8c81130e3d35bf21009329bd28bbe93bb529b57a9b1",
+            "0a1e76dcdb0d74c63a48d83b3b1f236af9a4f08ab5ecc14cfe965e7fa3de6888",
+            "2624b626474e97423db43c2090c8dfc86d685457b15b2c64c8de56a8c7d3d3b3",
+            "4d297e3013e83808b6356a7a2a524bb500c568205bbe6c0ba159aae4a88ee765",
+            "203d8f941a01ba370a6ea4a6b39fca7a17b13c841fb03e82a8d9221d49b20e9d",
+            "7bc8566e59a3ee54512cc346aaab0d9e8f520351e05a285ffdf8c74cb659f220",
+            "5a726fb84f2b8d7f286b3450fa57e99bd367e5b29fe06542a4253fa6b15454b7",
+            "c2ae83acef31089021a74754b5cd7e72410060644ef1e54fac5a345cb4a258a3",
+            "3c22ebc47a6d272b5e1c46981fc6e14dec8795a9a37426be285ae4b3a8aba8a0",
+            "0f86cb3dd5f2acd69df4fb841dbedbf9b61b420a181aed9c181cbfa8cd4da68d",
+            "040d95a85c6e0d65ce6572c37e99926787b4b2e24ee7555c3a7a56a3770de605",
+            "b2dd630d1c0da8ccf7b0d377968eed436a2a38e4ec47c3d0ef4a6cec04d08d98",
+            "8d2734a0517a9c36bdbd0461d3d1f2b0b424c08ef53a66ff875602c6c5d58e72",
+            "35647e57f47ceecaada54647fce8184b4d29e0f30e958d946941d8d9207ad8f5",
+            "2dd33be2ede2e20e46295d74d932b2cd2ff4fb522ae14c7774c89c16e07d9f3f",
+            "469ce53a59f7b87adbe25cd61c7dba729f4e566740b54f467648568dd73a0675",
+            "2403e0e8e26f98dcde9435eb4e85833e5f7b7fd6fedb80d7d212882a744dbef0",
+            "b8161b78748f28103b1215bd4a0ddaaab3b5869018b42222543ba3022e7b68b2",
+            "b24b4a13619f6d80b5880644d2256ac5a423b9fc7ed93406aff649c3dcaf639c",
+            "86060eb4b026d384cbc656bf4445d7534e534aa2c394120684c19f64ceef6a7a"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
+      "expected_answer_summary": "Trigger says 'about to attempt' so the reaction resolves before the check. You use the reaction when the trigger is met, then you attempt the recovery check.",
+      "source_page": 406,
+      "notes": "Temporal: 'about to attempt' = before the attempt.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "4c33f5812b31d101305234b5b135cbaac0f5b726635a71a18923511108b08e6f": {
+          "page": 4,
+          "structural_path": [
+            "Changing the Initiative Order"
+          ],
+          "source_unit_ids": [
+            "a997f00ca673314a5c44789cf664287613977883505b2d89b18d653ca05a38ce",
+            "101fd8f7013c54b57d412ae9e5293b329c40880be6d58c6ef8493889cb75ec15",
+            "102ae0bab0f56237919affbaf049ac4c57b84210b9ab2df056ee4f4bf750f54f"
+          ]
+        },
+        "dc6a3b8ca9517ebe720a8b05203563e133ac895375a851b674315a26f7587212": {
+          "page": 11,
+          "structural_path": [
+            "Index"
+          ],
+          "source_unit_ids": [
+            "9aeaebd6d6692c5c7fdeae5f392f73b0a605f225148573909281795756045cef"
+          ]
+        },
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682": {
+          "page": 14,
+          "structural_path": [
+            "Assisted Recovery"
+          ],
+          "source_unit_ids": [
+            "527015ed8364d65a365bcf47fa180907f06ae91da6b88364ff4e02f10639a1bd",
+            "02d63a0ed9da08bce078c1d7f67ee8d2533fee1f06b759de96fc058250fcf371"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
+      "expected_answer_summary": "You can Stride up to half your speed once as a free action immediately before or after making your attacks. So you choose: either before or after, once.",
+      "source_page": 138,
+      "notes": "Temporal: 'before or after' = choice of order, one use.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/10/Text/50"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "b1eeac6e94c2b74c5db5453413619090364aad770c2c26a4a2a385e64e6b166e": {
+          "page": 10,
+          "structural_path": [
+            "Prerequisites Showing Shot"
+          ],
+          "source_unit_ids": [
+            "7a6c7032b0934925be7532713491045e692f8f642bc1f469ac43563bce0e51f6",
+            "d73ebea566bc6d82de77356d0208d2cf101a72155160b42258653be93d96f680",
+            "1bfc89ba450159cec5b4c870e22a361492be3bdbf7dcf75f1f9ce3520ffb048d",
+            "27461319f166ca055ac1047c9c5818a2efb4ec35838c20cce4472e8bd2f06908"
+          ]
+        },
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334": {
+          "page": 1,
+          "structural_path": [
+            "Subordinate Actions"
+          ],
+          "source_unit_ids": [
+            "3c32241949db83e0ff73bb5e840f109d1afefad2cdef695b0fd4ae36e6f8b5a9",
+            "83fda10fa6bc2a04dca42910bceb5642d4c72597edc929fecf7cb6ee8a6eca10",
+            "be76cc683021827923db99443827af40e5fdf1e230d287ffb640803130c0d170"
+          ]
+        },
+        "412cb4c17607b34e7177b7825da32ba4b9563f30007e0a9b30d12d2df264363c": {
+          "page": 2,
+          "structural_path": [
+            "BASIC ACTIONS"
+          ],
+          "source_unit_ids": [
+            "a577049d1bbb8fb6027226f05679ed6d3565899e7f32c89b96753b4c17291685",
+            "46ad5747282adc3f6ca2090c3ecebdc8b4343a61e2b0477caf2e00adf050b540",
+            "79a6631a636874d0050f2139056e26a1faf4228c49a2f0b781da66a62511b601"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
+      "expected_answer_summary": "Yes. 'The triggering creature' is the creature that triggered the reaction (e.g. the one who critically failed the melee Strike against you). You attempt to Grapple that creature.",
+      "source_page": 406,
+      "notes": "Temporal: 'triggering creature' = cause of the trigger.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/45",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/46"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c": {
+          "page": 8,
+          "structural_path": [
+            "REACTIVE STRIKE"
+          ],
+          "source_unit_ids": [
+            "bd4dc77a2d9ab16ffa5a24c3432806acd27fb66de6fb11c693a91ecd1a550038",
+            "77e6e74fdcb004271e0295f50a741100a61c390e7ab6309b6ead85a9260158f9"
+          ]
+        },
+        "68fc282f782fe86bff2fef2b299d3ea6d5a5a196865bd5e5a1c0743a10da0c3e": {
+          "page": 14,
+          "structural_path": [
+            "TAG TEAM"
+          ],
+          "source_unit_ids": [
+            "5a29efc96b7f81faac36551f4720a3570ed46a332fabd347b6812fa832dcf22e",
+            "607e460be4879603581f3e4170ecea2eac20ccb34dc11093e4d97eb33872ed61",
+            "8568112cbaf8fdae183250578c82c785153c969db549a6e1fb782a5d900090fe"
+          ]
+        },
+        "d35d28f461608bd4fa61f6ee88e93d321547990afa8e0cd74089f98a5d861221": {
+          "page": 7,
+          "structural_path": [
+            "DIRECTIVE ENVOY"
+          ],
+          "source_unit_ids": [
+            "8b1525d2223b0417eb663ff0e7c0606691b23441bef23eb63210ce2c2cd3c240"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_004_06",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "expected_answer_summary": "The multiple attack penalty starts at -5 on the second attack and increases for each additional attack. It lasts until the end of your turn, so it resets at the end of your turn (before your next turn).",
+      "source_page": 428,
+      "notes": "Temporal: MAP until end of turn; reset at end.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/8/Text/8"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c": {
+          "page": 8,
+          "structural_path": [
+            "ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "860a52ea23e4f309f54fa9ca5f19f2bf567b7b26ceaa111271b743e530266801"
+          ]
+        },
+        "b237df6a0ea00b4062756c31229bd4c72877c14d27c1d225c2b1537bf73ad74a": {
+          "page": 6,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "source_unit_ids": [
+            "fd7b5c26365a5bba66ca07a19f7d37affb3b5e515854fb560df014c6db45e8d7"
+          ]
+        },
+        "f6d32aaf72c5c50e1cfcc82804177325a9e17d46e36eaf5119d0345ac28bcff2": {
+          "page": 10,
+          "structural_path": [
+            "FISH IN A BARREL"
+          ],
+          "source_unit_ids": [
+            "59e873b8d7715fd54f1764855e4463d82bfa3469a1cc54b11e2b4bfa01c9d107",
+            "ec004984d546b15ea6d0d47af8446b03d55f3670bb79a07d3133491dace9389d"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What restrictions apply when I choose a target for an effect\u2014can I target undetected creatures or only those that match certain criteria?",
+      "expected_answer_summary": "Targeting can be difficult or impossible if the creature is undetected by you or doesn't match restrictions on who you can target. Some effects require specific targets.",
+      "source_page": 175,
+      "notes": "Constraint: targeting restrictions from core rules.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/4/Text/17"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437": {
+          "page": 12,
+          "structural_path": [
+            "EFFECTS",
+            "TARGETS"
+          ],
+          "source_unit_ids": [
+            "956e62f474d3e0c92243a431abd6c97e2b54f51a034f0265b9da3d186869f9a6",
+            "d4b6f7e9eccbd953b953425e4b9fb6df0ad769e8142012f6c7e2aedb0e04efb7",
+            "4363c038e0787b5ffc50c5157a9591606ae85f6bd246261481a22e5235a2abee"
+          ]
+        },
+        "d159b8bf0ee93d51b7ad9805ef406c8a69372ba7a83e8b402e3e8541671e5324": {
+          "page": 4,
+          "structural_path": [
+            "TARGETS"
+          ],
+          "source_unit_ids": [
+            "e6e92861c8935bbc3993b604b4fe57dc1da18c34c93d4038fdc796bae1a4be1a",
+            "c16eed23ff8a29beb8b1ac4ade699840773778b4f690b98382607e8af305ac44"
+          ]
+        },
+        "b09f1d7eb063ba0b3eb82c31721920f60ba3cfedc665c174bde679ef2e7dabfc": {
+          "page": 2,
+          "structural_path": [],
+          "source_unit_ids": [
+            "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584",
+            "ce97b644be9bc2a6ec5b82b49719729566721564f5393f3b86237784529e58dd"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When I'm grabbed, what am I prevented from doing?",
+      "expected_answer_summary": "Grabbed restricts movement and may prevent or limit other actions; the condition text states what you cannot do while grabbed.",
+      "source_page": 183,
+      "notes": "Constraint: grabbed condition prohibitions.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/19",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/21",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/22"
+      ],
+      "gold_unit_ids": [
+        "c6f3be87c23d2ecd877f2c3a7f13c6b15ed21f760878b18fdf25bbc7a8f88317",
+        "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5"
+      ],
+      "required_gold": [
+        "c6f3be87c23d2ecd877f2c3a7f13c6b15ed21f760878b18fdf25bbc7a8f88317"
+      ],
+      "supporting_gold": [
+        "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5"
+      ],
+      "_required_gold": [
+        "c6f3be87c23d2ecd877f2c3a7f13c6b15ed21f760878b18fdf25bbc7a8f88317"
+      ],
+      "_supporting_gold": [
+        "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5"
+      ],
+      "gold_locations": {
+        "c6f3be87c23d2ecd877f2c3a7f13c6b15ed21f760878b18fdf25bbc7a8f88317": {
+          "page": 13,
+          "structural_path": [
+            "GRABBED"
+          ]
+        },
+        "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5": {
+          "page": 15,
+          "structural_path": [
+            "RESTRAINED"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
+      "expected_answer_summary": "Frequency once per round means you can use the ability only once per round; the limit is per round, not per turn.",
+      "source_page": 76,
+      "notes": "Constraint: frequency cap semantics.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/7/Text/24",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/15/Text/20"
+      ],
+      "gold_unit_ids": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
+      ],
+      "_required_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
+      ],
+      "_supporting_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
+      ],
+      "gold_locations": {
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2": {
+          "page": 0,
+          "structural_path": [
+            "ARMOR UPGRADES",
+            "LIMITED ARMOR UPGRADES"
+          ]
+        },
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f": {
+          "page": 4,
+          "structural_path": [
+            "WEAPON UPGRADES",
+            "LIMITED WEAPON UPGRADES"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
+      "expected_answer_summary": "The illusion can cause damage by making the target believe the attacks are real, but it cannot otherwise directly affect the physical world.",
+      "source_page": 375,
+      "notes": "Constraint: illusion scope\u2014what it cannot do.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/11/Text/33"
+      ],
+      "gold_unit_ids": [
+        "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877"
+      ],
+      "required_gold": [
+        "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877": {
+          "page": 9,
+          "structural_path": []
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
+      "expected_answer_summary": "The target is invisible and paralyzed, cannot experience or interact with the outside world, and cannot take actions until the effect ends.",
+      "source_page": 381,
+      "notes": "Constraint: swallowed-by-shadow prohibitions.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/13/Text/9"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905": {
+          "page": 13,
+          "structural_path": [
+            "Defense Will"
+          ],
+          "source_unit_ids": [
+            "3eeb72e478e466e9fcd9044dc1c9b4ccb8d82c69a5d7eb5d64768a4603888f03",
+            "cbb6319a38893d974fb5494e657114a7d9941339cc4dffda2e22e6d0767c382d"
+          ]
+        },
+        "a5fbaecbcb1cb910eba06ec99833dbb669d738b975aa22004616eba9bceaa9a6": {
+          "page": 9,
+          "structural_path": [
+            "Index"
+          ],
+          "source_unit_ids": [
+            "0c7a50995e2b4d161db99c884aff7acc35c2ebe1127716330716077432565f1e"
+          ]
+        },
+        "f0ae780682ae593d89c3e063f08e716ede8ba82b7ad9fc848bda8cdb5fc8d481": {
+          "page": 11,
+          "structural_path": [
+            "CONDITIONS APPENDIX"
+          ],
+          "source_unit_ids": [
+            "3ae72416f56a3189b1bc3bbebd1c9d93cf679de407b89204a1111e5d4650c850",
+            "2cc63f7a8dcd4d2d809b587da5f64a57b225a85ba6983277d7e99bef250edb2a"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_06",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
+      "expected_answer_summary": "Aid and similar effects target an ally; restrictions on who can be targeted (e.g. willing ally) are stated in the effect.",
+      "source_page": 100,
+      "notes": "Constraint: ally-only targeting.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/11/Text/12",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437": {
+          "page": 12,
+          "structural_path": [
+            "EFFECTS",
+            "TARGETS"
+          ],
+          "source_unit_ids": [
+            "956e62f474d3e0c92243a431abd6c97e2b54f51a034f0265b9da3d186869f9a6",
+            "d4b6f7e9eccbd953b953425e4b9fb6df0ad769e8142012f6c7e2aedb0e04efb7",
+            "4363c038e0787b5ffc50c5157a9591606ae85f6bd246261481a22e5235a2abee"
+          ]
+        },
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37": {
+          "page": 3,
+          "structural_path": [
+            "AID DETAILS"
+          ],
+          "source_unit_ids": [
+            "2e9255376dd79b3050252f545e548639ed997cc43e982ab19d2fd9df8bcb157a",
+            "6506b8d3961da90091a6526cd9e4c67ff2f5b2837bd2bb4b3440108b24afb2f7"
+          ]
+        },
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c": {
+          "page": 2,
+          "structural_path": [
+            "AID"
+          ],
+          "source_unit_ids": [
+            "e7cc544247aaeca6b9dfce2b74c35f7deda4aa951bfad724e30c3282aec5e272",
+            "3f4f977ef5950a245193f719afa5a995489157dbf4437207ab31b8d5fdf5a240"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_005_07",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "expected_answer_summary": "Sure Footing can counteract clumsy, grabbed, paralyzed, or related conditions\u2014so it can remove or mitigate the grabbed condition's restrictions.",
+      "source_page": 59,
+      "notes": "Constraint: what overrides a restriction (counteract).",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/ListItem/58",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/8/Text/24"
+      ],
+      "gold_unit_ids": [
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
+      ],
+      "_required_gold": [
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
+      ],
+      "_supporting_gold": [
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
+      ],
+      "gold_locations": {
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503": {
+          "page": 17,
+          "structural_path": [
+            "UNTETHERED"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_006_01",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Why would I look at several conditions together instead of one at a time?",
+      "expected_answer_summary": "Some conditions exist relative to one another or share a similar theme. It can be useful to look at these conditions together to understand how they interact.",
+      "source_page": 436,
+      "notes": "Conceptual: purpose of grouping conditions.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2"
+      ],
+      "gold_unit_ids": [
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
+      ],
+      "_required_gold": [
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
+      ],
+      "_supporting_gold": [
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
+      ],
+      "gold_locations": {
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587": {
+          "page": 11,
+          "structural_path": [
+            "CONDITIONS APPENDIX",
+            "CONDITION VALUES"
+          ]
+        },
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb": {
+          "page": 11,
+          "structural_path": [
+            "CONDITIONS APPENDIX",
+            "OVERRIDING CONDITIONS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_006_02",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What is an archetype in character-building terms?",
+      "expected_answer_summary": "An archetype is a special additional theme for your character that you can choose using your class feats.",
+      "source_page": 175,
+      "notes": "Conceptual: glossary-style definition of archetype.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/1/Text/6"
+      ],
+      "gold_unit_ids": [
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
+      ],
+      "_required_gold": [
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
+      ],
+      "_supporting_gold": [
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
+      ],
+      "gold_locations": {
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd": {
+          "page": 0,
+          "structural_path": [
+            "CHAPTER 3: CLASSES"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_006_03",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "Do spells always have visible or sensory effects when cast?",
+      "expected_answer_summary": "Spellcasting creates obvious sensory manifestations (lights, sounds, smells). Nearly all spells manifest a spell signature\u2014a colorful, global indicator.",
+      "source_page": 335,
+      "notes": "Conceptual: narrative description of spellcasting, not procedure.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/4/Text/4"
+      ],
+      "gold_unit_ids": [
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
+      ],
+      "_required_gold": [
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
+      ],
+      "_supporting_gold": [
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
+      ],
+      "gold_locations": {
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0": {
+          "page": 6,
+          "structural_path": [
+            "SUBTLE SPELLS"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_006_04",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "How do conditions that share a theme relate to each other?",
+      "expected_answer_summary": "Some conditions exist relative to one another or share a similar theme; looking at them together helps understand how they interact.",
+      "source_page": 182,
+      "notes": "Conceptual: conditions as a family, not single mechanic.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/1/Text/6",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2"
+      ],
+      "gold_unit_ids": [
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
+      ],
+      "required_gold": [],
+      "supporting_gold": [
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
+      ],
+      "_required_gold": [
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
+      ],
+      "_supporting_gold": [
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
+      ],
+      "gold_locations": {
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2": {
+          "page": 9,
+          "structural_path": [
+            "Condition"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "batch_006_05",
+      "tier": "T2",
+      "question_type": "blind_eval",
+      "question": "What is the purpose of the Frequency and Trigger entries on an ability block?",
+      "expected_answer_summary": "Frequency limits how often you can use the ability; Trigger describes when a reaction or free action can be used. Together they define when and how often the ability is available.",
+      "source_page": 31,
+      "notes": "Conceptual: intent of stat block fields, not procedure.",
+      "legacy_gold_chunk_ids": [
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-030-039::/page/5/Text/1",
+        "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14"
+      ],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "d4d96f056a25e5a7af1b2cf75e9033e016bed0f61b925f146b3412ebe6033709": {
+          "page": 2,
+          "structural_path": [
+            "TRAITS"
+          ],
+          "source_unit_ids": [
+            "f40cd22d00bd3251d43dd93f87968f9bd988ae137101e0a71195d93aa996231b",
+            "568620ff18b4b82f3c2d52290e227e5512b2584b277205c6eea632578b5e3913",
+            "c09694562a00def88da44cabde96cc109ea1d0f7212abc42d006213ce7412b35"
+          ]
+        },
+        "56c0059740a81e57a873d04ee478d4ef6c6deba735454616521b8f811f0d9724": {
+          "page": 5,
+          "structural_path": [
+            "Starfinder Glossary"
+          ],
+          "source_unit_ids": [
+            "26542683c4be43cfd4e7edd4bd77bcaaa538cae5e4cd6dadc1f2e374521d521f"
+          ]
+        },
+        "061e980c1e6434a9ac4eb1dfb2f01bf66506758785e06b1b50ab77ba6fe7749f": {
+          "page": 2,
+          "structural_path": [
+            "READING RULES"
+          ],
+          "source_unit_ids": [
+            "71db97b2971249159b661b6e8d090a2f74fb06c0ee301bdcbdb9ebe245d093c2",
+            "87d8c8e5563682a46880fe4cd425880d200cc0a6d3f162217c96250cb6c6cf25",
+            "50ff0655a9b4c99de5c2aad39f31ff49eda273d4486fbd50a631f24260ed0337"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    }
+  ]
+}

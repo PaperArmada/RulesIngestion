@@ -1,0 +1,2232 @@
+[
+  {
+    "id": "sw_rev_u01_roles_and_authority",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What are the roles at the table (players vs GM/referee/judge/MC), and what decisions does each role control?",
+    "answer": "Players decide what their characters do, describing their actions and choices. The Referee decides and describes the setting and what characters perceive, decides what happens as a result of the characters\u2019 actions, creates and runs the adventure (including monsters), and decides the results of player decisions for their characters. The Referee does not tell players what their characters do; instead the Referee referees the results according to the rules and interprets what the rules mean. The rules are presented as guidelines rather than a complete procedure for every possibility: there is not a rule for everything, and when in doubt, the Referee makes a ruling.",
+    "expected_answer_summary": "Players choose and describe character actions; the Referee runs the world/adventure and adjudicates results, interpreting the rules and making rulings when needed.",
+    "source_page": "33, 73",
+    "gold_unit_ids": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b",
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "gold_locations": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+        ]
+      },
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c"
+        ]
+      },
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302"
+        ]
+      },
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6"
+        ]
+      },
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce"
+        ]
+      },
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": {
+        "page": 33,
+        "structural_path": [
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+        ]
+      },
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": {
+        "page": 73,
+        "structural_path": [],
+        "source_unit_ids": [
+          "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+        ]
+      }
+    },
+    "required_gold": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b",
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": "Defines player vs Referee responsibilities: Referee describes setting/what you see; you decide what your character does; Referee decides what happens as a result.",
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": "States Referee is in charge of the game, decides results of player decisions, interprets rules, and provides the key guidance: rules are guidelines; no rule for everything; when in doubt, make a ruling."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "1b5f1e0a8107266a0a2ae1d4c5c1d4964c74359a6f5edd0fce21e3bae00f88d3",
+      "ce15cabde1ad5e2873e9fea9462b9b935d68576faf1ac029900a5b1938932cbc",
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u02_uncertainty_core_mechanic",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "When the outcome is uncertain, what is the default way to resolve it (dice/cards/other), and how do you read the result (target number, degrees of success, opposing rolls, etc.)?",
+    "answer": "The game resolves uncertainty using dice, with the specific die and success rule defined by the procedure you are using. The rules define standard polyhedral dice notation (d4, d6, d8, d10, d12, d20) and percentile dice (d100 as two d10s for tens and ones). For example, saving throws are resolved by rolling 1d20 and succeeding if the result is equal to or higher than the character\u2019s saving throw target number (which depends on class/level, and monsters have a listed target number). In combat, initiative is resolved by each side rolling 1d6; the higher result wins initiative for that round. Surprise (when applicable) is checked by rolling 1d6 for a side: on a 1\u20132 the group is surprised (with stated class-based exceptions).",
+    "expected_answer_summary": "Uncertainty is resolved with dice; each procedure specifies what die to roll and how to read it (e.g., saves: d20 \u2265 target; initiative: sides roll d6 high wins; surprise: d6 with 1\u20132 surprised).",
+    "source_page": "5, 34, 35",
+    "gold_unit_ids": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380",
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "gold_locations": {
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380": {
+        "page": 5,
+        "structural_path": [
+          "DICE"
+        ],
+        "source_unit_ids": [
+          "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380"
+        ]
+      },
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": {
+        "page": 34,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+        ]
+      },
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed": {
+        "page": 34,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed"
+        ]
+      },
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382"
+        ]
+      },
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+        ]
+      },
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80"
+        ]
+      },
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c"
+        ]
+      },
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      }
+    },
+    "required_gold": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380",
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380": "Defines dice notation and how percentile dice (d100) are rolled and interpreted.",
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": "Defines saving throw roll procedure (roll d20; succeed on result \u2265 target number; targets by class/level; monsters have listed targets).",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed": "Defines saving throw roll procedure (roll d20; succeed on result \u2265 target number; targets by class/level; monsters have listed targets).",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise).",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Defines initiative and surprise procedures and how to interpret d6 results (high wins initiative; 1\u20132 indicates surprise)."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "5b733a7bb026b7fe7f1f01abbb4e29754f78c1750c1f6c1521e1025947693380",
+      "80e4520f9e698e55698aa5680bb0689fa4cb38be87fe5966a4ba1934f5e91143",
+      "f6082c83fe9771b8c83e51211d54beff43b2c980bab2488b46f82f617fb50b86"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_u03_time_progression_model",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How does time advance during play (turns/rounds/scenes/phases/ticks), and what causes the game to move from one step to the next?",
+    "answer": "Time can advance in larger jumps when the Referee rules that hours or months pass, but the rules call out two key time units used for procedures: the turn and the combat round. A turn represents 10 minutes and is used to measure normal movement in dangerous places; a combat round represents 1 minute and is used to measure time while the party is in combat. The movement tables apply these units directly (walking/running speeds per turn, and combat movement per round). In combat, time advances round-by-round following an ordered sequence (check surprise if needed, declare spells, determine initiative, resolve movement/missile fire, resolve melee/spells, then the round ends and you repeat from declaring spells until combat ends). Special case: the Referee Guide describes a mass-combat procedure where combat rounds are longer (5 minutes for five-man units, 10 minutes for ten-man units), and initiative determines whether a side moves/attacks first or last within that larger-scale round.",
+    "expected_answer_summary": "Procedural time uses turns (10 minutes) and combat rounds (1 minute) for movement/combat; combat advances by repeating a step-by-step round sequence; mass combat can use longer 5\u201310 minute rounds (special rule).",
+    "source_page": "32, 33, 35, 88",
+    "gold_unit_ids": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4",
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920",
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ],
+    "gold_locations": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b"
+        ]
+      },
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+        ]
+      },
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7": {
+        "page": 32,
+        "structural_path": [
+          "Indoor, Underground, and City Movement"
+        ],
+        "source_unit_ids": [
+          "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7"
+        ]
+      },
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e": {
+        "page": 32,
+        "structural_path": [
+          "Indoor, Underground, and City Movement"
+        ],
+        "source_unit_ids": [
+          "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e"
+        ]
+      },
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382"
+        ]
+      },
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+        ]
+      },
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80"
+        ]
+      },
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c"
+        ]
+      },
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      },
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb": {
+        "page": 88,
+        "structural_path": [
+          "INITIATIVE AND COMBAT ROUNDS"
+        ],
+        "source_unit_ids": [
+          "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+        ]
+      }
+    },
+    "required_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4",
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+    ],
+    "supporting_gold": [
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ],
+    "required_gold_rationale": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat).",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": "Defines the key procedural time units and what they are used for: turn = 10 minutes (dangerous-place movement) and combat round = 1 minute (combat).",
+      "38e3d3abb7c5218a8a873e8dc7de5f81499383a161f67f0bf46b2213f59617a7": "Shows how turns/rounds are applied in procedures by giving movement rates per turn and combat movement per round (including different contexts like underground vs wilderness).",
+      "87392e1264ee7dc4474e498007b5b3e980d7f73d27048fa8fcadcc562240b27e": "Shows how turns/rounds are applied in procedures by giving movement rates per turn and combat movement per round (including different contexts like underground vs wilderness).",
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Defines the step-by-step combat round sequence and the loop condition (repeat steps each round until combat ends).",
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb": "Adds the special-case mass-combat time scale where rounds become 5\u201310 minutes and initiative controls move/attack ordering at that scale."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "af4f986335810e36121879747b31a05e73b187e6930f038f3ec679f078789b49",
+      "7cbbce70a04318da313a2febb7d67014db35cd961c5e53d1468cc1f28b680ee2",
+      "f6082c83fe9771b8c83e51211d54beff43b2c980bab2488b46f82f617fb50b86"
+    ],
+    "_supporting_gold": [
+      "fea5a6d950744e8344d0222d9aa216f414cf0996a9de7b02fe5ab909a6bde8eb"
+    ]
+  },
+  {
+    "id": "sw_rev_u04_player_actions_in_combat",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What can a player character do when they act (actions, movement, reactions/interrupts, free actions), and what limits apply?",
+    "answer": "Combat actions are defined by the round procedure and its phases. In the standard combat sequence, each round follows an order of battle: check surprise (if needed), declare spells, roll initiative, then resolve movement and missile fire for the winning side and then the losing side, and finally resolve melee attacks and spellcasting for the winning side and then the losing side before completing the round and repeating. Within this structure, a combatant can take movement (including movement-like actions such as climbing onto tables or swinging from ropes) or fire missile weapons during the movement/missiles phase; and can make melee attacks (if in melee range) or cast spells during the melee/spells phase. Spellcasting has explicit limits: a spell must be declared before the initiative roll, and spells cannot be cast if the caster is in melee combat with enemies; if the enemy wins initiative and damages the spellcaster, the spell\u2019s casting may be disturbed and the spell lost. The book also presents alternate combat sequences: Method 1 keeps a three-phase round where the initiative winner may move and attack or may hold initiative to act later (the initiative loser cannot hold); Method 2 resolves actions in dexterity order with spells first, then missiles, then melee, then movement; Method 3 uses a segmented round with action intervals modified by armor, spell level, dexterity, and other factors, allowing faster characters to act more often.",
+    "expected_answer_summary": "Combat options are phase-structured: move or fire missiles, then melee or cast spells, with limits like declaring spells before initiative and no spellcasting in melee; alternate sequences add holding initiative (Method 1), dex-order phases (Method 2), or segmented action timing (Method 3).",
+    "source_page": "35, 36",
+    "gold_unit_ids": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6",
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6",
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619",
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9",
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec",
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+    ],
+    "gold_locations": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382"
+        ]
+      },
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+        ]
+      },
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80"
+        ]
+      },
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c"
+        ]
+      },
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      },
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": {
+        "page": 35,
+        "structural_path": [
+          "2. DECLARE SPELLS"
+        ],
+        "source_unit_ids": [
+          "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+        ]
+      },
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+        ]
+      },
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619"
+        ]
+      },
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9"
+        ]
+      },
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec"
+        ]
+      },
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+        ]
+      }
+    },
+    "required_gold": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "supporting_gold": [
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6",
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619",
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9",
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec",
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+    ],
+    "required_gold_rationale": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Defines what happens in a round and what actions are resolved in each phase (movement/missiles; melee/spells), plus key constraints like spellcasting not allowed in melee and the loop back to repeat rounds.",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": "States the timing rule that spells must be declared before the initiative roll and explains the interruption/losing-a-spell consequence when damaged before casting.",
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing.",
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing.",
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing.",
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing.",
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d": "Shows an alternate action ordering model based on dexterity (spells \u2192 missiles \u2192 melee \u2192 movement), useful for understanding permitted actions and sequencing."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "f6082c83fe9771b8c83e51211d54beff43b2c980bab2488b46f82f617fb50b86",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "_supporting_gold": [
+      "1d572490737dfcfbcaa83d6cb4fbf5f64fb7057b2caa83d9537f761555548c94",
+      "43591eb10715d1a556b292bedead7db39535a51e20f41fd5da6cb5a4b5abc278"
+    ]
+  },
+  {
+    "id": "sw_rev_u05_what_must_be_tracked",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What information must be tracked to play correctly (character stats/resources/conditions, positioning, clocks/time), and where is it recorded (character sheet, tokens, track, notes)?",
+    "answer": "The rules call out that you complete a character sheet by recording your character\u2019s statistics and equipment, and then play at the table with dice. Attribute scores (rolled 3d6 each) have mechanical effects that you should record, including bonuses/penalties (e.g., missile to-hit and Armor Class adjustments from Dexterity; Strength modifiers and carrying capacity/weight allowances; Constitution modifiers to hit points per hit die; Charisma limits on special hirelings and morale adjustments; and XP bonuses tied to Prime Attributes/Charisma/Wisdom). Treasure and money are tracked as gold pieces and other coinage, and treasure weight is tracked for encumbrance: weight is listed in pounds, a normal equipment load is assumed, and coins/gems have a defined weight; total carried weight determines base movement rate. Time is tracked in explicit procedural units (turns and combat rounds) that drive movement rates and other procedures. Consumable exploration resources like light sources have explicit durations (e.g., torch duration and lantern oil duration), which must be tracked to maintain light. Combat and exploration positioning/ranges are tracked at least in terms of distances/movement rates (feet per turn/round underground; yards per round outdoors), and combat procedures rely on tracked values like Armor Class and hit points.",
+    "expected_answer_summary": "Track character sheet stats and equipment; attribute-derived bonuses; treasure/coin and its weight for encumbrance and movement; procedural time units (turn/round); consumables like light duration; and combat-relevant values like AC/HP and distances/movement.",
+    "source_page": "5, 6, 7, 29, 32, 33",
+    "gold_unit_ids": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b",
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151",
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ],
+    "gold_locations": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+        ]
+      },
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c"
+        ]
+      },
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302"
+        ]
+      },
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6"
+        ]
+      },
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce"
+        ]
+      },
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": {
+        "page": 32,
+        "structural_path": [
+          "WEIGHT AND MOVEMENT"
+        ],
+        "source_unit_ids": [
+          "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6"
+        ]
+      },
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": {
+        "page": 33,
+        "structural_path": [
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+        ]
+      },
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8"
+        ]
+      },
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+        ]
+      },
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9"
+        ]
+      },
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2"
+        ]
+      },
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670"
+        ]
+      },
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228"
+        ]
+      },
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151"
+        ]
+      },
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a": {
+        "page": 6,
+        "structural_path": [
+          "ROLL ATTRIBUTE SCORES"
+        ],
+        "source_unit_ids": [
+          "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584",
+          "23621d0b42efc739ef058050295aa3e85ac39ac817ed9578e007aaba2a9dd273"
+        ]
+      }
+    },
+    "required_gold": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b",
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151"
+    ],
+    "supporting_gold": [
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ],
+    "required_gold_rationale": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": "Defines encumbrance tracking (equipment weight assumptions; coin/gem weight; total carried weight) and links it to base movement rates and movement tables.",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": "Defines treasure-to-XP tracking (gp \u2192 XP), XP bonuses, and procedural time units (turn and combat round) that must be tracked for correct play.",
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151": "Gives explicit durations and effects for light sources (torches, lantern oil), requiring tracking to maintain exploration state.",
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a": "Shows that attribute scores are rolled and have defined game effects; supports that these stats are tracked and recorded."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "1b5f1e0a8107266a0a2ae1d4c5c1d4964c74359a6f5edd0fce21e3bae00f88d3",
+      "a1b5ffba766bf3ce6364bbcfa1b1df5f2bb3085e2224e1bff9344a0469a215b7",
+      "ce15cabde1ad5e2873e9fea9462b9b935d68576faf1ac029900a5b1938932cbc",
+      "62eada1165e973a58b10450663d8370753e804a4437cd5730dd7d5b2a09fe33a"
+    ],
+    "_supporting_gold": [
+      "2d5d734938988f97509e12ed0ea1cfad6e16fb54c9feb61e84792de180b2d54a"
+    ]
+  },
+  {
+    "id": "sw_rev_s01_rules_silent_referee_ruling",
+    "tier": "T1",
+    "question_type": "reasoning",
+    "question": "If the rules don\u2019t cover a situation, what are you supposed to do at the table?",
+    "answer": "The Referee makes the call. The rules are guidelines, not a complete procedure for every possibility: by design, Swords & Wizardry does not try to cover every single possibility for what players will do. The three most important principles stated explicitly on this point are: the rules are just guidelines; there is not a rule for everything; and when in doubt, make a ruling.",
+    "expected_answer_summary": "When rules don't cover it, the Referee makes a ruling; the book explicitly states: rules are guidelines, no rule for everything, when in doubt make a ruling.",
+    "source_page": "73",
+    "gold_unit_ids": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "gold_locations": {
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": {
+        "page": 73,
+        "structural_path": [],
+        "source_unit_ids": [
+          "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+        ]
+      }
+    },
+    "required_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": "Contains the three explicit principles verbatim: 'The rules are just guidelines'; 'There is not a rule for everything'; 'When in doubt, make a ruling.' Also states the rules 'by design do not try to cover every single possibility' and that the Referee 'interprets what the rules mean.'"
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s02_treasure_division_procedure",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Does the game give a default procedure for dividing treasure or money among the party?",
+    "answer": "The book provides no explicit procedure for dividing treasure among the party. Treasure division is a player-driven table decision: deciding how to split loot is part of what players do for their characters, and the Referee does not dictate those choices. If a dispute arises, the Referee adjudicates as with any other uncovered situation. This absence is consistent with the book's explicit design philosophy: there is not a rule for everything, the rules are guidelines, and when in doubt the Referee makes a ruling.",
+    "expected_answer_summary": "No explicit procedure given; treasure division is a player table decision. The Referee adjudicates disputes if needed, consistent with the book's 'no rule for everything' philosophy.",
+    "source_page": "33, 73",
+    "gold_unit_ids": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "gold_locations": {
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec": {
+        "page": 73,
+        "structural_path": [],
+        "source_unit_ids": [
+          "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec"
+        ]
+      },
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+        ]
+      },
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c"
+        ]
+      },
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302"
+        ]
+      },
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6"
+        ]
+      },
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce"
+        ]
+      },
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b": {
+        "page": 33,
+        "structural_path": [
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+        ]
+      }
+    },
+    "required_gold": [],
+    "supporting_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec",
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "8dcfce79e9f1911a68f709f47b52880d16bb1f43faa5c168f7e51a772db8af8b"
+    ],
+    "required_gold_rationale": {},
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec",
+      "1b5f1e0a8107266a0a2ae1d4c5c1d4964c74359a6f5edd0fce21e3bae00f88d3",
+      "ce15cabde1ad5e2873e9fea9462b9b935d68576faf1ac029900a5b1938932cbc"
+    ],
+    "_supporting_gold": [
+      "3dd1aca55e4a806cc5083216f9bb53cae3f2d9ce911ddc40e3661384c57992ec",
+      "1b5f1e0a8107266a0a2ae1d4c5c1d4964c74359a6f5edd0fce21e3bae00f88d3",
+      "ce15cabde1ad5e2873e9fea9462b9b935d68576faf1ac029900a5b1938932cbc"
+    ]
+  },
+  {
+    "id": "sw_rev_s03_treasure_to_xp_rule",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "How does treasure translate into experience points (if at all)?",
+    "answer": "Characters earn experience points (XP) for two things: killing monsters and accumulating treasure. Each monster has a set XP value listed in its statistics. For treasure, the conversion is explicit: each gold piece acquired earns one XP. The book notes this rewards clever play \u2014 outwitting or bypassing monsters to secure loot counts just as much as combat.",
+    "expected_answer_summary": "1 gp = 1 XP; XP is also awarded for killing monsters (per listed monster value). Both treasure and monster kills are explicit XP sources.",
+    "source_page": "33",
+    "gold_unit_ids": [
+      "91306704f43641c873dad3eea24b34577167649c315180945209f813a2f94d94",
+      "293ea763161e4910da3a71144e384eaa17bb5a14a5b807b86543866126fbac46",
+      "220a2c0a9cb3c3a8ed28941ed8cb50a68ef3f5d95845bd81b25924e18ab0f109",
+      "510728f4640b8da7cb6644afe076e048241c1bb5783d91b1ae3198bfac97e269"
+    ],
+    "gold_locations": {
+      "91306704f43641c873dad3eea24b34577167649c315180945209f813a2f94d94": {
+        "page": 33,
+        "structural_path": [
+          "GAINING EXPERIENCE"
+        ],
+        "source_unit_ids": [
+          "91306704f43641c873dad3eea24b34577167649c315180945209f813a2f94d94"
+        ]
+      },
+      "293ea763161e4910da3a71144e384eaa17bb5a14a5b807b86543866126fbac46": {
+        "page": 33,
+        "structural_path": [
+          "GAINING EXPERIENCE"
+        ],
+        "source_unit_ids": [
+          "293ea763161e4910da3a71144e384eaa17bb5a14a5b807b86543866126fbac46"
+        ]
+      },
+      "220a2c0a9cb3c3a8ed28941ed8cb50a68ef3f5d95845bd81b25924e18ab0f109": {
+        "page": 33,
+        "structural_path": [
+          "GAINING EXPERIENCE"
+        ],
+        "source_unit_ids": [
+          "220a2c0a9cb3c3a8ed28941ed8cb50a68ef3f5d95845bd81b25924e18ab0f109"
+        ]
+      },
+      "510728f4640b8da7cb6644afe076e048241c1bb5783d91b1ae3198bfac97e269": {
+        "page": 33,
+        "structural_path": [
+          "GAINING EXPERIENCE"
+        ],
+        "source_unit_ids": [
+          "510728f4640b8da7cb6644afe076e048241c1bb5783d91b1ae3198bfac97e269"
+        ]
+      }
+    },
+    "required_gold": [
+      "91306704f43641c873dad3eea24b34577167649c315180945209f813a2f94d94",
+      "293ea763161e4910da3a71144e384eaa17bb5a14a5b807b86543866126fbac46",
+      "220a2c0a9cb3c3a8ed28941ed8cb50a68ef3f5d95845bd81b25924e18ab0f109",
+      "510728f4640b8da7cb6644afe076e048241c1bb5783d91b1ae3198bfac97e269"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "91306704f43641c873dad3eea24b34577167649c315180945209f813a2f94d94": "States the two XP sources (monsters and treasure) and gives the explicit conversion rate: each gold piece acquired earns one XP. Also explains the design rationale (rewarding non-combat play).",
+      "293ea763161e4910da3a71144e384eaa17bb5a14a5b807b86543866126fbac46": "States the two XP sources (monsters and treasure) and gives the explicit conversion rate: each gold piece acquired earns one XP. Also explains the design rationale (rewarding non-combat play).",
+      "220a2c0a9cb3c3a8ed28941ed8cb50a68ef3f5d95845bd81b25924e18ab0f109": "States the two XP sources (monsters and treasure) and gives the explicit conversion rate: each gold piece acquired earns one XP. Also explains the design rationale (rewarding non-combat play).",
+      "510728f4640b8da7cb6644afe076e048241c1bb5783d91b1ae3198bfac97e269": "States the two XP sources (monsters and treasure) and gives the explicit conversion rate: each gold piece acquired earns one XP. Also explains the design rationale (rewarding non-combat play)."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "39e3ded737d994d7585868dd3139533408e1b06a8d7afbf0b81d4cc2dd838461"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s04_advancement_tables_where",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Where do you find the XP thresholds for leveling up, and are they class-specific?",
+    "answer": "XP thresholds for leveling up are class-specific. Each class has its own advancement table located on its class page: Assassin (p.9), Cleric (p.11), Druid (p.14), Fighter (p.15), Magic-User (p.17), Monk (p.19), Paladin (p.21), Ranger (p.23), and Thief (p.25). There is no single unified advancement table; each class defines its own XP thresholds independently. For multi-classed characters, XP earned is divided evenly among all classes regardless of attribute bonuses, and a new hit die is only gained when the character has advanced a level in all classes.",
+    "expected_answer_summary": "Class-specific tables on each class's page (Assassin p.9, Cleric p.11, Druid p.14, Fighter p.15, Magic-User p.17, Monk p.19, Paladin p.21, Ranger p.23, Thief p.25); no single unified table.",
+    "source_page": "9, 11, 14, 15, 17, 19, 21, 23, 25, 27",
+    "gold_unit_ids": [
+      "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86",
+      "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce",
+      "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de",
+      "6e2d27f00d5ebfb11884d624fcee6ef538be73d287015be8ef91ef44362f5d96"
+    ],
+    "gold_locations": {
+      "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86": {
+        "page": 15,
+        "structural_path": [
+          "FIGHTER"
+        ],
+        "source_unit_ids": [
+          "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86"
+        ]
+      },
+      "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce": {
+        "page": 17,
+        "structural_path": [],
+        "source_unit_ids": [
+          "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce"
+        ]
+      },
+      "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de": {
+        "page": 17,
+        "structural_path": [],
+        "source_unit_ids": [
+          "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de"
+        ]
+      },
+      "6e2d27f00d5ebfb11884d624fcee6ef538be73d287015be8ef91ef44362f5d96": {
+        "page": 27,
+        "structural_path": [
+          "EXPERIENCE POINTS (XP)"
+        ],
+        "source_unit_ids": [
+          "6e2d27f00d5ebfb11884d624fcee6ef538be73d287015be8ef91ef44362f5d96"
+        ]
+      }
+    },
+    "required_gold": [
+      "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86",
+      "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce",
+      "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de"
+    ],
+    "supporting_gold": [
+      "6e2d27f00d5ebfb11884d624fcee6ef538be73d287015be8ef91ef44362f5d96"
+    ],
+    "required_gold_rationale": {
+      "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86": "Representative class advancement table demonstrating that XP thresholds are class-specific and located on each class's own page.",
+      "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce": "Second representative class table (different XP curve from Fighter) confirming class-specificity of advancement thresholds.",
+      "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de": "Second representative class table (different XP curve from Fighter) confirming class-specificity of advancement thresholds."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "fde109d9d50f9342bf06f2e0d6c168c3ae57dabe4247c5be3a0fad9a4dc09f86",
+      "9fd34cdc58a2166f9285f658abb20477ce4ee7ddeacf40273d86f53968c400ce",
+      "41ada0ce42adc8945c5e6a85665b9d3c12c369f93073270acbcb30d536ca76de"
+    ],
+    "_supporting_gold": [
+      "6e2d27f00d5ebfb11884d624fcee6ef538be73d287015be8ef91ef44362f5d96"
+    ]
+  },
+  {
+    "id": "sw_rev_s05_combat_sequence_group_initiative",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How does initiative work and what is the basic combat sequence for resolving a round?",
+    "answer": "Each combat round follows a fixed 6-step sequence: (1) Check for Surprise \u2014 the Referee determines whether a surprise roll is needed; each side rolls 1d6 and is surprised on a 1 or 2 (Monk/Ranger parties are surprised only on a 1); one roll per side, not per individual. (2) Declare Spells \u2014 any player intending to cast must declare before the initiative roll; a surprised side skips this step and waits until the next round. (3) Determine Initiative \u2014 each side rolls 1d6; highest result wins; on a tie the Referee may treat actions as simultaneous or have both sides re-roll. (4) Movement and Missile Fire \u2014 initiative winners move or fire first; then losers do the same; winners cannot hold to see what foes do. (5) Melee Combat and Spells \u2014 initiative winners attack in melee and cast spells first; losers follow; creatures killed by winners are already dead and cannot act; Turning Undead also occurs here. (6) Round Complete \u2014 check ongoing effects, then return to step 2 and repeat until combat ends (one side flees, surrenders, or is entirely slain). Spells declared in step 2 may be lost if the caster takes damage before the melee/spells phase resolves. The book also presents alternate combat sequences (Method No. 1\u20133) that change the initiative/action ordering (including holding initiative, dexterity-ordered casting/attacks, and segmented action intervals), but the standard 6-step order above is the basic procedure.",
+    "expected_answer_summary": "6-step round: Surprise check, Declare Spells, Roll initiative (d6 per side, high wins), Movement/Missiles (winners first), Melee/Spells (winners first), then repeat from step 2.",
+    "source_page": "35, 36",
+    "gold_unit_ids": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6",
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c",
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6",
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619",
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9",
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec",
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+    ],
+    "gold_locations": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382"
+        ]
+      },
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc"
+        ]
+      },
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80"
+        ]
+      },
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c"
+        ]
+      },
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330"
+        ]
+      },
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596"
+        ]
+      },
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": {
+        "page": 35,
+        "structural_path": [
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920"
+        ]
+      },
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": {
+        "page": 35,
+        "structural_path": [
+          "2. DECLARE SPELLS"
+        ],
+        "source_unit_ids": [
+          "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+        ]
+      },
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32"
+        ]
+      },
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb"
+        ]
+      },
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52"
+        ]
+      },
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5"
+        ]
+      },
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c"
+        ]
+      },
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6"
+        ]
+      },
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619"
+        ]
+      },
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9"
+        ]
+      },
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec"
+        ]
+      },
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d": {
+        "page": 36,
+        "structural_path": [
+          "(This system comes from the 1978 \u201cHolmes Blue Book Set\u201d)"
+        ],
+        "source_unit_ids": [
+          "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+        ]
+      }
+    },
+    "required_gold": [
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "supporting_gold": [
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c",
+      "6cdc1f09d1608d9a2651ea41ddc81b1cbce9a92547e24b34fdc7907c49aabbc6",
+      "295039793c1ef2e9bf234415948fc6c5991bda1584105b8b43bac7137fc39619",
+      "e838cde6c1c307a67da81995f2aa7c2f1a95b9406da546b22386cba700a34eb9",
+      "421fa7570213ebd4beec7082cf107f4769746f4bc178d22bc41f5701ae38b4ec",
+      "32fc4d35a158e3bcd71538a948a55ecd0b318cfa6c2081936db9a2229366947d"
+    ],
+    "required_gold_rationale": {
+      "41db6443653bb715a6c1eff49e16996950afa1e67e11487364f871e898e67382": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "5e1fc4479ada56a86d9d17b8201599e249537d097463ed2b64aca811423a4bcc": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "6b2569b3989c4dfa0009a1357c8f55e33b4f17e603b5c19846b2c33a9aac9c80": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "07c3bd99785200be6948bfa909a07dec03db798ab04db5d53e93241373aa5c4c": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "37ebcfb45c5f6d3f866e2ae19b1fc71e36e80f56889b6272585094dc28444330": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "c15f716a344450e795ca564aba7ea72d521cc3b254dd29144695a8b0ac354596": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "4cf4c0771f5bfaf8c51626665e38c5f7b6861182bdc340e309f48bb8a508e920": "Contains the full 6-step combat round sequence, the initiative roll procedure (d6 per side, high wins, tie options), and the phase structure (movement/missiles then melee/spells, winners before losers).",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": "States the critical timing rule that spells must be declared before the initiative roll and may be lost if the caster takes damage before the melee/spells phase."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "f6082c83fe9771b8c83e51211d54beff43b2c980bab2488b46f82f617fb50b86",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "_supporting_gold": [
+      "dfb9698476e45b34e81776037fc8973a5bd74b693c4c6a1b84c2aa58bb069406",
+      "52331db0ecf3b347c17e8ce6a300bb3e8906bf087daff84cee7aa21476d67070",
+      "1d572490737dfcfbcaa83d6cb4fbf5f64fb7057b2caa83d9537f761555548c94",
+      "43591eb10715d1a556b292bedead7db39535a51e20f41fd5da6cb5a4b5abc278"
+    ]
+  },
+  {
+    "id": "sw_rev_s06_spell_preparation_reprepare_and_interruption",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How often can a magic-user prepare spells, and what happens if they take damage while preparing/casting?",
+    "answer": "Magic-Users prepare spells by reading from their spellbook and forcing selected spell formulae into their minds, preparing as many spells as they can mentally sustain; a spell can be prepared multiple times using available memory slots. Once a prepared spell is cast, it disappears from the Magic-User\u2019s ability to cast until it is prepared again. The text does not state a fixed daily cadence for Magic-User preparation (unlike Clerics and Druids, who explicitly select and pray for a set of spells each day). If a spellcaster suffers damage while casting, the spell is lost; in the standard combat procedure, spells are declared before the initiative roll and casting starts at the beginning of the round, so if the enemy wins initiative and damages the spellcaster, the casting may be disturbed and the spell lost.",
+    "expected_answer_summary": "Magic-Users prepare from a spellbook into memory slots (can prepare a spell multiple times); after casting it must be prepared again. If damaged while casting, the spell is lost; in combat, declaring happens before initiative and damage before resolution can lose the spell.",
+    "source_page": "10, 13, 16, 35, 40",
+    "gold_unit_ids": [
+      "8a1d175e2d7bf7817916c129274646d5b502a6d78cbc896fd2c43352864d20d5",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6",
+      "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c",
+      "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51",
+      "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43"
+    ],
+    "gold_locations": {
+      "8a1d175e2d7bf7817916c129274646d5b502a6d78cbc896fd2c43352864d20d5": {
+        "page": 40,
+        "structural_path": [
+          "SPELLS"
+        ],
+        "source_unit_ids": [
+          "1514d406dbca62edd70f0a8dce7dc7958f749a8081323b72e0a6702a9a47c9b0",
+          "671676c8b7c20bb0d58a5807c4635ee1ca283a74c058debdeef043a017536128"
+        ]
+      },
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": {
+        "page": 35,
+        "structural_path": [
+          "2. DECLARE SPELLS"
+        ],
+        "source_unit_ids": [
+          "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+        ]
+      },
+      "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c": {
+        "page": 13,
+        "structural_path": [],
+        "source_unit_ids": [
+          "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c"
+        ]
+      },
+      "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51": {
+        "page": 13,
+        "structural_path": [],
+        "source_unit_ids": [
+          "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51"
+        ]
+      },
+      "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43": {
+        "page": 13,
+        "structural_path": [],
+        "source_unit_ids": [
+          "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43"
+        ]
+      }
+    },
+    "required_gold": [
+      "8a1d175e2d7bf7817916c129274646d5b502a6d78cbc896fd2c43352864d20d5",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "supporting_gold": [
+      "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c",
+      "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51",
+      "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43"
+    ],
+    "required_gold_rationale": {
+      "8a1d175e2d7bf7817916c129274646d5b502a6d78cbc896fd2c43352864d20d5": "Gives the explicit interruption consequence: if the spellcaster suffers damage while casting, the spell is lost (and notes timing depends on combat method).",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6": "Defines standard-combat timing: spells are declared before initiative; casting starts at the beginning of the round; damage before the spell resolves can disturb casting and lose the spell.",
+      "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c": "Provides contrast: Druids explicitly select/pray for spells each day and cannot recast until next day unless prepared multiple times.",
+      "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51": "Provides contrast: Druids explicitly select/pray for spells each day and cannot recast until next day unless prepared multiple times.",
+      "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43": "Provides contrast: Druids explicitly select/pray for spells each day and cannot recast until next day unless prepared multiple times."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "8a1d175e2d7bf7817916c129274646d5b502a6d78cbc896fd2c43352864d20d5",
+      "d05014d16d6b54ed0467752b65d64b268eff3c1df49e122e6a4ae2f3074b19d6"
+    ],
+    "_supporting_gold": [
+      "d8545ade0c0c3728f155bef759717af2d8963daf80893b92b42791e384c7186c",
+      "17e50445faa351a6e723247b66d20335eaf6c52fe5ad48ca7c10a27cf794af51",
+      "938d7072c4bac597407282ee77e9c58b629ef52170b1a20d080e42105d48da43"
+    ]
+  },
+  {
+    "id": "sw_rev_s07_turn_undead_table_symbols",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "On the Turn Undead table, what does a \u201cT\u201d result mean compared to a number?",
+    "answer": "On the Turning the Undead table, a number is the minimum 2d10 result needed: if the roll is equal to or greater than that number, 2d6 of the targeted undead type are turned and depart (not returning for 3d6 rounds). If the table shows \u201cT\u201d, then 2d6 of the targeted undead are automatically turned and depart for 3d6 rounds (no roll threshold). If the table shows \u201cD\u201d, then 2d6 of the targeted undead are automatically destroyed and crumble to dust.",
+    "expected_answer_summary": "Number = minimum 2d10 needed to turn; \u201cT\u201d = automatically turned; \u201cD\u201d = automatically destroyed (each affects 2d6 undead).",
+    "source_page": "42",
+    "gold_unit_ids": [
+      "0059c23657c340b6a5bb396cb9df3ac786fbfcaa1495bc90105701fe034e0cd5",
+      "1ef3847723ec4c73804d6b01c88dc8ae70d331674f65a975850f7f855a9b2e67",
+      "7081142aad2e29056fe44baa4135cd07efdb1390c0010c06b7edf6a30006ceb8",
+      "c7634ad8427a703a8680ee9de956ba5ae4812d4f8b6fc249c2ffeb4cb4dc6eed",
+      "df85aef94a8f446f17c31dad70ccc82084862ff80ff38b67a252817c71b4df1e"
+    ],
+    "gold_locations": {
+      "0059c23657c340b6a5bb396cb9df3ac786fbfcaa1495bc90105701fe034e0cd5": {
+        "page": 42,
+        "structural_path": [
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "0059c23657c340b6a5bb396cb9df3ac786fbfcaa1495bc90105701fe034e0cd5"
+        ]
+      },
+      "1ef3847723ec4c73804d6b01c88dc8ae70d331674f65a975850f7f855a9b2e67": {
+        "page": 42,
+        "structural_path": [
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "1ef3847723ec4c73804d6b01c88dc8ae70d331674f65a975850f7f855a9b2e67"
+        ]
+      },
+      "7081142aad2e29056fe44baa4135cd07efdb1390c0010c06b7edf6a30006ceb8": {
+        "page": 42,
+        "structural_path": [
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "7081142aad2e29056fe44baa4135cd07efdb1390c0010c06b7edf6a30006ceb8"
+        ]
+      },
+      "c7634ad8427a703a8680ee9de956ba5ae4812d4f8b6fc249c2ffeb4cb4dc6eed": {
+        "page": 42,
+        "structural_path": [
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "c7634ad8427a703a8680ee9de956ba5ae4812d4f8b6fc249c2ffeb4cb4dc6eed"
+        ]
+      },
+      "df85aef94a8f446f17c31dad70ccc82084862ff80ff38b67a252817c71b4df1e": {
+        "page": 42,
+        "structural_path": [
+          "Turning the Undead"
+        ],
+        "source_unit_ids": [
+          "df85aef94a8f446f17c31dad70ccc82084862ff80ff38b67a252817c71b4df1e"
+        ]
+      }
+    },
+    "required_gold": [
+      "0059c23657c340b6a5bb396cb9df3ac786fbfcaa1495bc90105701fe034e0cd5",
+      "1ef3847723ec4c73804d6b01c88dc8ae70d331674f65a975850f7f855a9b2e67",
+      "7081142aad2e29056fe44baa4135cd07efdb1390c0010c06b7edf6a30006ceb8",
+      "c7634ad8427a703a8680ee9de956ba5ae4812d4f8b6fc249c2ffeb4cb4dc6eed",
+      "df85aef94a8f446f17c31dad70ccc82084862ff80ff38b67a252817c71b4df1e"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "0059c23657c340b6a5bb396cb9df3ac786fbfcaa1495bc90105701fe034e0cd5": "Defines how to interpret numeric entries vs the special results \u201cT\u201d and \u201cD\u201d, including the 2d10 roll, 2d6 quantity affected, and durations/effects.",
+      "1ef3847723ec4c73804d6b01c88dc8ae70d331674f65a975850f7f855a9b2e67": "Defines how to interpret numeric entries vs the special results \u201cT\u201d and \u201cD\u201d, including the 2d10 roll, 2d6 quantity affected, and durations/effects.",
+      "7081142aad2e29056fe44baa4135cd07efdb1390c0010c06b7edf6a30006ceb8": "Defines how to interpret numeric entries vs the special results \u201cT\u201d and \u201cD\u201d, including the 2d10 roll, 2d6 quantity affected, and durations/effects.",
+      "c7634ad8427a703a8680ee9de956ba5ae4812d4f8b6fc249c2ffeb4cb4dc6eed": "Defines how to interpret numeric entries vs the special results \u201cT\u201d and \u201cD\u201d, including the 2d10 roll, 2d6 quantity affected, and durations/effects.",
+      "df85aef94a8f446f17c31dad70ccc82084862ff80ff38b67a252817c71b4df1e": "Defines how to interpret numeric entries vs the special results \u201cT\u201d and \u201cD\u201d, including the 2d10 roll, 2d6 quantity affected, and durations/effects."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "1bd25b915da8581e4a8d2962488350f31b4266c58f9676311cfd8acf0744e7f5",
+      "385a81ff159869eb4dda82422e4f641aca04989bf96404de4940ddb6fcc0b1e3",
+      "28fc18bd03af8ffeee648cbb3695c0be47948b42619443121cfde77e7faa54a8"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s08_first_level_cleric_spells",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Does a 1st-level cleric get to cast spells?",
+    "answer": "No. The Cleric Advancement Table shows no spells available at 1st level (all spell-level columns are blank). Clerics begin spellcasting at 2nd level, when they gain 1 first-level spell.",
+    "expected_answer_summary": "No; 1st-level clerics have no spells. Spellcasting starts at 2nd level (1 first-level spell).",
+    "source_page": "11",
+    "gold_unit_ids": [
+      "9309f3673500ceb86121522ff2e6fbce7c312e4c07d8f189c9522d66c809d991",
+      "87a44b1f0fa9658c0becb43479da6850a31390010fdb953a19ef2396949e122f"
+    ],
+    "gold_locations": {
+      "9309f3673500ceb86121522ff2e6fbce7c312e4c07d8f189c9522d66c809d991": {
+        "page": 11,
+        "structural_path": [],
+        "source_unit_ids": [
+          "b159c1baaaf2ddde7ec2ce470c563143d2e6ad5e439555d921adfdaf081178b1",
+          "84f6bee95668b2d5edbd6fffde11da5f37b1c806e48acff130ba90c673bd299a"
+        ]
+      },
+      "87a44b1f0fa9658c0becb43479da6850a31390010fdb953a19ef2396949e122f": {
+        "page": 11,
+        "structural_path": [],
+        "source_unit_ids": [
+          "d8bb5ad18c69b92afa7a7e44bdcaa81336dec638ad0f53f2fc3dae7baafd38de",
+          "c4f348bc1a38490ce1177c16f1a48d6d10cb07f5606a3181839c5c3e71c41ba2",
+          "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584"
+        ]
+      }
+    },
+    "required_gold": [
+      "9309f3673500ceb86121522ff2e6fbce7c312e4c07d8f189c9522d66c809d991",
+      "87a44b1f0fa9658c0becb43479da6850a31390010fdb953a19ef2396949e122f"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "9309f3673500ceb86121522ff2e6fbce7c312e4c07d8f189c9522d66c809d991": "Provides spells-per-level by cleric level; 1st level shows no spells, and 2nd level shows 1 first-level spell.",
+      "87a44b1f0fa9658c0becb43479da6850a31390010fdb953a19ef2396949e122f": "Provides spells-per-level by cleric level; 1st level shows no spells, and 2nd level shows 1 first-level spell."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "9309f3673500ceb86121522ff2e6fbce7c312e4c07d8f189c9522d66c809d991",
+      "87a44b1f0fa9658c0becb43479da6850a31390010fdb953a19ef2396949e122f"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s09_zero_hp_death_and_healing",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "What happens at 0 hit points, and when does a character die from damage?",
+    "answer": "When damage reduces a character (or creature) to 0 hit points, the character is unconscious. If hit points are brought down to \u20131 or lower, the character dies. The book also describes a potential house rule: a character remains alive (bleeding at 1 hp/round without assistance) until reaching negative hit points equal to the character\u2019s level (e.g., a 5th-level character dies at \u20135). For healing, natural recovery is 1 hit point per 2 days of uninterrupted rest (many Referees accelerate this to 1/day), and four weeks of rest returns a character to full hit points regardless of how many were lost.",
+    "expected_answer_summary": "0 HP = unconscious; \u20131 HP or lower = dead. Natural healing is 1 HP per 2 days of uninterrupted rest; four weeks restores to full.",
+    "source_page": "41",
+    "gold_unit_ids": [
+      "976600d480ba5ff3bfb8a5ab5433da11f34958714548e80a5ac0c7445d6c74cd",
+      "cdda25127d8ab5d2ed812a7496cb495b82aec279d54223f610b4f68da8d2fe28"
+    ],
+    "gold_locations": {
+      "976600d480ba5ff3bfb8a5ab5433da11f34958714548e80a5ac0c7445d6c74cd": {
+        "page": 41,
+        "structural_path": [
+          "DAMAGE AND DEATH"
+        ],
+        "source_unit_ids": [
+          "976600d480ba5ff3bfb8a5ab5433da11f34958714548e80a5ac0c7445d6c74cd"
+        ]
+      },
+      "cdda25127d8ab5d2ed812a7496cb495b82aec279d54223f610b4f68da8d2fe28": {
+        "page": 41,
+        "structural_path": [
+          "DAMAGE AND DEATH"
+        ],
+        "source_unit_ids": [
+          "cdda25127d8ab5d2ed812a7496cb495b82aec279d54223f610b4f68da8d2fe28"
+        ]
+      }
+    },
+    "required_gold": [
+      "976600d480ba5ff3bfb8a5ab5433da11f34958714548e80a5ac0c7445d6c74cd",
+      "cdda25127d8ab5d2ed812a7496cb495b82aec279d54223f610b4f68da8d2fe28"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "976600d480ba5ff3bfb8a5ab5433da11f34958714548e80a5ac0c7445d6c74cd": "Defines the 0 HP / death threshold rule and the natural healing rates, and explicitly labels the negative-HP-to-level rule as a potential house rule.",
+      "cdda25127d8ab5d2ed812a7496cb495b82aec279d54223f610b4f68da8d2fe28": "Defines the 0 HP / death threshold rule and the natural healing rates, and explicitly labels the negative-HP-to-level rule as a potential house rule."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "fb48a8c282078bf1c00a00542140757c5155a1db4746300c9730e72a8607b601"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s10_firing_missiles_into_melee",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "What happens if you fire a missile weapon into a melee where allies and enemies are mixed together?",
+    "answer": "When attacking into a melee with missile weapons, it is usually not possible to choose which participant (opponent or friend) is hit. Instead, the Referee determines the actual target randomly.",
+    "expected_answer_summary": "Missile fire into melee usually cannot pick a specific target; the Referee randomizes who is hit.",
+    "source_page": "40",
+    "gold_unit_ids": [
+      "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44"
+    ],
+    "gold_locations": {
+      "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44": {
+        "page": 40,
+        "structural_path": [
+          "MISSILE ATTACKS"
+        ],
+        "source_unit_ids": [
+          "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44"
+        ]
+      }
+    },
+    "required_gold": [
+      "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44": "States that when using missiles to attack into a melee, you usually cannot choose the participant hit; the Referee determines it randomly."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "bb863410dd4a21a4e1094bda2fff0b234913fb551fe2cea429e19eb3f68faa44"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s11_saving_throw_procedure",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "How do saving throws work (what categories exist, what do you roll, and what number do you need)?",
+    "answer": "In Swords & Wizardry, a saving throw is a d20 roll to avoid or lessen a hazard\u2019s effect. Each class has a saving throw target number that gets lower (easier) as the character gains levels. To make a saving throw, roll 1d20; if the result is equal to or higher than the character\u2019s saving throw target number, the saving throw succeeds. Some classes have bonuses against particular hazards (e.g., Magic-Users get +2 on saving throws against spells), and these bonuses are described in the class write-ups. Multi-classed characters use the best available saving throw option from their classes, including any class bonuses, but you do not combine one class\u2019s target number with another class\u2019s bonus. Monsters also make saving throws: a monster\u2019s saving throw target number may be listed in its description, and the book provides a monster saving throw table keyed by Hit Dice. The book also describes an alternative (Original Game) method with multiple saving-throw categories, but notes it does not integrate directly without house-ruling changes.",
+    "expected_answer_summary": "Roll d20; succeed on result \u2265 saving throw target number (class-based, improves with level; bonuses by class). Multi-class uses best option (don\u2019t mix bonus/target). Monsters use listed target or HD table; an alternative multi-category save method is provided but is a house-rule variant.",
+    "source_page": "26, 34, 38",
+    "gold_unit_ids": [
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed",
+      "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea",
+      "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924",
+      "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa",
+      "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9"
+    ],
+    "gold_locations": {
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": {
+        "page": 34,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035"
+        ]
+      },
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed": {
+        "page": 34,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed"
+        ]
+      },
+      "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea": {
+        "page": 26,
+        "structural_path": [
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea"
+        ]
+      },
+      "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924": {
+        "page": 38,
+        "structural_path": [],
+        "source_unit_ids": [
+          "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924"
+        ]
+      },
+      "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa": {
+        "page": 38,
+        "structural_path": [],
+        "source_unit_ids": [
+          "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa"
+        ]
+      },
+      "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9": {
+        "page": 34,
+        "structural_path": [
+          "Different Categories of Saving Throws"
+        ],
+        "source_unit_ids": [
+          "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9"
+        ]
+      }
+    },
+    "required_gold": [
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed",
+      "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea",
+      "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924",
+      "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa"
+    ],
+    "supporting_gold": [
+      "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9"
+    ],
+    "required_gold_rationale": {
+      "82d4c37731d0527b95dcbf16a1a30b10b129a9c50633760f3d3f5e24b1ea6035": "Defines what a saving throw is, that each class has a target number improving with level, and the roll procedure (d20; succeed on result \u2265 target); also notes class bonuses and that monsters have target numbers.",
+      "6e1306014cd54ed5cd42a46e3d1413ea5287faddb41bf6c996a87d0422ec03ed": "Defines what a saving throw is, that each class has a target number improving with level, and the roll procedure (d20; succeed on result \u2265 target); also notes class bonuses and that monsters have target numbers.",
+      "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea": "Defines how multi-classed characters choose which saving throw to use (best option including bonuses) and that you cannot mix one class\u2019s target with another\u2019s bonus.",
+      "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924": "Provides monster saving throw target numbers by Hit Dice.",
+      "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa": "Provides monster saving throw target numbers by Hit Dice.",
+      "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9": "Provides the alternative multi-category saving throw method from the Original Game and explicitly notes it does not integrate directly without house-ruling changes."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "80e4520f9e698e55698aa5680bb0689fa4cb38be87fe5966a4ba1934f5e91143",
+      "fa62061da1fbc34bc92f7f8cff504d3279c304c0726e3fcab80404444155b2ea",
+      "9a7906718642be07a07b28264f117285c90d91862d93fbb5aeed1d6b65a39924",
+      "fee9a435b18e61b9216316bbab53eced6b9bd89c3ca321106d145a3ff0db67aa"
+    ],
+    "_supporting_gold": [
+      "462e866b8c7af06d40b8ed029b6f56b1b1f187f1bdfe1cb60753fd71f1dc5ee9"
+    ]
+  },
+  {
+    "id": "sw_rev_s12_morale_and_reaction_rolls",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How do reaction rolls and morale checks work (when to roll, what dice, and how to interpret results)?",
+    "answer": "Reaction: monsters do not always attack on sight. In particular, if monsters surprise the adventurers and are not on the alert for intruders, the Referee may roll 2d6 to determine their initial reaction: 2\u20136 = hostile and attack; 7\u20139 = withhold judgment and wait to see if the adventurers are hostile; 10\u201312 = positive initial reaction and may even offer help (possibly for pay). Morale: most monsters will not fight a hopeless battle; they may retreat, flee, or surrender. The Referee decides when monsters abandon the battle based on the situation and the monsters\u2019 intelligence, and NPC allies may also flee if survival looks grim. The book points to an optional morale system elsewhere.",
+    "expected_answer_summary": "Reaction can be a 2d6 roll (2\u20136 hostile attack; 7\u20139 wait; 10\u201312 positive) in the surprise/alertness context. Morale is primarily Referee-adjudicated unless using the optional morale system.",
+    "source_page": "35, 41",
+    "gold_unit_ids": [
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c",
+      "138f97b19e060a5f57c05af2805f6501cf5c69831f10ade609d8d4e3fdf5c6bc"
+    ],
+    "gold_locations": {
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32"
+        ]
+      },
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb"
+        ]
+      },
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52"
+        ]
+      },
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5"
+        ]
+      },
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c"
+        ]
+      },
+      "138f97b19e060a5f57c05af2805f6501cf5c69831f10ade609d8d4e3fdf5c6bc": {
+        "page": 41,
+        "structural_path": [
+          "MORALE"
+        ],
+        "source_unit_ids": [
+          "99b598a74ada863400d2cf1a28d2c9ba4f35df4130356445876020008a1d7439",
+          "22cb884a74598df8bbef90d1193c5e72ab7a8f7eb20b2d4cea2ad6542e3b0341"
+        ]
+      }
+    },
+    "required_gold": [
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c",
+      "138f97b19e060a5f57c05af2805f6501cf5c69831f10ade609d8d4e3fdf5c6bc"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32": "Gives the 2d6 reaction roll and result interpretation (2\u20136 attack; 7\u20139 wait; 10\u201312 positive) in the context of monsters surprising the party and not being on alert.",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb": "Gives the 2d6 reaction roll and result interpretation (2\u20136 attack; 7\u20139 wait; 10\u201312 positive) in the context of monsters surprising the party and not being on alert.",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52": "Gives the 2d6 reaction roll and result interpretation (2\u20136 attack; 7\u20139 wait; 10\u201312 positive) in the context of monsters surprising the party and not being on alert.",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5": "Gives the 2d6 reaction roll and result interpretation (2\u20136 attack; 7\u20139 wait; 10\u201312 positive) in the context of monsters surprising the party and not being on alert.",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c": "Gives the 2d6 reaction roll and result interpretation (2\u20136 attack; 7\u20139 wait; 10\u201312 positive) in the context of monsters surprising the party and not being on alert.",
+      "138f97b19e060a5f57c05af2805f6501cf5c69831f10ade609d8d4e3fdf5c6bc": "Explains morale conceptually (most creatures won\u2019t fight hopelessly), that the Referee decides when they flee/retreat/surrender, notes NPC allies may flee, and points to an optional morale system."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "dfb9698476e45b34e81776037fc8973a5bd74b693c4c6a1b84c2aa58bb069406",
+      "52331db0ecf3b347c17e8ce6a300bb3e8906bf087daff84cee7aa21476d67070",
+      "138f97b19e060a5f57c05af2805f6501cf5c69831f10ade609d8d4e3fdf5c6bc"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s13_encumbrance_and_movement",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How does encumbrance affect movement and what needs to be tracked to apply it?",
+    "answer": "Encumbrance is tracked as carried weight (in pounds), including gear and treasure. A normal load of miscellaneous equipment (excluding armor and weapons) is assumed to be 10 pounds, and treasure adds weight: each coin and gem weighs one-tenth of a pound. Total carried weight determines base movement rate: up to 75 lb = 12; 76\u2013100 lb = 9; 101\u2013150 lb = 6; 151\u2013300 lb (300-lb max) = 3. Any Strength-based Carry Modifier is added to the total for determining which bracket you fall into (e.g., +10 increases the threshold before dropping a movement category; \u201310 reduces it).",
+    "expected_answer_summary": "Track carried pounds (gear + treasure; coin/gem = 0.1 lb each). Movement brackets: \u226475\u219212, 76\u2013100\u21929, 101\u2013150\u21926, 151\u2013300\u21923 (300 max), adjusted by Strength Carry Modifier.",
+    "source_page": "32",
+    "gold_unit_ids": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6"
+    ],
+    "gold_locations": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6"
+        ]
+      },
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c"
+        ]
+      },
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302"
+        ]
+      },
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6"
+        ]
+      },
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": {
+        "page": 95,
+        "structural_path": [
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce"
+        ]
+      },
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": {
+        "page": 32,
+        "structural_path": [
+          "WEIGHT AND MOVEMENT"
+        ],
+        "source_unit_ids": [
+          "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6"
+        ]
+      }
+    },
+    "required_gold": [
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "66306408726f842630aa01a2d5de729b8332ccfc639e750c1112a1898139f5f6": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds.",
+      "8da7bf7a98130ba66cdb5bc96086c0d20508dd1756ef64f44f93aa8d63ea354c": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds.",
+      "f75f2ccfe813648f446d818cb289722985ac6db16c8888206b46ab65d8d99302": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds.",
+      "7c8bb996bc0fdf9085dd48b45207a2567c444ee4828f0913d047e59fd42cccc6": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds.",
+      "3cef8052251f6df01a894f1b5b88b9c5597883c45b33f462142341c55fa8e1ce": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds.",
+      "53d44603c93d5f821beec33ac9bef5db3c51ad2dd83bf06f04e4607f97f30ab6": "Defines weight units and assumptions (misc gear = 10 lb; coins/gems = 0.1 lb each), the base movement rate brackets by carried weight, the 300-lb max, and how Strength Carry Modifier adjusts bracket thresholds."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "1b5f1e0a8107266a0a2ae1d4c5c1d4964c74359a6f5edd0fce21e3bae00f88d3",
+      "a1b5ffba766bf3ce6364bbcfa1b1df5f2bb3085e2224e1bff9344a0469a215b7"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s14_exploration_time_and_encounter_checks",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "In dungeon exploration (outside combat), how is time tracked and when do you check for wandering monsters or other time-based events?",
+    "answer": "In dungeon exploration outside combat, procedural time is tracked in turns: a turn represents 10 minutes and is used for normal movement in dangerous places. Wandering monster checks are commonly handled as a 1-in-6 chance on a d6 each turn (with the Referee free to make them less common, such as checking once every three turns). The example of play makes this concrete: searching a 10-by-10 area for secret doors takes a full turn, and the Referee makes a wandering-monster check for that turn. Some keyed dungeon material also specifies a cadence explicitly (e.g., check once every three turns with a 1-in-6 chance per check).",
+    "expected_answer_summary": "Dungeon exploration uses 10-minute turns; wandering monsters are often checked on 1-in-6 each turn (or less often, e.g. once per three turns), and time-consuming actions like searching a 10\u00d710 area consume a full turn and trigger checks.",
+    "source_page": "33, 45, 74, 79",
+    "gold_unit_ids": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4",
+      "c20788aa609042fbfdd7ca8642e714ca8fdc748992cdf9c5bb03e6c6d5ea77b7",
+      "c7bea91ca68c9ec644518aaba25da9e6a15632b00195b796b5cedb9b7fcb7ae7",
+      "6123cd6fe688126bc65ad126b9588c1a7e419cb2cbb4d673ad04ad1e457c1c18",
+      "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512"
+    ],
+    "gold_locations": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b"
+        ]
+      },
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": {
+        "page": 33,
+        "structural_path": [
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4"
+        ]
+      },
+      "c20788aa609042fbfdd7ca8642e714ca8fdc748992cdf9c5bb03e6c6d5ea77b7": {
+        "page": 79,
+        "structural_path": [
+          "MIXING MONSTERS IN AN ENCOUNTER"
+        ],
+        "source_unit_ids": [
+          "c20788aa609042fbfdd7ca8642e714ca8fdc748992cdf9c5bb03e6c6d5ea77b7"
+        ]
+      },
+      "c7bea91ca68c9ec644518aaba25da9e6a15632b00195b796b5cedb9b7fcb7ae7": {
+        "page": 45,
+        "structural_path": [],
+        "source_unit_ids": [
+          "2cb9b0e14da5553b34fb410705225f93ef93d1370590c0e725266d87a50eba54",
+          "95397af184ad1966265c105cfdd24a379aedf37a0258d67313e6a309a9f25177"
+        ]
+      },
+      "6123cd6fe688126bc65ad126b9588c1a7e419cb2cbb4d673ad04ad1e457c1c18": {
+        "page": 45,
+        "structural_path": [],
+        "source_unit_ids": [
+          "e2472992efab769a479544c6807dcdab3840a6e42cefc20ba37b76aa4e4f9a4d",
+          "30bda6a7a5f8ee0d1eb0e7e81ddcc8005aa4fd62ce9684d6fc95dcdbd9d4fd80",
+          "8e5470b06ee9077dba202f82260bc3d77bdcfcc2a1f0f2d939b4fd70190e8d27"
+        ]
+      },
+      "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512": {
+        "page": 45,
+        "structural_path": [],
+        "source_unit_ids": [
+          "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512"
+        ]
+      }
+    },
+    "required_gold": [
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4",
+      "c20788aa609042fbfdd7ca8642e714ca8fdc748992cdf9c5bb03e6c6d5ea77b7",
+      "c7bea91ca68c9ec644518aaba25da9e6a15632b00195b796b5cedb9b7fcb7ae7",
+      "6123cd6fe688126bc65ad126b9588c1a7e419cb2cbb4d673ad04ad1e457c1c18",
+      "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "4502bd354c2e21efc88d168a998bdef5c372d32f6ba15f14dce96b4e5cc6c52b": "Defines the dungeon exploration time unit: a turn is 10 minutes and is used for normal movement in dangerous places.",
+      "589b8e435633e140cbbd28f68c82875200442d6c0925e8da64964aa9610608d4": "Defines the dungeon exploration time unit: a turn is 10 minutes and is used for normal movement in dangerous places.",
+      "c20788aa609042fbfdd7ca8642e714ca8fdc748992cdf9c5bb03e6c6d5ea77b7": "States the common cadence: wandering monsters often checked on a roll of 1 in 6 each turn, with the Referee free to make checks less common (e.g., once per three turns).",
+      "c7bea91ca68c9ec644518aaba25da9e6a15632b00195b796b5cedb9b7fcb7ae7": "Shows operational use: searching a 10-by-10 area for secret doors takes a full turn and triggers a wandering monster check for that turn.",
+      "6123cd6fe688126bc65ad126b9588c1a7e419cb2cbb4d673ad04ad1e457c1c18": "Shows operational use: searching a 10-by-10 area for secret doors takes a full turn and triggers a wandering monster check for that turn.",
+      "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512": "Shows operational use: searching a 10-by-10 area for secret doors takes a full turn and triggers a wandering monster check for that turn."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "af4f986335810e36121879747b31a05e73b187e6930f038f3ec679f078789b49",
+      "3a4e2208d43d56ea7ae73f4a99418a5ee646de6db0d71c263edde9b27e6161e4",
+      "fede03712e07455e59d75684086e4703a31b32b9609b09eae9e05ec327163c29",
+      "c7bea91ca68c9ec644518aaba25da9e6a15632b00195b796b5cedb9b7fcb7ae7",
+      "6123cd6fe688126bc65ad126b9588c1a7e419cb2cbb4d673ad04ad1e457c1c18",
+      "2f3cc66753c40aca7156d8e43cc76d98f14710a3d954e4eedddd5e5ed7648512"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s15_light_sources_duration",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "How long do common light sources last (torches/lantern oil/etc.), and what time unit is that duration measured in?",
+    "answer": "Common light sources have explicit real-time durations measured in hours. A pint of lamp oil keeps a lantern (bullseye or hooded) burning for 4 hours. Torches burn for 1 hour.",
+    "expected_answer_summary": "Lantern oil: 4 hours per pint. Torches: 1 hour.",
+    "source_page": "29",
+    "gold_unit_ids": [
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151"
+    ],
+    "gold_locations": {
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8"
+        ]
+      },
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba"
+        ]
+      },
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9"
+        ]
+      },
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2"
+        ]
+      },
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670"
+        ]
+      },
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228"
+        ]
+      },
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151": {
+        "page": 29,
+        "structural_path": [
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151"
+        ]
+      }
+    },
+    "required_gold": [
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "d2f50c6abede3a601e363c7af5805c6b27bb03c5b0f9291868f79e6326f831e8": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "8262683b8376113ca427827c547681aa2b5a264e4e302e483fe469630ba949ba": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "28cdddeed9f297c3dbf8afe9102c8e18e2aa45af62cf05d6e7c279f135e599e9": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "6cf8f816b3fc7b84ae4dfe44046611bd0b9a21c83a77a84fd3b2a428d17853e2": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "5a6cd5dbc278f5d5aa855815393fc5634a74149f0744f7c494e0977fca81e670": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "fa4adc5c333cd05ff68e105787c3b0553ab50e127feeed9b83033ee1498da228": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour.",
+      "8628483d1900b044b1a04e544769cac2e66fa25a5bbbca5abede5b2f55638151": "States explicit durations and units: oil keeps a lantern burning for four hours per pint; torches burn for one hour."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "62eada1165e973a58b10450663d8370753e804a4437cd5730dd7d5b2a09fe33a"
+    ],
+    "_supporting_gold": []
+  },
+  {
+    "id": "sw_rev_s16_surprise_procedure",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How does surprise work and what advantage does the surprising side get?",
+    "answer": "If surprise is a possibility, roll 1d6 once per side (not per individual). A side is surprised on a 1\u20132; a party that includes a Monk or Ranger is surprised only on a 1. It is possible for both groups to be surprised, canceling out the effect. A group generally cannot be surprised if it is already aware of an opponent\u2019s presence. If one side is surprised, the other side automatically gets to take actions before the first initiative roll; if that side also wins the first initiative roll, it can take two actions before the surprised side can do anything. Additionally, if a group is surprised, each person (or creature) in it has a 1-in-4 chance to drop one or more handheld items.",
+    "expected_answer_summary": "Surprise is a 1d6 roll per side (1\u20132 surprised; Monk/Ranger party only on 1); surprised side grants opponents actions before initiative (potentially two actions before it can act).",
+    "source_page": "35",
+    "gold_unit_ids": [
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c"
+    ],
+    "gold_locations": {
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32"
+        ]
+      },
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb"
+        ]
+      },
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52"
+        ]
+      },
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5"
+        ]
+      },
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c": {
+        "page": 35,
+        "structural_path": [
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c"
+        ]
+      }
+    },
+    "required_gold": [
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "6ec60ec32b8d3ac8ff84c7b1d9dcb93073dd70f1c36d6ff3ac53e1adfebc8e32": "Defines when surprise applies, the 1d6 determination (including Monk/Ranger exception), what advantage it grants (actions before initiative; potential two actions), and the additional consequence (1-in-4 chance to drop handheld items).",
+      "2beac80fad3ba67467e7945f272412c32f740eae0fbc636a701dd00f8cf048cb": "Defines when surprise applies, the 1d6 determination (including Monk/Ranger exception), what advantage it grants (actions before initiative; potential two actions), and the additional consequence (1-in-4 chance to drop handheld items).",
+      "7e78d5af9c57a31ef6d50c270b1a9e86bb4122e5b0c8250efb36c252a592bb52": "Defines when surprise applies, the 1d6 determination (including Monk/Ranger exception), what advantage it grants (actions before initiative; potential two actions), and the additional consequence (1-in-4 chance to drop handheld items).",
+      "63e28bb0f9c99b3db360ebdda3ea255d3d3fee571190a57fe3cf2ca704f5fed5": "Defines when surprise applies, the 1d6 determination (including Monk/Ranger exception), what advantage it grants (actions before initiative; potential two actions), and the additional consequence (1-in-4 chance to drop handheld items).",
+      "16ee342ba457e782ad7cd251d7678999cbd2ca5ba0ec5b69bf79cdd68126519c": "Defines when surprise applies, the 1d6 determination (including Monk/Ranger exception), what advantage it grants (actions before initiative; potential two actions), and the additional consequence (1-in-4 chance to drop handheld items)."
+    },
+    "_mode": "single_cite",
+    "_status": "cited",
+    "_required_gold": [
+      "dfb9698476e45b34e81776037fc8973a5bd74b693c4c6a1b84c2aa58bb069406",
+      "52331db0ecf3b347c17e8ce6a300bb3e8906bf087daff84cee7aa21476d67070"
+    ],
+    "_supporting_gold": []
+  }
+]

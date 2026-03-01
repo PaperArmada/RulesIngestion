@@ -16,15 +16,21 @@
       "answer": "Starfinder has two roles at the table: the Game Master (GM) and the players. Everyone involved is a player, but \"player\" usually refers to participants other than the GM. The game is typically played in a group of four to seven people, with one player serving as the GM. The Game Master is in charge of the story and setting: they prepare, present, and preside over the game's setting and story; describe all the situations the player characters experience; consider how the actions of player characters affect the story; interpret the rules; and resolve the outcome of the players' actions. The GM poses challenges and plays adversaries, allies, and bystanders (NPCs and monsters). The GM can create new adventures or use published ones, and uses the rules and advice in Starfinder GM Core. Players create and control their player characters (PCs): they invent a history and personality, use the rules to determine their characters' statistics and abilities, and during play describe the actions their characters take and roll dice. The GM resolves the outcome of those actions. PCs are the protagonists; the GM portrays NPCs and monsters. The GM may limit options during character creation, but such restrictions should be discussed ahead of time.",
       "expected_answer_summary": "Starfinder uses one Game Master (GM) and the rest as players. The GM controls the story, setting, scenes, challenges, NPCs and monsters, rules interpretation, and outcome resolution; players create and control their PCs, describe their actions, and roll dice, with the GM resolving outcomes.",
       "source_page": "5, 6, 7, 389, 391",
-      "notes": "Tests: GM vs player distinction, GM authority (story/setting/rules/outcomes), player authority (PC creation and actions), NPC/monster portrayal. Intro (5–7); Ch.8 (389 Making Choices, 391 GM has final say) for deeper gold.",
-      "gold_unit_ids": [],
+      "notes": "Tests: GM vs player distinction, GM authority (story/setting/rules/outcomes), player authority (PC creation and actions), NPC/monster portrayal. Intro (5\u20137); Ch.8 (389 Making Choices, 391 GM has final say) for deeper gold.",
+      "gold_unit_ids": [
+        "524bb3b7ffa142f8ae816b4e558ba50c45cbb7931c04d7bf5705072fce830474"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "524bb3b7ffa142f8ae816b4e558ba50c45cbb7931c04d7bf5705072fce830474"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "524bb3b7ffa142f8ae816b4e558ba50c45cbb7931c04d7bf5705072fce830474"
+      ],
       "_supporting_gold": []
     },
     {
@@ -32,18 +38,24 @@
       "tier": "T1",
       "question_type": "atomic_rules",
       "question": "When the outcome is uncertain, what is the default way to resolve it (dice/cards/other), and how do you read the result (target number, degrees of success, opposing rolls, etc.)?",
-      "answer": "Starfinder resolves uncertain outcomes using dice. When success isn't certain you attempt a check: roll a d20, add the applicable modifiers (attribute, proficiency, circumstance/item/status bonuses and penalties), and compare the result to the Difficulty Class (DC). You succeed if the result is equal to or greater than the DC. Degrees of success: critical success (exceed DC by 10 or more), success (meet or exceed DC), failure (below DC), critical failure (fail by 10 or more). Natural 20 improves the result by one degree; natural 1 worsens it by one degree. Attack rolls are compared to Armor Class (AC); saving throws use Fortitude, Reflex, or Will against the effect's DC; skill checks use the skill's key attribute and proficiency. Flat checks use only the d20 result against the DC (no modifiers). Dice notation: d4–d20, NdX for multiple dice, d% for 1–100. Each procedure specifies which die and how to read it.",
-      "expected_answer_summary": "Uncertainty is resolved with dice. Checks: roll d20, add modifiers, compare to DC; success if result ≥ DC. Degrees of success: critical success (beat DC by 10+), success, failure, critical failure (fail by 10+). Natural 20/1 shift degree. Attack vs AC; saves vs effect DC; flat checks use raw d20 vs DC. Dice notation: d4–d20, NdX, d%.",
+      "answer": "Starfinder resolves uncertain outcomes using dice. When success isn't certain you attempt a check: roll a d20, add the applicable modifiers (attribute, proficiency, circumstance/item/status bonuses and penalties), and compare the result to the Difficulty Class (DC). You succeed if the result is equal to or greater than the DC. Degrees of success: critical success (exceed DC by 10 or more), success (meet or exceed DC), failure (below DC), critical failure (fail by 10 or more). Natural 20 improves the result by one degree; natural 1 worsens it by one degree. Attack rolls are compared to Armor Class (AC); saving throws use Fortitude, Reflex, or Will against the effect's DC; skill checks use the skill's key attribute and proficiency. Flat checks use only the d20 result against the DC (no modifiers). Dice notation: d4\u2013d20, NdX for multiple dice, d% for 1\u2013100. Each procedure specifies which die and how to read it.",
+      "expected_answer_summary": "Uncertainty is resolved with dice. Checks: roll d20, add modifiers, compare to DC; success if result \u2265 DC. Degrees of success: critical success (beat DC by 10+), success, failure, critical failure (fail by 10+). Natural 20/1 shift degree. Attack vs AC; saves vs effect DC; flat checks use raw d20 vs DC. Dice notation: d4\u2013d20, NdX, d%.",
       "source_page": "6, 8, 391, 392, 393, 394, 395, 396",
-      "notes": "Tests: dice as resolution, d20 vs DC, degrees of success, modifiers, attack rolls, saves, flat checks. Intro (6, 8) for notation; Ch.8 (391–396) for full check procedure and degrees of success.",
-      "gold_unit_ids": [],
+      "notes": "Tests: dice as resolution, d20 vs DC, degrees of success, modifiers, attack rolls, saves, flat checks. Intro (6, 8) for notation; Ch.8 (391\u2013396) for full check procedure and degrees of success.",
+      "gold_unit_ids": [
+        "d3565728df340db4ee6a5a619fa39cf165cd903549492950f22be85d1eea7594"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "d3565728df340db4ee6a5a619fa39cf165cd903549492950f22be85d1eea7594"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "d3565728df340db4ee6a5a619fa39cf165cd903549492950f22be85d1eea7594"
+      ],
       "_supporting_gold": []
     },
     {
@@ -51,18 +63,24 @@
       "tier": "T1",
       "question_type": "atomic_rules",
       "question": "How does time advance during play (turns/rounds/scenes/phases/ticks), and what causes the game to move from one step to the next?",
-      "answer": "Starfinder structures time differently depending on the mode of play. In encounters (combat, chases, tense social situations, or when timing is critical), time is structured: the players and GM roll initiative to determine who acts in what order. The encounter runs over a number of rounds; each round represents approximately 6 seconds in the game world. During a round, each participant takes one turn in initiative order. On your turn you can use up to three actions (plus free actions); each character can also use up to one reaction during the round, in response to certain events. The game moves from one turn to the next according to initiative order, and from one round to the next when every participant has acted. Exploration is handled in a free-form manner rather than in rounds. In downtime, time passes quickly—days or weeks—while characters work on long-term tasks (recovery, crafting, retraining, research, etc.), with progress represented by roleplaying scenes, discussions, and skill checks.",
+      "answer": "Starfinder structures time differently depending on the mode of play. In encounters (combat, chases, tense social situations, or when timing is critical), time is structured: the players and GM roll initiative to determine who acts in what order. The encounter runs over a number of rounds; each round represents approximately 6 seconds in the game world. During a round, each participant takes one turn in initiative order. On your turn you can use up to three actions (plus free actions); each character can also use up to one reaction during the round, in response to certain events. The game moves from one turn to the next according to initiative order, and from one round to the next when every participant has acted. Exploration is handled in a free-form manner rather than in rounds. In downtime, time passes quickly\u2014days or weeks\u2014while characters work on long-term tasks (recovery, crafting, retraining, research, etc.), with progress represented by roleplaying scenes, discussions, and skill checks.",
       "expected_answer_summary": "Time advances through three modes: encounters (structured rounds of ~6 seconds each, with turns in initiative order and 3 actions per turn plus one reaction per round), free-form exploration, and downtime (days/weeks for long-term tasks). Movement from step to step is driven by initiative order in encounters and by table agreement in exploration and downtime.",
       "source_page": "9, 11, 389, 390, 427, 430, 433",
-      "notes": "Tests: encounter rounds and turns, initiative order, 3-action economy, exploration vs encounter vs downtime. Intro (9, 11); Ch.8 (389–390 Modes of Play); full encounter p.427, exploration p.430, downtime p.433.",
-      "gold_unit_ids": [],
+      "notes": "Tests: encounter rounds and turns, initiative order, 3-action economy, exploration vs encounter vs downtime. Intro (9, 11); Ch.8 (389\u2013390 Modes of Play); full encounter p.427, exploration p.430, downtime p.433.",
+      "gold_unit_ids": [
+        "3cb52e92a928cd489aad46a3b5de952715a985786d9b10c17f7f0b75d785fd3c"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "3cb52e92a928cd489aad46a3b5de952715a985786d9b10c17f7f0b75d785fd3c"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "3cb52e92a928cd489aad46a3b5de952715a985786d9b10c17f7f0b75d785fd3c"
+      ],
       "_supporting_gold": []
     },
     {
@@ -70,17 +88,25 @@
       "tier": "T1",
       "question_type": "atomic_rules",
       "question": "What can a player character do when they act (actions, movement, reactions/interrupts, free actions), and what limits apply?",
-      "answer": "During an encounter, a character gets 3 actions and 1 reaction per turn. Abilities are marked with icons: [one-action], [two-actions], [three-actions], [reaction], or [free-action]. Reactions have triggers and can be used when their trigger occurs, even when it's not your turn; only one reaction per round. The Ready basic action lets you prepare a single action to use as a reaction. Free actions can have triggers like reactions; a free action with no trigger can be used like a single action but doesn't count toward your three actions. Speaking normally doesn't take an action. For movement: your Speed governs how far you can move. Stride is an action with the move trait—move up to your Speed in feet; you can Stride multiple times in a turn. Step lets you move 5 feet without triggering reactions. Other move-trait actions include Crawl, Drop Prone, Stand. Move actions can trigger reactions (including for every 5 feet moved). The game uses a grid; difficult terrain and other terrain can impede movement. Multiple attack penalty applies to attack actions after the first on your turn (–5 second, –10 third or more; agile weapons reduce this).",
-      "expected_answer_summary": "In encounter mode you get 3 actions and 1 reaction per turn. Actions use icons (1–3 actions, reaction, free); reactions have triggers and are limited to one per round; free actions don't cost actions. Movement: Speed, Stride (move trait, up to Speed), Step (5 ft, no reaction triggers). Ready lets you defer an action as a reaction. Speaking is free. Multiple attack penalty applies to repeated attacks.",
+      "answer": "During an encounter, a character gets 3 actions and 1 reaction per turn. Abilities are marked with icons: [one-action], [two-actions], [three-actions], [reaction], or [free-action]. Reactions have triggers and can be used when their trigger occurs, even when it's not your turn; only one reaction per round. The Ready basic action lets you prepare a single action to use as a reaction. Free actions can have triggers like reactions; a free action with no trigger can be used like a single action but doesn't count toward your three actions. Speaking normally doesn't take an action. For movement: your Speed governs how far you can move. Stride is an action with the move trait\u2014move up to your Speed in feet; you can Stride multiple times in a turn. Step lets you move 5 feet without triggering reactions. Other move-trait actions include Crawl, Drop Prone, Stand. Move actions can trigger reactions (including for every 5 feet moved). The game uses a grid; difficult terrain and other terrain can impede movement. Multiple attack penalty applies to attack actions after the first on your turn (\u20135 second, \u201310 third or more; agile weapons reduce this).",
+      "expected_answer_summary": "In encounter mode you get 3 actions and 1 reaction per turn. Actions use icons (1\u20133 actions, reaction, free); reactions have triggers and are limited to one per round; free actions don't cost actions. Movement: Speed, Stride (move trait, up to Speed), Step (5 ft, no reaction triggers). Ready lets you defer an action as a reaction. Speaking is free. Multiple attack penalty applies to repeated attacks.",
       "source_page": "390, 406, 408, 409, 410, 412, 413, 414",
       "notes": "Tests: 3-action economy, reaction (one per round, triggers), free actions, Ready, movement (Stride, Step, Speed, grid). Related: basic actions (408), disrupting actions (407).",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "d51fddc7f545c4f7cb8d16fab56a61ee4c7699928e2b2d3accdd7b294ec7a189"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "d51fddc7f545c4f7cb8d16fab56a61ee4c7699928e2b2d3accdd7b294ec7a189"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
-      "_status": "cited"
+      "_status": "cited",
+      "_required_gold": [
+        "d51fddc7f545c4f7cb8d16fab56a61ee4c7699928e2b2d3accdd7b294ec7a189"
+      ],
+      "_supporting_gold": []
     },
     {
       "id": "atomic_u05_what_must_be_tracked",
@@ -90,15 +116,21 @@
       "answer": "Track character statistics on the character sheet: total modifiers for key checks (attack modifier, spell attack modifier, spell DC, etc.), with persistent item bonuses often recorded ahead of time; circumstance and status bonuses are usually applied in the moment. Track current and maximum Hit Points; temporary Hit Points if granted (separately, one source at a time). Track conditions (dying, wounded, doomed, unconscious, and others) and their values. During encounters, track initiative order and positioning on the grid; movement uses Speed; terrain (e.g. difficult terrain) and elevation affect movement. The character sheet records the character and what happens during play; maps and miniatures or pawns represent the battlefield and participants.",
       "expected_answer_summary": "Character sheet: modifiers for attacks/spells/saves, HP (current/max, temp HP if any), conditions (dying, wounded, doomed, etc.). Encounter: initiative order, grid positioning, Speed. Recording: character sheet for stats/HP/conditions; maps and tokens for positioning.",
       "source_page": "391, 402, 390, 412, 413",
-      "notes": "Tests: what to track (stats, HP, conditions, initiative, positioning), where recorded (sheet, map, tokens). Writing Down Statistics (391); HP/temp HP/conditions (402); movement/grid (390, 412–413).",
-      "gold_unit_ids": [],
+      "notes": "Tests: what to track (stats, HP, conditions, initiative, positioning), where recorded (sheet, map, tokens). Writing Down Statistics (391); HP/temp HP/conditions (402); movement/grid (390, 412\u2013413).",
+      "gold_unit_ids": [
+        "a8d48cc9741c37acca13aa6a610ec2f66c38d1e397c0acf17b99e05930f556cb"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "a8d48cc9741c37acca13aa6a610ec2f66c38d1e397c0acf17b99e05930f556cb"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "a8d48cc9741c37acca13aa6a610ec2f66c38d1e397c0acf17b99e05930f556cb"
+      ],
       "_supporting_gold": []
     },
     {
@@ -110,14 +142,20 @@
       "expected_answer_summary": "Roll initiative (usually Perception check; highest first). Act in initiative order each round; each round ~6 seconds. On your turn you get 3 actions and 1 reaction. Delay lets you defer your turn. Full sequence in encounter mode (p.427).",
       "source_page": "389, 390, 396, 397, 408",
       "notes": "Tests: initiative roll (Perception or skill), order (highest first), turns per round, Delay. Full encounter mode p.427.",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049"
+      ],
       "_supporting_gold": []
     },
     {
@@ -125,18 +163,24 @@
       "tier": "T2",
       "question_type": "atomic_rules",
       "question": "How often can a magic-user prepare spells, and what happens if they take damage while preparing/casting?",
-      "answer": "Spellcasting rules, including how often a character prepares spells and how preparation works, are in Chapter 7 (pages 294–301). When casting spells that require an attack roll, you use your spell attack modifier (d20 + spellcasting attribute modifier + proficiency bonus + bonuses and penalties) against the target's AC. When a spell requires a saving throw, targets attempt a save against your spell DC (10 + spellcasting attribute modifier + proficiency bonus + bonuses and penalties). Disrupting actions that might affect casting are described under \"disrupting actions\" (page 407). If you take damage or are interrupted while preparing or casting, the specific rules for that are in Chapter 7.",
-      "expected_answer_summary": "Preparation frequency and process are in Chapter 7 (294–301). Casting: spell attack roll vs AC or spell DC for saves; formulas in Ch.8 (394–395). Disrupting actions (e.g. damage while casting) are covered on page 407; full interruption rules in Ch.7.",
+      "answer": "Spellcasting rules, including how often a character prepares spells and how preparation works, are in Chapter 7 (pages 294\u2013301). When casting spells that require an attack roll, you use your spell attack modifier (d20 + spellcasting attribute modifier + proficiency bonus + bonuses and penalties) against the target's AC. When a spell requires a saving throw, targets attempt a save against your spell DC (10 + spellcasting attribute modifier + proficiency bonus + bonuses and penalties). Disrupting actions that might affect casting are described under \"disrupting actions\" (page 407). If you take damage or are interrupted while preparing or casting, the specific rules for that are in Chapter 7.",
+      "expected_answer_summary": "Preparation frequency and process are in Chapter 7 (294\u2013301). Casting: spell attack roll vs AC or spell DC for saves; formulas in Ch.8 (394\u2013395). Disrupting actions (e.g. damage while casting) are covered on page 407; full interruption rules in Ch.7.",
       "source_page": "394, 395, 407",
       "notes": "Tests: spell preparation (Ch.7), spell attack and spell DC (Ch.8), disrupting actions (407). Preparation and interruption detail in Chapter 7.",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "25f91be4a1f03de9f5c6ddee0bb3818ce1bfe2e7cac7dc18f383239d5bb00aa2"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "25f91be4a1f03de9f5c6ddee0bb3818ce1bfe2e7cac7dc18f383239d5bb00aa2"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "25f91be4a1f03de9f5c6ddee0bb3818ce1bfe2e7cac7dc18f383239d5bb00aa2"
+      ],
       "_supporting_gold": []
     },
     {
@@ -144,18 +188,24 @@
       "tier": "T2",
       "question_type": "atomic_rules",
       "question": "What happens at 0 hit points, and when does a character die from damage?",
-      "answer": "Creatures can't be reduced to fewer than 0 Hit Points. When most creatures reach 0 HP they die and are removed from play, unless the attack was nonlethal—then they're knocked out (usually 10+ minutes). Undead and constructs at 0 HP are destroyed. Player characters and other significant creatures don't automatically die at 0 HP: they're knocked out and at risk of death. You move your initiative to just before the turn you were reduced to 0; you gain the dying 1 condition (or dying 2 if the hit was a critical success or your critical failure; add your wounded value if you have it). Nonlethal damage doesn't give the dying condition—you're unconscious with 0 HP. While dying, you're unconscious; at the start of each of your turns you attempt a recovery check (flat check, DC = 10 + dying value): critical success reduces dying by 2, success by 1, failure increases by 1, critical failure by 2. If dying reaches 4, you die. Taking damage while dying increases dying by 1 (or 2 if from a critical hit or your critical failure). You can spend all your Hero Points (minimum 1) when dying would increase to lose dying and stabilize at 0 HP. You die instantly if you take damage equal to or greater than double your maximum HP in one blow, or from death effects (e.g. certain spells). When you lose the dying condition you gain or increase the wounded condition. Healing that restores you to 1+ HP ends dying and unconsciousness.",
-      "expected_answer_summary": "At 0 HP, PCs (and some significant creatures) are knocked out and gain the dying condition (1–4). Recovery check each turn (flat check DC 10 + dying); dying 4 = death. Damage while dying increases dying; Hero Points can stabilize. Instant death: massive damage (≥2× max HP) or death effects. Losing dying grants wounded. Nonlethal knocks out without dying.",
+      "answer": "Creatures can't be reduced to fewer than 0 Hit Points. When most creatures reach 0 HP they die and are removed from play, unless the attack was nonlethal\u2014then they're knocked out (usually 10+ minutes). Undead and constructs at 0 HP are destroyed. Player characters and other significant creatures don't automatically die at 0 HP: they're knocked out and at risk of death. You move your initiative to just before the turn you were reduced to 0; you gain the dying 1 condition (or dying 2 if the hit was a critical success or your critical failure; add your wounded value if you have it). Nonlethal damage doesn't give the dying condition\u2014you're unconscious with 0 HP. While dying, you're unconscious; at the start of each of your turns you attempt a recovery check (flat check, DC = 10 + dying value): critical success reduces dying by 2, success by 1, failure increases by 1, critical failure by 2. If dying reaches 4, you die. Taking damage while dying increases dying by 1 (or 2 if from a critical hit or your critical failure). You can spend all your Hero Points (minimum 1) when dying would increase to lose dying and stabilize at 0 HP. You die instantly if you take damage equal to or greater than double your maximum HP in one blow, or from death effects (e.g. certain spells). When you lose the dying condition you gain or increase the wounded condition. Healing that restores you to 1+ HP ends dying and unconsciousness.",
+      "expected_answer_summary": "At 0 HP, PCs (and some significant creatures) are knocked out and gain the dying condition (1\u20134). Recovery check each turn (flat check DC 10 + dying); dying 4 = death. Damage while dying increases dying; Hero Points can stabilize. Instant death: massive damage (\u22652\u00d7 max HP) or death effects. Losing dying grants wounded. Nonlethal knocks out without dying.",
       "source_page": "402, 403, 404, 405",
       "notes": "Tests: 0 HP (knocked out vs death), dying condition and recovery checks, Heroic Recovery, massive damage, death effects, wounded. Undead/constructs destroyed at 0 HP.",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "e4d11b8368b0f9a96189dde881aa88e1d6c9ea69a4f6a0265f9f742ba191d99e"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "e4d11b8368b0f9a96189dde881aa88e1d6c9ea69a4f6a0265f9f742ba191d99e"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "e4d11b8368b0f9a96189dde881aa88e1d6c9ea69a4f6a0265f9f742ba191d99e"
+      ],
       "_supporting_gold": []
     },
     {
@@ -163,7 +213,7 @@
       "tier": "T2",
       "question_type": "atomic_rules",
       "question": "How do reaction rolls and morale checks work (when to roll, what dice, and how to interpret results)?",
-      "answer": "Starfinder 2e does not have a codified morale-check mechanic or reaction table. NPC and monster retreat or willingness to parley are adjudicated by the GM based on the situation. The word \"reaction\" in Starfinder refers to the [reaction] action type—one per round, with triggers—not a reaction roll to determine NPC attitude.",
+      "answer": "Starfinder 2e does not have a codified morale-check mechanic or reaction table. NPC and monster retreat or willingness to parley are adjudicated by the GM based on the situation. The word \"reaction\" in Starfinder refers to the [reaction] action type\u2014one per round, with triggers\u2014not a reaction roll to determine NPC attitude.",
       "expected_answer_summary": "Starfinder 2e does not have morale checks or reaction rolls; NPC behavior and retreat are GM-adjudicated. \"Reaction\" in Starfinder means the [reaction] action type (one per round, triggered), not a dice roll for attitude.",
       "source_page": null,
       "notes": "NOT APPLICABLE: StarFinder has no codified morale table or reaction roll. Refusal or 'no rule exists' is the correct answer.",
@@ -187,14 +237,20 @@
       "expected_answer_summary": "Movement: Speed sets distance; Stride (move trait, up to Speed per use), Step (5 ft, no reactions). Grid-based (e.g. 5 ft per square); difficult terrain and terrain types impede; cover and flanking affect AC. Travel speed in exploration. Encumbrance (if any) is in Equipment; Ch.8 covers movement rules.",
       "source_page": "390, 410, 412, 413, 414, 415, 416, 417",
       "notes": "Tests: Speed, Stride, Step, grid, terrain, cover, flanking. Encumbrance not in provided excerpt; may be in Equipment chapter.",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "6f2681aa6a908fa486ddb46f3fdc5d290607f1806b38084a29b3ac74d4173c66"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "6f2681aa6a908fa486ddb46f3fdc5d290607f1806b38084a29b3ac74d4173c66"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "6f2681aa6a908fa486ddb46f3fdc5d290607f1806b38084a29b3ac74d4173c66"
+      ],
       "_supporting_gold": []
     },
     {
@@ -202,18 +258,24 @@
       "tier": "T2",
       "question_type": "atomic_rules",
       "question": "In dungeon exploration (outside combat), how is time tracked and when do you check for wandering monsters or other time-based events?",
-      "answer": "In exploration mode, time is more flexible—minutes, hours, or days in the game world can pass quickly. Characters use travel Speed when moving. Exploration activities include Avoiding Notice, Detecting Magic, Scouting, Searching, and others. You can rest while exploring to recover HP and abilities, and make daily preparations at the start of each day. Developments during exploration often lead to encounters; the GM switches to encounter mode (e.g. \"roll for initiative\") until the encounter ends, then returns to exploration. Rules for exploration mode start on page 430; rest and daily preparations on page 432. Wandering-monster or other time-based encounter-check procedures, if defined for Starfinder, would be in the GM Core or the full exploration section.",
+      "answer": "In exploration mode, time is more flexible\u2014minutes, hours, or days in the game world can pass quickly. Characters use travel Speed when moving. Exploration activities include Avoiding Notice, Detecting Magic, Scouting, Searching, and others. You can rest while exploring to recover HP and abilities, and make daily preparations at the start of each day. Developments during exploration often lead to encounters; the GM switches to encounter mode (e.g. \"roll for initiative\") until the encounter ends, then returns to exploration. Rules for exploration mode start on page 430; rest and daily preparations on page 432. Wandering-monster or other time-based encounter-check procedures, if defined for Starfinder, would be in the GM Core or the full exploration section.",
       "expected_answer_summary": "Exploration mode: time is flexible (minutes to days); travel Speed for movement; activities (Avoid Notice, Scout, Search, etc.). Rest recovers HP and abilities; daily preparations at day start. GM switches to encounter mode when appropriate. Full exploration rules p.430; wandering-monster/time-based checks may be in GM Core.",
       "source_page": "389, 390, 430, 432",
       "notes": "Tests: exploration mode, flexible time, travel Speed, exploration activities, rest, daily prep, transition to encounters. Time-based encounter checks (e.g. wandering monsters) not in Player Core excerpt; may be in GM Core.",
-      "gold_unit_ids": [],
+      "gold_unit_ids": [
+        "86831be38ec98afb48ed3862e54c88be4338e0cb6e8625574e72cb985d42c47d"
+      ],
       "gold_locations": {},
-      "required_gold": [],
+      "required_gold": [
+        "86831be38ec98afb48ed3862e54c88be4338e0cb6e8625574e72cb985d42c47d"
+      ],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
       "_status": "cited",
-      "_required_gold": [],
+      "_required_gold": [
+        "86831be38ec98afb48ed3862e54c88be4338e0cb6e8625574e72cb985d42c47d"
+      ],
       "_supporting_gold": []
     },
     {
@@ -221,17 +283,18 @@
       "tier": "T2",
       "question_type": "atomic_rules",
       "question": "How does surprise work and what advantage does the surprising side get?",
-      "answer": "",
-      "expected_answer_summary": "",
-      "source_page": null,
-      "notes": "",
+      "answer": "Surprise attacks should be used sparingly, even in dangerous areas. The fact that PCs are usually in a group scares away most animals, and setting a watch can deter even more attackers. Surprise attacks are most likely if the PCs did something in advance that would lead to the ambush (e.g. flaunting wealth then ambushed by mercenaries, or attacking enemies then retreating to rest and being counterattacked). If the PCs set up camp hastily and do not set a watch, they might be in trouble if attacked; this should happen only in cases of extreme sloppiness. It is usually better to ask the PCs if they're setting up watches (GM Core p.43) rather than assume silence means they aren't. Watches and surprise: adventuring parties usually put people on guard while others rest; watch duty also interrupts sleep, so the watch schedule must account for everyone's rest. The Watches and Rest table gives total time needed assuming equal rotating watches. If a surprise encounter occurs during rest, the GM can roll randomly to determine which character is on watch. All characters roll initiative; sleeping characters typically roll Perception with a \u20134 status penalty for being unconscious. They don't automatically wake when rolling initiative but may attempt a Perception check to wake at the start of their turn due to noise. A savvy enemy can wait for a particularly vulnerable character to take watch and then the attack can happen on that character's watch automatically; alternatively the GM may have the ambusher attempt a Stealth check against all characters' Perception DCs to see if anyone noticed the approach.",
+      "expected_answer_summary": "Surprise used sparingly; group and watch deter attacks. Likely when PCs invited it (e.g. flaunting wealth, retreat after attacking). Ask if setting watch (GM Core p.43) rather than assume. Watches and Rest table; if surprise during rest: random who's on watch, everyone rolls initiative; sleeping: Perception \u20134, may wake on turn. Attacker can target vulnerable watch or Stealth vs all Perception DCs.",
+      "source_page": "GM Core p.38, p.43",
+      "notes": "Rule is in GM Core, not Player Core. Page 38: Surprise Attacks (when to use, when likely, ask about watches). Page 43: Watches and Surprise Attacks (watch schedule, Watches and Rest table, initiative and Perception for sleepers, Stealth vs Perception DCs).",
+      "source_book": "GM Core",
       "gold_unit_ids": [],
       "gold_locations": {},
       "required_gold": [],
       "supporting_gold": [],
       "required_gold_rationale": {},
       "_mode": "single_cite",
-      "_status": "pending",
+      "_status": "cited",
       "_required_gold": [],
       "_supporting_gold": []
     }
