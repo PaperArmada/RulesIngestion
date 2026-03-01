@@ -52,6 +52,10 @@ from retrieval_lab.store import (
     substrate_run_id,
 )
 from retrieval_lab.embedding_enrichment import build_embedding_text
+from retrieval_lab.chunk_quality_gate import (
+    evaluate_chunk_quality_gate,
+    summarize_chunk_quality,
+)
 from retrieval_lab.substrate_loader import (
     fold_under_threshold_into_adjacent,
     load_evidence_units,
@@ -490,6 +494,30 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     family_id_to_anchor_unit_id = context["family_id_to_anchor_unit_id"]
     run_id_family = context["run_id_family"]
 
+    chunk_quality_summary = summarize_chunk_quality(corpus)
+    logger.info(
+        "Chunk quality: units=%d short<=40=%d (%.3f) short<=80=%d (%.3f) duplicate_rate=%.3f",
+        chunk_quality_summary["total_units"],
+        chunk_quality_summary["short_le_40"],
+        chunk_quality_summary["short_le_40_rate"],
+        chunk_quality_summary["short_le_80"],
+        chunk_quality_summary["short_le_80_rate"],
+        chunk_quality_summary["duplicate_text_entry_rate"],
+    )
+    if config.chunk_quality_gate_enabled:
+        violations = evaluate_chunk_quality_gate(
+            chunk_quality_summary,
+            max_short_le_40_rate=config.chunk_quality_max_short_le_40_rate,
+            max_short_le_80_rate=config.chunk_quality_max_short_le_80_rate,
+            max_duplicate_text_entry_rate=config.chunk_quality_max_duplicate_text_entry_rate,
+        )
+        if violations:
+            raise ValueError(
+                "Chunk quality gate failed: "
+                + "; ".join(violations)
+                + " (set chunk_quality_gate_enabled=false to bypass explicitly)"
+            )
+
     grounding_context = _load_and_ground_queries(
         config,
         retrieval_mode,
@@ -523,6 +551,10 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     output_dir = Path(config.output_dir) / experiment_id
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "embeddings").mkdir(exist_ok=True)
+    (output_dir / "chunk_quality_gate.json").write_text(
+        json.dumps(chunk_quality_summary, indent=2),
+        encoding="utf-8",
+    )
     benchmark_lint_summary: Optional[Dict[str, Any]] = None
 
     results_by_model: Dict[str, Dict[str, Any]] = {}
@@ -795,6 +827,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "raw_merge_score_floor": getattr(config, "raw_merge_score_floor", True),
         "raw_merge_rank_floor": getattr(config, "raw_merge_rank_floor", True),
         "raw_merge_coverage_bonus": getattr(config, "raw_merge_coverage_bonus", 0.0),
+        "chunk_quality_gate_enabled": bool(getattr(config, "chunk_quality_gate_enabled", False)),
+        "chunk_quality_max_short_le_40_rate": float(getattr(config, "chunk_quality_max_short_le_40_rate", 0.10)),
+        "chunk_quality_max_short_le_80_rate": float(getattr(config, "chunk_quality_max_short_le_80_rate", 0.20)),
+        "chunk_quality_max_duplicate_text_entry_rate": float(
+            getattr(config, "chunk_quality_max_duplicate_text_entry_rate", 0.05)
+        ),
         "baseline_metrics_path": config.baseline_metrics_path,
         "expand_context": flags.expand_context,
         "expand_context_n": flags.expand_context_n,
@@ -831,6 +869,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "grounding_summary": grounding_summary,
         "results": results_by_model,
         "stage_timing_sec": stage_timing_sec,
+        "chunk_quality_summary": chunk_quality_summary,
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }

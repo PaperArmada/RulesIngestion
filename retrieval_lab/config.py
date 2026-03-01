@@ -223,6 +223,11 @@ class ExperimentConfig:
     dependency_pairing_emax: int = 6
     # Optional path to baseline metrics.json for report delta section.
     baseline_metrics_path: Optional[str] = None
+    # Optional fail-fast gate for corpus chunk quality.
+    chunk_quality_gate_enabled: bool = False
+    chunk_quality_max_short_le_40_rate: float = 0.10
+    chunk_quality_max_short_le_80_rate: float = 0.20
+    chunk_quality_max_duplicate_text_entry_rate: float = 0.05
     # Embedding metadata enrichment: baseline (text only) | path | type | table_title | topic_tags | co_retrieval_hints | page | full.
     # When set, run_id gets _embed_{profile} suffix so embeddings are recomputed per profile.
     embedding_enrichment_profile: Optional[str] = None
@@ -323,6 +328,13 @@ class ExperimentConfig:
             raise ValueError("top_k must be non-empty")
         if self.dual_list_fusion and self.dual_list_kfinal < max(self.top_k):
             raise ValueError("dual_list_kfinal must be >= max(top_k) when dual_list_fusion is enabled")
+        for value_name, value in (
+            ("chunk_quality_max_short_le_40_rate", self.chunk_quality_max_short_le_40_rate),
+            ("chunk_quality_max_short_le_80_rate", self.chunk_quality_max_short_le_80_rate),
+            ("chunk_quality_max_duplicate_text_entry_rate", self.chunk_quality_max_duplicate_text_entry_rate),
+        ):
+            if not (0.0 <= float(value) <= 1.0):
+                raise ValueError(f"{value_name} must be in [0, 1]")
         qe = self.query_enhancement
         if qe.enabled:
             if qe.mode not in ("none", "dict", "llm", "llm+dict", "decompose"):
@@ -459,6 +471,12 @@ class ExperimentConfig:
             dependency_pairing_expand=pairing.enabled,
             dependency_pairing_emax=pairing.emax,
             baseline_metrics_path=str(data["baseline_metrics_path"]) if data.get("baseline_metrics_path") else None,
+            chunk_quality_gate_enabled=bool(data.get("chunk_quality_gate_enabled", False)),
+            chunk_quality_max_short_le_40_rate=float(data.get("chunk_quality_max_short_le_40_rate", 0.10)),
+            chunk_quality_max_short_le_80_rate=float(data.get("chunk_quality_max_short_le_80_rate", 0.20)),
+            chunk_quality_max_duplicate_text_entry_rate=float(
+                data.get("chunk_quality_max_duplicate_text_entry_rate", 0.05)
+            ),
             embedding_enrichment_profile=(str(data.get("embedding_enrichment_profile") or "").strip() or None),
             crossref=crossref,
             dual_list=dual_list,
