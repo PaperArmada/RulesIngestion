@@ -30,7 +30,9 @@
       "gold_unit_ids": [
         "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
       "supporting_gold": [
         "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
       ],
@@ -45,6 +47,9 @@
           "page": 7,
           "structural_path": [
             "COUNTERACTING"
+          ],
+          "source_unit_ids": [
+            "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
           ]
         }
       },
@@ -66,10 +71,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/2/Table/2",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/8"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "50f8543fc760103ba758d98a9164e4e7c82916bec494050bfa841173933d7524",
+        "f38fe045c2f372704a1443a7ad6c29bf56ce708136e07bf46d885a0e031b06e7",
+        "f4146f329d6b04217c1a566576f262dc4837c7c41f05bad73214eee1e7542729"
+      ],
+      "required_gold": [
+        "50f8543fc760103ba758d98a9164e4e7c82916bec494050bfa841173933d7524",
+        "f38fe045c2f372704a1443a7ad6c29bf56ce708136e07bf46d885a0e031b06e7",
+        "f4146f329d6b04217c1a566576f262dc4837c7c41f05bad73214eee1e7542729"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "50f8543fc760103ba758d98a9164e4e7c82916bec494050bfa841173933d7524",
+        "f38fe045c2f372704a1443a7ad6c29bf56ce708136e07bf46d885a0e031b06e7",
+        "f4146f329d6b04217c1a566576f262dc4837c7c41f05bad73214eee1e7542729"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "50f8543fc760103ba758d98a9164e4e7c82916bec494050bfa841173933d7524": {
@@ -119,10 +136,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/20",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/34"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "631182b5c982bc04e247847dd48f9e1235beb2b8b6c804a83552dfd086014dd6",
+        "8ed348fae82675c0b4d711a2be2d0b3a4f01076e8a5a9c31f0860f8db32a9e76",
+        "da1eee7ab153ce4c022b79ab6440816bcde83c6f4d0b6fb2c2e462a8c33f010d"
+      ],
+      "required_gold": [
+        "631182b5c982bc04e247847dd48f9e1235beb2b8b6c804a83552dfd086014dd6",
+        "8ed348fae82675c0b4d711a2be2d0b3a4f01076e8a5a9c31f0860f8db32a9e76",
+        "da1eee7ab153ce4c022b79ab6440816bcde83c6f4d0b6fb2c2e462a8c33f010d"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "631182b5c982bc04e247847dd48f9e1235beb2b8b6c804a83552dfd086014dd6",
+        "8ed348fae82675c0b4d711a2be2d0b3a4f01076e8a5a9c31f0860f8db32a9e76",
+        "da1eee7ab153ce4c022b79ab6440816bcde83c6f4d0b6fb2c2e462a8c33f010d"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "631182b5c982bc04e247847dd48f9e1235beb2b8b6c804a83552dfd086014dd6": {
@@ -186,10 +215,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-232-249::/page/4/Text/20",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/9"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "5979c9644983ed269a06c866753d0a421d4fe850075b8c58b0d327339a915436",
+        "9d7b93c4b14347aa16612be5565b52277c9332ee080027803ccdbd87332e9d5b",
+        "9800f8f445647fc0bce89788a8bce3829cc1d7c07470f0ade2a2959e02c5e1f0"
+      ],
+      "required_gold": [
+        "5979c9644983ed269a06c866753d0a421d4fe850075b8c58b0d327339a915436",
+        "9d7b93c4b14347aa16612be5565b52277c9332ee080027803ccdbd87332e9d5b",
+        "9800f8f445647fc0bce89788a8bce3829cc1d7c07470f0ade2a2959e02c5e1f0"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "5979c9644983ed269a06c866753d0a421d4fe850075b8c58b0d327339a915436",
+        "9d7b93c4b14347aa16612be5565b52277c9332ee080027803ccdbd87332e9d5b",
+        "9800f8f445647fc0bce89788a8bce3829cc1d7c07470f0ade2a2959e02c5e1f0"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "5979c9644983ed269a06c866753d0a421d4fe850075b8c58b0d327339a915436": {
@@ -281,6 +322,9 @@
           "page": 8,
           "structural_path": [
             "PERCEPTION"
+          ],
+          "source_unit_ids": [
+            "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
           ]
         }
       },
@@ -304,10 +348,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/19",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/20"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04",
+        "a9f3f41442e4a7edfdf21b88d46f06f1d59a1b2092ff6ba648b10eba60a5a466",
+        "426cf38f230bc762663f63340dc2fa1d6c47f47002ce9b75008315f940746c65"
+      ],
+      "required_gold": [
+        "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04",
+        "a9f3f41442e4a7edfdf21b88d46f06f1d59a1b2092ff6ba648b10eba60a5a466",
+        "426cf38f230bc762663f63340dc2fa1d6c47f47002ce9b75008315f940746c65"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04",
+        "a9f3f41442e4a7edfdf21b88d46f06f1d59a1b2092ff6ba648b10eba60a5a466",
+        "426cf38f230bc762663f63340dc2fa1d6c47f47002ce9b75008315f940746c65"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04": {
@@ -365,10 +421,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/SectionHeader/42",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/Text/46"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165",
+        "dbcf0aeabd57daf0f6dddd7083b4ddb67e930ac58b4a7260fef65f7121390f91",
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c"
+      ],
+      "required_gold": [
+        "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165",
+        "dbcf0aeabd57daf0f6dddd7083b4ddb67e930ac58b4a7260fef65f7121390f91",
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165",
+        "dbcf0aeabd57daf0f6dddd7083b4ddb67e930ac58b4a7260fef65f7121390f91",
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165": {
@@ -441,6 +509,9 @@
           "page": 15,
           "structural_path": [
             "RECOVERY CHECKS"
+          ],
+          "source_unit_ids": [
+            "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
           ]
         }
       },
@@ -463,7 +534,9 @@
       "gold_unit_ids": [
         "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
+      ],
       "supporting_gold": [
         "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
       ],
@@ -479,6 +552,9 @@
           "structural_path": [
             "ARMOR UPGRADES",
             "LIMITED ARMOR UPGRADES"
+          ],
+          "source_unit_ids": [
+            "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
           ]
         }
       },
@@ -501,10 +577,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592",
+        "758292bad59c6287b997fff6a9618035980fe774048141309e58bf78345d9529",
+        "352eae4d2df7c4bc78cde8ebb87c635476300335851ce89587affdceea6ecce6"
+      ],
+      "required_gold": [
+        "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592",
+        "758292bad59c6287b997fff6a9618035980fe774048141309e58bf78345d9529",
+        "352eae4d2df7c4bc78cde8ebb87c635476300335851ce89587affdceea6ecce6"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592",
+        "758292bad59c6287b997fff6a9618035980fe774048141309e58bf78345d9529",
+        "352eae4d2df7c4bc78cde8ebb87c635476300335851ce89587affdceea6ecce6"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592": {
@@ -571,6 +659,9 @@
           "page": 15,
           "structural_path": [
             "PRONE"
+          ],
+          "source_unit_ids": [
+            "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
           ]
         }
       },
@@ -605,6 +696,9 @@
           "page": 15,
           "structural_path": [
             "PRONE"
+          ],
+          "source_unit_ids": [
+            "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
           ]
         }
       },
@@ -639,6 +733,9 @@
           "page": 16,
           "structural_path": [
             "Wounded"
+          ],
+          "source_unit_ids": [
+            "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0"
           ]
         }
       },
@@ -675,6 +772,9 @@
           "page": 15,
           "structural_path": [
             "RECOVERY CHECKS"
+          ],
+          "source_unit_ids": [
+            "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
           ]
         }
       },
@@ -716,6 +816,9 @@
           "page": 2,
           "structural_path": [
             "CONCEALED"
+          ],
+          "source_unit_ids": [
+            "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13"
           ]
         },
         "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791": {
@@ -723,6 +826,9 @@
           "structural_path": [
             "CONDITIONS APPENDIX",
             "CONCEALED"
+          ],
+          "source_unit_ids": [
+            "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791"
           ]
         }
       },
@@ -762,6 +868,9 @@
           "structural_path": [
             "CONDITIONS APPENDIX",
             "BLINDED"
+          ],
+          "source_unit_ids": [
+            "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70"
           ]
         },
         "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf": {
@@ -769,6 +878,9 @@
           "structural_path": [
             "PERCEPTION AND DETECTION",
             "DARKNESS"
+          ],
+          "source_unit_ids": [
+            "20f01ca952671cdce59b7d3851379d9c934b316f4435585228e0cec051e760bf"
           ]
         }
       },
@@ -788,10 +900,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/14/Text/17",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-250-267::/page/6/Text/17"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90",
+        "61b46bab7be558297b6929c6aa963735f98fb63b41c2ca6c77f21cae8e0b165f",
+        "c4d129cdd2dfa9509a150ed31962465c2d2eb5a92a416d1ae829a96db870adb3"
+      ],
+      "required_gold": [
+        "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90",
+        "61b46bab7be558297b6929c6aa963735f98fb63b41c2ca6c77f21cae8e0b165f",
+        "c4d129cdd2dfa9509a150ed31962465c2d2eb5a92a416d1ae829a96db870adb3"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90",
+        "61b46bab7be558297b6929c6aa963735f98fb63b41c2ca6c77f21cae8e0b165f",
+        "c4d129cdd2dfa9509a150ed31962465c2d2eb5a92a416d1ae829a96db870adb3"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90": {
@@ -858,6 +982,9 @@
           "page": 15,
           "structural_path": [
             "PRONE"
+          ],
+          "source_unit_ids": [
+            "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
           ]
         }
       },
@@ -891,6 +1018,9 @@
           "page": 14,
           "structural_path": [
             "OFF-GUARD"
+          ],
+          "source_unit_ids": [
+            "1fdc41999f031dfc8b9c253df6559c0d28a60d93b9481b83fbf803a12a27098a"
           ]
         }
       },
@@ -912,7 +1042,9 @@
       "gold_unit_ids": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
       "supporting_gold": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
       ],
@@ -925,7 +1057,10 @@
       "gold_locations": {
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
           "page": 1,
-          "structural_path": []
+          "structural_path": [],
+          "source_unit_ids": [
+            "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+          ]
         }
       },
       "_mode": "single_cite",
@@ -943,10 +1078,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/10"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437"
+      ],
+      "required_gold": [
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c": {
@@ -1000,7 +1147,10 @@
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
       "supporting_gold": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
@@ -1016,12 +1166,18 @@
       "gold_locations": {
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
           "page": 1,
-          "structural_path": []
+          "structural_path": [],
+          "source_unit_ids": [
+            "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+          ]
         },
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46": {
           "page": 1,
           "structural_path": [
             "Free Actions"
+          ],
+          "source_unit_ids": [
+            "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
           ]
         }
       },
@@ -1040,10 +1196,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/4/SectionHeader/25",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/36"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "2a9adb804c349575eae16c542651fb4f5cb47c4eb75a1487c271b6c11cfab4a6",
+        "9d73437bf597fe66360f981fd997c57d03bf671e6097848de4850f2a314dfdd2",
+        "280f6ab21cb530e0bb41dce8dba0e53af6b7e89560a76885091033b429570a6d"
+      ],
+      "required_gold": [
+        "2a9adb804c349575eae16c542651fb4f5cb47c4eb75a1487c271b6c11cfab4a6",
+        "9d73437bf597fe66360f981fd997c57d03bf671e6097848de4850f2a314dfdd2",
+        "280f6ab21cb530e0bb41dce8dba0e53af6b7e89560a76885091033b429570a6d"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "2a9adb804c349575eae16c542651fb4f5cb47c4eb75a1487c271b6c11cfab4a6",
+        "9d73437bf597fe66360f981fd997c57d03bf671e6097848de4850f2a314dfdd2",
+        "280f6ab21cb530e0bb41dce8dba0e53af6b7e89560a76885091033b429570a6d"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "2a9adb804c349575eae16c542651fb4f5cb47c4eb75a1487c271b6c11cfab4a6": {
@@ -1107,7 +1275,9 @@
       "gold_unit_ids": [
         "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
       "supporting_gold": [
         "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
       ],
@@ -1122,6 +1292,9 @@
           "page": 4,
           "structural_path": [
             "REACTIONS IN ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
           ]
         }
       },
@@ -1142,7 +1315,9 @@
       "gold_unit_ids": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+      ],
       "supporting_gold": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
       ],
@@ -1155,7 +1330,10 @@
       "gold_locations": {
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
           "page": 1,
-          "structural_path": []
+          "structural_path": [],
+          "source_unit_ids": [
+            "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+          ]
         }
       },
       "_mode": "single_cite",
@@ -1173,10 +1351,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "e63d6b366f27fb5cee020f062cb8af378087c4181a2f369aed8e6fcaeff81b2d",
+        "f19fe016da4a2b83b1deb8a58fc75b9394c4a813b6413e9046c6f5b4f0553901"
+      ],
+      "required_gold": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "e63d6b366f27fb5cee020f062cb8af378087c4181a2f369aed8e6fcaeff81b2d",
+        "f19fe016da4a2b83b1deb8a58fc75b9394c4a813b6413e9046c6f5b4f0553901"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "e63d6b366f27fb5cee020f062cb8af378087c4181a2f369aed8e6fcaeff81b2d",
+        "f19fe016da4a2b83b1deb8a58fc75b9394c4a813b6413e9046c6f5b4f0553901"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86": {
@@ -1228,7 +1418,9 @@
       "gold_unit_ids": [
         "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
       "supporting_gold": [
         "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
       ],
@@ -1243,6 +1435,9 @@
           "page": 0,
           "structural_path": [
             "APPENDICES"
+          ],
+          "source_unit_ids": [
+            "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
           ]
         }
       },
@@ -1264,7 +1459,9 @@
       "gold_unit_ids": [
         "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
       "supporting_gold": [
         "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
       ],
@@ -1279,6 +1476,9 @@
           "page": 15,
           "structural_path": [
             "RECOVERY CHECKS"
+          ],
+          "source_unit_ids": [
+            "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
           ]
         }
       },
@@ -1297,10 +1497,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/5/Text/43",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "d139c04d86b3c0b1f8f00ff1ba345d2778b3f2dc9fe93d85075a1edc73f240f8"
+      ],
+      "required_gold": [
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "d139c04d86b3c0b1f8f00ff1ba345d2778b3f2dc9fe93d85075a1edc73f240f8"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86",
+        "d139c04d86b3c0b1f8f00ff1ba345d2778b3f2dc9fe93d85075a1edc73f240f8"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334": {
@@ -1351,7 +1563,9 @@
       "gold_unit_ids": [
         "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
+      ],
       "supporting_gold": [
         "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
       ],
@@ -1366,6 +1580,9 @@
           "page": 4,
           "structural_path": [
             "REACTIONS IN ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "2f214df2e0658769c548a7fbe8d0811c65ad0c9f332b8a18408806e89b6b2ce5"
           ]
         }
       },
@@ -1387,7 +1604,10 @@
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
+        "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
+      ],
       "supporting_gold": [
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e",
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
@@ -1403,12 +1623,18 @@
       "gold_locations": {
         "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e": {
           "page": 1,
-          "structural_path": []
+          "structural_path": [],
+          "source_unit_ids": [
+            "7ce5d68cfc61982d54a1e76ab2c1ac2c80b0d5266ffdc45cce82ea8d621b188e"
+          ]
         },
         "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46": {
           "page": 1,
           "structural_path": [
             "Free Actions"
+          ],
+          "source_unit_ids": [
+            "d5dec8bce48f3cc0af783036211c59f47b4115cf98bb0c29208b873997ae2e46"
           ]
         }
       },
@@ -1429,7 +1655,9 @@
       "gold_unit_ids": [
         "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
+      ],
       "supporting_gold": [
         "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
       ],
@@ -1444,6 +1672,9 @@
           "page": 0,
           "structural_path": [
             "APPENDICES"
+          ],
+          "source_unit_ids": [
+            "c7393d73da93239206c2bc939f529915e409ea2d6cb56ba10502451ac82a473c"
           ]
         }
       },
@@ -1465,7 +1696,9 @@
       "gold_unit_ids": [
         "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
       "supporting_gold": [
         "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
       ],
@@ -1480,6 +1713,9 @@
           "page": 15,
           "structural_path": [
             "RECOVERY CHECKS"
+          ],
+          "source_unit_ids": [
+            "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
           ]
         }
       },
@@ -1498,10 +1734,19 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10",
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4"
+      ],
+      "required_gold": [
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10",
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10",
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10": {
@@ -1578,10 +1823,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "4c33f5812b31d101305234b5b135cbaac0f5b726635a71a18923511108b08e6f",
+        "dc6a3b8ca9517ebe720a8b05203563e133ac895375a851b674315a26f7587212",
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682"
+      ],
+      "required_gold": [
+        "4c33f5812b31d101305234b5b135cbaac0f5b726635a71a18923511108b08e6f",
+        "dc6a3b8ca9517ebe720a8b05203563e133ac895375a851b674315a26f7587212",
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "4c33f5812b31d101305234b5b135cbaac0f5b726635a71a18923511108b08e6f",
+        "dc6a3b8ca9517ebe720a8b05203563e133ac895375a851b674315a26f7587212",
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "4c33f5812b31d101305234b5b135cbaac0f5b726635a71a18923511108b08e6f": {
@@ -1629,10 +1886,22 @@
       "legacy_gold_chunk_ids": [
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/10/Text/50"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "b1eeac6e94c2b74c5db5453413619090364aad770c2c26a4a2a385e64e6b166e",
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "412cb4c17607b34e7177b7825da32ba4b9563f30007e0a9b30d12d2df264363c"
+      ],
+      "required_gold": [
+        "b1eeac6e94c2b74c5db5453413619090364aad770c2c26a4a2a385e64e6b166e",
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "412cb4c17607b34e7177b7825da32ba4b9563f30007e0a9b30d12d2df264363c"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "b1eeac6e94c2b74c5db5453413619090364aad770c2c26a4a2a385e64e6b166e",
+        "87e2fae5494792189d89d6b5275ca28d90c5bf6083d51bbc6d5682d476f96334",
+        "412cb4c17607b34e7177b7825da32ba4b9563f30007e0a9b30d12d2df264363c"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "b1eeac6e94c2b74c5db5453413619090364aad770c2c26a4a2a385e64e6b166e": {
@@ -1685,10 +1954,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/45",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/46"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c",
+        "68fc282f782fe86bff2fef2b299d3ea6d5a5a196865bd5e5a1c0743a10da0c3e",
+        "d35d28f461608bd4fa61f6ee88e93d321547990afa8e0cd74089f98a5d861221"
+      ],
+      "required_gold": [
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c",
+        "68fc282f782fe86bff2fef2b299d3ea6d5a5a196865bd5e5a1c0743a10da0c3e",
+        "d35d28f461608bd4fa61f6ee88e93d321547990afa8e0cd74089f98a5d861221"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c",
+        "68fc282f782fe86bff2fef2b299d3ea6d5a5a196865bd5e5a1c0743a10da0c3e",
+        "d35d28f461608bd4fa61f6ee88e93d321547990afa8e0cd74089f98a5d861221"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "28fc16b4719e581adb183c4856cde43256bd0c325591394c7a776f8e8c25646c": {
@@ -1736,10 +2017,22 @@
       "legacy_gold_chunk_ids": [
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/8/Text/8"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c",
+        "b237df6a0ea00b4062756c31229bd4c72877c14d27c1d225c2b1537bf73ad74a",
+        "f6d32aaf72c5c50e1cfcc82804177325a9e17d46e36eaf5119d0345ac28bcff2"
+      ],
+      "required_gold": [
+        "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c",
+        "b237df6a0ea00b4062756c31229bd4c72877c14d27c1d225c2b1537bf73ad74a",
+        "f6d32aaf72c5c50e1cfcc82804177325a9e17d46e36eaf5119d0345ac28bcff2"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c",
+        "b237df6a0ea00b4062756c31229bd4c72877c14d27c1d225c2b1537bf73ad74a",
+        "f6d32aaf72c5c50e1cfcc82804177325a9e17d46e36eaf5119d0345ac28bcff2"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c": {
@@ -1785,10 +2078,22 @@
       "legacy_gold_chunk_ids": [
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/4/Text/17"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "d159b8bf0ee93d51b7ad9805ef406c8a69372ba7a83e8b402e3e8541671e5324",
+        "b09f1d7eb063ba0b3eb82c31721920f60ba3cfedc665c174bde679ef2e7dabfc"
+      ],
+      "required_gold": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "d159b8bf0ee93d51b7ad9805ef406c8a69372ba7a83e8b402e3e8541671e5324",
+        "b09f1d7eb063ba0b3eb82c31721920f60ba3cfedc665c174bde679ef2e7dabfc"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "d159b8bf0ee93d51b7ad9805ef406c8a69372ba7a83e8b402e3e8541671e5324",
+        "b09f1d7eb063ba0b3eb82c31721920f60ba3cfedc665c174bde679ef2e7dabfc"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437": {
@@ -1859,12 +2164,18 @@
           "page": 13,
           "structural_path": [
             "GRABBED"
+          ],
+          "source_unit_ids": [
+            "c6f3be87c23d2ecd877f2c3a7f13c6b15ed21f760878b18fdf25bbc7a8f88317"
           ]
         },
         "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5": {
           "page": 15,
           "structural_path": [
             "RESTRAINED"
+          ],
+          "source_unit_ids": [
+            "1daa5114d9115970c3a65070c4889c4d3e3f2d7f0fb85e2de1b52479e0177bd5"
           ]
         }
       },
@@ -1887,7 +2198,10 @@
         "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
         "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
+        "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
+      ],
       "supporting_gold": [
         "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2",
         "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
@@ -1906,6 +2220,9 @@
           "structural_path": [
             "ARMOR UPGRADES",
             "LIMITED ARMOR UPGRADES"
+          ],
+          "source_unit_ids": [
+            "eb59415d090835d9d8bb12166b353a09a2e218213a60446042a76741a33adfe2"
           ]
         },
         "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f": {
@@ -1913,6 +2230,9 @@
           "structural_path": [
             "WEAPON UPGRADES",
             "LIMITED WEAPON UPGRADES"
+          ],
+          "source_unit_ids": [
+            "7b608f88a52d4c5bef153b180be520b87a889ae8128a9e82a03cc4b035c0e01f"
           ]
         }
       },
@@ -1944,7 +2264,10 @@
       "gold_locations": {
         "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877": {
           "page": 9,
-          "structural_path": []
+          "structural_path": [],
+          "source_unit_ids": [
+            "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877"
+          ]
         }
       },
       "_mode": "single_cite",
@@ -1961,10 +2284,22 @@
       "legacy_gold_chunk_ids": [
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/13/Text/9"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905",
+        "a5fbaecbcb1cb910eba06ec99833dbb669d738b975aa22004616eba9bceaa9a6",
+        "f0ae780682ae593d89c3e063f08e716ede8ba82b7ad9fc848bda8cdb5fc8d481"
+      ],
+      "required_gold": [
+        "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905",
+        "a5fbaecbcb1cb910eba06ec99833dbb669d738b975aa22004616eba9bceaa9a6",
+        "f0ae780682ae593d89c3e063f08e716ede8ba82b7ad9fc848bda8cdb5fc8d481"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905",
+        "a5fbaecbcb1cb910eba06ec99833dbb669d738b975aa22004616eba9bceaa9a6",
+        "f0ae780682ae593d89c3e063f08e716ede8ba82b7ad9fc848bda8cdb5fc8d481"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905": {
@@ -2012,10 +2347,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/11/Text/12",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c"
+      ],
+      "required_gold": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437",
+        "66529e2ab87979b36c062b1978112584b959aeede4ae1e6222298b5f345d6a37",
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "8e7b3d79ae73a21f7f5e746d1eb0e8e542724a40f0ced2d7202d9a26c6b92437": {
@@ -2069,7 +2416,9 @@
       "gold_unit_ids": [
         "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
+      ],
       "supporting_gold": [
         "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
       ],
@@ -2084,6 +2433,9 @@
           "page": 17,
           "structural_path": [
             "UNTETHERED"
+          ],
+          "source_unit_ids": [
+            "f1668fbd798c0bf2381443e3f4aa453f9bcedeb2cc0031740af8e16d9e465503"
           ]
         }
       },
@@ -2105,7 +2457,10 @@
         "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
         "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
+        "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
+      ],
       "supporting_gold": [
         "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587",
         "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
@@ -2124,6 +2479,9 @@
           "structural_path": [
             "CONDITIONS APPENDIX",
             "CONDITION VALUES"
+          ],
+          "source_unit_ids": [
+            "0f68fa896a1beaee105afc47e79490d04234cd01eb517e603c8ffdd380bac587"
           ]
         },
         "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb": {
@@ -2131,6 +2489,9 @@
           "structural_path": [
             "CONDITIONS APPENDIX",
             "OVERRIDING CONDITIONS"
+          ],
+          "source_unit_ids": [
+            "e3ecdacaac860e719319ab61a8729903008d71ae733dd1c9d8e0225aaf685efb"
           ]
         }
       },
@@ -2151,7 +2512,9 @@
       "gold_unit_ids": [
         "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
+      ],
       "supporting_gold": [
         "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
       ],
@@ -2166,6 +2529,9 @@
           "page": 0,
           "structural_path": [
             "CHAPTER 3: CLASSES"
+          ],
+          "source_unit_ids": [
+            "2077b6e997c4a35a5d0ca4a1083c5e5d9934d8391c93b6b2b1e992c9d3faa7bd"
           ]
         }
       },
@@ -2186,7 +2552,9 @@
       "gold_unit_ids": [
         "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
+      ],
       "supporting_gold": [
         "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
       ],
@@ -2201,6 +2569,9 @@
           "page": 6,
           "structural_path": [
             "SUBTLE SPELLS"
+          ],
+          "source_unit_ids": [
+            "12ef141b16ccd6c12f3c4682ced2f96abd49e574b798d3d810084451dd12e2d0"
           ]
         }
       },
@@ -2222,7 +2593,9 @@
       "gold_unit_ids": [
         "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
       ],
-      "required_gold": [],
+      "required_gold": [
+        "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
+      ],
       "supporting_gold": [
         "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
       ],
@@ -2237,6 +2610,9 @@
           "page": 9,
           "structural_path": [
             "Condition"
+          ],
+          "source_unit_ids": [
+            "df5b9808025bdd917f6393ed5405fe7247ce18d0bb0b4a2eaa4d3e56c78cd9e2"
           ]
         }
       },
@@ -2255,10 +2631,22 @@
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-030-039::/page/5/Text/1",
         "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14"
       ],
-      "gold_unit_ids": [],
-      "required_gold": [],
+      "gold_unit_ids": [
+        "d4d96f056a25e5a7af1b2cf75e9033e016bed0f61b925f146b3412ebe6033709",
+        "56c0059740a81e57a873d04ee478d4ef6c6deba735454616521b8f811f0d9724",
+        "061e980c1e6434a9ac4eb1dfb2f01bf66506758785e06b1b50ab77ba6fe7749f"
+      ],
+      "required_gold": [
+        "d4d96f056a25e5a7af1b2cf75e9033e016bed0f61b925f146b3412ebe6033709",
+        "56c0059740a81e57a873d04ee478d4ef6c6deba735454616521b8f811f0d9724",
+        "061e980c1e6434a9ac4eb1dfb2f01bf66506758785e06b1b50ab77ba6fe7749f"
+      ],
       "supporting_gold": [],
-      "_required_gold": [],
+      "_required_gold": [
+        "d4d96f056a25e5a7af1b2cf75e9033e016bed0f61b925f146b3412ebe6033709",
+        "56c0059740a81e57a873d04ee478d4ef6c6deba735454616521b8f811f0d9724",
+        "061e980c1e6434a9ac4eb1dfb2f01bf66506758785e06b1b50ab77ba6fe7749f"
+      ],
       "_supporting_gold": [],
       "gold_locations": {
         "d4d96f056a25e5a7af1b2cf75e9033e016bed0f61b925f146b3412ebe6033709": {
