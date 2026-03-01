@@ -1,0 +1,126 @@
+# Workflow: Ingestion Best Practices
+
+This workflow is the canonical ingestion runbook for current Mark III usage.
+
+Goal: produce stable Stage B substrates quickly for retrieval tuning, and run Stage A' only when it is actually needed.
+
+---
+
+## 1) Decision rule: `A+B` first, `A'` second
+
+Use this default unless you explicitly need enrichment artifacts immediately.
+
+| Situation | Recommended path |
+|---|---|
+| Tuning dense/hybrid retrieval configs | Run `A+B` only (`--stage ab`) |
+| Running retrieval matrix on embedding/co-retrieval knobs | Run `A+B` only first |
+| Evaluating A'-driven retrieval behavior | Run `A+B`, then Stage A' as separate pass |
+| Building a fully enriched substrate for downstream indexing | Run `A+B`, then Stage A' |
+
+Why: Stage A' is materially slower and usually not required to improve baseline hybrid tuning loops.
+
+---
+
+## 2) Canonical naming and paths
+
+- Use `SwordsandWizardry` for benchmark naming in files and configs.
+- Treat `SwordsandWizardy` as legacy typo only.
+- Use `out/Swords&Wizardry` as canonical S&W corpus output path.
+
+---
+
+## 3) Canonical workflows
+
+Run all commands from `RulesIngestion` root.
+
+### 3.1 Single-page debugging (fast)
+
+Stage A only:
+
+```bash
+uv run python scripts/run_mark3_sample.py \
+  --pdf <PDF_PATH> \
+  --page <PAGE_INDEX> \
+  --stage a \
+  --out-dir out/mark3_sample
+```
+
+Stage A+B:
+
+```bash
+uv run python scripts/run_mark3_sample.py \
+  --pdf <PDF_PATH> \
+  --page <PAGE_INDEX> \
+  --stage ab \
+  --out-dir out/mark3_sample
+```
+
+### 3.2 Full-book ingestion for retrieval tuning (default)
+
+```bash
+uv run python scripts/run_mark3_full_pdf.py \
+  --pdf <PDF_PATH> \
+  --out-dir <OUT_DIR> \
+  --stage ab \
+  --dpi 200
+```
+
+Expected outputs include per-page Stage A/B artifacts plus:
+- `run_summary.json`
+- `evaluation_report.json`
+- `EVALUATION_REPORT.md`
+
+### 3.3 Optional queue runner (multi-book)
+
+```bash
+bash scripts/run_mark3_overnight_queue.sh \
+  --out-root out/mark3_overnight \
+  --dpi 200 \
+  --stage ab
+```
+
+### 3.4 Stage A' as separate second pass (when needed)
+
+Set API key first:
+
+```bash
+export OPENAI_API_KEY=<YOUR_KEY>
+```
+
+Run on one page dir:
+
+```bash
+uv run python scripts/run_stage_a_prime.py \
+  --page-dir <PAGE_DIR> \
+  --book-id <BOOK_ID>
+```
+
+Run on an entire Stage B substrate:
+
+```bash
+uv run python scripts/run_stage_a_prime.py \
+  --substrate-dir <SUBSTRATE_DIR> \
+  --book-id <BOOK_ID> \
+  --concurrency 10
+```
+
+---
+
+## 4) Retrieval handoff after ingestion
+
+For retrieval benchmarking:
+1. Keep the Stage B substrate fixed while tuning retrieval knobs.
+2. Use embed-only then eval-only with matching `run_id`.
+3. Only include A'-dependent retrieval settings after A' artifacts exist (or explicitly use runtime fallback flags where supported).
+
+---
+
+## 5) Verification checklist
+
+Before declaring an ingestion run complete:
+
+- `evaluation_report.json` exists at corpus root output.
+- Per-page `stageB.evidence_units.json` files exist.
+- Gate failures are reviewed in `EVALUATION_REPORT.md` before retrieval benchmarking.
+- Path naming follows canonical conventions (no new `SwordsandWizardy` references).
+
