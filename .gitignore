@@ -96,6 +96,8 @@ node_modules/
 __pycache__/
 saved_data/
 models--BAAI--bge-m3/
+out/retrieval_lab/experiments/
+.qe_cache/
 
 # Legacy service directories (now split across DungeonMindServer/LandingPage)
 # Note: Use leading slash to match only at root, not in subdirectories
