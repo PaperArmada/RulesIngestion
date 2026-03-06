@@ -1,8 +1,8 @@
-# Hybrid retrieval default — Swords & Wizardry.
-# Validated default path: CC fusion + minmax BM25 normalization + lambda=0.7.
-# SWCR-like corpora prefer the smaller k=100 hybrid candidate budget.
+# Hybrid RRF + enriched BM25 comparison config — Swords & Wizardry.
+# Comparison-only bakeoff config retained for explicit RRF-vs-CC parity checks.
+# This is not the canonical default path.
 retrieval_mode: hybrid
-experiment_name: "swords_wizardry_hybrid"
+experiment_name: "swcr_hybrid_rrf_enriched"
 substrate_path: "out/Swords&Wizardry/SW_Complete_Revised/SW Complete Revised PDF"
 document_id: "Swords&Wizardry"
 substrate_version: "v3_swcr_merged2000_min100"
@@ -14,7 +14,7 @@ query_batches:
 models:
   - all-mpnet-base-v2
 top_k: [1, 3, 5, 10, 20, 50]
-output_dir: "out/retrieval_lab/experiments"
+output_dir: "out/retrieval_lab/bakeoff"
 mongo_uri: null
 reuse_embeddings: true
 gold_semantic_top_n: 5
@@ -22,6 +22,5 @@ gold_jaccard_threshold: 0.15
 batch_size: 16
 bm25_budget: 100
 dense_budget: 100
-hybrid_fusion_method: cc
-cc_lambda: 0.7
-cc_bm25_normalization: minmax
+hybrid_fusion_method: rrf
+bm25_enrichment_profile: full

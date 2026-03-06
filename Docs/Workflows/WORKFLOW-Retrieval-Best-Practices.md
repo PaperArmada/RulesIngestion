@@ -67,6 +67,9 @@ Never compare two runs if both substrate and retrieval knobs changed.
 ### 5.1 Defaults (baseline)
 
 - `retrieval_mode=hybrid`
+- `hybrid_fusion_method=cc`
+- `cc_bm25_normalization=minmax`
+- `cc_lambda=0.7`
 - `model=all-mpnet-base-v2`
 - `seed=42`
 - `recipe-mode=standardized`
@@ -79,9 +82,14 @@ Never compare two runs if both substrate and retrieval knobs changed.
 - `embedding_enrichment_profile=full`
 - `co_retrieval_expand=true`
 - `a_prime_generate_minimal=true` only when A' payloads are absent/incomplete
+- `bm25_budget=200` / `dense_budget=200` for Starfinder-like corpora
+- `bm25_budget=100` / `dense_budget=100` for SWCR-like corpora
 
 ### 5.3 Experimental knobs
 
+- `hybrid_fusion_method=rrf` for dense+BM25 parity checks only
+- `cc_bm25_normalization=atan`
+- `cc_lambda` values outside the validated default path unless isolated in a sweep
 - New enrichment profiles beyond baseline/full
 - New rerank/co-expansion heuristics not yet validated
 - Any setting change that is not isolated in a controlled matrix
@@ -89,12 +97,23 @@ Never compare two runs if both substrate and retrieval knobs changed.
 ### 5.4 Reasoning behind defaults
 
 - `retrieval_mode=hybrid` is default because dense+lexical fusion is generally more robust to wording drift than dense-only or sparse-only in isolation.
+- `hybrid_fusion_method=cc` is default because the March 2026 hybrid bakeoff confirmed CC is the architecture we should keep; dense+BM25 RRF is comparison-only.
+- `cc_bm25_normalization=minmax` is default because it beat `atan` in most model/corpus head-to-heads.
+- `cc_lambda=0.7` is the safest single default across corpora; use higher lambda only as an explicit corpus/model-specific variant.
 - `all-mpnet-base-v2` is default because it is the current stable baseline used across recent bakeoff comparisons.
 - `seed=42` is fixed to reduce run-to-run noise and make per-condition deltas interpretable.
 - `recipe-mode=standardized` is default for comparability; `recommended` is tracked as an explicit variant, not mixed into baseline.
 - `embedding_enrichment_profile=baseline|none` keeps baseline attribution clean; enrichment profiles are added only as controlled deltas.
 - `co_retrieval_expand=false` at baseline prevents expansion-side effects from masking core retrieval behavior.
 - `A+B first, A' second` minimizes iteration cost and isolates retrieval tuning from expensive enrichment generation.
+
+### 5.5 Hybrid policy notes
+
+- Treat `retrieval_lab/experiments/hybrid/starfinder_hybrid.yaml` and `retrieval_lab/experiments/hybrid/swords_wizardry_hybrid.yaml` as the canonical default configs.
+- Do not pass `--hybrid-fusion-method`, `--cc-lambda`, or `--cc-bm25-normalization` on baseline runs unless you are intentionally doing a comparison slice.
+- Treat `retrieval_lab/experiments/hybrid_bakeoff/*` as comparison configs, not baseline configs.
+- Treat SWCR BM25 enrichment as untrusted until `bm25_index_trace.json` proves the enrichment text changed the indexed corpus (`profile_noop=false`).
+- Production `ruleslawyer` keeps graph boost as a service-local post-fusion step; Retrieval Lab bakeoff guidance governs the base dense+BM25 fusion policy, not that extra production-only boost.
 
 ---
 
@@ -114,6 +133,13 @@ uv run python -m retrieval_lab.run_experiment \
   --embed-only \
   --seed 42
 ```
+
+This config already pins the validated default hybrid policy:
+- `hybrid_fusion_method=cc`
+- `cc_bm25_normalization=minmax`
+- `cc_lambda=0.7`
+- `bm25_budget=200`
+- `dense_budget=200`
 
 ### 5.2 Starfinder: eval-only
 
@@ -140,6 +166,13 @@ uv run python -m retrieval_lab.run_experiment \
   --embed-only \
   --seed 42
 ```
+
+This config already pins the validated default hybrid policy:
+- `hybrid_fusion_method=cc`
+- `cc_bm25_normalization=minmax`
+- `cc_lambda=0.7`
+- `bm25_budget=100`
+- `dense_budget=100`
 
 ### 5.4 S&W: eval-only
 

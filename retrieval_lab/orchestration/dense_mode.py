@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import logging
 import time
 from pathlib import Path
@@ -10,7 +11,16 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 
-from retrieval_lab.config import ParentFetchConfig
+from retrieval_lab.config import (
+    CC_BM25_NORMALIZATION_DEFAULT,
+    CC_LAMBDA_DEFAULT,
+    HYBRID_FUSION_METHOD_DEFAULT,
+    ParentFetchConfig,
+)
+from retrieval_lab.corpus_fingerprint import (
+    corpus_fingerprint_from_ids,
+    corpus_fingerprint_from_index_map,
+)
 from retrieval_lab.dual_list_fusion import fuse_dual_list
 from retrieval_lab.gold_grounding import ground_queries_corpus_semantic
 from retrieval_lab.metrics import score_retrieval
@@ -24,6 +34,56 @@ from retrieval_lab.store import (
 from retrieval_lab.substrate_loader import merge_units_by_heading
 
 logger = logging.getLogger(__name__)
+
+
+def _get_hybrid_fusion_method(config: Any) -> str:
+    """Return the configured hybrid fusion method with stabilized defaults."""
+    return str(getattr(config, "hybrid_fusion_method", HYBRID_FUSION_METHOD_DEFAULT))
+
+
+def _fuse_hybrid_rankings(
+    *,
+    config: Any,
+    dense_ranked_lists: List[List[str]],
+    dense_score_lists: List[List[float]],
+    bm25_ranked_lists: List[List[str]],
+    bm25_score_lists: List[List[float]],
+    max_k: int,
+) -> tuple[str, List[List[str]], List[List[float]]]:
+    """Fuse dense and BM25 rankings using the configured hybrid policy.
+
+    The validated default path is CC + minmax + lambda=0.7. RRF remains available
+    only for explicit comparison/legacy runs.
+    """
+    fusion_method = _get_hybrid_fusion_method(config)
+    if fusion_method == "cc":
+        from retrieval_lab.sparse_retrieval import convex_combination_fusion
+
+        cc_lambda = float(getattr(config, "cc_lambda", CC_LAMBDA_DEFAULT))
+        cc_norm = str(getattr(config, "cc_bm25_normalization", CC_BM25_NORMALIZATION_DEFAULT))
+        fused_ranked, fused_scores = convex_combination_fusion(
+            dense_ranked_lists=dense_ranked_lists,
+            dense_score_lists=dense_score_lists,
+            bm25_ranked_lists=bm25_ranked_lists,
+            bm25_score_lists=bm25_score_lists,
+            lam=cc_lambda,
+            bm25_normalization=cc_norm,
+            max_k=max_k,
+        )
+        return fusion_method, fused_ranked, fused_scores
+
+    from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
+
+    policy = config.get_policy(config.document_id)
+    rrf_k = policy.fusion_k
+    rankings_per_query = [
+        [dense_ranked_lists[i], bm25_ranked_lists[i]]
+        for i in range(len(dense_ranked_lists))
+    ]
+    fused_ranked, fused_scores = reciprocal_rank_fusion(
+        rankings_per_query, k=rrf_k, max_k=max_k
+    )
+    return fusion_method, fused_ranked, fused_scores
 
 
 def _rerank_candidates_dense(
@@ -72,6 +132,68 @@ def _minmax_normalize(values: Dict[str, float]) -> Dict[str, float]:
     return {k: (v - lo) / denom for k, v in values.items()}
 
 
+def _compute_hybrid_contribution(
+    *,
+    grounded_queries: List[Dict[str, Any]],
+    dense_ranked_lists: List[List[str]],
+    bm25_ranked_lists: List[List[str]],
+    eval_k: int,
+) -> Dict[str, Any]:
+    """Compute per-query and aggregate gold contribution for dense vs BM25."""
+    per_query: List[Dict[str, Any]] = []
+    summary = {
+        "queries": len(grounded_queries),
+        "required_gold_total": 0,
+        "dense_only_gold_hits": 0,
+        "bm25_only_gold_hits": 0,
+        "both_gold_hits": 0,
+        "neither_gold_ids": 0,
+        "queries_with_dense_only": 0,
+        "queries_with_bm25_only": 0,
+        "queries_with_both": 0,
+        "queries_with_neither": 0,
+    }
+    for i, q in enumerate(grounded_queries):
+        req = set(q.get("required_gold_ids") or q.get("gold_unit_ids") or [])
+        dense_top = set((dense_ranked_lists[i] if i < len(dense_ranked_lists) else [])[:eval_k])
+        bm25_top = set((bm25_ranked_lists[i] if i < len(bm25_ranked_lists) else [])[:eval_k])
+        dense_gold = req & dense_top
+        bm25_gold = req & bm25_top
+        dense_only = dense_gold - bm25_gold
+        bm25_only = bm25_gold - dense_gold
+        both = dense_gold & bm25_gold
+        neither = req - (dense_gold | bm25_gold)
+
+        summary["required_gold_total"] += len(req)
+        summary["dense_only_gold_hits"] += len(dense_only)
+        summary["bm25_only_gold_hits"] += len(bm25_only)
+        summary["both_gold_hits"] += len(both)
+        summary["neither_gold_ids"] += len(neither)
+        if dense_only:
+            summary["queries_with_dense_only"] += 1
+        if bm25_only:
+            summary["queries_with_bm25_only"] += 1
+        if both:
+            summary["queries_with_both"] += 1
+        if neither:
+            summary["queries_with_neither"] += 1
+
+        per_query.append(
+            {
+                "query_id": q.get("id", q.get("query_id", i)),
+                "required_gold_count": len(req),
+                "dense_gold_ids": sorted(dense_gold),
+                "bm25_gold_ids": sorted(bm25_gold),
+                "dense_only_gold_ids": sorted(dense_only),
+                "bm25_only_gold_ids": sorted(bm25_only),
+                "both_gold_ids": sorted(both),
+                "neither_gold_ids": sorted(neither),
+            }
+        )
+
+    return {"eval_k": eval_k, "summary": summary, "per_query": per_query}
+
+
 def _rank_deadline_order(
     ordered_ids: List[str],
     score_by_id: Dict[str, float],
@@ -112,6 +234,7 @@ def _load_or_compute_corpus_embeddings(
 ) -> Dict[str, Any]:
     """Resolve corpus embeddings from cache/disk or compute and persist."""
     t0 = time.perf_counter()
+    current_corpus_fingerprint = corpus_fingerprint_from_ids(corpus_ids)
     embed_dir = Path(config.output_dir) / f"embed_{run_id}"
     safe_model_id = str(model_id).replace("/", "__")
     npy_path = embed_dir / "embeddings" / f"{safe_model_id}_corpus.npy"
@@ -126,6 +249,15 @@ def _load_or_compute_corpus_embeddings(
             try:
                 index_data = json.loads(idx_path.read_text(encoding="utf-8"))
                 if index_data.get("run_id") == run_id:
+                    stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
+                    if not stored_fp:
+                        stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+                    if stored_fp and stored_fp != current_corpus_fingerprint:
+                        raise ValueError(
+                            "Eval-only preflight failed: run_id incompatible with current corpus shape; "
+                            f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
+                            f"stored={stored_fp[:12]}"
+                        )
                     safe_model_id = str(model_id).replace("/", "__")
                     npy_path = subdir / "embeddings" / f"{safe_model_id}_corpus.npy"
                     index_path = idx_path
@@ -140,6 +272,15 @@ def _load_or_compute_corpus_embeddings(
     if eval_only_run_id and npy_path.exists() and index_path.exists():
         loaded = np.load(npy_path)
         index_data = json.loads(index_path.read_text(encoding="utf-8"))
+        stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
+        if not stored_fp:
+            stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+        if stored_fp and stored_fp != current_corpus_fingerprint:
+            raise ValueError(
+                "Eval-only preflight failed: run_id incompatible with current corpus shape; "
+                f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
+                f"stored={stored_fp[:12]}"
+            )
         unit_id_to_index = index_data.get("unit_id_to_index", {})
         try:
             corpus_embeddings = np.array(
@@ -163,7 +304,20 @@ def _load_or_compute_corpus_embeddings(
                 "Run embed step first (without --run-id), or start MongoDB and re-run embed to populate cache."
             )
         else:
-            corpus_embeddings = encode_texts_fn(model, corpus_texts, batch_size=config.batch_size)
+            corpus_embeddings = encode_texts_fn(
+                model,
+                corpus_texts,
+                batch_size=config.batch_size,
+                model_id=model_id,
+                text_role="passage",
+                recipe_mode=getattr(config, "recipe_mode", "standardized"),
+                pooling=getattr(config, "embedding_pooling", "mean"),
+                normalize=bool(getattr(config, "embedding_normalize", True)),
+                max_seq_len=getattr(config, "embedding_max_seq_len", None),
+                query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+                passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+                fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+            )
             if mongo_uri:
                 records = [
                     {"run_id": run_id, "model_id": model_id, "chunk_id": uid, "embedding": corpus_embeddings[i].tolist()}
@@ -177,7 +331,12 @@ def _load_or_compute_corpus_embeddings(
                 index_path = output_dir / "embeddings" / "corpus_index.json"
                 index_path.write_text(
                     json.dumps(
-                        {"run_id": run_id, "substrate_version": config.substrate_version, "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)}},
+                        {
+                            "run_id": run_id,
+                            "substrate_version": config.substrate_version,
+                            "corpus_fingerprint": current_corpus_fingerprint,
+                            "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)},
+                        },
                         indent=2,
                     ),
                     encoding="utf-8",
@@ -216,7 +375,20 @@ def _load_or_compute_family_embeddings(
         logger.info("Loaded %d family embeddings from cache (run_id_family=%s)", len(family_embeddings), run_id_family)
         return family_embeddings
 
-    family_embeddings = encode_texts_fn(model, family_corpus_texts, batch_size=config.batch_size)
+    family_embeddings = encode_texts_fn(
+        model,
+        family_corpus_texts,
+        batch_size=config.batch_size,
+        model_id=model_id,
+        text_role="passage",
+        recipe_mode=getattr(config, "recipe_mode", "standardized"),
+        pooling=getattr(config, "embedding_pooling", "mean"),
+        normalize=bool(getattr(config, "embedding_normalize", True)),
+        max_seq_len=getattr(config, "embedding_max_seq_len", None),
+        query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+        passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+        fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+    )
     if mongo_uri and not eval_only_run_id:
         records_f = [
             {"run_id": run_id_family, "model_id": model_id, "chunk_id": fid, "embedding": family_embeddings[i].tolist()}
@@ -249,6 +421,7 @@ def _run_ranking_pipeline(
     use_semantic_grounding: bool,
     all_grounding_audit: List[Dict[str, Any]],
     bm25_ranked_lists: Optional[List[List[str]]],
+    bm25_score_lists: Optional[List[List[float]]],
     use_dual_list_fusion: bool,
     family_embeddings: Optional[np.ndarray],
     family_corpus_ids: List[str],
@@ -267,7 +440,20 @@ def _run_ranking_pipeline(
     """Run query encoding, ranking, reranking, and post-retrieval expansions."""
     if use_semantic_grounding:
         summary_texts = [(q.get("expected_answer_summary") or "").strip() for q in flat_queries]
-        summary_embeddings = encode_texts_fn(model, summary_texts, batch_size=config.batch_size)
+        summary_embeddings = encode_texts_fn(
+            model,
+            summary_texts,
+            batch_size=config.batch_size,
+            model_id=model_id,
+            text_role="summary",
+            recipe_mode=getattr(config, "recipe_mode", "standardized"),
+            pooling=getattr(config, "embedding_pooling", "mean"),
+            normalize=bool(getattr(config, "embedding_normalize", True)),
+            max_seq_len=getattr(config, "embedding_max_seq_len", None),
+            query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+            passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+            fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+        )
         grounded_queries, all_grounding_audit = ground_queries_corpus_semantic(
             flat_queries,
             summary_embeddings,
@@ -297,6 +483,7 @@ def _run_ranking_pipeline(
     use_qe = qe_profile is not None and qe_mode != "none"
     qe_expansion_logs: Optional[List[Any]] = None
     qe_fusion_debug: Optional[List[Dict[str, Any]]] = None
+    hybrid_contribution_payload: Optional[Dict[str, Any]] = None
     if use_qe:
         from retrieval_lab.query_enhancement.multi_query import (
             expand_query_texts,
@@ -333,16 +520,49 @@ def _run_ranking_pipeline(
         n_expanded = sum(len(g) for g in expanded_groups)
         logger.info("Query enhancement (%s): %d queries -> %d total variants", qe_mode, len(query_texts_stage1), n_expanded)
 
-    query_embeddings_stage1 = encode_texts_fn(model, query_texts_stage1, batch_size=config.batch_size)
+    query_embeddings_stage1 = encode_texts_fn(
+        model,
+        query_texts_stage1,
+        batch_size=config.batch_size,
+        model_id=model_id,
+        text_role="query",
+        recipe_mode=getattr(config, "recipe_mode", "standardized"),
+        pooling=getattr(config, "embedding_pooling", "mean"),
+        normalize=bool(getattr(config, "embedding_normalize", True)),
+        max_seq_len=getattr(config, "embedding_max_seq_len", None),
+        query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+        passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+        fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+    )
     t1 = time.perf_counter()
     max_k = max(config.top_k)
     retrieval_cutoff = max(max_k, stage1_admission_k if use_two_stage else max_k)
+    # Hybrid dense budget (Ku): when bm25_ranked_lists is present, extend dense depth to
+    # dense_ku so RRF receives a deeper dense list. This preserves Invariant B: any gold
+    # that sits at rank > max_k in dense but < dense_ku still enters the union before fusion.
+    _dense_budget_cfg = getattr(config, "dense_budget", None)
+    dense_ku_cutoff = retrieval_cutoff  # default: unchanged
+    if bm25_ranked_lists is not None and _dense_budget_cfg is not None:
+        dense_ku_cutoff = max(retrieval_cutoff, int(_dense_budget_cfg))
     ranked_lists = []
     score_lists = []
 
     if use_qe:
         all_variant_texts = [qt for group in expanded_groups for qt in group]
-        all_variant_embeddings = encode_texts_fn(model, all_variant_texts, batch_size=config.batch_size)
+        all_variant_embeddings = encode_texts_fn(
+            model,
+            all_variant_texts,
+            batch_size=config.batch_size,
+            model_id=model_id,
+            text_role="query",
+            recipe_mode=getattr(config, "recipe_mode", "standardized"),
+            pooling=getattr(config, "embedding_pooling", "mean"),
+            normalize=bool(getattr(config, "embedding_normalize", True)),
+            max_seq_len=getattr(config, "embedding_max_seq_len", None),
+            query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+            passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+            fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+        )
         all_v_norm = all_variant_embeddings / (np.linalg.norm(all_variant_embeddings, axis=1, keepdims=True) + 1e-9)
         c_norm = corpus_embeddings / (np.linalg.norm(corpus_embeddings, axis=1, keepdims=True) + 1e-9)
         all_sim = np.dot(all_v_norm, c_norm.T)
@@ -384,7 +604,7 @@ def _run_ranking_pipeline(
 
             # Baseline retrieval:
             # - Dense/hybrid: q0 row is the original query embedding.
-            # - Hybrid safety: baseline must be the *full hybrid(q0)* output (dense+BM25 RRF).
+            # - Hybrid safety: baseline must be the *full configured* hybrid(q0) output.
             row0 = all_sim[offset]
             order0 = np.lexsort((corpus_ids_arr, -row0))
             # For hybrid baseline B, dense(q0) must match the baseline pipeline input to RRF.
@@ -396,19 +616,17 @@ def _run_ranking_pipeline(
             offset += 1
 
             if config.retrieval_mode in ("hybrid", "hybrid+rerank") and bm25_ranked_lists is not None:
-                from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
-                policy = config.get_policy(config.document_id)
-                rrf_k = policy.fusion_k
                 qi = len(baseline_ranked_lists)
-                fused_ids, fused_scores = reciprocal_rank_fusion(
-                    [[dense_base_ids, bm25_ranked_lists[qi]]],
-                    k=rrf_k,
-                    # IMPORTANT: baseline B must match the baseline hybrid pipeline output.
-                    # Using a larger max_k here can change the top-20 due to RRF tie interactions.
+                _, fused_ranked_lists, fused_score_lists = _fuse_hybrid_rankings(
+                    config=config,
+                    dense_ranked_lists=[dense_base_ids],
+                    dense_score_lists=[dense_base_scores],
+                    bm25_ranked_lists=[bm25_ranked_lists[qi]],
+                    bm25_score_lists=[bm25_score_lists[qi]],
                     max_k=retrieval_cutoff,
                 )
-                base_ids = fused_ids[0]
-                base_scores = fused_scores[0]
+                base_ids = fused_ranked_lists[0]
+                base_scores = fused_score_lists[0]
             else:
                 base_ids = dense_base_ids
                 base_scores = dense_base_scores
@@ -522,7 +740,9 @@ def _run_ranking_pipeline(
             row = sim[i]
             # Deterministic tie-break by doc_id (score desc, doc_id lexical).
             order = np.lexsort((corpus_ids_arr, -row))
-            top_indices = order[:retrieval_cutoff]
+            # Use dense_ku_cutoff (>= retrieval_cutoff) so hybrid RRF receives
+            # a deeper dense list without affecting non-hybrid dense-only runs.
+            top_indices = order[:dense_ku_cutoff]
             ranked_lists.append([corpus_ids[j] for j in top_indices])
             score_lists.append([float(row[j]) for j in top_indices])
 
@@ -532,8 +752,22 @@ def _run_ranking_pipeline(
         for i in range(len(grounded_queries)):
             center_ids = ranked_lists[i][:max_k]
             expanded_texts = build_expanded_texts_fn(corpus, id_to_index, center_ids, n_ctx)
-            expanded_emb = encode_texts_fn(model, expanded_texts, batch_size=config.batch_size)
-            q_emb = query_embeddings[i : i + 1]
+            expanded_emb = encode_texts_fn(
+                model,
+                expanded_texts,
+                batch_size=config.batch_size,
+                model_id=model_id,
+                text_role="passage",
+                recipe_mode=getattr(config, "recipe_mode", "standardized"),
+                pooling=getattr(config, "embedding_pooling", "mean"),
+                normalize=bool(getattr(config, "embedding_normalize", True)),
+                max_seq_len=getattr(config, "embedding_max_seq_len", None),
+                query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+                passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+                fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+            )
+            # Use stage-1 query embeddings here; query_embeddings is assigned later.
+            q_emb = query_embeddings_stage1[i : i + 1]
             scores = np.dot(q_emb, expanded_emb.T).flatten()
             # Deterministic tie-break by center_id.
             center_arr = np.asarray(center_ids, dtype=object)
@@ -549,17 +783,52 @@ def _run_ranking_pipeline(
         and bm25_ranked_lists is not None
         and not (use_qe and qe_fusion_mode == "only_add")
     ):
-        from retrieval_lab.sparse_retrieval import reciprocal_rank_fusion
-        policy = config.get_policy(config.document_id)
-        rrf_k = policy.fusion_k
-        rankings_per_query = [
-            [ranked_lists[i], bm25_ranked_lists[i]]
-            for i in range(len(grounded_queries))
-        ]
-        ranked_lists, score_lists = reciprocal_rank_fusion(
-            rankings_per_query, k=rrf_k, max_k=retrieval_cutoff
+        _fusion_method = _get_hybrid_fusion_method(config)
+        pre_fusion_dense_ranked = [list(r) for r in ranked_lists]
+        _fusion_method, ranked_lists, score_lists = _fuse_hybrid_rankings(
+            config=config,
+            dense_ranked_lists=pre_fusion_dense_ranked,
+            dense_score_lists=score_lists,
+            bm25_ranked_lists=bm25_ranked_lists,
+            bm25_score_lists=bm25_score_lists,
+            max_k=retrieval_cutoff,
         )
-        logger.info("Fused dense + BM25 with RRF (k=%d) for model %s", rrf_k, model_id)
+        if _fusion_method == "cc":
+            _cc_lambda = float(getattr(config, "cc_lambda", CC_LAMBDA_DEFAULT))
+            _cc_norm = str(getattr(config, "cc_bm25_normalization", CC_BM25_NORMALIZATION_DEFAULT))
+            logger.info(
+                "Fused dense + BM25 with CC (lambda=%.2f, bm25_norm=%s) for model %s",
+                _cc_lambda, _cc_norm, model_id,
+            )
+        else:
+            policy = config.get_policy(config.document_id)
+            rrf_k = policy.fusion_k
+            logger.info("Fused dense + BM25 with RRF (k=%d) for model %s", rrf_k, model_id)
+        # Per-query hybrid diagnostics (Invariant B check at debug level).
+        for i, q in enumerate(grounded_queries):
+            dense_set = set(pre_fusion_dense_ranked[i])
+            bm25_set = set(bm25_ranked_lists[i])
+            fused_set = set(ranked_lists[i])
+            union_size = len(dense_set | bm25_set)
+            union_not_in_fused = (dense_set | bm25_set) - fused_set
+            if union_not_in_fused:
+                logger.debug(
+                    "%s[q=%s]: union=%d, fused=%d, dropped_from_union=%d "
+                    "(expected: union may exceed Kfinal=%d, extra items truncated by max_k)",
+                    _fusion_method.upper(),
+                    q.get("id", q.get("query_id", i)),
+                    union_size,
+                    len(fused_set),
+                    len(union_not_in_fused),
+                    retrieval_cutoff,
+                )
+        eval_k = max(config.top_k) if config.top_k else retrieval_cutoff
+        hybrid_contribution_payload = _compute_hybrid_contribution(
+            grounded_queries=grounded_queries,
+            dense_ranked_lists=pre_fusion_dense_ranked,
+            bm25_ranked_lists=bm25_ranked_lists,
+            eval_k=eval_k,
+        )
 
     reranker_model = getattr(config, "reranker", None)
     if config.retrieval_mode == "hybrid+rerank" and not reranker_model:
@@ -574,7 +843,20 @@ def _run_ranking_pipeline(
             )
             for q in grounded_queries
         ]
-        query_embeddings_stage2 = encode_texts_fn(model, query_texts_stage2, batch_size=config.batch_size)
+        query_embeddings_stage2 = encode_texts_fn(
+            model,
+            query_texts_stage2,
+            batch_size=config.batch_size,
+            model_id=model_id,
+            text_role="query",
+            recipe_mode=getattr(config, "recipe_mode", "standardized"),
+            pooling=getattr(config, "embedding_pooling", "mean"),
+            normalize=bool(getattr(config, "embedding_normalize", True)),
+            max_seq_len=getattr(config, "embedding_max_seq_len", None),
+            query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+            passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+            fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+        )
         if stage2_rerank_method == "cross_encoder":
             if not reranker_model:
                 raise ValueError("two_stage_retrieval with cross_encoder requires reranker")
@@ -686,7 +968,20 @@ def _run_ranking_pipeline(
 
             candidate_ids = list(agg.keys())
             candidate_texts = [final_id_to_text.get(cid, "") for cid in candidate_ids]
-            merged_emb = encode_texts_fn(model, candidate_texts, batch_size=config.batch_size)
+            merged_emb = encode_texts_fn(
+                model,
+                candidate_texts,
+                batch_size=config.batch_size,
+                model_id=model_id,
+                text_role="candidate",
+                recipe_mode=getattr(config, "recipe_mode", "standardized"),
+                pooling=getattr(config, "embedding_pooling", "mean"),
+                normalize=bool(getattr(config, "embedding_normalize", True)),
+                max_seq_len=getattr(config, "embedding_max_seq_len", None),
+                query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+                passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+                fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", False)),
+            )
             q_vec = query_embeddings[i : i + 1]
             merged_sim = np.dot(q_vec, merged_emb.T).flatten()
 
@@ -961,6 +1256,8 @@ def _run_ranking_pipeline(
         result["qe_expansion_logs"] = qe_expansion_logs
     if qe_fusion_debug is not None:
         result["qe_fusion_debug"] = qe_fusion_debug
+    if hybrid_contribution_payload is not None:
+        result["hybrid_contribution"] = hybrid_contribution_payload
     return result
 
 
@@ -1129,31 +1426,96 @@ def run_dense_mode(
     retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]] = {}
     all_grounding_audit: List[Dict[str, Any]] = initial_grounding_audit.copy()
     pairing_instrumentation_by_model: Dict[str, Any] = {}
+    embedding_provenance_by_model: Dict[str, Any] = {}
+    hybrid_contribution_by_model: Dict[str, Any] = {}
+    bm25_index_trace: Optional[Dict[str, Any]] = None
     mongo_uri = config.mongo_uri
     id_to_text = {u["id"]: u.get("text", "") for u in corpus}
     id_to_index = {u["id"]: idx for idx, u in enumerate(corpus)}
 
     bm25_ranked_lists: Optional[List[List[str]]] = None
+    bm25_score_lists: Optional[List[List[float]]] = None
     if config.retrieval_mode in ("hybrid", "hybrid+rerank"):
         from retrieval_lab.sparse_retrieval import build_bm25_index, bm25_rank
-        logger.info("Hybrid mode: building BM25 index for RRF fusion")
+        _fusion_method = _get_hybrid_fusion_method(config)
+        logger.info("Hybrid mode: building BM25 index for %s fusion", _fusion_method.upper())
+        _bm25_enrich = getattr(config, "bm25_enrichment_profile", None)
+        _trace_sample_n = 5
+        _raw_hash = hashlib.sha256("\n".join(corpus_texts).encode("utf-8")).hexdigest()
+        if _bm25_enrich:
+            from retrieval_lab.embedding_enrichment import build_embedding_text
+            bm25_texts = [build_embedding_text(c, _bm25_enrich) for c in corpus]
+            logger.info("BM25 uses enrichment profile '%s' (decoupled from dense embeddings)", _bm25_enrich)
+        else:
+            bm25_texts = corpus_texts
+        _bm25_hash = hashlib.sha256("\n".join(bm25_texts).encode("utf-8")).hexdigest()
+        _sample_traces: List[Dict[str, Any]] = []
+        for i, text in enumerate(bm25_texts[:_trace_sample_n]):
+            _sample_traces.append(
+                {
+                    "index": i,
+                    "chunk_id": corpus[i].get("id", ""),
+                    "text_hash": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                    "text_prefix": text[:160],
+                }
+            )
+        _same_as_raw = bool(_bm25_hash == _raw_hash)
+        _profile_noop = bool(_bm25_enrich and _same_as_raw)
+        bm25_index_trace = {
+            "text_source": f"enrichment:{_bm25_enrich}" if _bm25_enrich else "raw_corpus_text",
+            "bm25_enrichment_profile": _bm25_enrich or "",
+            "bm25_corpus_text_hash": _bm25_hash,
+            "raw_corpus_text_hash": _raw_hash,
+            "same_as_raw": _same_as_raw,
+            "profile_noop": _profile_noop,
+            "sample_entry_count": _trace_sample_n,
+            "sample_entries": _sample_traces,
+        }
+        logger.info(
+            "BM25 index trace: source=%s same_as_raw=%s profile_noop=%s bm25_hash=%s raw_hash=%s",
+            bm25_index_trace["text_source"],
+            _same_as_raw,
+            _profile_noop,
+            _bm25_hash[:16],
+            _raw_hash[:16],
+        )
+        if _profile_noop:
+            logger.warning(
+                "PROFILE_NOOP: bm25_enrichment_profile='%s' produced corpus hash identical to raw text. "
+                "Corpus units likely missing enrichment fields (topic_tags/co_retrieval_hints). "
+                "This enriched run is NOT testing BM25 enrichment — treat as equivalent to bm25_enrichment_profile=none.",
+                _bm25_enrich,
+            )
         bm25 = build_bm25_index(
-            corpus_texts,
+            bm25_texts,
             tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
             k1=float(getattr(config, "bm25_k1", 1.5)),
             b=float(getattr(config, "bm25_b", 0.75)),
         )
+        _kfinal = max(config.top_k)
+        _two_stage = bool(getattr(config, "two_stage_retrieval", False))
+        _stage1_k = int(getattr(config, "stage1_admission_k", 100))
+        _bm25_budget_cfg = getattr(config, "bm25_budget", None)
+        _dense_budget_cfg = getattr(config, "dense_budget", None)
         max_k_hybrid = max(
-            max(config.top_k),
-            int(getattr(config, "stage1_admission_k", 100))
-            if bool(getattr(config, "two_stage_retrieval", False))
-            else max(config.top_k),
+            _kfinal,
+            _stage1_k if _two_stage else _kfinal,
         )
-        bm25_ranked_lists, _ = bm25_rank(
+        bm25_ks = int(_bm25_budget_cfg) if _bm25_budget_cfg is not None else max_k_hybrid
+        dense_ku = int(_dense_budget_cfg) if _dense_budget_cfg is not None else max_k_hybrid
+        logger.info(
+            "Hybrid budgets: Ku(dense)=%d Ks(bm25)=%d Kfinal=%d fusion=%s rrf_k=%s",
+            dense_ku,
+            bm25_ks,
+            _kfinal,
+            _fusion_method,
+            getattr(config, "rrf_k", 60),
+        )
+        bm25_ranked_lists, bm25_score_lists = bm25_rank(
             bm25,
             corpus_ids,
             grounded_queries,
-            max_k_hybrid,
+            bm25_ks,
             tokenizer_mode=getattr(config, "bm25_tokenizer_mode", "basic"),
             query_mode=getattr(config, "bm25_query_mode", "question_only"),
             question_weight=int(getattr(config, "bm25_query_weight_question", 1)),
@@ -1162,14 +1524,35 @@ def run_dense_mode(
 
     for model_id in config.models:
         if model_id not in model_registry:
-            logger.warning("Model %s not in registry; using as model_name for SentenceTransformer", model_id)
-            model_name = model_id
-        else:
-            model_name = model_registry[model_id].model_name
+            raise ValueError(
+                f"Model {model_id!r} not in active MODEL_REGISTRY. "
+                "Add registry entry before running bakeoff for deterministic recommended recipes."
+            )
+        model_name = model_registry[model_id].model_name
         logger.info("Processing model: %s (%s)", model_id, model_name)
 
         trust_remote = config.trust_remote_code or (model_id in trust_remote_models)
         model = load_model_fn(model_name, trust_remote_code=trust_remote)
+        logger.info(
+            "Embedding model loaded via module path: %s",
+            getattr(model, "_dm_loader_module_path", "unknown"),
+        )
+        spec = model_registry.get(model_id)
+        embedding_provenance_by_model[model_id] = {
+            "model_id": model_id,
+            "model_name": model_name,
+            "model_revision": getattr(spec, "revision", "") if spec else "",
+            "recipe_source": getattr(spec, "recipe_source", "") if spec else "",
+            "recipe_mode": getattr(config, "recipe_mode", "standardized"),
+            "device": getattr(model, "_dm_loader_device", "unknown"),
+            "dtype_or_quantization": "unspecified",
+            "pooling": getattr(config, "embedding_pooling", "mean"),
+            "normalize": bool(getattr(config, "embedding_normalize", True)),
+            "max_seq_len": getattr(config, "embedding_max_seq_len", None),
+            "similarity_metric": getattr(config, "embedding_similarity_metric", "cosine"),
+            "query_prefix": getattr(config, "embedding_query_prefix", ""),
+            "passage_prefix": getattr(config, "embedding_passage_prefix", ""),
+        }
 
         embed_out = _load_or_compute_corpus_embeddings(
             config=config,
@@ -1217,6 +1600,7 @@ def run_dense_mode(
             use_semantic_grounding=use_semantic_grounding,
             all_grounding_audit=all_grounding_audit,
             bm25_ranked_lists=bm25_ranked_lists,
+            bm25_score_lists=bm25_score_lists,
             use_dual_list_fusion=use_dual_list_fusion,
             family_embeddings=family_embeddings,
             family_corpus_ids=family_corpus_ids,
@@ -1236,6 +1620,8 @@ def run_dense_mode(
         all_grounding_audit = rank_out["all_grounding_audit"]
         if rank_out.get("pairing_payload"):
             pairing_instrumentation_by_model[model_id] = rank_out["pairing_payload"]
+        if rank_out.get("hybrid_contribution"):
+            hybrid_contribution_by_model[model_id] = rank_out["hybrid_contribution"]
 
         model_out = _build_metrics_and_reviews(
             model_id=model_id,
@@ -1262,6 +1648,8 @@ def run_dense_mode(
         retrieved_chunks_by_model[model_id] = model_out["query_reviews"]
         logger.info("Model %s: retrieval done for %d queries; review in retrieved_chunks.json", model_id, len(grounded_queries))
         results_by_model[model_id] = model_out["results"]
+        if model_id in hybrid_contribution_by_model:
+            results_by_model[model_id]["hybrid_contribution_summary"] = hybrid_contribution_by_model[model_id].get("summary", {})
         per_query_by_model[model_id] = model_out["per_query"]
 
     return {
@@ -1270,4 +1658,7 @@ def run_dense_mode(
         "retrieved_chunks_by_model": retrieved_chunks_by_model,
         "all_grounding_audit": all_grounding_audit,
         "pairing_instrumentation_by_model": pairing_instrumentation_by_model,
+        "embedding_provenance_by_model": embedding_provenance_by_model,
+        "hybrid_contribution_by_model": hybrid_contribution_by_model,
+        "bm25_index_trace": bm25_index_trace,
     }

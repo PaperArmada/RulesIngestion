@@ -4,6 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from retrieval_lab.config import (
+    CC_BM25_NORMALIZATION_DEFAULT,
+    CC_LAMBDA_DEFAULT,
+    HYBRID_FUSION_METHOD_DEFAULT,
+)
 from retrieval_lab.orchestration.expansion_pipeline import ExpansionConfig
 
 
@@ -43,7 +48,21 @@ class RunFlags:
     raw_merge_score_floor: bool
     raw_merge_rank_floor: bool
     raw_merge_coverage_bonus: float
+    bm25_budget: int | None
+    dense_budget: int | None
+    hybrid_fusion_method: str
+    cc_lambda: float
+    cc_bm25_normalization: str
+    bm25_enrichment_profile: str | None
     embedding_enrichment_profile: str | None
+    recipe_mode: str
+    embedding_pooling: str
+    embedding_normalize: bool
+    embedding_max_seq_len: int | None
+    embedding_similarity_metric: str
+    embedding_query_prefix: str
+    embedding_passage_prefix: str
+    recipe_fail_on_missing_source: bool
 
 
 def read_run_flags(config: object) -> RunFlags:
@@ -82,7 +101,23 @@ def read_run_flags(config: object) -> RunFlags:
         raw_merge_score_floor=bool(getattr(config, "raw_merge_score_floor", True)),
         raw_merge_rank_floor=bool(getattr(config, "raw_merge_rank_floor", True)),
         raw_merge_coverage_bonus=float(getattr(config, "raw_merge_coverage_bonus", 0.0)),
+        bm25_budget=getattr(config, "bm25_budget", None),
+        dense_budget=getattr(config, "dense_budget", None),
+        hybrid_fusion_method=str(getattr(config, "hybrid_fusion_method", HYBRID_FUSION_METHOD_DEFAULT)),
+        cc_lambda=float(getattr(config, "cc_lambda", CC_LAMBDA_DEFAULT)),
+        cc_bm25_normalization=str(
+            getattr(config, "cc_bm25_normalization", CC_BM25_NORMALIZATION_DEFAULT)
+        ),
+        bm25_enrichment_profile=getattr(config, "bm25_enrichment_profile", None),
         embedding_enrichment_profile=getattr(config, "embedding_enrichment_profile", None),
+        recipe_mode=str(getattr(config, "recipe_mode", "standardized")),
+        embedding_pooling=str(getattr(config, "embedding_pooling", "mean")),
+        embedding_normalize=bool(getattr(config, "embedding_normalize", True)),
+        embedding_max_seq_len=getattr(config, "embedding_max_seq_len", None),
+        embedding_similarity_metric=str(getattr(config, "embedding_similarity_metric", "cosine")),
+        embedding_query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+        embedding_passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+        recipe_fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", True)),
     )
 
 

@@ -37,6 +37,13 @@ For any run to be eligible for model comparison, all of the following must be pi
    - BM25 settings
    - fusion/rerank policy knobs
    - top-k list
+   - canonical hybrid defaults when `retrieval_mode=hybrid`:
+     - `hybrid_fusion_method=cc`
+     - `cc_bm25_normalization=minmax`
+     - `cc_lambda=0.7`
+   - corpus-specific hybrid budgets when `retrieval_mode=hybrid`:
+     - Starfinder-like corpora: `bm25_budget=200`, `dense_budget=200`
+     - SWCR-like corpora: `bm25_budget=100`, `dense_budget=100`
 4. **Embedding contract**
    - model id + revision
    - recipe mode (`standardized` or `recommended`)
@@ -45,6 +52,8 @@ For any run to be eligible for model comparison, all of the following must be pi
    - `(corpus, retrieval_mode, model_id, recipe_mode, enrichment_profile, run_id)`
 
 If any contract field differs across two runs, they are not directly comparable.
+
+For embedding bakeoffs, retrieval policy must stay fixed unless the experiment is explicitly a retrieval-policy bakeoff. Do not let CLI defaults, config drift, or stale comparison YAMLs change fusion behavior between model rows.
 
 ---
 
@@ -110,6 +119,15 @@ Enrichment axis:
 
 - baseline profile (none/baseline)
 - `embedding_enrichment_profile=full` (required for S&W; optional for Starfinder)
+
+Retrieval-policy lock for this matrix:
+
+- `dense` rows must keep the same dense-only retrieval policy across all models.
+- `hybrid` rows must keep the same validated hybrid policy across all models:
+  - `hybrid_fusion_method=cc`
+  - `cc_bm25_normalization=minmax`
+  - `cc_lambda=0.7`
+- If you want to compare `atan`, `rrf`, or alternate lambda values, run a separate retrieval-policy bakeoff. Do not mix those rows into the embedding bakeoff matrix.
 
 ---
 
@@ -214,6 +232,7 @@ If mixed:
 - Comparing runs across different corpus tracks as if equivalent.
 - Declaring winner with high `required_gold_empty` drift.
 - Mixing retrieval policy changes into embedding bakeoff rows.
+- Using comparison-only hybrid configs (`rrf`, `atan`, alternate lambda sweeps) inside the baseline embedding matrix.
 - Using unenforced recipe settings without provenance capture.
 
 ---

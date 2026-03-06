@@ -28,6 +28,7 @@ if _DUNGEONMIND_SERVER.exists() and str(_DUNGEONMIND_SERVER) not in sys.path:
     sys.path.insert(0, str(_DUNGEONMIND_SERVER))
 
 from retrieval_lab.config import ExperimentConfig
+from retrieval_lab.corpus_fingerprint import corpus_fingerprint_from_ids
 from retrieval_lab.gold_grounding import (
     flatten_query_batches,
     ground_queries_page_anchored,
@@ -72,6 +73,8 @@ MODELS_REQUIRING_TRUST_REMOTE_CODE = frozenset({
     "nomic-embed-text-v2",
     "bge-m3",
     "gte-multilingual-base",
+    "pplx-embed-v1-0.6B",
+    "pplx-embed-context-v1",
 })
 
 
@@ -114,6 +117,22 @@ def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Di
                         "required_full_set_hit_at_10": float((metrics.get("required_full_set_hit_at_k") or {}).get("10", (metrics.get("required_full_set_hit_at_k") or {}).get(10, 0.0))),
                     }
     return out
+
+
+def _compose_embedding_substrate_version(
+    *,
+    base_substrate_version: Optional[str],
+    embed_profile: str,
+    recipe_mode: str,
+) -> str:
+    """Build substrate version suffixes that define embedding run identity."""
+    sv = str(base_substrate_version or "")
+    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
+        prof = str(embed_profile).strip()
+        sv = f"{sv}_embed_{prof}" if sv else f"embed_{prof}"
+    recipe = str(recipe_mode or "").strip().lower() or "standardized"
+    sv = f"{sv}_recipe_{recipe}" if sv else f"recipe_{recipe}"
+    return sv
 
 
 def _load_baseline_failure_types(
@@ -243,11 +262,14 @@ def _run_embed_only(config: ExperimentConfig) -> str:
         )
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
     corpus_ids = [c["id"] for c in corpus]
+    corpus_fingerprint = corpus_fingerprint_from_ids(corpus_ids)
     embed_profile = getattr(config, "embedding_enrichment_profile", None) or ""
     corpus_texts = [build_embedding_text(c, embed_profile or None) for c in corpus]
-    substrate_version = config.substrate_version
-    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
-        substrate_version = (substrate_version or "") + "_embed_" + str(embed_profile).strip()
+    substrate_version = _compose_embedding_substrate_version(
+        base_substrate_version=config.substrate_version,
+        embed_profile=str(embed_profile or ""),
+        recipe_mode=str(getattr(config, "recipe_mode", "standardized")),
+    )
     run_id = substrate_run_id(config.document_id, corpus_ids, substrate_version)
     logger.info("Corpus: %d units, run_id=%s", len(corpus), run_id)
     mongo_uri = config.mongo_uri
@@ -255,12 +277,31 @@ def _run_embed_only(config: ExperimentConfig) -> str:
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "embeddings").mkdir(exist_ok=True)
     for model_id in config.models:
-        model_name = MODEL_REGISTRY[model_id].model_name if model_id in MODEL_REGISTRY else model_id
+        if model_id not in MODEL_REGISTRY:
+            raise ValueError(
+                f"Model {model_id!r} not in active MODEL_REGISTRY; add it before bakeoff runs."
+            )
+        model_name = MODEL_REGISTRY[model_id].model_name
         logger.info("Embedding model: %s (%s)", model_id, model_name)
+        if model_id in MODEL_REGISTRY:
+            logger.info("Embedding registry module path: %s", _ARCHIVE_MARK_I / "evaluation/model_registry.py")
         # In embed-only we always compute (no cache read) so we never block on MongoDB when it's down.
         trust_remote = config.trust_remote_code or (model_id in MODELS_REQUIRING_TRUST_REMOTE_CODE)
         model = load_model_fn(model_name, trust_remote_code=trust_remote)
-        corpus_embeddings = encode_texts_fn(model, corpus_texts, batch_size=config.batch_size)
+        corpus_embeddings = encode_texts_fn(
+            model,
+            corpus_texts,
+            batch_size=config.batch_size,
+            model_id=model_id,
+            text_role="passage",
+            recipe_mode=getattr(config, "recipe_mode", "standardized"),
+            pooling=getattr(config, "embedding_pooling", "mean"),
+            normalize=bool(getattr(config, "embedding_normalize", True)),
+            max_seq_len=getattr(config, "embedding_max_seq_len", None),
+            query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+            passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+            fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", True)),
+        )
         records = [
             {"run_id": run_id, "model_id": model_id, "chunk_id": uid, "embedding": corpus_embeddings[i].tolist()}
             for i, uid in enumerate(corpus_ids)
@@ -271,7 +312,12 @@ def _run_embed_only(config: ExperimentConfig) -> str:
     index_path = output_dir / "embeddings" / "corpus_index.json"
     index_path.write_text(
         json.dumps(
-            {"run_id": run_id, "substrate_version": config.substrate_version, "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)}},
+            {
+                "run_id": run_id,
+                "substrate_version": config.substrate_version,
+                "corpus_fingerprint": corpus_fingerprint,
+                "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)},
+            },
             indent=2,
         ),
         encoding="utf-8",
@@ -338,9 +384,11 @@ def _prepare_experiment_corpus_context(
         c["id"]: list(c.get("source_unit_ids", [c["id"]])) for c in corpus
     }
 
-    substrate_version = config.substrate_version
-    if embed_profile and str(embed_profile).strip().lower() not in ("", "baseline"):
-        substrate_version = (substrate_version or "") + "_embed_" + str(embed_profile).strip()
+    substrate_version = _compose_embedding_substrate_version(
+        base_substrate_version=config.substrate_version,
+        embed_profile=str(embed_profile or ""),
+        recipe_mode=str(getattr(config, "recipe_mode", "standardized")),
+    )
     if eval_only_run_id:
         run_id = eval_only_run_id
         logger.info("Eval-only: using run_id=%s (no embedding)", run_id)
@@ -459,6 +507,14 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     embed_only = False
     eval_only = eval_only_run_id is not None
     config.validate(embed_only=embed_only, eval_only=eval_only)
+    if config.retrieval_mode != "bm25":
+        _, _, model_registry = _load_model_registry()
+        missing_models = [m for m in config.models if m not in model_registry]
+        if missing_models:
+            raise ValueError(
+                "Preflight failed: models missing from active registry: "
+                + ", ".join(missing_models)
+            )
     _set_seed(config.seed)
     retrieval_mode = config.retrieval_mode
     t_stage_start = time.perf_counter()
@@ -561,6 +617,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     per_query_by_model: Dict[str, List[Dict[str, Any]]] = {}
     retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]] = {}
     all_grounding_audit: List[Dict[str, Any]] = grounding_audit.copy()
+    embedding_provenance_by_model: Dict[str, Any] = {}
+    bm25_index_trace: Optional[Dict[str, Any]] = None
+    hybrid_contribution_by_model: Dict[str, Any] = {}
     mongo_uri = config.mongo_uri
     id_to_text = {u["id"]: u.get("text", "") for u in corpus}
     crossref_sidecar, pairing_edges = prepare_expansion_indices(
@@ -670,6 +729,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         retrieved_chunks_by_model = dense_out["retrieved_chunks_by_model"]
         all_grounding_audit = dense_out["all_grounding_audit"]
         pairing_instrumentation_by_model = dense_out["pairing_instrumentation_by_model"]
+        embedding_provenance_by_model = dense_out.get("embedding_provenance_by_model", {})
+        bm25_index_trace = dense_out.get("bm25_index_trace")
+        hybrid_contribution_by_model = dense_out.get("hybrid_contribution_by_model", {})
     stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
 
     # Optional: answer-generation evaluation pass (OpenAI-backed).
@@ -827,6 +889,14 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "raw_merge_score_floor": getattr(config, "raw_merge_score_floor", True),
         "raw_merge_rank_floor": getattr(config, "raw_merge_rank_floor", True),
         "raw_merge_coverage_bonus": getattr(config, "raw_merge_coverage_bonus", 0.0),
+        "recipe_mode": getattr(config, "recipe_mode", "standardized"),
+        "embedding_pooling": getattr(config, "embedding_pooling", "mean"),
+        "embedding_normalize": bool(getattr(config, "embedding_normalize", True)),
+        "embedding_max_seq_len": getattr(config, "embedding_max_seq_len", None),
+        "embedding_similarity_metric": getattr(config, "embedding_similarity_metric", "cosine"),
+        "embedding_query_prefix": getattr(config, "embedding_query_prefix", ""),
+        "embedding_passage_prefix": getattr(config, "embedding_passage_prefix", ""),
+        "recipe_fail_on_missing_source": bool(getattr(config, "recipe_fail_on_missing_source", True)),
         "chunk_quality_gate_enabled": bool(getattr(config, "chunk_quality_gate_enabled", False)),
         "chunk_quality_max_short_le_40_rate": float(getattr(config, "chunk_quality_max_short_le_40_rate", 0.10)),
         "chunk_quality_max_short_le_80_rate": float(getattr(config, "chunk_quality_max_short_le_80_rate", 0.20)),
@@ -842,6 +912,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "a_prime_generate_minimal": flags.a_prime_generate_minimal,
         "dual_list_fusion": flags.dual_list_fusion,
         "dependency_pairing_expand": expansion_cfg.dependency_pairing_expand,
+        "bm25_budget": config.bm25_budget,
+        "dense_budget": config.dense_budget,
+        "hybrid_fusion_method": config.hybrid_fusion_method,
+        "cc_lambda": config.cc_lambda,
+        "cc_bm25_normalization": config.cc_bm25_normalization,
+        "bm25_enrichment_profile": config.bm25_enrichment_profile,
         "query_enhancement": {
             "enabled": qe_flags.enabled,
             "mode": qe_flags.mode,
@@ -889,6 +965,10 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     }
     if baseline_failure_buckets:
         experiment_doc["baseline_failure_buckets"] = baseline_failure_buckets
+    if bm25_index_trace is not None:
+        experiment_doc["bm25_index_trace"] = bm25_index_trace
+    if hybrid_contribution_by_model:
+        experiment_doc["hybrid_contribution_by_model"] = hybrid_contribution_by_model
     for model_id, res in results_by_model.items():
         baseline = baseline_metrics.get(model_id, {})
         if baseline:
@@ -947,8 +1027,31 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         json.dumps(pairing_payload, indent=2),
         encoding="utf-8",
     )
+    if bm25_index_trace is not None:
+        (output_dir / "bm25_index_trace.json").write_text(
+            json.dumps(bm25_index_trace, indent=2),
+            encoding="utf-8",
+        )
+    if hybrid_contribution_by_model:
+        (output_dir / "hybrid_contribution.json").write_text(
+            json.dumps({"by_model": hybrid_contribution_by_model}, indent=2),
+            encoding="utf-8",
+        )
     if retrieved_chunks_by_model:
         logger.info("Retrieved chunks (for manual review): %s", paths.get("retrieved_chunks.json"))
+    if embedding_provenance_by_model:
+        (output_dir / "embedding_provenance.json").write_text(
+            json.dumps(
+                {
+                    "version": "embedding_provenance_v1",
+                    "run_id": run_id,
+                    "recipe_mode": getattr(config, "recipe_mode", "standardized"),
+                    "by_model": embedding_provenance_by_model,
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
 
     # Run manifest: file hashes + exact argv for reproducibility.
     try:
@@ -961,9 +1064,21 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             source_config_path=getattr(config, "source_config_path", None),
             query_batch_paths=list(config.query_batches),
             enhancement_profile_path=(qe_flags.profile_path if qe_flags.enabled else None),
+            run_keys={
+                "run_id": run_id,
+                "run_id_family": run_id_family,
+                "retrieval_mode": retrieval_mode,
+                "recipe_mode": getattr(config, "recipe_mode", "standardized"),
+                "models": model_list,
+            },
         )
+        manifest_json = json.dumps(manifest, indent=2)
         (output_dir / "manifest.json").write_text(
-            json.dumps(manifest, indent=2),
+            manifest_json,
+            encoding="utf-8",
+        )
+        (output_dir / "run_manifest.json").write_text(
+            manifest_json,
             encoding="utf-8",
         )
     except Exception as e:
@@ -988,7 +1103,7 @@ def main() -> None:
             document_id=args.document_id,
             query_batches=args.batches or [],
             models=args.models,
-            top_k=[int(x) for x in args.top_k.split(",") if x.strip()],
+            top_k=[int(x) for x in (args.top_k or "1,3,5,10,20").split(",") if x.strip()],
             output_dir=args.output or "out/retrieval_lab/experiments",
             mongo_uri=args.mongo_uri,
             reuse_embeddings=args.reuse_embeddings,

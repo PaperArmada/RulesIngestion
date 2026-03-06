@@ -14,6 +14,11 @@ except ImportError:
     _HAS_YAML = False
 
 
+HYBRID_FUSION_METHOD_DEFAULT = "cc"
+CC_LAMBDA_DEFAULT = 0.7
+CC_BM25_NORMALIZATION_DEFAULT = "minmax"
+
+
 @dataclass
 class ParentFetchConfig:
     """R2: Configuration for parent-fetch enrichment of retrieval results."""
@@ -164,6 +169,24 @@ class ExperimentConfig:
     bm25_query_mode: str = "question_only"  # question_only | question_plus_summary | weighted
     bm25_query_weight_question: int = 1
     bm25_query_weight_summary: int = 1
+    # Hybrid retrieval candidate budgets (Ku/Ks).
+    # bm25_budget: BM25 candidate list depth (Ks). Defaults to None → falls back to max(top_k).
+    # Setting Ks > Kfinal (max(top_k)) gives BM25 a deeper candidate pool before RRF, which
+    # prevents BM25 from displacing dense-only gold that ranks beyond Kfinal in BM25 alone.
+    # dense_budget: dense candidate list depth (Ku). Defaults to None → falls back to max(top_k).
+    # Setting Ku > Kfinal gives dense a deeper pool; has no effect when dense is already
+    # monotonically better than hybrid (Invariant B already holds with Ku=Kfinal).
+    bm25_budget: Optional[int] = 100   # Ks — None means use max(top_k)
+    dense_budget: Optional[int] = 100  # Ku — None means use max(top_k)
+    # Hybrid fusion defaults are bakeoff-validated: CC + minmax + lambda=0.7.
+    # RRF remains supported only for explicit comparison/legacy runs.
+    hybrid_fusion_method: str = HYBRID_FUSION_METHOD_DEFAULT  # cc | rrf(experimental)
+    # CC fusion parameters (only used when hybrid_fusion_method=cc).
+    cc_lambda: float = CC_LAMBDA_DEFAULT  # weight for dense; (1-cc_lambda) for BM25
+    cc_bm25_normalization: str = CC_BM25_NORMALIZATION_DEFAULT  # minmax | atan(experimental)
+    # BM25-specific enrichment: when set, BM25 indexes text built with this profile
+    # instead of sharing corpus_texts with dense. Allows enriched BM25 + raw-text dense embeddings.
+    bm25_enrichment_profile: Optional[str] = None
     # Two-stage retrieval: Stage1 admission (expanded query), Stage2 rerank (strict query).
     two_stage_retrieval: bool = False
     stage1_admission_k: int = 100
@@ -231,6 +254,18 @@ class ExperimentConfig:
     # Embedding metadata enrichment: baseline (text only) | path | type | table_title | topic_tags | co_retrieval_hints | page | full.
     # When set, run_id gets _embed_{profile} suffix so embeddings are recomputed per profile.
     embedding_enrichment_profile: Optional[str] = None
+    # Embedding recipe mode used for bakeoff reproducibility.
+    # standardized: uniform pipeline across models
+    # recommended: model-specific guidance from registry/model cards
+    recipe_mode: str = "standardized"  # standardized | recommended
+    # Embedding controls (applied by active embedding backend).
+    embedding_pooling: str = "mean"  # mean | model_default
+    embedding_normalize: bool = True
+    embedding_max_seq_len: Optional[int] = None
+    embedding_similarity_metric: str = "cosine"  # cosine | dot
+    embedding_query_prefix: str = ""
+    embedding_passage_prefix: str = ""
+    recipe_fail_on_missing_source: bool = True
     # Grouped options (wave-2 structure). Flat keys remain authoritative for backward compatibility.
     crossref: CrossrefConfig = field(default_factory=CrossrefConfig)
     dual_list: DualListConfig = field(default_factory=DualListConfig)
@@ -281,6 +316,12 @@ class ExperimentConfig:
             raise ValueError("bm25_b must be in [0, 1]")
         if self.bm25_query_weight_question < 1 or self.bm25_query_weight_summary < 1:
             raise ValueError("bm25 query weights must be >= 1")
+        if self.hybrid_fusion_method not in ("rrf", "cc"):
+            raise ValueError("hybrid_fusion_method must be 'rrf' or 'cc'")
+        if not (0.0 <= self.cc_lambda <= 1.0):
+            raise ValueError("cc_lambda must be in [0, 1]")
+        if self.cc_bm25_normalization not in ("atan", "minmax"):
+            raise ValueError("cc_bm25_normalization must be 'atan' or 'minmax'")
         if self.stage1_query_mode not in ("question_only", "question_plus_summary", "weighted"):
             raise ValueError("stage1_query_mode must be 'question_only', 'question_plus_summary', or 'weighted'")
         if self.stage2_query_mode not in ("question_only", "question_plus_summary", "weighted"):
@@ -308,6 +349,14 @@ class ExperimentConfig:
                 raise ValueError("raw_merge_coverage_bonus must be >= 0")
         if not self.models and self.retrieval_mode != "bm25":
             raise ValueError("models must be non-empty")
+        if self.recipe_mode not in ("standardized", "recommended"):
+            raise ValueError("recipe_mode must be 'standardized' or 'recommended'")
+        if self.embedding_pooling not in ("mean", "model_default"):
+            raise ValueError("embedding_pooling must be 'mean' or 'model_default'")
+        if self.embedding_similarity_metric not in ("cosine", "dot"):
+            raise ValueError("embedding_similarity_metric must be 'cosine' or 'dot'")
+        if self.embedding_max_seq_len is not None and int(self.embedding_max_seq_len) < 8:
+            raise ValueError("embedding_max_seq_len must be >= 8 when provided")
         if embed_only:
             return
         if eval_only:
@@ -477,7 +526,23 @@ class ExperimentConfig:
             chunk_quality_max_duplicate_text_entry_rate=float(
                 data.get("chunk_quality_max_duplicate_text_entry_rate", 0.05)
             ),
+            bm25_budget=int(data["bm25_budget"]) if data.get("bm25_budget") is not None else None,
+            dense_budget=int(data["dense_budget"]) if data.get("dense_budget") is not None else None,
+            hybrid_fusion_method=str(data.get("hybrid_fusion_method", HYBRID_FUSION_METHOD_DEFAULT)),
+            cc_lambda=float(data.get("cc_lambda", CC_LAMBDA_DEFAULT)),
+            cc_bm25_normalization=str(
+                data.get("cc_bm25_normalization", CC_BM25_NORMALIZATION_DEFAULT)
+            ),
+            bm25_enrichment_profile=(str(data.get("bm25_enrichment_profile") or "").strip() or None),
             embedding_enrichment_profile=(str(data.get("embedding_enrichment_profile") or "").strip() or None),
+            recipe_mode=str(data.get("recipe_mode", "standardized")),
+            embedding_pooling=str(data.get("embedding_pooling", "mean")),
+            embedding_normalize=bool(data.get("embedding_normalize", True)),
+            embedding_max_seq_len=int(data["embedding_max_seq_len"]) if data.get("embedding_max_seq_len") is not None else None,
+            embedding_similarity_metric=str(data.get("embedding_similarity_metric", "cosine")),
+            embedding_query_prefix=str(data.get("embedding_query_prefix", "")),
+            embedding_passage_prefix=str(data.get("embedding_passage_prefix", "")),
+            recipe_fail_on_missing_source=bool(data.get("recipe_fail_on_missing_source", True)),
             crossref=crossref,
             dual_list=dual_list,
             pairing=pairing,

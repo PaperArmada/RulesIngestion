@@ -1,9 +1,10 @@
 """
-Sparse retrieval (BM25) and hybrid fusion (RRF).
+Sparse retrieval (BM25) and hybrid fusion (RRF, CC).
 """
 
 from __future__ import annotations
 
+import math
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -37,6 +38,64 @@ def reciprocal_rank_fusion(
             sorted_ids = sorted_ids[:max_k]
         fused_ranked.append(sorted_ids)
         fused_scores.append([doc_scores[d] for d in sorted_ids])
+    return fused_ranked, fused_scores
+
+
+def _atan_normalize(scores: Dict[str, float]) -> Dict[str, float]:
+    """Normalize unbounded scores (e.g. BM25) to [0, 1] via atan squashing."""
+    if not scores:
+        return {}
+    return {k: (2.0 / math.pi) * math.atan(max(v, 0.0)) for k, v in scores.items()}
+
+
+def _minmax_normalize_dict(scores: Dict[str, float]) -> Dict[str, float]:
+    """Normalize scores to [0, 1] via min-max scaling."""
+    if not scores:
+        return {}
+    lo = min(scores.values())
+    hi = max(scores.values())
+    if hi <= lo:
+        return {k: 1.0 for k in scores}
+    denom = hi - lo
+    return {k: (v - lo) / denom for k, v in scores.items()}
+
+
+def convex_combination_fusion(
+    dense_ranked_lists: List[List[str]],
+    dense_score_lists: List[List[float]],
+    bm25_ranked_lists: List[List[str]],
+    bm25_score_lists: List[List[float]],
+    lam: float = 0.7,
+    bm25_normalization: str = "minmax",
+    max_k: Optional[int] = None,
+) -> Tuple[List[List[str]], List[List[float]]]:
+    """Fuse dense + BM25 via convex combination of normalized scores.
+
+    S(d) = lam * dense_norm(d) + (1 - lam) * bm25_norm(d)
+
+    Dense scores are min-max normalized per query before fusion. The validated
+    default path uses BM25 min-max normalization; atan remains available for
+    explicit comparison runs.
+    """
+    bm25_norm_fn = _atan_normalize if bm25_normalization == "atan" else _minmax_normalize_dict
+    fused_ranked: List[List[str]] = []
+    fused_scores: List[List[float]] = []
+    for i in range(len(dense_ranked_lists)):
+        dense_scores = dict(zip(dense_ranked_lists[i], dense_score_lists[i]))
+        bm25_scores = dict(zip(bm25_ranked_lists[i], bm25_score_lists[i]))
+        dense_norm = _minmax_normalize_dict(dense_scores)
+        bm25_norm = bm25_norm_fn(bm25_scores)
+        all_ids = set(dense_norm.keys()) | set(bm25_norm.keys())
+        combined: Dict[str, float] = {}
+        for doc_id in all_ids:
+            d_score = dense_norm.get(doc_id, 0.0)
+            b_score = bm25_norm.get(doc_id, 0.0)
+            combined[doc_id] = lam * d_score + (1.0 - lam) * b_score
+        sorted_ids = sorted(combined.keys(), key=lambda d: (-combined[d], d))
+        if max_k is not None:
+            sorted_ids = sorted_ids[:max_k]
+        fused_ranked.append(sorted_ids)
+        fused_scores.append([combined[d] for d in sorted_ids])
     return fused_ranked, fused_scores
 
 
