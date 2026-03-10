@@ -6,6 +6,7 @@
 - **Stage A:** [v1/stage_a_contract.md](v1/stage_a_contract.md)
 - **Stage B:** [v1/stage_b_contract.md](v1/stage_b_contract.md)
 - **Retrieval Lab:** [v1/retrieval_lab_v1.md](v1/retrieval_lab_v1.md)
+- **Benchmark projection lifecycle:** [gold_resolution_design.md](gold_resolution_design.md)
 - **Baseline & schemas:** [v1/baseline_manifest.md](v1/baseline_manifest.md), [v1/schema_registry.md](v1/schema_registry.md), [v1/glossary.md](v1/glossary.md)
 - **Stage C/D (gated):** [v1/gates_stage_c_d.md](v1/gates_stage_c_d.md)
 - **TOC structural enrichment (Mark III):** [ARCHITECTURE-TOC-Structural-Enrichment.md](ARCHITECTURE-TOC-Structural-Enrichment.md)

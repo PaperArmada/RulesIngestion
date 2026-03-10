@@ -55,10 +55,35 @@ Use benchmarks intentionally. Do not use one benchmark for every question.
 
 1. Run `embed-only` first.
 2. Capture `run_id` from embed output.
-3. Run `eval-only` with the same `run_id`.
-4. Keep `(corpus, model, recipe mode, enrichment profile)` stable per comparison slice.
+3. Materialize or validate the benchmark projection for the exact corpus you are scoring.
+4. Run `eval-only` with the same `run_id`.
+5. Keep `(corpus, model, recipe mode, enrichment profile)` stable per comparison slice.
 
 Never compare two runs if both substrate and retrieval knobs changed.
+
+### 4.1 Benchmark contract discipline
+
+- Treat the checked-in benchmark JSON as the benchmark definition unless it is already an explicitly materialized projection.
+- Treat the scored `benchmark.<surface>.json` artifact inside a run directory as the benchmark projection for that exact run corpus.
+- Require benchmark validation to pass against the active:
+  - `run_id`
+  - `substrate_version`
+  - `corpus_fingerprint`
+  - `corpus_content_fingerprint`
+  - `corpus_index_sha256`
+  - benchmark surface
+- If chunk topology changes, require a new projection. Do not reuse an old projection contract across changed `min_chars`, `merge_chunks`, `merge_max_chars`, or other corpus-shaping changes.
+
+### 4.2 Corpus contract discipline
+
+The run corpus contract is now stronger than "same run name".
+
+- `embeddings/corpus_index.json` is the canonical corpus identity artifact.
+- The corpus contract now includes both:
+  - `corpus_fingerprint` for ordered chunk IDs
+  - `corpus_content_fingerprint` for ordered chunk content/path/source lineage
+- The corpus contract also records the applied `corpus_recipe`.
+- Eval-only embedding reuse should be treated as invalid if any of those identity checks drift.
 
 ---
 
@@ -214,7 +239,10 @@ Every recommendation must include:
 1. exact run artifact directory path(s),
 2. matrix condition label,
 3. metric delta vs baseline (`MRR`, `Hit@10/20`, `Recall@10/20`, `gold_in_candidates`),
-4. one-line interpretation (`improved`, `regressed`, `neutral`).
+4. one-line interpretation (`improved`, `regressed`, `neutral`),
+5. exact benchmark surface used for the decision,
+6. confirmation that contract validation passed,
+7. the `prod_readiness.json` artifact path when recommending a production promotion.
 
 Minimum result bundle per corpus:
 
@@ -248,12 +276,26 @@ These are concrete runs from `out/retrieval_lab/experiments` and are useful refe
 
 ## 10) Canonical location for best outputs
 
-Promote the currently selected "best" run into a canonical per-book location:
+Promote the currently selected contract-valid run into a canonical per-book location:
 
 - Starfinder: `out/StarFinderPlayerCore/retrieval_best/current`
 - S&W Complete Revised: `out/Swords&Wizardry/SW_Complete_Revised/SW Complete Revised PDF/retrieval_best/current`
 
 This avoids hunting through timestamped experiment directories and gives one stable path for downstream consumers.
+
+### 10.0 Promotion gate
+
+Promotion should now key off the explicit production-readiness artifact, not an informal run label.
+
+- Only promote runs that emitted `prod_readiness.json`.
+- `prod_readiness.json` must show `promotion_ready=true`.
+- The selected benchmark surface in `prod_readiness.json` is the authoritative evaluation surface for the promotion decision.
+- The promoted artifact bundle should preserve:
+  - benchmark projection path/hash
+  - benchmark contract path/hash
+  - corpus fingerprint
+  - corpus content fingerprint
+  - corpus index hash
 
 ### 10.1 Promotion command
 
@@ -288,6 +330,10 @@ The promotion script copies key run artifacts (when present), including:
 - `per_query.json`
 - `failure_buckets.json`
 - `grounding_audit.json`
+- `benchmark.<surface>.json`
+- `benchmark.<surface>.contract.json`
+- `embeddings/corpus_index.json`
+- `prod_readiness.json`
 
 It also writes `selection.json` with provenance, label, notes, and source run path.
 
@@ -308,6 +354,8 @@ So `current/` stays stable while preserving prior selections.
 - Confirm eval `--run-id` comes from the exact embed run.
 - Confirm same corpus and model set.
 - Re-run embed-only if substrate or embedding recipe changed.
+- If benchmark validation fails, inspect `benchmark_contract_validation.json` before trusting any metrics.
+- If `corpus_index_sha256` or `corpus_content_fingerprint` changed, treat this as a new corpus contract and re-materialize the benchmark projection.
 
 ### 11.2 S&W path/spelling drift
 

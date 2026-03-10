@@ -18,6 +18,9 @@ from retrieval_lab.config import (
     ParentFetchConfig,
 )
 from retrieval_lab.corpus_fingerprint import (
+    build_corpus_index_payload,
+    corpus_content_fingerprint_from_index_payload,
+    corpus_content_fingerprint_from_units,
     corpus_fingerprint_from_ids,
     corpus_fingerprint_from_index_map,
 )
@@ -226,6 +229,7 @@ def _load_or_compute_corpus_embeddings(
     model: Any,
     encode_texts_fn: Any,
     run_id: str,
+    corpus: List[Dict[str, Any]],
     corpus_ids: List[str],
     corpus_texts: List[str],
     output_dir: Path,
@@ -235,10 +239,26 @@ def _load_or_compute_corpus_embeddings(
     """Resolve corpus embeddings from cache/disk or compute and persist."""
     t0 = time.perf_counter()
     current_corpus_fingerprint = corpus_fingerprint_from_ids(corpus_ids)
+    current_corpus_content_fingerprint = corpus_content_fingerprint_from_units(corpus)
+    current_index_payload = build_corpus_index_payload(
+        run_id=run_id,
+        substrate_version=getattr(config, "substrate_version", None),
+        corpus=corpus,
+    )
     embed_dir = Path(config.output_dir) / f"embed_{run_id}"
     safe_model_id = str(model_id).replace("/", "__")
     npy_path = embed_dir / "embeddings" / f"{safe_model_id}_corpus.npy"
     index_path = embed_dir / "embeddings" / "corpus_index.json"
+
+    def _stored_identity(index_data: Dict[str, Any]) -> tuple[str, str]:
+        stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
+        if not stored_fp:
+            stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+        stored_content_fp = str(index_data.get("corpus_content_fingerprint") or "").strip()
+        if not stored_content_fp:
+            stored_content_fp = corpus_content_fingerprint_from_index_payload(index_data)
+        return stored_fp, stored_content_fp
+
     if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
         for subdir in Path(config.output_dir).iterdir():
             if not subdir.is_dir():
@@ -249,14 +269,18 @@ def _load_or_compute_corpus_embeddings(
             try:
                 index_data = json.loads(idx_path.read_text(encoding="utf-8"))
                 if index_data.get("run_id") == run_id:
-                    stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
-                    if not stored_fp:
-                        stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+                    stored_fp, stored_content_fp = _stored_identity(index_data)
                     if stored_fp and stored_fp != current_corpus_fingerprint:
                         raise ValueError(
                             "Eval-only preflight failed: run_id incompatible with current corpus shape; "
                             f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
                             f"stored={stored_fp[:12]}"
+                        )
+                    if stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
+                        raise ValueError(
+                            "Eval-only preflight failed: run_id incompatible with current corpus content; "
+                            f"re-embed with same config. current={current_corpus_content_fingerprint[:12]} "
+                            f"stored={stored_content_fp[:12]}"
                         )
                     safe_model_id = str(model_id).replace("/", "__")
                     npy_path = subdir / "embeddings" / f"{safe_model_id}_corpus.npy"
@@ -272,14 +296,18 @@ def _load_or_compute_corpus_embeddings(
     if eval_only_run_id and npy_path.exists() and index_path.exists():
         loaded = np.load(npy_path)
         index_data = json.loads(index_path.read_text(encoding="utf-8"))
-        stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
-        if not stored_fp:
-            stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+        stored_fp, stored_content_fp = _stored_identity(index_data)
         if stored_fp and stored_fp != current_corpus_fingerprint:
             raise ValueError(
                 "Eval-only preflight failed: run_id incompatible with current corpus shape; "
                 f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
                 f"stored={stored_fp[:12]}"
+            )
+        if stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
+            raise ValueError(
+                "Eval-only preflight failed: run_id incompatible with current corpus content; "
+                f"re-embed with same config. current={current_corpus_content_fingerprint[:12]} "
+                f"stored={stored_content_fp[:12]}"
             )
         unit_id_to_index = index_data.get("unit_id_to_index", {})
         try:
@@ -294,16 +322,40 @@ def _load_or_compute_corpus_embeddings(
         logger.info("Loaded %d embeddings from disk (%s)", len(corpus_embeddings), npy_path)
     else:
         cached = fetch_cached_embeddings(run_id, model_id, mongo_uri) if ((eval_only_run_id or config.reuse_embeddings) and mongo_uri) else None
-        if cached and len(cached) == len(corpus_ids):
-            id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
-            corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
-            logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
-        elif eval_only_run_id:
+        cache_index_data = None
+        if index_path.exists():
+            try:
+                cache_index_data = json.loads(index_path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                cache_index_data = None
+        if cached and len(cached) == len(corpus_ids) and cache_index_data is not None:
+            stored_fp, stored_content_fp = _stored_identity(cache_index_data)
+            if stored_fp == current_corpus_fingerprint and stored_content_fp == current_corpus_content_fingerprint:
+                id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
+                corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
+                logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
+            else:
+                logger.info(
+                    "Ignoring cached embeddings for run_id=%s due to corpus drift (id_fp=%s/%s content_fp=%s/%s)",
+                    run_id,
+                    stored_fp[:12],
+                    current_corpus_fingerprint[:12],
+                    stored_content_fp[:12],
+                    current_corpus_content_fingerprint[:12],
+                )
+                cached = None
+        elif cached and len(cached) == len(corpus_ids):
+            logger.info(
+                "Ignoring cached embeddings for run_id=%s because compatible corpus_index.json was not found",
+                run_id,
+            )
+            cached = None
+        if cached is None and eval_only_run_id:
             raise ValueError(
                 f"Eval-only: no cached embeddings for run_id={run_id} model_id={model_id}. "
                 "Run embed step first (without --run-id), or start MongoDB and re-run embed to populate cache."
             )
-        else:
+        if cached is None and not eval_only_run_id:
             corpus_embeddings = encode_texts_fn(
                 model,
                 corpus_texts,
@@ -330,15 +382,7 @@ def _load_or_compute_corpus_embeddings(
             if model_id == config.models[0]:
                 index_path = output_dir / "embeddings" / "corpus_index.json"
                 index_path.write_text(
-                    json.dumps(
-                        {
-                            "run_id": run_id,
-                            "substrate_version": config.substrate_version,
-                            "corpus_fingerprint": current_corpus_fingerprint,
-                            "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)},
-                        },
-                        indent=2,
-                    ),
+                    json.dumps(current_index_payload, indent=2),
                     encoding="utf-8",
                 )
     return {
@@ -1307,10 +1351,12 @@ def _build_metrics_and_reviews(
         enabled=flags.parent_fetch_enabled,
     )
     query_reviews = []
+    unit_by_id = {str(unit.get("id") or ""): unit for unit in corpus if unit.get("id")}
     for i, q in enumerate(grounded_queries):
         pq = metrics.per_query[i]
         retrieved = []
         for r, (cid, sc) in enumerate(zip(ranked_lists[i], score_lists[i]), start=1):
+            unit = unit_by_id.get(cid, {})
             text = (
                 expanded_text_fn(corpus, id_to_index, cid, flags.expand_context_n)
                 if use_expanded
@@ -1321,6 +1367,9 @@ def _build_metrics_and_reviews(
                 "chunk_id": cid,
                 "score": round(sc, 4),
                 "text": text,
+                "page": unit.get("page"),
+                "structural_path": list(unit.get("structural_path") or []),
+                "source_unit_ids": list(unit.get("source_unit_ids") or id_to_source_ids.get(cid, [cid])),
             })
         if pf_policy.enabled:
             from retrieval_lab.parent_fetch import fetch_parent_context
@@ -1329,6 +1378,9 @@ def _build_metrics_and_reviews(
             "query_id": q.get("id", ""),
             "question": q.get("question", ""),
             "expected_answer_summary": q.get("expected_answer_summary", ""),
+            "notes": q.get("notes", ""),
+            "tier": q.get("tier", q.get("_tier", "")),
+            "question_type": q.get("question_type", ""),
             "gold_unit_ids": list(q.get("gold_unit_ids") or []),
             "first_gold_rank": pq.get("first_gold_rank"),
             "failure_type": pq.get("failure_type", ""),
@@ -1560,6 +1612,7 @@ def run_dense_mode(
             model=model,
             encode_texts_fn=encode_texts_fn,
             run_id=run_id,
+            corpus=corpus,
             corpus_ids=corpus_ids,
             corpus_texts=corpus_texts,
             output_dir=output_dir,

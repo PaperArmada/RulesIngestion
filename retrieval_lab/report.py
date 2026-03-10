@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from retrieval_lab.benchmark_contract import benchmark_contract_sidecar_path
+
 
 def _glossary_md() -> str:
     return """
@@ -97,6 +99,8 @@ def generate_report(
     enhancement_attribution: Optional[Dict[str, Any]] = None,
     benchmark_lint: Optional[Dict[str, Any]] = None,
     answer_evaluation: Optional[Dict[str, Any]] = None,
+    bm25_index_trace: Optional[Dict[str, Any]] = None,
+    auto_gold_review_summary: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Generate the main REPORT.md content as a string.
@@ -107,6 +111,16 @@ def generate_report(
         f"**Experiment ID:** `{experiment_id}`",
         f"**Created:** {created_at}",
         "",
+    ]
+    if bm25_index_trace and bm25_index_trace.get("profile_noop"):
+        _profile = bm25_index_trace.get("bm25_enrichment_profile", "?")
+        lines.extend([
+            f"> **⚠ PROFILE_NOOP:** `bm25_enrichment_profile='{_profile}'` produced corpus text identical to raw text. "
+            "Enrichment fields (topic_tags/co_retrieval_hints) are absent or stale on this corpus. "
+            "This run did NOT test BM25 enrichment — treat enriched and non-enriched variants as equivalent comparisons.",
+            "",
+        ])
+    lines.extend([
         "---",
         "",
         "## 1. Experiment Summary",
@@ -128,7 +142,7 @@ def generate_report(
         f"- **Ungrounded:** {grounding_summary.get('ungrounded', 0)}",
         f"- **Method:** {grounding_summary.get('method', 'N/A')}",
         "",
-    ]
+    ])
     grounded = grounding_summary.get("grounded", 0)
     total_q = grounding_summary.get("total_queries", 0)
     if total_q and grounded == 0:
@@ -257,6 +271,27 @@ def generate_report(
                 lines.append("")
             lines.extend(["Artifacts: `answer_eval.json`", ""])
 
+    if isinstance(auto_gold_review_summary, dict) and bool(auto_gold_review_summary.get("enabled")):
+        lines.extend(["### Auto Gold Review", ""])
+        if bool(auto_gold_review_summary.get("skipped")):
+            lines.extend([
+                f"- **Status:** skipped ({auto_gold_review_summary.get('reason', 'unknown')})",
+                "",
+            ])
+        else:
+            lines.extend([
+                f"- **Reviewer model:** {auto_gold_review_summary.get('llm_model_id', '')}",
+                f"- **Retrieval review model:** {auto_gold_review_summary.get('retrieval_model_id', '')}",
+                f"- **Candidate top-k:** {auto_gold_review_summary.get('candidate_top_k', '')}",
+                f"- **Queries reviewed:** {auto_gold_review_summary.get('queries_reviewed', 0)}",
+                f"- **Queries applied:** {auto_gold_review_summary.get('queries_applied', 0)}",
+                f"- **Queries needing human review:** {auto_gold_review_summary.get('queries_needing_human_review', 0)}",
+                f"- **Review queue size:** {auto_gold_review_summary.get('queue_size', 0)}",
+                "",
+                "Artifacts: `auto_gold_review.json`, `review_queue.json`",
+                "",
+            ])
+
     lines.extend([
         "---",
         "",
@@ -282,6 +317,26 @@ def generate_report(
             h = res.get("hit_at_k", {})
             row += f" {r.get(k, 0):.4f} | {h.get(k, 0):.4f} |"
         lines.append(row)
+    hybrid_contrib_models = {
+        model_id: (res.get("hybrid_contribution_summary") or {})
+        for model_id, res in results_by_model.items()
+        if res.get("hybrid_contribution_summary")
+    }
+    if hybrid_contrib_models:
+        lines.extend([
+            "",
+            "### Hybrid Contribution Snapshot",
+            "",
+            "| Model | Dense-only gold hits | BM25-only gold hits | Both gold hits | Neither gold ids | Queries w/ BM25-only |",
+            "|-------|------------------------|---------------------|----------------|------------------|----------------------|",
+        ])
+        for model_id, summary in hybrid_contrib_models.items():
+            lines.append(
+                f"| {model_id} | {int(summary.get('dense_only_gold_hits', 0))} | "
+                f"{int(summary.get('bm25_only_gold_hits', 0))} | {int(summary.get('both_gold_hits', 0))} | "
+                f"{int(summary.get('neither_gold_ids', 0))} | {int(summary.get('queries_with_bm25_only', 0))} |"
+            )
+        lines.extend(["", "Artifacts: `hybrid_contribution.json`, `bm25_index_trace.json`", ""])
     raw_merge_models = {
         model_id: res.get("raw_merge_rerank_diagnostics", {})
         for model_id, res in results_by_model.items()
@@ -434,6 +489,87 @@ def generate_report(
     return "\n".join(lines)
 
 
+def generate_surface_overview_report(
+    *,
+    experiment_id: str,
+    experiment_name: str,
+    created_at: str,
+    config: Dict[str, Any],
+    corpus_stats: Dict[str, Any],
+    grounding_summary: Dict[str, Any],
+    auto_gold_review_summary: Optional[Dict[str, Any]],
+    evaluation_surfaces: List[Dict[str, Any]],
+) -> str:
+    lines = [
+        f"# Retrieval Lab Report: {experiment_name}",
+        "",
+        f"**Experiment ID:** `{experiment_id}`",
+        f"**Created:** {created_at}",
+        "",
+        "## Diagnostic Surfaces",
+        "",
+        "Auto-gold review was enabled for this run, so scoring is emitted as explicit, separate surfaces.",
+        "There is intentionally no unlabeled `metrics.json` or `per_query.json` in this output directory.",
+        "",
+    ]
+    for surface in evaluation_surfaces:
+        label = str(surface.get("label") or "")
+        display_name = str(surface.get("display_name") or label)
+        lines.extend(
+            [
+                f"### {display_name}",
+                "",
+                f"- Report: `REPORT.{label}.md`",
+                f"- Metrics: `metrics.{label}.json`",
+                f"- Failure buckets: `failure_buckets.{label}.json`",
+                f"- Per-query metrics: `per_query.{label}.json`",
+                f"- Retrieved chunks: `retrieved_chunks.{label}.json`",
+                f"- Benchmark snapshot: `benchmark.{label}.json`",
+                f"- Benchmark contract: `benchmark.{label}.contract.json`",
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "## Run Contract",
+            "",
+            f"- Substrate: {config.get('substrate_path', 'N/A')}",
+            f"- Document ID: {config.get('document_id', 'N/A')}",
+            f"- Substrate version: {config.get('substrate_version') or 'content hash'}",
+            f"- Embedding run_id: {config.get('run_id', 'N/A')}",
+            f"- Corpus unit count: {corpus_stats.get('unit_count', 'N/A')}",
+            f"- Grounded queries: {grounding_summary.get('grounded', 0)}/{grounding_summary.get('total_queries', 0)}",
+            "- Contract validation artifact: `benchmark_contract_validation.json`",
+            "- Repro manifest: `manifest.json`",
+            "",
+        ]
+    )
+    if isinstance(auto_gold_review_summary, dict) and bool(auto_gold_review_summary.get("enabled")):
+        lines.extend(["## Auto Gold Review", ""])
+        if bool(auto_gold_review_summary.get("skipped")):
+            lines.extend(
+                [
+                    f"- Status: skipped ({auto_gold_review_summary.get('reason', 'unknown')})",
+                    "",
+                ]
+            )
+        else:
+            lines.extend(
+                [
+                    f"- Reviewer model: {auto_gold_review_summary.get('llm_model_id', '')}",
+                    f"- Retrieval review model: {auto_gold_review_summary.get('retrieval_model_id', '')}",
+                    f"- Candidate top-k: {auto_gold_review_summary.get('candidate_top_k', '')}",
+                    f"- Queries reviewed: {auto_gold_review_summary.get('queries_reviewed', 0)}",
+                    f"- Queries applied: {auto_gold_review_summary.get('queries_applied', 0)}",
+                    f"- Queries needing human review: {auto_gold_review_summary.get('queries_needing_human_review', 0)}",
+                    "",
+                    "Artifacts: `auto_gold_review.json`, `review_queue.json`",
+                    "",
+                ]
+            )
+    return "\n".join(lines)
+
+
 def write_report_artifacts(
     output_dir: Path,
     experiment_id: str,
@@ -449,6 +585,10 @@ def write_report_artifacts(
     enhancement_attribution: Optional[Dict[str, Any]] = None,
     grounded_queries: Optional[List[Dict[str, Any]]] = None,
     corpus: Optional[List[Dict[str, Any]]] = None,
+    auto_gold_review_payload: Optional[Dict[str, Any]] = None,
+    review_queue_payload: Optional[List[Dict[str, Any]]] = None,
+    evaluation_surfaces: Optional[List[Dict[str, Any]]] = None,
+    benchmark_snapshots: Optional[Dict[str, Dict[str, Any]]] = None,
 ) -> Dict[str, Path]:
     """
     Write REPORT.md, metrics.json, per_query.json, grounding_audit.json, experiment.json,
@@ -467,43 +607,155 @@ def write_report_artifacts(
             current=res,
             baseline=baseline_failure_buckets.get(model_id),
         )
-    report_md = generate_report(
-        experiment_id=experiment_id,
-        experiment_name=experiment_name,
-        config=config,
-        corpus_stats=corpus_stats,
-        grounding_summary=grounding_summary,
-        results_by_model=results_by_model,
-        grounding_audit=grounding_audit,
-        per_query_by_model=per_query_by_model,
-        created_at=created_at,
-        baseline_failure_buckets=baseline_failure_buckets,
-        stage_timing_sec=experiment_doc.get("stage_timing_sec"),
-        enhancement_attribution=enhancement_attribution,
-        benchmark_lint=experiment_doc.get("benchmark_lint"),
-        answer_evaluation=experiment_doc.get("answer_evaluation"),
-    )
     report_path = output_dir / "REPORT.md"
-    report_path.write_text(report_md, encoding="utf-8")
-    metrics_path = output_dir / "metrics.json"
-    metrics_path.write_text(
-        json.dumps(results_by_model, indent=2),
-        encoding="utf-8",
-    )
-    # First-class failure bucket summary (v1: every run produces this).
-    failure_buckets = {
-        model_id: res.get("failure_bucket_counts", {})
-        for model_id, res in results_by_model.items()
-    }
-    (output_dir / "failure_buckets.json").write_text(
-        json.dumps(failure_buckets, indent=2),
-        encoding="utf-8",
-    )
-    per_query_path = output_dir / "per_query.json"
-    per_query_path.write_text(
-        json.dumps(per_query_by_model, indent=2),
-        encoding="utf-8",
-    )
+    result = {"REPORT.md": report_path}
+    if evaluation_surfaces:
+        overview_md = generate_surface_overview_report(
+            experiment_id=experiment_id,
+            experiment_name=experiment_name,
+            created_at=created_at,
+            config=config,
+            corpus_stats=corpus_stats,
+            grounding_summary=grounding_summary,
+            auto_gold_review_summary=experiment_doc.get("auto_gold_review_summary"),
+            evaluation_surfaces=evaluation_surfaces,
+        )
+        report_path.write_text(overview_md, encoding="utf-8")
+        surface_index: Dict[str, Any] = {}
+        for surface in evaluation_surfaces:
+            label = str(surface.get("label") or "")
+            display_name = str(surface.get("display_name") or label)
+            surface_results = dict(surface.get("results_by_model") or {})
+            surface_per_query = dict(surface.get("per_query_by_model") or {})
+            surface_retrieved = dict(surface.get("retrieved_chunks_by_model") or {})
+            surface_queries = list(surface.get("grounded_queries") or [])
+            for model_id, res in surface_results.items():
+                res["outcome_classification"] = _classify_outcome(
+                    current=res,
+                    baseline=baseline_failure_buckets.get(model_id),
+                )
+            surface_report_md = generate_report(
+                experiment_id=experiment_id,
+                experiment_name=f"{experiment_name} [{display_name}]",
+                config=config,
+                corpus_stats=corpus_stats,
+                grounding_summary=grounding_summary,
+                results_by_model=surface_results,
+                grounding_audit=grounding_audit,
+                per_query_by_model=surface_per_query,
+                created_at=created_at,
+                baseline_failure_buckets=baseline_failure_buckets,
+                stage_timing_sec=experiment_doc.get("stage_timing_sec"),
+                enhancement_attribution=enhancement_attribution,
+                benchmark_lint=experiment_doc.get("benchmark_lint"),
+                answer_evaluation=experiment_doc.get("answer_evaluation"),
+                bm25_index_trace=experiment_doc.get("bm25_index_trace"),
+                auto_gold_review_summary=None,
+            )
+            surface_report_path = output_dir / f"REPORT.{label}.md"
+            surface_metrics_path = output_dir / f"metrics.{label}.json"
+            surface_failure_buckets_path = output_dir / f"failure_buckets.{label}.json"
+            surface_per_query_path = output_dir / f"per_query.{label}.json"
+            surface_retrieved_path = output_dir / f"retrieved_chunks.{label}.json"
+            surface_benchmark_path = output_dir / f"benchmark.{label}.json"
+            surface_contract_path = benchmark_contract_sidecar_path(surface_benchmark_path)
+            surface_report_path.write_text(surface_report_md, encoding="utf-8")
+            surface_metrics_path.write_text(json.dumps(surface_results, indent=2), encoding="utf-8")
+            surface_failure_buckets_path.write_text(
+                json.dumps(
+                    {
+                        model_id: res.get("failure_bucket_counts", {})
+                        for model_id, res in surface_results.items()
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            surface_per_query_path.write_text(json.dumps(surface_per_query, indent=2), encoding="utf-8")
+            surface_retrieved_path.write_text(
+                json.dumps({"by_model": surface_retrieved}, indent=2),
+                encoding="utf-8",
+            )
+            surface_benchmark_path.write_text(json.dumps(surface_queries, indent=2), encoding="utf-8")
+            surface_contract = surface.get("benchmark_contract")
+            if surface_contract is not None:
+                surface_contract_path.write_text(json.dumps(surface_contract, indent=2), encoding="utf-8")
+            result[f"REPORT.{label}.md"] = surface_report_path
+            result[f"metrics.{label}.json"] = surface_metrics_path
+            result[f"failure_buckets.{label}.json"] = surface_failure_buckets_path
+            result[f"per_query.{label}.json"] = surface_per_query_path
+            result[f"retrieved_chunks.{label}.json"] = surface_retrieved_path
+            result[f"benchmark.{label}.json"] = surface_benchmark_path
+            if surface_contract is not None:
+                result[f"benchmark.{label}.contract.json"] = surface_contract_path
+            surface_index[label] = {
+                "display_name": display_name,
+                "report": surface_report_path.name,
+                "metrics": surface_metrics_path.name,
+                "failure_buckets": surface_failure_buckets_path.name,
+                "per_query": surface_per_query_path.name,
+                "retrieved_chunks": surface_retrieved_path.name,
+                "benchmark": surface_benchmark_path.name,
+                "benchmark_contract": surface_contract_path.name if surface_contract is not None else "",
+            }
+        surfaces_index_path = output_dir / "evaluation_surfaces.json"
+        surfaces_index_path.write_text(json.dumps(surface_index, indent=2), encoding="utf-8")
+        result["evaluation_surfaces.json"] = surfaces_index_path
+    else:
+        report_md = generate_report(
+            experiment_id=experiment_id,
+            experiment_name=experiment_name,
+            config=config,
+            corpus_stats=corpus_stats,
+            grounding_summary=grounding_summary,
+            results_by_model=results_by_model,
+            grounding_audit=grounding_audit,
+            per_query_by_model=per_query_by_model,
+            created_at=created_at,
+            baseline_failure_buckets=baseline_failure_buckets,
+            stage_timing_sec=experiment_doc.get("stage_timing_sec"),
+            enhancement_attribution=enhancement_attribution,
+            benchmark_lint=experiment_doc.get("benchmark_lint"),
+            answer_evaluation=experiment_doc.get("answer_evaluation"),
+            bm25_index_trace=experiment_doc.get("bm25_index_trace"),
+            auto_gold_review_summary=experiment_doc.get("auto_gold_review_summary"),
+        )
+        report_path.write_text(report_md, encoding="utf-8")
+        metrics_path = output_dir / "metrics.json"
+        metrics_path.write_text(
+            json.dumps(results_by_model, indent=2),
+            encoding="utf-8",
+        )
+        failure_buckets = {
+            model_id: res.get("failure_bucket_counts", {})
+            for model_id, res in results_by_model.items()
+        }
+        (output_dir / "failure_buckets.json").write_text(
+            json.dumps(failure_buckets, indent=2),
+            encoding="utf-8",
+        )
+        per_query_path = output_dir / "per_query.json"
+        per_query_path.write_text(
+            json.dumps(per_query_by_model, indent=2),
+            encoding="utf-8",
+        )
+        result["metrics.json"] = metrics_path
+        result["failure_buckets.json"] = output_dir / "failure_buckets.json"
+        result["per_query.json"] = per_query_path
+        active_snapshot = (benchmark_snapshots or {}).get("active")
+        if active_snapshot is not None:
+            active_queries = list(active_snapshot.get("queries") or [])
+            active_contract = active_snapshot.get("contract")
+            active_benchmark_path = output_dir / "benchmark.active.json"
+            active_contract_path = benchmark_contract_sidecar_path(active_benchmark_path)
+            active_benchmark_path.write_text(
+                json.dumps(active_queries, indent=2),
+                encoding="utf-8",
+            )
+            result["benchmark.active.json"] = active_benchmark_path
+            if active_contract is not None:
+                active_contract_path.write_text(json.dumps(active_contract, indent=2), encoding="utf-8")
+                result["benchmark.active.contract.json"] = active_contract_path
     audit_path = output_dir / "grounding_audit.json"
     audit_path.write_text(
         json.dumps(grounding_audit, indent=2),
@@ -518,21 +770,30 @@ def write_report_artifacts(
         json.dumps(exp_serializable, indent=2),
         encoding="utf-8",
     )
-    result = {
-        "REPORT.md": report_path,
-        "metrics.json": metrics_path,
-        "failure_buckets.json": output_dir / "failure_buckets.json",
-        "per_query.json": per_query_path,
-        "grounding_audit.json": audit_path,
-        "experiment.json": exp_path,
-    }
+    result["grounding_audit.json"] = audit_path
+    result["experiment.json"] = exp_path
     if retrieved_chunks_by_model:
-        chunks_path = output_dir / "retrieved_chunks.json"
-        chunks_path.write_text(
-            json.dumps({"by_model": retrieved_chunks_by_model}, indent=2),
+        if not evaluation_surfaces:
+            chunks_path = output_dir / "retrieved_chunks.json"
+            chunks_path.write_text(
+                json.dumps({"by_model": retrieved_chunks_by_model}, indent=2),
+                encoding="utf-8",
+            )
+            result["retrieved_chunks.json"] = chunks_path
+    if auto_gold_review_payload is not None:
+        auto_gold_path = output_dir / "auto_gold_review.json"
+        auto_gold_path.write_text(
+            json.dumps(auto_gold_review_payload, indent=2),
             encoding="utf-8",
         )
-        result["retrieved_chunks.json"] = chunks_path
+        result["auto_gold_review.json"] = auto_gold_path
+    if review_queue_payload is not None:
+        review_queue_path = output_dir / "review_queue.json"
+        review_queue_path.write_text(
+            json.dumps(review_queue_payload, indent=2),
+            encoding="utf-8",
+        )
+        result["review_queue.json"] = review_queue_path
 
     # Forensics: gold_not_in_candidates bundles + miss classification + heatmap stub.
     if (

@@ -13,6 +13,14 @@ def test_manifest_includes_file_hashes(tmp_path: Path) -> None:
     batch.write_text(json.dumps({"queries": []}), encoding="utf-8")
     profile = tmp_path / "profile.json"
     profile.write_text(json.dumps({"profile_id": "p"}), encoding="utf-8")
+    definition_snapshot = tmp_path / "benchmark_definition_00.json"
+    definition_snapshot.write_text(json.dumps([{"id": "q1"}]), encoding="utf-8")
+    projection_snapshot = tmp_path / "benchmark.active.json"
+    projection_snapshot.write_text(json.dumps([{"id": "q1", "gold_unit_ids": ["u1"]}]), encoding="utf-8")
+    corpus_index = tmp_path / "corpus_index.json"
+    corpus_index.write_text(json.dumps({"run_id": "run_123"}), encoding="utf-8")
+    prod_readiness = tmp_path / "prod_readiness.json"
+    prod_readiness.write_text(json.dumps({"promotion_ready": True}), encoding="utf-8")
 
     manifest = build_run_manifest(
         experiment_id="exp1",
@@ -21,6 +29,10 @@ def test_manifest_includes_file_hashes(tmp_path: Path) -> None:
         source_config_path=str(cfg),
         query_batch_paths=[str(batch)],
         enhancement_profile_path=str(profile),
+        benchmark_definition_snapshot_paths=[str(definition_snapshot)],
+        benchmark_projection_snapshot_paths=[str(projection_snapshot)],
+        corpus_index_path=str(corpus_index),
+        prod_readiness_path=str(prod_readiness),
     )
     assert manifest["inputs"]["config_yaml"]["exists"] is True
     assert "sha256" in manifest["inputs"]["config_yaml"]
@@ -28,4 +40,8 @@ def test_manifest_includes_file_hashes(tmp_path: Path) -> None:
     assert "sha256" in manifest["inputs"]["query_batches"][0]
     assert manifest["inputs"]["enhancement_profile"]["exists"] is True
     assert "sha256" in manifest["inputs"]["enhancement_profile"]
+    assert manifest["inputs"]["benchmark_definition_snapshots"][0]["exists"] is True
+    assert manifest["inputs"]["benchmark_projection_snapshots"][0]["exists"] is True
+    assert manifest["inputs"]["corpus_index"]["exists"] is True
+    assert manifest["inputs"]["prod_readiness"]["exists"] is True
 

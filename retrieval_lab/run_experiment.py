@@ -4,6 +4,7 @@ CLI entry point: load config, load substrate, ground gold, embed per model, scor
 
 from __future__ import annotations
 
+import copy
 import json
 import logging
 import os
@@ -27,14 +28,46 @@ if str(_ARCHIVE_MARK_I) not in sys.path:
 if _DUNGEONMIND_SERVER.exists() and str(_DUNGEONMIND_SERVER) not in sys.path:
     sys.path.insert(0, str(_DUNGEONMIND_SERVER))
 
+
+def _load_dotenv_for_openai() -> None:
+    """Load .env so OPENAI_API_KEY is available (auto-gold review, answer evaluation)."""
+    if os.environ.get("OPENAI_API_KEY"):
+        return
+    try:
+        from dotenv import load_dotenv
+    except ImportError:
+        return
+    for base in (_RULES_INGESTION_ROOT, _REPO_ROOT):
+        for name in (".env", ".env.development"):
+            path = base / name
+            if path.is_file():
+                load_dotenv(path)
+                if os.environ.get("OPENAI_API_KEY"):
+                    return
+
+
 from retrieval_lab.config import ExperimentConfig
-from retrieval_lab.corpus_fingerprint import corpus_fingerprint_from_ids
+from retrieval_lab.benchmark_contract import (
+    benchmark_contract_sidecar_path,
+    benchmark_query_alignment_summary,
+    build_benchmark_contract,
+    build_prod_readiness_artifact,
+    validate_benchmark_contract,
+    write_benchmark_contract,
+)
+from retrieval_lab.corpus_fingerprint import (
+    build_corpus_index_payload,
+    corpus_content_fingerprint_from_units,
+    corpus_fingerprint_from_ids,
+)
 from retrieval_lab.gold_grounding import (
+    INTERNAL_QUERY_KEYS,
+    apply_gold_recommendations_to_queries,
     flatten_query_batches,
     ground_queries_page_anchored,
-    persist_resolved_gold_to_batch_files,
     resolve_gold_locations_to_current_corpus,
 )
+from retrieval_lab.metrics import score_retrieval
 from retrieval_lab.projection import build_clause_family_projection
 from retrieval_lab.report import write_report_artifacts
 from retrieval_lab.crossref_sidecar import (
@@ -117,6 +150,119 @@ def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Di
                         "required_full_set_hit_at_10": float((metrics.get("required_full_set_hit_at_k") or {}).get("10", (metrics.get("required_full_set_hit_at_k") or {}).get(10, 0.0))),
                     }
     return out
+
+
+def _sha256_jsonable(payload: Any) -> str:
+    rendered = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
+
+
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _snapshot_file(source_path: str, target_path: Path) -> Optional[str]:
+    src = Path(source_path)
+    if not source_path or not src.exists():
+        return None
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    target_path.write_bytes(src.read_bytes())
+    return str(target_path.resolve())
+
+
+def _snapshot_query_batch_inputs(
+    *,
+    output_dir: Path,
+    query_batch_paths: List[str],
+    query_batch_contract_paths: List[str],
+) -> Dict[str, List[str]]:
+    snapshot_dir = output_dir / "snapshots" / "benchmark_inputs"
+    definition_paths: List[str] = []
+    contract_paths: List[str] = []
+    for index, path_str in enumerate(query_batch_paths):
+        src = Path(path_str)
+        suffix = "".join(src.suffixes) or ".json"
+        definition_target = snapshot_dir / f"benchmark_definition_{index:02d}{suffix}"
+        copied = _snapshot_file(path_str, definition_target)
+        if copied:
+            definition_paths.append(copied)
+    for index, path_str in enumerate(query_batch_contract_paths):
+        contract_target = snapshot_dir / f"benchmark_definition_{index:02d}.contract.json"
+        copied = _snapshot_file(path_str, contract_target)
+        if copied:
+            contract_paths.append(copied)
+    return {
+        "definition_snapshot_paths": definition_paths,
+        "contract_snapshot_paths": contract_paths,
+    }
+
+
+def _build_corpus_recipe(config: ExperimentConfig, flags: Any, expansion_cfg: Any) -> Dict[str, Any]:
+    return {
+        "substrate_path": config.substrate_path,
+        "document_id": config.document_id,
+        "substrate_version": config.substrate_version or "",
+        "min_chars": flags.min_chars,
+        "merge_chunks": bool(flags.merge_chunks),
+        "merge_max_chars": int(flags.merge_max_chars),
+        "clause_family_projection": bool(flags.clause_family_projection),
+        "crossref_sidecar_expand": bool(expansion_cfg.crossref_sidecar_expand),
+        "co_retrieval_expand": bool(flags.co_retrieval_expand),
+        "a_prime_generate_minimal": bool(flags.a_prime_generate_minimal),
+        "dual_list_fusion": bool(flags.dual_list_fusion),
+        "dependency_pairing_expand": bool(expansion_cfg.dependency_pairing_expand),
+    }
+
+
+def _build_surface_contract(
+    *,
+    benchmark_path: Path,
+    queries: List[Dict[str, Any]],
+    corpus_ids: List[str],
+    run_id: str,
+    substrate_version: Optional[str],
+    benchmark_kind: str,
+    benchmark_surface: str,
+    corpus_fingerprint: str,
+    corpus_content_fingerprint: str,
+    corpus_unit_count: int,
+    corpus_index_path: Path,
+    corpus_index_sha256: str,
+    corpus_recipe: Dict[str, Any],
+    definition_snapshot_paths: List[str],
+    definition_contract_snapshot_paths: List[str],
+    lineage: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    rendered = json.dumps(queries, indent=2)
+    benchmark_sha256 = hashlib.sha256(rendered.encode("utf-8")).hexdigest()
+    definition_path = definition_snapshot_paths[0] if definition_snapshot_paths else str(benchmark_path.resolve())
+    definition_sha = _sha256_file(Path(definition_path)) if Path(definition_path).exists() else benchmark_sha256
+    merged_lineage = {
+        "source_benchmark_paths": list(definition_snapshot_paths),
+        "source_contract_paths": list(definition_contract_snapshot_paths),
+    }
+    if lineage:
+        merged_lineage.update(lineage)
+    return build_benchmark_contract(
+        benchmark_path=benchmark_path,
+        benchmark_sha256=benchmark_sha256,
+        query_count=len(queries),
+        run_id=run_id,
+        substrate_version=substrate_version,
+        corpus_fingerprint=corpus_fingerprint,
+        corpus_content_fingerprint=corpus_content_fingerprint,
+        corpus_unit_count=corpus_unit_count,
+        corpus_index_path=str(corpus_index_path),
+        corpus_index_sha256=corpus_index_sha256,
+        corpus_recipe=corpus_recipe,
+        benchmark_kind=benchmark_kind,
+        benchmark_surface=benchmark_surface,
+        benchmark_definition_path=definition_path,
+        benchmark_definition_sha256=definition_sha,
+        lineage=merged_lineage,
+        alignment_summary=benchmark_query_alignment_summary(queries, corpus_ids=corpus_ids),
+        projection_metadata={"projection_tool_version": "retrieval_lab_projection_v1"},
+    )
 
 
 def _compose_embedding_substrate_version(
@@ -262,7 +408,6 @@ def _run_embed_only(config: ExperimentConfig) -> str:
         )
     corpus = merge_enrichments_into_corpus(corpus, config.substrate_path)
     corpus_ids = [c["id"] for c in corpus]
-    corpus_fingerprint = corpus_fingerprint_from_ids(corpus_ids)
     embed_profile = getattr(config, "embedding_enrichment_profile", None) or ""
     corpus_texts = [build_embedding_text(c, embed_profile or None) for c in corpus]
     substrate_version = _compose_embedding_substrate_version(
@@ -310,16 +455,18 @@ def _run_embed_only(config: ExperimentConfig) -> str:
         save_embedding_run_metadata(run_id, model_id, len(corpus_ids), mongo_uri)
         np.save(output_dir / "embeddings" / f"{model_id}_corpus.npy", corpus_embeddings)
     index_path = output_dir / "embeddings" / "corpus_index.json"
+    corpus_index_payload = build_corpus_index_payload(
+        run_id=run_id,
+        substrate_version=config.substrate_version,
+        corpus=corpus,
+    )
+    corpus_index_payload["corpus_recipe"] = {
+        "min_chars": min_chars,
+        "merge_chunks": bool(getattr(config, "merge_chunks", False)),
+        "merge_max_chars": int(getattr(config, "merge_max_chars", 2000)),
+    }
     index_path.write_text(
-        json.dumps(
-            {
-                "run_id": run_id,
-                "substrate_version": config.substrate_version,
-                "corpus_fingerprint": corpus_fingerprint,
-                "unit_id_to_index": {uid: i for i, uid in enumerate(corpus_ids)},
-            },
-            indent=2,
-        ),
+        json.dumps(corpus_index_payload, indent=2),
         encoding="utf-8",
     )
     logger.info("Embed-only complete. run_id=%s", run_id)
@@ -463,15 +610,6 @@ def _load_and_ground_queries(
         gold_resolution_summary["queries_resolved_empty"],
         gold_resolution_summary["queries_legacy_only"],
     )
-    if gold_resolution_summary["queries_with_gold_locations"] > 0:
-        cwd = Path.cwd()
-        n_updated = persist_resolved_gold_to_batch_files(
-            config.query_batches,
-            flat_queries,
-            cwd,
-        )
-        if n_updated:
-            logger.info("Persisted resolved gold to %d batch file(s)", n_updated)
     logger.info("Loaded %d queries", len(flat_queries))
 
     use_semantic_grounding = all(
@@ -499,6 +637,178 @@ def _load_and_ground_queries(
         "use_semantic_grounding": use_semantic_grounding,
         "gold_resolution_summary": gold_resolution_summary,
     }
+
+
+def _metric_payload_from_scored_reviews(
+    metrics: Any,
+    *,
+    existing_result: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    existing_result = existing_result or {}
+    updated = dict(existing_result)
+    updated.update(
+        {
+            "recall_at_k": metrics.recall_at_k,
+            "hit_at_k": metrics.hit_at_k,
+            "ndcg_at_k": metrics.ndcg_at_k,
+            "full_set_hit_at_k": metrics.full_set_hit_at_k,
+            "required_recall_at_k": metrics.required_recall_at_k,
+            "required_full_set_hit_at_k": metrics.required_full_set_hit_at_k,
+            "rank_of_last_required_mean": metrics.rank_of_last_required_mean,
+            "mrr": metrics.mrr,
+            "gold_in_candidates": metrics.gold_in_candidates,
+            "gold_in_candidates_true_ceiling": metrics.gold_in_candidates_true_ceiling,
+            "grounding_coverage": metrics.grounding_coverage,
+            "answer_similarity_at_k": metrics.answer_similarity_at_k,
+            "failure_counts": metrics.failure_counts,
+            "failure_bucket_counts": metrics.failure_bucket_counts,
+            "per_suite": metrics.per_suite,
+            "per_tier": metrics.per_tier,
+            "embedding_time_sec": float(existing_result.get("embedding_time_sec", 0.0) or 0.0),
+            "scoring_time_sec": float(existing_result.get("scoring_time_sec", 0.0) or 0.0),
+        }
+    )
+    return updated
+
+
+def _sync_query_reviews_with_gold(
+    *,
+    retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]],
+    grounded_queries: List[Dict[str, Any]],
+) -> None:
+    query_by_id = {str(q.get("id") or ""): q for q in grounded_queries if q.get("id")}
+    for reviews in retrieved_chunks_by_model.values():
+        for review in reviews:
+            qid = str(review.get("query_id") or "")
+            query = query_by_id.get(qid)
+            if query is None:
+                continue
+            review["gold_unit_ids"] = list(query.get("gold_unit_ids") or [])
+            review["required_gold"] = list(query.get("required_gold") or [])
+            review["supporting_gold"] = list(query.get("supporting_gold") or [])
+
+
+def _rescore_from_query_reviews(
+    *,
+    retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]],
+    grounded_queries: List[Dict[str, Any]],
+    top_k: List[int],
+    existing_results_by_model: Dict[str, Dict[str, Any]],
+) -> tuple[Dict[str, Dict[str, Any]], Dict[str, List[Dict[str, Any]]]]:
+    query_by_id = {str(q.get("id") or ""): q for q in grounded_queries if q.get("id")}
+    results_by_model: Dict[str, Dict[str, Any]] = {}
+    per_query_by_model: Dict[str, List[Dict[str, Any]]] = {}
+    for model_id, query_reviews in retrieved_chunks_by_model.items():
+        model_queries: List[Dict[str, Any]] = []
+        ranked_lists: List[List[str]] = []
+        score_lists: List[List[float]] = []
+        ranked_source_id_lists: List[List[List[str]]] = []
+        for review in query_reviews:
+            qid = str(review.get("query_id") or "")
+            query = query_by_id.get(qid)
+            if query is None:
+                continue
+            retrieved = review.get("retrieved") or []
+            model_queries.append(query)
+            ranked_lists.append([str(item.get("chunk_id") or "") for item in retrieved if str(item.get("chunk_id") or "").strip()])
+            score_lists.append([float(item.get("score") or 0.0) for item in retrieved if str(item.get("chunk_id") or "").strip()])
+            ranked_source_id_lists.append(
+                [
+                    [str(x).strip() for x in (item.get("source_unit_ids") or [item.get("chunk_id")]) if str(x).strip()]
+                    for item in retrieved
+                    if str(item.get("chunk_id") or "").strip()
+                ]
+            )
+        metrics = score_retrieval(
+            model_queries,
+            ranked_lists,
+            score_lists,
+            top_k,
+            ranked_source_id_lists=ranked_source_id_lists,
+        )
+        results_by_model[model_id] = _metric_payload_from_scored_reviews(
+            metrics,
+            existing_result=existing_results_by_model.get(model_id, {}),
+        )
+        per_query_by_model[model_id] = metrics.per_query
+        for review, per_query in zip(query_reviews, metrics.per_query):
+            review["first_gold_rank"] = per_query.get("first_gold_rank")
+            review["failure_type"] = per_query.get("failure_type", "")
+    return results_by_model, per_query_by_model
+
+
+def _queries_for_artifact(queries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [{k: v for k, v in query.items() if k not in INTERNAL_QUERY_KEYS} for query in queries]
+
+
+def _validate_query_batch_contracts(
+    *,
+    query_batches: List[str],
+    resolved_queries: List[Dict[str, Any]],
+    corpus_ids: List[str],
+    run_id: str,
+    substrate_version: Optional[str],
+    corpus_content_fingerprint: str,
+    corpus_index_sha256: str,
+    output_dir: Path,
+    allow_mismatch: bool,
+) -> tuple[List[Dict[str, Any]], List[str]]:
+    validations: List[Dict[str, Any]] = []
+    contract_paths: List[str] = []
+    for batch_path_str in query_batches:
+        benchmark_path = Path(batch_path_str).resolve()
+        batch_queries = [
+            query
+            for query in resolved_queries
+            if str(query.get("_source_path") or "") == str(benchmark_path)
+        ]
+        alignment_summary = benchmark_query_alignment_summary(
+            batch_queries,
+            corpus_ids=corpus_ids,
+        )
+        contract_path = benchmark_contract_sidecar_path(benchmark_path)
+        if not contract_path.exists():
+            validation = {
+                "benchmark_path": str(benchmark_path),
+                "contract_path": str(contract_path),
+                "valid": False,
+                "errors": [f"benchmark contract missing: {contract_path}"],
+                "alignment_summary": alignment_summary,
+            }
+        else:
+            validation = validate_benchmark_contract(
+                benchmark_path=benchmark_path,
+                contract_path=contract_path,
+                query_count=len(batch_queries),
+                run_id=run_id,
+                substrate_version=substrate_version,
+                corpus_fingerprint=corpus_fingerprint_from_ids(corpus_ids),
+                corpus_content_fingerprint=corpus_content_fingerprint,
+                corpus_index_sha256=corpus_index_sha256,
+                alignment_summary=alignment_summary,
+            )
+            contract_paths.append(str(contract_path))
+        validations.append(validation)
+        if not validation.get("valid"):
+            message = "; ".join(validation.get("errors", []))
+            if allow_mismatch:
+                logger.warning("Benchmark contract override active for %s: %s", benchmark_path, message)
+            else:
+                raise ValueError(f"Benchmark contract validation failed for {benchmark_path}: {message}")
+
+    validation_payload = {
+        "version": "retrieval_lab_benchmark_contract_validation_v1",
+        "run_id": run_id,
+        "corpus_fingerprint": corpus_fingerprint_from_ids(corpus_ids),
+        "corpus_content_fingerprint": corpus_content_fingerprint,
+        "corpus_index_sha256": corpus_index_sha256,
+        "query_batches": validations,
+    }
+    (output_dir / "benchmark_contract_validation.json").write_text(
+        json.dumps(validation_payload, indent=2),
+        encoding="utf-8",
+    )
+    return validations, contract_paths
 
 
 def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = None) -> str:
@@ -603,15 +913,46 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         )
 
     experiment_ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    experiment_id = f"{config.experiment_name}_{experiment_ts}"
+    experiment_id = (
+        str(config.experiment_id_override).strip()
+        if getattr(config, "experiment_id_override", None) and str(config.experiment_id_override).strip()
+        else f"{config.experiment_name}_{experiment_ts}"
+    )
     output_dir = Path(config.output_dir) / experiment_id
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "embeddings").mkdir(exist_ok=True)
+    corpus_content_fingerprint = corpus_content_fingerprint_from_units(corpus)
+    corpus_recipe = _build_corpus_recipe(config, flags, expansion_cfg)
+    corpus_index_payload = build_corpus_index_payload(
+        run_id=run_id,
+        substrate_version=config.substrate_version,
+        corpus=corpus,
+    )
+    corpus_index_payload["corpus_recipe"] = dict(corpus_recipe)
+    corpus_index_path = output_dir / "embeddings" / "corpus_index.json"
+    corpus_index_path.write_text(json.dumps(corpus_index_payload, indent=2), encoding="utf-8")
+    corpus_index_sha256 = _sha256_file(corpus_index_path)
     (output_dir / "chunk_quality_gate.json").write_text(
         json.dumps(chunk_quality_summary, indent=2),
         encoding="utf-8",
     )
     benchmark_lint_summary: Optional[Dict[str, Any]] = None
+    benchmark_contract_validations, benchmark_contract_paths = _validate_query_batch_contracts(
+        query_batches=config.query_batches,
+        resolved_queries=flat_queries,
+        corpus_ids=corpus_ids,
+        run_id=run_id,
+        substrate_version=config.substrate_version,
+        corpus_content_fingerprint=corpus_content_fingerprint,
+        corpus_index_sha256=corpus_index_sha256,
+        output_dir=output_dir,
+        allow_mismatch=bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+    )
+    input_snapshot_paths = _snapshot_query_batch_inputs(
+        output_dir=output_dir,
+        query_batch_paths=list(config.query_batches),
+        query_batch_contract_paths=benchmark_contract_paths,
+    )
 
     results_by_model: Dict[str, Dict[str, Any]] = {}
     per_query_by_model: Dict[str, List[Dict[str, Any]]] = {}
@@ -733,6 +1074,110 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         bm25_index_trace = dense_out.get("bm25_index_trace")
         hybrid_contribution_by_model = dense_out.get("hybrid_contribution_by_model", {})
     stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
+
+    auto_gold_review_payload: Optional[Dict[str, Any]] = None
+    review_queue_payload: Optional[List[Dict[str, Any]]] = None
+    auto_gold_review_summary: Optional[Dict[str, Any]] = None
+    pre_review_surface: Optional[Dict[str, Any]] = None
+    post_review_surface: Optional[Dict[str, Any]] = None
+    agr = getattr(config, "auto_gold_review", None)
+    if agr is not None and agr.enabled:
+        pre_review_surface = {
+            "label": "pre_review_manual",
+            "display_name": "Pre-review / manual benchmark surface",
+            "results_by_model": copy.deepcopy(results_by_model),
+            "per_query_by_model": copy.deepcopy(per_query_by_model),
+            "retrieved_chunks_by_model": copy.deepcopy(retrieved_chunks_by_model),
+            "grounded_queries": _queries_for_artifact(copy.deepcopy(grounded_queries)),
+        }
+        if not os.environ.get("OPENAI_API_KEY"):
+            logger.warning("Auto gold review enabled but OPENAI_API_KEY is not set; skipping.")
+            auto_gold_review_summary = {"enabled": True, "skipped": True, "reason": "missing_openai_api_key"}
+        else:
+            review_model_id = str(agr.retrieval_model_id or "").strip() or next(iter(retrieved_chunks_by_model.keys()), "")
+            query_reviews_for_review = retrieved_chunks_by_model.get(review_model_id)
+            if not review_model_id or not isinstance(query_reviews_for_review, list):
+                logger.warning("Auto gold review skipped: retrieval review model not available: %s", review_model_id)
+                auto_gold_review_summary = {
+                    "enabled": True,
+                    "skipped": True,
+                    "reason": f"missing_retrieval_model:{review_model_id or 'none'}",
+                }
+            else:
+                try:
+                    from retrieval_lab.auto_gold_review.evaluate import evaluate_gold_reviews
+                    from retrieval_lab.auto_gold_review.openai_reviewer import OpenAIGoldChunkReviewer
+                    from retrieval_lab.benchmark_lint import lint_flat_queries
+
+                    reviewer = OpenAIGoldChunkReviewer(model_id=agr.llm_model_id)
+                    t_auto_gold = time.perf_counter()
+                    auto_gold_review_payload = evaluate_gold_reviews(
+                        query_reviews=query_reviews_for_review,
+                        grounded_queries=flat_queries,
+                        reviewer=reviewer,
+                        candidate_top_k=int(agr.candidate_top_k),
+                        max_queries=int(agr.max_queries),
+                        max_chars_per_chunk=int(agr.max_chars_per_chunk),
+                        max_required_gold=int(agr.max_required_gold),
+                        max_supporting_gold=int(agr.max_supporting_gold),
+                        challenge_sample_size=int(agr.review_queue_challenge_sample_size),
+                        max_required_overlap=int(agr.max_required_overlap),
+                    )
+                    applied_queries, apply_summary = apply_gold_recommendations_to_queries(
+                        flat_queries,
+                        auto_gold_review_payload.get("recommendations", []),
+                    )
+                    auto_gold_review_payload["metadata"] = {
+                        "enabled": True,
+                        "llm_model_id": agr.llm_model_id,
+                        "retrieval_model_id": review_model_id,
+                        "candidate_top_k": int(agr.candidate_top_k),
+                        "persist_benchmark": bool(agr.persist_benchmark),
+                    }
+                    auto_gold_review_payload["apply_summary"] = apply_summary
+                    review_queue_payload = list(auto_gold_review_payload.get("review_queue") or [])
+                    auto_gold_review_summary = {
+                        "enabled": True,
+                        "skipped": False,
+                        "llm_model_id": agr.llm_model_id,
+                        "retrieval_model_id": review_model_id,
+                        "candidate_top_k": int(agr.candidate_top_k),
+                        "queries_reviewed": int(auto_gold_review_payload.get("summary", {}).get("queries_reviewed", 0) or 0),
+                        "queries_applied": int(apply_summary.get("queries_applied", 0) or 0),
+                        "queries_needing_human_review": int(
+                            auto_gold_review_payload.get("summary", {}).get("queries_needing_human_review", 0) or 0
+                        ),
+                        "queue_size": len(review_queue_payload),
+                    }
+                    flat_queries = applied_queries
+                    grounded_queries = applied_queries
+                    _sync_query_reviews_with_gold(
+                        retrieved_chunks_by_model=retrieved_chunks_by_model,
+                        grounded_queries=grounded_queries,
+                    )
+                    results_by_model, per_query_by_model = _rescore_from_query_reviews(
+                        retrieved_chunks_by_model=retrieved_chunks_by_model,
+                        grounded_queries=grounded_queries,
+                        top_k=config.top_k,
+                        existing_results_by_model=results_by_model,
+                    )
+                    benchmark_lint_summary = lint_flat_queries(flat_queries)
+                    (output_dir / "benchmark_lint.json").write_text(
+                        json.dumps(benchmark_lint_summary, indent=2),
+                        encoding="utf-8",
+                    )
+                    post_review_surface = {
+                        "label": "post_review_applied",
+                        "display_name": "Post-review / auto-applied benchmark surface",
+                        "results_by_model": copy.deepcopy(results_by_model),
+                        "per_query_by_model": copy.deepcopy(per_query_by_model),
+                        "retrieved_chunks_by_model": copy.deepcopy(retrieved_chunks_by_model),
+                        "grounded_queries": _queries_for_artifact(copy.deepcopy(grounded_queries)),
+                    }
+                    stage_timing_sec["auto_gold_review"] = time.perf_counter() - t_auto_gold
+                except Exception as e:
+                    logger.warning("Auto gold review failed (non-fatal): %s", e, exc_info=True)
+                    auto_gold_review_summary = {"enabled": True, "skipped": True, "reason": f"error:{e}"}
 
     # Optional: answer-generation evaluation pass (OpenAI-backed).
     answer_eval_payload: Optional[Dict[str, Any]] = None
@@ -903,6 +1348,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "chunk_quality_max_duplicate_text_entry_rate": float(
             getattr(config, "chunk_quality_max_duplicate_text_entry_rate", 0.05)
         ),
+        "min_chars": flags.min_chars,
+        "merge_chunks": bool(flags.merge_chunks),
+        "merge_max_chars": int(flags.merge_max_chars),
         "baseline_metrics_path": config.baseline_metrics_path,
         "expand_context": flags.expand_context,
         "expand_context_n": flags.expand_context_n,
@@ -935,17 +1383,45 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 "rerank_union": qe_flags.only_add.rerank_union,
             },
         },
+        "auto_gold_review": {
+            "enabled": bool(getattr(config.auto_gold_review, "enabled", False)),
+            "llm_model_id": getattr(config.auto_gold_review, "llm_model_id", ""),
+            "candidate_top_k": int(getattr(config.auto_gold_review, "candidate_top_k", 20)),
+            "retrieval_model_id": getattr(config.auto_gold_review, "retrieval_model_id", ""),
+            "max_queries": int(getattr(config.auto_gold_review, "max_queries", 0)),
+            "max_chars_per_chunk": int(getattr(config.auto_gold_review, "max_chars_per_chunk", 1600)),
+            "max_required_gold": int(getattr(config.auto_gold_review, "max_required_gold", 5)),
+            "max_supporting_gold": int(getattr(config.auto_gold_review, "max_supporting_gold", 5)),
+            "review_queue_challenge_sample_size": int(
+                getattr(config.auto_gold_review, "review_queue_challenge_sample_size", 10)
+            ),
+            "max_required_overlap": int(getattr(config.auto_gold_review, "max_required_overlap", 2)),
+            "persist_benchmark": bool(getattr(config.auto_gold_review, "persist_benchmark", True)),
+        },
+        "allow_benchmark_contract_mismatch": bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+        "corpus_fingerprint": corpus_index_payload.get("corpus_fingerprint", ""),
+        "corpus_content_fingerprint": corpus_content_fingerprint,
+        "corpus_index_sha256": corpus_index_sha256,
+        "corpus_recipe": corpus_recipe,
     }
     experiment_doc = {
         "experiment_id": experiment_id,
         "experiment_name": config.experiment_name,
         "created_at": datetime.now(timezone.utc),
         "config": config_dict,
+        "corpus_contract": {
+            "corpus_fingerprint": corpus_index_payload.get("corpus_fingerprint", ""),
+            "corpus_content_fingerprint": corpus_content_fingerprint,
+            "corpus_index_path": str(corpus_index_path.resolve()),
+            "corpus_index_sha256": corpus_index_sha256,
+            "corpus_recipe": corpus_recipe,
+        },
         "corpus_stats": corpus_stats,
         "grounding_summary": grounding_summary,
         "results": results_by_model,
         "stage_timing_sec": stage_timing_sec,
         "chunk_quality_summary": chunk_quality_summary,
+        "benchmark_contracts": benchmark_contract_validations,
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }
@@ -953,6 +1429,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         experiment_doc["benchmark_lint"] = benchmark_lint_summary
     if answer_eval_payload is not None:
         experiment_doc["answer_evaluation"] = answer_eval_payload
+    if auto_gold_review_summary is not None:
+        experiment_doc["auto_gold_review_summary"] = auto_gold_review_summary
+    if pre_review_surface is not None:
+        experiment_doc["evaluation_surfaces"] = ["pre_review_manual"]
+    if post_review_surface is not None:
+        experiment_doc["evaluation_surfaces"] = ["pre_review_manual", "post_review_applied"]
     if tail_rerank_diagnostics:
         experiment_doc["tail_rerank_diagnostics"] = tail_rerank_diagnostics
         for model_id, res in results_by_model.items():
@@ -1001,6 +1483,79 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             enhancement_attribution["profile_id"] = qe_profile.profile_id
             experiment_doc["enhancement_attribution"] = enhancement_attribution
 
+    evaluation_surfaces: Optional[List[Dict[str, Any]]] = None
+    benchmark_snapshots: Optional[Dict[str, Dict[str, Any]]] = None
+    if pre_review_surface is not None:
+        pre_review_surface["benchmark_contract"] = _build_surface_contract(
+            benchmark_path=output_dir / f"benchmark.{pre_review_surface['label']}.json",
+            queries=list(pre_review_surface.get("grounded_queries") or []),
+            corpus_ids=corpus_ids,
+            run_id=run_id,
+            substrate_version=config.substrate_version,
+            benchmark_kind="benchmark_projection",
+            benchmark_surface=str(pre_review_surface["label"]),
+            corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+            corpus_content_fingerprint=corpus_content_fingerprint,
+            corpus_unit_count=len(corpus_ids),
+            corpus_index_path=corpus_index_path,
+            corpus_index_sha256=corpus_index_sha256,
+            corpus_recipe=corpus_recipe,
+            definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+            definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
+            lineage={"source_surface": "manual_input"},
+        )
+    if post_review_surface is not None:
+        post_review_surface["benchmark_contract"] = _build_surface_contract(
+            benchmark_path=output_dir / f"benchmark.{post_review_surface['label']}.json",
+            queries=list(post_review_surface.get("grounded_queries") or []),
+            corpus_ids=corpus_ids,
+            run_id=run_id,
+            substrate_version=config.substrate_version,
+            benchmark_kind="post_review_projection",
+            benchmark_surface=str(post_review_surface["label"]),
+            corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+            corpus_content_fingerprint=corpus_content_fingerprint,
+            corpus_unit_count=len(corpus_ids),
+            corpus_index_path=corpus_index_path,
+            corpus_index_sha256=corpus_index_sha256,
+            corpus_recipe=corpus_recipe,
+            definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+            definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
+            lineage={
+                "source_surface": "pre_review_manual",
+                "auto_gold_review_applied": True,
+            },
+        )
+    if pre_review_surface is not None:
+        evaluation_surfaces = [pre_review_surface]
+        if post_review_surface is not None:
+            evaluation_surfaces.append(post_review_surface)
+    else:
+        active_queries = _queries_for_artifact(copy.deepcopy(grounded_queries))
+        benchmark_snapshots = {
+            "active": {
+                "queries": active_queries,
+                "contract": _build_surface_contract(
+                    benchmark_path=output_dir / "benchmark.active.json",
+                    queries=active_queries,
+                    corpus_ids=corpus_ids,
+                    run_id=run_id,
+                    substrate_version=config.substrate_version,
+                    benchmark_kind="benchmark_projection",
+                    benchmark_surface="active",
+                    corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+                    corpus_content_fingerprint=corpus_content_fingerprint,
+                    corpus_unit_count=len(corpus_ids),
+                    corpus_index_path=corpus_index_path,
+                    corpus_index_sha256=corpus_index_sha256,
+                    corpus_recipe=corpus_recipe,
+                    definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+                    definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
+                    lineage={"source_surface": "manual_input"},
+                ),
+            }
+        }
+
     paths = write_report_artifacts(
         output_dir,
         experiment_id,
@@ -1016,6 +1571,10 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         enhancement_attribution=enhancement_attribution,
         grounded_queries=grounded_queries,
         corpus=corpus,
+        auto_gold_review_payload=auto_gold_review_payload,
+        review_queue_payload=review_queue_payload,
+        evaluation_surfaces=evaluation_surfaces,
+        benchmark_snapshots=benchmark_snapshots,
     )
     logger.info("Report written to %s", paths.get("REPORT.md"))
     # v1: pairing instrumentation (required; emit even when 0 so dashboard/tests can rely on it).
@@ -1053,6 +1612,53 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             encoding="utf-8",
         )
 
+    benchmark_projection_snapshot_paths = sorted(
+        str(path.resolve())
+        for name, path in paths.items()
+        if name.startswith("benchmark.") and name.endswith(".json") and ".contract." not in name
+    )
+    prod_readiness_path: Optional[Path] = None
+    try:
+        if evaluation_surfaces:
+            selected_surface = "post_review_applied" if post_review_surface is not None else str(evaluation_surfaces[0]["label"])
+            selected_surface_payload = next(
+                (surface for surface in evaluation_surfaces if str(surface.get("label") or "") == selected_surface),
+                evaluation_surfaces[0],
+            )
+            selected_metrics_by_model = dict(selected_surface_payload.get("results_by_model") or {})
+        else:
+            selected_surface = "active"
+            selected_metrics_by_model = results_by_model
+        selected_model_id = next(iter(selected_metrics_by_model.keys()), "")
+        projection_artifact_name = f"benchmark.{selected_surface}.json"
+        contract_artifact_name = f"benchmark.{selected_surface}.contract.json"
+        projection_artifact_path = paths.get(projection_artifact_name)
+        contract_artifact_path = paths.get(contract_artifact_name)
+        if projection_artifact_path is not None and contract_artifact_path is not None:
+            prod_readiness = build_prod_readiness_artifact(
+                experiment_id=experiment_id,
+                experiment_name=config.experiment_name,
+                run_id=run_id,
+                selected_surface=selected_surface,
+                selected_model_id=selected_model_id,
+                benchmark_projection_path=str(projection_artifact_path),
+                benchmark_projection_sha256=_sha256_file(projection_artifact_path),
+                benchmark_contract_path=str(contract_artifact_path),
+                benchmark_contract_sha256=_sha256_file(contract_artifact_path),
+                corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+                corpus_content_fingerprint=corpus_content_fingerprint,
+                corpus_index_path=str(corpus_index_path),
+                corpus_index_sha256=corpus_index_sha256,
+                contract_validations=benchmark_contract_validations,
+                metrics_by_model=selected_metrics_by_model,
+            )
+            if not prod_readiness.get("promotion_ready"):
+                raise ValueError("prod_readiness cannot be emitted from a contract-invalid run")
+            prod_readiness_path = output_dir / "prod_readiness.json"
+            prod_readiness_path.write_text(json.dumps(prod_readiness, indent=2), encoding="utf-8")
+    except Exception as e:
+        logger.warning("Failed to write prod_readiness.json (non-fatal): %s", e)
+
     # Run manifest: file hashes + exact argv for reproducibility.
     try:
         from retrieval_lab.run_manifest import build_run_manifest
@@ -1063,7 +1669,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             config_dict=config_dict,
             source_config_path=getattr(config, "source_config_path", None),
             query_batch_paths=list(config.query_batches),
+            query_batch_contract_paths=benchmark_contract_paths,
             enhancement_profile_path=(qe_flags.profile_path if qe_flags.enabled else None),
+            benchmark_definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+            benchmark_projection_snapshot_paths=benchmark_projection_snapshot_paths,
+            corpus_index_path=str(corpus_index_path),
+            prod_readiness_path=str(prod_readiness_path) if prod_readiness_path is not None else None,
             run_keys={
                 "run_id": run_id,
                 "run_id_family": run_id_family,
@@ -1087,6 +1698,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
 
 
 def main() -> None:
+    _load_dotenv_for_openai()
     parser = build_cli_parser()
     args = parser.parse_args()
 

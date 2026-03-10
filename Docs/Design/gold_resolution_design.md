@@ -1,12 +1,35 @@
-# Gold resolution: keeping benchmarks valid across corpus changes
+# Gold resolution and benchmark projection lifecycle
 
-**Problem:** `gold_unit_ids` in benchmarks are **derived** from the corpus pipeline (load → fold → merge). When we change min_chars, fold/merge logic, or substrate, chunk IDs change and existing gold IDs become invalid. Manually re-running a resolve script is easy to forget and doesn’t help when running with a different config.
+**Problem:** `gold_unit_ids` in benchmarks are **derived** from the corpus pipeline (load → fold → merge). When we change `min_chars`, fold/merge logic, substrate contents, or other chunk-shaping rules, old chunk IDs and old corpus identities become invalid for evaluation.
 
-**Goal:** Benchmarks stay valid across pipeline/config changes without manual re-resolution.
+**Goal:** Preserve stable benchmark intent while forcing every scored run to use a benchmark projection that matches one exact corpus contract.
 
 ---
 
-## Option A: Resolve at run time (recommended)
+## Current architecture
+
+The implemented lifecycle is now:
+
+1. **Benchmark definition**
+   - stable, human-maintained benchmark intent
+   - durable anchors live in `gold_locations` and related rationale fields
+2. **Corpus contract**
+   - exact `corpus_index.json`
+   - `corpus_fingerprint`
+   - `corpus_content_fingerprint`
+   - `corpus_index_sha256`
+   - `corpus_recipe`
+3. **Benchmark projection**
+   - generated benchmark artifact for one exact corpus contract
+   - stored in run outputs as `benchmark.<surface>.json`
+4. **Projection contract**
+   - stored as `benchmark.<surface>.contract.json`
+   - validated before scoring
+5. **Promotion artifact**
+   - `prod_readiness.json`
+   - authoritative answer to "what should ship?"
+
+## Option A: Resolve at run time (historical recommendation)
 
 **Idea:** Treat **gold_locations** (or equivalent) as the **canonical** definition of “what is gold.” At experiment run time, **after** building the corpus (load → fold → merge), resolve gold_locations → current chunk IDs **in memory** and attach the result to each query. Downstream code (grounding, metrics) only ever sees resolved `gold_unit_ids` for the corpus we’re actually using.
 
@@ -48,27 +71,48 @@
 
 ---
 
-## Recommendation: Option A (resolve at run time)
+## Current recommendation
 
-1. **Add a resolution step** inside `_prepare_experiment_corpus_context` (or immediately after it, before grounding):  
-   - Input: `flat_queries` (from benchmark), `canonical_corpus` (merged), and folded corpus (to build `original_to_merged`).  
-   - For each query that has `gold_locations`, resolve to current chunk IDs; set `gold_unit_ids`, `required_gold`, `supporting_gold` (and optionally `required_gold_rationale` keyed by new id) on the query dict.  
-   - Queries without `gold_locations` keep existing `gold_unit_ids` (legacy behavior).
+Use runtime resolution plus explicit run-local benchmark projection snapshots.
 
-2. **Curation workflow:** When adding or editing gold (e.g. apply_nominated_gold, or manual edit), always **write gold_locations** from the current corpus (page, structural_path, source_unit_ids) so that future runs can resolve. Scripts like `apply_nominated_gold_sw.py` should call into the same “corpus from config + gold_locations from corpus” logic to populate `gold_locations` when copying gold ids.
+Practical rules:
 
-3. **Integrity check:** Keep using the same pipeline (load → fold → merge) and resolve before checking; then “missing gold” means “gold_locations don’t match any chunk” (e.g. substrate or extraction changed), not “chunk IDs changed.”
+1. Keep `gold_locations` as the durable curation surface.
+2. Resolve benchmark intent against the exact active corpus before scoring.
+3. Snapshot the scored benchmark projection into the run directory.
+4. Snapshot the projection contract beside it.
+5. Fail closed if the active corpus contract does not match the projection contract.
+6. Treat post-review auto-gold as a separate benchmark surface with its own projection contract.
 
-4. **Docs:** In MANUAL_REVIEW.md (or a single “Benchmark gold” doc), state that **gold_locations are the source of truth**; `gold_unit_ids` are derived at run time for the current corpus. New benchmarks should always include `gold_locations` for each gold entry.
+### Current run artifacts
 
-5. **Optional:** Keep `scripts/resolve_sw_gold_to_corpus.py` for one-off “write resolved IDs back to the file” (e.g. for debugging or for consumers that read the benchmark without running the full pipeline). The main path doesn’t depend on it.
+Every recommendation-grade run should preserve:
+
+- `embeddings/corpus_index.json`
+- `benchmark_contract_validation.json`
+- `benchmark.<surface>.json`
+- `benchmark.<surface>.contract.json`
+- `manifest.json`
+- `prod_readiness.json`
+
+### Current role of `resolve_sw_gold_to_corpus.py`
+
+`scripts/resolve_sw_gold_to_corpus.py` should be treated as the projection materialization tool for one-off explicit projection generation and debugging, not merely as a repair script.
+
+Use it when you need to:
+
+- generate a projection against one exact `corpus_index.json`,
+- inspect how anchors resolved,
+- produce an explicit projection contract outside a normal evaluation run.
 
 ---
 
-## Implementation checklist (Option A)
+## Updated checklist
 
-- [ ] Extract resolution logic from `resolve_sw_gold_to_corpus.py` into a reusable function (e.g. `retrieval_lab/gold_grounding.py` or `retrieval_lab/gold_resolution.py`) that takes (queries, folded_corpus, merged_corpus) and returns queries with resolved gold ids.
-- [ ] In `run_experiment.py`, after building corpus and before `_resolve_gold_grounding`, call the resolver so `flat_queries` (or the list passed to grounding) have current `gold_unit_ids` when they have `gold_locations`.
-- [ ] Ensure `flatten_query_batches` (or the loader) preserves `gold_locations` on each query.
-- [ ] Update integrity check to use the same resolve step before checking gold ids in corpus.
-- [ ] Document in MANUAL_REVIEW.md / benchmark README that gold_locations are canonical and resolution is automatic at run time.
+- [x] Resolve benchmark intent against the active corpus before scoring.
+- [x] Preserve `gold_locations` as the durable intent layer.
+- [x] Add stronger corpus identity using content-aware fingerprints.
+- [x] Validate projection contracts against `corpus_index_sha256`.
+- [x] Snapshot benchmark projections into run directories.
+- [x] Snapshot projection contracts into run directories.
+- [x] Emit `prod_readiness.json` for contract-valid promotion candidates.

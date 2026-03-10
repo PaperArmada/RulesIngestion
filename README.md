@@ -7,9 +7,9 @@ Deterministic rulebook ingestion and retrieval-evaluation pipeline.
 - **Stage A:** extraction + prose reconstruction (`SurfaceAST`).
 - **Stage B:** evidence binding (`EvidenceUnits`).
 - **Stage A':** optional retrieval-only enrichment over Stage B units.
-- **Retrieval Lab:** embed/eval over Stage B substrate (with optional retrieval-time expansion features).
+- **Retrieval Lab:** embed/eval over Stage B substrate, with corpus-specific benchmark projections and contract-validated run artifacts.
 
-See [Docs/Design/v1/baseline_manifest.md](Docs/Design/v1/baseline_manifest.md) for reproducibility and [Docs/Design/v1/retrieval_lab_v1.md](Docs/Design/v1/retrieval_lab_v1.md) for retrieval-lab architecture.
+See [Docs/Design/v1/baseline_manifest.md](Docs/Design/v1/baseline_manifest.md) for reproducibility, [Docs/Design/v1/retrieval_lab_v1.md](Docs/Design/v1/retrieval_lab_v1.md) for retrieval-lab architecture, and [Docs/Design/gold_resolution_design.md](Docs/Design/gold_resolution_design.md) for the benchmark definition/projection lifecycle.
 
 ## What You Can Do From This Repo
 
@@ -35,11 +35,28 @@ See [Docs/Design/v1/baseline_manifest.md](Docs/Design/v1/baseline_manifest.md) f
 ### Retrieval benchmarking
 
 1. **Canonical protocol: embed-only, then eval-only with the same run-id.**
-2. **Use corpus-compatible run-id only (fingerprint guardrail).**
-3. **Use canonical S&W naming/paths in commands and docs:**
+2. **Benchmarks are now contract-bound to one exact corpus.**
+   - Treat the human-maintained benchmark file as the benchmark definition.
+   - Treat the scored benchmark artifact as a benchmark projection tied to one exact corpus identity.
+   - Do not assume one benchmark file is valid across changed chunk topology.
+3. **Use corpus-compatible run-id only (shape + content guardrail).**
+   - Eval-only now validates both `corpus_fingerprint` and `corpus_content_fingerprint`.
+   - Benchmark validation also checks the active `corpus_index.json` hash and benchmark surface.
+4. **Use canonical S&W naming/paths in commands and docs:**
    - benchmark path: `evals/retrieval/SwordsandWizardry/...`
    - corpus output path (Complete Revised): `out/Swords&Wizardry/SW_Complete_Revised/SW Complete Revised PDF`
    - `SwordsandWizardy` is legacy typo only.
+
+### Retrieval run artifacts
+
+Every experiment run should now be treated as an auditable contract bundle, not just a metrics directory.
+
+- `embeddings/corpus_index.json` records exact corpus identity and corpus recipe.
+- `benchmark_contract_validation.json` records whether input benchmark contracts matched the active corpus.
+- `benchmark.<surface>.json` records the benchmark projection actually scored for a surface.
+- `benchmark.<surface>.contract.json` records the projection contract for that exact surface.
+- `manifest.json` / `run_manifest.json` snapshot definition inputs, projection snapshots, corpus index, and prod-readiness artifacts.
+- `prod_readiness.json` is the explicit promotion artifact for "what should ship?" and must only exist for a contract-valid run.
 
 ## Canonical Workflow References
 
@@ -87,6 +104,13 @@ uv run python -m retrieval_lab.run_experiment \
   --embed-only \
   --seed 42
 ```
+
+After eval, inspect at minimum:
+
+- `benchmark_contract_validation.json`
+- `embeddings/corpus_index.json`
+- `manifest.json`
+- `prod_readiness.json` when evaluating a promotion candidate
 
 ```bash
 uv run python -m retrieval_lab.run_experiment \

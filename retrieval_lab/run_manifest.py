@@ -44,10 +44,19 @@ def build_run_manifest(
     config_dict: Dict[str, Any],
     source_config_path: Optional[str] = None,
     query_batch_paths: Optional[List[str]] = None,
+    query_batch_contract_paths: Optional[List[str]] = None,
     enhancement_profile_path: Optional[str] = None,
+    benchmark_definition_snapshot_paths: Optional[List[str]] = None,
+    benchmark_projection_snapshot_paths: Optional[List[str]] = None,
+    corpus_index_path: Optional[str] = None,
+    prod_readiness_path: Optional[str] = None,
+    run_keys: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     now = datetime.now(timezone.utc).isoformat()
     query_batch_paths = query_batch_paths or list(config_dict.get("query_batch_paths") or [])
+    query_batch_contract_paths = query_batch_contract_paths or []
+    benchmark_definition_snapshot_paths = benchmark_definition_snapshot_paths or []
+    benchmark_projection_snapshot_paths = benchmark_projection_snapshot_paths or []
 
     env_subset = {
         "cwd": str(Path.cwd()),
@@ -63,9 +72,19 @@ def build_run_manifest(
         "inputs": {
             "config_yaml": _safe_file_record(source_config_path or ""),
             "query_batches": [_safe_file_record(p) for p in query_batch_paths],
+            "query_batch_contracts": [_safe_file_record(p) for p in query_batch_contract_paths],
             "enhancement_profile": _safe_file_record(enhancement_profile_path or ""),
+            "benchmark_definition_snapshots": [
+                _safe_file_record(p) for p in benchmark_definition_snapshot_paths
+            ],
+            "benchmark_projection_snapshots": [
+                _safe_file_record(p) for p in benchmark_projection_snapshot_paths
+            ],
+            "corpus_index": _safe_file_record(corpus_index_path or ""),
+            "prod_readiness": _safe_file_record(prod_readiness_path or ""),
         },
         "config": config_dict,
+        "run_keys": run_keys or {},
         "env": env_subset,
     }
     return manifest

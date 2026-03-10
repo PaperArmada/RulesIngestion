@@ -10,7 +10,7 @@ def _base_config_dict() -> dict:
         "experiment_name": "x",
         "substrate_path": ".",
         "document_id": "doc",
-        "query_batches": ["evals/retrieval/PHB5e/dnd_5_e_equivalent_rag_eval_queries.json"],
+        "query_batches": ["evals/retrieval/PHB5e/dnd_5e_2024_rules_50q_benchmark.json"],
         "models": ["all-mpnet-base-v2"],
         "retrieval_mode": "hybrid",
         "top_k": [1, 3, 5, 10],
@@ -163,3 +163,62 @@ def test_config_validate_raw_first_merge_rerank_top_k_floor() -> None:
     )
     with pytest.raises(ValueError, match="raw_merge_rerank_top_k must be >= max\\(top_k\\)"):
         cfg.validate()
+
+
+def test_config_parses_auto_gold_review_group() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "auto_gold_review": {
+                "enabled": True,
+                "llm_model_id": "gpt-4o-mini",
+                "candidate_top_k": 20,
+                "retrieval_model_id": "all-mpnet-base-v2",
+                "review_queue_challenge_sample_size": 4,
+            },
+        }
+    )
+    assert cfg.auto_gold_review.enabled is True
+    assert cfg.auto_gold_review.llm_model_id == "gpt-4o-mini"
+    assert cfg.auto_gold_review.retrieval_model_id == "all-mpnet-base-v2"
+    assert cfg.auto_gold_review.review_queue_challenge_sample_size == 4
+
+
+def test_config_validate_auto_gold_review_requires_model() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "auto_gold_review": {
+                "enabled": True,
+                "llm_model_id": "",
+            },
+        }
+    )
+    with pytest.raises(ValueError, match="auto_gold_review.llm_model_id is required"):
+        cfg.validate()
+
+
+def test_config_validate_auto_gold_review_requires_top_k_cover_eval_window() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "top_k": [1, 3, 10, 20],
+            "auto_gold_review": {
+                "enabled": True,
+                "llm_model_id": "gpt-4o-mini",
+                "candidate_top_k": 10,
+            },
+        }
+    )
+    with pytest.raises(ValueError, match="candidate_top_k must be >= max\\(top_k\\)=20"):
+        cfg.validate()
+
+
+def test_config_parses_allow_benchmark_contract_mismatch_flag() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "allow_benchmark_contract_mismatch": True,
+        }
+    )
+    assert cfg.allow_benchmark_contract_mismatch is True

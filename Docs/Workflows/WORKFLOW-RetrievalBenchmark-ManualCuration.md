@@ -66,6 +66,33 @@ For **negative** queries, `gold_unit_ids`, `gold_locations`, `required_gold`, an
 
 ---
 
+## Benchmark lifecycle contract
+
+This workflow now assumes a two-layer benchmark model:
+
+- **Benchmark definition:** the stable, human-maintained artifact that captures query text and anchor intent.
+- **Benchmark projection:** the generated artifact actually scored for one exact corpus contract.
+
+Use these rules:
+
+- `gold_locations` and related intent fields are the durable curation surface.
+- `gold_unit_ids`, `required_gold`, and `supporting_gold` should be treated as projection outputs tied to a specific corpus shape.
+- If chunk topology changes, regenerate the projection instead of hand-editing stale chunk IDs against the new corpus.
+- Production decisions should reference the run's `prod_readiness.json`, not just the source benchmark filename.
+
+### Required evaluation artifacts
+
+For a scored run, expect:
+
+- `benchmark.<surface>.json`
+- `benchmark.<surface>.contract.json`
+- `benchmark_contract_validation.json`
+- `embeddings/corpus_index.json`
+
+If these artifacts are missing or mismatched, the run is not a trustworthy recommendation surface.
+
+---
+
 ## Suite 1: Atomic Questions
 
 ### Purpose
@@ -280,10 +307,17 @@ If the question mixes two independent lookups, split into separate entries. If i
 
 Update all citation fields. Apply these rules:
 
+- Fill `gold_locations` completely. This is the anchor-intent layer that must survive future projection changes.
 - `required_gold`: the minimum set of EvidenceUnits needed to *operationalize* the answer (what a compiler needs to implement the procedure/state). Not "everything that mentions the topic."
 - `supporting_gold`: expansions, examples, extra context, edge cases.
 - Check overlap: if this query's `required_gold` shares units with another query's `required_gold`, and total shared count > 2 across the benchmark, consider whether one query should use a different anchor.
 - Set `_status: cited`.
+
+When editing a benchmark after a corpus change:
+
+- update the intent fields first (`gold_locations`, rationale, source-page evidence),
+- regenerate the projection for the active corpus,
+- validate the new projection contract instead of trusting old IDs.
 
 ### Phase C: Post-citation validation
 
@@ -306,6 +340,15 @@ Compute how many queries share each required gold unit. Flag any unit appearing 
 #### Check 3: Zero-required-gold queries
 
 No positive query (atomic or sourced) should have empty `required_gold`. This creates a "free pass" that inflates ReqFSH. Every positive query must have at least 1 required anchor.
+
+#### Check 3b: Projection validity
+
+After curation, confirm that the benchmark projection for the active corpus:
+
+- has zero dead gold IDs,
+- validates against the active `corpus_fingerprint`,
+- validates against the active `corpus_content_fingerprint`,
+- validates against the active `corpus_index_sha256`.
 
 #### Check 4: Suite balance
 
@@ -359,6 +402,14 @@ For each benchmark, run at minimum:
 - Mode C (raw-first merge-rerank): tests pipeline improvement over raw.
 
 Mode B (merged-only) is optional and currently has known gold-grounding issues where unit IDs don't survive the merge process.
+
+### Surface discipline
+
+If auto-gold review is enabled, treat pre-review and post-review as separate benchmark surfaces.
+
+- `benchmark.pre_review_manual.json` / `.contract.json` represent the manual surface.
+- `benchmark.post_review_applied.json` / `.contract.json` represent the auto-applied surface.
+- Do not mix metrics from those surfaces when making a recommendation.
 
 ### Metrics to report per suite
 
