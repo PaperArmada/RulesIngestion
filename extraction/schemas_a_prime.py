@@ -2,7 +2,8 @@
 Stage A' (A-Prime) schemas: enrichment payloads for retrieval-only augmentation.
 
 All A' outputs are non-evidence (authority=none, never_cite).
-Schema version: A_PRIME_V1. See Docs/Design/stage_a_prime_contract.md.
+Schema versions: A_PRIME_V1 and A_PRIME_V2. Historical contract reference:
+Docs/Design/archive/stage_a_prime_contract.md.
 """
 
 from __future__ import annotations

@@ -2,12 +2,15 @@
 
 Deterministic rulebook ingestion and retrieval-evaluation pipeline.
 
-**Start here:** [Docs/Design/v1/architecture_overview.md](Docs/Design/v1/architecture_overview.md)
+**Start here:** [Docs/Design/README.md](Docs/Design/README.md)
 
 - **Stage A:** extraction + prose reconstruction (`SurfaceAST`).
 - **Stage B:** evidence binding (`EvidenceUnits`).
 - **Stage A':** optional retrieval-only enrichment over Stage B units.
 - **Retrieval Lab:** embed/eval over Stage B substrate, with corpus-specific benchmark projections and contract-validated run artifacts.
+
+Canonical design lives in `Docs/Design/v1/`. Historical design notes remain in
+`Docs/Design/` and superseded design docs live in `Docs/Design/archive/`.
 
 See [Docs/Design/v1/baseline_manifest.md](Docs/Design/v1/baseline_manifest.md) for reproducibility, [Docs/Design/v1/retrieval_lab_v1.md](Docs/Design/v1/retrieval_lab_v1.md) for retrieval-lab architecture, and [Docs/Design/gold_resolution_design.md](Docs/Design/gold_resolution_design.md) for the benchmark definition/projection lifecycle.
 

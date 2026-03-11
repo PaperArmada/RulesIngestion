@@ -2,6 +2,10 @@
 
 These documents are **archived**. They are superseded by the canonical v1 set in [Docs/Design/v1/](../v1/). Kept for reference and historical context.
 
+This archive is only for **superseded design docs**. Dated but still useful
+notes that have not been fully superseded remain in `Docs/Design/` and are
+labeled there as **historical in place**.
+
 | Archived doc | Superseded by / notes |
 |-------------|------------------------|
 | BRUTAL_PAGES_METRICS.md | v1 [gates_stage_c_d.md](../v1/gates_stage_c_d.md) and Stage A/B contracts |
@@ -11,5 +15,8 @@ These documents are **archived**. They are superseded by the canonical v1 set in
 | stage_a_prime_contract.md | Future Stage C (enrichment); v1 gates_stage_c_d.md |
 | STAGE_C_CONTRACTv1.md | v1 [gates_stage_c_d.md](../v1/gates_stage_c_d.md) |
 | STAGE_C_CONTRACTv2.md | v1 gates; detailed graph contract deferred |
+
+Pre-v1 contract copies live separately in
+[Archive/pre-v1/Docs/pre_v1/](../../../Archive/pre-v1/Docs/pre_v1/).
 
 **Start here for current design:** [Docs/Design/v1/architecture_overview.md](../v1/architecture_overview.md)

@@ -1,4 +1,4 @@
-# Swords & Wizardry: hybrid with dual-list fusion (Index_U + Index_F).
+# Swords & Wizardry Complete Revised: hybrid with dual-list fusion (Index_U + Index_F).
 # Run after swords_wizardry_hybrid (same substrate) so unit embeddings exist; family embeddings are computed on first run.
 retrieval_mode: hybrid
 experiment_name: "swords_wizardry_hybrid_dual_list_fusion"
@@ -9,7 +9,7 @@ min_chars: 200
 merge_chunks: true
 merge_max_chars: 2000
 query_batches:
-  - "evals/retrieval/SwordsandWizardy/swords_wizardry_benchmark.json"
+  - "evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json"
 models:
   - all-mpnet-base-v2
 top_k: [1, 3, 5, 10, 20, 50]

@@ -1,7 +1,8 @@
 # Stage A' Enrichment Prompt — A_PRIME_PROMPT_V1
 
 Single frozen prompt for retrieval-only semantic annotation of an EvidenceUnit.
-Output is non-evidence (authority=none, never_cite). See stage_a_prime_contract.md.
+Output is non-evidence (authority=none, never_cite). Historical contract
+reference: `Docs/Design/archive/stage_a_prime_contract.md`.
 
 ---
 

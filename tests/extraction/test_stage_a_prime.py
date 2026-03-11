@@ -134,10 +134,10 @@ def test_aprime_enrichment_schema_valid(valid_enrichment_payload: dict) -> None:
     assert len(enr.lexical_anchors) == 5
 
 
-def test_aprime_enrichment_schema_invalid_topic_tag(valid_enrichment_payload: dict) -> None:
+def test_aprime_enrichment_schema_invalid_topic_tag_is_dropped(valid_enrichment_payload: dict) -> None:
     valid_enrichment_payload["topic_tags"] = ["actions", "invalid_tag"]
-    with pytest.raises(ValueError, match="topic_tag must be in allowed vocabulary"):
-        APrimeEnrichment.model_validate(valid_enrichment_payload)
+    enr = APrimeEnrichment.model_validate(valid_enrichment_payload)
+    assert enr.topic_tags == ["actions"]
 
 
 def test_aprime_enrichment_schema_summary_1s_word_count(valid_enrichment_payload: dict) -> None:
@@ -146,15 +146,15 @@ def test_aprime_enrichment_schema_summary_1s_word_count(valid_enrichment_payload
         APrimeEnrichment.model_validate(valid_enrichment_payload)
 
 
-def test_aprime_enrichment_schema_summary_3b_bullets(valid_enrichment_payload: dict) -> None:
+def test_aprime_enrichment_schema_summary_3b_bullets_warn_only(valid_enrichment_payload: dict) -> None:
     valid_enrichment_payload["summary_3b"] = "- One\n- Two"
-    with pytest.raises(ValueError, match="4-18 words"):
-        APrimeEnrichment.model_validate(valid_enrichment_payload)
+    enr = APrimeEnrichment.model_validate(valid_enrichment_payload)
+    assert enr.summary_3b == "- One\n- Two"
 
 
 def test_aprime_enrichment_schema_lexical_anchors_length(valid_enrichment_payload: dict) -> None:
     valid_enrichment_payload["lexical_anchors"] = []
-    with pytest.raises(ValueError, match="lexical_anchors must have 1-20"):
+    with pytest.raises(ValueError, match="lexical_anchors must have at least 1 item"):
         APrimeEnrichment.model_validate(valid_enrichment_payload)
 
 
@@ -196,11 +196,11 @@ def test_validate_surface_forms_substrings_pass(valid_enrichment_payload: dict, 
     _validate_surface_forms_substrings(enr, sample_unit.text)
 
 
-def test_validate_surface_forms_substrings_fail(valid_enrichment_payload: dict, sample_unit: EvidenceUnit) -> None:
+def test_validate_surface_forms_substrings_fail_drops_bad_atoms(valid_enrichment_payload: dict, sample_unit: EvidenceUnit) -> None:
     enr = APrimeEnrichment.model_validate(valid_enrichment_payload)
     enr.mechanic_atoms[0].surface_forms.append("not in text xyz")
-    with pytest.raises(ValueError, match="surface_form .* is not a substring"):
-        _validate_surface_forms_substrings(enr, sample_unit.text)
+    _validate_surface_forms_substrings(enr, sample_unit.text)
+    assert enr.mechanic_atoms == []
 
 
 # ---------------------------------------------------------------------------

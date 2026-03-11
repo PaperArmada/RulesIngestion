@@ -6,7 +6,8 @@ for retrieval indexing. All outputs are authority=none, never_cite.
 
 Uses the OpenAI Responses API with Structured Outputs (Pydantic schema) so that
 responses adhere to APrimeEnrichment and refusals are programmatically detectable.
-See Docs/Design/stage_a_prime_contract.md and Docs/architecture/OpenAI_Responses_API.md.
+See Docs/Design/archive/stage_a_prime_contract.md and
+Docs/architecture/OpenAI_Responses_API.md.
 """
 
 from __future__ import annotations
@@ -34,11 +35,11 @@ PROMPT_ID = "A_PRIME_PROMPT_V2"
 
 
 def _load_prompt_template() -> str:
-    """Load the template block from A_PRIME_PROMPT_V1.md (between Template and ---)."""
+    """Load the template block from A_PRIME_PROMPT_V2.md."""
     text = _PROMPT_PATH.read_text(encoding="utf-8")
     start = text.find("You are annotating a single evidence unit")
     if start == -1:
-        raise ValueError("Template section not found in A_PRIME_PROMPT_V1.md")
+        raise ValueError("Template section not found in A_PRIME_PROMPT_V2.md")
     end_marker = "\n---\n"
     end = text.find(end_marker, start)
     if end == -1:
@@ -120,12 +121,12 @@ def _responses_parse_sync(
         {"role": "developer", "content": "You are annotating evidence units for retrieval indexing. Output only valid JSON matching the schema. Do not add facts or use outside knowledge."},
         {"role": "user", "content": prompt},
     ]
-    response = client.responses.parse(
-        model=model,
-        input=input_messages,
-        text_format=APrimeEnrichment,
-        temperature=0,
-    )
+    parse_kwargs = {
+        "model": model,
+        "input": input_messages,
+        "text_format": APrimeEnrichment,
+    }
+    response = client.responses.parse(**parse_kwargs)
     if not response.output:
         return None
     for item in response.output:
@@ -273,6 +274,7 @@ def run_stage_a_prime(
 
     run_manifest = {
         "model_id": model,
+        "model_temperature_mode": "omitted",
         "prompt_id": PROMPT_ID,
         "prompt_hash": prompt_hash,
         "created_at": datetime.now(timezone.utc).isoformat(),

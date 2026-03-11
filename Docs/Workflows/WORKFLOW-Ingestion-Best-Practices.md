@@ -4,6 +4,12 @@ This workflow is the canonical ingestion runbook for current Mark III usage.
 
 Goal: produce stable Stage B substrates quickly for retrieval tuning, and run Stage A' only when it is actually needed.
 
+Design references:
+- `Docs/Design/README.md` for doc taxonomy and current canonical entrypoints
+- `Docs/Design/v1/architecture_overview.md`
+- `Docs/Design/v1/stage_a_contract.md`
+- `Docs/Design/v1/stage_b_contract.md`
+
 ---
 
 ## 1) Decision rule: `A+B` first, `A'` second
@@ -64,6 +70,9 @@ uv run python scripts/run_mark3_full_pdf.py \
   --stage ab \
   --dpi 200
 ```
+
+`scripts/run_mark3_full_pdf.py` defaults to `--stage ab` so the common tuning path
+is explicit even without an override.
 
 Expected outputs include per-page Stage A/B artifacts plus:
 - `run_summary.json`

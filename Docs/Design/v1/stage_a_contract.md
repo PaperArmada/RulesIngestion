@@ -52,4 +52,4 @@ See [schema_registry.md](schema_registry.md) for full field definitions.
 
 - Given the same inputs (same page, same raw model output), Stage A must produce **byte-identical** structural outputs.
 - All iteration over collections that affect output order must use fixed sort keys (e.g. page_index, source_line_start, node order in tree).
-- Implementation: `extraction/stage_a_prime.py`, `extraction/ast_parser.py`; schemas in `extraction/schemas.py`.
+- Implementation: `extraction/stage_a.py`, `extraction/ast_parser.py`; schemas in `extraction/schemas.py`.

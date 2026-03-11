@@ -4,6 +4,11 @@ This workflow is the canonical retrieval runbook for Starfinder + S&W.
 
 Goal: run reproducible retrieval experiments with clear defaults, explicit run contracts, and evidence-backed recommendations.
 
+Design references:
+- `Docs/Design/README.md` for doc taxonomy and current canonical entrypoints
+- `Docs/Design/v1/retrieval_lab_v1.md`
+- `Docs/Design/gold_resolution_design.md`
+
 ---
 
 ## 1) Prerequisite ingestion policy
@@ -84,6 +89,10 @@ The run corpus contract is now stronger than "same run name".
   - `corpus_content_fingerprint` for ordered chunk content/path/source lineage
 - The corpus contract also records the applied `corpus_recipe`.
 - Eval-only embedding reuse should be treated as invalid if any of those identity checks drift.
+
+Historical deep-dives and experiment notes remain in `Docs/Design/`, but they
+should be treated as supporting context rather than canonical policy unless
+explicitly incorporated into the `v1/` contract set.
 
 ---
 

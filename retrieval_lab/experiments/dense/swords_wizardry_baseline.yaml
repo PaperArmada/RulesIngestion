@@ -1,7 +1,7 @@
-# Dense retrieval baseline — Swords & Wizardry (merged chunks, min_chars=200).
+# Dense retrieval baseline — Swords & Wizardry Complete Revised.
 # 1) Embed once: uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/dense/swords_wizardry_baseline.yaml --embed-only
 # 2) Run retrieval: same --config, optionally --run-id <run_id>
-# 3) Nominated gold workflow: see evals/retrieval/SwordsandWizardy/MANUAL_REVIEW.md
+# 3) Nominated gold workflow: use files under evals/retrieval/SwordsandWizardry/
 retrieval_mode: dense
 experiment_name: "swords_wizardry_dense_baseline"
 substrate_path: "out/Swords&Wizardry"
@@ -11,7 +11,7 @@ min_chars: 200
 merge_chunks: true
 merge_max_chars: 2000
 query_batches:
-  - "evals/retrieval/SwordsandWizardy/swords_wizardry_benchmark.json"
+  - "evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json"
 models:
   - all-mpnet-base-v2
 top_k: [1, 3, 5, 10, 20, 50]

@@ -181,8 +181,8 @@ def main() -> None:
     parser.add_argument(
         "--stage",
         choices=["ab", "ab+aprime"],
-        default="ab+aprime",
-        help="ab = Stage A+B only; ab+aprime = A+B then Stage A' enrichment (default, standard path). Requires OPENAI_API_KEY for A'.",
+        default="ab",
+        help="ab = Stage A+B only (default, recommended retrieval-tuning path); ab+aprime = A+B then Stage A' enrichment. Requires OPENAI_API_KEY for A'.",
     )
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging.")
     args = parser.parse_args()

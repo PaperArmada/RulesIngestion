@@ -2,7 +2,7 @@
 
 Stage A′ (A-Prime) adds **retrieval-only semantic annotations** to every EvidenceUnit produced by Stage B. It does not create or change rules; it only augments how units are represented for **retrieval indexing** so that paraphrased, terse, or stylistically different queries can find the right evidence.
 
-This README summarizes **what is enriched**, **how** it is produced, and **how it will be used**. The canonical contract is `Docs/Design/stage_a_prime_contract.md`.
+This README summarizes **what is enriched**, **how** it is produced, and **how it will be used**. The latest detailed A-prime contract is retained in `Docs/Design/archive/stage_a_prime_contract.md`; Stage A' itself is currently optional and outside the canonical `v1/` ingestion baseline.
 
 ---
 
@@ -52,7 +52,7 @@ Stage A′ runs **after** Stage B. It can be run over existing Stage B output wi
 
 ### Mechanism
 
-1. **One LLM call per unit** (or batched per page), with a **frozen prompt** (`A_PRIME_PROMPT_V1`).
+1. **One LLM call per unit** (or batched per page), with a **frozen prompt** (`A_PRIME_PROMPT_V2`).
 2. **OpenAI Responses API** with **Structured Outputs**: the model is constrained to return JSON that conforms to the `APrimeEnrichment` Pydantic schema. No ad-hoc parsing or retries for format.
 3. **Determinism:** `temperature=0`; cache key = `hash(input_fingerprint | prompt_id | model_id)`. Re-runs on unchanged input reuse the cache.
 4. **Gates:** After enrichment, gates check schema validity, substring consistency (surface forms in verbatim text), and fragment flagging. Results are written regardless; gates are for diagnostics and pipeline quality.
@@ -65,7 +65,7 @@ Stage A′ runs **after** Stage B. It can be run over existing Stage B output wi
 - **Worker:** `extraction/stage_a_prime.py` — prompt loading, `_responses_parse_sync` (Responses API + `text_format=APrimeEnrichment`), caching, batch enrichment, gates.
 - **Gates:** `extraction/gates_a_prime.py`.
 - **Pipeline:** `extraction/pipeline.py` — `run_a_b_aprime()`, `write_stage_a_prime_artifacts()`.
-- **Prompt:** `extraction/prompts/A_PRIME_PROMPT_V1.md`.
+- **Prompt:** `extraction/prompts/A_PRIME_PROMPT_V2.md`.
 
 ### Enrichment schema (summary)
 
@@ -78,7 +78,7 @@ Stage A′ runs **after** Stage B. It can be run over existing Stage B output wi
 | `questions_answered` | 1–10 natural-language questions this unit (or unit + parent) answers; 5–18 words each.                                                                  |
 | `lexical_anchors`    | 1–20 surface phrases for lexical matching.                                                                                                              |
 
-All payloads also carry metadata: `authority="none"`, `source="llm_annotation"`, `admissibility="non_evidence"`, `stage_c_visibility="hidden"`, `citation_policy="never_cite"`. Exact field rules and vocabulary are in `Docs/Design/stage_a_prime_contract.md`.
+All payloads also carry metadata: `authority="none"`, `source="llm_annotation"`, `admissibility="non_evidence"`, `stage_c_visibility="hidden"`, `citation_policy="never_cite"`. Exact field rules and vocabulary are documented in `Docs/Design/archive/stage_a_prime_contract.md` plus the live `schemas_a_prime.py` implementation.
 
 ---
 
@@ -160,7 +160,7 @@ uv run python scripts/run_mark3_full_pdf.py --pdf path/to/book.pdf --stage ab+ap
 
 | Document                                    | Purpose                                                              |
 | ------------------------------------------- | -------------------------------------------------------------------- |
-| `Docs/Design/stage_a_prime_contract.md`     | Canonical contract: inputs, outputs, schema, authority, determinism. |
-| `extraction/prompts/A_PRIME_PROMPT_V1.md`   | Frozen prompt and schema summary for the model.                      |
+| `Docs/Design/archive/stage_a_prime_contract.md` | Historical detailed contract for the current A-prime shape.      |
+| `extraction/prompts/A_PRIME_PROMPT_V2.md`   | Active frozen prompt used by the current implementation.             |
 | `Docs/architecture/OpenAI_Responses_API.md` | Responses API + Structured Outputs; Stage A′ usage note.             |
 | `scripts/run_stage_a_prime.py`              | CLI for single-page or substrate-wide A′ runs.                       |

@@ -1,5 +1,6 @@
 """
-Stage A' quality gates. See stage_a_prime_contract.md acceptance tests.
+Stage A' quality gates. Historical contract reference:
+Docs/Design/archive/stage_a_prime_contract.md.
 
 A'-01: Output schema validity
 A'-02: Substring enforcement (surface_forms in verbatim_text)

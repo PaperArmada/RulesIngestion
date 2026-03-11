@@ -1,5 +1,9 @@
 # Decision Lock-In + Next Implementation Spec (Stages A/B / Retrieval Lab)
 
+**Status:** Historical decision memo kept for rationale. The canonical current
+baseline is documented in [v1/](v1/) and current workflow docs; this note is not
+normative for the stabilized Mark III surface.
+
 ## Context
 
 Stage A extraction is high-fidelity (minimal prose/structure loss). Benchmark results show the system is in “crack-finding” mode: refactor parity is proven, and the most meaningful improvements come from **candidate shaping / compositional retrieval support**, not from tuning retrieval knobs.

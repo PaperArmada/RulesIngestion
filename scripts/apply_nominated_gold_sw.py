@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-Apply reviewed gold from nominated_gold_per_query.json to swords_wizardry_benchmark.json.
+Apply reviewed gold from nominated_gold_per_query.json to the canonical S&W
+Complete Revised benchmark.
 
 Usage:
   uv run python scripts/apply_nominated_gold_sw.py
 
-Reads evals/retrieval/SwordsandWizardy/nominated_gold_per_query.json and
-evals/retrieval/SwordsandWizardy/swords_wizardry_benchmark.json. For each query,
-copies gold_unit_ids from the nomination file into the benchmark. Writes the
-benchmark back (preserves id, question, answer, source_page; updates gold_unit_ids).
+Reads `evals/retrieval/SwordsandWizardry/nominated_gold_per_query.json` and
+`evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json`.
+For each query, copies `gold_unit_ids` from the nomination file into the
+benchmark. Writes the benchmark back (preserves id, question, answer,
+source_page; updates `gold_unit_ids`).
 """
 
 from __future__ import annotations
@@ -17,9 +19,9 @@ import json
 import sys
 from pathlib import Path
 
-EVAL_DIR = Path("evals/retrieval/SwordsandWizardy")
+EVAL_DIR = Path("evals/retrieval/SwordsandWizardry")
 NOMINATED_PATH = EVAL_DIR / "nominated_gold_per_query.json"
-BENCHMARK_PATH = EVAL_DIR / "swords_wizardry_benchmark.json"
+BENCHMARK_PATH = EVAL_DIR / "swords_wizardry_complete_revised_benchmark.json"
 
 
 def main() -> None:

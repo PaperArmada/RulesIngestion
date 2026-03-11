@@ -4,6 +4,9 @@
 
 **Status:** Implemented and run (2026-02-24). Baseline + path, type, topic_tags, full ablations on SWCR; see §Run summary below.  
 **Related:** [ARCHITECTURE-TOC-Structural-Enrichment.md](ARCHITECTURE-TOC-Structural-Enrichment.md), retrieval_lab `substrate_loader`, `run_experiment`, `store.substrate_run_id`.
+**Canonical note:** Keep as experiment history. Current baseline policy and
+workflow guidance live in `Docs/Design/v1/` and
+`Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md`.
 
 ---
 

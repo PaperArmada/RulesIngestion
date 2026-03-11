@@ -4,6 +4,8 @@
 **Owner:** Retrieval Lab / DungeonOverMind  
 **Status:** Proposed  
 **Date:** 2026-02-22
+**Canonical note:** This is a future-facing proposal, not part of the current
+stabilized Mark III baseline.
 
 ---
 
