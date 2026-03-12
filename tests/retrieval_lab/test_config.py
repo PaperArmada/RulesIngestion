@@ -29,6 +29,13 @@ def test_config_parses_grouped_and_flat_crossref() -> None:
     assert cfg.crossref.expand_total_cap == 9
 
 
+def test_config_defaults_to_merged_chunk_recipe() -> None:
+    cfg = ExperimentConfig.from_dict(_base_config_dict())
+    assert cfg.min_chars == 200
+    assert cfg.merge_chunks is True
+    assert cfg.merge_max_chars == 2000
+
+
 def test_config_parses_grouped_dual_list() -> None:
     cfg = ExperimentConfig.from_dict(
         {
@@ -157,6 +164,7 @@ def test_config_validate_raw_first_merge_rerank_top_k_floor() -> None:
         {
             **_base_config_dict(),
             "raw_first_merge_rerank": True,
+            "merge_chunks": False,
             "raw_merge_rerank_top_k": 5,
             "top_k": [1, 3, 10],
         }

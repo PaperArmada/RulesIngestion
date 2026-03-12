@@ -119,8 +119,9 @@ uv run python scripts/run_stage_a_prime.py \
 
 For retrieval benchmarking:
 1. Keep the Stage B substrate fixed while tuning retrieval knobs.
-2. Use embed-only then eval-only with matching `run_id`.
-3. Only include A'-dependent retrieval settings after A' artifacts exist (or explicitly use runtime fallback flags where supported).
+2. Lock the retrieval chunk recipe before embedding. Canonical default: `min_chars=200`, `merge_chunks=true`, `merge_max_chars=2000` unless a corpus-specific workflow says otherwise.
+3. Use `embed-only` then `eval-only` with matching `run_id`, and treat any chunk-recipe change as requiring a fresh embed step.
+4. Only include A'-dependent retrieval settings after A' artifacts exist (or explicitly use runtime fallback flags where supported).
 
 ---
 

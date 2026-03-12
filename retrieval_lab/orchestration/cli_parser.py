@@ -179,11 +179,11 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument("--stage1-query-mode", type=str, choices=["question_only", "question_plus_summary", "weighted"], default=None, help="Stage1 query representation mode")
     parser.add_argument("--stage2-query-mode", type=str, choices=["question_only", "question_plus_summary", "weighted"], default=None, help="Stage2 rerank query representation mode")
     parser.add_argument("--stage2-rerank-method", type=str, choices=["dense", "cross_encoder"], default=None, help="Stage2 rerank scoring method")
-    parser.add_argument("--merge-chunks", action="store_true", dest="merge_chunks", help="Enable heading-based chunk merge before retrieval")
+    parser.add_argument("--merge-chunks", action="store_true", dest="merge_chunks", help="Enable heading-based chunk merge before embedding/retrieval")
     parser.add_argument("--no-merge-chunks", action="store_false", dest="merge_chunks")
     parser.set_defaults(merge_chunks=None)
     parser.add_argument("--merge-max-chars", type=int, default=None, help="Max characters per merged chunk when merge is enabled")
-    parser.add_argument("--min-chars", type=int, default=None, help="Drop units with text shorter than this threshold")
+    parser.add_argument("--min-chars", type=int, default=None, help="Fold units shorter than this threshold into adjacent units before heading merge")
     parser.add_argument("--raw-first-merge-rerank", action="store_true", help="Run hybrid retrieval/rerank on raw units, then promote to merged chunks and rerank merged candidates")
     parser.add_argument("--raw-stage1-admission-k", type=int, default=None, help="Raw top-k candidates admitted before merged promotion")
     parser.add_argument("--raw-merge-rerank-top-k", type=int, default=None, help="Final top-k kept after merged rerank")
@@ -201,6 +201,19 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument("--answer-max-queries", type=int, default=None, help="Answer-eval max queries (deterministic: sorted by query_id)")
     parser.add_argument("--answer-max-chars-per-unit", type=int, default=None, help="Answer-eval evidence truncation per unit (chars)")
     parser.add_argument("--answer-eval-models", type=str, default=None, help="Comma-separated retrieval model IDs to evaluate (default: first model only)")
+    parser.add_argument("--auto-gold-review", action="store_true", help="Run LLM review over top-k retrieval candidates and apply benchmark gold")
+    parser.add_argument("--auto-gold-model", type=str, default=None, help="Auto-gold reviewer LLM model id (e.g. gpt-4o-mini)")
+    parser.add_argument("--auto-gold-retrieval-model", type=str, default=None, help="Retrieval model whose ranked candidates should drive gold review (default: first available)")
+    parser.add_argument("--auto-gold-top-k", type=int, default=None, help="How many retrieved chunks per query to review and persist in the auto-gold artifact")
+    parser.add_argument("--auto-gold-max-queries", type=int, default=None, help="Limit auto-gold review to the first N queries (0 means all)")
+    parser.add_argument("--auto-gold-max-chars-per-chunk", type=int, default=None, help="Truncate candidate text to this many chars for LLM review")
+    parser.add_argument("--auto-gold-challenge-sample", type=int, default=None, help="Extra hard-but-successful queries to include in the human review queue")
+    parser.add_argument("--auto-gold-max-required-overlap", type=int, default=None, help="Flag queries when the same required chunk appears in more than this many queries")
+    parser.add_argument(
+        "--allow-benchmark-contract-mismatch",
+        action="store_true",
+        help="Noisy override: continue even when a benchmark contract is missing, mismatched, or points at dead corpus ids.",
+    )
     parser.add_argument("--enhancement-mode", type=str, choices=["none", "dict", "llm", "llm+dict", "decompose"], default=None, help="Query enhancement mode (overrides config)")
     parser.add_argument("--enhancement-profile", type=str, default=None, help="Path to QueryExpansionProfile JSON (overrides config)")
     parser.add_argument(

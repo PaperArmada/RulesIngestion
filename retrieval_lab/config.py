@@ -123,6 +123,23 @@ class AnswerEvaluationConfig:
 
 
 @dataclass
+class AutoGoldReviewConfig:
+    """Optional: LLM review pass to assign benchmark gold from top-k candidates."""
+
+    enabled: bool = False
+    llm_model_id: str = ""
+    candidate_top_k: int = 20
+    retrieval_model_id: str = ""
+    max_queries: int = 0
+    max_chars_per_chunk: int = 1600
+    max_required_gold: int = 5
+    max_supporting_gold: int = 5
+    review_queue_challenge_sample_size: int = 10
+    max_required_overlap: int = 2
+    persist_benchmark: bool = True
+
+
+@dataclass
 class ExperimentConfig:
     """Configuration for a single retrieval lab experiment."""
 
@@ -136,6 +153,8 @@ class ExperimentConfig:
     retrieval_mode: str = "dense"
     top_k: List[int] = field(default_factory=lambda: [1, 3, 5, 10, 20])
     output_dir: str = "out/retrieval_lab/experiments"
+    # When set, use this as experiment_id so output goes to output_dir/experiment_id (e.g. fixed run path).
+    experiment_id_override: Optional[str] = None
     mongo_uri: Optional[str] = None
     reuse_embeddings: bool = True
     # Substrate version: when set, run_id = retrieval_lab_{document_id}_{substrate_version}.
@@ -153,12 +172,13 @@ class ExperimentConfig:
     # Expand top-k with context then re-rank: append prev/next N chunks (document order), re-embed, re-rank.
     expand_context: bool = False
     expand_context_n: int = 1
-    # Exclude units with len(text) < min_chars when loading substrate (reduces spell-header/metadata noise; requires re-embed).
-    min_chars: Optional[int] = None
+    # Fold units with len(text) < min_chars into adjacent units before retrieval-time heading merge.
+    # Canonical default is enabled so new workflows embed the merged corpus unless they explicitly opt out.
+    min_chars: Optional[int] = 200
     # Post-hoc heading merge: merge consecutive units sharing the same structural_path.
     # Produces richer chunks (e.g. full spell entries) without changing Stage B extraction.
-    # Requires re-embed when toggled (new substrate_version).
-    merge_chunks: bool = False
+    # Canonical default is enabled so embedding happens after corpus shaping unless explicitly disabled.
+    merge_chunks: bool = True
     merge_max_chars: int = 2000
     # R7: RRF fusion constant k (default 60). Overridden by per-corpus policy if set.
     rrf_k: int = 60
@@ -274,6 +294,10 @@ class ExperimentConfig:
     query_enhancement: QueryEnhancementConfig = field(default_factory=QueryEnhancementConfig)
     # Optional response generation evaluation pass.
     answer_evaluation: AnswerEvaluationConfig = field(default_factory=AnswerEvaluationConfig)
+    # Optional LLM review pass to auto-ground benchmark gold from retrieval results.
+    auto_gold_review: AutoGoldReviewConfig = field(default_factory=AutoGoldReviewConfig)
+    # Noisy override: allow running with missing/mismatched benchmark contracts.
+    allow_benchmark_contract_mismatch: bool = False
 
     def get_policy(self, corpus_id: str) -> RetrievalPolicy:
         """Get retrieval policy for corpus. Falls back to default policy from config."""
@@ -425,6 +449,29 @@ class ExperimentConfig:
         ae = self.answer_evaluation
         if ae.enabled and not ae.llm_model_id.strip():
             raise ValueError("answer_evaluation.llm_model_id is required when answer_evaluation.enabled=true")
+        agr = self.auto_gold_review
+        if agr.enabled:
+            if not agr.llm_model_id.strip():
+                raise ValueError("auto_gold_review.llm_model_id is required when auto_gold_review.enabled=true")
+            if agr.candidate_top_k < 1:
+                raise ValueError("auto_gold_review.candidate_top_k must be >= 1")
+            eval_k = max(self.top_k) if self.top_k else 0
+            if eval_k and agr.candidate_top_k < eval_k:
+                raise ValueError(
+                    f"auto_gold_review.candidate_top_k must be >= max(top_k)={eval_k} so rescoring stays valid"
+                )
+            if agr.max_queries < 0:
+                raise ValueError("auto_gold_review.max_queries must be >= 0")
+            if agr.max_chars_per_chunk < 1:
+                raise ValueError("auto_gold_review.max_chars_per_chunk must be >= 1")
+            if agr.max_required_gold < 1:
+                raise ValueError("auto_gold_review.max_required_gold must be >= 1")
+            if agr.max_supporting_gold < 0:
+                raise ValueError("auto_gold_review.max_supporting_gold must be >= 0")
+            if agr.review_queue_challenge_sample_size < 0:
+                raise ValueError("auto_gold_review.review_queue_challenge_sample_size must be >= 0")
+            if agr.max_required_overlap < 1:
+                raise ValueError("auto_gold_review.max_required_overlap must be >= 1")
 
     @classmethod
     def from_yaml(cls, path: Path, base_dir: Optional[Path] = None) -> "ExperimentConfig":
@@ -452,6 +499,7 @@ class ExperimentConfig:
         pairing = _parse_pairing(data)
         query_enhancement = _parse_query_enhancement(data)
         answer_evaluation = _parse_answer_evaluation(data)
+        auto_gold_review = _parse_auto_gold_review(data)
         cfg = cls(
             experiment_name=str(data.get("experiment_name", "unnamed_experiment")),
             substrate_path=str(data.get("substrate_path", "")),
@@ -461,6 +509,7 @@ class ExperimentConfig:
             retrieval_mode=str(data.get("retrieval_mode", "dense")),
             top_k=top_k,
             output_dir=str(data.get("output_dir", "out/retrieval_lab/experiments")),
+            experiment_id_override=(str(data.get("experiment_id", "") or "").strip() or None),
             mongo_uri=data.get("mongo_uri"),
             reuse_embeddings=bool(data.get("reuse_embeddings", True)),
             substrate_version=data.get("substrate_version"),
@@ -488,8 +537,8 @@ class ExperimentConfig:
             raw_merge_score_floor=bool(data.get("raw_merge_score_floor", True)),
             raw_merge_rank_floor=bool(data.get("raw_merge_rank_floor", True)),
             raw_merge_coverage_bonus=float(data.get("raw_merge_coverage_bonus", 0.0)),
-            min_chars=int(data["min_chars"]) if data.get("min_chars") is not None else None,
-            merge_chunks=bool(data.get("merge_chunks", False)),
+            min_chars=int(data["min_chars"]) if data.get("min_chars") is not None else 200,
+            merge_chunks=bool(data.get("merge_chunks", True)),
             merge_max_chars=int(data.get("merge_max_chars", 2000)),
             rrf_k=int(data.get("rrf_k", 60)),
             retrieval_policies=_parse_retrieval_policies(data.get("retrieval_policies")),
@@ -548,6 +597,8 @@ class ExperimentConfig:
             pairing=pairing,
             query_enhancement=query_enhancement,
             answer_evaluation=answer_evaluation,
+            auto_gold_review=auto_gold_review,
+            allow_benchmark_contract_mismatch=bool(data.get("allow_benchmark_contract_mismatch", False)),
         )
         return cfg
 
@@ -676,6 +727,25 @@ def _parse_answer_evaluation(data: Dict[str, Any]) -> AnswerEvaluationConfig:
             eval_models=[str(x) for x in eval_models if str(x).strip()],
         )
     return AnswerEvaluationConfig()
+
+
+def _parse_auto_gold_review(data: Dict[str, Any]) -> AutoGoldReviewConfig:
+    raw = data.get("auto_gold_review")
+    if isinstance(raw, dict):
+        return AutoGoldReviewConfig(
+            enabled=bool(raw.get("enabled", False)),
+            llm_model_id=str(raw.get("llm_model_id", raw.get("model_id", ""))),
+            candidate_top_k=int(raw.get("candidate_top_k", 20)),
+            retrieval_model_id=str(raw.get("retrieval_model_id", "")),
+            max_queries=int(raw.get("max_queries", 0)),
+            max_chars_per_chunk=int(raw.get("max_chars_per_chunk", 1600)),
+            max_required_gold=int(raw.get("max_required_gold", 5)),
+            max_supporting_gold=int(raw.get("max_supporting_gold", 5)),
+            review_queue_challenge_sample_size=int(raw.get("review_queue_challenge_sample_size", 10)),
+            max_required_overlap=int(raw.get("max_required_overlap", 2)),
+            persist_benchmark=bool(raw.get("persist_benchmark", True)),
+        )
+    return AutoGoldReviewConfig()
 
 
 def resolve_model_id(model_id: str, registry: Optional[Dict[str, Any]] = None) -> str:

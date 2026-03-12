@@ -1,0 +1,42 @@
+# ShadowRun 4e Anniversary — auto-gold pilot.
+# Substrate from: uv run python scripts/run_mark3_full_pdf.py --pdf <SR4_PDF> --out-dir out/mark3_evaluation
+# 1) After ingestion: embed once, then run retrieval + auto-gold with --run-id.
+# 2) Run benchmark eval with same --run-id.
+#
+retrieval_mode: dense
+experiment_name: "sr4_autogold_pilot"
+experiment_id: "sr4_autogold_pilot"
+substrate_path: "out/mark3_evaluation/CAT2600A_SR4Anniversary"
+document_id: "CAT2600A_SR4Anniversary"
+substrate_version: "v1"
+query_batches:
+  - "evals/retrieval/ShadowRun4e/sr4_anniversary_benchmark_blank.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+expand_context: true
+expand_context_n: 1
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+reuse_embeddings: true
+batch_size: 16
+min_chars: 200
+merge_chunks: true
+merge_max_chars: 2000
+
+# Auto-gold: LLM assigns required/supporting gold from top-k retrieval.
+auto_gold_review:
+  enabled: true
+  llm_model_id: "gpt-5.4"
+  candidate_top_k: 20
+  retrieval_model_id: "all-mpnet-base-v2"
+  max_queries: 0
+  max_chars_per_chunk: 1600
+  max_required_gold: 5
+  max_supporting_gold: 5
+  review_queue_challenge_sample_size: 5
+  max_required_overlap: 2
+  persist_benchmark: true
+
+# Allow run when benchmark has no .contract.json yet (blank-for-autogold).
+allow_benchmark_contract_mismatch: true

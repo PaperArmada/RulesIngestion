@@ -58,13 +58,23 @@ Use benchmarks intentionally. Do not use one benchmark for every question.
 
 ## 4) Canonical retrieval protocol (always)
 
-1. Run `embed-only` first.
-2. Capture `run_id` from embed output.
-3. Materialize or validate the benchmark projection for the exact corpus you are scoring.
-4. Run `eval-only` with the same `run_id`.
-5. Keep `(corpus, model, recipe mode, enrichment profile)` stable per comparison slice.
+1. Lock the retrieval chunk recipe first. Canonical default: `min_chars=200`, `merge_chunks=true`, `merge_max_chars=2000` unless a corpus-specific workflow says otherwise.
+2. Run `embed-only` only after that merged-corpus recipe is set.
+3. Capture `run_id` from embed output.
+4. Materialize or validate the benchmark projection for the exact corpus you are scoring.
+5. Run `eval-only` with the same `run_id`.
+6. Keep `(corpus, chunk recipe, model, recipe mode, enrichment profile)` stable per comparison slice.
 
 Never compare two runs if both substrate and retrieval knobs changed.
+
+### 4.0 Merged-corpus rule
+
+Embedding must happen after corpus shaping, not before it.
+
+- Treat `min_chars`, `merge_chunks`, and `merge_max_chars` as part of the substrate contract.
+- A changed chunk recipe means a changed corpus identity and therefore a new embed step.
+- Do not reuse an old `run_id` across raw-vs-merged or merged-recipe changes.
+- The current generic Retrieval Lab defaults should already produce a merged corpus, but workflows should still state the intended chunk recipe explicitly.
 
 ### 4.1 Benchmark contract discipline
 
@@ -107,6 +117,9 @@ explicitly incorporated into the `v1/` contract set.
 - `model=all-mpnet-base-v2`
 - `seed=42`
 - `recipe-mode=standardized`
+- `min_chars=200`
+- `merge_chunks=true`
+- `merge_max_chars=2000`
 - `embedding_enrichment_profile=baseline|none`
 - `co_retrieval_expand=false`
 
@@ -137,6 +150,7 @@ explicitly incorporated into the `v1/` contract set.
 - `all-mpnet-base-v2` is default because it is the current stable baseline used across recent bakeoff comparisons.
 - `seed=42` is fixed to reduce run-to-run noise and make per-condition deltas interpretable.
 - `recipe-mode=standardized` is default for comparability; `recommended` is tracked as an explicit variant, not mixed into baseline.
+- merged retrieval chunks are default because they reduce header noise and give embedding a richer, more stable unit of retrieval than raw page-fragment units.
 - `embedding_enrichment_profile=baseline|none` keeps baseline attribution clean; enrichment profiles are added only as controlled deltas.
 - `co_retrieval_expand=false` at baseline prevents expansion-side effects from masking core retrieval behavior.
 - `A+B first, A' second` minimizes iteration cost and isolates retrieval tuning from expensive enrichment generation.

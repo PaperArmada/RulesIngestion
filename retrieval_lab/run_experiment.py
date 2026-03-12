@@ -5,6 +5,7 @@ CLI entry point: load config, load substrate, ground gold, embed per model, scor
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import logging
 import os
@@ -399,6 +400,12 @@ def _run_embed_only(config: ExperimentConfig) -> str:
     if not corpus:
         raise ValueError("Corpus is empty; no EvidenceUnits found.")
     min_chars = getattr(config, "min_chars", None)
+    logger.info(
+        "Applying corpus recipe before embedding/retrieval: min_chars=%s merge_chunks=%s merge_max_chars=%s",
+        min_chars,
+        bool(getattr(config, "merge_chunks", False)),
+        int(getattr(config, "merge_max_chars", 2000)),
+    )
     if min_chars is not None:
         corpus = fold_under_threshold_into_adjacent(corpus, min_chars)
     if getattr(config, "merge_chunks", False):
