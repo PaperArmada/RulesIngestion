@@ -33,6 +33,16 @@ def _sha256_jsonable(payload: Any) -> str:
     return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
 
 
+def _path_contract_matches(benchmark_value: str, current_value: str) -> bool:
+    left = str(benchmark_value or "").strip().replace("\\", "/")
+    right = str(current_value or "").strip().replace("\\", "/")
+    if not left or not right:
+        return left == right
+    if left == right:
+        return True
+    return right.endswith(f"/{left}") or left.endswith(f"/{right}")
+
+
 def benchmark_query_alignment_summary(
     queries: Iterable[Dict[str, Any]],
     *,
@@ -158,6 +168,100 @@ def load_benchmark_contract(contract_path: Path) -> Dict[str, Any]:
     return json.loads(contract_path.read_text(encoding="utf-8"))
 
 
+def load_benchmark_definition(benchmark_path: Path) -> Dict[str, Any]:
+    payload = json.loads(benchmark_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        return {}
+    return payload
+
+
+def validate_benchmark_metadata_contract(
+    *,
+    benchmark_path: Path,
+    query_count: int,
+    alignment_summary: Dict[str, Any],
+    substrate_version: Optional[str],
+    corpus_recipe: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    payload = load_benchmark_definition(benchmark_path)
+    metadata = payload.get("metadata") if isinstance(payload, dict) else None
+    queries = payload.get("queries") if isinstance(payload, dict) else None
+    errors: List[str] = []
+    metadata = metadata if isinstance(metadata, dict) else {}
+    queries = queries if isinstance(queries, list) else []
+    if not metadata:
+        errors.append("benchmark metadata missing from benchmark definition")
+
+    current_recipe = dict(corpus_recipe or {})
+    expected_substrate_version = str(substrate_version or "").strip()
+    metadata_substrate_version = str(metadata.get("substrate_version") or "").strip()
+    if expected_substrate_version != metadata_substrate_version:
+        errors.append(
+            "benchmark metadata substrate_version mismatch: "
+            f"benchmark={metadata_substrate_version!r} current={expected_substrate_version!r}"
+        )
+
+    expected_substrate_path = str(current_recipe.get("substrate_path") or "").strip()
+    metadata_substrate_path = str(metadata.get("substrate_path") or "").strip()
+    if expected_substrate_path and not _path_contract_matches(metadata_substrate_path, expected_substrate_path):
+        errors.append(
+            "benchmark metadata substrate_path mismatch: "
+            f"benchmark={metadata_substrate_path!r} current={expected_substrate_path!r}"
+        )
+
+    expected_document_id = str(current_recipe.get("document_id") or "").strip()
+    metadata_document_id = str(metadata.get("document_id") or "").strip()
+    if expected_document_id and metadata_document_id != expected_document_id:
+        errors.append(
+            "benchmark metadata document_id mismatch: "
+            f"benchmark={metadata_document_id!r} current={expected_document_id!r}"
+        )
+
+    chunk_recipe = metadata.get("chunk_recipe") if isinstance(metadata.get("chunk_recipe"), dict) else {}
+    if current_recipe:
+        expected_min_chars = current_recipe.get("min_chars")
+        if expected_min_chars is not None and chunk_recipe.get("min_chars") != expected_min_chars:
+            errors.append(
+                "benchmark metadata chunk_recipe.min_chars mismatch: "
+                f"benchmark={chunk_recipe.get('min_chars')!r} current={expected_min_chars!r}"
+            )
+        expected_merge_chunks = current_recipe.get("merge_chunks")
+        if expected_merge_chunks is not None and bool(chunk_recipe.get("merge_chunks")) != bool(expected_merge_chunks):
+            errors.append(
+                "benchmark metadata chunk_recipe.merge_chunks mismatch: "
+                f"benchmark={chunk_recipe.get('merge_chunks')!r} current={expected_merge_chunks!r}"
+            )
+        expected_merge_max_chars = current_recipe.get("merge_max_chars")
+        if expected_merge_max_chars is not None and chunk_recipe.get("merge_max_chars") != expected_merge_max_chars:
+            errors.append(
+                "benchmark metadata chunk_recipe.merge_max_chars mismatch: "
+                f"benchmark={chunk_recipe.get('merge_max_chars')!r} current={expected_merge_max_chars!r}"
+            )
+
+    if queries and len(queries) != int(query_count):
+        errors.append(
+            f"benchmark query count mismatch: benchmark={len(queries)} current={query_count}"
+        )
+
+    if int(alignment_summary.get("missing_gold_ids_total", 0) or 0) > 0:
+        errors.append(
+            "benchmark definition points at corpus-missing gold ids: "
+            f"{int(alignment_summary.get('missing_gold_ids_total', 0))} missing id reference(s)"
+        )
+
+    return {
+        "contract_path": "",
+        "benchmark_path": str(benchmark_path.resolve()),
+        "valid": not errors,
+        "errors": errors,
+        "contract": {
+            "source": "benchmark_metadata",
+            "metadata": metadata,
+        },
+        "alignment_summary": alignment_summary,
+    }
+
+
 def validate_benchmark_contract(
     *,
     benchmark_path: Path,
@@ -262,9 +366,11 @@ def build_prod_readiness_artifact(
     corpus_index_sha256: str,
     contract_validations: List[Dict[str, Any]],
     metrics_by_model: Dict[str, Dict[str, Any]],
+    bundle_metadata: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     contract_valid = bool(contract_validations) and all(v.get("valid") for v in contract_validations)
     selected_metrics = dict(metrics_by_model.get(selected_model_id) or {})
+    bundle_metadata = dict(bundle_metadata or {})
     metrics_summary = {
         "mrr": selected_metrics.get("mrr"),
         "gold_in_candidates_true_ceiling": selected_metrics.get("gold_in_candidates_true_ceiling"),
@@ -293,6 +399,21 @@ def build_prod_readiness_artifact(
             "corpus_content_fingerprint": str(corpus_content_fingerprint),
             "corpus_index_path": str(Path(corpus_index_path).resolve()),
             "corpus_index_sha256": str(corpus_index_sha256),
+        },
+        "bundle": {
+            "kind": str(bundle_metadata.get("bundle_kind") or ""),
+            "member_role": str(bundle_metadata.get("bundle_member_role") or ""),
+            "member_mode_hint": str(bundle_metadata.get("bundle_member_mode_hint") or ""),
+            "member_status": str(bundle_metadata.get("bundle_member_status") or ""),
+            "baseline_package_dir": str(bundle_metadata.get("baseline_package_dir") or ""),
+            "baseline_package_stamp": str(bundle_metadata.get("baseline_package_stamp") or ""),
+        },
+        "freeze": {
+            "git_commit_sha": str(bundle_metadata.get("git_commit_sha") or ""),
+            "git_tag": str(bundle_metadata.get("git_tag") or ""),
+            "python_version": str(bundle_metadata.get("python_version") or ""),
+            "uv_lock_path": str(bundle_metadata.get("uv_lock_path") or ""),
+            "uv_lock_sha256": str(bundle_metadata.get("uv_lock_sha256") or ""),
         },
         "metrics_summary": metrics_summary,
         "contract_validation_summary": {

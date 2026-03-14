@@ -53,13 +53,29 @@ from retrieval_lab.benchmark_contract import (
     benchmark_query_alignment_summary,
     build_benchmark_contract,
     build_prod_readiness_artifact,
+    validate_benchmark_metadata_contract,
     validate_benchmark_contract,
     write_benchmark_contract,
 )
+from retrieval_lab.artifact_resolution import load_resolved_json_artifact
+from retrieval_lab.benchmark_ratification import (
+    TRACK_RATIFIED_CORE,
+    TRACK_WORKING_SET,
+    compact_ratification_summary,
+    filter_queries_by_ids,
+    summarize_ratification,
+)
+from retrieval_lab.bundle_metadata import infer_run_bundle_metadata
 from retrieval_lab.corpus_fingerprint import (
     build_corpus_index_payload,
     corpus_content_fingerprint_from_units,
     corpus_fingerprint_from_ids,
+)
+from retrieval_lab.anchor_resolver import (
+    build_resolved_gold_sets,
+    load_anchors_from_batches,
+    resolve_anchors,
+    resolution_summary,
 )
 from retrieval_lab.gold_grounding import (
     INTERNAL_QUERY_KEYS,
@@ -129,14 +145,20 @@ def _set_seed(seed: Optional[int]) -> None:
 def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Dict[str, Any]]:
     if not baseline_metrics_path:
         return {}
+
     path = Path(baseline_metrics_path)
-    if not path.exists():
-        logger.warning("baseline_metrics_path not found: %s", baseline_metrics_path)
-        return {}
+    experiment_dir = path if path.is_dir() else path.parent
+    preferred_surface = ""
+    if path.is_file() and path.name.startswith("metrics.") and path.name.endswith(".json"):
+        preferred_surface = path.name[len("metrics."):-len(".json")]
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        logger.warning("baseline_metrics_path is not valid JSON: %s", baseline_metrics_path)
+        payload = load_resolved_json_artifact(
+            experiment_dir,
+            "metrics",
+            preferred_surface=preferred_surface or None,
+        )
+    except Exception:
+        logger.warning("baseline metrics could not be resolved from: %s", baseline_metrics_path)
         return {}
     out: Dict[str, Dict[str, Any]] = {}
     if isinstance(payload, dict):
@@ -151,6 +173,24 @@ def _load_baseline_metrics(baseline_metrics_path: Optional[str]) -> Dict[str, Di
                         "required_full_set_hit_at_10": float((metrics.get("required_full_set_hit_at_k") or {}).get("10", (metrics.get("required_full_set_hit_at_k") or {}).get(10, 0.0))),
                     }
     return out
+
+
+def _load_baseline_reference_artifact(
+    baseline_metrics_path: Optional[str],
+    artifact_kind: str,
+) -> Any:
+    if not baseline_metrics_path:
+        return None
+    path = Path(baseline_metrics_path)
+    experiment_dir = path if path.is_dir() else path.parent
+    preferred_surface = ""
+    if path.is_file() and path.name.startswith("metrics.") and path.name.endswith(".json"):
+        preferred_surface = path.name[len("metrics."):-len(".json")]
+    return load_resolved_json_artifact(
+        experiment_dir,
+        artifact_kind,
+        preferred_surface=preferred_surface or None,
+    )
 
 
 def _sha256_jsonable(payload: Any) -> str:
@@ -233,6 +273,7 @@ def _build_surface_contract(
     definition_snapshot_paths: List[str],
     definition_contract_snapshot_paths: List[str],
     lineage: Optional[Dict[str, Any]] = None,
+    projection_metadata: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     rendered = json.dumps(queries, indent=2)
     benchmark_sha256 = hashlib.sha256(rendered.encode("utf-8")).hexdigest()
@@ -262,7 +303,10 @@ def _build_surface_contract(
         benchmark_definition_sha256=definition_sha,
         lineage=merged_lineage,
         alignment_summary=benchmark_query_alignment_summary(queries, corpus_ids=corpus_ids),
-        projection_metadata={"projection_tool_version": "retrieval_lab_projection_v1"},
+        projection_metadata={
+            "projection_tool_version": "retrieval_lab_projection_v1",
+            **dict(projection_metadata or {}),
+        },
     )
 
 
@@ -294,19 +338,25 @@ def _load_baseline_failure_types(
     failure buckets that baseline couldn't solve (retrieval_miss / rank_miss), and
     we can split behavior between those buckets.
 
-    Expects baseline_metrics_path to be a metrics.json inside a baseline run directory,
-    with a sibling per_query.json.
+    baseline_metrics_path may point at a run directory, a legacy metrics.json, or a
+    labeled metrics.<surface>.json. Resolution prefers the prod_readiness-selected surface.
     """
     if not baseline_metrics_path:
         return None
+
     metrics_path = Path(baseline_metrics_path)
-    per_query_path = metrics_path.with_name("per_query.json")
-    if not per_query_path.exists():
-        return None
+    experiment_dir = metrics_path if metrics_path.is_dir() else metrics_path.parent
+    preferred_surface = ""
+    if metrics_path.is_file() and metrics_path.name.startswith("metrics.") and metrics_path.name.endswith(".json"):
+        preferred_surface = metrics_path.name[len("metrics."):-len(".json")]
     try:
-        payload = json.loads(per_query_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        logger.warning("baseline per_query.json is not valid JSON: %s", per_query_path)
+        payload = load_resolved_json_artifact(
+            experiment_dir,
+            "per_query",
+            preferred_surface=preferred_surface or None,
+        )
+    except Exception:
+        logger.warning("baseline per_query artifact could not be resolved from: %s", baseline_metrics_path)
         return None
     if not isinstance(payload, dict):
         return None
@@ -617,6 +667,33 @@ def _load_and_ground_queries(
         gold_resolution_summary["queries_resolved_empty"],
         gold_resolution_summary["queries_legacy_only"],
     )
+
+    anchors = load_anchors_from_batches(config.query_batches)
+    anchor_resolution_audit: dict = {}
+    if anchors:
+        resolutions = resolve_anchors(
+            anchors, canonical_corpus,
+            substrate_version=config.substrate_version or "",
+        )
+        anchor_summary = resolution_summary(resolutions)
+        anchor_resolution_audit = {
+            "summary": anchor_summary,
+            "resolutions": {aid: r.to_dict() for aid, r in resolutions.items()},
+        }
+        logger.info(
+            "Anchor resolution: %d anchors, by_status=%s, all_resolved=%s",
+            anchor_summary["total_anchors"],
+            anchor_summary["by_status"],
+            anchor_summary["all_resolved"],
+        )
+        if anchor_summary["unresolved_anchors"]:
+            logger.warning(
+                "Unresolved anchors (%d): %s",
+                len(anchor_summary["unresolved_anchors"]),
+                anchor_summary["unresolved_anchors"][:10],
+            )
+        flat_queries = build_resolved_gold_sets(flat_queries, resolutions)
+
     logger.info("Loaded %d queries", len(flat_queries))
 
     use_semantic_grounding = all(
@@ -643,6 +720,7 @@ def _load_and_ground_queries(
         "grounding_audit": grounding_audit,
         "use_semantic_grounding": use_semantic_grounding,
         "gold_resolution_summary": gold_resolution_summary,
+        "anchor_resolution_audit": anchor_resolution_audit,
     }
 
 
@@ -693,6 +771,98 @@ def _sync_query_reviews_with_gold(
             review["gold_unit_ids"] = list(query.get("gold_unit_ids") or [])
             review["required_gold"] = list(query.get("required_gold") or [])
             review["supporting_gold"] = list(query.get("supporting_gold") or [])
+
+
+def _write_ratification_summary(
+    *,
+    output_dir: Path,
+    stage_label: str,
+    queries: List[Dict[str, Any]],
+    corpus_ids: List[str],
+) -> Dict[str, Any]:
+    summary = summarize_ratification(queries, corpus_ids=corpus_ids)
+    summary["stage"] = stage_label
+    (output_dir / f"benchmark_ratification.{stage_label}.json").write_text(
+        json.dumps(summary, indent=2),
+        encoding="utf-8",
+    )
+    return summary
+
+
+def _enforce_ratified_query_policy(
+    *,
+    summary: Dict[str, Any],
+    allow_contract_override: bool,
+    stage_label: str,
+) -> None:
+    ratified_count = int(summary.get("ratified_query_count", 0) or 0)
+    invalid_count = int(summary.get("ratified_invalid_query_count", 0) or 0)
+    invalid_query_ids = list(summary.get("invalid_ratified_query_ids") or [])
+    messages: List[str] = []
+    if ratified_count > 0 and allow_contract_override:
+        messages.append(
+            "allow_benchmark_contract_mismatch is forbidden when ratified_core queries are present"
+        )
+    if invalid_count > 0:
+        preview = ", ".join(invalid_query_ids[:8])
+        if len(invalid_query_ids) > 8:
+            preview += ", ..."
+        messages.append(
+            f"ratified benchmark validation failed during {stage_label}: "
+            f"{invalid_count} invalid ratified query(s)"
+            + (f" [{preview}]" if preview else "")
+        )
+    if messages:
+        raise ValueError("; ".join(messages))
+
+
+def _filter_retrieved_chunks_by_query_ids(
+    *,
+    retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]],
+    query_ids: List[str],
+) -> Dict[str, List[Dict[str, Any]]]:
+    allowed = {str(qid).strip() for qid in query_ids if str(qid).strip()}
+    return {
+        model_id: [
+            review
+            for review in query_reviews
+            if str(review.get("query_id") or "").strip() in allowed
+        ]
+        for model_id, query_reviews in retrieved_chunks_by_model.items()
+    }
+
+
+def _build_filtered_evaluation_surface(
+    *,
+    label: str,
+    display_name: str,
+    grounded_queries: List[Dict[str, Any]],
+    retrieved_chunks_by_model: Dict[str, List[Dict[str, Any]]],
+    top_k: List[int],
+    existing_results_by_model: Dict[str, Dict[str, Any]],
+    query_ids: List[str],
+    ratification_summary: Dict[str, Any],
+) -> Dict[str, Any]:
+    filtered_queries = filter_queries_by_ids(grounded_queries, query_ids)
+    filtered_reviews = _filter_retrieved_chunks_by_query_ids(
+        retrieved_chunks_by_model=retrieved_chunks_by_model,
+        query_ids=query_ids,
+    )
+    filtered_results, filtered_per_query = _rescore_from_query_reviews(
+        retrieved_chunks_by_model=filtered_reviews,
+        grounded_queries=filtered_queries,
+        top_k=top_k,
+        existing_results_by_model=existing_results_by_model,
+    )
+    return {
+        "label": label,
+        "display_name": display_name,
+        "results_by_model": filtered_results,
+        "per_query_by_model": filtered_per_query,
+        "retrieved_chunks_by_model": filtered_reviews,
+        "grounded_queries": _queries_for_artifact(copy.deepcopy(filtered_queries)),
+        "ratification_summary": compact_ratification_summary(ratification_summary),
+    }
 
 
 def _rescore_from_query_reviews(
@@ -757,6 +927,7 @@ def _validate_query_batch_contracts(
     substrate_version: Optional[str],
     corpus_content_fingerprint: str,
     corpus_index_sha256: str,
+    corpus_recipe: Dict[str, Any],
     output_dir: Path,
     allow_mismatch: bool,
 ) -> tuple[List[Dict[str, Any]], List[str]]:
@@ -775,13 +946,13 @@ def _validate_query_batch_contracts(
         )
         contract_path = benchmark_contract_sidecar_path(benchmark_path)
         if not contract_path.exists():
-            validation = {
-                "benchmark_path": str(benchmark_path),
-                "contract_path": str(contract_path),
-                "valid": False,
-                "errors": [f"benchmark contract missing: {contract_path}"],
-                "alignment_summary": alignment_summary,
-            }
+            validation = validate_benchmark_metadata_contract(
+                benchmark_path=benchmark_path,
+                query_count=len(batch_queries),
+                alignment_summary=alignment_summary,
+                substrate_version=substrate_version,
+                corpus_recipe=corpus_recipe,
+            )
         else:
             validation = validate_benchmark_contract(
                 benchmark_path=benchmark_path,
@@ -903,6 +1074,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     grounding_audit = grounding_context["grounding_audit"]
     use_semantic_grounding = grounding_context["use_semantic_grounding"]
     gold_resolution_summary = grounding_context["gold_resolution_summary"]
+    anchor_resolution_audit = grounding_context.get("anchor_resolution_audit") or {}
     stage_timing_sec: Dict[str, float] = {
         "load_corpus_and_projection": time.perf_counter() - t_stage_start
     }
@@ -952,8 +1124,20 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         substrate_version=config.substrate_version,
         corpus_content_fingerprint=corpus_content_fingerprint,
         corpus_index_sha256=corpus_index_sha256,
+        corpus_recipe=corpus_recipe,
         output_dir=output_dir,
         allow_mismatch=bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+    )
+    ratification_summary_input = _write_ratification_summary(
+        output_dir=output_dir,
+        stage_label="input",
+        queries=flat_queries,
+        corpus_ids=corpus_ids,
+    )
+    _enforce_ratified_query_policy(
+        summary=ratification_summary_input,
+        allow_contract_override=bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+        stage_label="input",
     )
     input_snapshot_paths = _snapshot_query_batch_inputs(
         output_dir=output_dir,
@@ -1002,6 +1186,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             )
     except Exception as e:
         logger.warning("Benchmark lint failed (non-fatal): %s", e)
+
+    if anchor_resolution_audit:
+        (output_dir / "anchor_resolution.json").write_text(
+            json.dumps(anchor_resolution_audit, indent=2),
+            encoding="utf-8",
+        )
 
     t_retrieval = time.perf_counter()
     if retrieval_mode == "bm25":
@@ -1087,6 +1277,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     auto_gold_review_summary: Optional[Dict[str, Any]] = None
     pre_review_surface: Optional[Dict[str, Any]] = None
     post_review_surface: Optional[Dict[str, Any]] = None
+    ratification_summary_final = ratification_summary_input
     agr = getattr(config, "auto_gold_review", None)
     if agr is not None and agr.enabled:
         pre_review_surface = {
@@ -1173,6 +1364,17 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                         json.dumps(benchmark_lint_summary, indent=2),
                         encoding="utf-8",
                     )
+                    ratification_summary_final = _write_ratification_summary(
+                        output_dir=output_dir,
+                        stage_label="post_review",
+                        queries=grounded_queries,
+                        corpus_ids=corpus_ids,
+                    )
+                    _enforce_ratified_query_policy(
+                        summary=ratification_summary_final,
+                        allow_contract_override=bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+                        stage_label="post_review",
+                    )
                     post_review_surface = {
                         "label": "post_review_applied",
                         "display_name": "Post-review / auto-applied benchmark surface",
@@ -1185,6 +1387,18 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 except Exception as e:
                     logger.warning("Auto gold review failed (non-fatal): %s", e, exc_info=True)
                     auto_gold_review_summary = {"enabled": True, "skipped": True, "reason": f"error:{e}"}
+    if post_review_surface is None:
+        ratification_summary_final = _write_ratification_summary(
+            output_dir=output_dir,
+            stage_label="final",
+            queries=grounded_queries,
+            corpus_ids=corpus_ids,
+        )
+        _enforce_ratified_query_policy(
+            summary=ratification_summary_final,
+            allow_contract_override=bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+            stage_label="final",
+        )
 
     # Optional: answer-generation evaluation pass (OpenAI-backed).
     answer_eval_payload: Optional[Dict[str, Any]] = None
@@ -1246,12 +1460,14 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     tail_rerank_diagnostics: Dict[str, Dict[str, Any]] = {}
     if config.baseline_metrics_path:
         try:
-            baseline_per_query = json.loads(Path(config.baseline_metrics_path).with_name("per_query.json").read_text(encoding="utf-8"))
+            baseline_per_query = _load_baseline_reference_artifact(config.baseline_metrics_path, "per_query")
         except Exception:
             baseline_per_query = None
         try:
-            baseline_chunks_path = Path(config.baseline_metrics_path).with_name("retrieved_chunks.json")
-            baseline_retrieved = json.loads(baseline_chunks_path.read_text(encoding="utf-8")) if baseline_chunks_path.exists() else None
+            baseline_retrieved = _load_baseline_reference_artifact(
+                config.baseline_metrics_path,
+                "retrieved_chunks",
+            )
         except Exception:
             baseline_retrieved = None
 
@@ -1429,6 +1645,10 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "stage_timing_sec": stage_timing_sec,
         "chunk_quality_summary": chunk_quality_summary,
         "benchmark_contracts": benchmark_contract_validations,
+        "benchmark_ratification": {
+            "input": compact_ratification_summary(ratification_summary_input),
+            "final": compact_ratification_summary(ratification_summary_final),
+        },
         "per_suite_results": results_by_model.get(model_list[0], {}).get("per_suite", {}) if model_list else {},
         "frozen": False,
     }
@@ -1438,10 +1658,6 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         experiment_doc["answer_evaluation"] = answer_eval_payload
     if auto_gold_review_summary is not None:
         experiment_doc["auto_gold_review_summary"] = auto_gold_review_summary
-    if pre_review_surface is not None:
-        experiment_doc["evaluation_surfaces"] = ["pre_review_manual"]
-    if post_review_surface is not None:
-        experiment_doc["evaluation_surfaces"] = ["pre_review_manual", "post_review_applied"]
     if tail_rerank_diagnostics:
         experiment_doc["tail_rerank_diagnostics"] = tail_rerank_diagnostics
         for model_id, res in results_by_model.items():
@@ -1492,6 +1708,26 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
 
     evaluation_surfaces: Optional[List[Dict[str, Any]]] = None
     benchmark_snapshots: Optional[Dict[str, Dict[str, Any]]] = None
+    full_working_set_surface = _build_filtered_evaluation_surface(
+        label="full_working_set",
+        display_name="Full working set",
+        grounded_queries=grounded_queries,
+        retrieved_chunks_by_model=retrieved_chunks_by_model,
+        top_k=config.top_k,
+        existing_results_by_model=results_by_model,
+        query_ids=[str(query.get("id") or "") for query in grounded_queries if query.get("id")],
+        ratification_summary=ratification_summary_final,
+    )
+    clean_subset_surface = _build_filtered_evaluation_surface(
+        label="clean_subset",
+        display_name="Clean subset",
+        grounded_queries=grounded_queries,
+        retrieved_chunks_by_model=retrieved_chunks_by_model,
+        top_k=config.top_k,
+        existing_results_by_model=results_by_model,
+        query_ids=list(ratification_summary_final.get("clean_query_ids") or []),
+        ratification_summary=ratification_summary_final,
+    )
     if pre_review_surface is not None:
         pre_review_surface["benchmark_contract"] = _build_surface_contract(
             benchmark_path=output_dir / f"benchmark.{pre_review_surface['label']}.json",
@@ -1510,6 +1746,9 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
             definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
             lineage={"source_surface": "manual_input"},
+            projection_metadata={
+                "ratification_summary": compact_ratification_summary(ratification_summary_input),
+            },
         )
     if post_review_surface is not None:
         post_review_surface["benchmark_contract"] = _build_surface_contract(
@@ -1532,36 +1771,65 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 "source_surface": "pre_review_manual",
                 "auto_gold_review_applied": True,
             },
+            projection_metadata={
+                "ratification_summary": compact_ratification_summary(ratification_summary_final),
+            },
         )
+    full_working_set_surface["benchmark_contract"] = _build_surface_contract(
+        benchmark_path=output_dir / "benchmark.full_working_set.json",
+        queries=list(full_working_set_surface.get("grounded_queries") or []),
+        corpus_ids=corpus_ids,
+        run_id=run_id,
+        substrate_version=config.substrate_version,
+        benchmark_kind="benchmark_projection",
+        benchmark_surface="full_working_set",
+        corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+        corpus_content_fingerprint=corpus_content_fingerprint,
+        corpus_unit_count=len(corpus_ids),
+        corpus_index_path=corpus_index_path,
+        corpus_index_sha256=corpus_index_sha256,
+        corpus_recipe=corpus_recipe,
+        definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+        definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
+        lineage={"source_surface": "manual_input"},
+        projection_metadata={
+            "ratification_summary": compact_ratification_summary(ratification_summary_final),
+            "track": TRACK_WORKING_SET,
+        },
+    )
+    clean_subset_surface["benchmark_contract"] = _build_surface_contract(
+        benchmark_path=output_dir / "benchmark.clean_subset.json",
+        queries=list(clean_subset_surface.get("grounded_queries") or []),
+        corpus_ids=corpus_ids,
+        run_id=run_id,
+        substrate_version=config.substrate_version,
+        benchmark_kind="ratified_projection",
+        benchmark_surface="clean_subset",
+        corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
+        corpus_content_fingerprint=corpus_content_fingerprint,
+        corpus_unit_count=len(corpus_ids),
+        corpus_index_path=corpus_index_path,
+        corpus_index_sha256=corpus_index_sha256,
+        corpus_recipe=corpus_recipe,
+        definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
+        definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
+        lineage={"source_surface": "manual_input", "benchmark_track": TRACK_RATIFIED_CORE},
+        projection_metadata={
+            "ratification_summary": compact_ratification_summary(ratification_summary_final),
+            "track": TRACK_RATIFIED_CORE,
+        },
+    )
+    evaluation_surfaces = [full_working_set_surface, clean_subset_surface]
     if pre_review_surface is not None:
-        evaluation_surfaces = [pre_review_surface]
-        if post_review_surface is not None:
-            evaluation_surfaces.append(post_review_surface)
-    else:
-        active_queries = _queries_for_artifact(copy.deepcopy(grounded_queries))
-        benchmark_snapshots = {
-            "active": {
-                "queries": active_queries,
-                "contract": _build_surface_contract(
-                    benchmark_path=output_dir / "benchmark.active.json",
-                    queries=active_queries,
-                    corpus_ids=corpus_ids,
-                    run_id=run_id,
-                    substrate_version=config.substrate_version,
-                    benchmark_kind="benchmark_projection",
-                    benchmark_surface="active",
-                    corpus_fingerprint=corpus_index_payload.get("corpus_fingerprint", ""),
-                    corpus_content_fingerprint=corpus_content_fingerprint,
-                    corpus_unit_count=len(corpus_ids),
-                    corpus_index_path=corpus_index_path,
-                    corpus_index_sha256=corpus_index_sha256,
-                    corpus_recipe=corpus_recipe,
-                    definition_snapshot_paths=input_snapshot_paths["definition_snapshot_paths"],
-                    definition_contract_snapshot_paths=input_snapshot_paths["contract_snapshot_paths"],
-                    lineage={"source_surface": "manual_input"},
-                ),
-            }
-        }
+        evaluation_surfaces.insert(0, pre_review_surface)
+    if post_review_surface is not None:
+        insert_index = 1 if pre_review_surface is not None else 0
+        evaluation_surfaces.insert(insert_index, post_review_surface)
+    experiment_doc["evaluation_surfaces"] = [
+        str(surface.get("label") or "")
+        for surface in evaluation_surfaces
+        if str(surface.get("label") or "")
+    ]
 
     paths = write_report_artifacts(
         output_dir,
@@ -1624,10 +1892,15 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         for name, path in paths.items()
         if name.startswith("benchmark.") and name.endswith(".json") and ".contract." not in name
     )
+    bundle_metadata = infer_run_bundle_metadata(
+        repo_root=_RULES_INGESTION_ROOT,
+        run_dir=output_dir,
+        experiment_name=config.experiment_name,
+    )
     prod_readiness_path: Optional[Path] = None
     try:
         if evaluation_surfaces:
-            selected_surface = "post_review_applied" if post_review_surface is not None else str(evaluation_surfaces[0]["label"])
+            selected_surface = "clean_subset"
             selected_surface_payload = next(
                 (surface for surface in evaluation_surfaces if str(surface.get("label") or "") == selected_surface),
                 evaluation_surfaces[0],
@@ -1658,6 +1931,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 corpus_index_sha256=corpus_index_sha256,
                 contract_validations=benchmark_contract_validations,
                 metrics_by_model=selected_metrics_by_model,
+                bundle_metadata=bundle_metadata,
             )
             if not prod_readiness.get("promotion_ready"):
                 raise ValueError("prod_readiness cannot be emitted from a contract-invalid run")
@@ -1689,6 +1963,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                 "recipe_mode": getattr(config, "recipe_mode", "standardized"),
                 "models": model_list,
             },
+            bundle_metadata=bundle_metadata,
         )
         manifest_json = json.dumps(manifest, indent=2)
         (output_dir / "manifest.json").write_text(

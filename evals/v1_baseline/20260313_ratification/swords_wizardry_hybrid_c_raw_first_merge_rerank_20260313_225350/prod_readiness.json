@@ -1,0 +1,52 @@
+{
+  "version": "retrieval_lab_prod_readiness_v1",
+  "experiment_id": "swords_wizardry_hybrid_c_raw_first_merge_rerank_20260313_225350",
+  "experiment_name": "swords_wizardry_hybrid_c_raw_first_merge_rerank",
+  "run_id": "retrieval_lab_Swords&Wizardry_v3_swcr_merged2000_min100_recipe_standardized",
+  "selected_surface": "clean_subset",
+  "selected_model_id": "all-mpnet-base-v2",
+  "contract_valid": true,
+  "promotion_ready": true,
+  "benchmark_projection": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/v1_baseline/20260313_ratification/swords_wizardry_hybrid_c_raw_first_merge_rerank_20260313_225350/benchmark.clean_subset.json",
+    "sha256": "a3fd8676141e996c70fd157fed9a07afd5f0bb75946fd03c7590a15b0c348859"
+  },
+  "benchmark_contract": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/v1_baseline/20260313_ratification/swords_wizardry_hybrid_c_raw_first_merge_rerank_20260313_225350/benchmark.clean_subset.contract.json",
+    "sha256": "f5978803eb3129d4d2214cd5218db0f34085c9c87c3f62dad7082aefb129ccb8"
+  },
+  "corpus_contract": {
+    "corpus_fingerprint": "9a4b9bb4762bd67c827dc6e69d81401b4255d1380a03ec3df38f8e4701f7e94f",
+    "corpus_content_fingerprint": "3a51a2912a4d8a49cbaee5fc93a98d76006b8700ab75ab1962882806fca0fab9",
+    "corpus_index_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/v1_baseline/20260313_ratification/swords_wizardry_hybrid_c_raw_first_merge_rerank_20260313_225350/embeddings/corpus_index.json",
+    "corpus_index_sha256": "a49197e1c8ff9b91c3f23c0c2b7cf2c9340b5ab0f4d18bda93ca898d71546518"
+  },
+  "metrics_summary": {
+    "mrr": 0.20634920634920634,
+    "gold_in_candidates_true_ceiling": 0.2857142857142857,
+    "required_full_set_hit_at_10": 0.14285714285714285,
+    "outcome_classification": "insufficient_baseline"
+  },
+  "contract_validation_summary": {
+    "batch_count": 1,
+    "failed_batches": [],
+    "summary_sha256": "f73716b4a77c5368cc72b4a9ad951462b2800892bfba70338e9edaa59a1602d2"
+  },
+  "bundle": {
+    "kind": "v1_baseline_package",
+    "member_role": "canonical_baseline_run",
+    "member_mode_hint": "C",
+    "member_status": "canonical_member",
+    "canonical_bundle_member": true,
+    "canonical_mode": "c_raw_first_merge_rerank",
+    "baseline_package_dir": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/v1_baseline/20260313_ratification",
+    "baseline_package_stamp": "20260313_ratification"
+  },
+  "freeze": {
+    "git_commit_sha": "061d1c91c6deec8cd570ce8e3e1663538930abc2",
+    "git_tag": "",
+    "python_version": "3.13.12",
+    "uv_lock_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/uv.lock",
+    "uv_lock_sha256": "f42fcda0178768104fe3b497aebbb8a8064e689e02761c2bef66e6ee4a072f69"
+  }
+}

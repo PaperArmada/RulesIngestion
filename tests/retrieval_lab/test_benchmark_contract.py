@@ -143,8 +143,18 @@ def test_build_prod_readiness_artifact_requires_contract_validity() -> None:
                 "outcome_classification": "coverage_gain",
             }
         },
+        bundle_metadata={
+            "bundle_kind": "v1_baseline_package",
+            "bundle_member_role": "canonical_baseline_run",
+            "bundle_member_status": "canonical_member",
+            "baseline_package_stamp": "20260313",
+            "git_commit_sha": "abc123",
+            "python_version": "3.13.2",
+        },
     )
 
     assert artifact["promotion_ready"] is True
     assert artifact["selected_surface"] == "active"
     assert artifact["metrics_summary"]["required_full_set_hit_at_10"] == 0.4
+    assert artifact["bundle"]["member_role"] == "canonical_baseline_run"
+    assert artifact["freeze"]["git_commit_sha"] == "abc123"

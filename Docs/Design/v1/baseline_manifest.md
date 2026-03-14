@@ -1,30 +1,41 @@
 # Stage A/B v1 Baseline Manifest
 
-**Purpose:** Single source of truth for reproducing the Stage A/B v1 baseline and comparison runs.
+**Purpose:** Canonical reference for building, replaying, and auditing the ratifiable Stage A/B baseline package.
 
 ---
 
-## 1. Commit / Tag
+## 1. Canonical Package Location
 
-- **Baseline commit SHA:** `3dca57d0b1799abc31661451a68a10278d657e8f`
-- **Optional tag:** `stage-ab-v1-baseline` (may be applied when baseline is ratified)
-- **Branch:** `stage-ab-v1-stabilization`
+The ratifiable baseline package lives under:
+
+- `evals/v1_baseline/<STAMP>/`
+
+Where `<STAMP>` is the archived package identifier (typically a date or dated tag). The package is not ratified unless the directory exists and contains both:
+
+- suite-level integrity artifacts
+- per-run retrieval artifacts for every baseline run
+
+When the package is finalized, the suite should emit these freeze fields into the archived package metadata:
+
+- `baseline_commit_sha`
+- `baseline_tag` (optional)
+- `baseline_package_dir`
+- `python_version`
+- `uv_lock_sha256`
 
 ---
 
-## 2. Corpus Manifest
+## 2. Corpus / Config Matrix
 
-| Book / Corpus     | Document ID   | Substrate path (relative to repo root)     | Version | Extraction inputs |
-|------------------|---------------|--------------------------------------------|---------|--------------------|
-| D&D 5e PHB       | DnD_PHB_5.5   | `out/DnD_PHB_5.5`                          | v1/v2   | Stage A (extraction + prose reconstruction), Stage B (evidence binding). |
-| Starfinder 2e PC | StarFinderPlayerCore | `out/StarFinderPlayerCore`     | v1/v2   | Same pipeline. |
-| Swords & Wizardry| Swords&Wizardry | `out/Swords&Wizardry`                    | v1      | Same pipeline. |
+| Corpus | Document ID | Substrate path | Baseline config |
+|--------|-------------|----------------|-----------------|
+| PHB | `DnD_PHB_5.5` | `out/DnD_PHB_5.5` | `retrieval_lab/experiments/hybrid/phb_hybrid.yaml` |
+| Starfinder | `StarFinderPlayerCore` | `out/StarFinderPlayerCore` | `retrieval_lab/experiments/hybrid/starfinder_hybrid.yaml` |
+| S&W | `Swords&Wizardry` | `out/Swords&Wizardry` | `retrieval_lab/experiments/hybrid/swords_wizardry_hybrid.yaml` |
 
-For v1 baseline comparison, the canonical corpus used is **DnD_PHB_5.5** (6999 units, 379 pages per baseline run).
+The baseline suite runs mode `C` as canonical and may include comparator modes `A` and `B`.
 
-### Corpus contract fields to freeze
-
-For any baseline or recommendation-grade run, freeze and preserve:
+For any archived baseline or recommendation-grade run, freeze:
 
 - `substrate_path`
 - `document_id`
@@ -36,95 +47,112 @@ For any baseline or recommendation-grade run, freeze and preserve:
 
 ---
 
-## 3. Retrieval Configs (v1 Baseline)
+## 3. Required Package Contents
 
-| Config role           | Config file (relative to repo root)                                      | Run ID (example) |
-|-----------------------|---------------------------------------------------------------------------|------------------|
-| **Canonical hybrid (baseline)** | `retrieval_lab/experiments/hybrid/phb_hybrid.yaml`                  | `phb_hybrid_20260211_212748` |
-| **Dual-list fusion (production default)** | `retrieval_lab/experiments/hybrid/phb_hybrid_dual_list_fusion.yaml` | `phb_hybrid_dual_list_fusion_20260212_032935` |
-| **Dual-list + pairing (experimental)**     | `retrieval_lab/experiments/hybrid/phb_hybrid_dual_list_fusion_plus_pairing.yaml` | `phb_hybrid_dual_list_fusion_plus_pairing_20260212_034258` |
+### Suite root
 
-- **Comparison report path:** `out/retrieval_lab/stage_a_and_b/COMPARISON_BASELINE_DUAL_LIST_PAIRING.md`
-- **Benchmark discipline:** compare runs using the same benchmark definition intent, but validate each run against its own exact benchmark projection contract.
-- To regenerate comparison:
-  ```bash
-  uv run python -m retrieval_lab.compare_baseline_dual_list_pairing \
-    --baseline out/retrieval_lab/stage_a_and_b/phb_hybrid_20260211_212748 \
-    --dual-list out/retrieval_lab/stage_a_and_b/phb_hybrid_dual_list_fusion_20260212_032935 \
-    --pairing out/retrieval_lab/stage_a_and_b/phb_hybrid_dual_list_fusion_plus_pairing_20260212_034258 \
-    --output out/retrieval_lab/stage_a_and_b/COMPARISON_BASELINE_DUAL_LIST_PAIRING.md
-  ```
+Every ratifiable package root `evals/v1_baseline/<STAMP>/` must contain:
+
+- `baseline_process_summary.json`
+- `canonical_runs_index.json`
+- `integrity_<config>.json`
+- `integrity_<config>.md`
+- replay/determinism reports produced by `scripts/assert_corpus_replay_determinism.py`
+
+The suite root metadata must also identify:
+
+- the frozen package directory and stamp
+- git commit SHA and optional exact tag
+- Python version
+- `uv.lock` path and SHA-256
+- which run directories are canonical package members versus non-canonical retry/history directories
+
+### Per-run directory
+
+Every baseline run directory `evals/v1_baseline/<STAMP>/<experiment_id>/` must contain:
+
+- `benchmark_contract_validation.json`
+- `benchmark.<surface>.json`
+- `benchmark.<surface>.contract.json`
+- `manifest.json`
+- `run_manifest.json`
+- `prod_readiness.json`
+- `embeddings/corpus_index.json`
+
+`prod_readiness.json` is required for a ratified package. If a run is contract-invalid and cannot emit `prod_readiness.json`, that run is not eligible to serve as the archived baseline.
+
+For canonical baseline members, `run_manifest.json` and `prod_readiness.json` must both include:
+
+- bundle membership back to the archived package
+- canonical/non-canonical role labeling
+- the same freeze metadata emitted at the suite root
 
 ---
 
-## 4. Environment Fingerprint
+## 4. Strict Build / Replay Commands
 
-- **Python:** 3.12+ (project `pyproject.toml` specifies `requires-python = ">=3.13"`; CI and local may use 3.12 or 3.13).
-- **OS:** Linux (recommended for reproducibility; macOS/Windows may differ for path handling).
-- **Dependency lock:** `uv.lock` at repo root. Use `uv sync` to install exact versions.
-- **Random seed policy:** No global RNG seed is set for Stage A/B or Retrieval Lab; determinism is achieved via sorted iteration and stable ordering keys (document_id, page, structural_path, unit_id). Embedding models are deterministic for same inputs.
-
----
-
-## 5. Determinism Statements
-
-- **Stage A:** Given the same input (PDF page, OCR/model output), Stage A produces byte-identical structural outputs (SurfaceAST, prose blocks) when iteration order over structures is fixed. Deterministic replay requires same Python version and dependency versions.
-- **Stage B:** Given the same Stage A artifacts (and same config), Stage B produces byte-identical EvidenceUnit outputs when all dict/set iteration uses stable sort keys (document_id, page, structural_path, ordering_key, unit_id).
-- **Retrieval Lab:** Given the same corpus (substrate), config, and embedding cache, Retrieval Lab produces identical rankings and metrics. Stable ordering and dedupe rules (EvidenceUnit preferred over family anchor when both exist) ensure reproducible results.
-
----
-
-## 6. Promotion Policy (Expansion -> Gating)
-
-### Tracks
-
-- **Gating track:** small, hand-audited, merge-blocking.
-- **Expansion track:** larger trend-only pool used to mine candidates.
-
-### Promotion requirements
-
-1. Candidate batch passes integrity checker in strict mode.
-2. Candidate batch carries explicit benchmark semantics at the definition layer:
-   - `required_gold`
-   - `supporting_gold`
-   - `mode` (`single_cite | multi_required | multi_supported`)
-3. Candidate run carries a contract-valid benchmark projection for the exact evaluated corpus.
-4. Candidate run carries:
-   - `benchmark.<surface>.json`
-   - `benchmark.<surface>.contract.json`
-   - `embeddings/corpus_index.json`
-   - `manifest.json`
-   - `prod_readiness.json`
-5. Required-set retrieval metrics are non-regressing on protected suites/tiers.
-6. Outcome classification is reviewed:
-   - `coverage_gain`
-   - `rank_shuffle_only`
-   - `fragment_repair_signal`
-7. Reproducibility check passes using documented command path on another machine.
-
-### Promotion signal
-
-`prod_readiness.json` is now the authoritative production promotion artifact.
-
-It must identify:
-
-- exact `run_id`
-- selected benchmark surface
-- selected model
-- benchmark projection path/hash
-- benchmark contract path/hash
-- corpus fingerprint
-- corpus content fingerprint
-- corpus index hash
-
-If `prod_readiness.json` is absent or `promotion_ready=false`, the run is not eligible for production promotion.
-
-### Reference execution
+### Build the baseline suite
 
 ```bash
 uv run python -m evals.v1_baseline.run_baseline_suite \
-  --out-dir evals/v1_baseline/$(date +%Y%m%d) \
-  --version v1 \
+  --out-dir "evals/v1_baseline/<STAMP>" \
+  --c-only \
+  --strict-integrity \
   --gating-integrity-policy strict \
-  --expansion-integrity-policy warn
+  --stage-b-gate-policy strict
 ```
+
+### Assert corpus replay determinism
+
+Run once per corpus config and archive the JSON outputs in the package root:
+
+```bash
+uv run python scripts/assert_corpus_replay_determinism.py \
+  --config retrieval_lab/experiments/hybrid/phb_hybrid.yaml \
+  --no-merge-chunks \
+  --out "evals/v1_baseline/<STAMP>/replay_phb_hybrid.json"
+```
+
+Repeat for:
+
+- `retrieval_lab/experiments/hybrid/starfinder_hybrid.yaml`
+- `retrieval_lab/experiments/hybrid/swords_wizardry_hybrid.yaml`
+
+### Regression assertion
+
+```bash
+uv run python -m evals.v1_baseline.assert_baseline_regression \
+  --summary "evals/v1_baseline/<STAMP>/baseline_process_summary.json"
+```
+
+---
+
+## 5. Environment Fingerprint
+
+- **Python:** `>=3.13` (matches `pyproject.toml`)
+- **OS:** Linux preferred for archived ratification builds
+- **Dependency lock:** repo-root `uv.lock`
+- **Package manager:** `uv`
+
+Determinism is expected from:
+
+- stable Stage A serialization
+- Stage B ordering keyed by page-local provenance and `ordering_key`
+- numeric page loading in Retrieval Lab
+- contract-validated benchmark projections
+
+---
+
+## 6. Ratification Policy
+
+A package is eligible for ratification only if all of the following are true:
+
+1. Integrity checks pass in strict mode.
+2. Stage B gate policy is run in `strict` mode with zero failing pages and no missing gate diagnostics.
+3. Replay determinism reports show matching corpus fingerprints and zero page inversions.
+4. Required artifact files exist in every archived run directory.
+5. `prod_readiness.json` exists and is contract-valid for the canonical baseline runs.
+6. `canonical_runs_index.json` points at the same canonical runs and selected surfaces as the per-run `prod_readiness.json` files.
+7. Any retained retry/history run directories are explicitly labeled as non-canonical by suite-root metadata and are not required to be consumed by downstream tooling.
+
+If any of the above are missing, the package is not the v1 ratified baseline.

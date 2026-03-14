@@ -35,7 +35,8 @@ uv run python -m retrieval_lab.run_experiment --config <CONFIG_YAML> [OPTIONS]
 
 ## 3. Output Directory Conventions
 
-- **output_dir** in config (e.g. `out/retrieval_lab/stage_a_and_b` or `out/retrieval_lab/experiments`).
+- **General runs:** `output_dir` in config (for example `out/retrieval_lab/experiments`).
+- **Ratified baseline packages:** `evals/v1_baseline/<STAMP>/`.
 - Each run writes a directory `<experiment_id>/` containing:
   - `experiment.json` config and result snapshot
   - `embeddings/corpus_index.json` with:
@@ -60,13 +61,21 @@ uv run python -m retrieval_lab.run_experiment --config <CONFIG_YAML> [OPTIONS]
     - `run_manifest.json`
     - `prod_readiness.json` for contract-valid promotion candidates
   - diagnostics (failure bucket summary, optional diagnostics subdir)
-- Comparison report: canonical path `out/retrieval_lab/stage_a_and_b/COMPARISON_BASELINE_DUAL_LIST_PAIRING.md` when comparing baseline vs dual-list vs pairing.
+- In a ratified baseline package, the suite root also contains:
+  - `baseline_process_summary.json`
+  - `canonical_runs_index.json`
+  - `integrity_<config>.json`
+  - `integrity_<config>.md`
+  - replay reports from `scripts/assert_corpus_replay_determinism.py`
+  - suite-level freeze metadata and bundle hygiene classification inside `baseline_process_summary.json`
+- Comparison reports remain optional ad hoc artifacts and are not part of the ratification package contract.
 
 ### Surface behavior
 
 - Runs without auto-gold review use one active surface and may emit `metrics.json` / `per_query.json`.
 - Runs with auto-gold review emit explicit surfaces such as `pre_review_manual` and `post_review_applied`.
 - When multiple surfaces exist, there is intentionally no unlabeled `metrics.json` or `per_query.json`.
+- Downstream consumers must resolve the selected scoring surface from `prod_readiness.json.selected_surface` first, then fall back to `evaluation_surfaces.json` if they need to locate `metrics.<surface>.json`, `per_query.<surface>.json`, or `retrieved_chunks.<surface>.json`.
 
 ---
 
@@ -105,8 +114,20 @@ Minimum comparison evidence:
 
 ## 7. Baseline Suite (v1)
 
-- **Baseline suite:** PHB + Starfinder + S&W (and other books in evals/retrieval). Run with baseline hybrid and dual-list fusion where applicable; save under `evals/v1_baseline/<date_or_tag>/...`.
-- Default config per corpus: see configs in `retrieval_lab/experiments/hybrid/` (phb_hybrid_dual_list_fusion.yaml for PHB; starfinder_hybrid, swords_wizardry_hybrid for others). Document in baseline_manifest and this doc.
+- **Baseline suite:** PHB + Starfinder + S&W saved under `evals/v1_baseline/<STAMP>/`.
+- Canonical ratification command:
+
+```bash
+uv run python -m evals.v1_baseline.run_baseline_suite \
+  --out-dir "evals/v1_baseline/<STAMP>" \
+  --c-only \
+  --strict-integrity \
+  --gating-integrity-policy strict \
+  --stage-b-gate-policy strict
+```
+
+- After the suite runs, archive replay reports for each corpus config with `scripts/assert_corpus_replay_determinism.py`.
+- Default config per corpus: `phb_hybrid.yaml`, `starfinder_hybrid.yaml`, `swords_wizardry_hybrid.yaml`. The archived package, not an old `out/retrieval_lab/...` directory, is the canonical baseline reference.
 
 ## 8. Promotion artifact
 
@@ -123,3 +144,6 @@ Production recommendation should key off `prod_readiness.json`, not an informal 
 - the corpus content fingerprint,
 - the corpus index hash,
 - whether contract validation passed.
+- the archived baseline package membership and canonical/non-canonical role when the run belongs to a ratified bundle.
+
+For ratified baseline bundles, `canonical_runs_index.json` is the authoritative package-level list of canonical runs. Downstream Stage C/D work should begin from those entries, not from an arbitrary run directory.

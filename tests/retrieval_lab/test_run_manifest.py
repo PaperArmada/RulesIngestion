@@ -33,6 +33,19 @@ def test_manifest_includes_file_hashes(tmp_path: Path) -> None:
         benchmark_projection_snapshot_paths=[str(projection_snapshot)],
         corpus_index_path=str(corpus_index),
         prod_readiness_path=str(prod_readiness),
+        bundle_metadata={
+            "bundle_kind": "v1_baseline_package",
+            "bundle_member_role": "canonical_baseline_run",
+            "bundle_member_mode_hint": "C",
+            "bundle_member_status": "canonical_member",
+            "baseline_package_dir": str(tmp_path / "bundle"),
+            "baseline_package_stamp": "20260313",
+            "git_commit_sha": "abc123",
+            "git_tag": "baseline-v1",
+            "python_version": "3.13.2",
+            "uv_lock_path": str(tmp_path / "uv.lock"),
+            "uv_lock_sha256": "lock123",
+        },
     )
     assert manifest["inputs"]["config_yaml"]["exists"] is True
     assert "sha256" in manifest["inputs"]["config_yaml"]
@@ -44,4 +57,8 @@ def test_manifest_includes_file_hashes(tmp_path: Path) -> None:
     assert manifest["inputs"]["benchmark_projection_snapshots"][0]["exists"] is True
     assert manifest["inputs"]["corpus_index"]["exists"] is True
     assert manifest["inputs"]["prod_readiness"]["exists"] is True
+    assert manifest["bundle"]["member_role"] == "canonical_baseline_run"
+    assert manifest["bundle"]["baseline_package_stamp"] == "20260313"
+    assert manifest["freeze"]["git_commit_sha"] == "abc123"
+    assert manifest["freeze"]["uv_lock_sha256"] == "lock123"
 

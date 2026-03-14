@@ -51,6 +51,7 @@ def build_run_manifest(
     corpus_index_path: Optional[str] = None,
     prod_readiness_path: Optional[str] = None,
     run_keys: Optional[Dict[str, Any]] = None,
+    bundle_metadata: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     now = datetime.now(timezone.utc).isoformat()
     query_batch_paths = query_batch_paths or list(config_dict.get("query_batch_paths") or [])
@@ -64,6 +65,7 @@ def build_run_manifest(
         "openai_api_key_present": bool(os.environ.get("OPENAI_API_KEY")),
     }
 
+    bundle_metadata = dict(bundle_metadata or {})
     manifest = {
         "version": "retrieval_lab_manifest_v1",
         "created_at": now,
@@ -85,6 +87,21 @@ def build_run_manifest(
         },
         "config": config_dict,
         "run_keys": run_keys or {},
+        "bundle": {
+            "kind": str(bundle_metadata.get("bundle_kind") or ""),
+            "member_role": str(bundle_metadata.get("bundle_member_role") or ""),
+            "member_mode_hint": str(bundle_metadata.get("bundle_member_mode_hint") or ""),
+            "member_status": str(bundle_metadata.get("bundle_member_status") or ""),
+            "baseline_package_dir": str(bundle_metadata.get("baseline_package_dir") or ""),
+            "baseline_package_stamp": str(bundle_metadata.get("baseline_package_stamp") or ""),
+        },
+        "freeze": {
+            "git_commit_sha": str(bundle_metadata.get("git_commit_sha") or ""),
+            "git_tag": str(bundle_metadata.get("git_tag") or ""),
+            "python_version": str(bundle_metadata.get("python_version") or ""),
+            "uv_lock_path": str(bundle_metadata.get("uv_lock_path") or ""),
+            "uv_lock_sha256": str(bundle_metadata.get("uv_lock_sha256") or ""),
+        },
         "env": env_subset,
     }
     return manifest

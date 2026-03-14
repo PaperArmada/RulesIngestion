@@ -18,22 +18,22 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from retrieval_lab.artifact_resolution import load_resolved_json_artifact
+
 
 def load_per_query(exp_dir: Path, model_id: str = "all-mpnet-base-v2") -> List[Dict[str, Any]]:
-    pq_path = exp_dir / "per_query.json"
-    if not pq_path.exists():
+    data = load_resolved_json_artifact(exp_dir, "per_query")
+    if not isinstance(data, dict):
         return []
-    data = json.loads(pq_path.read_text(encoding="utf-8"))
     if model_id not in data:
         return list(data.values())[0] if data else []
     return data[model_id]
 
 
 def load_metrics(exp_dir: Path, model_id: str = "all-mpnet-base-v2") -> Optional[Dict[str, Any]]:
-    m_path = exp_dir / "metrics.json"
-    if not m_path.exists():
+    data = load_resolved_json_artifact(exp_dir, "metrics")
+    if not isinstance(data, dict):
         return None
-    data = json.loads(m_path.read_text(encoding="utf-8"))
     return data.get(model_id)
 
 
