@@ -10,6 +10,7 @@ reason from `v1/` first.
 - **Stage A contract:** [v1/stage_a_contract.md](v1/stage_a_contract.md)
 - **Stage B contract:** [v1/stage_b_contract.md](v1/stage_b_contract.md)
 - **Retrieval Lab:** [v1/retrieval_lab_v1.md](v1/retrieval_lab_v1.md)
+- **Retrieval Lab current architecture:** [RETRIEVAL_LAB.md](RETRIEVAL_LAB.md)
 - **Baseline + schemas:** [v1/baseline_manifest.md](v1/baseline_manifest.md), [v1/schema_registry.md](v1/schema_registry.md), [v1/glossary.md](v1/glossary.md)
 - **Benchmark projection lifecycle:** [gold_resolution_design.md](gold_resolution_design.md)
 - **Stage C/D gates:** [v1/gates_stage_c_d.md](v1/gates_stage_c_d.md)
@@ -20,9 +21,10 @@ reason from `v1/` first.
 | Location | Status | Purpose |
 |---------|--------|---------|
 | **v1/** | Canonical | Normative contracts, architecture, retrieval lab, glossary, schema registry, ADRs. |
+| **RETRIEVAL_LAB.md** | Canonical adjunct | Current Retrieval Lab architecture and live-system orientation. |
 | **gold_resolution_design.md** | Canonical adjunct | Current benchmark definition/projection lifecycle. |
 | **ARCHITECTURE-TOC-Structural-Enrichment.md** | Canonical adjunct | Current TOC enrichment architecture used by Mark III. |
-| **STAGE_A_CONTRACT.md**, **STAGE_B_CONTRACT.md**, **RETRIEVAL_LAB.md** | Legacy stubs | Forwarders kept for old links that now point into `v1/`. |
+| **STAGE_A_CONTRACT.md**, **STAGE_B_CONTRACT.md** | Legacy stubs | Forwarders kept for old links that now point into `v1/`. |
 | **decision_lock_in_and_next_spec.md**, **stage_ab_v1_stabilization_checklist.md** | Historical in place | Planning / lock-in notes kept for rationale and handoff context; not normative. |
 | **ARCHITECTURE-Chunking-System-Deep-Dive-2026-02-28.md** | Historical in place | Dated regression and hardening analysis; useful context, not the primary spec. |
 | **EXPERIMENT-Embedding-Metadata-Enrichment.md** | Historical in place | Experiment record and implementation note for embedding enrichment work. |

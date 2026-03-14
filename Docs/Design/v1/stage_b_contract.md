@@ -7,13 +7,13 @@
 ## 1. EvidenceUnit Definition
 
 - **EvidenceUnit:** One unit of authored prose (or table/list) with stable identity, provenance, and containment.
-- **Admissible unit:** (a) Structurally valid (no bleed, complete tables, within size bounds); (b) under a heading or assigned one (no unreasonably many orphans); (c) meaningful as evidence (not a bare heading or fragment too small to cite). Unit size bounds enforce (c): oversized → FAIL; undersized dominance → configurable FAIL.
+- **Admissible unit:** (a) Structurally valid (no bleed, complete tables, within size bounds); (b) under a heading or assigned one (no unreasonably many orphans); (c) meaningful as evidence (not a bare heading or fragment too small to cite). Unit size bounds enforce (c): oversized prose → FAIL; oversized tables use a higher cap because complete tables must remain intact; undersized dominance → configurable FAIL.
 
 ---
 
 ## 2. Unit ID Scheme and Provenance Fields
 
-- **unit_id:** Stable id (e.g. blake3(text + '|' + structural_path_joined)).
+- **unit_id:** Stable id derived from unit text plus page-local provenance (page_fingerprint, source line span, unit_type, structural_path).
 - **Provenance:** document_id (or source), page (or page_fingerprint), structural_path, source_line_start, source_line_end, content_hash, content_version, ordering_key. Optional: page_fingerprints (multi-page joins), table_group_id, join_metadata.
 
 See [schema_registry.md](schema_registry.md) for full EvidenceUnit schema.
@@ -48,7 +48,7 @@ See [schema_registry.md](schema_registry.md) for full EvidenceUnit schema.
 - **Orphan gate:** Flag empty structural_path; exemptions documented.
 - **Bleed gate:** Flag overlapping source line ranges.
 - **Table integrity gate:** Complete table per unit.
-- **Unit size gate:** Oversized FAIL; undersized WARN, with fail ratio when undersized dominate.
+- **Unit size gate:** Oversized prose FAIL; complete tables use a larger maximum bound; undersized WARN, with fail ratio when undersized dominate.
 
 Implementation: `extraction/stage_b.py`, `extraction/gates_b.py`.
 
