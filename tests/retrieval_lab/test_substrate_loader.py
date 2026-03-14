@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from retrieval_lab.substrate_loader import (
     fold_under_threshold_into_adjacent,
     load_evidence_units,
@@ -12,6 +14,32 @@ def test_load_evidence_units_from_minimal_fixture(substrate_minimal_path) -> Non
     assert len(corpus) == 2
     assert {u["id"] for u in corpus} == {"u1", "u2"}
     assert all(u["page"] == 1 for u in corpus)
+
+
+def test_load_evidence_units_uses_numeric_page_order(tmp_path) -> None:
+    for page, unit_id in ((1, "u1"), (11, "u11"), (109, "u109")):
+        page_dir = tmp_path / f"TestDoc_p{page}"
+        page_dir.mkdir()
+        (page_dir / "stageB.evidence_units.json").write_text(
+            json.dumps(
+                {
+                    "units": [
+                        {
+                            "unit_id": unit_id,
+                            "text": f"page {page}",
+                            "structural_path": ["Rules"],
+                            "unit_type": "prose",
+                        }
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    corpus = load_evidence_units(tmp_path, "TestDoc")
+
+    assert [unit["page"] for unit in corpus] == [1, 11, 109]
+    assert [unit["id"] for unit in corpus] == ["u1", "u11", "u109"]
 
 
 def test_merge_units_by_heading_keeps_or_merges_consistently() -> None:

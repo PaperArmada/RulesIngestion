@@ -1,0 +1,3310 @@
+{
+  "metadata": {
+    "batch_id": "atomic_rules_001",
+    "created_by": "agent",
+    "pdf_source": "CAT2600A_SR4Anniversary.pdf",
+    "creation_method": "atomic_rules_template",
+    "created_at": "2026-03-12",
+    "notes": "Atomic rules benchmark for ShadowRun 4e Anniversary. Question text is copied verbatim from the shared atomic-rules template and must stay language-locked across rulesets so the benchmark can measure same-language baseline behavior and vocabulary drift. This revision adds first-pass expected summaries and initial gold anchors so the surface is usable for real atomic sweep interpretation.",
+    "ratification_policy": {
+      "ratified_track": "ratified_core",
+      "working_track": "working_set",
+      "max_required_gold": 2
+    }
+  },
+  "queries": [
+    {
+      "id": "atomic_u01_roles_and_authority",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What are the roles at the table (players vs GM/referee/judge/MC), and what decisions does each role control?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun is run by a gamesmaster and a group of players. The players create and portray their characters, while the gamesmaster runs the game, presents the setting and situations, and adjudicates how the world and other characters respond.",
+      "source_page": 59,
+      "notes": "Grounded from the introductory roleplaying explanation rather than a dedicated GM-advice section.",
+      "gold_unit_ids": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "gold_locations": {
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232": {
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "source_unit_ids": [
+            "5d6c14be0746256b7813191154d466c164b03d3c0dc61411d03d1ed63fae529b",
+            "22d2923bd9ed2802f88443c5db40589a463c8f6a4bce73cdc3da0cdb41d81fbb",
+            "6fdc107130a9b35229f28738cadc68d758c18c118202e8a9740b574f4aba7f73"
+          ]
+        }
+      },
+      "required_gold": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232": "This chunk explicitly states that the game is played by a gamesmaster and a group of players, that the players create and portray their characters, and that the gamesmaster presents the setting and situations."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232",
+          "bucket": "required",
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "text": "WHAT IS A ROLEPLAYING GAME? — A roleplaying game is part improvisational theater, part storytelling, and part game. It is played by a gamesmaster who runs the game and a group of players who pretend to be characters. These characters are created by the players, given a history and personality, and then further defined by a set of statistics that represent the character's skills and attributes—as developed in the character creation process (see Creating a Shadowrunner, p. 80). The gamesmaster presents the setting and situation; through their characters, the players interact with the storyline and other characters. — Think of it this way: everyone has read a book or seen a movie in which the lead character does something that the reader or viewer finds so utterly wrong that he or she wants to shout out a warning. But no matter what we say, the character will do what the plot demands; we’re just along for the ride. Even throwing popcorn won’t help. — In a roleplaying game, the players control their characters' actions and respond to the events of the plot. If the player does not want his or her character to go through the door, the character will not. If the player thinks the character can talk him- or herself out of a tight situation rather than resorting to that trusty pistol, he or she can talk away. The script, or plot, of a roleplaying game is flexible, always changing based on the decisions the players make as characters."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_9873af4c54495f38"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u02_uncertainty_core_mechanic",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "When the outcome is uncertain, what is the default way to resolve it (dice/cards/other), and how do you read the result (target number, degrees of success, opposing rolls, etc.)?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun resolves uncertain outcomes with dice pools of d6s. A Success Test rolls the relevant dice pool and counts hits, with each 5 or 6 counting as a hit; opposed tests compare hits between sides, and other tests may use thresholds or extended procedures.",
+      "source_page": "62, 64, 65",
+      "notes": "Reuses the existing Success Test grounding plus an opposed-test support chunk so the answer covers both the basic roll and how results are interpreted.",
+      "gold_unit_ids": [
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+        "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+        "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+      ],
+      "gold_locations": {
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744": {
+          "page": 65,
+          "structural_path": [
+            "SUCCESS TESTS"
+          ],
+          "source_unit_ids": [
+            "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744"
+          ]
+        },
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763": {
+          "page": 62,
+          "structural_path": [
+            "DICE POOLS"
+          ],
+          "source_unit_ids": [
+            "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+          ]
+        },
+        "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d": {
+          "page": 64,
+          "structural_path": [
+            "BUYING HITS"
+          ],
+          "source_unit_ids": [
+            "07bb6b693c9b38b12dd9702ff1852ad749fc4f200bf64192072983fa8315385e"
+          ]
+        },
+        "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0": {
+          "page": 65,
+          "structural_path": [
+            "OPPOSED TESTS"
+          ],
+          "source_unit_ids": [
+            "9067d63aa2b4379578c06c37880b547acd40438b794ad5fd735997615510eba8",
+            "37f11499e8f3e3ec07207492eab8f034b6406b2af2acb3ca8a0756327214227a",
+            "eae8ae26ba6a264e8652d0518bf35c4be2e2c36914d0ac564bc097e1e46e6b0d"
+          ]
+        }
+      },
+      "required_gold": [
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+      ],
+      "supporting_gold": [
+        "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+        "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+      ],
+      "required_gold_rationale": {
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744": "Defines a Success Test as the standard way to resolve whether a character accomplishes a task.",
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763": "Explains how the dice pool is built from the relevant skill and linked attribute plus modifiers."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+      ],
+      "_supporting_gold": [
+        "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+        "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+      ],
+      "gold_chunks": [
+        {
+          "id": "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+          "bucket": "required",
+          "page": 65,
+          "structural_path": [
+            "SUCCESS TESTS"
+          ],
+          "text": "SUCCESS TESTS — A Success Test is the standard test to see if a character can accomplish a given task, and how well. Use Success Tests when the character is exercising a skill or ability for immediate effect and is not directly opposed by another person or force."
+        },
+        {
+          "id": "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+          "bucket": "required",
+          "page": 62,
+          "structural_path": [
+            "DICE POOLS"
+          ],
+          "text": "DICE POOLS — When a player makes a test, she rolls a number of dice equal to her dice pool. The dice pool is the sum of the relevant skill plus its linked attribute, plus or minus any modifiers that may apply. When a gamesmaster calls for a test, he will provide the player with a description of the task at hand and which skill (and linked attribute) is most appropriate for it. The gamesmaster and player then decide on the applicable dice pool modifiers—both positive and negative—to determine the final dice pool. The player then rolls a number of dice equal to the dice pool."
+        },
+        {
+          "id": "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+          "bucket": "supporting",
+          "page": 64,
+          "structural_path": [
+            "BUYING HITS"
+          ],
+          "text": "BUYING HITS — If the gamesmaster allows it, a character may trade in 4 dice from her dice pool in exchange for an automatic hit. Gamesisters should only allow this when the character has an exceptionally large dice pool (and is unlikely to fail) or when the situation is non-threatening and non-stressful. If the character might suffer bad consequences from failing the test, then the gamesmaster should require her to roll the test rather than buying hits. Buying hits is an all-or-nothing affair; you cannot spend part of your pool to buy hits and then make a test with the rest."
+        },
+        {
+          "id": "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0",
+          "bucket": "supporting",
+          "page": 65,
+          "structural_path": [
+            "OPPOSED TESTS"
+          ],
+          "text": "If no threshold is listed, then the threshold for the test is 1. So only 1 hit is necessary to succeed in an Infiltration + Agility Test. — If an attribute-only Success Test is called for, use the attribute in place of the skill: “Agility + Body (3) Test.” — OPPOSED TESTS — An Opposed Test occurs when two characters are in direct conflict with each other. In this case, the chance of success is based not so much on the situation as on the opponent. When making an Opposed Test, both characters roll their dice pools and compare the number of hits they score. The character generating the greater number of hits achieves her goal. — In the event of a tie, the action is typically a stalemate, and the characters have to choose between continuing with another test or withdrawing. If the gamesmaster needs or wants a result on a tie, then rule in favor of the defending character. — Max is holding a door shut while a security guard tries to push it open. This test has no appropriate skill, so the gamesmaster calls for a Strength + Body Opposed Test. Max rolls eight dice (STR 4 + BOD 4) and gets a 1, 2, 2, 4, 5, 5, 6, 6—four hits! The guard rolls nine dice (STR 5 + BOD 4) and gets 1, 2, 3, 3, 3, 4, 5, 5, 6—only 3 hits! Miraculously, Max barely holds the door shut while his team escapes."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_b90f8d96536021dc",
+        "ga_a93906669d0bc8c6"
+      ],
+      "supporting_anchor_ids": [
+        "ga_b528eb7f941274de",
+        "ga_31473146667a6f89"
+      ]
+    },
+    {
+      "id": "atomic_u03_time_progression_model",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What named units of time does the game use during play (rounds, turns, scenes, phases), and how does each unit begin and end?",
+      "answer": "",
+      "expected_answer_summary": "The explicit ShadowRun time model is the Combat Turn, which lasts about three seconds and can be divided into Initiative Passes. Characters act in Initiative Score order, and extra passes come from magic or implants; outside tactical combat, pacing is handled more loosely by the gamesmaster.",
+      "source_page": "59, 67, 146",
+      "notes": "First-pass grounding emphasizes the codified combat time model; broader scene pacing is treated as GM-mediated rather than as a formal dungeon-turn subsystem.",
+      "gold_unit_ids": [
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38",
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "gold_locations": {
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757": {
+          "page": 67,
+          "structural_path": [
+            "INITIATIVE PASSES"
+          ],
+          "source_unit_ids": [
+            "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+          ]
+        },
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38": {
+          "page": 67,
+          "structural_path": [
+            "COMBAT TURNS"
+          ],
+          "source_unit_ids": [
+            "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+          ]
+        },
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232": {
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "source_unit_ids": [
+            "5d6c14be0746256b7813191154d466c164b03d3c0dc61411d03d1ed63fae529b",
+            "22d2923bd9ed2802f88443c5db40589a463c8f6a4bce73cdc3da0cdb41d81fbb",
+            "6fdc107130a9b35229f28738cadc68d758c18c118202e8a9740b574f4aba7f73"
+          ]
+        }
+      },
+      "required_gold": [
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+      ],
+      "supporting_gold": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "required_gold_rationale": {
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757": "This chunk states that a Combat Turn is divided into Initiative Passes and that action order is determined by Initiative Score.",
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38": "This chunk supplies the length and named unit of the combat time model: the Combat Turn."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+      ],
+      "_supporting_gold": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "gold_chunks": [
+        {
+          "id": "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "INITIATIVE PASSES"
+          ],
+          "text": "INITIATIVE PASSES — Some characters may have magic or implants that allow them to act more than once in a Combat Turn. When this occurs, the Combat Turn is divided into Initiative Passes. Everyone gets to act during the first Initiative Pass (in order according to their Initiative Score), characters with two actions get to go again during a second Initiative Pass, characters with three actions get a third action during a third Initiative Pass, and so on."
+        },
+        {
+          "id": "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "COMBAT TURNS"
+          ],
+          "text": "COMBAT TURNS — In certain situations, such as combat or pursuit scenes, timing becomes critical. When this occurs, the Shadowrun game proceeds in turns. Each character acts in order, the fastest first, according to their Initiative Score. Characters act in a set sequence known as the Combat Turn that is roughly 3 seconds long (see Combat Turn Sequence, p. 144). The point during each Combat Turn when a specific character can act is called an Action Phase."
+        },
+        {
+          "id": "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232",
+          "bucket": "supporting",
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "text": "WHAT IS A ROLEPLAYING GAME? — A roleplaying game is part improvisational theater, part storytelling, and part game. It is played by a gamesmaster who runs the game and a group of players who pretend to be characters. These characters are created by the players, given a history and personality, and then further defined by a set of statistics that represent the character's skills and attributes—as developed in the character creation process (see Creating a Shadowrunner, p. 80). The gamesmaster presents the setting and situation; through their characters, the players interact with the storyline and other characters. — Think of it this way: everyone has read a book or seen a movie in which the lead character does something that the reader or viewer finds so utterly wrong that he or she wants to shout out a warning. But no matter what we say, the character will do what the plot demands; we’re just along for the ride. Even throwing popcorn won’t help. — In a roleplaying game, the players control their characters' actions and respond to the events of the plot. If the player does not want his or her character to go through the door, the character will not. If the player thinks the character can talk him- or herself out of a tight situation rather than resorting to that trusty pistol, he or she can talk away. The script, or plot, of a roleplaying game is flexible, always changing based on the decisions the players make as characters."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_937d37f912ffb237",
+        "ga_f68269a40f4c0236"
+      ],
+      "supporting_anchor_ids": [
+        "ga_9873af4c54495f38"
+      ]
+    },
+    {
+      "id": "atomic_u04_player_actions_in_combat",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What can a player character do when they act (actions, movement, reactions/interrupts, free actions), and what limits apply?",
+      "answer": "",
+      "expected_answer_summary": "On an Action Phase, a character takes either one Complex Action or two Simple Actions. They also get one Free Action in each Initiative Pass in which they act, can sometimes take Interrupt Actions by spending their next available action, and movement is measured per Combat Turn rather than per Initiative Pass.",
+      "source_page": "146, 147, 151",
+      "notes": "Grounded from the explicit combat action-economy sections in the Anniversary corpus.",
+      "gold_unit_ids": [
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36",
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77",
+        "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b",
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "gold_locations": {
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36": {
+          "page": 67,
+          "structural_path": [
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36"
+          ]
+        },
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77": {
+          "page": 67,
+          "structural_path": [
+            "FREE ACTIONS"
+          ],
+          "source_unit_ids": [
+            "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77"
+          ]
+        },
+        "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b": {
+          "page": 150,
+          "structural_path": [
+            "INTERRUPT ACTIONS"
+          ],
+          "source_unit_ids": [
+            "7cc79785f56e237a56e72e6e315987381044f8f8735ec7f9954551c430fa4adb",
+            "073b5db63b250df8436fb11b59cf0fefb0ecaa64e657067304ee0bd76a98c556"
+          ]
+        },
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7": {
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "source_unit_ids": [
+            "a71d5a021900ec7b7a57383936d14e76c0e6855e6f0a168584a77c9349870c22",
+            "759a0010409621fd3ffb95ef1e137a9653b81a6fef5cdf3a85ae014ce1620095"
+          ]
+        }
+      },
+      "required_gold": [
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36",
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77"
+      ],
+      "supporting_gold": [
+        "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b",
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "required_gold_rationale": {
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36": "Defines the base action budget on an Action Phase as one Complex Action or two Simple Actions.",
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77": "Defines the free-action allowance within an Initiative Pass."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36",
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77"
+      ],
+      "_supporting_gold": [
+        "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b",
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "gold_chunks": [
+        {
+          "id": "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "ACTIONS"
+          ],
+          "text": "ACTIONS — Within an Action Phase, a character can carry out a number of actions depending on their complexity. Each phase, a character can take one Complex Action OR two Simple Actions (see pp. 147–148 for a complete listing of what actions fall into which categories)."
+        },
+        {
+          "id": "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "FREE ACTIONS"
+          ],
+          "text": "FREE ACTIONS — In addition to Complex or Simple Actions, a character can take one Free Action during each Initiative Pass in which she has an action. This Free Action can only be taken on the character’s Action Phase or at any other point later in that Initiative Pass. Free Actions are detailed on p. 146."
+        },
+        {
+          "id": "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b",
+          "bucket": "supporting",
+          "page": 150,
+          "structural_path": [
+            "INTERRUPT ACTIONS"
+          ],
+          "text": "USE SKILL — A character may use an appropriate skill by taking a Complex Action (see Using Skills, p. 118). — INTERRUPT ACTIONS — There are occasions when characters are allowed to take an action before it is their allotted Action Phase. Such rare instances are called Interrupt Actions and are clearly identified when they come up in the rules. When a character uses an interrupt action, such as full defense (above), he uses up his next available action. Characters may even take an interrupt action when they no longer possess an action that pass or Combat Turn, by “buying ahead” their very first action of the next Combat Turn instead (but only the first)."
+        },
+        {
+          "id": "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+          "bucket": "supporting",
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "text": "MOVEMENT RATE — The movement rates for each metatype are noted on the Movement Table. This rate is the distance the character moves by that method per Combat Turn (not per Initiative Pass). — If a character mixed his modes of movement during a Combat Turn and it becomes important to know exactly how far the character moved in a particular pass, simply divide his Movement Rate by the number of passes in that turn."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_0b42708d8939016d",
+        "ga_8ca55fd05e7b9065"
+      ],
+      "supporting_anchor_ids": [
+        "ga_aa0236e0b06143c6",
+        "ga_bfb43601ae913409"
+      ]
+    },
+    {
+      "id": "atomic_u05_what_must_be_tracked",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What information must be tracked to play correctly (character stats/resources/conditions, positioning, clocks/time), and where is it recorded (character sheet, tokens, track, notes)?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun characters are defined by statistics such as skills and attributes, and the record sheet explicitly includes Condition Monitors for Physical and Stun damage. In structured combat you also track Combat Turns, Initiative Passes, and movement rate, while table state beyond that is managed by the gamemaster and the group.",
+      "source_page": "59, 67, 71, 151",
+      "notes": "This first-pass grounding focuses on record-sheet state and the explicit combat state the corpus surfaces clearly.",
+      "gold_unit_ids": [
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e",
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "gold_locations": {
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e": {
+          "page": 73,
+          "structural_path": [
+            "CONDITION MONITORS"
+          ],
+          "source_unit_ids": [
+            "bd2735a02bed3bd465b4ebf33a22ead802a3a9d9bf292e65068c54720013600b",
+            "fea2d61bf9c453095ba529fe464d2d42102e993f3152ad79a2ae57fd72a9ce6c"
+          ]
+        },
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757": {
+          "page": 67,
+          "structural_path": [
+            "INITIATIVE PASSES"
+          ],
+          "source_unit_ids": [
+            "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+          ]
+        },
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7": {
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "source_unit_ids": [
+            "a71d5a021900ec7b7a57383936d14e76c0e6855e6f0a168584a77c9349870c22",
+            "759a0010409621fd3ffb95ef1e137a9653b81a6fef5cdf3a85ae014ce1620095"
+          ]
+        },
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232": {
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "source_unit_ids": [
+            "5d6c14be0746256b7813191154d466c164b03d3c0dc61411d03d1ed63fae529b",
+            "22d2923bd9ed2802f88443c5db40589a463c8f6a4bce73cdc3da0cdb41d81fbb",
+            "6fdc107130a9b35229f28738cadc68d758c18c118202e8a9740b574f4aba7f73"
+          ]
+        }
+      },
+      "required_gold": [
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e",
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+      ],
+      "supporting_gold": [
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "required_gold_rationale": {
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e": "This chunk explicitly says the record sheet includes Condition Monitors and explains what the Physical and Stun tracks are for.",
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757": "This chunk grounds the structured combat state that must be tracked, namely Initiative Passes and action order."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e",
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+      ],
+      "_supporting_gold": [
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "gold_chunks": [
+        {
+          "id": "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e",
+          "bucket": "required",
+          "page": 73,
+          "structural_path": [
+            "CONDITION MONITORS"
+          ],
+          "text": "CONDITION MONITORS — An important part of the record sheet is the Condition Monitor, consisting of two tracks. The Physical Damage Track displays wound damage and shows when the character dies. The Sun Damage Track shows fatigue and stun damage and indicates when a character falls unconscious. See Damage, p. 162, for more information. — The Physical Damage Track has a number of boxes equal to 8 plus half a character’s Body attribute (round up). The Sun Damage Track has a number of boxes equal to 8 plus half a character’s Willpower attribute (round up)."
+        },
+        {
+          "id": "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "INITIATIVE PASSES"
+          ],
+          "text": "INITIATIVE PASSES — Some characters may have magic or implants that allow them to act more than once in a Combat Turn. When this occurs, the Combat Turn is divided into Initiative Passes. Everyone gets to act during the first Initiative Pass (in order according to their Initiative Score), characters with two actions get to go again during a second Initiative Pass, characters with three actions get a third action during a third Initiative Pass, and so on."
+        },
+        {
+          "id": "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+          "bucket": "supporting",
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "text": "MOVEMENT RATE — The movement rates for each metatype are noted on the Movement Table. This rate is the distance the character moves by that method per Combat Turn (not per Initiative Pass). — If a character mixed his modes of movement during a Combat Turn and it becomes important to know exactly how far the character moved in a particular pass, simply divide his Movement Rate by the number of passes in that turn."
+        },
+        {
+          "id": "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232",
+          "bucket": "supporting",
+          "page": 17,
+          "structural_path": [
+            "WHAT IS A ROLEPLAYING GAME?"
+          ],
+          "text": "WHAT IS A ROLEPLAYING GAME? — A roleplaying game is part improvisational theater, part storytelling, and part game. It is played by a gamesmaster who runs the game and a group of players who pretend to be characters. These characters are created by the players, given a history and personality, and then further defined by a set of statistics that represent the character's skills and attributes—as developed in the character creation process (see Creating a Shadowrunner, p. 80). The gamesmaster presents the setting and situation; through their characters, the players interact with the storyline and other characters. — Think of it this way: everyone has read a book or seen a movie in which the lead character does something that the reader or viewer finds so utterly wrong that he or she wants to shout out a warning. But no matter what we say, the character will do what the plot demands; we’re just along for the ride. Even throwing popcorn won’t help. — In a roleplaying game, the players control their characters' actions and respond to the events of the plot. If the player does not want his or her character to go through the door, the character will not. If the player thinks the character can talk him- or herself out of a tight situation rather than resorting to that trusty pistol, he or she can talk away. The script, or plot, of a roleplaying game is flexible, always changing based on the decisions the players make as characters."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_fbcd5eb01893d15f",
+        "ga_937d37f912ffb237"
+      ],
+      "supporting_anchor_ids": [
+        "ga_bfb43601ae913409",
+        "ga_9873af4c54495f38"
+      ]
+    },
+    {
+      "id": "atomic_s05_combat_sequence_group_initiative",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How does initiative work and what is the basic combat sequence for resolving a round?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun combat begins by rolling Initiative, which sets Initiative Score order. On each Action Phase the acting character declares and takes actions, then the sequence repeats through additional Initiative Passes for characters with extra passes before a new Combat Turn begins.",
+      "source_page": 146,
+      "notes": "Re-anchored to the explicit step-by-step combat procedure on page 146 rather than the broader heading-level combat summary.",
+      "gold_unit_ids": [
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6",
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7",
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+        "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18"
+      ],
+      "gold_locations": {
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6": {
+          "page": 146,
+          "structural_path": [
+            "1. ROLL INITIATIVE"
+          ],
+          "source_unit_ids": [
+            "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6"
+          ]
+        },
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7": {
+          "page": 146,
+          "structural_path": [
+            "3. BEGIN ACTION PHASE"
+          ],
+          "source_unit_ids": [
+            "4de808bfea1aa7a3258a2a7d16d880aedab06d3deefde108c60acc22ed846bcb",
+            "525896ae76d0fbd6e90010d21db3349bc105f7bd378f4865ae6ff3aafeec95ca",
+            "633c743c7f24448c41e6249cb25334131d2b1c330c31fde7a93327b3e3cefc63"
+          ]
+        },
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7": {
+          "page": 146,
+          "structural_path": [
+            "5. BEGIN NEXT INITIATIVE PASS"
+          ],
+          "source_unit_ids": [
+            "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7"
+          ]
+        },
+        "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18": {
+          "page": 146,
+          "structural_path": [
+            "COMBAT",
+            "INITIATIVE"
+          ],
+          "source_unit_ids": [
+            "0d06e4d6647cfd5b035afd4f6bafe2a2a4b88293724c31a7d94352b17466465b",
+            "ecf5247ca9fea36a501afa259b29e922a92bea5b75eed1480ea262c3a26f7f1e",
+            "dbc0225a9d5756b9c9a9900f80d1a10c2b5d25c1ff72e633925be1b3da3e72e4"
+          ]
+        }
+      },
+      "required_gold": [
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6",
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7"
+      ],
+      "supporting_gold": [
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+        "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18"
+      ],
+      "required_gold_rationale": {
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6": "This chunk states that combat starts by rolling Initiative and that Initiative Score determines acting order.",
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7": "This chunk anchors the action-phase step in the combat sequence where the acting character declares and takes actions."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6",
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7"
+      ],
+      "_supporting_gold": [
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+        "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18"
+      ],
+      "gold_chunks": [
+        {
+          "id": "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6",
+          "bucket": "required",
+          "page": 146,
+          "structural_path": [
+            "1. ROLL INITIATIVE"
+          ],
+          "text": "1. ROLL INITIATIVE — Determine Initiative for all the characters, critters, spirits, intrusion countermeasures, and anything else involved in the fight (see Initiative). The order of Initiative Scores from high to low determines the order in which the action will take place."
+        },
+        {
+          "id": "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7",
+          "bucket": "required",
+          "page": 146,
+          "structural_path": [
+            "3. BEGIN ACTION PHASE"
+          ],
+          "text": "If more than one character has the same Initiative Score, they go at the same time. — 3. BEGIN ACTION PHASE — The acting character now declares and takes his actions, according to the steps below. — If another character has delayed an action (see Delayed Actions, p. 145) and wishes to act during this Action Phase, he must declare it here. That character chooses whether to act before, after, or at the same time as current acting character."
+        },
+        {
+          "id": "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+          "bucket": "supporting",
+          "page": 146,
+          "structural_path": [
+            "5. BEGIN NEXT INITIATIVE PASS"
+          ],
+          "text": "5. BEGIN NEXT INITIATIVE PASS — Once all of the characters have acted and all of the actions have been resolved for the first Initiative Pass, Steps 2 through 4 are then repeated for characters who get a second Initiative Pass due to implants, magic, or other abilities. This cycle is repeated in full for characters who get a third pass, and then for those who get a fourth pass (if any). Few characters can act in more than four Initiative Passes in a Combat Turn and none under these basic rules."
+        },
+        {
+          "id": "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18",
+          "bucket": "supporting",
+          "page": 146,
+          "structural_path": [
+            "COMBAT",
+            "INITIATIVE"
+          ],
+          "text": "If a character was wounded in a previous Initiative Pass, wound modifiers may affect his Initiative Score on this and any subsequent passes. — COMBAT — 6. BEGIN A NEW COMBAT TURN — Begin a new Combat Turn, starting again at Step 1. Continue repeating Steps 1 through 6 until the combat ends. — INITIATIVE — Initiative determines the order in which characters act, as well as how often they act during a single Combat Turn. Initiative is based on two factors: Initiative Score and Initiative Passes."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_84253e8825e85b5c",
+        "ga_0036349207e5d279"
+      ],
+      "supporting_anchor_ids": [
+        "ga_5c6a12279ed69b39",
+        "ga_a78ddc6c35c9dff5"
+      ]
+    },
+    {
+      "id": "atomic_s06_spell_preparation_reprepare_and_interruption",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does a character regain the ability to use their most powerful abilities (spell slots, power points, charges, or other expendable resources), and what restrictions apply?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun does not use daily spell preparation in the Vancian sense. A magician casts by choosing a spell and a Force, actual hits are capped by Force, then the caster resists Drain with Willpower plus the tradition’s Drain attribute; this atomic question should be read as a cross-system mismatch, and a 'handled differently' answer is acceptable.",
+      "source_page": "184, 186, 205",
+      "notes": "Cross-system mismatch: ShadowRun spellcasting is not based on daily prepared spell slots. First-pass gold anchors focus on the actual casting and Drain workflow rather than a nonexistent preparation subsystem.",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+        "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16"
+      ],
+      "gold_locations": {
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86": {
+          "page": 184,
+          "structural_path": [
+            "STEP 1: CHOOSE A SPELL"
+          ],
+          "source_unit_ids": [
+            "d9c0f068da39365f1986ae3829bb88936b79f80567958d0f1f80ac2b1bc5fff8",
+            "b6873309a4e760a69557327863fc3fc0906770f2688365da40bca0f1f598ad2f",
+            "e59245b32ce08f64d861061d72425fbb02e88e4a80421b45b0dcb338cde76fa2",
+            "d62817ef36969ab11ea43a4ffb03117519288da62a69a5e9d21a2fcccb47bca9",
+            "c9cb5cf40b3486c92073a79d2ef012cf469a304ea0e1a6d1d98390c426bfc6f1",
+            "b7fd16980910788102fc38313fc328511aae6438bb00cf0f965e4d4144349e06",
+            "b6b45befc4835872a6e3b12e46498bd904c4030c62598e90bf4717364259f301",
+            "dd419c162c830fe9c8481364584a45903b4c14c4f75ce302ab29599105235b28",
+            "716a0633d474dfdee60f65fa039d33f3137fc09c750ae2b3bbfddb13d0bfea28"
+          ]
+        },
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b": {
+          "page": 186,
+          "structural_path": [
+            "STEP 6: RESIST DRAIN"
+          ],
+          "source_unit_ids": [
+            "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b"
+          ]
+        },
+        "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16": {
+          "page": 184,
+          "structural_path": [
+            "FORCE"
+          ],
+          "source_unit_ids": [
+            "b9cc86db6ecbbac7cdabedc31efe2bfee2b29e0f56704a8f3365a77ca6372fc7",
+            "450fe90153df669721d8f0a229b95bedf5b73ef6189ce1ac53534e0787330427",
+            "63f7789c8d23365034713c5ba27892cf219407a26a133bd6509538298d39c41a"
+          ]
+        }
+      },
+      "required_gold": [
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b"
+      ],
+      "supporting_gold": [
+        "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16"
+      ],
+      "required_gold_rationale": {
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86": "This anchors the spellcasting procedure and establishes that the caster chooses a spell and Force rather than preparing daily slots.",
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b": "This chunk provides the post-cast Drain resistance procedure, which is the closest codified equivalent to the damage or cost consequences of casting in this system."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b"
+      ],
+      "_supporting_gold": [
+        "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16"
+      ],
+      "gold_chunks": [
+        {
+          "id": "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+          "bucket": "required",
+          "page": 184,
+          "structural_path": [
+            "STEP 1: CHOOSE A SPELL"
+          ],
+          "text": "STEP 1: CHOOSE A SPELL — When casting a spell, the first thing a magician does is prepare for what she's about to attempt. First, the character chooses the spell she wants to cast. She can cast any spell she knows. If the magician has any other spells currently active, called sustained spells (see Step 7: Ongoing Effects, p. 184), she must choose whether to drop them or keep them active while she casts the new spell. Sustained spells are a distraction and will reduce the character's dice pool for any other tests by -2 per sustained spell. Dropping a sustained spell is a Free Action. — ![](images/0.jpg) — SPELLCASTING BY THE NUMBERS — Step 1: Choose a Spell. — Step 2: Choose the Force up to the caster's Magic attribute (unless overcasting—at left). — Step 3: Choose a Target within the caster's line of sight. — Step 4: Roll Spellcasting + Magic. — Step 5: Determine Effect (see spell description). — Step 6: Resist Drain by rolling Willpower + tradition's Drain attribute. — Step 7: Determine Ongoing Effects (-2 sustaining modifier)."
+        },
+        {
+          "id": "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+          "bucket": "required",
+          "page": 186,
+          "structural_path": [
+            "STEP 6: RESIST DRAIN"
+          ],
+          "text": "STEP 6: RESIST DRAIN — Magicians roll Willpower + an attribute appropriate to their tradition (Charisma for shamans and Logic for mages) to resist Drain. Each hit on the Drain Resistance Test reduces the Drain Value of the spell by one. Note that wound modifiers or sustained spells have no effect on the character’s dice pool for Drain Resistance Tests. Drain damage for spells is Stun damage unless the magician is Overcasting (p. 182)."
+        },
+        {
+          "id": "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "bucket": "supporting",
+          "page": 184,
+          "structural_path": [
+            "FORCE"
+          ],
+          "text": "FORCE — A spell’s only attribute is its Force—the measure of the spell’s raw power. A spell’s Force helps determine its effectiveness and its Drain. The Force of a spell is chosen by the castern during spellcasting, typically at a value up to the Magic attribute of the magician who cast it. The maximum Force that a spell can be cast at is equal to twice the character’s Magic. — For simplicity, you may wish to decide that spells are always cast at a Force equal to the character’s Magic attribute unless otherwise noted. This makes it slightly easier to keep track of spell effects and Drain (see Simplifying Spell Drain, p. 203). — A spell’s Force limits the number of hits (not net hits) that can be achieved on the Spellcasting Test. So if you cast a Force 3 spell and get 5 hits, only 3 of those hits count. In other words, Force has a limiting effect on spells—the more oomph you put into the spell, the better you can succeed with it. This limitation does not apply to Edge dice that are used to boost a spell."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_c531d84685dfe010",
+        "ga_1aa42ae0aeca655c"
+      ],
+      "supporting_anchor_ids": [
+        "ga_64a3767cf785dcbd"
+      ]
+    },
+    {
+      "id": "atomic_s09_zero_hp_death_and_healing",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "What happens at 0 hit points, and when does a character die from damage?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun does not use hit points. Filling the Stun track knocks a character unconscious, filling the Physical track leaves the character near death and in need of stabilization, and exceeding the Physical track puts the character into overflow damage where death becomes an immediate risk.",
+      "source_page": "164, 165, 255",
+      "notes": "Re-anchored to the explicit unconsciousness and overflow procedure rather than the more general record-sheet overview.",
+      "gold_unit_ids": [
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579",
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8",
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53"
+      ],
+      "gold_locations": {
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579": {
+          "page": 165,
+          "structural_path": [
+            "UNCONSCIOUSNESS"
+          ],
+          "source_unit_ids": [
+            "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579"
+          ]
+        },
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8": {
+          "page": 255,
+          "structural_path": [
+            "PHYSICAL DAMAGE OVERFLOW"
+          ],
+          "source_unit_ids": [
+            "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8"
+          ]
+        },
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53": {
+          "page": 164,
+          "structural_path": [
+            "APPLYING DAMAGE"
+          ],
+          "source_unit_ids": [
+            "b5fc4d941a7ebe573f086a18c22f6b59dfe6af59783b807b018487995e739f7c",
+            "babca4b9ad4caadbe1657879655b91ec0dc394bdb076dc394aed7b265125debf",
+            "1636c5844ebbb7103945409fac21a77929bb23582a59f19f950e07083f2d356d"
+          ]
+        }
+      },
+      "required_gold": [
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579",
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8"
+      ],
+      "supporting_gold": [
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53"
+      ],
+      "required_gold_rationale": {
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579": "This chunk directly answers the zero-hit-points mapping by stating what happens when the Stun or Physical track fills.",
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8": "This chunk anchors when damage becomes immediately life-threatening by explaining overflow damage beyond the Physical track."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579",
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8"
+      ],
+      "_supporting_gold": [
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53"
+      ],
+      "gold_chunks": [
+        {
+          "id": "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579",
+          "bucket": "required",
+          "page": 165,
+          "structural_path": [
+            "UNCONSCIOUSNESS"
+          ],
+          "text": "UNCONSCIOUSNESS — When all of the available boxes in a track (Physical or Stun) are filled in, the character immediately falls unconscious and drops to the ground. If the Stun track is filled in, the character is merely knocked out. If the Physical track is filled in, however, the character is near death and will die unless stabilized (see Healing, p. 252)."
+        },
+        {
+          "id": "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8",
+          "bucket": "required",
+          "page": 255,
+          "structural_path": [
+            "PHYSICAL DAMAGE OVERFLOW"
+          ],
+          "text": "PHYSICAL DAMAGE OVERFLOW — Characters who exceed their Physical Condition Monitor and enter into overflow damage (see Exceeding the Condition Monitor, p. 163) are at risk of dying if they do not receive prompt medical attention."
+        },
+        {
+          "id": "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53",
+          "bucket": "supporting",
+          "page": 164,
+          "structural_path": [
+            "APPLYING DAMAGE"
+          ],
+          "text": "APPLYING DAMAGE — Once the final Damage Value is calculated, it must be recorded on the character’s Condition Monitor. As described under Condition Monitors, p. 71, the Condition Monitor has two damage tracks: Physical and Stun. Physical damage is recorded in the Physical damage track, Stun damage in the Stun damage track. Each point of Damage Value equals 1 box on the appropriate damage track. — Damage is cumulative. A character who already has 3 boxes filled in and takes another 3 boxes of damage ends up with 6 boxes filled in. — A damaged character must also check for Knockdown (see p. 161)."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_bb691fb6312ef3ba",
+        "ga_a40d62fa0ef1ccc2"
+      ],
+      "supporting_anchor_ids": [
+        "ga_53e92eebe5e7e09a"
+      ]
+    },
+    {
+      "id": "atomic_s12_morale_and_reaction_rolls",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "When NPCs or enemies encounter the player characters for the first time, or when combat turns against them, how does the system determine their attitude or willingness to continue fighting?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun does not use an old-school morale or reaction table. The closest codified analogue is opposed social interaction: Con, Intimidation, Leadership, and Negotiation use opposed social tests with situation-based social modifiers, while morale or retreat remains GM adjudication.",
+      "source_page": "132, 133",
+      "notes": "Cross-system mismatch retained, but re-anchored to the explicit social-opposed-test rules that are the nearest codified analogue to reaction handling in this corpus.",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d"
+      ],
+      "gold_locations": {
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6": {
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "source_unit_ids": [
+            "ffedf0cd2ea6d3062ec5d580ea207ccb0d265d0bf6f961e8a10fcae60a9bbf8d",
+            "ccd582af6b99d8ff38659d1765c5028531a052bfbee8356d40bf25c484edfc0b"
+          ]
+        },
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d": {
+          "page": 133,
+          "structural_path": [
+            "SOCIAL MODIFIERS"
+          ],
+          "source_unit_ids": [
+            "a3aefde2070a761bfbf62804962e8f8938d705843fa74f1d04a2d31a779c618f"
+          ]
+        }
+      },
+      "required_gold": [
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6": "This chunk gives the closest codified reaction analogue by specifying when social influence attempts call for opposed tests and how group reactions are resolved.",
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d": "This chunk supplies the situational modifier framework that affects how those social reactions are interpreted at the table."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+          "bucket": "required",
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "text": "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION — When one character attempts to influence another character with Con, Intimidation, Leadership, or Negotiation skill, an Opposed Test is called for. To determine what each character roll, see the Charisma-Linked Opposed Tests Table. — If the character is attempting to influence a group of NPCs who have no designated leader, the Opposed Test applies to the whole group—use the highest dice pool available among the members of the group, then add +1 for each extra person (max +5). Groups tend to react as a whole, with reluctant members drawn along by enthusiastic ones. Alternatively, the gamesmaster may appoint a leader or a “ringer in the crowd” and base the success or failure of the endeavor on that character’s reaction to the player character."
+        },
+        {
+          "id": "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d",
+          "bucket": "required",
+          "page": 133,
+          "structural_path": [
+            "SOCIAL MODIFIERS"
+          ],
+          "text": "<table><tr><td colspan=\"2\">SOCIAL MODIFIERS TABLE</td></tr></table> — Unless otherwise noted, these dice pool modifiers apply to the acting character’s dice pool. — † These modifiers apply to the target character’s dice pool.\n‡ These modifiers can apply to either character’s dice pool. — Crazy Mary, by contrast, doesn’t go for subtle. She waits outside an Ares Macrotechnology subsidiary for a mid-level exec to leave. With pictures of his family in hand, Mary is going to intimidate the corp exec to let her inside the complex and lead her to the paydata she needs. Mary has Intimidation 5 and Charisma 6, and the exec has Intimidation 2 and Willpower 4. The gamesmaster applies the following modifiers: +2 for the gun in her hand and +2 for the pictures of the exec’s family. Mary rolls a total of 15 dice (5 + 6 + 4) and the exec rolls a measly 6 dice (2 + 4). Crazy Mary rolls 5 hits, and the exec rolls 2. With 3 net hits (5 − 2), the gamesmaster decides this guy is so afraid of Mary that not only does he escort her into the office complex, but he takes her in through a back entrance to ensure that no guards will see them."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_217034e6c53bc9c2",
+        "ga_b0c56782211b903d"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s13_encumbrance_and_movement",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does encumbrance affect movement and what needs to be tracked to apply it?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun has explicit encumbrance rules. Exceeding carrying capacity imposes a -1 dice pool modifier to physical actions for every 5 kilograms over the limit, and excessive armor can also reduce Agility and Reaction; movement rates are tracked separately from those encumbrance penalties.",
+      "source_page": "151, 163, 312",
+      "notes": "Re-anchored to the explicit gear and armor encumbrance rules while retaining movement-rate support.",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d",
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1",
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "gold_locations": {
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d": {
+          "page": 312,
+          "structural_path": [
+            "STREET GEAR",
+            "ENCUMBRANCE"
+          ],
+          "source_unit_ids": [
+            "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d"
+          ]
+        },
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1": {
+          "page": 163,
+          "structural_path": [
+            "ARMOR AND ENCUMBRANCE"
+          ],
+          "source_unit_ids": [
+            "7c2d0ce5c6c3c22fb6670af6fc096629698690c4f4bcae6ac16d6f578abf0e94",
+            "7f79a9d82da9e9724b7630d66ef86e4398cb2bc91376c27ef2b8ae06252ce119"
+          ]
+        },
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7": {
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "source_unit_ids": [
+            "a71d5a021900ec7b7a57383936d14e76c0e6855e6f0a168584a77c9349870c22",
+            "759a0010409621fd3ffb95ef1e137a9653b81a6fef5cdf3a85ae014ce1620095"
+          ]
+        }
+      },
+      "required_gold": [
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d",
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1"
+      ],
+      "supporting_gold": [
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "required_gold_rationale": {
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d": "This chunk states the primary encumbrance rule for carrying too much gear and quantifies the resulting penalty.",
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1": "This chunk covers the armor-based encumbrance case that slows characters by reducing Agility and Reaction."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d",
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1"
+      ],
+      "_supporting_gold": [
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "gold_chunks": [
+        {
+          "id": "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d",
+          "bucket": "required",
+          "page": 312,
+          "structural_path": [
+            "STREET GEAR",
+            "ENCUMBRANCE"
+          ],
+          "text": "ENCUMBRANCE — If a character overburdens herself with gear, she will suffer encumbrance modifiers. For every 5 kilograms that you exceed your carrying capacity, you suffer a -1 dice pool modifier to physical actions. A character with Strength 3 (Carrying Capacity 30) that is trudging along with 50 kilograms of equipment will suffer a -4 dice pool modifier."
+        },
+        {
+          "id": "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1",
+          "bucket": "required",
+          "page": 163,
+          "structural_path": [
+            "ARMOR AND ENCUMBRANCE"
+          ],
+          "text": "ARMOR AND ENCUMBRANCE — If a character is wearing more than one piece of armor at a time, only the highest value (for either Ballistic or Impact) applies. Note that some armor items, like helmets and shields, provide a modifier to the worn armor rating and so do not count as stacked armor. — Too much armor, however, can slow a character down. If either of a character’s armor ratings exceeds his Body x 2, apply a -1 modifier to Agility and Reaction for every 2 points (or fraction thereof) that his Body x 2 is exceeded. Note that this may affect Initiative as well. If a character is wearing multiple armor items, add their ratings together before comparing to Body."
+        },
+        {
+          "id": "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+          "bucket": "supporting",
+          "page": 151,
+          "structural_path": [
+            "MOVEMENT RATE"
+          ],
+          "text": "MOVEMENT RATE — The movement rates for each metatype are noted on the Movement Table. This rate is the distance the character moves by that method per Combat Turn (not per Initiative Pass). — If a character mixed his modes of movement during a Combat Turn and it becomes important to know exactly how far the character moved in a particular pass, simply divide his Movement Rate by the number of passes in that turn."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_c784722269690380",
+        "ga_9c9f94a99478357c"
+      ],
+      "supporting_anchor_ids": [
+        "ga_bfb43601ae913409"
+      ]
+    },
+    {
+      "id": "atomic_s14_exploration_time_and_encounter_checks",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "Outside of structured combat, how does the game track the passage of time during exploration or travel, and what time-based events can interrupt a group's progress?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun 4e does not use a dungeon-turn or wandering-monster procedure in the old-school sense. Outside combat, the rules say time is usually handled in a fluid and abstract manner by the gamesmaster, while more exact clocks are only tracked when a specific situation demands it.",
+      "source_page": 67,
+      "notes": "Cross-system mismatch retained, but re-anchored to the explicit noncombat time-handling rule instead of the generic GM-role introduction.",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+      ],
+      "gold_locations": {
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7": {
+          "page": 67,
+          "structural_path": [
+            "TIME"
+          ],
+          "source_unit_ids": [
+            "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+          ]
+        }
+      },
+      "required_gold": [
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7": "This chunk directly states how noncombat time is normally handled in ShadowRun and why there is no dungeon-turn wandering-monster procedure here."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7",
+          "bucket": "required",
+          "page": 67,
+          "structural_path": [
+            "TIME"
+          ],
+          "text": "TIME — In most situations, you don’t have to keep strict track of time while playing Shadowrun as long as the gamesmaster and players have a clear sense of continuity and the sequence of events. While it may often be necessary to keep track of time for specific periods within the game (for instance, if the runners must meet with the Mafia don for a dinner, and the hates tardiness), it is best dealt with in a fluid and abstract manner."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_45868b525b752ddc"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s16_surprise_procedure",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does surprise work and what advantage does the surprising side get?",
+      "answer": "",
+      "expected_answer_summary": "ShadowRun has an explicit surprise procedure. All participants make a Surprise Test using Reaction + Intuition, and in the first Initiative Pass characters are surprised by anyone who scored more hits than they did; surprised characters cannot directly act toward or react to those characters.",
+      "source_page": 167,
+      "notes": "Re-anchored to the explicit surprise rules that the corpus surfaces directly, so this is no longer treated as a cross-system mismatch.",
+      "gold_unit_ids": [
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7",
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050",
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+      ],
+      "gold_locations": {
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7": {
+          "page": 167,
+          "structural_path": [
+            "SURPRISE TESTS"
+          ],
+          "source_unit_ids": [
+            "5a0c5f9e5e1615369336e3bbeb91f0b21fa4d4701b5be8a7588597350fd9e822",
+            "437c4c94c837594fbd26995f483f3b1fa974797829c32328940401a83fb9f4b3"
+          ]
+        },
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050": {
+          "page": 167,
+          "structural_path": [
+            "EFFECTS OF SURPRISE"
+          ],
+          "source_unit_ids": [
+            "57bf74c29f617a82642947b41e3f53a5ce14ec5f0e772b5ceeaeababe52fb0f3",
+            "fc117dc8d9053521032422a7ee1e3835d533b08e24ade22d3f3fc8e399789db6",
+            "71e4a778ab37788aec6944190318e5d0f1e7feb6e3de2c8fbb59d3b042a50ccd"
+          ]
+        },
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57": {
+          "page": 167,
+          "structural_path": [
+            "SURPRISE WITHIN COMBAT"
+          ],
+          "source_unit_ids": [
+            "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+          ]
+        }
+      },
+      "required_gold": [
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7",
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050"
+      ],
+      "supporting_gold": [
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+      ],
+      "required_gold_rationale": {
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7": "This chunk gives the actual surprise test procedure, including the Reaction + Intuition roll and how the first Initiative Pass is affected.",
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050": "This chunk states what advantage the surprising side gets by explaining which actions and reactions surprised characters lose."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7",
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050"
+      ],
+      "_supporting_gold": [
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+      ],
+      "gold_chunks": [
+        {
+          "id": "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7",
+          "bucket": "required",
+          "page": 167,
+          "structural_path": [
+            "SURPRISE TESTS"
+          ],
+          "text": "The surprise rules below apply to all situations, whether all the parties involved are caught off guard or whether one or more parties are intentionally ambushing others. — SURPRISE TESTS — To resolve surprise situations, all participants must make an Initiative Test (Reaction + Intuition). Note the number of hits scored for each character—this is the threshold that other characters need to beat in order to act against them in the first Initiative Pass. Characters who have been alerted in some way receive a +3 dice pool modifier on this test. — At this point, the Combat Turn begins, and characters roll Initiative as normal. During the first Initiative Pass, however, characters are considered surprised by any other characters who scored more hits than they did on the surprise test. A character who is surprised may not directly act toward or react to characters who have surprised him—this includes friends as well as foes."
+        },
+        {
+          "id": "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050",
+          "bucket": "required",
+          "page": 167,
+          "structural_path": [
+            "EFFECTS OF SURPRISE"
+          ],
+          "text": "EFFECTS OF SURPRISE — Characters who are surprised cannot take any actions that directly affect, impede, or counteract characters that have surprised them. This means surprised characters cannot attack those who surprised them, nor can they dodge or defend against attacks from those characters. The surprised character also cannot react to those characters' actions in any way. The surprised character can, however, carry out other actions that are not specifically directed at any surprising characters, such as dropping prone or readying a weapon (but not firing it). — Note that friends may surprise as well as foes. A character caught in an ambush situation may not react to his friend’s warning to duck, for example, if the friend also surprised him. — SURPRISE AND GLITCHES — Characters who glitch on their surprise tests may still react appropriately, but they also jump or take an otherwise startled action, perhaps"
+        },
+        {
+          "id": "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57",
+          "bucket": "supporting",
+          "page": 167,
+          "structural_path": [
+            "SURPRISE WITHIN COMBAT"
+          ],
+          "text": "SURPRISE WITHIN COMBAT — Surprise may also occur within combats that have already started. A security guard may, for example, walk in a room to find a shadowrunner trying to strangle his partner. Whenever new characters are unexpectedly introduced to a combat situation, the gamesmaster should make a surprise test between the characters already involved and the ones just entering, and apply surprise effects as appropriate. The characters already involved in the combat do not have to check against each other for surprise."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_7a7c2982aef83661",
+        "ga_8c8c394759cb349c"
+      ],
+      "supporting_anchor_ids": [
+        "ga_48291c300506de07"
+      ]
+    },
+    {
+      "id": "atomic_u06_advancement_and_growth",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How do characters advance over time, and what changes when they do (level, skills, attributes, abilities, or equivalent progression)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2",
+        "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077",
+        "2e0476fd65f9a159847697e35f67e6b40065f5bb86fde49af3d37ed1e5fc7efa",
+        "9cee8e476ba28bee0e5fe691fb68f4ea9e7e717d979e89d1267ef0123db49eba",
+        "5c66d9f07ae88020f3f087cf5d5d80ff21a64501aa26e079bf3439fba0910f64",
+        "41e5c0fcebac6880932e968a6e660cc509514216dea4b173e3d8fcf4f28fe182",
+        "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae",
+        "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f",
+        "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc"
+      ],
+      "gold_locations": {
+        "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2": {
+          "page": 271,
+          "structural_path": [
+            "CHARACTER IMPROVEMENT"
+          ],
+          "source_unit_ids": [
+            "c8193ce76a0ad4e852df1d05c2ed880d4da2dee93ed81be474f5860ed9348da9",
+            "b4202dfd23a64283a720c84ab2ad4eaccb29a2ebb5b11978e67dbe7e2da36536",
+            "56a6a6ae6005db8a8bf0b096397d84bae914130a3b344904e0ac7213ba24617e"
+          ]
+        },
+        "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077": {
+          "page": 272,
+          "structural_path": [
+            "IMPROVING EXISTING SKILLS"
+          ],
+          "source_unit_ids": [
+            "b0d2d803b29b7ba167a17f3f1f08bda43feaff93c5189af37bd741d5aee05b50",
+            "cf4516dfca87e58882266d5c6681f69f4bbdef26a1423c606c1f4e0e1e66d88e",
+            "f1d7ee8271f98baebb3452aebbaaac702ec7d2a4057d2188192b25201837b740"
+          ]
+        },
+        "2e0476fd65f9a159847697e35f67e6b40065f5bb86fde49af3d37ed1e5fc7efa": {
+          "page": 272,
+          "structural_path": [
+            "IMPROVING ATTRIBUTES"
+          ],
+          "source_unit_ids": [
+            "f60884e0ed96ea5e434e10e8ac778d2dc4f2a9534c85fca6f9c3faed0730c094",
+            "cf2e77ad777e57b80bdbf1172754a7b4d03eb60843dc213b88a157e5999943e5"
+          ]
+        },
+        "9cee8e476ba28bee0e5fe691fb68f4ea9e7e717d979e89d1267ef0123db49eba": {
+          "page": 272,
+          "structural_path": [
+            "POSITIVE QUALITIES"
+          ],
+          "source_unit_ids": [
+            "c2b87a03e241e09462468071fb9ec60be1773387bbeb74a98fdaeb92d235fe5d",
+            "10999b6d0f8d9f98d380f71f03bbb25c3fd477f8bd2878cfa8459bae6d72d110"
+          ]
+        },
+        "5c66d9f07ae88020f3f087cf5d5d80ff21a64501aa26e079bf3439fba0910f64": {
+          "page": 200,
+          "structural_path": [
+            "INITIATION"
+          ],
+          "source_unit_ids": [
+            "60c738e2ade8433fa22415ea5e41ca09e0d1bb21c21ae9eecb4221a464edebf7",
+            "f250b5013e73d8fede6798ddfc7cbdee3b0862a20ca32eb8102354b8e1b3a581",
+            "3aec964c38aa3e6a2e0467da9f5c00bdfcfe7ddc953a17c5ad79de2922aec170"
+          ]
+        },
+        "41e5c0fcebac6880932e968a6e660cc509514216dea4b173e3d8fcf4f28fe182": {
+          "page": 272,
+          "structural_path": [
+            "IMPROVING SKILLS AND SKILL GROUPS"
+          ],
+          "source_unit_ids": [
+            "9be37f31bf84dca2a1e7b94c68717af23edaff800442db7f1334ee850739ff2d",
+            "ce98439dc716842b90a8aa314a03dc7e022f525eb2f5d5794c58157ef1b14d2a"
+          ]
+        },
+        "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae": {
+          "page": 272,
+          "structural_path": [
+            "NEW SKILLS"
+          ],
+          "source_unit_ids": [
+            "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae"
+          ]
+        },
+        "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f": {
+          "page": 272,
+          "structural_path": [],
+          "source_unit_ids": [
+            "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f"
+          ]
+        },
+        "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc": {
+          "page": 273,
+          "structural_path": [],
+          "source_unit_ids": [
+            "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc"
+          ]
+        }
+      },
+      "required_gold": [
+        "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2",
+        "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077"
+      ],
+      "supporting_gold": [
+        "2e0476fd65f9a159847697e35f67e6b40065f5bb86fde49af3d37ed1e5fc7efa",
+        "9cee8e476ba28bee0e5fe691fb68f4ea9e7e717d979e89d1267ef0123db49eba",
+        "5c66d9f07ae88020f3f087cf5d5d80ff21a64501aa26e079bf3439fba0910f64",
+        "41e5c0fcebac6880932e968a6e660cc509514216dea4b173e3d8fcf4f28fe182",
+        "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae",
+        "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f",
+        "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc"
+      ],
+      "required_gold_rationale": {
+        "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2": "Core advancement rule: characters advance by spending Karma between adventures/downtime, and this chunk explicitly lists the main categories that can change (attributes, skills, initiation/submersion, spells, complex forms).",
+        "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077": "Needed to ground what happens to skills when advancing: existing skills/skill groups can be raised by 1, with Karma costs and caps, which operationalizes skill progression."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2",
+          "bucket": "required",
+          "page": 271,
+          "structural_path": [
+            "CHARACTER IMPROVEMENT"
+          ],
+          "text": "CHARACTER IMPROVEMENT — Players use Karma between adventures to improve attributes and skills, as well as to initiate/submerse and buy spells or complex forms. — Advancement takes place in the interim game time between sessions, sometimes called down time. Characters may not spend Karma to improve skills, attributes, or abilities in the middle of an adventure. Additionally, some advancements may be limited to occurring only once per down time; if the character wants to advance again, she will have to wait until after the end of the next adventure. — Learning Time: It is recommended that a character only be allowed to learn one new skill (or specialization, spell, or complex form)"
+        },
+        {
+          "id": "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077",
+          "bucket": "required",
+          "page": 272,
+          "structural_path": [
+            "IMPROVING EXISTING SKILLS"
+          ],
+          "text": "IMPROVING EXISTING SKILLS — Characters may also improve an existing Active skill or skill group by 1. The cost for improving a skill is the character’s next skill rating x 2. For example, if a character wants to improve her Pistols from 4 to 5, the cost is 5 x 2, or 10 Karma. The cost for improving a skill group is the improved rating x 5. For example, improving the Firearms skill group from 4 to 5 is 5 x 5, or 25 Karma. — Improving a Knowledge or Language skill is half the cost of improving an Active skill: the Karma cost equals the improved skill rating. — Characters can only improve skills or skill groups to a maximum of 6, unless they already possess the Aptitude quality for a skill. (Sorry, you can't acquire Aptitude at the same time you try to improve above the maximum.) If a character raises a skill above 6 through Aptitude, the Karma cost doubles. — Skill Groups: If a character improves any skill in a skill group individually instead of improving the group, the remaining skills are treated as individual skills with individual levels from that point—in other words, the skill group no longer exists."
+        },
+        {
+          "id": "2e0476fd65f9a159847697e35f67e6b40065f5bb86fde49af3d37ed1e5fc7efa",
+          "bucket": "supporting",
+          "page": 272,
+          "structural_path": [
+            "IMPROVING ATTRIBUTES"
+          ],
+          "text": "IMPROVING ATTRIBUTES — A character can increase Physical or Mental Attributes, Magic, Resonance, or Edge by 1 point at a time. The cost of improving a natural attribute rating is the new rating x 5. For example, if a character wants to improve her Agility from 4 to 5, the cost is 5 x 5, or 25 Karma. — Characters can only improve Physical and Mental attributes up to their natural metatype maximum (6 plus metatype attribute modifiers), unless they possess the Exceptional Attribute quality for that attribute (see p. 91). Magic or Resonance may only be improved up to 6 plus the character’s initiation/submersion grade."
+        },
+        {
+          "id": "9cee8e476ba28bee0e5fe691fb68f4ea9e7e717d979e89d1267ef0123db49eba",
+          "bucket": "supporting",
+          "page": 272,
+          "structural_path": [
+            "POSITIVE QUALITIES"
+          ],
+          "text": "POSITIVE QUALITIES — If the gamesmaster chooses, he can “award” a character with a new positive quality. This should only be done if the quality is appropriate to the character and her recent developments—the character must have worked hard or changed in some way that fits the awarded quality. Some qualities represent a major change, so there should be a good reason for why the character has transformed that way. Players will undoubtedly lobby their gamesmasters to “award” them with qualities, but the gamesmaster should only award them rarely and after significant effort/events; the gamesmaster could even craft an adventure to dramatize the change. — The quality does not come for free, however—the character must pay for the quality at a cost equal to twice the quality’s BP cost. If the character does not have the Karma to pay for the quality, any new Karma she earns immediately goes to pay off the quality cost; the character may not spend Karma on anything else until it the quality is paid in full."
+        },
+        {
+          "id": "5c66d9f07ae88020f3f087cf5d5d80ff21a64501aa26e079bf3439fba0910f64",
+          "bucket": "supporting",
+          "page": 200,
+          "structural_path": [
+            "INITIATION"
+          ],
+          "text": "INITIATION — As Awakened characters grow in power, they often find that their initial explorations into magic and the astral plane can only take them so far in understanding and increasing their abilities. In order to increase their powers, magicians and adepts will often choose to undergo initiation in the mysteries of magic, the astral world, and the metaplanes in hope of increasing their connection with the Awakened world. — Initiation allows a character to wield greater magical abilities known as metamagic, access the metaplanes of astral space (p. 191), and raise her Magic attribute beyond her natural maximum of 6. Only characters with the Magician, Adept, or Mystic Adept qualities may initiate. Initiation is a serious process that requires a great deal of mental and spiritual preparation in the form of rituals or study appropriate to the character's tradition. A mage might spend months in research on a particular point of magic, writing a scholarly thesis in order to prepare, while a shaman might undergo a vision quest and seek guidance from her mentor spirit. — Initiation is measured in grades, beginning with Grade 1 and increasing. At the end of a character’s first initiation, she is a Grade 1 initiate. When she completes her second initiation, she is a Grade 2 initiate, and so on. The numerical system is for tracking initiation levels in game terms: each tradition refers to grades of initiation in their own way."
+        },
+        {
+          "id": "41e5c0fcebac6880932e968a6e660cc509514216dea4b173e3d8fcf4f28fe182",
+          "bucket": "supporting",
+          "page": 272,
+          "structural_path": [
+            "IMPROVING SKILLS AND SKILL GROUPS"
+          ],
+          "text": "IMPROVING SKILLS AND SKILL GROUPS — In between adventures, players can learn new skills, improve existing ones, or master specializations. Each option costs a certain amount of Karma, and certain limitations apply as to how much a character can improve between sessions. — To learn or improve a skill or skill group, the character must succeed in an Extended Intuition + skill Test, with a threshold equal to the new skill rating x 2 and an interval of 1 week (1 month for skill groups). A teacher can add bonus dice to this test (see Using Instruction, p. 134)."
+        },
+        {
+          "id": "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae",
+          "bucket": "supporting",
+          "page": 272,
+          "structural_path": [
+            "NEW SKILLS"
+          ],
+          "text": "NEW SKILLS — A character can learn a new Active Skill or skill group she doesn’t currently possess. The cost is 4 Karma for a skill and 10 Karma for a skill group, which gives the character the new skill (or skill group) at Rating 1. The cost to learn new Knowledge/Language skills is half that of Active skills: 2 Karma."
+        },
+        {
+          "id": "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f",
+          "bucket": "supporting",
+          "page": 272,
+          "structural_path": [],
+          "text": "between adventures; the character cannot simultaneously improve any existing skills, attributes, etc. during this time. A character can be allowed to improve as many skills, attributes, etc. between adventures as she has Karma, assuming the gamesmaster feels the improvement is warranted (a character who hasn’t touched a gun in months should be made to practice a bit before improving Pistols skill)—but each can only be improved once. If the time frame between adventures is longer than one month, gamesmasters may increase these allowances as appropriate."
+        },
+        {
+          "id": "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc",
+          "bucket": "supporting",
+          "page": 273,
+          "structural_path": [],
+          "text": "Note that some qualities might also be considered innate—not something a character could ever learn—and so should not be awarded (ambidexterity, for example). The Adept, Magician, Mystic Adept, and Technomancer qualities may not be awarded; they may only be obtained during character creation."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_b241b6eee418c17d",
+        "ga_3347920186a329f8"
+      ],
+      "supporting_anchor_ids": [
+        "ga_780261e1a4b2f705",
+        "ga_64ce04dba5a0c961",
+        "ga_75129a6f776fbeab",
+        "ga_d9645c7513ae6ff1",
+        "ga_7b2245a991edcb69",
+        "ga_743f348cc35eb33c",
+        "ga_93635ba5922031e6"
+      ]
+    },
+    {
+      "id": "atomic_u07_character_creation_basics",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What are the minimum required steps and choices to create a playable character?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac",
+        "84b9646ea807694f17c823216dc239b2fc30dc1d22e05bf3658510af7d8d0ba8",
+        "33be19ac29e32bf782a19b5e8c1da8be05ec0ead72c193749d35e400d19c962e"
+      ],
+      "gold_locations": {
+        "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac": {
+          "page": 82,
+          "structural_path": [
+            "ADVICE TO NEW PLAYERS"
+          ],
+          "source_unit_ids": [
+            "32b33421b408327272867493e941d2881b550e2f599dc57dd27f31729b48aa69",
+            "1dd9fbd91eb5fdf59194085625de6880bccd0f486691188d19cc1d049fb5f0b0"
+          ]
+        },
+        "84b9646ea807694f17c823216dc239b2fc30dc1d22e05bf3658510af7d8d0ba8": {
+          "page": 99,
+          "structural_path": [
+            "WALKTHROUGH"
+          ],
+          "source_unit_ids": [
+            "bd0d79a2ec12d8a8de0c4180b7f2727aaceb70907981ff61e2af65ac11d7e02f",
+            "dc1df00027e5c4603d8aff0102e53d37d78668b817af92a27b83fd0dde0fbc90",
+            "263c311ca1109120262eee5f1fcbe36a6f07550f857d52d4999cf541892dfb9e",
+            "0dc56890be7eabc3c9845cc4780a61e2e9db34203890f33c4f79081c4ccf9ffb",
+            "ef6e4a795c9dc69062f1cec99fadee71f6d93c16f36a603daa7fdf71f43638a3",
+            "7c490df39fdd9d228b295826c05095c2a6abb118dc33908fde8d6e6f8a3e38ce",
+            "e27e4e919c37f9e6903739a54e7c3c5502025dc11bbd6523cf719b114306fcf6",
+            "208f2a30a5bd5ef18ecbf18186423620ae714f449ee7ab50545dfbff2e2ae333",
+            "09f617c27a8264532046359aa4b5dfe272fcfd2e0ad6a99853b32a986e55f259",
+            "9e067b9ff2e92319db6734564dbfdaf58cf4cfbfb6f1f454ed5b926c8b3c1d0e",
+            "a8b09b0c4f7caa00c38e408d16e684aab31bd465febe7203df7f4c5e1f104be1",
+            "043c1d0febfa0e326d15d7c54f5e6b2df1c3f04e21225e9e518488ce03fc68e2",
+            "9e06cbaf63bc122142e22fabd7832ddd7ac0f8671a344904ee84fedcfc70b3ef",
+            "c658b26ec4395b87f9b4314282bbbd523f50583c2965a6639e123b75bb826eec",
+            "a1c54678281bf084775c51ddd7abbeea03614ac433dbcbb5654ed2c59319189b",
+            "8d2047d2e8072fc8707d988d4e7bd052c70bc675c1807dbab7e93e7f48baf459",
+            "09c274e377ea03e93507fc50309b1d17d6aac4af9024ec664b353188b7fce5cd",
+            "3aff27081e54e791a2fbbb10dd33ea994639e0723135222c1e10b9d3dbd11d20",
+            "bdb1a6f13906ed77b51355cc55f73d79cbe915e6e092f8aeecb29f81f1f88617",
+            "b864868fd2f5db7301a281240ea6b6c20263272b878fadd9946192f68a37eb2e",
+            "2bfcd01eead4932dddc0cab074546ba71dce4223820821d9b577a7e101ec80f8",
+            "6e783cb1ae4bb778bffcce08df61e624c94aad054d1eca4accd32a5f49e0ebe5",
+            "5a7ad6fc2d2e0a0b50fe74ac3b6f3c1a26eb90e95f119b916588617ecd41273c",
+            "0098837448f7e7050f95c5a6415e05e983bc020ec0162577a699ad65db302a97",
+            "5e06c15f99612e511fed8f6ff16f134cb0ea34be9d81fc9837294463020d6a52",
+            "40297405c448144d3251f486a1bbeb100f55c5341ef91d1227fbea49c5b6ed5d",
+            "6080eaec28de132f47ab82598559245b391cec978c7588ab0dac54670c2d43df",
+            "d22c548b65481c469d6a3a9f600ae0ca7f30d1266520eaf9a461ad9be8f2a477",
+            "4ea6c7da7ad3a9ca1cea181528b980714349a66ea73e00ad6ff7713a768d96f3",
+            "8d3a3eba48d4790c221e2fb5cbe005a9d7bc614ebe5e5d165b1662310d74e785",
+            "35095c3b1f5a31fdb13824aa2c1b209c8b1d5d52e40da03401330c4a856470f4",
+            "64bcee077b7c9d5694601635a4790790d3c2a7aa8220d3427d81dc6f0e4b1a2f",
+            "04b4deeeaca8a768fe96e0b3067e9d5cd196fa5bb1a3ab77d83ed4074d36421e",
+            "0eaed223790105ffae105d561f6a6d5e6eab9349f3b3943c591a38d58f9e39d9",
+            "b683166e483e835f8532e9539a6980aab963bac8b90987caf2be0685b041670c",
+            "a04bc502cada4d322757281eb01fa9baf6216140215e8db58625420022e588f6",
+            "fe2ff5f7d89af5ab043b7bcd0ad4f36130db47223ad0c2e50d2a7f553a2fc69e",
+            "11f283888c6accda068bd7a12a721b7239c6ddd6272d826d99691a4e3b56a6ca",
+            "8bfa9f4cfc502b65fa0947787a03075d61c182ad04d2f87d8709d682e073010a",
+            "4efb5f3f32d58ca68bb8991782e76918f34e8616caba70e4e46cee387e12cbdc",
+            "5b8ae8cbe1e6f94de786527e0cab0134736cd3d44a8f0e1790d5724ff6bd7ffe",
+            "7c6835cb1043e0c545dc343bd3fa7655cd3af7bbfd42476c656d69fcf3548838",
+            "1129ea7a5846af8cb56957e8fc7c01a004b93b5575c0e829d4087c768f298fbd",
+            "164a2886fd1a7f93049d5ff13aed142384caf7ce6d8bafdae69ccc3889efb339",
+            "fe494a26898bf6d0924dcbdc118870299e90586ab55bbc8ed854111fdd93c02b",
+            "a13ca51870f7eae12ec98c35d3f6ac64b057c99a7a57bbc4894832f8d5bceca3",
+            "b157fe34e97ded4a1409320cce2eb7a31219f2abdc8fec59c9997641c7f2f033",
+            "a78ea1c1e23ae477d345f06171bd2bbff78f30b609c3f799d9dd4dbbf04fe204",
+            "56896b432ef2f81b783da5eecb575b60fea2ad697cf96763d9fa95af8e977075",
+            "7f75d02dcf21c542cf87098bb80eb79e6e66ef2301c84bd4408a07827c5e4088",
+            "149c73cda45d83f50ec394d8a1c47a7912e4a7b7bf5841887bafde2e550d5177"
+          ]
+        },
+        "33be19ac29e32bf782a19b5e8c1da8be05ec0ead72c193749d35e400d19c962e": {
+          "page": 90,
+          "structural_path": [
+            "FINAL STATISTICS"
+          ],
+          "source_unit_ids": [
+            "b048a5834dea55cf2d6e393826e13538c85baf18cb803b495a44db33b52d1aff",
+            "fa2d504d0e27646e6983400fa231a89d745a293f3f9bcf291bb74bcf78cb5a7d"
+          ]
+        }
+      },
+      "required_gold": [
+        "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac"
+      ],
+      "supporting_gold": [
+        "84b9646ea807694f17c823216dc239b2fc30dc1d22e05bf3658510af7d8d0ba8",
+        "33be19ac29e32bf782a19b5e8c1da8be05ec0ead72c193749d35e400d19c962e"
+      ],
+      "required_gold_rationale": {
+        "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac": "This chunk directly states the recommended straight progression of character creation and names the minimum required choices/steps: choose metatype, pick qualities, purchase attributes, acquire skills, assign resources, and finishing touches. That is sufficient to answer the question at a basic rules level."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac",
+          "bucket": "required",
+          "page": 82,
+          "structural_path": [
+            "ADVICE TO NEW PLAYERS"
+          ],
+          "text": "The sample characters allow you to begin playing Shadowrun right away. — ![](images/0.jpg) — ADVICE TO NEW PLAYERS — Shadowrun’s character creation is extraordinarily flexible, and the array of options available can be daunting to new players. The easiest way to build a character is to approach creation with a strong character concept in mind and try to recreate that concept within the rules step by step. — The best way to accomplish this—until you familiarize yourself with the nuances of Shadowrun—is to follow a straight progression between the following sections: Choose your Metatype, Pick Qualities, Purchase Attributes, Acquire Skills, Assign Resources, and finally Finishing Touches."
+        },
+        {
+          "id": "84b9646ea807694f17c823216dc239b2fc30dc1d22e05bf3658510af7d8d0ba8",
+          "bucket": "supporting",
+          "page": 99,
+          "structural_path": [
+            "WALKTHROUGH"
+          ],
+          "text": "WALKTHROUGH — Shadowrun's Build Point system is intended to offer a great deal of flexibility in character creation. Experienced players may feel comfortable dispensing with a linear order and allocating BP as they see fit. It is recommended new players follow these steps until they are familiar with Shadowrun character creation. — 1. CHOOSE A METATYPE — The five basic metatypes are described on p. 66 and pp. 71–73. — HUMAN: 0 BP — ORK: 20 BP — DWARF: 25 BP — ELF: 30 BP — TROLL: 40 BP — 2. PICK QUALITIES — Basic qualities are presented on p. 90–96. — 3. ASSIGN BPS TO ATTRIBUTES [MAX. 200 BP] — Attributes are described and listed on p. 67–68, minimum and maximum Attribute ratings by metatype can be found in p. 81. — Physical / Mental: 10 BP per Att. Point [except max point] — Edge: 10 BP per Att. Point [except max point] — Magic: 10 BP per Att. Point [except max point; requires Adept, Magician, or Mystic Adept Quality] — Resonance: 10 BP per Att. Point\n[except max point; requires Technomancer Quality]\nMax Attribute value 25 BP for final Att. Point — 4. ASSIGN BPS TO SKILLS — Skills and skill groups are presented on p. 120 — Active Skills: 4 BP per Skill Point — Knowledge Skills: 2 BP per Skill Point, start with (Intuition + Logic) x 3 for free — Skill Groups: 10 BP per Group Point — Specializations: 2 BP per Active specialization; — 1 BP per Knowledge specialization — 5. ASSIGN BPS TO RESOURCES — The various categories of Resources are briefly addressed on p. 86. — Gear: 1 BP per 5,000 \\( ^{\\text{¥}} \\)  [max 50 BP] — Melee Weapons, p. 314 — Projectile & Throwing Weapons, p. 315 — Firearms, p. 316 — Firearm Accessories, p. 322 — Ammo and Explosives, p. 323–325 — Misc Gear — Clothing and Armor, p. 326 — Commlinks and Electronics, p. 327–328 — Datachips and Software, p. 330–331 — ID & Credsticks, p. 331 — Tools, p. 332 — Sensors & Sensory Enhancements, p. 332–333 — Disguise, p. 338 — Biotech, p. 337 — Augmentations — Cyberware, p. 338 — Bioware, p. 345 — Vehicles and Drones — Groundcraft, Cars & Bikes, p. 348–349 — Watercraft, p. 349 — Aircraft, p. 349 — VTOL/VSTOL, p. 349 — Drones, p. 349 — MAGICAL RESOURCES — Spells: 3 BP per spell (max = 2 x Spellcasting/Ritual Spellcasting)\nStreet Grimoire, p. 203 — Spirits: 1 BP per service owed (max services = Summoning, max spirits = Charisma) — Spirits, p. 186 — Bonding Foci: 1 BP per Force Point (max = 5 x Magic)\nFoci, p. 199 — TECHNOMANCER RESOURCES — Complex Forms: 1 BP per rating point (max forms = Logic x 2)\nComplex Forms, p. 239 — Sprites: 1 BP per task owed (max services = Compiling, max sprites = Charisma)\nSprites, p. 240 — Contacts: (Connection rating + Loyalty rating) BP — Contacts and Sample Contacts, p. 285, 289 — Lifestyles, p. 267 — 6. FINAL TOUCHES — Calculate final Essence, Magic/Resonance, Initiative"
+        },
+        {
+          "id": "33be19ac29e32bf782a19b5e8c1da8be05ec0ead72c193749d35e400d19c962e",
+          "bucket": "supporting",
+          "page": 90,
+          "structural_path": [
+            "FINAL STATISTICS"
+          ],
+          "text": "FINISHING TOUCHES — The following are the few final steps that will help you make sure your character is finished. Use these as a final checklist before you begin play. — FINAL STATISTICS — If you gave your character cyberware, bioware, or purchased adept powers, the character’s attributes may have changed. If so, write down your augmented attribute ratings in parentheses to reflect the bonuses. Write affected attributes in this fashion: Body 4 (6). The first number is the character’s natural Body rating; the second, the augmented rating. In most situations, your character will use the augmented rating unless otherwise noted. — Separate Initiatives exist for magicians in astral space, as well as hackers and technomancers in full-sim virtual reality in the Matrix. Rules for astral Initiative appear on p. 193, and those for Matrix Initiative on p. 226."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_d5a10c9a961dac6b"
+      ],
+      "supporting_anchor_ids": [
+        "ga_c2a82bd2205bcfa2",
+        "ga_625f1dc2cee4fd4d"
+      ]
+    },
+    {
+      "id": "atomic_u08_difficulty_and_modifiers",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How does the game set task difficulty and apply situational modifiers (bonuses/penalties, advantage/disadvantage, edge, dice added/removed)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+        "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f",
+        "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0",
+        "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6",
+        "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9",
+        "9138672ed4aa932b97853fe2bea1fe7fc114bef5403442f4d39e57c5f9d7ba06"
+      ],
+      "gold_locations": {
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763": {
+          "page": 62,
+          "structural_path": [
+            "DICE POOLS"
+          ],
+          "source_unit_ids": [
+            "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+          ]
+        },
+        "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f": {
+          "page": 63,
+          "structural_path": [],
+          "source_unit_ids": [
+            "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f"
+          ]
+        },
+        "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0": {
+          "page": 65,
+          "structural_path": [
+            "THRESHOLDS"
+          ],
+          "source_unit_ids": [
+            "49d4a50528207aa63dfe0bba85a96ce082e434191647d4eed9b756145c5feb9b",
+            "68c0fed892c51dd46840b07542d509e0cd58ba619ae791685174ee7222b8a664",
+            "bf51d1f5c23f71e45afa1b5f28c59b1ccce24913e98210b163457019108e1d81",
+            "f06a3edf9e9555b3d7562b590ff0f861385e7f6a32a8b35b6f5a89bb242d1569"
+          ]
+        },
+        "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6": {
+          "page": 63,
+          "structural_path": [],
+          "source_unit_ids": [
+            "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6"
+          ]
+        },
+        "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9": {
+          "page": 63,
+          "structural_path": [],
+          "source_unit_ids": [
+            "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9"
+          ]
+        },
+        "9138672ed4aa932b97853fe2bea1fe7fc114bef5403442f4d39e57c5f9d7ba06": {
+          "page": 66,
+          "structural_path": [
+            "EXTENDED TEST DIFFICULTIES"
+          ],
+          "source_unit_ids": [
+            "c64ddbd6c8a877274e727a7dd2b6f87c7ba8809ce4bcff6dae02035f626e8e80",
+            "f5e0ba0d19ba532e986a7ff0ed5bb53b1e78ad95c09cdeb3fc78c081860ed006",
+            "accf8720d29b7c9100fe72960bb6bee37b822d52b2ff78c94df0fadd93f0e067",
+            "c3c047848721fe202786937c09b1511af12a2185071f79f49751287796be7e20",
+            "3a2079b362984a20eeb6d3941e72b8e8466224414f89d86f252aebc11c06cbc8"
+          ]
+        }
+      },
+      "required_gold": [
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+        "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f"
+      ],
+      "supporting_gold": [
+        "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0",
+        "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6",
+        "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9",
+        "9138672ed4aa932b97853fe2bea1fe7fc114bef5403442f4d39e57c5f9d7ba06"
+      ],
+      "required_gold_rationale": {
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763": "Core rule for how task resolution is built: the GM identifies the relevant skill and linked attribute, then applies positive/negative modifiers to arrive at the final dice pool. This is the main anchor for bonuses/penalties as dice added/removed.",
+        "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f": "Defines the game's modifier framework: attribute modifiers, skill modifiers, threshold modifiers, and dice pool modifiers. Necessary to explain how situational modifiers are applied in different ways, not just as dice pool changes."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+          "bucket": "required",
+          "page": 62,
+          "structural_path": [
+            "DICE POOLS"
+          ],
+          "text": "DICE POOLS — When a player makes a test, she rolls a number of dice equal to her dice pool. The dice pool is the sum of the relevant skill plus its linked attribute, plus or minus any modifiers that may apply. When a gamesmaster calls for a test, he will provide the player with a description of the task at hand and which skill (and linked attribute) is most appropriate for it. The gamesmaster and player then decide on the applicable dice pool modifiers—both positive and negative—to determine the final dice pool. The player then rolls a number of dice equal to the dice pool."
+        },
+        {
+          "id": "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f",
+          "bucket": "required",
+          "page": 63,
+          "structural_path": [],
+          "text": "Shadowrun, Fourth Edition, uses four distinct types of modifiers: Attribute modifiers, Skill modifiers, threshold modifiers, and dice pool modifiers. Attribute and Skill modifiers affect the character's relevant stats directly, resulting in augmented Attribute Ratings and modified Skill Ratings respectively (see Attribute Ratings, p. 68, and Skill Ratings, p. 68). Threshold modifiers are situational modifiers that increase or decrease the thresholds of unopposed Success Tests and Extended Tests (see Thresholds, p. 63). Finally, dice pool modifiers are the most common type of modifiers; they represent dice pool increases and reductions from situational modifiers, the effects of augmentations, powers, spells, and from injuries, qualities, and various other sources (see Dice Pool Modifiers). These add and subtract from the dice pools but do not modify the basic Skills and Attributes in use."
+        },
+        {
+          "id": "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0",
+          "bucket": "supporting",
+          "page": 65,
+          "structural_path": [
+            "THRESHOLDS"
+          ],
+          "text": "To make a Success Test, the character rolls her dice pool and counts the number of hits, as described above. — THRESHOLDS — Hits represent a measure of achievement on a test. In order to succeed completely on a Success Test, you must meet or exceed a gamesterdetermined threshold with your hits. The higher the threshold, the more difficult an action is. The standard threshold is 1 (so only 1 hit is necessary to succeed), though other tests may have thresholds as high as 4 or more. The Success Test Difficulties Table lists a range of difficulty levels along with a standard threshold for each. In some cases, a threshold modifier may apply to an action, raising or lowering the threshold by the stated amount. — The more net hits a character scores (the more hits exceed the threshold), the more the task was pulled off with finesse and flair. So a character who rolls 4 hits on a threshold 2 test has scored 2 net hits. — The gamesmaster does not have to (and should not) tell the player what the threshold for any test is before she rolls, unless the character has good reason to know exactly how difficult the action will be. — If the threshold is larger than the character’s dice pool, then there is simply no way the character can succeed unless she spends Edge (p. 74). — Leila wants to pilot her speedboat between two larger ships and then take a hard turn down a narrow canal. The gamesmaster decides that this is much more difficult than a normal Pilot Watercraft Test and increases the threshold to 3. Leila has a Reaction of 4 and a Pilot Watercraft of 2. Leila rolls and gets 2 hits, but that's not enough to meet the threshold so she does not succeed."
+        },
+        {
+          "id": "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6",
+          "bucket": "supporting",
+          "page": 63,
+          "structural_path": [],
+          "text": "For example, let's say you want a character to make a Perception + Intuition Test to notice a clue left in a room. Rather than looking up the Perception Test modifiers, the GM decides that the biggest modifying factor is that the room is dark, and applies a -3 modifier for that alone. If a lot of other modifiers might also apply (the character is wounded, the clue is partially hidden under something else, the character knows what he's looking for, etc.), the gamesmaster can simply nudge the modifier up to -4 or -5 depending on his \"eyeballing\" of the situation, rather than looking all of the modifiers up."
+        },
+        {
+          "id": "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9",
+          "bucket": "supporting",
+          "page": 63,
+          "structural_path": [],
+          "text": "Adjust the Threshold: Rather than counting modifiers, tell the player to make a standard test without modifiers and simply adjust the threshold to account for how you think modifiers would affect the difficulty (as a rule of thumb, -3 dice would equal a +1 threshold). Note that this only works for Success Tests and Extended Tests."
+        },
+        {
+          "id": "9138672ed4aa932b97853fe2bea1fe7fc114bef5403442f4d39e57c5f9d7ba06",
+          "bucket": "supporting",
+          "page": 66,
+          "structural_path": [
+            "EXTENDED TEST DIFFICULTIES"
+          ],
+          "text": "QUICK EXTENDED TESTS — In some situations, you may wish to avoid a lot of dice-rolling and focus on the storytelling. In this case, rather than repeatedly asking a — TASK DIFFICULTY THRESHOLD — <table><tr><td>DIFFICULTY</td><td>THRESHOLD</td></tr><tr><td>Easy</td><td>6</td></tr><tr><td>Average</td><td>12</td></tr><tr><td>Hard</td><td>18</td></tr><tr><td>Extreme</td><td>24+</td></tr></table> — EXTENDED TEST DIFFICULTIES — To quickly set the guidelines for an Extended Test, pick an appropriate interval and difficulty: — <table><tr><td>TASK TIME</td><td>INTERVAL</td></tr><tr><td>Fast</td><td>1 Combat Turn</td></tr><tr><td>Quick</td><td>1 Minute</td></tr><tr><td>Short</td><td>10 Minutes</td></tr><tr><td>Average</td><td>30 Minutes</td></tr><tr><td>Long</td><td>1 Hour</td></tr><tr><td>Consuming</td><td>1 Day</td></tr><tr><td>Exhaustive</td><td>1 Week</td></tr><tr><td>Mammoth</td><td>1 Month</td></tr></table>"
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_a93906669d0bc8c6",
+        "ga_d8d032389de9a8db"
+      ],
+      "supporting_anchor_ids": [
+        "ga_f771a18a445cf681",
+        "ga_8a97a2bafd395f8d",
+        "ga_b7bc7419392f9e7c",
+        "ga_bc1d87d02aa0e4b9"
+      ]
+    },
+    {
+      "id": "atomic_s17_damage_and_wound_application",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "When a character is hit, how is damage applied and translated into mechanical harm before the dying/death stage?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53",
+        "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2",
+        "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+        "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+        "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c",
+        "63734c19b195ca44efdd6901bf607c8f69309fbf518122da6d17a38e2ea76ec4"
+      ],
+      "gold_locations": {
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53": {
+          "page": 164,
+          "structural_path": [
+            "APPLYING DAMAGE"
+          ],
+          "source_unit_ids": [
+            "b5fc4d941a7ebe573f086a18c22f6b59dfe6af59783b807b018487995e739f7c",
+            "babca4b9ad4caadbe1657879655b91ec0dc394bdb076dc394aed7b265125debf",
+            "1636c5844ebbb7103945409fac21a77929bb23582a59f19f950e07083f2d356d"
+          ]
+        },
+        "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2": {
+          "page": 165,
+          "structural_path": [
+            "WOUND MODIFIERS"
+          ],
+          "source_unit_ids": [
+            "4b531397419d2472e56266c8a7748b5b2527188ac30e87799af9397746402bed",
+            "2dfac62e7498544425387067fc00ab0d1b8761f6d3231d5d55566db4d4fbce81"
+          ]
+        },
+        "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58": {
+          "page": 151,
+          "structural_path": [
+            "STEP 5. DAMAGE RESISTANCE TEST"
+          ],
+          "source_unit_ids": [
+            "1eaf4c016517c06f4eada39f9d147ddab936a280337ecb94d939e373e7026f8e",
+            "c121600a32763660a34fe84ea37cd516d05e5a5c932e26f98af8ab650979cfea",
+            "d50814c56d973b8b88dbf18db4cf80194210ae55791ba272c88191e3b3ca207c",
+            "01fe127a9601cd2bcd506017660ca803dfe6b8cdeb825e1ffc2be08b069069b8"
+          ]
+        },
+        "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c": {
+          "page": 164,
+          "structural_path": [
+            "DAMAGE RESISTANCE TESTS"
+          ],
+          "source_unit_ids": [
+            "b1216287c275981b431b1e9918edcc1c2fde8a753c3f1f15f1bf2a0a6459ff58",
+            "011e405cfbd7ad99bba864af7974f514b3f86554126545c220c872843f2de5ed"
+          ]
+        },
+        "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c": {
+          "page": 151,
+          "structural_path": [
+            "STEP 6. APPLY DAMAGE"
+          ],
+          "source_unit_ids": [
+            "0fae23aaec81c2bc4b750909de69ab6a9e4616a6deee95de7698fb0c8b6b7116",
+            "d13fd12944d67f6f4e94a641eef590b79d8589007d33d9f0809bb4214a6250d3"
+          ]
+        },
+        "63734c19b195ca44efdd6901bf607c8f69309fbf518122da6d17a38e2ea76ec4": {
+          "page": 163,
+          "structural_path": [
+            "KNOCKDOWN"
+          ],
+          "source_unit_ids": [
+            "746cae8a9c6705fd9bddcfb9d69c01daadd06e6ccf395cafe4c74631f234655e",
+            "f44b42e19b4e1b2c550fef8be14252bb8dc327513f0a9e2254290902a5132653"
+          ]
+        }
+      },
+      "required_gold": [
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53",
+        "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2"
+      ],
+      "supporting_gold": [
+        "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+        "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+        "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c",
+        "63734c19b195ca44efdd6901bf607c8f69309fbf518122da6d17a38e2ea76ec4"
+      ],
+      "required_gold_rationale": {
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53": "Core rule for applying damage after final DV is known: record it on the appropriate Condition Monitor (Physical or Stun), 1 DV = 1 box, and damage is cumulative. This directly answers how damage is translated into mechanical harm before dying/death.",
+        "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2": "Provides the mechanical consequences of accumulated wounds before death: every 3 boxes on a track impose -1 wound modifier, cumulative across Physical and Stun, affecting most tests and Initiative. This is the key 'wound application' rule implied by the question."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53",
+          "bucket": "required",
+          "page": 164,
+          "structural_path": [
+            "APPLYING DAMAGE"
+          ],
+          "text": "APPLYING DAMAGE — Once the final Damage Value is calculated, it must be recorded on the character’s Condition Monitor. As described under Condition Monitors, p. 71, the Condition Monitor has two damage tracks: Physical and Stun. Physical damage is recorded in the Physical damage track, Stun damage in the Stun damage track. Each point of Damage Value equals 1 box on the appropriate damage track. — Damage is cumulative. A character who already has 3 boxes filled in and takes another 3 boxes of damage ends up with 6 boxes filled in. — A damaged character must also check for Knockdown (see p. 161)."
+        },
+        {
+          "id": "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2",
+          "bucket": "required",
+          "page": 165,
+          "structural_path": [
+            "WOUND MODIFIERS"
+          ],
+          "text": "WOUND MODIFIERS — As a character records damage on his Condition Monitor, he suffers certain effects that simulate real-life injuries. For every 3 boxes of cumulative damage taken on a Condition Monitor track, the character suffers a -1 wound modifier. These wound modifiers are cumulative, so a character who has taken 6 boxes of Physical and 3 boxes of Stun suffers a total -3 wound modifier. — Wound modifiers are dice pool modifiers that apply to nearly all tests the injured character may attempt, except for resistance tests. Wound modifiers are also applied immediately to a character’s Initiative Score, potentially affecting whether he goes before or after someone else in an Initiative Pass. If a wound modifier reduces his Initiative Score to 0 or less, the character cannot take any actions that Combat Turn."
+        },
+        {
+          "id": "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "bucket": "supporting",
+          "page": 151,
+          "structural_path": [
+            "STEP 5. DAMAGE RESISTANCE TEST"
+          ],
+          "text": "STEP 4. COMPARE ARMOR — Add the net hits scored to the base Damage Value of the attack; this is the modified Damage Value. — Determine the type of armor used to defend against the specific attack (see Armor, p. 160), and apply the attack's Armor Penetration modifier (see p. 162); this is the modified Armor Value. — If the attack causes Physical damage, compare the modified Damage Value to the modified Armor Value. If the DV does not exceed the Armor, then the attack inflicts Stun rather than Physical damage. — STEP 5. DAMAGE RESISTANCE TEST — The defender rolls attribute + modified Armor Value to resist damage. Each hit scored reduces the modified Damage Value by 1. If the DV is reduce to 0 or less, no damage is inflicted."
+        },
+        {
+          "id": "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+          "bucket": "supporting",
+          "page": 164,
+          "structural_path": [
+            "DAMAGE RESISTANCE TESTS"
+          ],
+          "text": "Jack is wearing 5 points of Ballistic armor when he is shot with an AP -1 attack. That reduces his effective Armor to 4, so he rolls only 4 dice for armor on his damage resistance test. — DAMAGE RESISTANCE TESTS — Unless otherwise noted, a character rolls Body + armor to resist damage. In some cases another attribute may be called for; Willpower is often used in place of Body, for example, against certain Stun damage attacks. The exact armor that applies is determined by the type of attack (see Armor, p. 160). The armor rating is modified by the attack's AP modifier. Other bonuses may also apply, such as a troll's natural armor bonus (which is cumulative with other types of armor). — Note that wound modifiers (see p. 163) do not apply to damage resistance tests. — Each hit scored on the damage resistance test reduces the attack’s DV by 1. If the DV is reduced to 0 or less, no damage is inflicted. — Austin has been blasted with a devastating 10 DV, AP -2 attack. He has Body 3 and is wearing 6 points of armor (reduced to 4 by the AP). Rolling his 7 dice (3 + 4) on the damage resistance test, he scores 3 hits, reducing the damage to 7 boxes (10 - 3). Austin already had 2 boxes of damage filled in, so crossing out 7 more brings his damage total to 9—I more and he'll be unconscious!"
+        },
+        {
+          "id": "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c",
+          "bucket": "supporting",
+          "page": 151,
+          "structural_path": [
+            "STEP 6. APPLY DAMAGE"
+          ],
+          "text": "STEP 6. APPLY DAMAGE — Apply the remaining Damage Value to the target’s Condition Monitor (Damage, p. 162). Each point of DV equals 1 box of damage. Wound modifiers (see p. 163) may come into effect as a result of damage. Characters may also need to check for knock-down (see p. 161). — ![](images/1.jpg)"
+        },
+        {
+          "id": "63734c19b195ca44efdd6901bf607c8f69309fbf518122da6d17a38e2ea76ec4",
+          "bucket": "supporting",
+          "page": 163,
+          "structural_path": [
+            "KNOCKDOWN"
+          ],
+          "text": "If the character attempting to pass takes damage, he is intercepted and cannot continue his movement. — KNOCKDOWN — Characters who take damage may be knocked down by the attack. If a character takes a number of boxes of damage (Stun or Physical) from a single attack that equal or exceed his Body, then the attack automatically knocks him down. Characters who take 10 or more boxes of damage in a single attack are always knocked down. — Note that certain less-than-lethal weapons are specifically designed to knock a target down, including gel rounds and shock weapons such as stasers and stun batons. Gel rounds reduce the Body of a character by 2 when comparing it to the DV to determine knockdown. Shock weapons have their own effects, noted under Electricity Damage, p. 163."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_53e92eebe5e7e09a",
+        "ga_29057350dca58352"
+      ],
+      "supporting_anchor_ids": [
+        "ga_e9a11a738b41a8c0",
+        "ga_3bed2e69acc180c6",
+        "ga_673311b60e918dad",
+        "ga_ef5e7f85066bd5d6"
+      ]
+    },
+    {
+      "id": "atomic_s18_recovery_and_rest",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How do characters recover lost health or remove injuries outside the dying/death state, and what limits apply?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [],
+      "gold_locations": {},
+      "required_gold": [],
+      "supporting_gold": [],
+      "required_gold_rationale": {},
+      "_mode": "single_cite",
+      "_status": "pending",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [],
+      "benchmark_track": "working_set",
+      "evidence_scope": "ungrounded",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_m01_social_resolution_procedure",
+      "tier": "T3",
+      "question_type": "atomic_rules",
+      "question": "What procedure, if any, resolves uncertain social outcomes (persuasion, intimidation, negotiation), and what inputs modify it?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+        "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42",
+        "bdefaa384a522ec73795f522e966cdffcf1388befa2d4b0278ee84a88a753db2",
+        "85559cf00253aa76d20c6cfdbc95886cf8dd5b51a727bb3dea2c1a3a6b1dd548",
+        "de9601213c44b2f977957528aa945abb6ae294d9ce687e66f82ae55f718ea641"
+      ],
+      "gold_locations": {
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6": {
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "source_unit_ids": [
+            "ffedf0cd2ea6d3062ec5d580ea207ccb0d265d0bf6f961e8a10fcae60a9bbf8d",
+            "ccd582af6b99d8ff38659d1765c5028531a052bfbee8356d40bf25c484edfc0b"
+          ]
+        },
+        "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42": {
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "source_unit_ids": [
+            "48134d7575a3f4fc9e025189738ff923b11712e026b112e9ced895bb55903a00",
+            "214e862c8c630a3de75711d54c142a7eec4b1056132133f78a093b4d14e2d2ab"
+          ]
+        },
+        "bdefaa384a522ec73795f522e966cdffcf1388befa2d4b0278ee84a88a753db2": {
+          "page": 132,
+          "structural_path": [
+            "SOCIAL MODIFIERS"
+          ],
+          "source_unit_ids": [
+            "d07faefd061c7d4fa85d2326c5e0c765c6b304ee1271d1007e44906b02eb1ff7",
+            "3e774c516c02928a7268190f9a028f40a830408a31cd2ff84582df2b846d04cd",
+            "3ddb714f52d6c4ff4036e144cc9c7af9fa121cc40f138771bbc84c6ab127cf44"
+          ]
+        },
+        "85559cf00253aa76d20c6cfdbc95886cf8dd5b51a727bb3dea2c1a3a6b1dd548": {
+          "page": 132,
+          "structural_path": [
+            "CHARISMA-LINKED SKILLS AND LANGUAGE"
+          ],
+          "source_unit_ids": [
+            "719eae40dd70b4c148a23b9c48522be3cd89692a54d24bae274744c3bab2f667",
+            "7a14725b76508f71304b1e8a3df8973e531c04106d8dce5dd03aad76cc7104b9"
+          ]
+        },
+        "de9601213c44b2f977957528aa945abb6ae294d9ce687e66f82ae55f718ea641": {
+          "page": 198,
+          "structural_path": [
+            "KINESICS"
+          ],
+          "source_unit_ids": [
+            "5c4127f4ed6ae588b58eadfdf975f61bf1308e8ddcde1b48bdc1090abdfe51f7",
+            "d5d0fe65f5c28fe8f17167c9552d02e6bb9bdb63db8403fb853e66413721de3b",
+            "cb01cb17c7446ff07a603538dd7b365230b7470f2f9becc3849f23d91cf4cf8c"
+          ]
+        }
+      },
+      "required_gold": [
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+        "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42"
+      ],
+      "supporting_gold": [
+        "bdefaa384a522ec73795f522e966cdffcf1388befa2d4b0278ee84a88a753db2",
+        "85559cf00253aa76d20c6cfdbc95886cf8dd5b51a727bb3dea2c1a3a6b1dd548",
+        "de9601213c44b2f977957528aa945abb6ae294d9ce687e66f82ae55f718ea641"
+      ],
+      "required_gold_rationale": {
+        "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6": "States the core procedure for uncertain social outcomes: when influencing with Con, Intimidation, Leadership, or Negotiation, resolve it with an Opposed Test. It also includes the special group-NPC handling and group dice-pool modifier.",
+        "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42": "Provides the exact inputs to the opposed test by listing what each side rolls for Con, Intimidation, Leadership, and Negotiation, which is necessary to operationalize the procedure."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "fb1ff828b29316612604e0f900374b5abf859c750901039fab37e09c3d0c87e6",
+          "bucket": "required",
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "text": "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION — When one character attempts to influence another character with Con, Intimidation, Leadership, or Negotiation skill, an Opposed Test is called for. To determine what each character roll, see the Charisma-Linked Opposed Tests Table. — If the character is attempting to influence a group of NPCs who have no designated leader, the Opposed Test applies to the whole group—use the highest dice pool available among the members of the group, then add +1 for each extra person (max +5). Groups tend to react as a whole, with reluctant members drawn along by enthusiastic ones. Alternatively, the gamesmaster may appoint a leader or a “ringer in the crowd” and base the success or failure of the endeavor on that character’s reaction to the player character."
+        },
+        {
+          "id": "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42",
+          "bucket": "required",
+          "page": 132,
+          "structural_path": [
+            "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+          ],
+          "text": "CHARISMA-LINKED OPPOSED TESTS — <table><tr><td>SKILL USED</td><td>ACTING CHARACTER ROLLS</td><td>TARGET CHARACTER ROLLS</td></tr><tr><td>Con</td><td>Con + Charisma</td><td>(Con or Negotiation) + Charisma</td></tr><tr><td>Etiquette</td><td>Etiquette + Charisma</td><td>Perception + Charisma</td></tr><tr><td>Intimidation</td><td>Intimidation + Charisma</td><td>Intimidation + Willpower</td></tr><tr><td>Leadership</td><td>Leadership + Charisma</td><td>Leadership + Willpower</td></tr><tr><td>Negotiation</td><td>Negotiation + Charisma</td><td>Negotiation + Charisma</td></tr></table>"
+        },
+        {
+          "id": "bdefaa384a522ec73795f522e966cdffcf1388befa2d4b0278ee84a88a753db2",
+          "bucket": "supporting",
+          "page": 132,
+          "structural_path": [
+            "SOCIAL MODIFIERS"
+          ],
+          "text": "In most cases, using Charisma-linked skills calls for an Opposed Test, as one person attempts to influence the other. — SOCIAL MODIFIERS — Many sorts of modifiers may apply to social skill tests, depending on the situation and characters in question. For example, trying to influence someone in a club where the music is overbearingly loud, while being covered in blood, or when wearing a rival team's sports jersey in the wrong sports bar may all impact a character's Charisma-linked tests. The gamester should evaluate each situation and apply modifications as he feels appropriate. The Social Modifiers Table (p. 131) provides some examples. — Game Masters must also keep the nature of the Shadowrun world in mind when assigning modifiers. For example, racism and prejudice still exist. Though it is often directed towards meathumans, it may also affect characters of certain ethnic, cultural, subcultural, or economic class backgrounds. Of course, one does not need to be racist to be intimidated by a menacing, hulking troll. Heavy amounts of visible cyberware or wearing bulky armored clothing may be faux pas and looked down upon in some circles, but down at the corner runner dive they might be par for the course. Likewise, while everyone knows that magic exists and has seen magic (real and simulated) on the trid, few people are used to seeing it in real life and may be unnerved by, intimidated by, or hostile to those who can wield it. — Unless otherwise noted, Opposed Test modifiers only affect one character or another—usually the acting character—but not both. Cumulative positive Social Modifiers may not exceed the character’s combined natural Attribute + Skill Ratings."
+        },
+        {
+          "id": "85559cf00253aa76d20c6cfdbc95886cf8dd5b51a727bb3dea2c1a3a6b1dd548",
+          "bucket": "supporting",
+          "page": 132,
+          "structural_path": [
+            "CHARISMA-LINKED SKILLS AND LANGUAGE"
+          ],
+          "text": "Lingos are treated as specializations of existing languages. — CHARISMA-LINKED SKILLS AND LANGUAGE — When a character attempts to influence someone using another language, her persuasive ability is limited by her ability to convey idea and concepts in that language. To reflect this, whenever a character uses a Charisma-linked Social skill to interact with another character in a non-native tongue, the Social skill dice used may not exceed the character’s Language skill rating. — ![](images/0.jpg) — Leon is trying to negotiate with a Japanese salaryman, but Leon's Japanese is rusty (Skill Rating 2). Even though Leon has Negotiation 5, he may only roll 2 Negotiation Skill dice, plus his Charisma, Negotiation specialization, and any other social modifiers that apply to the test."
+        },
+        {
+          "id": "de9601213c44b2f977957528aa945abb6ae294d9ce687e66f82ae55f718ea641",
+          "bucket": "supporting",
+          "page": 198,
+          "structural_path": [
+            "KINESICS"
+          ],
+          "text": "KINESICS — Cost: .5 per level (max 3 levels) — An adept with Kinesics has complete control over her body’s nonverbal and subconscious communication and social cues, even when engaged in stressful social scenarios. This control includes facial expressions, body movements, posture, eye movements, and internal biological stress functions such as heartbeat, blood pressure, and sweat glands. The adept is also gifted at reading others’ body language and cultural-specific affectations and mimicking their cues to her advantage. As a result, this power boosts the character’s natural presence and social charms. — Each level applies a +1 bonus for the adept when making or resisting Social skill tests. It also applies a +1 dice pool modifier to the adept on any Opposed Tests made to gauge the adept’s truthfulness or emotional state, including Judge Intention tests (p. 139), assessing for emotional state, and other magical and technological tests. — Two adepts with Kinesics and within sight of each other can use a Complex Action to nonverbally communicate simple notions to each other, using body language alone. Only basic messages and emotional states can be conveyed: yes, no, bad idea, I don’t want to, I’m angry, look out behind you, and so on."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_217034e6c53bc9c2",
+        "ga_da27c98206e35d91"
+      ],
+      "supporting_anchor_ids": [
+        "ga_bea71d5a8ee713a6",
+        "ga_7b9d82f0fc74e504",
+        "ga_6f79d1a8765f07f8"
+      ]
+    },
+    {
+      "id": "atomic_m02_resource_depletion_and_resupply",
+      "tier": "T3",
+      "question_type": "atomic_rules",
+      "question": "Which consumable resources are expected to deplete during play, and how are they restored or replenished?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1",
+        "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43",
+        "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6",
+        "86067b57039150bd87cab1acc87d13b4424e80eb60fb1db85ea7859be59d1910"
+      ],
+      "gold_locations": {
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1": {
+          "page": 73,
+          "structural_path": [
+            "LIFESTYLE"
+          ],
+          "source_unit_ids": [
+            "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1"
+          ]
+        },
+        "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43": {
+          "page": 314,
+          "structural_path": [
+            "BLACK MARKET GOODS"
+          ],
+          "source_unit_ids": [
+            "e5b555f00d26a4f62a271e520f8df3f95d179fc028cbe3fdf2af240ea0668218",
+            "518a870986f14eb741783e91ed570794eb380c63a7322455719afa9d390bb34c",
+            "0482770f10e46eddd17bbd64445508ba3c8e6e8a205c891ee9d9971bbf109f4a"
+          ]
+        },
+        "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6": {
+          "page": 316,
+          "structural_path": [],
+          "source_unit_ids": [
+            "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6"
+          ]
+        },
+        "86067b57039150bd87cab1acc87d13b4424e80eb60fb1db85ea7859be59d1910": {
+          "page": 71,
+          "structural_path": [
+            "GEAR"
+          ],
+          "source_unit_ids": [
+            "1fb662f0b9267563eca9bd091099929ba3ccf05c782d4f3ebaeda54ca63fb6fb",
+            "dcb590f4928d7d786bc4ac9422a08fd248657105fd458afe9124bd710f3fc781"
+          ]
+        }
+      },
+      "required_gold": [
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1",
+        "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43"
+      ],
+      "supporting_gold": [
+        "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6",
+        "86067b57039150bd87cab1acc87d13b4424e80eb60fb1db85ea7859be59d1910"
+      ],
+      "required_gold_rationale": {
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1": "Directly states that money is an ongoing consumable during play because lifestyle must be paid monthly, while daily expenses are otherwise abstracted by lifestyle.",
+        "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43": "Provides the restoration/replenishment mechanism for consumable gear/resources during play: items can be acquired again, with availability and time-to-acquire rules for black market goods."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1",
+          "bucket": "required",
+          "page": 73,
+          "structural_path": [
+            "LIFESTYLE"
+          ],
+          "text": "LIFESTYLE — During character creation, the player must “purchase” the character’s starting lifestyle. Lifestyle determines how well the character lives, and it eliminates the worry of daily expenses like food, laundry, phone bills, and so on. To maintain a lifestyle once the game begins, the character must pay a certain amount of money (based on the lifestyle) per month. Lifestyles are covered in detail on p. 267."
+        },
+        {
+          "id": "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43",
+          "bucket": "required",
+          "page": 314,
+          "structural_path": [
+            "BLACK MARKET GOODS"
+          ],
+          "text": "Note that many standard goods can also be purchased on the black market. An Availability Test is usually not necessary, but the gamester should adjust the price as noted under Street Values. — BLACK MARKET GOODS — When it comes to the interesting stuff, the higher the Availability rating is, the harder it is to acquire the item. — <table><tr><td colspan=\"2\">AVAILABILITY INTERVAL</td></tr><tr><td>ITEM COST</td><td>INTERVAL</td></tr><tr><td>Up to 100¥</td><td>12 hours</td></tr><tr><td>101¥ to 1,000¥</td><td>1 day</td></tr><tr><td>1,001¥ to 10,000¥</td><td>2 days</td></tr><tr><td>10,001¥+</td><td>1 week</td></tr></table>"
+        },
+        {
+          "id": "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6",
+          "bucket": "supporting",
+          "page": 316,
+          "structural_path": [],
+          "text": "The following are common services the characters may wish to enjoy. Most such costs are subsumed by a character's Lifestyle, but these costs are provided for gamemaster reference. Prices listed are average and will vary depending on locale and circumstances."
+        },
+        {
+          "id": "86067b57039150bd87cab1acc87d13b4424e80eb60fb1db85ea7859be59d1910",
+          "bucket": "supporting",
+          "page": 71,
+          "structural_path": [
+            "GEAR"
+          ],
+          "text": "GEAR — Gear is stuff the character owns. Gear includes a runner’s trusted sidearm, her nightclub clothes and corporate drone disguise, her micro-transceiver tuned to the team’s encrypted frequency, her battered Eurocar that she bought hot from the local gangbangers for use as a getaway vehicle, her ancient Celtic wristband made of orichalcum that serves as a spell focus, and the commlink that wirelessly connects her to the augmented Matrix. The list of available gear appears in the Street Gear chapter, p. 310. Beginning characters purchase gear with a pool of resources available only during character creation. Once the game starts, anything a character wants to buy, she’ll have to buy with money she earns. Welcome to real life, omae. — As with attributes and skills, let your character’s background suggest appropriate gear when allocating resources. Characters should not be able to pull money and gear out of thin air—they should only possess items they can plausibly pay for and obtain, based on their backgrounds. Resources spent during character generation, however, do not necessarily reflect actual money spent—if a character has something that would normally be out of her price range, it could be justified as a gift from a mysterious benefactor, something implanted against her will (perhaps with some sort of tracking device attached ...), or something she earned “in trade” for services rendered."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_aa7721174e7f1062",
+        "ga_c640c7e419cfd51d"
+      ],
+      "supporting_anchor_ids": [
+        "ga_3f0a6cc8b01149c0",
+        "ga_ea136a75e7aa6c6a"
+      ]
+    }
+  ],
+  "anchors": {
+    "ga_9873af4c54495f38": {
+      "anchor_id": "ga_9873af4c54495f38",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 17,
+      "structural_path": [
+        "WHAT IS A ROLEPLAYING GAME?"
+      ],
+      "anchor_quote": "WHAT IS A ROLEPLAYING GAME? — A roleplaying game is part improvisational theater, part storytelling, and part game.",
+      "quote_normalized_hash": "286e91ba780e4b2464a135ea39e804eb",
+      "cached_unit_ids": [
+        "4fe7aca31d641fd41bbf610fc2e81da9d9246a4ba3fd1a99ea14a41b2d710232"
+      ],
+      "cached_source_unit_ids": [
+        "5d6c14be0746256b7813191154d466c164b03d3c0dc61411d03d1ed63fae529b",
+        "22d2923bd9ed2802f88443c5db40589a463c8f6a4bce73cdc3da0cdb41d81fbb",
+        "6fdc107130a9b35229f28738cadc68d758c18c118202e8a9740b574f4aba7f73"
+      ]
+    },
+    "ga_b90f8d96536021dc": {
+      "anchor_id": "ga_b90f8d96536021dc",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 65,
+      "structural_path": [
+        "SUCCESS TESTS"
+      ],
+      "anchor_quote": "SUCCESS TESTS — A Success Test is the standard test to see if a character can accomplish a given task, and how well.",
+      "quote_normalized_hash": "11dcf5f80375771279f3a8af5126d48e",
+      "cached_unit_ids": [
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744"
+      ],
+      "cached_source_unit_ids": [
+        "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744"
+      ]
+    },
+    "ga_a93906669d0bc8c6": {
+      "anchor_id": "ga_a93906669d0bc8c6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 62,
+      "structural_path": [
+        "DICE POOLS"
+      ],
+      "anchor_quote": "DICE POOLS — When a player makes a test, she rolls a number of dice equal to her dice pool.",
+      "quote_normalized_hash": "7adf153e22747be6fcb908c4b5839855",
+      "cached_unit_ids": [
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+      ],
+      "cached_source_unit_ids": [
+        "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+      ]
+    },
+    "ga_b528eb7f941274de": {
+      "anchor_id": "ga_b528eb7f941274de",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 64,
+      "structural_path": [
+        "BUYING HITS"
+      ],
+      "anchor_quote": "BUYING HITS — If the gamesmaster allows it, a character may trade in 4 dice from her dice pool in exchange for an automatic hit.",
+      "quote_normalized_hash": "e2e0db25ce49dd3018d7a1256edb3693",
+      "cached_unit_ids": [
+        "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d"
+      ],
+      "cached_source_unit_ids": [
+        "07bb6b693c9b38b12dd9702ff1852ad749fc4f200bf64192072983fa8315385e"
+      ]
+    },
+    "ga_31473146667a6f89": {
+      "anchor_id": "ga_31473146667a6f89",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 65,
+      "structural_path": [
+        "OPPOSED TESTS"
+      ],
+      "anchor_quote": "If no threshold is listed, then the threshold for the test is 1.",
+      "quote_normalized_hash": "d3e993ebcf2f05c2936c27c26c0e5fbb",
+      "cached_unit_ids": [
+        "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+      ],
+      "cached_source_unit_ids": [
+        "9067d63aa2b4379578c06c37880b547acd40438b794ad5fd735997615510eba8",
+        "37f11499e8f3e3ec07207492eab8f034b6406b2af2acb3ca8a0756327214227a",
+        "eae8ae26ba6a264e8652d0518bf35c4be2e2c36914d0ac564bc097e1e46e6b0d"
+      ]
+    },
+    "ga_937d37f912ffb237": {
+      "anchor_id": "ga_937d37f912ffb237",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 67,
+      "structural_path": [
+        "INITIATIVE PASSES"
+      ],
+      "anchor_quote": "INITIATIVE PASSES — Some characters may have magic or implants that allow them to act more than once in a Combat Turn.",
+      "quote_normalized_hash": "6fa178e63bae898f2f255ab6eb4def23",
+      "cached_unit_ids": [
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+      ],
+      "cached_source_unit_ids": [
+        "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757"
+      ]
+    },
+    "ga_f68269a40f4c0236": {
+      "anchor_id": "ga_f68269a40f4c0236",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 67,
+      "structural_path": [
+        "COMBAT TURNS"
+      ],
+      "anchor_quote": "COMBAT TURNS — In certain situations, such as combat or pursuit scenes, timing becomes critical.",
+      "quote_normalized_hash": "486496dd33d38982335a25196fb075ea",
+      "cached_unit_ids": [
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+      ],
+      "cached_source_unit_ids": [
+        "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+      ]
+    },
+    "ga_0b42708d8939016d": {
+      "anchor_id": "ga_0b42708d8939016d",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 67,
+      "structural_path": [
+        "ACTIONS"
+      ],
+      "anchor_quote": "ACTIONS — Within an Action Phase, a character can carry out a number of actions depending on their complexity.",
+      "quote_normalized_hash": "719f6f4cb044283d8e67b6ae16e31a4a",
+      "cached_unit_ids": [
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36"
+      ],
+      "cached_source_unit_ids": [
+        "4a34f578d93a8c1651a70f8928ff76ad790d7de389c1a3564967f9a50dbeae36"
+      ]
+    },
+    "ga_8ca55fd05e7b9065": {
+      "anchor_id": "ga_8ca55fd05e7b9065",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 67,
+      "structural_path": [
+        "FREE ACTIONS"
+      ],
+      "anchor_quote": "FREE ACTIONS — In addition to Complex or Simple Actions, a character can take one Free Action during each Initiative Pass in which she has an action.",
+      "quote_normalized_hash": "ab1d29cb6028c9a763ba53196b93d6c0",
+      "cached_unit_ids": [
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77"
+      ],
+      "cached_source_unit_ids": [
+        "92fed54f0052d2ab37dec64962b8ac1cbdce77050d2e5f8c65be2c3af461dc77"
+      ]
+    },
+    "ga_aa0236e0b06143c6": {
+      "anchor_id": "ga_aa0236e0b06143c6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 150,
+      "structural_path": [
+        "INTERRUPT ACTIONS"
+      ],
+      "anchor_quote": "USE SKILL — A character may use an appropriate skill by taking a Complex Action (see Using Skills, p.",
+      "quote_normalized_hash": "246fcf65642d359b4be725c6a6250d13",
+      "cached_unit_ids": [
+        "a2d5e33ca0d19efca62bb730800c7c5d8a0667ced888d1dc3595ead22df6a13b"
+      ],
+      "cached_source_unit_ids": [
+        "7cc79785f56e237a56e72e6e315987381044f8f8735ec7f9954551c430fa4adb",
+        "073b5db63b250df8436fb11b59cf0fefb0ecaa64e657067304ee0bd76a98c556"
+      ]
+    },
+    "ga_bfb43601ae913409": {
+      "anchor_id": "ga_bfb43601ae913409",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 151,
+      "structural_path": [
+        "MOVEMENT RATE"
+      ],
+      "anchor_quote": "MOVEMENT RATE — The movement rates for each metatype are noted on the Movement Table.",
+      "quote_normalized_hash": "73c4ac96140434616b4000eeb5aec0c2",
+      "cached_unit_ids": [
+        "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+      ],
+      "cached_source_unit_ids": [
+        "a71d5a021900ec7b7a57383936d14e76c0e6855e6f0a168584a77c9349870c22",
+        "759a0010409621fd3ffb95ef1e137a9653b81a6fef5cdf3a85ae014ce1620095"
+      ]
+    },
+    "ga_fbcd5eb01893d15f": {
+      "anchor_id": "ga_fbcd5eb01893d15f",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "CONDITION MONITORS"
+      ],
+      "anchor_quote": "CONDITION MONITORS — An important part of the record sheet is the Condition Monitor, consisting of two tracks.",
+      "quote_normalized_hash": "6273148ad67d1be29ba43017bebbed09",
+      "cached_unit_ids": [
+        "541cd8b122f2dc8ab2ca6b5b8ad98e6b81bf91122a7a8d25f2d2056e86b05d3e"
+      ],
+      "cached_source_unit_ids": [
+        "bd2735a02bed3bd465b4ebf33a22ead802a3a9d9bf292e65068c54720013600b",
+        "fea2d61bf9c453095ba529fe464d2d42102e993f3152ad79a2ae57fd72a9ce6c"
+      ]
+    },
+    "ga_84253e8825e85b5c": {
+      "anchor_id": "ga_84253e8825e85b5c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 146,
+      "structural_path": [
+        "1. ROLL INITIATIVE"
+      ],
+      "anchor_quote": "1.",
+      "quote_normalized_hash": "c977dbe785221d34114d345fdf8ff4e1",
+      "cached_unit_ids": [
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6"
+      ],
+      "cached_source_unit_ids": [
+        "3d0527a4522725fa4f1f26009695db8d6b7eb3ca3b3670aa373f0611fdf369f6"
+      ]
+    },
+    "ga_0036349207e5d279": {
+      "anchor_id": "ga_0036349207e5d279",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 146,
+      "structural_path": [
+        "3. BEGIN ACTION PHASE"
+      ],
+      "anchor_quote": "If more than one character has the same Initiative Score, they go at the same time.",
+      "quote_normalized_hash": "c5a2181b611f5fd6e4e4346135daf3f3",
+      "cached_unit_ids": [
+        "461193ef7c3ae2a9c566d0f43f6a5bf674a737f3315e04ca957c7be285b779e7"
+      ],
+      "cached_source_unit_ids": [
+        "4de808bfea1aa7a3258a2a7d16d880aedab06d3deefde108c60acc22ed846bcb",
+        "525896ae76d0fbd6e90010d21db3349bc105f7bd378f4865ae6ff3aafeec95ca",
+        "633c743c7f24448c41e6249cb25334131d2b1c330c31fde7a93327b3e3cefc63"
+      ]
+    },
+    "ga_5c6a12279ed69b39": {
+      "anchor_id": "ga_5c6a12279ed69b39",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 146,
+      "structural_path": [
+        "5. BEGIN NEXT INITIATIVE PASS"
+      ],
+      "anchor_quote": "5.",
+      "quote_normalized_hash": "540dd397b2d380dcc3f59796c4facc43",
+      "cached_unit_ids": [
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7"
+      ],
+      "cached_source_unit_ids": [
+        "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7"
+      ]
+    },
+    "ga_a78ddc6c35c9dff5": {
+      "anchor_id": "ga_a78ddc6c35c9dff5",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 146,
+      "structural_path": [
+        "COMBAT",
+        "INITIATIVE"
+      ],
+      "anchor_quote": "If a character was wounded in a previous Initiative Pass, wound modifiers may affect his Initiative Score on this and any subsequent passes.",
+      "quote_normalized_hash": "60749aeb15d753022b45aa2a58fc4d2e",
+      "cached_unit_ids": [
+        "8c73208525ad9f6fd519c8390e3723829ec1fbc8bcb08fd6610e58ebf9027e18"
+      ],
+      "cached_source_unit_ids": [
+        "0d06e4d6647cfd5b035afd4f6bafe2a2a4b88293724c31a7d94352b17466465b",
+        "ecf5247ca9fea36a501afa259b29e922a92bea5b75eed1480ea262c3a26f7f1e",
+        "dbc0225a9d5756b9c9a9900f80d1a10c2b5d25c1ff72e633925be1b3da3e72e4"
+      ]
+    },
+    "ga_c531d84685dfe010": {
+      "anchor_id": "ga_c531d84685dfe010",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 184,
+      "structural_path": [
+        "STEP 1: CHOOSE A SPELL"
+      ],
+      "anchor_quote": "STEP 1: CHOOSE A SPELL — When casting a spell, the first thing a magician does is prepare for what she's about to attempt.",
+      "quote_normalized_hash": "e3758e5662daabc5913699983c0a02ff",
+      "cached_unit_ids": [
+        "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86"
+      ],
+      "cached_source_unit_ids": [
+        "d9c0f068da39365f1986ae3829bb88936b79f80567958d0f1f80ac2b1bc5fff8",
+        "b6873309a4e760a69557327863fc3fc0906770f2688365da40bca0f1f598ad2f",
+        "e59245b32ce08f64d861061d72425fbb02e88e4a80421b45b0dcb338cde76fa2",
+        "d62817ef36969ab11ea43a4ffb03117519288da62a69a5e9d21a2fcccb47bca9",
+        "c9cb5cf40b3486c92073a79d2ef012cf469a304ea0e1a6d1d98390c426bfc6f1",
+        "b7fd16980910788102fc38313fc328511aae6438bb00cf0f965e4d4144349e06",
+        "b6b45befc4835872a6e3b12e46498bd904c4030c62598e90bf4717364259f301",
+        "dd419c162c830fe9c8481364584a45903b4c14c4f75ce302ab29599105235b28",
+        "716a0633d474dfdee60f65fa039d33f3137fc09c750ae2b3bbfddb13d0bfea28"
+      ]
+    },
+    "ga_1aa42ae0aeca655c": {
+      "anchor_id": "ga_1aa42ae0aeca655c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 186,
+      "structural_path": [
+        "STEP 6: RESIST DRAIN"
+      ],
+      "anchor_quote": "STEP 6: RESIST DRAIN — Magicians roll Willpower + an attribute appropriate to their tradition (Charisma for shamans and Logic for mages) to resist Drain.",
+      "quote_normalized_hash": "b44fbcbe05cf24fd5375124c2be3e411",
+      "cached_unit_ids": [
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b"
+      ],
+      "cached_source_unit_ids": [
+        "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b"
+      ]
+    },
+    "ga_64a3767cf785dcbd": {
+      "anchor_id": "ga_64a3767cf785dcbd",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 184,
+      "structural_path": [
+        "FORCE"
+      ],
+      "anchor_quote": "FORCE — A spell’s only attribute is its Force—the measure of the spell’s raw power.",
+      "quote_normalized_hash": "609e316a36f5e503cc63435ca3ce5693",
+      "cached_unit_ids": [
+        "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16"
+      ],
+      "cached_source_unit_ids": [
+        "b9cc86db6ecbbac7cdabedc31efe2bfee2b29e0f56704a8f3365a77ca6372fc7",
+        "450fe90153df669721d8f0a229b95bedf5b73ef6189ce1ac53534e0787330427",
+        "63f7789c8d23365034713c5ba27892cf219407a26a133bd6509538298d39c41a"
+      ]
+    },
+    "ga_bb691fb6312ef3ba": {
+      "anchor_id": "ga_bb691fb6312ef3ba",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 165,
+      "structural_path": [
+        "UNCONSCIOUSNESS"
+      ],
+      "anchor_quote": "UNCONSCIOUSNESS — When all of the available boxes in a track (Physical or Stun) are filled in, the character immediately falls unconscious and drops to the ground.",
+      "quote_normalized_hash": "2dba6101ab759bb8639584071284684f",
+      "cached_unit_ids": [
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579"
+      ],
+      "cached_source_unit_ids": [
+        "0330c23ad9188fee3fe95d7f978482b99fa2bbe80a39bd2142270aafb6b02579"
+      ]
+    },
+    "ga_a40d62fa0ef1ccc2": {
+      "anchor_id": "ga_a40d62fa0ef1ccc2",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 255,
+      "structural_path": [
+        "PHYSICAL DAMAGE OVERFLOW"
+      ],
+      "anchor_quote": "PHYSICAL DAMAGE OVERFLOW — Characters who exceed their Physical Condition Monitor and enter into overflow damage (see Exceeding the Condition Monitor, p.",
+      "quote_normalized_hash": "b6448be64d85e32475bd293839f66369",
+      "cached_unit_ids": [
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8"
+      ],
+      "cached_source_unit_ids": [
+        "ec9dbcb24e26c5e283b913c7869ef72bfa2e7903473dcd9e3054f1a218d3e0b8"
+      ]
+    },
+    "ga_53e92eebe5e7e09a": {
+      "anchor_id": "ga_53e92eebe5e7e09a",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 164,
+      "structural_path": [
+        "APPLYING DAMAGE"
+      ],
+      "anchor_quote": "APPLYING DAMAGE — Once the final Damage Value is calculated, it must be recorded on the character’s Condition Monitor.",
+      "quote_normalized_hash": "8ef927a5446466f6f652612ca0fea867",
+      "cached_unit_ids": [
+        "d3511594202a4ef1a9125e18a4317c2d816668f23b04cc564aec25f615c94c53"
+      ],
+      "cached_source_unit_ids": [
+        "b5fc4d941a7ebe573f086a18c22f6b59dfe6af59783b807b018487995e739f7c",
+        "babca4b9ad4caadbe1657879655b91ec0dc394bdb076dc394aed7b265125debf",
+        "1636c5844ebbb7103945409fac21a77929bb23582a59f19f950e07083f2d356d"
+      ]
+    },
+    "ga_da27c98206e35d91": {
+      "anchor_id": "ga_da27c98206e35d91",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 132,
+      "structural_path": [
+        "USING CON, INTIMIDATION, LEADERSHIP, AND NEGOTIATION"
+      ],
+      "anchor_quote": "CHARISMA-LINKED OPPOSED TESTS — <table><tr><td>SKILL USED</td><td>ACTING CHARACTER ROLLS</td><td>TARGET CHARACTER ROLLS</td></tr><tr><td>Con</td><td>Con + Charisma</td><td>(Con or Negotiation) + Chari",
+      "quote_normalized_hash": "2e298b574249c2fdb7261e7eb87e09f6",
+      "cached_unit_ids": [
+        "689f8abd641e4d19e08d6fc975082374803038d003dc593e848fe424c1844d42"
+      ],
+      "cached_source_unit_ids": [
+        "48134d7575a3f4fc9e025189738ff923b11712e026b112e9ced895bb55903a00",
+        "214e862c8c630a3de75711d54c142a7eec4b1056132133f78a093b4d14e2d2ab"
+      ]
+    },
+    "ga_b0c56782211b903d": {
+      "anchor_id": "ga_b0c56782211b903d",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 133,
+      "structural_path": [
+        "SOCIAL MODIFIERS"
+      ],
+      "anchor_quote": "<table><tr><td colspan=\"2\">SOCIAL MODIFIERS TABLE</td></tr></table> — Unless otherwise noted, these dice pool modifiers apply to the acting character’s dice pool.",
+      "quote_normalized_hash": "824db4096c47551c66b16be7123f1b65",
+      "cached_unit_ids": [
+        "db1e7455706c23432ca6058ad47b36ab475e38d6a94374407767650d042c380d"
+      ],
+      "cached_source_unit_ids": [
+        "a3aefde2070a761bfbf62804962e8f8938d705843fa74f1d04a2d31a779c618f"
+      ]
+    },
+    "ga_c784722269690380": {
+      "anchor_id": "ga_c784722269690380",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 312,
+      "structural_path": [
+        "STREET GEAR",
+        "ENCUMBRANCE"
+      ],
+      "anchor_quote": "ENCUMBRANCE — If a character overburdens herself with gear, she will suffer encumbrance modifiers.",
+      "quote_normalized_hash": "f467164793aabc6a64d83dd9c08e2c82",
+      "cached_unit_ids": [
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d"
+      ],
+      "cached_source_unit_ids": [
+        "98c910a53a97a1be73ca3c5177479ed687798690f2ac618088b2e2ebc902f39d"
+      ]
+    },
+    "ga_9c9f94a99478357c": {
+      "anchor_id": "ga_9c9f94a99478357c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 163,
+      "structural_path": [
+        "ARMOR AND ENCUMBRANCE"
+      ],
+      "anchor_quote": "ARMOR AND ENCUMBRANCE — If a character is wearing more than one piece of armor at a time, only the highest value (for either Ballistic or Impact) applies.",
+      "quote_normalized_hash": "20a9e0629fb8518fc9f3d64153ac1e72",
+      "cached_unit_ids": [
+        "365241b624c19a92700b05bcf388b00f0a91cadbf5a52ac25f8ccaff04c49bb1"
+      ],
+      "cached_source_unit_ids": [
+        "7c2d0ce5c6c3c22fb6670af6fc096629698690c4f4bcae6ac16d6f578abf0e94",
+        "7f79a9d82da9e9724b7630d66ef86e4398cb2bc91376c27ef2b8ae06252ce119"
+      ]
+    },
+    "ga_45868b525b752ddc": {
+      "anchor_id": "ga_45868b525b752ddc",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 67,
+      "structural_path": [
+        "TIME"
+      ],
+      "anchor_quote": "TIME — In most situations, you don’t have to keep strict track of time while playing Shadowrun as long as the gamesmaster and players have a clear sense of continuity and the sequence of events.",
+      "quote_normalized_hash": "bd55f9ca04d90a95398ae5206d93ba16",
+      "cached_unit_ids": [
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+      ],
+      "cached_source_unit_ids": [
+        "8e451d4d65941f13901f86c0ebb4581b725673a468ae2a9da46cf73941a7a6f7"
+      ]
+    },
+    "ga_7a7c2982aef83661": {
+      "anchor_id": "ga_7a7c2982aef83661",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 167,
+      "structural_path": [
+        "SURPRISE TESTS"
+      ],
+      "anchor_quote": "The surprise rules below apply to all situations, whether all the parties involved are caught off guard or whether one or more parties are intentionally ambushing others.",
+      "quote_normalized_hash": "7d746fd2909a18c400d33ca486f53744",
+      "cached_unit_ids": [
+        "cbbfeb3554c10a06614c8bbaf46af6d065cf7cdfc9f8bd6723af7338e24995b7"
+      ],
+      "cached_source_unit_ids": [
+        "5a0c5f9e5e1615369336e3bbeb91f0b21fa4d4701b5be8a7588597350fd9e822",
+        "437c4c94c837594fbd26995f483f3b1fa974797829c32328940401a83fb9f4b3"
+      ]
+    },
+    "ga_8c8c394759cb349c": {
+      "anchor_id": "ga_8c8c394759cb349c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 167,
+      "structural_path": [
+        "EFFECTS OF SURPRISE"
+      ],
+      "anchor_quote": "EFFECTS OF SURPRISE — Characters who are surprised cannot take any actions that directly affect, impede, or counteract characters that have surprised them.",
+      "quote_normalized_hash": "adad0f27cfc5953960f7242955b553d8",
+      "cached_unit_ids": [
+        "aa1dc05c09935c652026f467b5aa79eee81a210c70f407758e76d20b626cc050"
+      ],
+      "cached_source_unit_ids": [
+        "57bf74c29f617a82642947b41e3f53a5ce14ec5f0e772b5ceeaeababe52fb0f3",
+        "fc117dc8d9053521032422a7ee1e3835d533b08e24ade22d3f3fc8e399789db6",
+        "71e4a778ab37788aec6944190318e5d0f1e7feb6e3de2c8fbb59d3b042a50ccd"
+      ]
+    },
+    "ga_48291c300506de07": {
+      "anchor_id": "ga_48291c300506de07",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 167,
+      "structural_path": [
+        "SURPRISE WITHIN COMBAT"
+      ],
+      "anchor_quote": "SURPRISE WITHIN COMBAT — Surprise may also occur within combats that have already started.",
+      "quote_normalized_hash": "bdb8fb502f6ba592889be60d03f40d07",
+      "cached_unit_ids": [
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+      ],
+      "cached_source_unit_ids": [
+        "804dae9b08d76ca958df73f4899790e671a31c66738296d053f4e02a60449c57"
+      ]
+    },
+    "ga_b241b6eee418c17d": {
+      "anchor_id": "ga_b241b6eee418c17d",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 271,
+      "structural_path": [
+        "CHARACTER IMPROVEMENT"
+      ],
+      "anchor_quote": "CHARACTER IMPROVEMENT — Players use Karma between adventures to improve attributes and skills, as well as to initiate/submerse and buy spells or complex forms.",
+      "quote_normalized_hash": "a4954657b075dc3dccbe7175e5cf837f",
+      "cached_unit_ids": [
+        "081c08abd2d73389b95b2c1da4a77e85469f4a1b1ad0d9b3aa92070608456ba2"
+      ],
+      "cached_source_unit_ids": [
+        "c8193ce76a0ad4e852df1d05c2ed880d4da2dee93ed81be474f5860ed9348da9",
+        "b4202dfd23a64283a720c84ab2ad4eaccb29a2ebb5b11978e67dbe7e2da36536",
+        "56a6a6ae6005db8a8bf0b096397d84bae914130a3b344904e0ac7213ba24617e"
+      ]
+    },
+    "ga_3347920186a329f8": {
+      "anchor_id": "ga_3347920186a329f8",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "IMPROVING EXISTING SKILLS"
+      ],
+      "anchor_quote": "IMPROVING EXISTING SKILLS — Characters may also improve an existing Active skill or skill group by 1.",
+      "quote_normalized_hash": "50487cfff96c91299efca7014c7e6f00",
+      "cached_unit_ids": [
+        "11fe8f85207de1b2658d70df41e070d0ec4f737cf921d30e95b3039e597b4077"
+      ],
+      "cached_source_unit_ids": [
+        "b0d2d803b29b7ba167a17f3f1f08bda43feaff93c5189af37bd741d5aee05b50",
+        "cf4516dfca87e58882266d5c6681f69f4bbdef26a1423c606c1f4e0e1e66d88e",
+        "f1d7ee8271f98baebb3452aebbaaac702ec7d2a4057d2188192b25201837b740"
+      ]
+    },
+    "ga_780261e1a4b2f705": {
+      "anchor_id": "ga_780261e1a4b2f705",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "IMPROVING ATTRIBUTES"
+      ],
+      "anchor_quote": "IMPROVING ATTRIBUTES — A character can increase Physical or Mental Attributes, Magic, Resonance, or Edge by 1 point at a time.",
+      "quote_normalized_hash": "d2a143b0d4f2d34fe38807a70d828783",
+      "cached_unit_ids": [
+        "2e0476fd65f9a159847697e35f67e6b40065f5bb86fde49af3d37ed1e5fc7efa"
+      ],
+      "cached_source_unit_ids": [
+        "f60884e0ed96ea5e434e10e8ac778d2dc4f2a9534c85fca6f9c3faed0730c094",
+        "cf2e77ad777e57b80bdbf1172754a7b4d03eb60843dc213b88a157e5999943e5"
+      ]
+    },
+    "ga_64ce04dba5a0c961": {
+      "anchor_id": "ga_64ce04dba5a0c961",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "POSITIVE QUALITIES"
+      ],
+      "anchor_quote": "POSITIVE QUALITIES — If the gamesmaster chooses, he can “award” a character with a new positive quality.",
+      "quote_normalized_hash": "f39ef7b0da70df0e3048959a249571e9",
+      "cached_unit_ids": [
+        "9cee8e476ba28bee0e5fe691fb68f4ea9e7e717d979e89d1267ef0123db49eba"
+      ],
+      "cached_source_unit_ids": [
+        "c2b87a03e241e09462468071fb9ec60be1773387bbeb74a98fdaeb92d235fe5d",
+        "10999b6d0f8d9f98d380f71f03bbb25c3fd477f8bd2878cfa8459bae6d72d110"
+      ]
+    },
+    "ga_75129a6f776fbeab": {
+      "anchor_id": "ga_75129a6f776fbeab",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 200,
+      "structural_path": [
+        "INITIATION"
+      ],
+      "anchor_quote": "INITIATION — As Awakened characters grow in power, they often find that their initial explorations into magic and the astral plane can only take them so far in understanding and increasing their abili",
+      "quote_normalized_hash": "55273f1763125b1839e0947b56899f79",
+      "cached_unit_ids": [
+        "5c66d9f07ae88020f3f087cf5d5d80ff21a64501aa26e079bf3439fba0910f64"
+      ],
+      "cached_source_unit_ids": [
+        "60c738e2ade8433fa22415ea5e41ca09e0d1bb21c21ae9eecb4221a464edebf7",
+        "f250b5013e73d8fede6798ddfc7cbdee3b0862a20ca32eb8102354b8e1b3a581",
+        "3aec964c38aa3e6a2e0467da9f5c00bdfcfe7ddc953a17c5ad79de2922aec170"
+      ]
+    },
+    "ga_d9645c7513ae6ff1": {
+      "anchor_id": "ga_d9645c7513ae6ff1",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "IMPROVING SKILLS AND SKILL GROUPS"
+      ],
+      "anchor_quote": "IMPROVING SKILLS AND SKILL GROUPS — In between adventures, players can learn new skills, improve existing ones, or master specializations.",
+      "quote_normalized_hash": "3332bf3a8f8df1e51be03fd880a8ede9",
+      "cached_unit_ids": [
+        "41e5c0fcebac6880932e968a6e660cc509514216dea4b173e3d8fcf4f28fe182"
+      ],
+      "cached_source_unit_ids": [
+        "9be37f31bf84dca2a1e7b94c68717af23edaff800442db7f1334ee850739ff2d",
+        "ce98439dc716842b90a8aa314a03dc7e022f525eb2f5d5794c58157ef1b14d2a"
+      ]
+    },
+    "ga_7b2245a991edcb69": {
+      "anchor_id": "ga_7b2245a991edcb69",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "NEW SKILLS"
+      ],
+      "anchor_quote": "NEW SKILLS — A character can learn a new Active Skill or skill group she doesn’t currently possess.",
+      "quote_normalized_hash": "f0d82bffde90343757379ff0d4ac481c",
+      "cached_unit_ids": [
+        "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae"
+      ],
+      "cached_source_unit_ids": [
+        "8ad5803d2afe91b740ce4546d3f3343d509e7ff00b45e0e92431cc7fab3225ae"
+      ]
+    },
+    "ga_743f348cc35eb33c": {
+      "anchor_id": "ga_743f348cc35eb33c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [],
+      "anchor_quote": "between adventures; the character cannot simultaneously improve any existing skills, attributes, etc.",
+      "quote_normalized_hash": "d1842c1d8e6014938e2ff5792eefa137",
+      "cached_unit_ids": [
+        "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f"
+      ],
+      "cached_source_unit_ids": [
+        "a552ee693b431c72f925fb73311801ce10bc8c35ba91c8dd751461d057011e6f"
+      ]
+    },
+    "ga_93635ba5922031e6": {
+      "anchor_id": "ga_93635ba5922031e6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 273,
+      "structural_path": [],
+      "anchor_quote": "Note that some qualities might also be considered innate—not something a character could ever learn—and so should not be awarded (ambidexterity, for example).",
+      "quote_normalized_hash": "9867aca88a1d6fe6569205e0d333439c",
+      "cached_unit_ids": [
+        "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc"
+      ],
+      "cached_source_unit_ids": [
+        "3ad4b86fd3ace04ddd74c7ccb10897fc12da9293c0aba6d6b3cd6fb9dab2b9cc"
+      ]
+    },
+    "ga_d5a10c9a961dac6b": {
+      "anchor_id": "ga_d5a10c9a961dac6b",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 82,
+      "structural_path": [
+        "ADVICE TO NEW PLAYERS"
+      ],
+      "anchor_quote": "The sample characters allow you to begin playing Shadowrun right away.",
+      "quote_normalized_hash": "583acc90be269a67eb04763d8d2c1142",
+      "cached_unit_ids": [
+        "6cd54dac4778a31696818dbbc06ecff863bb65174a6ff52536ab2e5f71f367ac"
+      ],
+      "cached_source_unit_ids": [
+        "32b33421b408327272867493e941d2881b550e2f599dc57dd27f31729b48aa69",
+        "1dd9fbd91eb5fdf59194085625de6880bccd0f486691188d19cc1d049fb5f0b0"
+      ]
+    },
+    "ga_c2a82bd2205bcfa2": {
+      "anchor_id": "ga_c2a82bd2205bcfa2",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 99,
+      "structural_path": [
+        "WALKTHROUGH"
+      ],
+      "anchor_quote": "WALKTHROUGH — Shadowrun's Build Point system is intended to offer a great deal of flexibility in character creation.",
+      "quote_normalized_hash": "ca7c4ca8c86100a6d82e72068f0a5698",
+      "cached_unit_ids": [
+        "84b9646ea807694f17c823216dc239b2fc30dc1d22e05bf3658510af7d8d0ba8"
+      ],
+      "cached_source_unit_ids": [
+        "bd0d79a2ec12d8a8de0c4180b7f2727aaceb70907981ff61e2af65ac11d7e02f",
+        "dc1df00027e5c4603d8aff0102e53d37d78668b817af92a27b83fd0dde0fbc90",
+        "263c311ca1109120262eee5f1fcbe36a6f07550f857d52d4999cf541892dfb9e",
+        "0dc56890be7eabc3c9845cc4780a61e2e9db34203890f33c4f79081c4ccf9ffb",
+        "ef6e4a795c9dc69062f1cec99fadee71f6d93c16f36a603daa7fdf71f43638a3",
+        "7c490df39fdd9d228b295826c05095c2a6abb118dc33908fde8d6e6f8a3e38ce",
+        "e27e4e919c37f9e6903739a54e7c3c5502025dc11bbd6523cf719b114306fcf6",
+        "208f2a30a5bd5ef18ecbf18186423620ae714f449ee7ab50545dfbff2e2ae333",
+        "09f617c27a8264532046359aa4b5dfe272fcfd2e0ad6a99853b32a986e55f259",
+        "9e067b9ff2e92319db6734564dbfdaf58cf4cfbfb6f1f454ed5b926c8b3c1d0e",
+        "a8b09b0c4f7caa00c38e408d16e684aab31bd465febe7203df7f4c5e1f104be1",
+        "043c1d0febfa0e326d15d7c54f5e6b2df1c3f04e21225e9e518488ce03fc68e2",
+        "9e06cbaf63bc122142e22fabd7832ddd7ac0f8671a344904ee84fedcfc70b3ef",
+        "c658b26ec4395b87f9b4314282bbbd523f50583c2965a6639e123b75bb826eec",
+        "a1c54678281bf084775c51ddd7abbeea03614ac433dbcbb5654ed2c59319189b",
+        "8d2047d2e8072fc8707d988d4e7bd052c70bc675c1807dbab7e93e7f48baf459",
+        "09c274e377ea03e93507fc50309b1d17d6aac4af9024ec664b353188b7fce5cd",
+        "3aff27081e54e791a2fbbb10dd33ea994639e0723135222c1e10b9d3dbd11d20",
+        "bdb1a6f13906ed77b51355cc55f73d79cbe915e6e092f8aeecb29f81f1f88617",
+        "b864868fd2f5db7301a281240ea6b6c20263272b878fadd9946192f68a37eb2e",
+        "2bfcd01eead4932dddc0cab074546ba71dce4223820821d9b577a7e101ec80f8",
+        "6e783cb1ae4bb778bffcce08df61e624c94aad054d1eca4accd32a5f49e0ebe5",
+        "5a7ad6fc2d2e0a0b50fe74ac3b6f3c1a26eb90e95f119b916588617ecd41273c",
+        "0098837448f7e7050f95c5a6415e05e983bc020ec0162577a699ad65db302a97",
+        "5e06c15f99612e511fed8f6ff16f134cb0ea34be9d81fc9837294463020d6a52",
+        "40297405c448144d3251f486a1bbeb100f55c5341ef91d1227fbea49c5b6ed5d",
+        "6080eaec28de132f47ab82598559245b391cec978c7588ab0dac54670c2d43df",
+        "d22c548b65481c469d6a3a9f600ae0ca7f30d1266520eaf9a461ad9be8f2a477",
+        "4ea6c7da7ad3a9ca1cea181528b980714349a66ea73e00ad6ff7713a768d96f3",
+        "8d3a3eba48d4790c221e2fb5cbe005a9d7bc614ebe5e5d165b1662310d74e785",
+        "35095c3b1f5a31fdb13824aa2c1b209c8b1d5d52e40da03401330c4a856470f4",
+        "64bcee077b7c9d5694601635a4790790d3c2a7aa8220d3427d81dc6f0e4b1a2f",
+        "04b4deeeaca8a768fe96e0b3067e9d5cd196fa5bb1a3ab77d83ed4074d36421e",
+        "0eaed223790105ffae105d561f6a6d5e6eab9349f3b3943c591a38d58f9e39d9",
+        "b683166e483e835f8532e9539a6980aab963bac8b90987caf2be0685b041670c",
+        "a04bc502cada4d322757281eb01fa9baf6216140215e8db58625420022e588f6",
+        "fe2ff5f7d89af5ab043b7bcd0ad4f36130db47223ad0c2e50d2a7f553a2fc69e",
+        "11f283888c6accda068bd7a12a721b7239c6ddd6272d826d99691a4e3b56a6ca",
+        "8bfa9f4cfc502b65fa0947787a03075d61c182ad04d2f87d8709d682e073010a",
+        "4efb5f3f32d58ca68bb8991782e76918f34e8616caba70e4e46cee387e12cbdc",
+        "5b8ae8cbe1e6f94de786527e0cab0134736cd3d44a8f0e1790d5724ff6bd7ffe",
+        "7c6835cb1043e0c545dc343bd3fa7655cd3af7bbfd42476c656d69fcf3548838",
+        "1129ea7a5846af8cb56957e8fc7c01a004b93b5575c0e829d4087c768f298fbd",
+        "164a2886fd1a7f93049d5ff13aed142384caf7ce6d8bafdae69ccc3889efb339",
+        "fe494a26898bf6d0924dcbdc118870299e90586ab55bbc8ed854111fdd93c02b",
+        "a13ca51870f7eae12ec98c35d3f6ac64b057c99a7a57bbc4894832f8d5bceca3",
+        "b157fe34e97ded4a1409320cce2eb7a31219f2abdc8fec59c9997641c7f2f033",
+        "a78ea1c1e23ae477d345f06171bd2bbff78f30b609c3f799d9dd4dbbf04fe204",
+        "56896b432ef2f81b783da5eecb575b60fea2ad697cf96763d9fa95af8e977075",
+        "7f75d02dcf21c542cf87098bb80eb79e6e66ef2301c84bd4408a07827c5e4088",
+        "149c73cda45d83f50ec394d8a1c47a7912e4a7b7bf5841887bafde2e550d5177"
+      ]
+    },
+    "ga_625f1dc2cee4fd4d": {
+      "anchor_id": "ga_625f1dc2cee4fd4d",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 90,
+      "structural_path": [
+        "FINAL STATISTICS"
+      ],
+      "anchor_quote": "FINISHING TOUCHES — The following are the few final steps that will help you make sure your character is finished.",
+      "quote_normalized_hash": "fbb43d4a380dcfe847c10943e037f22b",
+      "cached_unit_ids": [
+        "33be19ac29e32bf782a19b5e8c1da8be05ec0ead72c193749d35e400d19c962e"
+      ],
+      "cached_source_unit_ids": [
+        "b048a5834dea55cf2d6e393826e13538c85baf18cb803b495a44db33b52d1aff",
+        "fa2d504d0e27646e6983400fa231a89d745a293f3f9bcf291bb74bcf78cb5a7d"
+      ]
+    },
+    "ga_b7bc7419392f9e7c": {
+      "anchor_id": "ga_b7bc7419392f9e7c",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 63,
+      "structural_path": [],
+      "anchor_quote": "Adjust the Threshold: Rather than counting modifiers, tell the player to make a standard test without modifiers and simply adjust the threshold to account for how you think modifiers would affect the",
+      "quote_normalized_hash": "4b9c9fef5676a2de73d76b467934602b",
+      "cached_unit_ids": [
+        "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9"
+      ],
+      "cached_source_unit_ids": [
+        "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9"
+      ]
+    },
+    "ga_f771a18a445cf681": {
+      "anchor_id": "ga_f771a18a445cf681",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 65,
+      "structural_path": [
+        "THRESHOLDS"
+      ],
+      "anchor_quote": "To make a Success Test, the character rolls her dice pool and counts the number of hits, as described above.",
+      "quote_normalized_hash": "36d99813b5f0432efe506313a5c113e1",
+      "cached_unit_ids": [
+        "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0"
+      ],
+      "cached_source_unit_ids": [
+        "49d4a50528207aa63dfe0bba85a96ce082e434191647d4eed9b756145c5feb9b",
+        "68c0fed892c51dd46840b07542d509e0cd58ba619ae791685174ee7222b8a664",
+        "bf51d1f5c23f71e45afa1b5f28c59b1ccce24913e98210b163457019108e1d81",
+        "f06a3edf9e9555b3d7562b590ff0f861385e7f6a32a8b35b6f5a89bb242d1569"
+      ]
+    },
+    "ga_bc1d87d02aa0e4b9": {
+      "anchor_id": "ga_bc1d87d02aa0e4b9",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 66,
+      "structural_path": [
+        "EXTENDED TEST DIFFICULTIES"
+      ],
+      "anchor_quote": "QUICK EXTENDED TESTS — In some situations, you may wish to avoid a lot of dice-rolling and focus on the storytelling.",
+      "quote_normalized_hash": "5d6b58ae6479c340b77b07741161fe62",
+      "cached_unit_ids": [
+        "9138672ed4aa932b97853fe2bea1fe7fc114bef5403442f4d39e57c5f9d7ba06"
+      ],
+      "cached_source_unit_ids": [
+        "c64ddbd6c8a877274e727a7dd2b6f87c7ba8809ce4bcff6dae02035f626e8e80",
+        "f5e0ba0d19ba532e986a7ff0ed5bb53b1e78ad95c09cdeb3fc78c081860ed006",
+        "accf8720d29b7c9100fe72960bb6bee37b822d52b2ff78c94df0fadd93f0e067",
+        "c3c047848721fe202786937c09b1511af12a2185071f79f49751287796be7e20",
+        "3a2079b362984a20eeb6d3941e72b8e8466224414f89d86f252aebc11c06cbc8"
+      ]
+    },
+    "ga_29057350dca58352": {
+      "anchor_id": "ga_29057350dca58352",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 165,
+      "structural_path": [
+        "WOUND MODIFIERS"
+      ],
+      "anchor_quote": "WOUND MODIFIERS — As a character records damage on his Condition Monitor, he suffers certain effects that simulate real-life injuries.",
+      "quote_normalized_hash": "ad98784d0e5a428dbdcb37510049cc8b",
+      "cached_unit_ids": [
+        "7182f3d9302a6a825da9765925b829263f508f93e2efacacab35b915a3a68bf2"
+      ],
+      "cached_source_unit_ids": [
+        "4b531397419d2472e56266c8a7748b5b2527188ac30e87799af9397746402bed",
+        "2dfac62e7498544425387067fc00ab0d1b8761f6d3231d5d55566db4d4fbce81"
+      ]
+    },
+    "ga_e9a11a738b41a8c0": {
+      "anchor_id": "ga_e9a11a738b41a8c0",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 151,
+      "structural_path": [
+        "STEP 5. DAMAGE RESISTANCE TEST"
+      ],
+      "anchor_quote": "STEP 4.",
+      "quote_normalized_hash": "33309a9bbc854c908fb8c5be08846e52",
+      "cached_unit_ids": [
+        "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58"
+      ],
+      "cached_source_unit_ids": [
+        "1eaf4c016517c06f4eada39f9d147ddab936a280337ecb94d939e373e7026f8e",
+        "c121600a32763660a34fe84ea37cd516d05e5a5c932e26f98af8ab650979cfea",
+        "d50814c56d973b8b88dbf18db4cf80194210ae55791ba272c88191e3b3ca207c",
+        "01fe127a9601cd2bcd506017660ca803dfe6b8cdeb825e1ffc2be08b069069b8"
+      ]
+    },
+    "ga_3bed2e69acc180c6": {
+      "anchor_id": "ga_3bed2e69acc180c6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 164,
+      "structural_path": [
+        "DAMAGE RESISTANCE TESTS"
+      ],
+      "anchor_quote": "Jack is wearing 5 points of Ballistic armor when he is shot with an AP -1 attack.",
+      "quote_normalized_hash": "6d717275169cbb7ddbc6ff7acd5ce2c8",
+      "cached_unit_ids": [
+        "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c"
+      ],
+      "cached_source_unit_ids": [
+        "b1216287c275981b431b1e9918edcc1c2fde8a753c3f1f15f1bf2a0a6459ff58",
+        "011e405cfbd7ad99bba864af7974f514b3f86554126545c220c872843f2de5ed"
+      ]
+    },
+    "ga_673311b60e918dad": {
+      "anchor_id": "ga_673311b60e918dad",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 151,
+      "structural_path": [
+        "STEP 6. APPLY DAMAGE"
+      ],
+      "anchor_quote": "STEP 6.",
+      "quote_normalized_hash": "6720872c69832d7e76743ad4a1bd4b2a",
+      "cached_unit_ids": [
+        "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c"
+      ],
+      "cached_source_unit_ids": [
+        "0fae23aaec81c2bc4b750909de69ab6a9e4616a6deee95de7698fb0c8b6b7116",
+        "d13fd12944d67f6f4e94a641eef590b79d8589007d33d9f0809bb4214a6250d3"
+      ]
+    },
+    "ga_ef5e7f85066bd5d6": {
+      "anchor_id": "ga_ef5e7f85066bd5d6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 163,
+      "structural_path": [
+        "KNOCKDOWN"
+      ],
+      "anchor_quote": "If the character attempting to pass takes damage, he is intercepted and cannot continue his movement.",
+      "quote_normalized_hash": "f5814415d418dfebd9195116d59e6ef6",
+      "cached_unit_ids": [
+        "63734c19b195ca44efdd6901bf607c8f69309fbf518122da6d17a38e2ea76ec4"
+      ],
+      "cached_source_unit_ids": [
+        "746cae8a9c6705fd9bddcfb9d69c01daadd06e6ccf395cafe4c74631f234655e",
+        "f44b42e19b4e1b2c550fef8be14252bb8dc327513f0a9e2254290902a5132653"
+      ]
+    },
+    "ga_bea71d5a8ee713a6": {
+      "anchor_id": "ga_bea71d5a8ee713a6",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 132,
+      "structural_path": [
+        "SOCIAL MODIFIERS"
+      ],
+      "anchor_quote": "In most cases, using Charisma-linked skills calls for an Opposed Test, as one person attempts to influence the other.",
+      "quote_normalized_hash": "1350ad116c6f70de7d4ad72ce56618d9",
+      "cached_unit_ids": [
+        "bdefaa384a522ec73795f522e966cdffcf1388befa2d4b0278ee84a88a753db2"
+      ],
+      "cached_source_unit_ids": [
+        "d07faefd061c7d4fa85d2326c5e0c765c6b304ee1271d1007e44906b02eb1ff7",
+        "3e774c516c02928a7268190f9a028f40a830408a31cd2ff84582df2b846d04cd",
+        "3ddb714f52d6c4ff4036e144cc9c7af9fa121cc40f138771bbc84c6ab127cf44"
+      ]
+    },
+    "ga_7b9d82f0fc74e504": {
+      "anchor_id": "ga_7b9d82f0fc74e504",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 132,
+      "structural_path": [
+        "CHARISMA-LINKED SKILLS AND LANGUAGE"
+      ],
+      "anchor_quote": "Lingos are treated as specializations of existing languages.",
+      "quote_normalized_hash": "1d14bec6031dca3cfd0031461885a00a",
+      "cached_unit_ids": [
+        "85559cf00253aa76d20c6cfdbc95886cf8dd5b51a727bb3dea2c1a3a6b1dd548"
+      ],
+      "cached_source_unit_ids": [
+        "719eae40dd70b4c148a23b9c48522be3cd89692a54d24bae274744c3bab2f667",
+        "7a14725b76508f71304b1e8a3df8973e531c04106d8dce5dd03aad76cc7104b9"
+      ]
+    },
+    "ga_6f79d1a8765f07f8": {
+      "anchor_id": "ga_6f79d1a8765f07f8",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 198,
+      "structural_path": [
+        "KINESICS"
+      ],
+      "anchor_quote": "KINESICS — Cost: .",
+      "quote_normalized_hash": "d8bb7916608b4d0c88bc068683e28d8c",
+      "cached_unit_ids": [
+        "de9601213c44b2f977957528aa945abb6ae294d9ce687e66f82ae55f718ea641"
+      ],
+      "cached_source_unit_ids": [
+        "5c4127f4ed6ae588b58eadfdf975f61bf1308e8ddcde1b48bdc1090abdfe51f7",
+        "d5d0fe65f5c28fe8f17167c9552d02e6bb9bdb63db8403fb853e66413721de3b",
+        "cb01cb17c7446ff07a603538dd7b365230b7470f2f9becc3849f23d91cf4cf8c"
+      ]
+    },
+    "ga_aa7721174e7f1062": {
+      "anchor_id": "ga_aa7721174e7f1062",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "LIFESTYLE"
+      ],
+      "anchor_quote": "LIFESTYLE — During character creation, the player must “purchase” the character’s starting lifestyle.",
+      "quote_normalized_hash": "0db96f10b0580240b3bd9f548ec7d14e",
+      "cached_unit_ids": [
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1"
+      ],
+      "cached_source_unit_ids": [
+        "cd23e33154ccbd061152fc49499f1b0c35a63132f089481f5f0ec4856dad1bc1"
+      ]
+    },
+    "ga_c640c7e419cfd51d": {
+      "anchor_id": "ga_c640c7e419cfd51d",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 314,
+      "structural_path": [
+        "BLACK MARKET GOODS"
+      ],
+      "anchor_quote": "Note that many standard goods can also be purchased on the black market.",
+      "quote_normalized_hash": "9826df1383212585858e7acbaac5a139",
+      "cached_unit_ids": [
+        "6f44809543feae41f4fa97234f2d46fbf21038536d3f6366ea0e76743af71a43"
+      ],
+      "cached_source_unit_ids": [
+        "e5b555f00d26a4f62a271e520f8df3f95d179fc028cbe3fdf2af240ea0668218",
+        "518a870986f14eb741783e91ed570794eb380c63a7322455719afa9d390bb34c",
+        "0482770f10e46eddd17bbd64445508ba3c8e6e8a205c891ee9d9971bbf109f4a"
+      ]
+    },
+    "ga_3f0a6cc8b01149c0": {
+      "anchor_id": "ga_3f0a6cc8b01149c0",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 316,
+      "structural_path": [],
+      "anchor_quote": "The following are common services the characters may wish to enjoy.",
+      "quote_normalized_hash": "4258e42f0ab6ff754522a192ec1bf0b2",
+      "cached_unit_ids": [
+        "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6"
+      ],
+      "cached_source_unit_ids": [
+        "d2fe177990e5d3a0903bd1413690b23b1b8f407132f2a451dad30145560c4ce6"
+      ]
+    },
+    "ga_ea136a75e7aa6c6a": {
+      "anchor_id": "ga_ea136a75e7aa6c6a",
+      "document_id": "CAT2600A_SR4Anniversary.pdf",
+      "anchor_type": "prose",
+      "page": 71,
+      "structural_path": [
+        "GEAR"
+      ],
+      "anchor_quote": "GEAR — Gear is stuff the character owns.",
+      "quote_normalized_hash": "5aa5533bd203d71f644502ceb69bbff0",
+      "cached_unit_ids": [
+        "86067b57039150bd87cab1acc87d13b4424e80eb60fb1db85ea7859be59d1910"
+      ],
+      "cached_source_unit_ids": [
+        "1fb662f0b9267563eca9bd091099929ba3ccf05c782d4f3ebaeda54ca63fb6fb",
+        "dcb590f4928d7d786bc4ac9422a08fd248657105fd458afe9124bd710f3fc781"
+      ]
+    }
+  }
+}

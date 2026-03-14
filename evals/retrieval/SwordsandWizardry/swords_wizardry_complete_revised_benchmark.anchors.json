@@ -1,0 +1,670 @@
+{
+  "anchors": {
+    "ga_cce833489630f691": {
+      "anchor_id": "ga_cce833489630f691",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 95,
+      "structural_path": [
+        "Monsters",
+        "Monster Descriptions",
+        "READING THE MONSTER DESCRIPTIONS"
+      ],
+      "anchor_quote": "Move (Move) is the monster’s movement rate, and it is handled just as movement rates are handled for characters.",
+      "quote_normalized_hash": "31162cd2ba935e1f675fcb2662c61e0b",
+      "cached_unit_ids": [
+        "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e"
+      ],
+      "cached_source_unit_ids": [
+        "9557ce8065f44a4f2ecf989aff2aa4090bde738761c57395db54aaf961b9e2a2",
+        "43fcb18ab9854aa2980bc10865a25a8b028701d1e9d41104fdefcd39bb6a5bb0",
+        "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464",
+        "fd0a80cb467cd8589904f010a7e4b48f455f2e574a368a4707549a3b9036bfcd"
+      ]
+    },
+    "ga_486b5d80ee588bc2": {
+      "anchor_id": "ga_486b5d80ee588bc2",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "HOW TO PLAY"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594"
+      ],
+      "cached_source_unit_ids": [
+        "77cb1d30a5f131068ee647cd8593528bc15eb6434c5b7f6152f66505adc16511",
+        "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+      ]
+    },
+    "ga_60ce6c21ab5ee395": {
+      "anchor_id": "ga_60ce6c21ab5ee395",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "DICE"
+      ],
+      "anchor_quote": "DICE — Swords & Wizardry uses several different kinds of dice, abbreviated according to how many sides they have.",
+      "quote_normalized_hash": "1eaaa2865ebeb2c3c64df170181ca63c",
+      "cached_unit_ids": [
+        "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+      ],
+      "cached_source_unit_ids": [
+        "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+      ]
+    },
+    "ga_424f7fa33be429f2": {
+      "anchor_id": "ga_424f7fa33be429f2",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "SAVING THROWS"
+      ],
+      "anchor_quote": "SAVING THROWS — From time to time, a spell or some other kind of hazard requires you to make a “saving throw.",
+      "quote_normalized_hash": "0fed9612ed8ff7a0b3989e29d13d306f",
+      "cached_unit_ids": [
+        "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b"
+      ],
+      "cached_source_unit_ids": [
+        "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b"
+      ]
+    },
+    "ga_09b1f158934bf215": {
+      "anchor_id": "ga_09b1f158934bf215",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "INITIATIVE AND ORDER OF BATTLE"
+      ],
+      "anchor_quote": "INITIATIVE AND ORDER OF BATTLE — When the party of adventurers comes into contact with enemies, the order of events is as follows: — 1.",
+      "quote_normalized_hash": "5dea9f4b8e468e23bb7a488164f07d98",
+      "cached_unit_ids": [
+        "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725"
+      ],
+      "cached_source_unit_ids": [
+        "00d210b96c57b01df9147d008f2ef93852436ec1118df2b7042f51bc766b8c42",
+        "828401297f15eeff5fafca1d4e454f496e72bce701d6175e3fda9e71ca74408f",
+        "d5a2f2b2e9e330b0a2f71da02735a1e2b97027f11c0b1401d6ea2c1853fe7e7b"
+      ]
+    },
+    "ga_5f91ec6d75955fa0": {
+      "anchor_id": "ga_5f91ec6d75955fa0",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "1. SURPRISE"
+      ],
+      "anchor_quote": "Take note: Monsters do not always leap to the attack.",
+      "quote_normalized_hash": "b92146320d452daead167da9b00e5b39",
+      "cached_unit_ids": [
+        "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420"
+      ],
+      "cached_source_unit_ids": [
+        "91feddda23437f87819abc7c289ef8f2643659cff2ba2ee60461cecaa35e7d61"
+      ]
+    },
+    "ga_2fb4485a1c640038": {
+      "anchor_id": "ga_2fb4485a1c640038",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "TIME"
+      ],
+      "anchor_quote": "TIME — Sometimes the Referee will rule that “an hour passes,” or even, “a month passes,” in the life of the intrepid adventurers.",
+      "quote_normalized_hash": "2473881ffce312e505125a6c17ffe3c2",
+      "cached_unit_ids": [
+        "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4"
+      ],
+      "cached_source_unit_ids": [
+        "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+        "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b"
+      ]
+    },
+    "ga_9ffc5b363e0dffcd": {
+      "anchor_id": "ga_9ffc5b363e0dffcd",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 32,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "Weight and Movement",
+        "Indoor, Underground, and City Movement"
+      ],
+      "anchor_quote": "Indoor, Underground, and City Movement — A turn represents 10 minutes, and a round represents 1 minute of combat.",
+      "quote_normalized_hash": "9b3468b3d7da19f9f35f0bc09317849a",
+      "cached_unit_ids": [
+        "b9d68622d4089f03e3c3f1e6eb11c9a9a43422c71d7c44abd6221b461266569c"
+      ],
+      "cached_source_unit_ids": [
+        "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97",
+        "0f1c08c0a25200cff16a667911370e585467842549fccf8b61a94f39a76f9f2f"
+      ]
+    },
+    "ga_701ae4fd2b1613f0": {
+      "anchor_id": "ga_701ae4fd2b1613f0",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 88,
+      "structural_path": [
+        "Referee Guide",
+        "Wilderness Adventures",
+        "Special Combat Rules",
+        "INITIATIVE AND COMBAT ROUNDS"
+      ],
+      "anchor_quote": "INITIATIVE AND COMBAT ROUNDS — Combat rounds are five minutes long if troops are grouped into five-man units, and 10 minutes long if they are grouped into 10-man units.",
+      "quote_normalized_hash": "8bf099fdcf0096e0a782439525f51327",
+      "cached_unit_ids": [
+        "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+      ],
+      "cached_source_unit_ids": [
+        "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+      ]
+    },
+    "ga_ee954ec2dea2dab1": {
+      "anchor_id": "ga_ee954ec2dea2dab1",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "2. DECLARE SPELLS"
+      ],
+      "anchor_quote": "2.",
+      "quote_normalized_hash": "6bc54f13bea593dc5e1c8e6b16249e66",
+      "cached_unit_ids": [
+        "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+      ],
+      "cached_source_unit_ids": [
+        "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+      ]
+    },
+    "ga_da612c7e0f4b9679": {
+      "anchor_id": "ga_da612c7e0f4b9679",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 36,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "(This system comes from the 1978 “Holmes Blue Book Set”)"
+      ],
+      "anchor_quote": "4.",
+      "quote_normalized_hash": "23f663630e2f28250c09d7a0c370f55e",
+      "cached_unit_ids": [
+        "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0"
+      ],
+      "cached_source_unit_ids": [
+        "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+      ]
+    },
+    "ga_08b2125e11abec50": {
+      "anchor_id": "ga_08b2125e11abec50",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "GETTING STARTED"
+      ],
+      "anchor_quote": "GETTING STARTED — Most likely, you already know basically how this game works.",
+      "quote_normalized_hash": "46fdf79dc9015e2e76c881a52e848228",
+      "cached_unit_ids": [
+        "b1edd8859bee08917610e56087ea88bc4459e980f70dee80e9f7a56604627842"
+      ],
+      "cached_source_unit_ids": [
+        "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9",
+        "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f"
+      ]
+    },
+    "ga_98a15d748ef5237e": {
+      "anchor_id": "ga_98a15d748ef5237e",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure",
+        "When in doubt, make a ruling."
+      ],
+      "anchor_quote": "The three most important things to know about running a game of Swords & Wizardry are these: — The rules are just guidelines — There is not a rule for everything.",
+      "quote_normalized_hash": "dd628f638e3cee1604891dfd46186819",
+      "cached_unit_ids": [
+        "d7e4a5f5ebe79ffb2b39482b9382734940d54a253363fcd3d1f1541471da9fdd"
+      ],
+      "cached_source_unit_ids": [
+        "8cf9007d452eeccf7fb71befc0c637cafd55880a5b76661f19081d0e6f223aa9",
+        "e211e07e83d3dadf89cd7a70353e68b66f0d15fb7b51010095158d7d282f664e"
+      ]
+    },
+    "ga_eaf7b38075d91a03": {
+      "anchor_id": "ga_eaf7b38075d91a03",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure"
+      ],
+      "anchor_quote": "As the Referee of a game of Swords & Wizardry, you do not have a character; instead, you are the player who is in charge of the game.",
+      "quote_normalized_hash": "be4f6dffc32f1d3f3844ec9d2b36c946",
+      "cached_unit_ids": [
+        "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+      ],
+      "cached_source_unit_ids": [
+        "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+      ]
+    },
+    "ga_91a339a99ae4d527": {
+      "anchor_id": "ga_91a339a99ae4d527",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "GAINING EXPERIENCE"
+      ],
+      "anchor_quote": "GAINING EXPERIENCE — Characters are awarded experience points (XP) for killing monsters and accumulating treasure.",
+      "quote_normalized_hash": "8ed780f7e10ac801f4b4941a21c41885",
+      "cached_unit_ids": [
+        "61d87c8ac0a7262fa5282dc58f5b73ad0312dd7bf29aade835c8ee922b4aac86"
+      ],
+      "cached_source_unit_ids": [
+        "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398",
+        "420dcc89264a1bb2dc54d7d07b8323d6b8a413624183975f7312785c032c5fd4",
+        "38f1c55a0d66312a73fb4db0c098793dbbc877bd0ed1121524ef78ffb49fad28"
+      ]
+    },
+    "ga_fd631ac4058d8228": {
+      "anchor_id": "ga_fd631ac4058d8228",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 15,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Fighter",
+        "FIGHTER"
+      ],
+      "anchor_quote": "FIGHTER — You are a warrior trained in battle and in the use of armor and weapons.",
+      "quote_normalized_hash": "1c170aca6378bae8beba1ccee5396749",
+      "cached_unit_ids": [
+        "a8eac700589abd86a2808f8b9a356ed458b6dc27f23cb8faffba0ee0c08b2a4b"
+      ],
+      "cached_source_unit_ids": [
+        "a8eac700589abd86a2808f8b9a356ed458b6dc27f23cb8faffba0ee0c08b2a4b"
+      ]
+    },
+    "ga_7dd3a9575524cd33": {
+      "anchor_id": "ga_7dd3a9575524cd33",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 27,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose an Alignment",
+        "EXPERIENCE POINTS (XP)"
+      ],
+      "anchor_quote": "EXPERIENCE POINTS (XP) — Any experience points received are divided evenly among all the classes of a multi-classed character, even when the character can no longer advance in one or more classes.",
+      "quote_normalized_hash": "e12f2ebdc7fc68fe8b11b371d806ebf3",
+      "cached_unit_ids": [
+        "20adedae21ef4baeae1c5d6ae298f286be90e3879f2489aae4822f5ff508d6df"
+      ],
+      "cached_source_unit_ids": [
+        "20adedae21ef4baeae1c5d6ae298f286be90e3879f2489aae4822f5ff508d6df"
+      ]
+    },
+    "ga_85ca1d3d39f207df": {
+      "anchor_id": "ga_85ca1d3d39f207df",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "SPELLS"
+      ],
+      "anchor_quote": "SECOND RANK — Spears and polearms in the second rank of a battle formation can attack by reaching through the first rank.",
+      "quote_normalized_hash": "4409db7fffcba9c460e30044d65095ce",
+      "cached_unit_ids": [
+        "ebcf70619161287e24d62941b327be513233dca5685731cabb0750176bee332d"
+      ],
+      "cached_source_unit_ids": [
+        "85114c4244055e4e5fdca042779766ca5c568fb6170a75b03fbd551a20d73869",
+        "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+      ]
+    },
+    "ga_656e5ee2c0f337d7": {
+      "anchor_id": "ga_656e5ee2c0f337d7",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 42,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Turning the Undead"
+      ],
+      "anchor_quote": "Turning the Undead — Roll 2d10 to determine the result: — <table><tr><td rowspan=\"2\">Challenge Level of Undead</td><td rowspan=\"2\">Specific Undead</td><td colspan=\"13\">Clerical Level</td></tr><tr><td>",
+      "quote_normalized_hash": "5e6cc1569749ddf86f0c9e7b63303112",
+      "cached_unit_ids": [
+        "baf16fe8697e5e305a6cf757f58ca007df6b62592b060a8d953a784fda264104"
+      ],
+      "cached_source_unit_ids": [
+        "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4",
+        "4369a62cdd3880852d27f7ce14865390d6c23b3af119ca22aaa9dac7e5943800"
+      ]
+    },
+    "ga_480893907bf53f8a": {
+      "anchor_id": "ga_480893907bf53f8a",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 42,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "No Neutral Clerics?"
+      ],
+      "anchor_quote": "Shadows might not be undead creatures in your campaign; even so, they might be subject to being turned, just as demons (also not undead) can be turned.",
+      "quote_normalized_hash": "e77424eea7b7e0f1173e1ae67865e14c",
+      "cached_unit_ids": [
+        "1f43ff6bc76b202a5751b2acfb269eb0777bd70feea04208dac3c066558c2f33"
+      ],
+      "cached_source_unit_ids": [
+        "db66b85977c210de2a27cb69325f767098d087f236167545402ae8d666ed97df",
+        "6aa25c6d4b0dc99da045f6d8f4f3746afa39c75a4a3e7dddde6e68d15212cf59"
+      ]
+    },
+    "ga_9126bca0d6e15ae6": {
+      "anchor_id": "ga_9126bca0d6e15ae6",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 11,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Cleric"
+      ],
+      "anchor_quote": "Hit points shown for levels after the character no longer gains full hit dice are the total combined number.",
+      "quote_normalized_hash": "e2a595c6a776205026b9ddc4900b3f5e",
+      "cached_unit_ids": [
+        "d21ad62b74f394fd3034d20f8c1617c21529d3e4ec44954284734672305a51f6"
+      ],
+      "cached_source_unit_ids": [
+        "8ef1bd36538784546fd62bdbbced0a8a73ffacfeb8e8adf382d0fbf3ad22f18f"
+      ]
+    },
+    "ga_f6744a2c962032a3": {
+      "anchor_id": "ga_f6744a2c962032a3",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 41,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "DAMAGE AND DEATH"
+      ],
+      "anchor_quote": "DAMAGE AND DEATH — When a character (or creature) is hit, the amount of damage is deducted from hit points.",
+      "quote_normalized_hash": "85a158c47e39f3bb7430e625febcd8e2",
+      "cached_unit_ids": [
+        "884ce2952bfaf3c2c0e078ad002ac5ee3ec5f6e01381bf45fa34a153f11f5076"
+      ],
+      "cached_source_unit_ids": [
+        "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af",
+        "5bc053d8cf3ea602363f79dc21aae7b4b3a7fe9c58fca75dd315b380c99d90a0"
+      ]
+    },
+    "ga_e281ab17486c153b": {
+      "anchor_id": "ga_e281ab17486c153b",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "MISSILE ATTACKS"
+      ],
+      "anchor_quote": "MISSILE ATTACKS — Missile attacks are attacks with a ranged weapon such as a bow, crossbow, sling, or thrown axe.",
+      "quote_normalized_hash": "9a12c3a3f29d9a61878357d73f44f07e",
+      "cached_unit_ids": [
+        "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+      ],
+      "cached_source_unit_ids": [
+        "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+      ]
+    },
+    "ga_359c6fea786ecf82": {
+      "anchor_id": "ga_359c6fea786ecf82",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 26,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Thief",
+        "SAVING THROWS"
+      ],
+      "anchor_quote": "SAVING THROWS — The saving throw of a multi-classed character is the best available from the different choices, including any bonuses from a character class.",
+      "quote_normalized_hash": "bcc13d0c13c922a3a2ed59d77edec41b",
+      "cached_unit_ids": [
+        "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43"
+      ],
+      "cached_source_unit_ids": [
+        "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43"
+      ]
+    },
+    "ga_7b9abe9a9dcca5d9": {
+      "anchor_id": "ga_7b9abe9a9dcca5d9",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Different Categories of Saving Throws"
+      ],
+      "anchor_quote": "Monsters can also make saving throws; a monster’s saving throw target number is listed in its description.",
+      "quote_normalized_hash": "0b928b4053fb0296583afb7f3fd7abe7",
+      "cached_unit_ids": [
+        "325c2e2794ff170a58dd9270307fa5c0fbc5d655e04f792edd38a30cd7d97b68"
+      ],
+      "cached_source_unit_ids": [
+        "4d77d4b1af9a539b93b779ac0ea296073f00d16cd65bda28d1a6b860b89865fa",
+        "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+      ]
+    },
+    "ga_8f55ed09235b1f92": {
+      "anchor_id": "ga_8f55ed09235b1f92",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 41,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "MORALE"
+      ],
+      "anchor_quote": "MORALE — Certain monsters, such as mindless or undead creatures, are fearless and always fight to the death.",
+      "quote_normalized_hash": "8c3a2ddc00a89aa76e39a23e4c6f204d",
+      "cached_unit_ids": [
+        "e73e3371529b1c35d81ed8f8eb42a74f720a80d7024a2c392081cfc02261957e"
+      ],
+      "cached_source_unit_ids": [
+        "440daac3e0e9e33d167b850135b5ae45554ad3b14b1919086b274162636fd049",
+        "8185cc9233f5c462a5d831060b4ff64f236aa5ff4c58310b6c6cad93b064d962",
+        "e91b5cbb4d51d32b5cc21a6d63e2e22c7570bf11921d6f2375a4545f95d23407",
+        "79b9dede5d4a0dba444c7dabe979afb2527658c16f32a782f03843eda2b0b62f",
+        "167317d8136b97fcfee470baa745c76e34e6b2b82d264f837cff534d9fc872c2",
+        "ca9f8a433f2221689ca064df1e896d5cea705972ebddff5c12f2bb68791bc18f",
+        "533f5f57ae6a9efca7d93cf0b91e5f86d257d1457cdd25b1638319a02bf74947",
+        "ea61715463f6364c27df06ec9e466b87c61e8232e34fcfd11e14e603ef77064b",
+        "99d8d68e5ccec89f1c1d5ee0b9f7bcc74e39fcaf5ca9753e132fda7c8e0b3d48",
+        "7095d8ffb1fa8271cc0fe754ca282c9d06ff917f0f915863e593365014c4e4cf",
+        "ee3bcba979d093e126811349cbcf731496b67fa03aaba82bbaf284b07166bc3f",
+        "a41c2d419653856a55642aaaef4d7c98254dc1aa127d6b406d0a679db1f6a99c",
+        "35dee43495407365bdf1c1d4bf37edcf9f9a9f07e56f0e1f3da86638560f64e1",
+        "141529b56a81a67bb8d4e27e60394191a44704cbae81e817afcee1d9f88f6c5b",
+        "ceaef083ebadde9f223514a3ae8678b390045f4da220df3f2a17d12b56b1d54e",
+        "c14a149d65a1f70ddc24be9c890765589ab9c38e9f30198d1154eb9238f24fb8",
+        "8ba5caccabe032d14a7b5cd80a8dc1a55751f720bf0795fc77dc631282ec49aa",
+        "30976af5fd0de3f0b3afe8627584dec76ee0bf7791e0be6c108504a322095b6d",
+        "60476707fa2747a8780e8c461f7a038e7c19fbc92f4e44a7ad98cea289fe2e18",
+        "0f9b22a2a82e646ff62d9f5fc74c3ea458562aef8248a0ec66693e61ef3b7e52",
+        "e90b1babb7146cd942259aadd4bc6e892d8041206ae913f3e3c03ea6698125b7",
+        "e7711690eb06a01c1091e49da188e76bd34ce54b3b9658ea9066fda8cf4f60a8",
+        "5ad98b089262a29e375c70f9f09023519a3171ba9077dd8713c88e722caaafd7",
+        "3ffa93e0e5d6f52c5119814ef34cb12b435e7fa897ae4de3d6bc818ed15893f2",
+        "4cdd3d66dd36830ff762bff8f5902da55b20f3d7deb8c16b6f8f4899ccbb940c",
+        "6cc9126ecd0146fd855fb689838242f3dd807da8d6637abef98900116115260b",
+        "1100da8e91db0801f6b12aecdc15d363df5c141955c72019d00af6c47e6b654e",
+        "7e165fb64dec492ec6ee7fdc13eee14ecc4c481bcc07b211734022eea25af5c6",
+        "99b661e37fd89876ecd9239ceb4cc6e4f3b5ef1496f5447457338d40c49a5f08",
+        "41309954daeefbde8a195ef92bec191ad092b4c84c1b8429a130afe1452d0f8a",
+        "0157f3d0329faf55797d3b763cfecb64c61a2b28ad754cab977b9b277eb212da",
+        "4009819128884d95996a36ab8dfa3d798a27e451d0ec5ef3eae80a606232d45a",
+        "88aaf92c25a32c86dff6566dd83764cd888799f3c8e7f37bb9083e230891a0e4",
+        "38a300a885c827a1de523e6c4d4f004ca1bbca5cc77827efc74d09f8a1b72e52",
+        "283f91f351b137da81741a21ca9f9778f4a89c0a092a5c4b6d8503d665df20b9",
+        "dc2117e1272b952114eafc5cab0689172277d90f3ffb6ca00d4e8f90e4226852",
+        "0d0002b4e3325f9de65904af52d591353d00043aafcdbf6daf2a6424e0fc4d29",
+        "840917aa3fe5184c11945f84a6607c7a2d5dcd7aa79acb8f21946acddf67cacd",
+        "d79baef0832d17730bd588c9ba67e91b8550d5093e033e4ad63ba7d28239f86a",
+        "32f8c62793444ca6179139c72090ffa6322eda9785b15dc95b2acc413129d521",
+        "f0450c8cfe39fe54eff1e9447653ed9b5f1945742e41aaf06fffe003eeade0c5",
+        "0f79a9e8980857c37cabf2462757404595cded0cede716d8a20dfc19402543f8",
+        "9df86bcbcf355821d10ce1de8916a9ac3cdc29ba7f7f280ea2da5ac48e57cf58",
+        "46c6a5151ea08d18595ca47408f103d54fabb5f1775a336619ea696cc2625b59",
+        "a885c42fb88130bcb1900a8e34d05376d258fb9dbdf52fe42e682c78b5c07605",
+        "63e2c2fcfbea8c609931f7d262dce7c6d160ace33465916e9fbe1d557828b9dd",
+        "5d7e1a12c0a7b0d2c021e8248a6298ba71a1289476247ae657599923700b4a30",
+        "4b7fca58b261b77f204de34a72cab16131adc352a9289352e30c461f7e3f3c52",
+        "cd90ffb414538be20a60654f9b0c85f27453cb8c08bf46dc5206ece18bebb3e9",
+        "5fbc2d8d806a6486850db97ea6768f43c1a70a8946fa403ae42ed933b2c6547d",
+        "6b0ff026f5ce1f4b5c155890b13312dd350aa018df4c07a541afca58122910d7",
+        "95552c31fed709184c2720b54c8a1b0926390d673caa1b0318cb72f85639841a",
+        "5d237bbf908a4b9fcff77e0b7ae7b4c49a43347503fafd32549876e5dce09bfb",
+        "dac51e4b56e6801013eedcd306e59f48f7f51f6ab6e0bd766b266050614831aa",
+        "92f910e985924de6300fd2ffea540188812d2b16223c36d02d9b3f2a26d1bfb6",
+        "3c8b7610ba0b7d05136af58e0289150db50248370641acdee8706a57f79ded3d",
+        "69427f2bf1a5f82900d5b31a6d7306b4eced84f34dc1373368a7a490ee4f9cfd",
+        "1eb837ac2ed2624c88b31e18d351c55bca600845f804b92f80bdbc14954c1d78",
+        "f1ca07e0c1616d24714c8424e2356ed7a4172a43b4e67ad2ea08aa39953160a2",
+        "47c041e5b98eddeabcd67976c059b8686863f1e658920021bfd2382555128028",
+        "d8b65325d2e097ce571e86b683a8c17ee2cbac8bf8444cc5bbf9e4b8fa512288",
+        "6b33c14b7298ac47fe9e59479aeddd42b926b606c03a6cf5b07721ade8bf7a74",
+        "3f2f432d4f6d0ed2933c4b800e6ee803ea8c5b1a94cb556f31f4f490627e1b49",
+        "3e6871f94461b73435f2d7830e76772793c8266b3f4abcd6883b159e4fb5ec11",
+        "2fb6397bc288f92934314d0ed438fbe45163f54a2b5f2b203fa4bacdacf4594b",
+        "c0134aea39d010d138d11168bc0174efdb31f505fdbe90f8ba39cbffa1792d27",
+        "2cce5354692d739b58c1ab53b5cb2ca433f073340b339677af85bab8484f2dec",
+        "8de8a94241dedb67cc94978feaac8d701a7ccbaa05d0e639a760c98b982b7ed9",
+        "12960da45a72d7da8c648e34ba30dd743827731e8b803d9bbf1590dc0c765563"
+      ]
+    },
+    "ga_06db2586874daf72": {
+      "anchor_id": "ga_06db2586874daf72",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 32,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "Weight and Movement",
+        "WEIGHT AND MOVEMENT"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "430507986040ffde475efac80985fce3216b260bf971343924377636bd8a4d39"
+      ],
+      "cached_source_unit_ids": [
+        "5f76a16e9722341510169f616caabf1c0bbd956b89384f3819c129fad5d73059",
+        "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd"
+      ]
+    },
+    "ga_e87ad6a7eebaeea8": {
+      "anchor_id": "ga_e87ad6a7eebaeea8",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 79,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure",
+        "Monsters in the Dungeon",
+        "MIXING MONSTERS IN AN ENCOUNTER"
+      ],
+      "anchor_quote": "Wandering monsters are often checked on a roll of 1 in 6 each turn, but the Referee is, of course, free to make such encounters less common (checking only once per three turns, for example).",
+      "quote_normalized_hash": "06a5a285fa78d6d8e80c6964d0eb7d67",
+      "cached_unit_ids": [
+        "cc4cc7cb6526bc9d1817bf754744146f84961a04158d5e54c3ad83cbc0895873"
+      ],
+      "cached_source_unit_ids": [
+        "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa"
+      ]
+    },
+    "ga_af87507068ab2a42": {
+      "anchor_id": "ga_af87507068ab2a42",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 29,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "ITEM DESCRIPTIONS"
+      ],
+      "anchor_quote": "ITEM DESCRIPTIONS — Garlic, charmed: A head of garlic with hexes and blessings on it.",
+      "quote_normalized_hash": "834297981f9b5ce84d202e59817f850e",
+      "cached_unit_ids": [
+        "9dae2cbb163e453c0bdb26fb841ddf85c6aba2c84867e96b4137615b163d7be5"
+      ],
+      "cached_source_unit_ids": [
+        "8e69b62a123b35b2d84673ea4213a0d13dc26ace65aa91aa440aa367dde9c9e4",
+        "c374301e6e9e9913d419d01ebe47175aa7b8c11b1fbea089c3ce12eeb29c751c",
+        "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47"
+      ]
+    }
+  }
+}

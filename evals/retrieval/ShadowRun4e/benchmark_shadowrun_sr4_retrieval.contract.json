@@ -1,0 +1,937 @@
+{
+  "version": "retrieval_lab_benchmark_contract_v2",
+  "benchmark_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/ShadowRun4e/benchmark_shadowrun_sr4_retrieval.json",
+  "benchmark_sha256": "82b5a8e4c93455f9b2439c2a73d64be18957b7676ad4f88ad3232f6c01247644",
+  "query_count": 50,
+  "benchmark_kind": "manual",
+  "benchmark_surface": "active",
+  "benchmark_definition": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/ShadowRun4e/benchmark_shadowrun_sr4_retrieval.json",
+    "sha256": "82b5a8e4c93455f9b2439c2a73d64be18957b7676ad4f88ad3232f6c01247644"
+  },
+  "benchmark_projection": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/ShadowRun4e/benchmark_shadowrun_sr4_retrieval.json",
+    "sha256": "82b5a8e4c93455f9b2439c2a73d64be18957b7676ad4f88ad3232f6c01247644",
+    "query_count": 50,
+    "benchmark_kind": "manual",
+    "benchmark_surface": "active"
+  },
+  "run_contract": {
+    "run_id": "retrieval_lab_CAT2600A_SR4Anniversary_v1_recipe_standardized",
+    "substrate_version": "v1",
+    "corpus_fingerprint": "0006b2ed43d61ad60e46befd8f6e334c6cf25928a832a7d0bccd26419faa2af2",
+    "corpus_content_fingerprint": "7b94b0d0e0a936cd4d629bf08aa6485893dab571415571b6b03a49931d43896a",
+    "corpus_unit_count": 2313,
+    "corpus_index_path": "",
+    "corpus_index_sha256": "",
+    "corpus_recipe": {
+      "substrate_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/out/mark3_evaluation/CAT2600A_SR4Anniversary",
+      "document_id": "CAT2600A_SR4Anniversary",
+      "min_chars": 200,
+      "merge_chunks": true,
+      "merge_max_chars": 2000
+    }
+  },
+  "lineage": {},
+  "alignment_summary": {
+    "queries_total": 50,
+    "queries_with_contract_gold_ids": 50,
+    "queries_with_missing_gold_ids": 0,
+    "queries_with_no_surviving_gold_ids": 0,
+    "missing_gold_ids_total": 0,
+    "missing_gold_ids_unique": [],
+    "per_query": [
+      {
+        "query_id": "sr4_001",
+        "contract_gold_ids": [
+          "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+          "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+          "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+          "a22e486fb928c1212a5fc219ae5a0415474ea8d2596a27789d1e1892b2c43734",
+          "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+        ],
+        "present_gold_ids": [
+          "adfe0d06324d180aa5bdb92886d7d0ab7e2fb91d31fbd8fc3611c23bf53da744",
+          "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763",
+          "3bc392dc497bbc98aef0ad71422f8c27180a158e956ffad985fcdb93d173668d",
+          "a22e486fb928c1212a5fc219ae5a0415474ea8d2596a27789d1e1892b2c43734",
+          "90f5aab40293113ef5ef41d23e48a1d2a4ebb2fd1ebb661a91e712a2c9daa8b0"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_002",
+        "contract_gold_ids": [
+          "c0f49d82cd4f45fd8200743e09eaedfc1c0feae6a88c1243065dcc3ba42dec1f",
+          "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0"
+        ],
+        "present_gold_ids": [
+          "c0f49d82cd4f45fd8200743e09eaedfc1c0feae6a88c1243065dcc3ba42dec1f",
+          "05623ddeb79b2c90b286853339c7740aa84f3d1113d9189db5715c3bc5cd47e0"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_003",
+        "contract_gold_ids": [
+          "c0f49d82cd4f45fd8200743e09eaedfc1c0feae6a88c1243065dcc3ba42dec1f",
+          "04be11d6b72892a97751d4f0bda9942c53ab7b7ab284e2d8de0f8b87fcfd32d7"
+        ],
+        "present_gold_ids": [
+          "c0f49d82cd4f45fd8200743e09eaedfc1c0feae6a88c1243065dcc3ba42dec1f",
+          "04be11d6b72892a97751d4f0bda9942c53ab7b7ab284e2d8de0f8b87fcfd32d7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_004",
+        "contract_gold_ids": [
+          "b8e0fd443e3d18c10d7b59d31ba411f50efb459ebdd3076f3e95e3a1ef6b365f"
+        ],
+        "present_gold_ids": [
+          "b8e0fd443e3d18c10d7b59d31ba411f50efb459ebdd3076f3e95e3a1ef6b365f"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 1,
+        "present_gold_count": 1,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_005",
+        "contract_gold_ids": [
+          "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f",
+          "40744f4c1a324c163b2b64660bf9da388c1fa3798b0114241179d577db3e355a",
+          "9a5ccf32ebe63ba7a46f377782bd321b3da0a8a1ece1c57c644967b5cde4b60a",
+          "43d99514bb2a25c4ff609b46885d9c80b5c0ed2fc4db4549c3516ee41362baf0",
+          "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9",
+          "0414aa11364acfa3bdbb0685f2d1c5ae032f8602c62a1f682eca08a88290e979",
+          "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6",
+          "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+        ],
+        "present_gold_ids": [
+          "98afc68a2325ff0420b1c10f03877703092794eeef5804698c2cde84d4dfe82f",
+          "40744f4c1a324c163b2b64660bf9da388c1fa3798b0114241179d577db3e355a",
+          "9a5ccf32ebe63ba7a46f377782bd321b3da0a8a1ece1c57c644967b5cde4b60a",
+          "43d99514bb2a25c4ff609b46885d9c80b5c0ed2fc4db4549c3516ee41362baf0",
+          "22e3889e3b693983a869cdfd4f7dfeb4694cbf3c7f521fc6e486866876af2cf9",
+          "0414aa11364acfa3bdbb0685f2d1c5ae032f8602c62a1f682eca08a88290e979",
+          "028744d79c723ccec4a0edf525b2f856237061b62d4b62841ebf6b53971e63b6",
+          "aa6b286f451a0be308c63c262209cc0481829ab3bfec314d7e818885616ca763"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 8,
+        "present_gold_count": 8,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_006",
+        "contract_gold_ids": [
+          "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+          "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+          "5bb23c1fd42a9ee159879de011420f8d50ad036c21461062186830f694447f4a",
+          "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+        ],
+        "present_gold_ids": [
+          "b243fb89503c15fd8f51d66a0ff7f668ec0bb0256489876157117e903f102757",
+          "3b755da67e911fd3ddc0f3e66f35cfe19e01fa780aa3b69740e73aa0b166d2c7",
+          "5bb23c1fd42a9ee159879de011420f8d50ad036c21461062186830f694447f4a",
+          "a6e5ef5325a70c6ba2525f600e52e43a358acd2341e4b455a84aa45df90bbf38"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_007",
+        "contract_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+        ],
+        "present_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_008",
+        "contract_gold_ids": [
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+        ],
+        "present_gold_ids": [
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_009",
+        "contract_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "9772e1bac57904eae596d257aa3aea586e7923ace09beff6d427e1c1024233c4",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a",
+          "c35a19b93bd0cf717800e4770294ef91cfc6dc88f2077a74873d89aec53dad71"
+        ],
+        "present_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "9772e1bac57904eae596d257aa3aea586e7923ace09beff6d427e1c1024233c4",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a",
+          "c35a19b93bd0cf717800e4770294ef91cfc6dc88f2077a74873d89aec53dad71"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_010",
+        "contract_gold_ids": [
+          "d4248eac498cd3650111103fa68a9eea282d7562615422b8fe581011d76aaf87",
+          "0fd98d247c78da2471e0878b9ceea17d606f0ef3c3d968281e07983220506cef",
+          "385a32189fc75348766d5f8dd4a9262799903047de121ac1771fe9dbc3f9d00e",
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5"
+        ],
+        "present_gold_ids": [
+          "d4248eac498cd3650111103fa68a9eea282d7562615422b8fe581011d76aaf87",
+          "0fd98d247c78da2471e0878b9ceea17d606f0ef3c3d968281e07983220506cef",
+          "385a32189fc75348766d5f8dd4a9262799903047de121ac1771fe9dbc3f9d00e",
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_011",
+        "contract_gold_ids": [
+          "1fdebef5ed0c5b57fdcede53d84f3d0e9146c1c531d5850b2e97e173526a38d1",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80"
+        ],
+        "present_gold_ids": [
+          "1fdebef5ed0c5b57fdcede53d84f3d0e9146c1c531d5850b2e97e173526a38d1",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_012",
+        "contract_gold_ids": [
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5",
+          "53c7359d8596cf9fccbd72acdebde5c516e057f60d816d12a06c4ed899c0b0c9",
+          "9772e1bac57904eae596d257aa3aea586e7923ace09beff6d427e1c1024233c4",
+          "cef5312f699589146603e372edbfe64979b8a5f4bc841348c8afeb5d90a594d7"
+        ],
+        "present_gold_ids": [
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5",
+          "53c7359d8596cf9fccbd72acdebde5c516e057f60d816d12a06c4ed899c0b0c9",
+          "9772e1bac57904eae596d257aa3aea586e7923ace09beff6d427e1c1024233c4",
+          "cef5312f699589146603e372edbfe64979b8a5f4bc841348c8afeb5d90a594d7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_013",
+        "contract_gold_ids": [
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2",
+          "0aae7ccb6090901015724adfeef067f8d4b38c8fea905597c67f71e30fb988e8",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa"
+        ],
+        "present_gold_ids": [
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2",
+          "0aae7ccb6090901015724adfeef067f8d4b38c8fea905597c67f71e30fb988e8",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_014",
+        "contract_gold_ids": [
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5",
+          "4aa64d4a7e028adebee6b924f623b97bd55943e1fd9a1aa06f348948390f4cb2",
+          "7ea6ab2ab84b0ce24d51344f5f454c9a97e414a896a1092831d7ef86c055a033",
+          "52c3282f1463e981de47a629a3bc72533feabbd38e8ea1b4f91461740c642b75"
+        ],
+        "present_gold_ids": [
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5",
+          "4aa64d4a7e028adebee6b924f623b97bd55943e1fd9a1aa06f348948390f4cb2",
+          "7ea6ab2ab84b0ce24d51344f5f454c9a97e414a896a1092831d7ef86c055a033",
+          "52c3282f1463e981de47a629a3bc72533feabbd38e8ea1b4f91461740c642b75"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_015",
+        "contract_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5"
+        ],
+        "present_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_016",
+        "contract_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "4aa64d4a7e028adebee6b924f623b97bd55943e1fd9a1aa06f348948390f4cb2"
+        ],
+        "present_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "4aa64d4a7e028adebee6b924f623b97bd55943e1fd9a1aa06f348948390f4cb2"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_017",
+        "contract_gold_ids": [
+          "9c8fefc2ef6a572bf5e61465a7b344e67ffdf682159ef42b4f607951179f56cf",
+          "52c3282f1463e981de47a629a3bc72533feabbd38e8ea1b4f91461740c642b75",
+          "c233a186131fd674bd2a49311cbea2251aa6236427d6e8d191fb0f7689b1201e"
+        ],
+        "present_gold_ids": [
+          "9c8fefc2ef6a572bf5e61465a7b344e67ffdf682159ef42b4f607951179f56cf",
+          "52c3282f1463e981de47a629a3bc72533feabbd38e8ea1b4f91461740c642b75",
+          "c233a186131fd674bd2a49311cbea2251aa6236427d6e8d191fb0f7689b1201e"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_018",
+        "contract_gold_ids": [
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c"
+        ],
+        "present_gold_ids": [
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "c7122a58c12cefb585278d8f7c4f15c37eeff123fe282efb582978fda182c36c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_019",
+        "contract_gold_ids": [
+          "1c884fb46bed8bf18460e75afe6939b02e3dc60a3a04d6c736440f41983bce78",
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "af82def3c294d4c36e9a1957f6472485abc08d78c91cfbea9e3f7d1d23195281",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "present_gold_ids": [
+          "1c884fb46bed8bf18460e75afe6939b02e3dc60a3a04d6c736440f41983bce78",
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "af82def3c294d4c36e9a1957f6472485abc08d78c91cfbea9e3f7d1d23195281",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_020",
+        "contract_gold_ids": [
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "present_gold_ids": [
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_021",
+        "contract_gold_ids": [
+          "d74d214583720152fcc2e63c6e0546326f4515a1fa839e8d2a6a24b8d3021676",
+          "4d905a339790fd23d4c70ac249cd4f742a0ba1aadc7f289d8ce9b3a04f9cbadf",
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "f8752d624ef15847cd5b54efe1d8aa08c5319b7b42f59e9bd8d3fdaa391b31bd"
+        ],
+        "present_gold_ids": [
+          "d74d214583720152fcc2e63c6e0546326f4515a1fa839e8d2a6a24b8d3021676",
+          "4d905a339790fd23d4c70ac249cd4f742a0ba1aadc7f289d8ce9b3a04f9cbadf",
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "f8752d624ef15847cd5b54efe1d8aa08c5319b7b42f59e9bd8d3fdaa391b31bd"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_022",
+        "contract_gold_ids": [
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d"
+        ],
+        "present_gold_ids": [
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_023",
+        "contract_gold_ids": [
+          "6265b4ba1d3a452b7b98a923f4e7d776977f22f6921985fac041700d1410e5f2",
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "02edecbd706fab0f593b928a658503837e6739469dcc6a5e9fd51c7355a5be85"
+        ],
+        "present_gold_ids": [
+          "6265b4ba1d3a452b7b98a923f4e7d776977f22f6921985fac041700d1410e5f2",
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "02edecbd706fab0f593b928a658503837e6739469dcc6a5e9fd51c7355a5be85"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_024",
+        "contract_gold_ids": [
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "57e0ef7b46073e95470917a8d73e95c4e4063e199adfc9c9078402a6a40e43b5"
+        ],
+        "present_gold_ids": [
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "57e0ef7b46073e95470917a8d73e95c4e4063e199adfc9c9078402a6a40e43b5"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_025",
+        "contract_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b",
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "333e50919d42dc0e5bf096fb184028238b571f44ec34754b923117b9b8f3313c"
+        ],
+        "present_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b",
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "333e50919d42dc0e5bf096fb184028238b571f44ec34754b923117b9b8f3313c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_026",
+        "contract_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2"
+        ],
+        "present_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a",
+          "867f4d35284a6c907965907bd09d471b3efaa5ea26d0e856833a7b7aa575d1a7",
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_027",
+        "contract_gold_ids": [
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "53c7359d8596cf9fccbd72acdebde5c516e057f60d816d12a06c4ed899c0b0c9",
+          "458429c6f1d06ed0f70f791036735a7f14507da6a51d67e143edadec17f1847f"
+        ],
+        "present_gold_ids": [
+          "9040d6fe1dfb20b4d7f7f31e865a681dda5bc7ef2251ff46d7361244d470aac5",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "53c7359d8596cf9fccbd72acdebde5c516e057f60d816d12a06c4ed899c0b0c9",
+          "458429c6f1d06ed0f70f791036735a7f14507da6a51d67e143edadec17f1847f"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_028",
+        "contract_gold_ids": [
+          "3eb2bdb8edd5f6584b4aa337b4aa2387a204821f5c6fbd3be03ffe751388969c",
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe"
+        ],
+        "present_gold_ids": [
+          "3eb2bdb8edd5f6584b4aa337b4aa2387a204821f5c6fbd3be03ffe751388969c",
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_029",
+        "contract_gold_ids": [
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "9c8700328f64f08074bcbeccd1b9e06856291206c9234a35e6b87acc30e51949",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa"
+        ],
+        "present_gold_ids": [
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "9c8700328f64f08074bcbeccd1b9e06856291206c9234a35e6b87acc30e51949",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_030",
+        "contract_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a"
+        ],
+        "present_gold_ids": [
+          "ca426f518701bae7ff15db650b67c03bc4d5ac16ce7b71c02fe33b6a63393e3b",
+          "c183ffef2a573753e05c44e4f5a1ebb16973aaf49bbc5cac86fd7ab42c9754c8",
+          "52f844e8928f86df0fb5a30f58ff3013b877a8a6be9fc2ec2c6b183a78fe217a"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_031",
+        "contract_gold_ids": [
+          "b6afbf1d048a7595c16807017fd8cfc3b7c918569b2c1371f0ae924dd226b29d"
+        ],
+        "present_gold_ids": [
+          "b6afbf1d048a7595c16807017fd8cfc3b7c918569b2c1371f0ae924dd226b29d"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 1,
+        "present_gold_count": 1,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_032",
+        "contract_gold_ids": [
+          "2e64568371b716616f8d778ed49cb5d706687ab2e4c0fd9e929d8770b5d9b813",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "1c884fb46bed8bf18460e75afe6939b02e3dc60a3a04d6c736440f41983bce78",
+          "cef5312f699589146603e372edbfe64979b8a5f4bc841348c8afeb5d90a594d7"
+        ],
+        "present_gold_ids": [
+          "2e64568371b716616f8d778ed49cb5d706687ab2e4c0fd9e929d8770b5d9b813",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "30a2762ccac5eb608b303535bed01a1608c9bf058d6aeb28a3bc041a1ddc8f80",
+          "1c884fb46bed8bf18460e75afe6939b02e3dc60a3a04d6c736440f41983bce78",
+          "cef5312f699589146603e372edbfe64979b8a5f4bc841348c8afeb5d90a594d7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_033",
+        "contract_gold_ids": [
+          "353defe921dd2ac0b67c88d60c88fb896cc9570760fd64d4415bd0968a32b3e2",
+          "af82def3c294d4c36e9a1957f6472485abc08d78c91cfbea9e3f7d1d23195281",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "e3f9b2feb75e4dc117526b13bae053fb27bb1050a0fea6b8c8425395cc347b63"
+        ],
+        "present_gold_ids": [
+          "353defe921dd2ac0b67c88d60c88fb896cc9570760fd64d4415bd0968a32b3e2",
+          "af82def3c294d4c36e9a1957f6472485abc08d78c91cfbea9e3f7d1d23195281",
+          "971858df4ede91fb2c14d93ee5a3afec7ed11941cb150d6fb6e7b290f2bc06fe",
+          "e3f9b2feb75e4dc117526b13bae053fb27bb1050a0fea6b8c8425395cc347b63"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_034",
+        "contract_gold_ids": [
+          "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+          "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "f196de8507f05a9a6ed338791af4487212baf3e9623092c2ce531ed884d85469",
+          "83724a337df4bc06ef98e9d28daa9afdfca9445a09e944b4c8b5f273e79d8a5d"
+        ],
+        "present_gold_ids": [
+          "bf4303616f67ab7b202ab7bf9ea7fb85c4ac87571dc4834318ca4f852ccb5f86",
+          "ae3912261e568d2007211cd0f2dad2f95e7263a1f87ddb34aef42d3c83da8e0b",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "f196de8507f05a9a6ed338791af4487212baf3e9623092c2ce531ed884d85469",
+          "83724a337df4bc06ef98e9d28daa9afdfca9445a09e944b4c8b5f273e79d8a5d"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_035",
+        "contract_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "333e50919d42dc0e5bf096fb184028238b571f44ec34754b923117b9b8f3313c",
+          "216bd82e6d8db397661b63ba7882b7611a1569cff68452f032f469b7168b2b3b"
+        ],
+        "present_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "333e50919d42dc0e5bf096fb184028238b571f44ec34754b923117b9b8f3313c",
+          "216bd82e6d8db397661b63ba7882b7611a1569cff68452f032f469b7168b2b3b"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_036",
+        "contract_gold_ids": [
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "f196de8507f05a9a6ed338791af4487212baf3e9623092c2ce531ed884d85469",
+          "d340a6b56b4dd04042fc8b7db71d11726b05efcaa1e7137068888720a5558a2c"
+        ],
+        "present_gold_ids": [
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "bd75cccd55072d583658041274317eec24fac2611867c71d5982f3d4aac3e7dc",
+          "f196de8507f05a9a6ed338791af4487212baf3e9623092c2ce531ed884d85469",
+          "d340a6b56b4dd04042fc8b7db71d11726b05efcaa1e7137068888720a5558a2c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_037",
+        "contract_gold_ids": [
+          "5880af75f14d0c49d6e9e88fe376dbdb38476ee9f3068f9c14d30fd02b39e8d5",
+          "cc450ba4dcfcf0e7a2bbac9b41f785220f88b299f301a11e3c7ed5c7d7158931"
+        ],
+        "present_gold_ids": [
+          "5880af75f14d0c49d6e9e88fe376dbdb38476ee9f3068f9c14d30fd02b39e8d5",
+          "cc450ba4dcfcf0e7a2bbac9b41f785220f88b299f301a11e3c7ed5c7d7158931"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_038",
+        "contract_gold_ids": [
+          "dbeb2dff85c8682bd607279b42ca5d72c9836216a1db30598c4110f9d3b04803",
+          "b0249913763d9e5d030c84881762bb132284372db0b29d0fca7e04050d398faf"
+        ],
+        "present_gold_ids": [
+          "dbeb2dff85c8682bd607279b42ca5d72c9836216a1db30598c4110f9d3b04803",
+          "b0249913763d9e5d030c84881762bb132284372db0b29d0fca7e04050d398faf"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_039",
+        "contract_gold_ids": [
+          "5c4c68c2ec63fd188ad837704f6eaae2677aa120a166ab8f1c28d99b8ed32bbb",
+          "34059187671660333125348382434bf3e33e5e0297b445f8e4b443cc24857636",
+          "9ecceee47fe26c64ed6387d95fd30decb503499cc083bf2d8c008f9fe5c0d31c"
+        ],
+        "present_gold_ids": [
+          "5c4c68c2ec63fd188ad837704f6eaae2677aa120a166ab8f1c28d99b8ed32bbb",
+          "34059187671660333125348382434bf3e33e5e0297b445f8e4b443cc24857636",
+          "9ecceee47fe26c64ed6387d95fd30decb503499cc083bf2d8c008f9fe5c0d31c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_040",
+        "contract_gold_ids": [
+          "4d905a339790fd23d4c70ac249cd4f742a0ba1aadc7f289d8ce9b3a04f9cbadf",
+          "e93b1cbad52fad9db524156c1e426bb4a0f0006c189e2f7531b85c5086085357"
+        ],
+        "present_gold_ids": [
+          "4d905a339790fd23d4c70ac249cd4f742a0ba1aadc7f289d8ce9b3a04f9cbadf",
+          "e93b1cbad52fad9db524156c1e426bb4a0f0006c189e2f7531b85c5086085357"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_041",
+        "contract_gold_ids": [
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+          "2f4aef485ad52b942694dbaa67ba4c241cd5f13aae2b13b550accd9e3dc2c9cb",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa",
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "present_gold_ids": [
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c",
+          "2f4aef485ad52b942694dbaa67ba4c241cd5f13aae2b13b550accd9e3dc2c9cb",
+          "ef2e16ecaf0f911aa4e77cd430b23867908f70d87476b9d1dfab250433a1c6fa",
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "bc4f21c28f0d4f1d162721c5463a3985f5102f0e75ae7f74d4a4417ed582444a"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 5,
+        "present_gold_count": 5,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_042",
+        "contract_gold_ids": [
+          "e065f0c98bce24f9d075c53f2f54f67916902d1550e46435b3f178cfb87fe041",
+          "91029c9e6862e28d4f60bdc3dd0d0b8bc458352adc3febb4d27aaf3477eb2c02",
+          "5bf49d31deae492fd656444261596d0ec93a31570bd856f93c57401ea135509d"
+        ],
+        "present_gold_ids": [
+          "e065f0c98bce24f9d075c53f2f54f67916902d1550e46435b3f178cfb87fe041",
+          "91029c9e6862e28d4f60bdc3dd0d0b8bc458352adc3febb4d27aaf3477eb2c02",
+          "5bf49d31deae492fd656444261596d0ec93a31570bd856f93c57401ea135509d"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_043",
+        "contract_gold_ids": [
+          "d687c6b04ebe7b1760dc01d3403c6521d8453676f5af81fc94e74b2f0e629a20",
+          "34059187671660333125348382434bf3e33e5e0297b445f8e4b443cc24857636",
+          "fffd91aa809936e39bf951af27e734c85d7d0b1d703e26e6e8012cecb6234544",
+          "01e10727cccda24f027936c28d6c42dbffd464a94149c39874fe8ebd4251abcb",
+          "2f37cb407bdb627765c4bf7efc704914c22624a5beb93d2b6e4698fe1383351a",
+          "fe10ef0138f649ab0847a1a0e0ff78e5c444e64a052277a22c1e018a6e0c8038"
+        ],
+        "present_gold_ids": [
+          "d687c6b04ebe7b1760dc01d3403c6521d8453676f5af81fc94e74b2f0e629a20",
+          "34059187671660333125348382434bf3e33e5e0297b445f8e4b443cc24857636",
+          "fffd91aa809936e39bf951af27e734c85d7d0b1d703e26e6e8012cecb6234544",
+          "01e10727cccda24f027936c28d6c42dbffd464a94149c39874fe8ebd4251abcb",
+          "2f37cb407bdb627765c4bf7efc704914c22624a5beb93d2b6e4698fe1383351a",
+          "fe10ef0138f649ab0847a1a0e0ff78e5c444e64a052277a22c1e018a6e0c8038"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 6,
+        "present_gold_count": 6,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_044",
+        "contract_gold_ids": [
+          "8a1fc2d8c5c5c4f92fc0cf9db027ab311236b3194a84544e63968ba31aafc597",
+          "1f11dc1d1122a665615f775de6e2ab685008717f4671d40b74ed90009e678f14",
+          "c246fad0d5bd3ddff73d32aa1ddc938aa93e3379ef9bd4c9849c80b9694235b6",
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2"
+        ],
+        "present_gold_ids": [
+          "8a1fc2d8c5c5c4f92fc0cf9db027ab311236b3194a84544e63968ba31aafc597",
+          "1f11dc1d1122a665615f775de6e2ab685008717f4671d40b74ed90009e678f14",
+          "c246fad0d5bd3ddff73d32aa1ddc938aa93e3379ef9bd4c9849c80b9694235b6",
+          "b417e7a7262cbcae72347629cd64ca0be44ea4f3b15b07fe6ddeeefa1d2ebbd2"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_045",
+        "contract_gold_ids": [
+          "3a9f61e7160fc3cf5116bcc5c43d19ec41df6e8806a6859c8ee0cd0293ca5daa",
+          "e0dff525830235398cdcbb0989faf7da07de035363fe9b16a735f6fc1213de85",
+          "8282a4e4feadbfd53b5ce5d8969577b41e50dc3f4383ab358e5de8bc406c3239",
+          "ac22afaaf151a80bdf3417b1fc860f9b1375604c14b4eb54e410c76b58391ec7"
+        ],
+        "present_gold_ids": [
+          "3a9f61e7160fc3cf5116bcc5c43d19ec41df6e8806a6859c8ee0cd0293ca5daa",
+          "e0dff525830235398cdcbb0989faf7da07de035363fe9b16a735f6fc1213de85",
+          "8282a4e4feadbfd53b5ce5d8969577b41e50dc3f4383ab358e5de8bc406c3239",
+          "ac22afaaf151a80bdf3417b1fc860f9b1375604c14b4eb54e410c76b58391ec7"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_046",
+        "contract_gold_ids": [
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c"
+        ],
+        "present_gold_ids": [
+          "c85cbf1a71d19fd4128b7259585b116fc71296dd38f6a123df0d060c38b36c58",
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_047",
+        "contract_gold_ids": [
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "353defe921dd2ac0b67c88d60c88fb896cc9570760fd64d4415bd0968a32b3e2",
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c"
+        ],
+        "present_gold_ids": [
+          "d6dcdef68a754017e3f2b5ff936c87af647c32a44ab2066fc531fb6eba34cc09",
+          "353defe921dd2ac0b67c88d60c88fb896cc9570760fd64d4415bd0968a32b3e2",
+          "d8d627a463f7349852153a808bbf78103f1502499a05ef3dfa6b99e4569d3e4c"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 3,
+        "present_gold_count": 3,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_048",
+        "contract_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5"
+        ],
+        "present_gold_ids": [
+          "e5846cf03e3421dcf7fd8cf188dd3ae2dfe368574e097b88106f4628faedaa57",
+          "ed9879b1b263a8b6bf5e89d16c5f464d1c5420e395c0f6de58040f986305ffe5"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 2,
+        "present_gold_count": 2,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_049",
+        "contract_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "02edecbd706fab0f593b928a658503837e6739469dcc6a5e9fd51c7355a5be85",
+          "216bd82e6d8db397661b63ba7882b7611a1569cff68452f032f469b7168b2b3b",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b"
+        ],
+        "present_gold_ids": [
+          "4f722bc49048a85751bef4d8980ba0805ccf340447872c2f4b67beed6896d951",
+          "02edecbd706fab0f593b928a658503837e6739469dcc6a5e9fd51c7355a5be85",
+          "216bd82e6d8db397661b63ba7882b7611a1569cff68452f032f469b7168b2b3b",
+          "7326682a2d8d7a0437146a004475fe65a2ef4b682f38090a53a704ebcc0f8c4b"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      },
+      {
+        "query_id": "sr4_050",
+        "contract_gold_ids": [
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "d340a6b56b4dd04042fc8b7db71d11726b05efcaa1e7137068888720a5558a2c",
+          "57e0ef7b46073e95470917a8d73e95c4e4063e199adfc9c9078402a6a40e43b5"
+        ],
+        "present_gold_ids": [
+          "5aa5c4e429d87810aaa392c3e0d6b3f59399dd955d0d3f314f4d2140e4cf4c16",
+          "8cef3ffa19dd1577a52c81de2cf2f0d954c3130a270522bda34eb3a22daa093d",
+          "d340a6b56b4dd04042fc8b7db71d11726b05efcaa1e7137068888720a5558a2c",
+          "57e0ef7b46073e95470917a8d73e95c4e4063e199adfc9c9078402a6a40e43b5"
+        ],
+        "missing_gold_ids": [],
+        "contract_gold_count": 4,
+        "present_gold_count": 4,
+        "missing_gold_count": 0
+      }
+    ]
+  },
+  "projection_metadata": {
+    "ratified_track": "ratified_core",
+    "working_track": "working_set",
+    "gold_chunks_embedded": true
+  }
+}

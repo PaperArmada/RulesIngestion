@@ -1,0 +1,558 @@
+{
+  "metadata": {
+    "created_at": "2026-02-28T16:48:54.548320+00:00",
+    "source_benchmark": "evals/retrieval/StarFinderPlayerCore/starfinder_player_core_50q_benchmark.json",
+    "source_mapping": "evals/retrieval/StarFinderPlayerCore/starfinder_player_core_blind_eval_50q_legacy_to_current_map.json",
+    "source_retrieved_chunks": "out/retrieval_lab/experiments/starfinder_player_core_atomic_rules_20260228_062632/retrieved_chunks.json",
+    "model_key": "all-mpnet-base-v2",
+    "query_count": 50,
+    "notes": "Recommendation-only artifact; does not modify benchmark."
+  },
+  "recommendations": [
+    {
+      "query_id": "blind_001_01",
+      "question": "What abilities can cancel out Vent Gas when a Barathu uses it?",
+      "recommended_required_gold": [
+        "71e38daee08b923dd5e663da14ffc4b087cec62594443ad60c24c8a9b8acbe5c"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.370; facets=3; legacy_items=3. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_02",
+      "question": "Suggest some complimentary feats for a Level 9 Lashunta Solarian",
+      "recommended_required_gold": [
+        "6e263076b495090646952866507e6f602ceb773ac3151104886c0a3f4bc9458e"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=2, composite=0.184; facets=3; legacy_items=5. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_03",
+      "question": "Can I use Redirect Current to power up a console?",
+      "recommended_required_gold": [
+        "dfd49bb0c0f1faa122c3d67b3a22fd9717dfc0359df401f59a9f3dd14d9eb58f"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=5, composite=0.208; facets=2; legacy_items=3. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_04",
+      "question": "Can I use Side Step to hit something that is inanimate or maybe a robot?",
+      "recommended_required_gold": [
+        "bdec2af17da2b9f89b8c1fcc9c73774cb56768d25343e019bae844f391940f4a"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=11, composite=0.208; facets=4; legacy_items=4. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_05",
+      "question": "I don't really understand perception?",
+      "recommended_required_gold": [
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
+      ],
+      "recommended_supporting_gold": [
+        "0caba323a1609dfe9fee5e4cde1ec42027f61cdc6fe691e3ae5809b54798d6c3",
+        "155de72922a180af49c5e5ad3db42bd51f6a018ffd0ba6f7a8548fe2af5aadd2",
+        "acfb3aeb6bbdba9e98b4a1e009e17c0e464a8da7b99fb0d79ee17843e184e354"
+      ],
+      "confidence": "low",
+      "rationale": "Top anchor rank=2, composite=0.333; facets=4; legacy_items=6. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_06",
+      "question": "I need help deciding between Covering Fire or I'll be back as my 6th level feat I'm playing an Android",
+      "recommended_required_gold": [
+        "7c4cb99b3714ec58a3f5e042a35b136553ac63e09184d50db66c562bf058557a"
+      ],
+      "recommended_supporting_gold": [
+        "6c9004c1aef3cba34a11ff9227dadaefade7c157e8323bbf8950d04a51de1390"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=3, composite=0.540; facets=6; legacy_items=7. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_07",
+      "question": "Can a character with only the Solar Nimbus feat use Nimbus Surge when an enemy within reach leaves a square during a move action?",
+      "recommended_required_gold": [
+        "d4388628ebb41687ad879827953c6794774d5df6828d3691e5313862f57b57ba"
+      ],
+      "recommended_supporting_gold": [
+        "66e544180d231369ffc71ccb20b1a137fc132f32dc218be7b7ed60638d550913",
+        "ea8828a320c5da1a0bf9fc1cb0e19f4d0471b9faa76169d9530ada8c32428a2d",
+        "b60392b68a5ea49561fef421c927b49fc3c11b896799b86f7461c487e7daa589"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=19, composite=0.574; facets=2; legacy_items=5. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_08",
+      "question": "Do Androids with Revivification Protocol need to make recovery checks?",
+      "recommended_required_gold": [
+        "46374577eaf1300006a6ee46c7de7ee729b475a153f5c1e81e8f03229ca85b02"
+      ],
+      "recommended_supporting_gold": [
+        "baae4ba29bcf6a7d861965b17bd67e45358cdd7d4bee38e04bd811475aaa623c",
+        "b0a557c32874607640833a4946ab0e126ecf02ae348aedb7cdd2e98295739d77"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=13, composite=0.599; facets=3; legacy_items=5. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_09",
+      "question": "Can a Shirren use Undying more than once per day?",
+      "recommended_required_gold": [
+        "c9579ac600a027266c8a61c527bd8c23b9d9c9c357e088a0db0e3a47dff46a0e"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.201; facets=3; legacy_items=3. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "blind_001_10",
+      "question": "What's the difference between Android Revivification Protocol and Shirren Undying?",
+      "recommended_required_gold": [
+        "fad4ae64172b528fe5192af242590b037fcc470e89c47d867b813fd042ab93e5"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.276; facets=6; legacy_items=6. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_01",
+      "question": "What penalties do I have while prone?",
+      "recommended_required_gold": [
+        "d0d9d8f745334c5279bd0e8a93b4093f79079b7281b22ce8492fdb4fb192d997"
+      ],
+      "recommended_supporting_gold": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=4, composite=0.447; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_02",
+      "question": "Can I use Stealth to Hide while I'm prone?",
+      "recommended_required_gold": [
+        "ea3d50feb28a98bc96b0847a3f2c055abdcca79b1ae151a3252eb1d98cd45a41"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=3, composite=0.366; facets=4; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_03",
+      "question": "What changes when I gain the wounded condition?",
+      "recommended_required_gold": [
+        "a40fcb7a49803f3bbd9fd72cd70c2714f88b121a20f7ff75f20b3209475c5b76"
+      ],
+      "recommended_supporting_gold": [
+        "757e460273325619c533cfd75cd5eec15f7e151a4fe074903cead87b075743dc",
+        "8ecb5f2b8004d0bf1108ed8645388b5d6b27e3cc08dea8c528f65fcc3ae8ecce"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=4, composite=0.618; facets=4; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_04",
+      "question": "If I'm dying and taking persistent damage, what happens during my turn?",
+      "recommended_required_gold": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "recommended_supporting_gold": [
+        "ae4b7f7e12cf02530d0e8d5a74531c0b71fae1710f117017f4e884f0418e0492"
+      ],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=9, composite=0.456; facets=3; legacy_items=4. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_05",
+      "question": "Does the concealed condition stack with cover?",
+      "recommended_required_gold": [
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=4, composite=0.349; facets=4; legacy_items=4. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_06",
+      "question": "What penalties apply while blinded?",
+      "recommended_required_gold": [
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=1, composite=0.440; facets=4; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_07",
+      "question": "If I'm reduced to 0 HP by nonlethal damage, do I gain the dying condition?",
+      "recommended_required_gold": [
+        "195cb52666694fe3bc10680fa7b738a538bec01203f465186db9da999c4972ad"
+      ],
+      "recommended_supporting_gold": [
+        "afa58cb7bf95c2d8518fd1923fe0e6138ba28c2148b8ee30ae8d00bb9ccfdda2"
+      ],
+      "confidence": "low",
+      "rationale": "Top anchor rank=7, composite=0.371; facets=3; legacy_items=3. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_002_08",
+      "question": "Can I crawl while prone and does it provoke?",
+      "recommended_required_gold": [
+        "516c696513da84981b631820430204f2f5f9a44bcb50015e3eb1384c951a1509"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=1, composite=0.495; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_01",
+      "question": "Does the off-guard condition from flanking apply only while the creature is flanked, or does it persist after the flanking ally moves away?",
+      "recommended_required_gold": [
+        "c8134f509a776cf083f4a9eb0254b1d1c7bf3af59b6480f6ed368624429ce932"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=3, composite=0.561; facets=4; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_02",
+      "question": "Is the 'until the end of your next turn' effect from an ability applied once when you use it, or every time the trigger is met?",
+      "recommended_required_gold": [
+        "f9ac2491639db31a6e96d09e5b8ff217a5f72de15a7f50250e554b44a56bbf71"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=13, composite=0.569; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_03",
+      "question": "Does the Aid action apply to allies, enemies, or only the ally you choose?",
+      "recommended_required_gold": [
+        "265b964dab0189e0f57845575674cc992900ee12720edc2dad27fcb90b27e7ce"
+      ],
+      "recommended_supporting_gold": [
+        "ff13d62917af1ebda451e8cfe90d2188c206a497c36a6d8be8c34a97cedbc643"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.643; facets=4; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_04",
+      "question": "When you have both a reaction and a free action with the same trigger, can you use both or only one?",
+      "recommended_required_gold": [
+        "2a09806fa3577ee0aaacf3b37b89afcf48da59b861a63bdf70624f7c78211733"
+      ],
+      "recommended_supporting_gold": [
+        "c79abce6948a78f7cfac307e6e48eab37bc9fd30f57217add37aab744a22e0c7"
+      ],
+      "confidence": "low",
+      "rationale": "Top anchor rank=2, composite=0.347; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_05",
+      "question": "Does Enhanced Nanite Surge replace the base Nanite Surge frequency or add to it?",
+      "recommended_required_gold": [
+        "05afcc90c20d5971e65cc5e0954880acd1f31abf7d5c2884ebbc3a19bb4966e3"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=3, composite=0.527; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_06",
+      "question": "What exact condition must be true to use your one reaction per round?",
+      "recommended_required_gold": [
+        "b4eec26407c4e61f504a363b79a7b2cdf8680c6cc6d60d193fa33f799bb98aca"
+      ],
+      "recommended_supporting_gold": [
+        "4a4c918737042e33961bebf22943fadaabf500b79caab25e4e383e12d5f51b22"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=12, composite=0.551; facets=5; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_07",
+      "question": "Can you use more than one reaction in response to the same trigger?",
+      "recommended_required_gold": [
+        "2a09806fa3577ee0aaacf3b37b89afcf48da59b861a63bdf70624f7c78211733"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=6, composite=0.333; facets=2; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_08",
+      "question": "What does 'reaction' mean in Starfinder rules terms?",
+      "recommended_required_gold": [
+        "b4eec26407c4e61f504a363b79a7b2cdf8680c6cc6d60d193fa33f799bb98aca"
+      ],
+      "recommended_supporting_gold": [
+        "4a4c918737042e33961bebf22943fadaabf500b79caab25e4e383e12d5f51b22"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=3, composite=0.598; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_09",
+      "question": "Where does the book tell you to look for the complete definition of a bolded term?",
+      "recommended_required_gold": [
+        "1817deac1f912889ec91e4798ab3291503ab4447c9150251bab05efc75ad1424"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=16, composite=0.172; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_10",
+      "question": "When in your turn does the dying recovery check happen?",
+      "recommended_required_gold": [
+        "39baf390d0815ce7c4552c9bc2f8505c1ff694029d7231bfaf0dd6274048c47b"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=6, composite=0.310; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_11",
+      "question": "Does a free action with a trigger use up your one reaction per round?",
+      "recommended_required_gold": [
+        "eddf0961a0fef2fe340654ded85c1b87329466fbb44a62dd22204ec1c8b98b44"
+      ],
+      "recommended_supporting_gold": [
+        "4a4c918737042e33961bebf22943fadaabf500b79caab25e4e383e12d5f51b22"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=4, composite=0.663; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_12",
+      "question": "Can you use a reaction when it's not your turn?",
+      "recommended_required_gold": [
+        "b4eec26407c4e61f504a363b79a7b2cdf8680c6cc6d60d193fa33f799bb98aca"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=3, composite=0.527; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_13",
+      "question": "If the book gives an example of having both a reaction and a free action with the same trigger, does that example change the rule or just illustrate it?",
+      "recommended_required_gold": [
+        "2a09806fa3577ee0aaacf3b37b89afcf48da59b861a63bdf70624f7c78211733"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=2, composite=0.326; facets=5; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_003_14",
+      "question": "If the text is ambiguous, where does the book say to look?",
+      "recommended_required_gold": [
+        "1817deac1f912889ec91e4798ab3291503ab4447c9150251bab05efc75ad1424"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=10, composite=0.171; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_01",
+      "question": "When in my turn does the dying recovery check happen\u2014start or end?",
+      "recommended_required_gold": [
+        "39baf390d0815ce7c4552c9bc2f8505c1ff694029d7231bfaf0dd6274048c47b"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=5, composite=0.318; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_02",
+      "question": "When do I take persistent damage\u2014start or end of my turn?",
+      "recommended_required_gold": [
+        "ae4b7f7e12cf02530d0e8d5a74531c0b71fae1710f117017f4e884f0418e0492"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=1, composite=0.381; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_03",
+      "question": "If I have a reaction that triggers on 'you are about to attempt a recovery check', does it happen before or after the recovery check roll?",
+      "recommended_required_gold": [
+        "46374577eaf1300006a6ee46c7de7ee729b475a153f5c1e81e8f03229ca85b02"
+      ],
+      "recommended_supporting_gold": [
+        "baae4ba29bcf6a7d861965b17bd67e45358cdd7d4bee38e04bd811475aaa623c"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.579; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_04",
+      "question": "For Graviton-Attuned Stride, can I move immediately before or after my attacks, or only one?",
+      "recommended_required_gold": [
+        "7a6c7032b0934925be7532713491045e692f8f642bc1f469ac43563bce0e51f6"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.846; facets=2; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_05",
+      "question": "When a reaction says you Grapple the 'triggering creature', does that mean the creature that triggered the reaction?",
+      "recommended_required_gold": [
+        "3d2024fc3a64a96275ea23645ea13296d7700be62f9c51474708e23f9e0343d2"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=11, composite=0.550; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_004_06",
+      "question": "Does the multiple attack penalty reset at the start or end of my turn?",
+      "recommended_required_gold": [
+        "ad5323216ad29aa66b6cbc779fa9ddf03f0a0d1114ed6859c9a784ab7b0489bc"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=7, composite=0.291; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_01",
+      "question": "What restrictions apply when I choose a target for an effect\u2014can I target undetected creatures or only those that match certain criteria?",
+      "recommended_required_gold": [
+        "956e62f474d3e0c92243a431abd6c97e2b54f51a034f0265b9da3d186869f9a6"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.270; facets=2; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_02",
+      "question": "When I'm grabbed, what am I prevented from doing?",
+      "recommended_required_gold": [
+        "a52c3fc2845c8ac38ec29ac73e800ba21e50d45b628d037e451cd7f5a8c49d9c"
+      ],
+      "recommended_supporting_gold": [
+        "88ca7bebf3c1028412a8a32cb91e9aceba63f604f2d8630061caf9ce08cbda28",
+        "25211dbd200c91524490de168094e96be464a91f4d4ec142b7d37c60294463a8"
+      ],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=14, composite=0.492; facets=2; legacy_items=3. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_03",
+      "question": "If an ability says 'Frequency once per round', can I use it more than once in the same round by any means?",
+      "recommended_required_gold": [
+        "44b98221130d0ad7e3d0c51f113fa8f659f0644f01dd20e1a93d615be8113113"
+      ],
+      "recommended_supporting_gold": [
+        "7def9f6a7660bc037385c74164a5e8a2f5596fc7ae9d59ec6c7394c04086730d",
+        "bf8338879b57a8bb7b91b6178c00aa4031a6d0077fb073404fea3785028d61a6",
+        "fbf98b504c99c3023b92c8ee06508178b8d9f846bf78b91944f60a5ead7c6ec5"
+      ],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.616; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_04",
+      "question": "Can an illusion created by a spell affect the physical world or cause damage beyond what the spell says?",
+      "recommended_required_gold": [
+        "5e67124ab08a6c02f21213ec8a24fd57bcd1210cd37f6a31166a25fa14db8877"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.143; facets=1; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_05",
+      "question": "When a creature is swallowed by its own shadow (spell failure), can it act or perceive the outside world?",
+      "recommended_required_gold": [
+        "f38bcdd821da3bc93adc142d7470e2ccea83744bf20ccc2b2bd4b940d5f44b93"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.610; facets=3; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_06",
+      "question": "Are there restrictions on who I can target with the Aid action or similar ally-only effects?",
+      "recommended_required_gold": [
+        "265b964dab0189e0f57845575674cc992900ee12720edc2dad27fcb90b27e7ce"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=4, composite=0.467; facets=3; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_005_07",
+      "question": "Does Sure Footing let me ignore the movement restriction from being grabbed?",
+      "recommended_required_gold": [
+        "6194191ca06372631b13b454fc0d81e0cdf70434bb1765398627461ad6dc9461"
+      ],
+      "recommended_supporting_gold": [
+        "33ef21707051ef003ff1e9d98c7342b0348b6ce6a3fd31ef708649d48499b428",
+        "74f4f74f1fe55475429ab0f5ab861cb60a6afef374f74c0ca8b46011414c0e72",
+        "7f2e7e554b6c0e2913b6d575f2c3c238a7d2358c6206437aa11890d6f57a46ae"
+      ],
+      "confidence": "medium",
+      "rationale": "Top anchor rank=4, composite=0.450; facets=1; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_006_01",
+      "question": "Why would I look at several conditions together instead of one at a time?",
+      "recommended_required_gold": [
+        "5abb09a7ca87000bf6d78edcdc21c971b82725281643102b0e775fb041584fc2"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.871; facets=2; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_006_02",
+      "question": "What is an archetype in character-building terms?",
+      "recommended_required_gold": [
+        "20c76b01daa691f9e3fbedbdcaef5284fa241eb611a8799533835b4805287e02"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=9, composite=0.186; facets=1; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_006_03",
+      "question": "Do spells always have visible or sensory effects when cast?",
+      "recommended_required_gold": [
+        "718bfa54b9aed060a0e2372994288ac6c87200709f687beb28647a35774456c3"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "low",
+      "rationale": "Top anchor rank=1, composite=0.317; facets=2; legacy_items=1. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_006_04",
+      "question": "How do conditions that share a theme relate to each other?",
+      "recommended_required_gold": [
+        "5abb09a7ca87000bf6d78edcdc21c971b82725281643102b0e775fb041584fc2"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.745; facets=2; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    },
+    {
+      "query_id": "batch_006_05",
+      "question": "What is the purpose of the Frequency and Trigger entries on an ability block?",
+      "recommended_required_gold": [
+        "f9ac2491639db31a6e96d09e5b8ff217a5f72de15a7f50250e554b44a56bbf71"
+      ],
+      "recommended_supporting_gold": [],
+      "confidence": "high",
+      "rationale": "Top anchor rank=1, composite=0.612; facets=4; legacy_items=2. Supporting chunks selected for additional facet coverage from top-20 retrieval."
+    }
+  ]
+}

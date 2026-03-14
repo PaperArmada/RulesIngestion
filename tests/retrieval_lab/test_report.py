@@ -193,6 +193,77 @@ def test_write_report_artifacts_splits_pre_and_post_review_surfaces(tmp_path: Pa
     assert "evaluation_surfaces.json" in paths
 
 
+def test_write_report_artifacts_writes_clean_and_full_working_set_surfaces(tmp_path: Path) -> None:
+    surface_results = {
+        "all-mpnet-base-v2": {
+            "mrr": 0.5,
+            "ndcg_at_k": {10: 0.5},
+            "gold_in_candidates": 1.0,
+            "gold_in_candidates_true_ceiling": 1.0,
+            "full_set_hit_at_k": {10: 1.0},
+            "required_full_set_hit_at_k": {10: 1.0},
+            "rank_of_last_required_mean": 2.0,
+            "recall_at_k": {1: 0.5, 3: 1.0, 10: 1.0},
+            "hit_at_k": {1: 1.0, 3: 1.0, 10: 1.0},
+            "grounding_coverage": 1.0,
+            "failure_counts": {"hit": 1, "retrieval_miss": 0, "rank_miss": 0, "grounding_failure": 0},
+            "failure_bucket_counts": {"success": 1},
+            "per_suite": {},
+            "per_tier": {},
+        }
+    }
+    paths = write_report_artifacts(
+        output_dir=tmp_path,
+        experiment_id="exp1",
+        experiment_name="dual",
+        config={
+            "substrate_path": "out/PF2E",
+            "document_id": "PathCore",
+            "substrate_version": "v1",
+            "run_id": "run_123",
+            "models": ["all-mpnet-base-v2"],
+            "top_k": [1, 3, 10],
+            "retrieval_mode": "dense",
+        },
+        corpus_stats={"unit_count": 10, "page_count": 2},
+        grounding_summary={"total_queries": 2, "grounded": 2, "ungrounded": 0, "method": "page_anchored"},
+        results_by_model=surface_results,
+        grounding_audit=[],
+        per_query_by_model={"all-mpnet-base-v2": []},
+        experiment_doc={"created_at": "2026-03-14T00:00:00Z"},
+        retrieved_chunks_by_model={"all-mpnet-base-v2": []},
+        evaluation_surfaces=[
+            {
+                "label": "full_working_set",
+                "display_name": "Full working set",
+                "results_by_model": surface_results,
+                "per_query_by_model": {"all-mpnet-base-v2": []},
+                "retrieved_chunks_by_model": {"all-mpnet-base-v2": []},
+                "grounded_queries": [{"id": "q1", "benchmark_track": "ratified_core"}, {"id": "q2", "benchmark_track": "working_set"}],
+                "benchmark_contract": {"version": "v1"},
+            },
+            {
+                "label": "clean_subset",
+                "display_name": "Clean subset",
+                "results_by_model": surface_results,
+                "per_query_by_model": {"all-mpnet-base-v2": []},
+                "retrieved_chunks_by_model": {"all-mpnet-base-v2": []},
+                "grounded_queries": [{"id": "q1", "benchmark_track": "ratified_core"}],
+                "benchmark_contract": {"version": "v1"},
+            },
+        ],
+    )
+
+    assert (tmp_path / "REPORT.full_working_set.md").exists()
+    assert (tmp_path / "REPORT.clean_subset.md").exists()
+    assert (tmp_path / "metrics.full_working_set.json").exists()
+    assert (tmp_path / "metrics.clean_subset.json").exists()
+    overview = (tmp_path / "REPORT.md").read_text(encoding="utf-8")
+    assert "REPORT.full_working_set.md" in overview
+    assert "REPORT.clean_subset.md" in overview
+    assert "evaluation_surfaces.json" in paths
+
+
 def test_write_report_artifacts_writes_active_benchmark_snapshot(tmp_path: Path) -> None:
     paths = write_report_artifacts(
         output_dir=tmp_path,

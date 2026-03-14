@@ -46,10 +46,27 @@ def run_embed_only(
     run_id = substrate_run_id(config.document_id, corpus_ids, substrate_version)
 
     for model_id in config.models:
-        model_name = model_registry[model_id].model_name if model_id in model_registry else model_id
+        if model_id not in model_registry:
+            raise ValueError(
+                f"Model {model_id!r} not in active MODEL_REGISTRY; add it before embedding."
+            )
+        model_name = model_registry[model_id].model_name
         trust_remote = config.trust_remote_code or (model_id in trust_remote_models)
         model = load_model_fn(model_name, trust_remote_code=trust_remote)
-        corpus_embeddings = encode_texts_fn(model, corpus_texts, batch_size=config.batch_size)
+        corpus_embeddings = encode_texts_fn(
+            model,
+            corpus_texts,
+            batch_size=config.batch_size,
+            model_id=model_id,
+            text_role="passage",
+            recipe_mode=getattr(config, "recipe_mode", "standardized"),
+            pooling=getattr(config, "embedding_pooling", "mean"),
+            normalize=bool(getattr(config, "embedding_normalize", True)),
+            max_seq_len=getattr(config, "embedding_max_seq_len", None),
+            query_prefix=str(getattr(config, "embedding_query_prefix", "")),
+            passage_prefix=str(getattr(config, "embedding_passage_prefix", "")),
+            fail_on_missing_source=bool(getattr(config, "recipe_fail_on_missing_source", True)),
+        )
         records = [
             {"run_id": run_id, "model_id": model_id, "chunk_id": uid, "embedding": corpus_embeddings[i].tolist()}
             for i, uid in enumerate(corpus_ids)

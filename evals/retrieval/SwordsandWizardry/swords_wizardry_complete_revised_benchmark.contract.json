@@ -1,0 +1,430 @@
+{
+  "version": "retrieval_lab_benchmark_contract_v2",
+  "benchmark_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json",
+  "benchmark_sha256": "58ad7c1e39674809c49111b85d969599103b8bff9d842d0bb0608d7a11397c8c",
+  "query_count": 21,
+  "benchmark_kind": "manual",
+  "benchmark_surface": "active",
+  "benchmark_definition": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json",
+    "sha256": "58ad7c1e39674809c49111b85d969599103b8bff9d842d0bb0608d7a11397c8c"
+  },
+  "benchmark_projection": {
+    "path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/evals/retrieval/SwordsandWizardry/swords_wizardry_complete_revised_benchmark.json",
+    "sha256": "58ad7c1e39674809c49111b85d969599103b8bff9d842d0bb0608d7a11397c8c",
+    "query_count": 21,
+    "benchmark_kind": "manual",
+    "benchmark_surface": "active"
+  },
+  "run_contract": {
+    "run_id": "retrieval_lab_Swords&Wizardry_v3_swcr_merged2000_min100_recipe_standardized",
+    "substrate_version": "v3_swcr_merged2000_min100",
+    "corpus_fingerprint": "9a4b9bb4762bd67c827dc6e69d81401b4255d1380a03ec3df38f8e4701f7e94f",
+    "corpus_content_fingerprint": "3a51a2912a4d8a49cbaee5fc93a98d76006b8700ab75ab1962882806fca0fab9",
+    "corpus_unit_count": 1618,
+    "corpus_index_path": "",
+    "corpus_index_sha256": "",
+    "corpus_recipe": {
+      "substrate_path": "/media/drakosfire/Projects/DungeonOverMind/RulesIngestion/out/Swords&Wizardry/SW_Complete_Revised/SW Complete Revised PDF",
+      "document_id": "Swords&Wizardry",
+      "min_chars": 100,
+      "merge_chunks": false,
+      "merge_max_chars": 2000
+    }
+  },
+  "lineage": {},
+  "alignment_summary": {
+    "queries_total": 21,
+    "queries_with_contract_gold_ids": 21,
+    "queries_with_missing_gold_ids": 21,
+    "queries_with_no_surviving_gold_ids": 21,
+    "missing_gold_ids_total": 56,
+    "missing_gold_ids_unique": [
+      "1f43ff6bc76b202a5751b2acfb269eb0777bd70feea04208dac3c066558c2f33",
+      "20adedae21ef4baeae1c5d6ae298f286be90e3879f2489aae4822f5ff508d6df",
+      "325c2e2794ff170a58dd9270307fa5c0fbc5d655e04f792edd38a30cd7d97b68",
+      "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0",
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921",
+      "430507986040ffde475efac80985fce3216b260bf971343924377636bd8a4d39",
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+      "61d87c8ac0a7262fa5282dc58f5b73ad0312dd7bf29aade835c8ee922b4aac86",
+      "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+      "65b7e19c027c937fe4a6e6662d2acd4fd2ef8d0927a32cbeed3aeddc9e4e6700",
+      "65c841e3fbae3ca02418079aa45a897adc2fdd4e72db2cabc42f4c5f4a655882",
+      "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594",
+      "6a91e3275d1e3e3836b7cd2c9575dbcc93e3ccaa6226c12ba94755dfb5a85ce8",
+      "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+      "884ce2952bfaf3c2c0e078ad002ac5ee3ec5f6e01381bf45fa34a153f11f5076",
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30",
+      "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420",
+      "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4",
+      "9dae2cbb163e453c0bdb26fb841ddf85c6aba2c84867e96b4137615b163d7be5",
+      "a8eac700589abd86a2808f8b9a356ed458b6dc27f23cb8faffba0ee0c08b2a4b",
+      "b1edd8859bee08917610e56087ea88bc4459e980f70dee80e9f7a56604627842",
+      "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+      "b9d68622d4089f03e3c3f1e6eb11c9a9a43422c71d7c44abd6221b461266569c",
+      "baf16fe8697e5e305a6cf757f58ca007df6b62592b060a8d953a784fda264104",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054",
+      "c3f97beb1f326b3bde43c889f5d87330a5554629f30f42c4d8830a819be9df1d",
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7",
+      "cc4cc7cb6526bc9d1817bf754744146f84961a04158d5e54c3ad83cbc0895873",
+      "d21ad62b74f394fd3034d20f8c1617c21529d3e4ec44954284734672305a51f6",
+      "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0",
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+      "d7e4a5f5ebe79ffb2b39482b9382734940d54a253363fcd3d1f1541471da9fdd",
+      "e73e3371529b1c35d81ed8f8eb42a74f720a80d7024a2c392081cfc02261957e",
+      "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+      "ebcf70619161287e24d62941b327be513233dca5685731cabb0750176bee332d"
+    ],
+    "per_query": [
+      {
+        "query_id": "sw_rev_u01_roles_and_authority",
+        "contract_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_u02_uncertainty_core_mechanic",
+        "contract_gold_ids": [
+          "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7",
+          "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7",
+          "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57"
+        ],
+        "contract_gold_count": 4,
+        "present_gold_count": 0,
+        "missing_gold_count": 4
+      },
+      {
+        "query_id": "sw_rev_u03_time_progression_model",
+        "contract_gold_ids": [
+          "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4",
+          "b9d68622d4089f03e3c3f1e6eb11c9a9a43422c71d7c44abd6221b461266569c",
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4",
+          "b9d68622d4089f03e3c3f1e6eb11c9a9a43422c71d7c44abd6221b461266569c",
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+        ],
+        "contract_gold_count": 5,
+        "present_gold_count": 0,
+        "missing_gold_count": 5
+      },
+      {
+        "query_id": "sw_rev_u04_player_actions_in_combat",
+        "contract_gold_ids": [
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0",
+          "6a91e3275d1e3e3836b7cd2c9575dbcc93e3ccaa6226c12ba94755dfb5a85ce8",
+          "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0",
+          "6a91e3275d1e3e3836b7cd2c9575dbcc93e3ccaa6226c12ba94755dfb5a85ce8",
+          "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0"
+        ],
+        "contract_gold_count": 5,
+        "present_gold_count": 0,
+        "missing_gold_count": 5
+      },
+      {
+        "query_id": "sw_rev_u05_what_must_be_tracked",
+        "contract_gold_ids": [
+          "b1edd8859bee08917610e56087ea88bc4459e980f70dee80e9f7a56604627842"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "b1edd8859bee08917610e56087ea88bc4459e980f70dee80e9f7a56604627842"
+        ],
+        "contract_gold_count": 1,
+        "present_gold_count": 0,
+        "missing_gold_count": 1
+      },
+      {
+        "query_id": "sw_rev_s01_rules_silent_referee_ruling",
+        "contract_gold_ids": [
+          "d7e4a5f5ebe79ffb2b39482b9382734940d54a253363fcd3d1f1541471da9fdd",
+          "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "d7e4a5f5ebe79ffb2b39482b9382734940d54a253363fcd3d1f1541471da9fdd",
+          "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+        ],
+        "contract_gold_count": 2,
+        "present_gold_count": 0,
+        "missing_gold_count": 2
+      },
+      {
+        "query_id": "sw_rev_s02_treasure_division_procedure",
+        "contract_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "69baafba9345a67291ffc62cb022c71f9ed90e00f8ed6cd3b3ed0beb3bab3594"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s03_treasure_to_xp_rule",
+        "contract_gold_ids": [
+          "61d87c8ac0a7262fa5282dc58f5b73ad0312dd7bf29aade835c8ee922b4aac86"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "61d87c8ac0a7262fa5282dc58f5b73ad0312dd7bf29aade835c8ee922b4aac86"
+        ],
+        "contract_gold_count": 1,
+        "present_gold_count": 0,
+        "missing_gold_count": 1
+      },
+      {
+        "query_id": "sw_rev_s04_advancement_tables_where",
+        "contract_gold_ids": [
+          "a8eac700589abd86a2808f8b9a356ed458b6dc27f23cb8faffba0ee0c08b2a4b",
+          "20adedae21ef4baeae1c5d6ae298f286be90e3879f2489aae4822f5ff508d6df"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "a8eac700589abd86a2808f8b9a356ed458b6dc27f23cb8faffba0ee0c08b2a4b",
+          "20adedae21ef4baeae1c5d6ae298f286be90e3879f2489aae4822f5ff508d6df"
+        ],
+        "contract_gold_count": 2,
+        "present_gold_count": 0,
+        "missing_gold_count": 2
+      },
+      {
+        "query_id": "sw_rev_s05_combat_sequence_group_initiative",
+        "contract_gold_ids": [
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420",
+          "6a91e3275d1e3e3836b7cd2c9575dbcc93e3ccaa6226c12ba94755dfb5a85ce8",
+          "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "6461abe873c599951c0859f61499093245b2a0ed5ea44632f606279b02e1a725",
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420",
+          "6a91e3275d1e3e3836b7cd2c9575dbcc93e3ccaa6226c12ba94755dfb5a85ce8",
+          "d32909379db498c4379e220a7703924f9d2f04415d2b94ca02ef6e39acc93bd0"
+        ],
+        "contract_gold_count": 6,
+        "present_gold_count": 0,
+        "missing_gold_count": 6
+      },
+      {
+        "query_id": "sw_rev_s06_spell_preparation_reprepare_and_interruption",
+        "contract_gold_ids": [
+          "ebcf70619161287e24d62941b327be513233dca5685731cabb0750176bee332d",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "ebcf70619161287e24d62941b327be513233dca5685731cabb0750176bee332d",
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+        ],
+        "contract_gold_count": 2,
+        "present_gold_count": 0,
+        "missing_gold_count": 2
+      },
+      {
+        "query_id": "sw_rev_s07_turn_undead_table_symbols",
+        "contract_gold_ids": [
+          "65c841e3fbae3ca02418079aa45a897adc2fdd4e72db2cabc42f4c5f4a655882",
+          "baf16fe8697e5e305a6cf757f58ca007df6b62592b060a8d953a784fda264104",
+          "1f43ff6bc76b202a5751b2acfb269eb0777bd70feea04208dac3c066558c2f33"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "65c841e3fbae3ca02418079aa45a897adc2fdd4e72db2cabc42f4c5f4a655882",
+          "baf16fe8697e5e305a6cf757f58ca007df6b62592b060a8d953a784fda264104",
+          "1f43ff6bc76b202a5751b2acfb269eb0777bd70feea04208dac3c066558c2f33"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s08_first_level_cleric_spells",
+        "contract_gold_ids": [
+          "c3f97beb1f326b3bde43c889f5d87330a5554629f30f42c4d8830a819be9df1d",
+          "d21ad62b74f394fd3034d20f8c1617c21529d3e4ec44954284734672305a51f6"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "c3f97beb1f326b3bde43c889f5d87330a5554629f30f42c4d8830a819be9df1d",
+          "d21ad62b74f394fd3034d20f8c1617c21529d3e4ec44954284734672305a51f6"
+        ],
+        "contract_gold_count": 2,
+        "present_gold_count": 0,
+        "missing_gold_count": 2
+      },
+      {
+        "query_id": "sw_rev_s09_zero_hp_death_and_healing",
+        "contract_gold_ids": [
+          "884ce2952bfaf3c2c0e078ad002ac5ee3ec5f6e01381bf45fa34a153f11f5076"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "884ce2952bfaf3c2c0e078ad002ac5ee3ec5f6e01381bf45fa34a153f11f5076"
+        ],
+        "contract_gold_count": 1,
+        "present_gold_count": 0,
+        "missing_gold_count": 1
+      },
+      {
+        "query_id": "sw_rev_s10_firing_missiles_into_melee",
+        "contract_gold_ids": [
+          "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+        ],
+        "contract_gold_count": 1,
+        "present_gold_count": 0,
+        "missing_gold_count": 1
+      },
+      {
+        "query_id": "sw_rev_s11_saving_throw_procedure",
+        "contract_gold_ids": [
+          "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+          "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+          "325c2e2794ff170a58dd9270307fa5c0fbc5d655e04f792edd38a30cd7d97b68"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+          "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+          "325c2e2794ff170a58dd9270307fa5c0fbc5d655e04f792edd38a30cd7d97b68"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s12_morale_and_reaction_rolls",
+        "contract_gold_ids": [
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420",
+          "e73e3371529b1c35d81ed8f8eb42a74f720a80d7024a2c392081cfc02261957e"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420",
+          "e73e3371529b1c35d81ed8f8eb42a74f720a80d7024a2c392081cfc02261957e"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s13_encumbrance_and_movement",
+        "contract_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "430507986040ffde475efac80985fce3216b260bf971343924377636bd8a4d39"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "b6bddd370589affebe1004481caef324d63112fd68a67e5025eacda8090920c1",
+          "7ca17f02e851d8320dd66d1d10b1169c4c5dc708b348dbed47e4223e2e165b5e",
+          "430507986040ffde475efac80985fce3216b260bf971343924377636bd8a4d39"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s14_exploration_time_and_encounter_checks",
+        "contract_gold_ids": [
+          "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4",
+          "65b7e19c027c937fe4a6e6662d2acd4fd2ef8d0927a32cbeed3aeddc9e4e6700",
+          "cc4cc7cb6526bc9d1817bf754744146f84961a04158d5e54c3ad83cbc0895873"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "9ba0f3d9d7f98ddfc507db986d6adcd984fba3df2a6c870ca81da51e848bf7d4",
+          "65b7e19c027c937fe4a6e6662d2acd4fd2ef8d0927a32cbeed3aeddc9e4e6700",
+          "cc4cc7cb6526bc9d1817bf754744146f84961a04158d5e54c3ad83cbc0895873"
+        ],
+        "contract_gold_count": 3,
+        "present_gold_count": 0,
+        "missing_gold_count": 3
+      },
+      {
+        "query_id": "sw_rev_s15_light_sources_duration",
+        "contract_gold_ids": [
+          "9dae2cbb163e453c0bdb26fb841ddf85c6aba2c84867e96b4137615b163d7be5"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "9dae2cbb163e453c0bdb26fb841ddf85c6aba2c84867e96b4137615b163d7be5"
+        ],
+        "contract_gold_count": 1,
+        "present_gold_count": 0,
+        "missing_gold_count": 1
+      },
+      {
+        "query_id": "sw_rev_s16_surprise_procedure",
+        "contract_gold_ids": [
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420"
+        ],
+        "present_gold_ids": [],
+        "missing_gold_ids": [
+          "e9e4c940e6ba0f2501559dd6c76522630c3bc00a563f626998e7e6ce4bd97f57",
+          "95b274dfc29c6aebe993de3b26e39ccba9f0e259680d3e6a533c13f9c95a2420"
+        ],
+        "contract_gold_count": 2,
+        "present_gold_count": 0,
+        "missing_gold_count": 2
+      }
+    ]
+  },
+  "projection_metadata": {
+    "ratified_track": "ratified_core",
+    "working_track": "working_set",
+    "gold_chunks_embedded": true
+  }
+}

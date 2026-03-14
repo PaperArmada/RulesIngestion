@@ -12,13 +12,14 @@ dependencies = [
     "matplotlib>=3.10.8",
     "opencv-python>=4.13.0.90",
     "pymupdf>=1.26.7",
+    "pytest>=9.0.2",
 ]
 
 [project.optional-dependencies]
 deepseek-ocr2 = [
     "easydict>=1.13",
-    "transformers>=4.46.0,<4.47.0",
-    "tokenizers>=0.19.0,<0.21.0",
+    "transformers>=4.46.0",
+    "tokenizers>=0.19.0",
     "pymupdf>=1.26.7",
     "pytest>=9.0.2",
     "torch>=2.0.0",
@@ -34,6 +35,10 @@ retrieval-lab = [
     "pymongo>=4.0",
     "rank-bm25>=0.2.2",
     "sentence-transformers>=3.0",
+    "peft>=0.13.0",
+    "transformers>=4.51.0",
+    "einops>=0.7.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [tool.pytest.ini_options]

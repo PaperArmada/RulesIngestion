@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "batch_ids": [
+      "001"
+    ],
+    "source": "<FILL_ME: ruleset/source document name>",
+    "merged_at": "YYYY-MM-DDTHH:MM:SS+00:00",
+    "query_count": 3,
+    "current_run_id": null,
+    "created_by": "template",
+    "creation_method": "retrieval_benchmark_template",
+    "notes": "Template for retrieval benchmarks. Duplicate this file, update metadata, expand queries to the desired benchmark size, then fill gold anchors after grounding/reanchor.",
+    "schema_version": "retrieval_benchmark_v1",
+    "schema": {
+      "top_level_keys": [
+        "metadata",
+        "queries"
+      ],
+      "metadata_fields": {
+        "batch_ids": "string[] (batch identifiers merged into this benchmark; often ['001'] for a fresh benchmark)",
+        "source": "string (human-readable ruleset/source description)",
+        "merged_at": "string (ISO-8601 timestamp for template instantiation or merge time)",
+        "query_count": "number (must match queries.length)",
+        "current_run_id": "string|null (latest retrieval/eval run id if available)",
+        "created_by": "string (human|agent|pipeline name)",
+        "creation_method": "string (how this benchmark was created)",
+        "notes": "string (freeform instructions/context)",
+        "schema_version": "string",
+        "schema": "object (this schema description; optional in non-template benchmarks)"
+      },
+      "query_fields": {
+        "id": "string (stable id; do not change once published)",
+        "tier": "string (e.g. 'T1', 'T2', 'T3')",
+        "question_type": "string (benchmark query category, e.g. 'blind_eval', 'lookup', 'reasoning')",
+        "question": "string (the user-facing retrieval question)",
+        "expected_answer_summary": "string (short target answer summary; can be empty initially)",
+        "source_page": "number|string|null (authoritative source page if known; null if unknown)",
+        "notes": "string (what this is testing, ambiguity, cross-chapter requirements, etc.)",
+        "legacy_gold_chunk_ids": "string[] (optional legacy chunk ids from older corpora/benchmarks)",
+        "gold_unit_ids": "string[] (merged union of required_gold + supporting_gold; populated by grounding)",
+        "required_gold": "string[] (unit ids that MUST be retrieved for a correct answer)",
+        "supporting_gold": "string[] (unit ids that help but aren't strictly required)",
+        "_required_gold": "string[] (internal normalized copy used by metrics)",
+        "_supporting_gold": "string[] (internal normalized copy used by metrics)",
+        "gold_locations": "object (unit_id -> {page, structural_path, source_unit_ids}; populated by grounding)",
+        "_mode": "string ('single_cite' | 'multi_cite'; default 'single_cite')",
+        "required_gold_rationale": "object (unit_id -> string explaining why that unit is required)"
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "benchmark_001_01",
+      "tier": "T2",
+      "question_type": "<FILL_ME: query type>",
+      "question": "<FILL_ME: concrete rules question>",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "<FILL_ME: what this query is testing>",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "benchmark_001_02",
+      "tier": "T2",
+      "question_type": "<FILL_ME: query type>",
+      "question": "<FILL_ME: cross-section or synthesis question>",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "<FILL_ME: why this is hard or what retrieval behavior it should exercise>",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    },
+    {
+      "id": "benchmark_001_03",
+      "tier": "T3",
+      "question_type": "<FILL_ME: query type>",
+      "question": "<FILL_ME: higher-difficulty reasoning or edge-case question>",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "<FILL_ME: edge case, ambiguity, or multi-hop intent>",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "single_cite",
+      "required_gold_rationale": {}
+    }
+  ]
+}

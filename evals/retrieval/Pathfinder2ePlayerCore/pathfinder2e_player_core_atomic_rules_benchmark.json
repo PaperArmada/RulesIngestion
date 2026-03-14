@@ -1,0 +1,3215 @@
+{
+  "metadata": {
+    "batch_id": "atomic_rules_001",
+    "created_by": "agent",
+    "pdf_source": "Pathfinder2e Player Core",
+    "creation_method": "atomic_rules_template",
+    "created_at": "2026-03-09",
+    "notes": "Atomic rules benchmark for Pathfinder 2e Player Core. Question text is copied verbatim from the shared atomic-rules template and must stay language-locked across rulesets so the benchmark can measure same-language baseline behavior and vocabulary drift. Fill answer/expected_answer_summary/source_page/gold during annotation.",
+    "ratification_policy": {
+      "ratified_track": "ratified_core",
+      "working_track": "working_set",
+      "max_required_gold": 2
+    }
+  },
+  "queries": [
+    {
+      "id": "atomic_u01_roles_and_authority",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What are the roles at the table (players vs GM/referee/judge/MC), and what decisions does each role control?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 8,
+      "notes": "",
+      "gold_unit_ids": [
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29"
+      ],
+      "gold_locations": {
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29": {
+          "page": 8,
+          "structural_path": [
+            "THE GAME MASTER"
+          ],
+          "source_unit_ids": [
+            "e4e64bd756da42bbe4d41aab031b4a18dac14a133d23ac9f6e655cd76bb54b4c",
+            "71332b9a7ec153eb2bc6161196bd52aaeb0abeac7bd332a98f222dfa7f76a937",
+            "5dd1ac3de33d0547229d87937937afeb2c6afe5f6bab39ac05b8a58a7c80b502"
+          ]
+        }
+      },
+      "required_gold": [
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29": "This single chunk is the minimal sufficient anchor because it explicitly contrasts players creating and controlling characters with the GM controlling the story and world, presenting situations, and interpreting the rules."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29",
+          "bucket": "required",
+          "page": 8,
+          "structural_path": [
+            "THE GAME MASTER"
+          ],
+          "text": "THE GAME MASTER — While the other players create and control their characters, the Game Master (or GM) is in charge of the story and world. The GM describes all the situations player characters experience in an adventure, considers how the actions of player characters affect the story, and interprets the rules along the way. — The GM can create a new adventure—crafting a narrative, selecting monsters, and assigning treasure on their own—or they can instead rely on a published adventure, using it as a basis for the session and modifying it as needed to accommodate their individual players and the group’s style of play. Some even run games that combine original and published content, mixed together to form a new narrative. — Being the GM is a challenge, requiring you to adjudicate the rules, narrate the story, and juggle other responsibilities. But it can also be very rewarding and worth all the work required to run a good game. If it is your first time running a game, remember that the only thing that matters is that everyone has a good time, and that includes you. Everything else will come naturally with practice and patience."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_e0e68884c738388d"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u02_uncertainty_core_mechanic",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "When the outcome is uncertain, what is the default way to resolve it (dice/cards/other), and how do you read the result (target number, degrees of success, opposing rolls, etc.)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 443,
+      "notes": "",
+      "gold_unit_ids": [
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5",
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84"
+      ],
+      "gold_locations": {
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5": {
+          "page": 443,
+          "structural_path": [
+            "CHECKS"
+          ],
+          "source_unit_ids": [
+            "6de4e619d9ac0e870cd05de73295a72503c6d1e842156413446401d57adc9d00",
+            "f4a5007212d46a30022083d4aa3749793caec48be3a51dffe3ab8f21d1c8da53"
+          ]
+        },
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84": {
+          "page": 10,
+          "structural_path": [
+            "PLAYING THE GAME"
+          ],
+          "source_unit_ids": [
+            "b4944a0412c8d8c51dcd8ebb038767c935eadd84a6dba4252a3fc889ff8d12b3"
+          ]
+        }
+      },
+      "required_gold": [
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5",
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5": "This chunk gives the default uncertain-outcome procedure: roll a d20, add modifiers, and compare the total against a difficulty class.",
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84": "This chunk supplies the result-reading rules: success, failure, critical success, critical failure, and the natural 20 or natural 1 degree shifts."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5",
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5",
+          "bucket": "required",
+          "page": 443,
+          "structural_path": [
+            "CHECKS"
+          ],
+          "text": "But sometimes what happens as a result of your choices is less than certain. In those cases, you’ll attempt a check. — CHECKS — When success isn’t certain—whether you’re swinging a sword at a foul beast, attempting to leap across a chasm, or straining to remember the name of the earl’s second cousin at a soiree—you’ll attempt a check. Pathfinder has many types of checks, from skill checks to attack rolls to saving throws, but they all follow these basic steps. — 1. Roll a d20 and identify the modifiers, bonuses, and penalties that apply. — 2. Calculate the result. — 3. Compare the result to the difficulty class (DC). — 4. Determine the degree of success and the effect. — Checks and difficulty classes (DC) both come in many forms. When you swing your sword at that foul beast, you’ll make an attack roll against its Armor Class, which is the DC to hit another creature. If you are leaping across that chasm, you’ll attempt an Athletics skill check with a"
+        },
+        {
+          "id": "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84",
+          "bucket": "required",
+          "page": 10,
+          "structural_path": [
+            "PLAYING THE GAME"
+          ],
+          "text": "Once a check is rolled, the GM compares the result to a target number called the difficulty class (DC) to determine the outcome. If the result of the check is equal to or greater than the DC, the check is successful. If it is less, the check is a failure. Beating the DC by 10 or more is referred to as a critical success, which usually grants an especially positive outcome. Similarly, failing the check by 10 or more is a critical failure (sometimes called a fumble). This sometimes results in additional negative effects. You also often score a critical success by rolling a 20 on the die when attempting a check (before adding anything). Likewise, rolling a 1 on the die when attempting a check often results in a critical failure. Note that not all checks have a special effect on a critical success or critical failure and such results should be treated just like an ordinary success or failure instead."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_60c6f9c6cc8b82fc",
+        "ga_7163d48e68143bf4"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u03_time_progression_model",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What named units of time does the game use during play (rounds, turns, scenes, phases), and how does each unit begin and end?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 443,
+      "notes": "",
+      "gold_unit_ids": [
+        "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc",
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba"
+      ],
+      "gold_locations": {
+        "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc": {
+          "page": 443,
+          "structural_path": [
+            "CHAPTER 9: PLAYING THE GAME"
+          ],
+          "source_unit_ids": [
+            "b0ee82ae2bdc693078be87bcfdf659690d738134067f202ddea509fca78a196e",
+            "640fc0a3df968d5f908a5d2ce72a42dd620a93d7e4ebae9c485f09e0a6dc236b",
+            "53a1fd08aee31787406213d8b1a2f3b5e5fa9007c34f66da4c45121969591687"
+          ]
+        },
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba": {
+          "page": 443,
+          "structural_path": [
+            "CHAPTER 9: PLAYING THE GAME"
+          ],
+          "source_unit_ids": [
+            "7c177246fc8289f713ae994940c59a5ee3378ad65f7a83e28454871599dd96cb",
+            "28bc182edae8baf6c0355dc9ac12ad8ed6c5778713a9c013e0af8380d375d07f"
+          ]
+        }
+      },
+      "required_gold": [
+        "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc",
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc": "This chunk establishes that the GM controls transitions between exploration, encounter, and downtime and introduces the encounter-round structure.",
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba": "This adjacent chunk completes the time model by covering the broader mode progression and the distinct pacing of exploration, encounter, and downtime."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc",
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "04afb70510290abeeaf4c8572f60d61bc08dd16b8d526d1151cce1fbd6f905cc",
+          "bucket": "required",
+          "page": 443,
+          "structural_path": [
+            "CHAPTER 9: PLAYING THE GAME"
+          ],
+          "text": "CHAPTER 9: PLAYING THE GAME — At this point, you have a character and are ready to play Pathfinder! Or maybe you're the GM and you are getting ready to run your first adventure. Either way, this chapter provides the full details for the rules outlined in Chapter 1: Introduction. This chapter begins by describing the general rules and conventions of how the game is played and then presents more in-depth explanations of the rules for each mode of play. — Before diving into how to play Pathfinder, it’s important to understand the game’s three modes of play, which determine the pace of your adventure and the specific rules you’ll use at a given time. Each mode provides a different pace and presents a different level of risk to your characters. The Game Master (GM) determines which mode works best for the story and controls the transition between them. You’ll likely talk about the modes less formally during your play session, simply transitioning between exploration and encounters during the adventure, before heading to a settlement to achieve something during downtime. — The most intricate of the modes is encounter mode. This is where most of the intense action takes place, and it's most often used for combat or other high-stakes situations. The GM typically switches to encounter mode by calling on the players to \"roll for initiative\" to determine the order in which all the actors take their turns during the encounter. Time is then divided into a series of rounds, each lasting roughly 6 seconds in the game world. Each round, player characters, other creatures, and sometimes even hazards or events take their turn in initiative order. At the start of a participant's turn, they gain the use of a number of actions (typically 3 in the case of PCs and other creatures) as well as a special action called a reaction. These actions, and what you do with them, are how you affect the world within an encounter. The full rules for playing in encounter mode start on page 468."
+        },
+        {
+          "id": "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba",
+          "bucket": "required",
+          "page": 443,
+          "structural_path": [
+            "CHAPTER 9: PLAYING THE GAME"
+          ],
+          "text": "In exploration mode, time is more flexible and the play more free form. In this mode, minutes, hours, or even days in the game world pass quickly in the real world, as the characters travel cross country, explore uninhabited sections of a dungeon, or roleplay during a social gathering. Often, developments during exploration lead to encounters, and the GM will switch to that mode of play until the encounter ends, before returning to exploration mode. The rules for exploration start on page 479. — The third mode is downtime. During downtime, the characters are at little risk, and the passage of time is measured in days or longer. This is when you might forge a magic sword, research a new spell, or prepare for your next adventure. The rules for downtime are on page 481."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_08fe8f3af5adde82",
+        "ga_fb8f629e6a0aac73"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u04_player_actions_in_combat",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What can a player character do when they act (actions, movement, reactions/interrupts, free actions), and what limits apply?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 11,
+      "notes": "",
+      "gold_unit_ids": [
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856"
+      ],
+      "gold_locations": {
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856": {
+          "page": 11,
+          "structural_path": [
+            "ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "5f93fc782eebc7a9cdb1fc673a6a368c2db5dde82dbc273100b51da109a7581c",
+            "c8052dae3c4a7ddbcd0d07338c00ef23798d961dbab221d2f3a55984df1b5808",
+            "c36a0c7f53c803f8f6a4e6f7465663da37a561878d4e1fb8b147e04de229c463"
+          ]
+        }
+      },
+      "required_gold": [
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856": "This chunk is the tightest single-shot answer to PF2E combat action economy: it covers three actions on your turn, multi-action activities, free actions, one reaction per round, movement as actions, and the multiple attack penalty."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856",
+          "bucket": "required",
+          "page": 11,
+          "structural_path": [
+            "ENCOUNTERS"
+          ],
+          "text": "![](images/0.jpg) — action to perform; these are often special abilities from your character’s class and feats. One common activity in the game is casting a spell, which usually uses two actions. — Free actions, such as dropping an object, don’t count toward the three actions you can take on your turn. Finally, each character can use up to one reaction during a round. This special type of action can be used even when it’s not your turn, but only in response to certain events, and only if you have an ability that allows it. Rogues, for example, can select a feat that lets them use their reaction to dodge an incoming attack. — Attacking another creature is one of the most common actions in combat, and is done by using the Strike action. This requires an attack roll—a kind of check made against the Armor Class (AC) of the creature you’re attacking. Strikes can be made using weapons, spells, or even parts of a creature’s body, like a fist, claw, or tail. You add a modifier to this roll based on your proficiency rank with the type of attack you’re using, your ability scores, and any other bonuses or penalties based on the situation. The target’s AC is calculated using their proficiency rank in the armor they’re wearing and their Dexterity modifier. An attack deals damage if it hits, and rolling a critical success results in the attack dealing double damage! — You can use more than one Strike action on your turn, but each additional attack after the first becomes less accurate. This is reflected by a multiple attack penalty that starts at -5 on the second attack, but increases to -10 on the third. There are many ways to reduce this penalty, and it resets at the end of your turn."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_c439559a3f43975e"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u05_what_must_be_tracked",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What information must be tracked to play correctly (character stats/resources/conditions, positioning, clocks/time), and where is it recorded (character sheet, tokens, track, notes)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 26,
+      "notes": "",
+      "gold_unit_ids": [
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9",
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f",
+        "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a"
+      ],
+      "gold_locations": {
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9": {
+          "page": 26,
+          "structural_path": [
+            "CHARACTER SHEET"
+          ],
+          "source_unit_ids": [
+            "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9"
+          ]
+        },
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f": {
+          "page": 8,
+          "structural_path": [
+            "TOOLS OF PLAY"
+          ],
+          "source_unit_ids": [
+            "dcc98791f03fcc7b65e3cdc005768c4ee54a6ddade45d48e96c33079cc9ecd4b",
+            "54be8f2316c3f83cd18ea8c58c7e67f80af197d460a0eda4b5368c72e66acc79",
+            "c6112ac7ab80fc4c9d101f1e0ebd3b81b720457c3d0b9dfb369665cbcba0ef4a",
+            "c9aa81bb7dd03cde4e1045e2a8ad692ae7c020c0b4c8f47d8b847e9964a57bdb",
+            "e5684c4ea09e4329f8f876c49dc886b20609242850554ce4f900824c673f021b"
+          ]
+        },
+        "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a": {
+          "page": 468,
+          "structural_path": [
+            "STEP 1: START YOUR TURN"
+          ],
+          "source_unit_ids": [
+            "a68cce322af6954a7c4813bb839e6c85e2374e48baf53e468f581e9213eff2e6",
+            "613c35704d9aefc693b0221874df22ebd38ae65137e2064ca4982fa643a7abd2"
+          ]
+        }
+      },
+      "required_gold": [
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9",
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f"
+      ],
+      "supporting_gold": [
+        "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a"
+      ],
+      "required_gold_rationale": {
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9": "This chunk anchors the character-state layer of play by enumerating the information recorded on the character sheet, including hit points, armor, proficiencies, skills, feats, and other core stats.",
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f": "This chunk adds the physical play-state layer: the sheet is used during play, and maps, pawns, minis, or notes track positioning and table state."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9",
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f"
+      ],
+      "_supporting_gold": [
+        "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a"
+      ],
+      "gold_chunks": [
+        {
+          "id": "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9",
+          "bucket": "required",
+          "page": 26,
+          "structural_path": [
+            "CHARACTER SHEET"
+          ],
+          "text": "CHARACTER SHEET — Write your character’s total Hit Points on the first page of your character sheet. Use the proficiency fields (the boxes marked “T,” “E,” “M,” and “L”) on your character sheet to record your character’s initial proficiencies in Perception, saving throws, and the skills granted by their class: mark “T” if your character is trained, or “E” if your character is expert. Indicate which additional skills you chose for your character to be trained in by marking the “T” proficiency box for each skill you selected. Likewise, record your character’s armor proficiencies in the Armor Class section at the top of the first page and their weapon proficiencies at the bottom of the first page. Record all other class feats and abilities on the second page. Don’t worry yet about finalizing any values for your character’s statistics—you’ll handle that in Step 9."
+        },
+        {
+          "id": "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f",
+          "bucket": "required",
+          "page": 8,
+          "structural_path": [
+            "TOOLS OF PLAY"
+          ],
+          "text": "TOOLS OF PLAY — In addition to this book, there are a few things you will need to play Pathfinder. These supplies can be found at your local hobby shop or online at paizo.com. — Character Sheet: Each player will need a character sheet to create their character and to record what happens to that character during play. You can find a character sheet in the back of this book and online as a free pdf. — Dice: The players and GM will need at least one set of polyhedral dice, although most participants bring their own. Six-sided dice are quite common, but all the dice in the set can be found at hobby game stores or online. See the Dice sidebar on page 7 for more on the different kinds of dice and how they are discussed in the text.\nAdventure: Every table needs an adventure to play, whether it’s designed by the GM or found in a published resource. You can find a variety of exciting adventures and even entire Adventure Path campaigns at paizo.com. — Bestiary: From terrifying dragons to mischievous gremlins, monsters are a common threat that the PCs might face, and each type has its own statistics and abilities. These can be found in the Pathfinder Bestiary, an absolutely invaluable book for GMs. Monster statistics can also be found online for free at paizo.com/prd. — Maps and Miniatures: The chaos of combat can be difficult to imagine, so many groups use maps to represent the battlefield. These maps are marked with a 1-inch grid, and each square represents 5 feet in the game. Miniatures and illustrated tokens called pawns are used to represent the characters and the adversaries they face. — Additional Accessories: There are a number of additional accessories you can add to your game to enhance the experience, including tools that help you track turns in combat, decks of cards for referencing common rules, digital character-creation tools, and even background music and sound-effect sets."
+        },
+        {
+          "id": "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a",
+          "bucket": "supporting",
+          "page": 468,
+          "structural_path": [
+            "STEP 1: START YOUR TURN"
+          ],
+          "text": "STEP 1: START YOUR TURN — Many things happen automatically at the start of your turn—it’s a common point for tracking the passage of time for effects that last multiple rounds. At the start of each of your turns, take these steps in any order you choose: — If you created an effect lasting for a certain number of rounds, reduce the number of rounds remaining by 1. The effect ends if the duration is reduced to 0. For example, if you cast a spell that lasts 3 rounds on yourself during your first turn of a fight, it would affect you during that turn, decrease to 2 rounds of duration at the start of your second turn, decrease to 1 round of duration at the start of your third turn, and expire at the start of your fourth turn. — You can use 1 free action or reaction with a trigger of “Your turn begins” or something similar. — If you’re dying, roll a recovery check (page 459)."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_551c928aa339d460",
+        "ga_fba0371af43c7c7d"
+      ],
+      "supporting_anchor_ids": [
+        "ga_41f9cd986ca47938"
+      ]
+    },
+    {
+      "id": "atomic_s05_combat_sequence_group_initiative",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How does initiative work and what is the basic combat sequence for resolving a round?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 468,
+      "notes": "",
+      "gold_unit_ids": [
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e",
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be",
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+      ],
+      "gold_locations": {
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e": {
+          "page": 468,
+          "structural_path": [
+            "STEP 1: ROLL INITIATIVE"
+          ],
+          "source_unit_ids": [
+            "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049",
+            "418bef60f16d0e8581df4d80a33f7a8fdfabe65f3b50880e1d40952addc50640",
+            "9e0da34a39332a53bd2e48502411013495375794addcda2b88b18000ef26217e",
+            "7e5bceeaa86c71d8502623595e402af67ddf5346cb48b5765a0dc96c7f3d602e",
+            "25ba567fd6fe636675f3df9fd4e472018c3a49b8b7ed049dc5ced8ee12a79768"
+          ]
+        },
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be": {
+          "page": 468,
+          "structural_path": [
+            "STEP 2: PLAY A ROUND"
+          ],
+          "source_unit_ids": [
+            "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be"
+          ]
+        },
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4": {
+          "page": 468,
+          "structural_path": [
+            "STEP 3: BEGIN THE NEXT ROUND"
+          ],
+          "source_unit_ids": [
+            "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+          ]
+        }
+      },
+      "required_gold": [
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e",
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be"
+      ],
+      "supporting_gold": [
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+      ],
+      "required_gold_rationale": {
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e": "This chunk explains how initiative is rolled, ordered, tied, and grouped for the start of combat.",
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be": "This chunk defines the basic combat round structure by specifying when a round starts and ends in initiative order."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e",
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be"
+      ],
+      "_supporting_gold": [
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+      ],
+      "gold_chunks": [
+        {
+          "id": "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e",
+          "bucket": "required",
+          "page": 468,
+          "structural_path": [
+            "STEP 1: ROLL INITIATIVE"
+          ],
+          "text": "STEP 1: ROLL INITIATIVE — When the GM calls for it, you’ll roll initiative to determine your place in the initiative order, which is the sequence in which the encounter’s participants will take their turns. Rolling initiative marks the start of an encounter. More often than not, you’ll roll initiative when you enter a battle. — Typically, you’ll roll a Perception check to determine your initiative—the more aware you are of your surroundings, the more quickly you can respond. Sometimes, though, the GM might call on you to roll some other type of check. For instance, if you were Avoiding Notice during exploration (page 479), you’d roll a Stealth check. A social encounter could call for a Deception or Diplomacy check. — The GM rolls initiative for anyone other than the player characters in the encounter. If these include a number of identical creatures, the GM could roll once for the group as a whole and have them take their turns within the group in any order. However, this can make battles less predictable and more dangerous, so the GM might want to roll initiative for some or all creatures individually unless it’s too much of a burden. — Unlike a typical check, where the result is compared to a DC, the results of initiative rolls are ranked. This ranking sets the order in which the encounter’s participants act—the initiative order. The character with the highest result goes first. The second highest follows, and so on until whoever had the lowest result takes their turn last. — If your result is tied with a foe’s result, the adversary goes first. If your result is tied with another PC’s, you can decide between yourselves who goes first when you reach that place in the initiative order. After that, your places in the initiative order usually don’t change during the encounter."
+        },
+        {
+          "id": "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be",
+          "bucket": "required",
+          "page": 468,
+          "structural_path": [
+            "STEP 2: PLAY A ROUND"
+          ],
+          "text": "STEP 2: PLAY A ROUND — A round begins when the participant with the highest initiative roll result starts their turn, and it ends when the one with the lowest initiative ends their turn. The process of taking a turn is detailed below. Creatures might also act outside their turns with reactions and free actions."
+        },
+        {
+          "id": "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4",
+          "bucket": "supporting",
+          "page": 468,
+          "structural_path": [
+            "STEP 3: BEGIN THE NEXT ROUND"
+          ],
+          "text": "STEP 3: BEGIN THE NEXT ROUND — Once everyone in the encounter has taken a turn, the round is over and the next one begins. Don’t roll initiative again; the new round proceeds in the same order as the previous one, repeating the cycle until the encounter ends."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_e520d283b98cc91b",
+        "ga_8158d730fe1d50a7"
+      ],
+      "supporting_anchor_ids": [
+        "ga_e87ca366b65f7191"
+      ]
+    },
+    {
+      "id": "atomic_s06_spell_preparation_reprepare_and_interruption",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does a character regain the ability to use their most powerful abilities (spell slots, power points, charges, or other expendable resources), and what restrictions apply?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 480,
+      "notes": "",
+      "gold_unit_ids": [
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
+      "gold_locations": {
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590": {
+          "page": 480,
+          "structural_path": [
+            "REST AND DAILY"
+          ],
+          "source_unit_ids": [
+            "2f628eb50dcdfac50264c92b83fe88f5167f91892151af197f2b15992123dcaa",
+            "530ba55f6b4cce6336ef6f5b8e4d724bc7cd3efe0fb5c54ffe5e3da9ae8b3524",
+            "2778ee5c24103ad16daf91759c4120f979d290d4e331db7a0f1129a609a92380",
+            "46d955261acc018cafe8b75fd3ad287eb5b0925c6c0dba9c2e94d7ec2c1cd7e6",
+            "92bfd195521001e9e7ea03598eb9e35948c105f95cfb40e18de9b9ae67e93054",
+            "45ea8997b38c89dc635ca855506d81f920a081d30f580be00b4372981f242b19",
+            "2a71bd55409b43a95ed547c36681815b27ff0e459bab8341086665fd149ac35a"
+          ]
+        },
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42": {
+          "page": 302,
+          "structural_path": [
+            "CAST A SPELL"
+          ],
+          "source_unit_ids": [
+            "655c51953ea5a994a0ce7d4c8718f004b0e85c7405a29b95a68e341a69b83b3f",
+            "111af6016c2065b59f5a115de526c402d9beb70b3c23aa2efd083f839ef16306",
+            "081228bacf389bf45834b0ce2e4e31489c4e259a39b73681ab94434547b2b472"
+          ]
+        }
+      },
+      "required_gold": [
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590": "This chunk anchors the spell-preparation cadence by stating that daily preparations happen once every 24 hours and can only be completed once per day.",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42": "This chunk is the closest system anchor for casting interruption, covering long-cast disruption and what happens when casting is interrupted."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590",
+          "bucket": "required",
+          "page": 480,
+          "structural_path": [
+            "REST AND DAILY"
+          ],
+          "text": "REST AND DAILY — PREPARATIONS — You perform at your best when you take enough time to rest and prepare. Once every 24 hours, you can take a period of rest (typically 8 hours), after which you regain Hit Points equal to your Constitution modifier (minimum 1) times your level, and you might recover from or improve certain conditions (page 453). Sleeping in armor results in poor rest that leaves you fatigued. If you go more than 16 hours without resting, you become fatigued (you cannot recover from this until you rest at least 6 continuous hours). — After you rest, you make your daily preparations, which takes around 1 hour. You can prepare only if you’ve rested, and only once per day. Preparing includes the following: — Spellcasters regain spell slots, and prepared spellcasters choose spells to have available that day. — Focus Points, other abilities that refresh during your preparations, and abilities that can be used only a certain number of times per day, including magic item uses, are reset. — You don armor and equip weapons and other gear. — You invest up to 10 worn magic items to gain their benefits for the day."
+        },
+        {
+          "id": "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42",
+          "bucket": "required",
+          "page": 302,
+          "structural_path": [
+            "CAST A SPELL"
+          ],
+          "text": "CAST A SPELL — You cast a spell you have prepared or in your repertoire. Casting a Spell is a special activity that takes a variable number of actions depending on the spell, as listed in each spell’s stat block. As soon as the spellcasting actions are complete, the spell effect occurs. — Some spells are cast as a reaction or free action. In those cases, you Cast the Spell as a reaction or free action (as appropriate) instead of as an activity. Such cases will be noted in the spell’s stat block—for example, “➔ verbal.” — Long Casting Times Some spells take minutes or hours to cast. The Cast a Spell activity for these spells includes a mix of the listed spell components, but it’s not necessary to break down which one you’re providing at a given time. You can’t use other actions or reactions while casting such a spell, though at the GM’s discretion, you might be able to speak a few sentences. As with other activities that take a long time, these spells have the exploration trait, and you can’t cast them in an encounter. If combat breaks out while you’re casting one, your spell is disrupted (see Disrupted and Lost Spells on page 303)."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_20c69d7c59acd6ca",
+        "ga_ec3dac88535f9c3f"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s09_zero_hp_death_and_healing",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "What happens at 0 hit points, and when does a character die from damage?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 459,
+      "notes": "",
+      "gold_unit_ids": [
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857",
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110"
+      ],
+      "gold_locations": {
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174": {
+          "page": 459,
+          "structural_path": [
+            "KNOCKED OUT AND DYING"
+          ],
+          "source_unit_ids": [
+            "2a6d7007ea699695ecf6ff1f172846e1bae5f4be66cb0f0cd0da58410c2c829e",
+            "9408313e49cbfed6379a252849addab53c273c1c00a15ceef24820f3084c8bf0",
+            "6067caf3e4d1bd6f2ae395a787e8d56444178f5620d994348892a2b67742fdb1"
+          ]
+        },
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857": {
+          "page": 459,
+          "structural_path": [
+            "Dying"
+          ],
+          "source_unit_ids": [
+            "808628efdc2c17eafd7bc8152a7f1e610618f87b1927b2b28b2533f630388f36",
+            "a9cca713875f3188261855f80aab63287568dfe27a48f4e064cf87d58d7c3ecd"
+          ]
+        },
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110": {
+          "page": 461,
+          "structural_path": [
+            "TEMPORARY HIT POINTS"
+          ],
+          "source_unit_ids": [
+            "a4a04e650c26939fdcd7bc334f4f308e216cba64efc5bae27018098410615099",
+            "79980dc90daf6075903668924473725efbcb9ddc5d442929f68bb02dd2b99ce4"
+          ]
+        }
+      },
+      "required_gold": [
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857"
+      ],
+      "supporting_gold": [
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110"
+      ],
+      "required_gold_rationale": {
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174": "This chunk covers the ordinary 0 HP transition into the dying state and the immediate consequences of being knocked out.",
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857": "This chunk gives the normal death threshold and the healing interaction needed to explain when a character dies from damage in ordinary play."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857"
+      ],
+      "_supporting_gold": [
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110"
+      ],
+      "gold_chunks": [
+        {
+          "id": "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+          "bucket": "required",
+          "page": 459,
+          "structural_path": [
+            "KNOCKED OUT AND DYING"
+          ],
+          "text": "KNOCKED OUT AND DYING — Creatures cannot be reduced to fewer than 0 Hit Points. When most creatures reach 0 Hit Points, they die and are removed from play unless the attack was nonlethal, in which case they are instead knocked out for a significant amount of time (usually 1 minute or more). When undead and construct creatures reach 0 Hit Points, they are destroyed. — Player characters, their companions, and other significant characters and creatures don’t automatically die when they reach 0 Hit Points. Instead, they are knocked out and are at risk of death. At the GM’s discretion, villains, powerful monsters, special NPCs, and enemies with special abilities that are likely to bring them back to the fight (like ferocity, regeneration, or healing magic) can use these rules as well. — As a player character, when you are reduced to 0 Hit Points, you’re knocked out with the following effects: — You immediately move your initiative position to directly before the turn in which you were reduced to 0 HP.\nYou gain the dying 1 condition. If the effect that knocked you out was a critical success from the attacker or the result of your critical failure, you gain the dying 2 condition instead. If you have the wounded condition (page 460), increase your dying value by an amount equal to your wounded value. If the damage was dealt by a nonlethal attack or nonlethal effect, you don’t gain the dying condition; you are instead unconscious with 0 Hit Points."
+        },
+        {
+          "id": "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857",
+          "bucket": "required",
+          "page": 459,
+          "structural_path": [
+            "Dying"
+          ],
+          "text": "Dying — You are bleeding out or otherwise at death’s door. While you have this condition, you are unconscious. Dying always includes a value. If this value ever reaches dying 4, you die. If you’re dying, you must attempt a recovery check at the start of your turn each round to determine whether you get better or worse. — If you lose the dying condition by succeeding at a recovery check and are still at 0 Hit Points, you remain unconscious, but you can wake up as described on page 460. You lose the dying condition automatically and wake up if you ever have 1 Hit Point or more. Anytime you lose the dying condition, you gain the wounded 1 condition, or increase your wounded value by 1 if you already have that condition."
+        },
+        {
+          "id": "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110",
+          "bucket": "supporting",
+          "page": 461,
+          "structural_path": [
+            "TEMPORARY HIT POINTS"
+          ],
+          "text": "MASSIVE DAMAGE — You die instantly if you ever take damage equal to or greater than double your maximum Hit Points in one blow. — TEMPORARY HIT POINTS — Some spells or abilities give you temporary Hit Points. Track these separately from your current and maximum Hit Points; when you take damage, reduce your temporary Hit Points first. Most temporary Hit Points last for a limited duration. You can’t regain lost temporary Hit Points through healing, but you can gain more via other abilities. You can have temporary Hit Points from only one source at a time. If you gain temporary Hit Points when you already have some, choose whether to keep the amount you already have and their corresponding duration or to gain the new temporary Hit Points and their duration."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_a4c1682df3731295",
+        "ga_72d766bf885f4fb9"
+      ],
+      "supporting_anchor_ids": [
+        "ga_b7d3321046cf39ca"
+      ]
+    },
+    {
+      "id": "atomic_s12_morale_and_reaction_rolls",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "When NPCs or enemies encounter the player characters for the first time, or when combat turns against them, how does the system determine their attitude or willingness to continue fighting?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Reviewed against the current PF2E Player Core corpus. This book does not define an old-school morale-check plus reaction-roll subsystem matching this query, so the query is marked not applicable for this corpus.",
+      "not_applicable": true,
+      "gold_unit_ids": [],
+      "gold_locations": {},
+      "required_gold": [],
+      "supporting_gold": [],
+      "required_gold_rationale": {},
+      "_mode": "single_cite",
+      "_status": "not_applicable",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [],
+      "benchmark_track": "working_set",
+      "evidence_scope": "ungrounded",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s13_encumbrance_and_movement",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does encumbrance affect movement and what needs to be tracked to apply it?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 29,
+      "notes": "",
+      "gold_unit_ids": [
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23",
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+      ],
+      "gold_locations": {
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23": {
+          "page": 29,
+          "structural_path": [
+            "BULK"
+          ],
+          "source_unit_ids": [
+            "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23"
+          ]
+        },
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41": {
+          "page": 272,
+          "structural_path": [
+            "Encumbered"
+          ],
+          "source_unit_ids": [
+            "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+          ]
+        }
+      },
+      "required_gold": [
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23",
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23": "This chunk explains what is tracked to apply encumbrance by defining Bulk and the thresholds that make a character encumbered.",
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41": "This chunk supplies the actual gameplay effect of being encumbered, including the movement penalty that answers the second half of the query."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23",
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23",
+          "bucket": "required",
+          "page": 29,
+          "structural_path": [
+            "BULK"
+          ],
+          "text": "BULK — Your character’s maximum Bulk determines how much weight they can comfortably carry. If they’re carrying a total amount of Bulk that exceeds 5 plus their Strength modifier, they are encumbered. A character can’t carry a total amount of Bulk that exceeds 10 plus their Strength modifier. The Bulk your character is carrying equals the sum of all of their items; keep in mind that 10 light items make up 1 Bulk. You can find out more about Bulk in Chapter 6: Equipment."
+        },
+        {
+          "id": "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41",
+          "bucket": "required",
+          "page": 272,
+          "structural_path": [
+            "Encumbered"
+          ],
+          "text": "Encumbered — You are carrying more weight than you can manage. While you’re encumbered, you’re clumsy 1 and take a -10-foot penalty to all your Speeds. As with all penalties to your Speed, this can’t reduce your Speed below 5 feet."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_7ddc0a456533a806",
+        "ga_edd3e6937850ac02"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s14_exploration_time_and_encounter_checks",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "Outside of structured combat, how does the game track the passage of time during exploration or travel, and what time-based events can interrupt a group's progress?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Reviewed against the current PF2E Player Core corpus. The book supports exploration-time pacing, but it does not define a wandering-monster or periodic encounter-check subsystem matching this query, so the query is marked not applicable for this corpus.",
+      "not_applicable": true,
+      "gold_unit_ids": [],
+      "gold_locations": {},
+      "required_gold": [],
+      "supporting_gold": [],
+      "required_gold_rationale": {},
+      "_mode": "single_cite",
+      "_status": "not_applicable",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [],
+      "benchmark_track": "working_set",
+      "evidence_scope": "ungrounded",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_s16_surprise_procedure",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How does surprise work and what advantage does the surprising side get?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": 498,
+      "notes": "",
+      "gold_unit_ids": [
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288",
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e"
+      ],
+      "gold_locations": {
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288": {
+          "page": 498,
+          "structural_path": [
+            "ROLLING INITIATIVE"
+          ],
+          "source_unit_ids": [
+            "07d518c8c09fd21ead3457badfc9c4189ab640bc2538460efde164c21dbcd128",
+            "3478038bc476fa3fbe46ec266f000a32f8a7958f69bb26b5d23b972e5fb23c74"
+          ]
+        },
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e": {
+          "page": 468,
+          "structural_path": [
+            "STEP 1: ROLL INITIATIVE"
+          ],
+          "source_unit_ids": [
+            "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049",
+            "418bef60f16d0e8581df4d80a33f7a8fdfabe65f3b50880e1d40952addc50640",
+            "9e0da34a39332a53bd2e48502411013495375794addcda2b88b18000ef26217e",
+            "7e5bceeaa86c71d8502623595e402af67ddf5346cb48b5765a0dc96c7f3d602e",
+            "25ba567fd6fe636675f3df9fd4e472018c3a49b8b7ed049dc5ced8ee12a79768"
+          ]
+        }
+      },
+      "required_gold": [
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288",
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e"
+      ],
+      "supporting_gold": [],
+      "required_gold_rationale": {
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288": "This chunk explains the PF2E system-wide surprise procedure: when hostile action starts, the game moves straight into initiative instead of using a separate surprise round.",
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e": "This chunk adds the systemic edge the surprising side actually gains in PF2E by clarifying initiative setup and context-appropriate initiative rolls."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288",
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e"
+      ],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288",
+          "bucket": "required",
+          "page": 498,
+          "structural_path": [
+            "ROLLING INITIATIVE"
+          ],
+          "text": "ROLLING INITIATIVE — Transitioning from exploration to an encounter usually involves rolling for initiative. Call for initiative once a trap is triggered, as soon as two opposing groups come into contact, or when a creature on one side decides to take action against the other. For example: — A group of PCs are exploring a cavern. They enter a narrow passage patrolled by a group of kobold warriors. Now that the two groups are in the same area, it’s time to roll initiative. — Amiri and a kobold champion agree to have a friendly wrestling match. They square off on a patch of dirt, and you call for initiative using Athletics. — Merisiel and Kyra are negotiating with the kobold king. Things aren’t going well, so Merisiel decides to launch a surprise attack. As soon as she says this is her plan, you call for initiative. — Harsk and Ezren are trying to Balance across a narrow beam to reach an isolated kobold treasure trove. When they get halfway across, a red dragon who was hiding behind the mountain flies around to attack! As soon as the dragon makes its appearance, you call for an initiative roll."
+        },
+        {
+          "id": "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e",
+          "bucket": "required",
+          "page": 468,
+          "structural_path": [
+            "STEP 1: ROLL INITIATIVE"
+          ],
+          "text": "STEP 1: ROLL INITIATIVE — When the GM calls for it, you’ll roll initiative to determine your place in the initiative order, which is the sequence in which the encounter’s participants will take their turns. Rolling initiative marks the start of an encounter. More often than not, you’ll roll initiative when you enter a battle. — Typically, you’ll roll a Perception check to determine your initiative—the more aware you are of your surroundings, the more quickly you can respond. Sometimes, though, the GM might call on you to roll some other type of check. For instance, if you were Avoiding Notice during exploration (page 479), you’d roll a Stealth check. A social encounter could call for a Deception or Diplomacy check. — The GM rolls initiative for anyone other than the player characters in the encounter. If these include a number of identical creatures, the GM could roll once for the group as a whole and have them take their turns within the group in any order. However, this can make battles less predictable and more dangerous, so the GM might want to roll initiative for some or all creatures individually unless it’s too much of a burden. — Unlike a typical check, where the result is compared to a DC, the results of initiative rolls are ranked. This ranking sets the order in which the encounter’s participants act—the initiative order. The character with the highest result goes first. The second highest follows, and so on until whoever had the lowest result takes their turn last. — If your result is tied with a foe’s result, the adversary goes first. If your result is tied with another PC’s, you can decide between yourselves who goes first when you reach that place in the initiative order. After that, your places in the initiative order usually don’t change during the encounter."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_c0848125eb70ad9f",
+        "ga_e520d283b98cc91b"
+      ],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "atomic_u06_advancement_and_growth",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How do characters advance over time, and what changes when they do (level, skills, attributes, abilities, or equivalent progression)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "08c3b8ab83db4c305967795fe2aa99f9d95a6170b6b547991f04a4f556ae2867",
+        "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c",
+        "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de",
+        "c9fad371599b8de7c20f07e99f4cb09fc126945c7a6fa9196ad4345eab093d95",
+        "a7f5a56d0244bfaf92c00be921c75fe70c67552338f4aa9874271241f3cf9db6"
+      ],
+      "gold_locations": {
+        "08c3b8ab83db4c305967795fe2aa99f9d95a6170b6b547991f04a4f556ae2867": {
+          "page": 31,
+          "structural_path": [
+            "LEVELING UP"
+          ],
+          "source_unit_ids": [
+            "7d7772b2242dd3809dccca43a5662f23b5c41755b44c74638620491ed7b46947",
+            "f175c68313a9ab8f96fdeee988925fb1f5ccf6d6d79e496c99cf3e02fd3c4b4e",
+            "6fa6ba1cb877f1811f5fb2bbb8a7a6d151c1cec9b293dcd1e209accb2c7c192e"
+          ]
+        },
+        "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c": {
+          "page": 31,
+          "structural_path": [
+            "LEVELING-UP CHECKLIST"
+          ],
+          "source_unit_ids": [
+            "c8b2d448b8b8042da1aab93b728b6132a54d7a5a9e3c872ac6d89c350dd60972",
+            "9864271dbd1372deb2290dc2051ce1b42c4c1fcc819ced97c745547ba6a63b77",
+            "07704e54f962e269cb21cee9a6bc90cf59e7c8680352d70df6cbd4088a9427e6",
+            "b52e39b4771e7a6961e691a479af15c641dacd14eee5ffa2d3b57fdd844b12dc",
+            "93b37284d50b95a5794c575bc9d2060b8cf8ae76c8a9dbfa0a4119e42098cdc0",
+            "020dbd245771df684c395e0470783af984eb3f5863a77b842806fd5466f3a29c",
+            "f7fabe75b2655abab33b52c145fd40730cd954e4283fefab74898f6e5d1a2d42",
+            "db7787bee8c029c9424c0a6a3665903a548d2cbd1275b83d6fd68fdd076b6c86",
+            "28b6f91f15185b4c3d1ca76f2b274ee5813983911dcf064a338bb9f21eb69909",
+            "348c605dec17242dda83a28ea9e1d68273b522cc79c541add5d54a89536a7124",
+            "3ddfb2de99f99b4191c2b05e3ccc03981f10e33563f8c806006a2ba5ee2ba98b",
+            "0296fac3f37f7c4466fc62dd5c50dc285e3f9682da97f486510430f5e05a63b0",
+            "913909d68af5adddf547842937f0e24c825a76048a3210d1e467929e87df8017",
+            "62cc8bbc86e4fa8dee938c5faabf94503e41df13f974da2008d3f54d65d5d5b3",
+            "56cbecab7f52a29093d25893922b0896fbff7466ebcc17e9af16b084b8e4ab27",
+            "c07e50dea95fbe9a506609d5d644907db31241526e20814628b66d927751a436",
+            "09dae180242f0d904277654e8ba5ba08dd73e0bc3bad11c9946e043878fe828b",
+            "55eca53c9e95d20f64423025dd090b76c0ffd5986aba0f7a6e8684463f52311b",
+            "5416a6c3dc658ed27bf24af3969dabd573aaa8cf0b076eb16e6033c45f573fe5",
+            "90afb74d12ffbf1b05706cced99aa487c50b36d3be8a9d696764d2a7ab4574c6",
+            "297982e12efd40dc1306ec4faaffce0641e9c52d12063d2559f8efd1d1bca7ad"
+          ]
+        },
+        "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de": {
+          "page": 68,
+          "structural_path": [
+            "ADVANCEMENT TABLE"
+          ],
+          "source_unit_ids": [
+            "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de"
+          ]
+        },
+        "c9fad371599b8de7c20f07e99f4cb09fc126945c7a6fa9196ad4345eab093d95": {
+          "page": 68,
+          "structural_path": [
+            "SKILL INCREASES"
+          ],
+          "source_unit_ids": [
+            "5b4ede889897f4163e35186f0808050520f34f83351952a8526d002182b7e24c",
+            "cdbafabb00c44a405810245efe7a6c3d98d18762b6cfa7b98c0155b9c0eae6f4"
+          ]
+        },
+        "a7f5a56d0244bfaf92c00be921c75fe70c67552338f4aa9874271241f3cf9db6": {
+          "page": 31,
+          "structural_path": [
+            "LEVELING UP"
+          ],
+          "source_unit_ids": [
+            "614a8cd3d49aaadcead60d07d55217116c3490a9d0840919427c4d172c579c90",
+            "3292a4a08d85be5bfefbf1a06e36f1fbcb86918e5ae62e240cda868499fe327e"
+          ]
+        }
+      },
+      "required_gold": [
+        "08c3b8ab83db4c305967795fe2aa99f9d95a6170b6b547991f04a4f556ae2867",
+        "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c"
+      ],
+      "supporting_gold": [
+        "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de",
+        "c9fad371599b8de7c20f07e99f4cb09fc126945c7a6fa9196ad4345eab093d95",
+        "a7f5a56d0244bfaf92c00be921c75fe70c67552338f4aa9874271241f3cf9db6"
+      ],
+      "required_gold_rationale": {
+        "08c3b8ab83db4c305967795fe2aa99f9d95a6170b6b547991f04a4f556ae2867": "Establishes the core advancement rule: characters gain XP, level up every 1,000 XP, increase Hit Points, and gain all abilities listed for the new level, including class-specific abilities and universal benefits such as ability boosts.",
+        "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c": "Operationalizes what changes on level-up: add class features, ability boosts, skill increases, feats, spells/spell slots, increase proficiency bonuses by 1 from the new level, and update other statistics affected by boosts or abilities."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "08c3b8ab83db4c305967795fe2aa99f9d95a6170b6b547991f04a4f556ae2867",
+          "bucket": "required",
+          "page": 31,
+          "structural_path": [
+            "LEVELING UP"
+          ],
+          "text": "LEVELING UP — The world of Pathfinder is a dangerous place, and your character will face terrifying beasts and deadly traps on their journey into legend. With each challenge resolved, a character earns Experience Points (XP) that allow them to increase in level. Each level grants greater skill, increased resiliency, and new capabilities, allowing your character to face even greater challenges and go on to earn even more impressive rewards. — Each time your character reaches 1,000 Experience Points, their level increases by 1. On your character sheet, indicate your character's new level beside the name of their class, and deduct 1,000 XP from their XP total. If you have any Experience Points left after this, record them—they count toward your next level, so your character is already on their way to advancing yet again! — Next, return to your character’s class entry. Increase your character’s total Hit Points by the number indicated for your class. Then, take a look at the class advancement table and find the row for your character’s new level. Your character gains all the abilities listed for that level, including new abilities specific to your class and additional benefits all characters gain as they level up. For example, all characters gain four ability boosts at 5th level and every 5 levels thereafter."
+        },
+        {
+          "id": "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c",
+          "bucket": "required",
+          "page": 31,
+          "structural_path": [
+            "LEVELING-UP CHECKLIST"
+          ],
+          "text": "LEVELING-UP CHECKLIST — Every time you gain a level, make sure you do each of the following: — Increase your level by 1 and subtract 1,000 XP from your XP total. — Increase your maximum Hit Points by the amount listed in your class entry in Chapter 3. — Add class features from your class advancement table, including ability boosts and skill increases. — Select feats as indicated on your class advancement table. For ancestry feats, see Chapter 2. For class feats, see your class entry in Chapter 3. For general feats and skill feats, see Chapter 5. — Add spells and spell slots if your class grants spellcasting. See Chapter 7 for spells. — Increase all of your proficiency bonuses by 1 from your new level, and make other increases to your proficiency bonuses as necessary from skill increases or other class features. Increase any other statistics that changed as a result of ability boosts or other abilities. — Adjust bonuses from feats and other abilities that are based on your level. — INTRODUCTION — ANCESTRIES & BACKGROUNDS — CLASSES — SKILLS — FEATS — EQUIPMENT — SPELLS — THE AGE OF\nLOST OMENS — PLAYING THE\nGAME — GAME\nMASTERING — CRAFTING\n& TREASURE — APPENDIX — ![](images/0.jpg)"
+        },
+        {
+          "id": "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de",
+          "bucket": "supporting",
+          "page": 68,
+          "structural_path": [
+            "ADVANCEMENT TABLE"
+          ],
+          "text": "ADVANCEMENT TABLE — This table summarizes the feats, skill increases, ability boosts, and other benefits your character gains as they advance in level. The first column of the class table indicates a level, and the second column lists each feature your character receives when they reach that level. The 1st-level entry includes a reminder to select your ancestry and background."
+        },
+        {
+          "id": "c9fad371599b8de7c20f07e99f4cb09fc126945c7a6fa9196ad4345eab093d95",
+          "bucket": "supporting",
+          "page": 68,
+          "structural_path": [
+            "SKILL INCREASES"
+          ],
+          "text": "SKILL INCREASES — This section specifies the levels at which your character can increase their proficiency rank in a skill. At 3rd level and every 2 levels thereafter, most classes grant a skill increase, though rogues gain them earlier and more often. Your character can use a skill increase to either become trained in one skill in which they’re untrained or become an expert in one skill in which they’re already trained. — If your character is at least 7th level, they can use a skill increase to become a master of a skill in which they’re already an expert. If they’re at least 15th level, they can use an increase to become legendary in a skill of which they’re already a master."
+        },
+        {
+          "id": "a7f5a56d0244bfaf92c00be921c75fe70c67552338f4aa9874271241f3cf9db6",
+          "bucket": "supporting",
+          "page": 31,
+          "structural_path": [
+            "LEVELING UP"
+          ],
+          "text": "You can find all the new abilities specific to your class, including class feats, right in your class entry, though you can also use class feats to take an archetype (page 219). Your character's class entry also explains how to apply any ability boosts and skill increases your character gains. If they gain an ancestry feat, head back to the entry for your character's ancestry in Chapter 2 and select another ancestry feat from the list of options. If they gain a skill increase, refer to Chapter 4 when deciding which skill to apply it to. If they gain a general feat or a skill feat, you can choose from the feats listed in Chapter 5. If they can cast spells, see the class entry for details on adding spell slots and spells. It's also a good idea to review your character's spells in Chapter 7 and see if there are heightened versions they can now cast. — Once you’ve made all your choices for your character’s new level, be sure to go over your character sheet and adjust any values that have changed. At a bare minimum, your proficiency bonuses all increase by 1 because you’ve gained a level, so your AC, attack rolls, Perception, saving throws, skill modifiers, spell attack rolls, and class DC all increase by at least 1. You might need to change other values because of skill increases, ability boosts, or class features that either increase your proficiency rank or increase other statistics at certain levels. If an ability boost increases your character’s Constitution modifier, recalculate their maximum Hit Points using their new Constitution modifier (typically this adds 1 Hit Point per level). If an ability boost increases your character’s Intelligence modifier, they become trained in an additional skill and language. Some feats grant a benefit based on your level, such as Toughness, and these benefits are adjusted whenever you gain a level as well."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_e9a4672842eee5eb",
+        "ga_67a40367d3bee49b"
+      ],
+      "supporting_anchor_ids": [
+        "ga_e34d2a3eccaf2fd6",
+        "ga_8133c5a2e2845bc1",
+        "ga_8150da045283e196"
+      ]
+    },
+    {
+      "id": "atomic_u07_character_creation_basics",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "What are the minimum required steps and choices to create a playable character?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020",
+        "e1a3f9b698f3d87740980bc211256597ed7c9234edf7d7f285dd4ab6a92770a3",
+        "5dc5f60e75287891e5f71ac9c5bc6d123446abaf78fd18738846308f2cf88a50",
+        "42c3fe7f1c1accc00d59bb2525a6e37287fddf997cdedbb2609cad88763cf9ee",
+        "93f6361ad822e7f66d0ce1e67cc75b8b8f609bc3c8bc4f934be8708e055d9720",
+        "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda"
+      ],
+      "gold_locations": {
+        "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020": {
+          "page": 19,
+          "structural_path": [
+            "CHARACTER CREATION"
+          ],
+          "source_unit_ids": [
+            "d02f966e84232fb157ed1493f30595c55af3403900a8d1e32b5b6a60ae3a0f74",
+            "4f5385ab4de37010a50ff32c6b4c6626d96fa0723e30aa640901b4de2216f735",
+            "b2f2849f9408e460eb456ffa5a5d1510137c214d60aeccb69f2fff6462a5da61",
+            "16ce7f3bae0e00f930be256a9d9510aa85cb273934f3e053509628e88f7cdb4e"
+          ]
+        },
+        "e1a3f9b698f3d87740980bc211256597ed7c9234edf7d7f285dd4ab6a92770a3": {
+          "page": 21,
+          "structural_path": [
+            "CREATE A CONCEPT"
+          ],
+          "source_unit_ids": [
+            "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584",
+            "5fab2303c9ab34b1042de8676ee7ca098db37be5e94fb6fab6a430d4cf926374"
+          ]
+        },
+        "5dc5f60e75287891e5f71ac9c5bc6d123446abaf78fd18738846308f2cf88a50": {
+          "page": 24,
+          "structural_path": [
+            "ABILITY SCORES"
+          ],
+          "source_unit_ids": [
+            "10b1642eb9b1a0c299228664ce91c72a1bccbaa2ddebed9106e1d25e7e72473f",
+            "329a5b9e108ab0c1c80495dbff4c060a95d941c67a8fa04544ac4d8b461fd90a"
+          ]
+        },
+        "42c3fe7f1c1accc00d59bb2525a6e37287fddf997cdedbb2609cad88763cf9ee": {
+          "page": 25,
+          "structural_path": [
+            "CHOOSE A CLASS"
+          ],
+          "source_unit_ids": [
+            "9c65bdbbd9e1c47185b43af62c266043a042336654cb6825802d99dd93e5c282",
+            "7128ed889ed910cf72a59386dcd13dd3b922ec71fbb56fe74cfacafc758f947a"
+          ]
+        },
+        "93f6361ad822e7f66d0ce1e67cc75b8b8f609bc3c8bc4f934be8708e055d9720": {
+          "page": 26,
+          "structural_path": [
+            "RECORD CLASS DETAILS"
+          ],
+          "source_unit_ids": [
+            "301c7567b58acc11d955dbb1be624dba716b7ea0deb0e395cd8c2f929c0eef14",
+            "566c26ea1d54abfda829a1c15f8c94f86d39bd99eb86eaa06fc2f6e5c927ade4",
+            "054157d9dc1a6fff964085d635829d67ceb1f3f6c80df5e579ec6f45a74e47a0"
+          ]
+        },
+        "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda": {
+          "page": 9,
+          "structural_path": [],
+          "source_unit_ids": [
+            "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda"
+          ]
+        }
+      },
+      "required_gold": [
+        "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020"
+      ],
+      "supporting_gold": [
+        "e1a3f9b698f3d87740980bc211256597ed7c9234edf7d7f285dd4ab6a92770a3",
+        "5dc5f60e75287891e5f71ac9c5bc6d123446abaf78fd18738846308f2cf88a50",
+        "42c3fe7f1c1accc00d59bb2525a6e37287fddf997cdedbb2609cad88763cf9ee",
+        "93f6361ad822e7f66d0ce1e67cc75b8b8f609bc3c8bc4f934be8708e055d9720",
+        "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda"
+      ],
+      "required_gold_rationale": {
+        "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020": "This is the anchor that establishes character creation as a step-by-step process and points to the full sequence of steps on the following pages. For a question asking the minimum required steps and choices to create a playable character, this chunk is the necessary top-level grounding for the existence and structure of the required process."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020",
+          "bucket": "required",
+          "page": 19,
+          "structural_path": [
+            "CHARACTER CREATION"
+          ],
+          "text": "CHARACTER CREATION — Unless you’re the GM, the first thing you need to do when playing Pathfinder is create your character. It’s up to you to imagine your character’s past experiences, personality, and worldview, and this will set the stage for your roleplaying during the game. You’ll use the game’s mechanics to determine your character’s ability to perform various tasks and use special abilities during the game. — This section provides a step-by-step guide for creating a character using the Pathfinder rules, preceded by a guide to help you understand ability scores. These scores are a critical part of your character, and you will be asked to make choices about them during many of the following steps. The steps of character creation are presented in a suggested order, but you can complete them in whatever order you prefer. — Many of the steps on pages 21–28 instruct you to fill out fields on your character sheet. The character sheet is shown on pages 24–25; you can find a copy in the back of this book or online as a free pdf. The character sheet is designed to be easy to use when you’re actually playing the game—but creating a character happens in a different order, so you’ll move back and forth through the character sheet as you go through the character creation process. Additionally, the character sheet includes every field you might need, even though not all characters will have something to put in each field. If a field on your character sheet is not applicable to your character, just leave that field blank. — All the steps of character creation are detailed on the following pages; each is marked with a number that corresponds to the sample character sheet on pages 24–25, showing you where the information goes. If the field you need to fill out is on the third or fourth page of the character sheet, which aren’t shown, the text will tell you."
+        },
+        {
+          "id": "e1a3f9b698f3d87740980bc211256597ed7c9234edf7d7f285dd4ab6a92770a3",
+          "bucket": "supporting",
+          "page": 21,
+          "structural_path": [
+            "CREATE A CONCEPT"
+          ],
+          "text": "![](images/0.jpg) — STEP 1 — CREATE A CONCEPT — What sort of hero do you want to play? The answer to this question might be as simple as “a brave warrior,” or as complicated as “the child of elven wanderers, but raised in a city dominated by humans and devoted to Sarenrae, goddess of the sun.” Consider your character’s personality, sketch out a few details about their past, and think about how and why they adventure. You’ll want to peruse Pathfinder’s available ancestries, backgrounds, and classes. The summaries on pages 22–23 might help you match your concept with some of these basic rule elements. Before a game begins, it’s also a good idea for the players to discuss how their characters might know each other and how they’ll work together throughout the course of their adventures."
+        },
+        {
+          "id": "5dc5f60e75287891e5f71ac9c5bc6d123446abaf78fd18738846308f2cf88a50",
+          "bucket": "supporting",
+          "page": 24,
+          "structural_path": [
+            "ABILITY SCORES"
+          ],
+          "text": "![](images/0.jpg) — ![](images/1.jpg) — STEP 2 — START BUILDING — ABILITY SCORES — At this point, you need to start building your character’s ability scores. See the overview of ability scores on pages 19–20 for more information about these important aspects of your character and an overview of the process. — Your character’s ability scores each start at 10, and as you select your ancestry, background, and class, you’ll apply ability boosts, which increase a score by 2, and ability flaws, which decrease a score by 2. At this point, just note a 10 in each ability score and familiarize yourself with the rules for ability boosts and flaws on page 20. This is also a good time to identify which ability scores will be most important to your character. See The Six Ability Scores on page 19 and the class summaries on pages 22–23 for more information."
+        },
+        {
+          "id": "42c3fe7f1c1accc00d59bb2525a6e37287fddf997cdedbb2609cad88763cf9ee",
+          "bucket": "supporting",
+          "page": 25,
+          "structural_path": [
+            "CHOOSE A CLASS"
+          ],
+          "text": "![](images/2.jpg) — STEP 5 — CHOOSE A CLASS — At this point, you need to decide your character’s class. A class gives your character access to a suite of heroic abilities, determines how effectively they fight, and governs how easily they can shake off or avoid certain harmful effects. Each class is fully detailed in Chapter 3, but the summaries on pages 22–23 provide an overview of each and tells you which ability scores are important when playing that class. — You don’t need to write down all of your character’s class features yet. You simply need to know which class you want to play, which determines the ability scores that will be most important for your character."
+        },
+        {
+          "id": "93f6361ad822e7f66d0ce1e67cc75b8b8f609bc3c8bc4f934be8708e055d9720",
+          "bucket": "supporting",
+          "page": 26,
+          "structural_path": [
+            "RECORD CLASS DETAILS"
+          ],
+          "text": "![](images/0.jpg) — STEP 6 — DETERMINE ABILITY SCORES — Now that you’ve made the main mechanical choices about your character, it’s time to finalize their ability scores. Do these three things: — First, make sure you’ve applied all the ability boosts and ability flaws you’ve noted in previous steps (from your ancestry, background, and class). — Then, apply four more ability boosts to your character’s ability scores, choosing a different ability score for each and increasing that ability score by 2. — Finally, record your starting ability scores and ability modifiers, as determined using Table 1–1: Ability Modifiers. — Remember that each ability boost adds 2 to the base score of 10, and each ability flaw subtracts 2. You should have no ability score lower than 8 or higher than 18. — CHARACTER SHEET — Write your character’s starting ability scores in the box provided for each. Record the ability modifier for each ability score in the box to the left of the ability’s name. — ![](images/1.jpg) — STEP 7 — RECORD CLASS DETAILS — Now, record all the benefits and class features that your character receives from the class you’ve chosen. While you’ve already noted your key ability score, you’ll want to be sure to record the following class features. — To determine your character’s total starting Hit Points, add together the number of Hit Points your character gains from their ancestry (chosen in Step 2) and the number of Hit Points they gain from their class. — The Initial Proficiencies section of your class entry indicates your character’s starting proficiency ranks in a number of areas. Choose which skills your character is trained in and record those, along with the ones set by your class. If your class would make you trained in a skill you’re already trained in (typically due to your background), you can select another skill to become trained in."
+        },
+        {
+          "id": "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda",
+          "bucket": "supporting",
+          "page": 9,
+          "structural_path": [],
+          "text": "Your player character is also defined by some key choices you make. The first choice is a PC’s ancestry, representing the character’s parents and heritage, such as human, elf, or goblin. Next up is the PC’s background, which describes their upbringing, from lowly street urchin to wealthy noble. Finally, and most importantly, a PC’s class defines the majority of their aptitudes and abilities, like a wizard’s command of powerful arcane spells or a druid’s power to transform into a fearsome beast!"
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_5360d9ff03aee651"
+      ],
+      "supporting_anchor_ids": [
+        "ga_cbec4242e5df2732",
+        "ga_85f77985eab2a9ec",
+        "ga_3413211c3b581a66",
+        "ga_36569b2ed9818ae9",
+        "ga_566c870887910ff2"
+      ]
+    },
+    {
+      "id": "atomic_u08_difficulty_and_modifiers",
+      "tier": "T1",
+      "question_type": "atomic_rules",
+      "question": "How does the game set task difficulty and apply situational modifiers (bonuses/penalties, advantage/disadvantage, edge, dice added/removed)?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f",
+        "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff",
+        "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe",
+        "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b",
+        "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f",
+        "f1976861bd0dc1be8c3a942d25720df1b8fe52904642173ae6e1c62465a20951",
+        "724cf010d7b188e48e36c97d7e4321d599db3206ba8af9b0ac8db6ea3ca3a239"
+      ],
+      "gold_locations": {
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f": {
+          "page": 503,
+          "structural_path": [
+            "DIFFICULTY CLASSES"
+          ],
+          "source_unit_ids": [
+            "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f"
+          ]
+        },
+        "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff": {
+          "page": 504,
+          "structural_path": [],
+          "source_unit_ids": [
+            "c6fad8b5b0c2155fb81f068a058bc8472330a93c5712be95890986f4d247e78a",
+            "a4ab503f5bafe6c8f8edf7ee478383fa73f1341e4b8976581413e23b6340b5d4",
+            "6f69fcc3591a65e7b688495aba051f19ed51ad58f0cf5fa95ee63df99fe2d53b"
+          ]
+        },
+        "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe": {
+          "page": 12,
+          "structural_path": [
+            "BONUSES AND PENALTIES"
+          ],
+          "source_unit_ids": [
+            "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe"
+          ]
+        },
+        "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b": {
+          "page": 505,
+          "structural_path": [],
+          "source_unit_ids": [
+            "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b"
+          ]
+        },
+        "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f": {
+          "page": 504,
+          "structural_path": [
+            "SPECIFIC ACTIONS"
+          ],
+          "source_unit_ids": [
+            "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f"
+          ]
+        },
+        "f1976861bd0dc1be8c3a942d25720df1b8fe52904642173ae6e1c62465a20951": {
+          "page": 491,
+          "structural_path": [
+            "OFF-SESSION GAMING"
+          ],
+          "source_unit_ids": [
+            "aded2d66694e222daa8e081627bf67903d80b3bf58bdcc034271ebeb9058d7d3"
+          ]
+        },
+        "724cf010d7b188e48e36c97d7e4321d599db3206ba8af9b0ac8db6ea3ca3a239": {
+          "page": 234,
+          "structural_path": [
+            "Skill modifier = modifier of the skill's key ability score + proficiency bonus + other bonuses + penalties"
+          ],
+          "source_unit_ids": [
+            "89bccbb2c6379f1e96821d88d6c8ef746280b5987c09cefcdc8a07e102872649",
+            "9f6e6ccfd978fb93f3a3b24a7e5989b101c22a1c14a6c4459e65e135b572560f"
+          ]
+        }
+      },
+      "required_gold": [
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f",
+        "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff"
+      ],
+      "supporting_gold": [
+        "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe",
+        "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b",
+        "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f",
+        "f1976861bd0dc1be8c3a942d25720df1b8fe52904642173ae6e1c62465a20951",
+        "724cf010d7b188e48e36c97d7e4321d599db3206ba8af9b0ac8db6ea3ca3a239"
+      ],
+      "required_gold_rationale": {
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f": "Core anchor stating the GM sets DCs for checks without predefined DCs and can use simple or level-based DCs, then tweak them as needed. This is the basis for how task difficulty is set.",
+        "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff": "Provides the explicit difficulty adjustment table (-10 to +10; easy/hard through incredibly hard, plus rarity links), which operationalizes situational difficulty modifiers to the DC."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f",
+          "bucket": "required",
+          "page": 503,
+          "structural_path": [
+            "DIFFICULTY CLASSES"
+          ],
+          "text": "DIFFICULTY CLASSES — As the Game Master, it’s up to you to set the difficulty classes (DCs) for checks that don’t use a predefined DC. The following sections offer advice on how to set appropriate DCs and tweak them as needed to feel natural for your story. Picking a simple DC and using a level-based DC each work well in certain circumstances, and you can adjust both types of DC using the advice on adjusting difficulty."
+        },
+        {
+          "id": "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff",
+          "bucket": "required",
+          "page": 504,
+          "structural_path": [],
+          "text": "ones, and are broken into increments of 2, 5, and 10. You’ll often apply the adjustments for uncommon, rare, or unique subjects. — TABLE 10-6: DC ADJUSTMENTS — <table><tr><td>Difficulty</td><td>Adjustment</td><td>Rarity</td></tr><tr><td>Incredibly easy</td><td>-10</td><td>-</td></tr><tr><td>Very easy</td><td>-5</td><td>-</td></tr><tr><td>Easy</td><td>-2</td><td>-</td></tr><tr><td>Hard</td><td>+2</td><td>Uncommon</td></tr><tr><td>Very hard</td><td>+5</td><td>Rare</td></tr><tr><td>Incredibly hard</td><td>+10</td><td>Unique</td></tr></table>"
+        },
+        {
+          "id": "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe",
+          "bucket": "supporting",
+          "page": 12,
+          "structural_path": [
+            "BONUSES AND PENALTIES"
+          ],
+          "text": "BONUSES AND PENALTIES — Bonuses and penalties apply to checks and certain statistics. There are several types of bonuses and penalties. If you have more than one bonus of the same type, you use only the highest bonus. Likewise, you use only the worst penalty of each type."
+        },
+        {
+          "id": "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b",
+          "bucket": "supporting",
+          "page": 505,
+          "structural_path": [],
+          "text": "Once the PC has decided on a particular level of task from those available, use the DC for that level from Table 10–5. You might adjust the DC to be more difficult if there’s inclement weather during an outdoor job, a rowdy audience for a performance, or the like."
+        },
+        {
+          "id": "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f",
+          "bucket": "supporting",
+          "page": 504,
+          "structural_path": [
+            "SPECIFIC ACTIONS"
+          ],
+          "text": "SPECIFIC ACTIONS — Several parts of this book, most notably Chapter 4: Skills, state that you as the GM set the DCs for certain checks or determine other parameters. Here are guidelines for the most common tasks. Remember that all of these are guidelines, and you can adjust them as necessary to suit the situation."
+        },
+        {
+          "id": "f1976861bd0dc1be8c3a942d25720df1b8fe52904642173ae6e1c62465a20951",
+          "bucket": "supporting",
+          "page": 491,
+          "structural_path": [
+            "OFF-SESSION GAMING"
+          ],
+          "text": "If an effect raises or lowers chances of success, grant a +1 circumstance bonus or a -1 circumstance penalty. — If you’re not sure how difficult a significant challenge should be, use the DC for the party’s level. — If you’re making up an effect, creatures should be incapacitated or killed on only a critical success (or for a saving throw, on a critical failure). — If you don’t know what check to use, pick the most appropriate skill. If no other skill applies to a check to Recall Knowledge, use an appropriate Lore skill (usually at an untrained proficiency rank). — Use the characters’ daily preparations as the time to reset anything that lasts roughly a day. — When a character accomplishes something noteworthy that doesn’t have rules for XP, award them XP for an accomplishment (10 to 30 XP, as described on page 507). — When the PCs fail at a task, look for a way they might fail forward, meaning the story moves"
+        },
+        {
+          "id": "724cf010d7b188e48e36c97d7e4321d599db3206ba8af9b0ac8db6ea3ca3a239",
+          "bucket": "supporting",
+          "page": 234,
+          "structural_path": [
+            "Skill modifier = modifier of the skill's key ability score + proficiency bonus + other bonuses + penalties"
+          ],
+          "text": "The GM sets the DC of a skill check, using the guidelines in Chapter 10: Game Mastering. The most important DCs to remember are the five simple skill DCs below. — <table><tr><td>Task Difficulty</td><td>Simple DC</td></tr><tr><td>Untrained</td><td>10</td></tr><tr><td>Trained</td><td>15</td></tr><tr><td>Expert</td><td>20</td></tr><tr><td>Master</td><td>30</td></tr><tr><td>Legendary</td><td>40</td></tr></table>"
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_a56473db8ef8371e",
+        "ga_bc1e32e486ae40f0"
+      ],
+      "supporting_anchor_ids": [
+        "ga_2d5fea849883737f",
+        "ga_84c2a70817ddeaf0",
+        "ga_683d94d046c46be7",
+        "ga_fefec0e28248c2d7",
+        "ga_47eea726eafd7cf3"
+      ]
+    },
+    {
+      "id": "atomic_s17_damage_and_wound_application",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "When a character is hit, how is damage applied and translated into mechanical harm before the dying/death stage?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20",
+        "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754",
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+        "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b",
+        "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458",
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110",
+        "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909"
+      ],
+      "gold_locations": {
+        "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20": {
+          "page": 450,
+          "structural_path": [
+            "DAMAGE"
+          ],
+          "source_unit_ids": [
+            "aa06d88a1d2bc233014c631c4281d32164f3670ffebc99c87373ae2453afe1e3",
+            "a04583c140a103d5b449005398857bb71cd1578dbb2b88d0274d6a5e85d831a5"
+          ]
+        },
+        "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754": {
+          "page": 450,
+          "structural_path": [
+            "STEP 1: ROLL THE DAMAGE DICE AND APPLY MODIFIERS, BONUSES, AND PENALTIES"
+          ],
+          "source_unit_ids": [
+            "ef89e1b0fe63aaeffedaa22c2e240eed832c17e41cb52c1d20e5afc3f11495e7",
+            "f154eab5d661a1c53bd0822f892bbd2565b2693e5e5a68d0523cd9b0f1532a94",
+            "51a65b279f544b8b52e5a1072faff6c8778f916fac521c567459fdbb52bf8663"
+          ]
+        },
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174": {
+          "page": 459,
+          "structural_path": [
+            "KNOCKED OUT AND DYING"
+          ],
+          "source_unit_ids": [
+            "2a6d7007ea699695ecf6ff1f172846e1bae5f4be66cb0f0cd0da58410c2c829e",
+            "9408313e49cbfed6379a252849addab53c273c1c00a15ceef24820f3084c8bf0",
+            "6067caf3e4d1bd6f2ae395a787e8d56444178f5620d994348892a2b67742fdb1"
+          ]
+        },
+        "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b": {
+          "page": 451,
+          "structural_path": [
+            "STEP 3: APPLY THE TARGET'S IMMUNITIES, WEAKNESSES, AND RESISTANCES"
+          ],
+          "source_unit_ids": [
+            "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b"
+          ]
+        },
+        "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458": {
+          "page": 453,
+          "structural_path": [
+            "STEP 4: IF DAMAGE REMAINS, REDUCE THE TARGET'S HIT POINTS"
+          ],
+          "source_unit_ids": [
+            "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458"
+          ]
+        },
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110": {
+          "page": 461,
+          "structural_path": [
+            "TEMPORARY HIT POINTS"
+          ],
+          "source_unit_ids": [
+            "a4a04e650c26939fdcd7bc334f4f308e216cba64efc5bae27018098410615099",
+            "79980dc90daf6075903668924473725efbcb9ddc5d442929f68bb02dd2b99ce4"
+          ]
+        },
+        "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909": {
+          "page": 12,
+          "structural_path": [
+            "Hit POINTS [HP]"
+          ],
+          "source_unit_ids": [
+            "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909"
+          ]
+        }
+      },
+      "required_gold": [
+        "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20",
+        "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754"
+      ],
+      "supporting_gold": [
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+        "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b",
+        "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458",
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110",
+        "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909"
+      ],
+      "required_gold_rationale": {
+        "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20": "Establishes the core rule that on a hit you deal damage and that damage reduces Hit Points on a 1-to-1 basis, framing how harm is mechanically applied.",
+        "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754": "Provides the operational sequence for applying damage before the dying stage: roll damage, determine type, apply immunities/weaknesses/resistances, then reduce HP."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20",
+          "bucket": "required",
+          "page": 450,
+          "structural_path": [
+            "DAMAGE"
+          ],
+          "text": "DAMAGE — In the midst of combat, you attempt checks to determine if you can damage your foe with weapons, spells, or alchemical concoctions. On a successful check, you hit and deal damage. Damage decreases a creature's Hit Points on a 1-to-1 basis (so a creature that takes 6 damage loses 6 Hit Points). The full rules can be found in the Hit Points, Healing, and Dying section on page 459. — Damage is sometimes given as a fixed amount, but more often than not you’ll make a damage roll to determine how much damage you deal. A damage roll typically uses a number and type of dice determined by the weapon or unarmed attack used or the spell cast, and it is often enhanced by various modifiers, bonuses, and penalties. Like checks, a damage roll—especially a melee weapon damage roll—is often modified by a number of modifiers, penalties, and bonuses. When making a damage roll, you take the following steps, explained in detail below."
+        },
+        {
+          "id": "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754",
+          "bucket": "required",
+          "page": 450,
+          "structural_path": [
+            "STEP 1: ROLL THE DAMAGE DICE AND APPLY MODIFIERS, BONUSES, AND PENALTIES"
+          ],
+          "text": "1. Roll the dice indicated by the weapon, unarmed attack, or spell, and apply the modifiers, bonuses, and penalties that apply to the result of the roll. — 2. Determine the damage type. — 3. Apply the target’s immunities, weaknesses, and resistances to the damage. — 4. If any damage remains, reduce the target’s Hit Points by that amount. — STEP 1: ROLL THE DAMAGE DICE AND APPLY MODIFIERS, BONUSES, AND PENALTIES — Your weapon, unarmed attack, spell, or even a magic item determines what type of dice you roll for damage, and how many. For instance, if you’re using a normal longsword, you’ll roll 1d8. If you’re casting a 3rd-level fireball spell, you’ll roll 6d6. Sometimes, especially in the case of weapons, you’ll apply modifiers, bonuses, and penalties to the damage. — When you use melee weapons, unarmed attacks, and thrown ranged weapons, the most common modifier you’ll add to damage is your Strength ability modifier. Weapons with the propulsive trait sometimes add half your Strength modifier. You typically do not add an ability modifier to spell damage, damage from most ranged weapons, or damage from alchemical bombs and similar items. — As with checks, you might add circumstance, status, or item bonuses to your damage rolls, but if you have multiple bonuses of the same type, you add only the highest bonus of that type. Again like checks, you may also apply circumstance, status, item, and untyped penalties to the damage roll, and again you apply only the greatest penalty"
+        },
+        {
+          "id": "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174",
+          "bucket": "supporting",
+          "page": 459,
+          "structural_path": [
+            "KNOCKED OUT AND DYING"
+          ],
+          "text": "KNOCKED OUT AND DYING — Creatures cannot be reduced to fewer than 0 Hit Points. When most creatures reach 0 Hit Points, they die and are removed from play unless the attack was nonlethal, in which case they are instead knocked out for a significant amount of time (usually 1 minute or more). When undead and construct creatures reach 0 Hit Points, they are destroyed. — Player characters, their companions, and other significant characters and creatures don’t automatically die when they reach 0 Hit Points. Instead, they are knocked out and are at risk of death. At the GM’s discretion, villains, powerful monsters, special NPCs, and enemies with special abilities that are likely to bring them back to the fight (like ferocity, regeneration, or healing magic) can use these rules as well. — As a player character, when you are reduced to 0 Hit Points, you’re knocked out with the following effects: — You immediately move your initiative position to directly before the turn in which you were reduced to 0 HP.\nYou gain the dying 1 condition. If the effect that knocked you out was a critical success from the attacker or the result of your critical failure, you gain the dying 2 condition instead. If you have the wounded condition (page 460), increase your dying value by an amount equal to your wounded value. If the damage was dealt by a nonlethal attack or nonlethal effect, you don’t gain the dying condition; you are instead unconscious with 0 Hit Points."
+        },
+        {
+          "id": "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b",
+          "bucket": "supporting",
+          "page": 451,
+          "structural_path": [
+            "STEP 3: APPLY THE TARGET'S IMMUNITIES, WEAKNESSES, AND RESISTANCES"
+          ],
+          "text": "STEP 3: APPLY THE TARGET'S IMMUNITIES, WEAKNESSES, AND RESISTANCES — Defenses against certain types of damage or effects are called immunities or resistances, while vulnerabilities are called weaknesses. Apply immunities first, then weaknesses, and resistances third. Immunity, weakness, or resistance to an alignment applies only to damage of that type, not to damage from an attacking creature of that alignment."
+        },
+        {
+          "id": "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458",
+          "bucket": "supporting",
+          "page": 453,
+          "structural_path": [
+            "STEP 4: IF DAMAGE REMAINS, REDUCE THE TARGET'S HIT POINTS"
+          ],
+          "text": "STEP 4: IF DAMAGE REMAINS, REDUCE THE TARGET'S HIT POINTS — After applying the target’s immunities, resistances, and weaknesses to the damage, the damage reduces the target’s Hit Points on a 1-to-1 basis. More information about Hit Points can be found in the Hit Points, Healing, and Dying section on page 459."
+        },
+        {
+          "id": "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110",
+          "bucket": "supporting",
+          "page": 461,
+          "structural_path": [
+            "TEMPORARY HIT POINTS"
+          ],
+          "text": "MASSIVE DAMAGE — You die instantly if you ever take damage equal to or greater than double your maximum Hit Points in one blow. — TEMPORARY HIT POINTS — Some spells or abilities give you temporary Hit Points. Track these separately from your current and maximum Hit Points; when you take damage, reduce your temporary Hit Points first. Most temporary Hit Points last for a limited duration. You can’t regain lost temporary Hit Points through healing, but you can gain more via other abilities. You can have temporary Hit Points from only one source at a time. If you gain temporary Hit Points when you already have some, choose whether to keep the amount you already have and their corresponding duration or to gain the new temporary Hit Points and their duration."
+        },
+        {
+          "id": "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909",
+          "bucket": "supporting",
+          "page": 12,
+          "structural_path": [
+            "Hit POINTS [HP]"
+          ],
+          "text": "Hit POINTS [HP] — Hit Points represent the amount of punishment a creature can take before it falls unconscious and begins dying. Damage decreases Hit Points on a 1-to-1 basis, while healing restores Hit Points at the same rate."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_4527e398015ffc1a",
+        "ga_7328069cff042b5b"
+      ],
+      "supporting_anchor_ids": [
+        "ga_a4c1682df3731295",
+        "ga_4ca80082451718a6",
+        "ga_1337f66f0e5a3300",
+        "ga_b7d3321046cf39ca",
+        "ga_502a9338f324c2fe"
+      ]
+    },
+    {
+      "id": "atomic_s18_recovery_and_rest",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How do characters recover lost health or remove injuries outside the dying/death state, and what limits apply?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab",
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719",
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682",
+        "a6a3d4929ede2ce88faef3e005b72592977d02a1902c1d7e10a59260c5b75741",
+        "9d86b2009687db97bcf299ba138672080165e129da136672f99e81acef6ef272"
+      ],
+      "gold_locations": {
+        "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab": {
+          "page": 623,
+          "structural_path": [
+            "WOUNDED"
+          ],
+          "source_unit_ids": [
+            "6495cfbc676ee64a98fb5dcf6d8d3e474c64c2f38fa78aae49187c78a8dffd4d",
+            "a36c274733b63913c92aad5678ee140742413039c3e97e81c8a2d49e61515818",
+            "8610824522ddd1e3a3e5457af4d593e0f5efa597ddd70eee458442bdf3dcde7d"
+          ]
+        },
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719": {
+          "page": 461,
+          "structural_path": [
+            "FAST HEALING AND REGENERATION"
+          ],
+          "source_unit_ids": [
+            "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719"
+          ]
+        },
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7": {
+          "page": 364,
+          "structural_path": [
+            "RESTORATION"
+          ],
+          "source_unit_ids": [
+            "b8ddd673b0dcc79abdb0373d3c4b2f6b54f3ee5c9c13db1683edb974f8a2c5fa",
+            "5b7f752168802cd7f62525c3aab9359cfd3a98f1ec0f38386b3ea08f71818f68",
+            "2520f1d62f5115fda97ad415c0d3cf2d93875804783c1b41a43ab21f511711f0"
+          ]
+        },
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682": {
+          "page": 621,
+          "structural_path": [
+            "Assisted Recovery"
+          ],
+          "source_unit_ids": [
+            "527015ed8364d65a365bcf47fa180907f06ae91da6b88364ff4e02f10639a1bd",
+            "02d63a0ed9da08bce078c1d7f67ee8d2533fee1f06b759de96fc058250fcf371"
+          ]
+        },
+        "a6a3d4929ede2ce88faef3e005b72592977d02a1902c1d7e10a59260c5b75741": {
+          "page": 363,
+          "structural_path": [
+            "HEALING NECROMANCY POSITIVE"
+          ],
+          "source_unit_ids": [
+            "da91ef621c87fca110e83d9f7700e8a99aa43b4c391b3f437ba686236fc09d50",
+            "15a0a85d525e091ea68cfa547163a9323364bfe06391e17dd23a9b348c91119f"
+          ]
+        },
+        "9d86b2009687db97bcf299ba138672080165e129da136672f99e81acef6ef272": {
+          "page": 260,
+          "structural_path": [
+            "Prerequisites expert in Medicine"
+          ],
+          "source_unit_ids": [
+            "20d30789babc7ccec35370fd894ef34efc496b530fbda010fba307ed3777aa81",
+            "79a2acee87c9972c9174bbc5f482308b6d6d5e956d68c14a220e74a4ef864110"
+          ]
+        }
+      },
+      "required_gold": [
+        "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab",
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719"
+      ],
+      "supporting_gold": [
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682",
+        "a6a3d4929ede2ce88faef3e005b72592977d02a1902c1d7e10a59260c5b75741",
+        "9d86b2009687db97bcf299ba138672080165e129da136672f99e81acef6ef272"
+      ],
+      "required_gold_rationale": {
+        "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab": "Provides the core non-dying recovery/removal rule for injuries: the wounded condition ends if Treat Wounds restores HP, or if the creature is restored to full HP and then rests 10 minutes. This directly answers how injuries are removed outside the dying/death state and the limit attached to rest.",
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719": "Establishes a general outside-dying way to recover lost health: fast healing/regeneration restore HP each round at the start of the creature’s turn. This is a core rule-level source for recovering lost HP apart from the dying process."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab",
+          "bucket": "required",
+          "page": 623,
+          "structural_path": [
+            "WOUNDED"
+          ],
+          "text": "for abilities that can be used only against targets totally unaware of your presence. — WOUNDED — You have been seriously injured. If you lose the dying condition and do not already have the wounded condition, you become wounded 1. If you already have the wounded condition when you lose the dying condition, your wounded condition value increases by 1. If you gain the dying condition while wounded, increase your dying condition value by your wounded value. — The wounded condition ends if someone successfully restores Hit Points to you with Treat Wounds, or if you are restored to full Hit Points and rest for 10 minutes."
+        },
+        {
+          "id": "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719",
+          "bucket": "required",
+          "page": 461,
+          "structural_path": [
+            "FAST HEALING AND REGENERATION"
+          ],
+          "text": "FAST HEALING AND REGENERATION — A creature with fast healing or regeneration regains the listed amount of Hit Points each round at the beginning of its turn. A creature with regeneration has additional benefits. Its dying condition can’t increase to a value that would kill it (this stops most creatures from going beyond dying 3) as long as its regeneration is active. If it takes damage of a type listed in the regeneration entry, its regeneration deactivates until the end of its next turn, including against the triggering damage."
+        },
+        {
+          "id": "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+          "bucket": "supporting",
+          "page": 364,
+          "structural_path": [
+            "RESTORATION"
+          ],
+          "text": "RESTORATION — SPELL 2 — HEALING NECROMANCY — Traditions divine, occult, primal — Cast 1 minute (somatic, verbal) — Range touch; Targets 1 creature — Restorative magic counters the effects of toxins or conditions that prevent a creature from functioning at its best. When you cast restoration, choose to either reduce a condition or lessen the effect of a toxin. A creature can benefit from only one restoration spell each day, and it can't benefit from restoration more than once to reduce the stage of the same exposure to a given toxin. — Reduce a Condition Reduce the value of the target’s clumsy, enfeebled, or stupefied condition by 2. You can instead reduce two of the listed conditions by 1 each. — Lessen a Toxin Reduce the stage of one toxin the target suffers from by one stage. This can’t reduce the stage below stage 1 or cure the affliction. — Heightened (4th) Add drained to the list of conditions you can reduce. When you lessen a toxin, reduce the stage by two. You also gain a third option that allows you to reduce the target’s doomed value by 1. You can’t use this to reduce a permanent doomed condition. — Heightened (6th) As the 4th-level restoration, but you can reduce a permanent doomed condition if you add a spellcasting action and a material component while Casting the Spell, during which you provide 100 gp worth of diamond dust as a cost."
+        },
+        {
+          "id": "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682",
+          "bucket": "supporting",
+          "page": 621,
+          "structural_path": [
+            "Assisted Recovery"
+          ],
+          "text": "Assisted Recovery — You can take steps to help yourself recover from persistent damage, or an ally can help you, allowing you to attempt an additional flat check before the end of your turn. This is usually an activity requiring 2 actions, and it must be something that would reasonably improve your chances (as determined by the GM). For example, you might try to smother a flame or wash off acid. This allows you to attempt an extra flat check immediately, but only once per round. — The GM decides how your help works, using the following examples as guidelines when there’s not a specific action that applies. — The action to help might require a skill check or another roll to determine its effectiveness. — Reduce the DC of the flat check to 10 for a particularly appropriate type of help, such as dousing you in water to put out flames. — Automatically end the condition due to the type of help, such as healing that restores you to your maximum HP to end persistent bleed damage, or submerging yourself in a lake to end persistent fire damage."
+        },
+        {
+          "id": "a6a3d4929ede2ce88faef3e005b72592977d02a1902c1d7e10a59260c5b75741",
+          "bucket": "supporting",
+          "page": 363,
+          "structural_path": [
+            "HEALING NECROMANCY POSITIVE"
+          ],
+          "text": "REGENERATE — SPELL 7 — HEALING NECROMANCY POSITIVE — Traditions divine, primal — Cast  \\( \\leftrightarrow \\)  somatic, verbal — Range touch; Targets 1 willing living creature — Duration 1 minute — An infusion of positive energy grants a creature continuous healing. The target temporarily gains regeneration 15, which restores 15 Hit Points to it at the start of each of its turns. While it has regeneration, the target can't die from damage and its dying condition can't increase to a value that would kill it (this stops most creatures from going beyond dying 3), though if its wounded value becomes 4 or higher, it stays unconscious until its wounds are treated. If the target takes acid or fire damage, its regeneration deactivates until after the end of its next turn. — Each time the creature regains Hit Points from regeneration, it also regrows one damaged or ruined organ (if any). During the spell’s duration, the creature can also reattach severed body parts by spending an Interact action to hold the body part to the area it was severed from."
+        },
+        {
+          "id": "9d86b2009687db97bcf299ba138672080165e129da136672f99e81acef6ef272",
+          "bucket": "supporting",
+          "page": 260,
+          "structural_path": [
+            "Prerequisites expert in Medicine"
+          ],
+          "text": "CONTINUAL RECOVERY — FEAT 2 — GENERAL SKILL — Prerequisites expert in Medicine — You zealously monitor a patient’s progress to administer treatment faster. When you Treat Wounds, your patient becomes immune for only 10 minutes instead of 1 hour. This applies only to your Treat Wounds activities, not any other the patient receives."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_e88d8fb771f5edbb",
+        "ga_032000c72d7922b4"
+      ],
+      "supporting_anchor_ids": [
+        "ga_13271984e43eb456",
+        "ga_01457fb397685d25",
+        "ga_1c275e5c8a9bc02e",
+        "ga_2aa7066cfc679447"
+      ]
+    },
+    {
+      "id": "atomic_m01_social_resolution_procedure",
+      "tier": "T3",
+      "question_type": "atomic_rules",
+      "question": "What procedure, if any, resolves uncertain social outcomes (persuasion, intimidation, negotiation), and what inputs modify it?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "refusal_acceptable": true,
+      "gold_unit_ids": [
+        "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf",
+        "b715eb00f8a0648950e959444c6d4ec2cdd45067791919a6c920814a449b5778",
+        "af42e6a15a57b5576949a06924f01df878101a1d72ff72da35b15dc944620945",
+        "c1611c1eafe6d5b874cfbad65c7c8405c353698f161705f5fbe578e2b30abd5f",
+        "b658a95e8a8898b423b8002f281857d7aeccbe8fd90b36d0b3ac3dc232d4a98a",
+        "96a9c9eaf4154c88981a7db88c34229cd2b2eea90fe868c36a0942a95e24f53d"
+      ],
+      "gold_locations": {
+        "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf": {
+          "page": 495,
+          "structural_path": [
+            "Measuring Success and Progress"
+          ],
+          "source_unit_ids": [
+            "07a205dbd1b11ad8d23fd5ae8aff1faa1125bbed829864a699eb7da207b07d34",
+            "f0e3dfdef1cf50d7ff1e7086ac2aed531b4c6c171b8cae6a6b6fffa36dfbde36",
+            "ba9d8856673534660630e6d777c3bc4275e7cf0fe9f81e42a305d0e64ced0c97"
+          ]
+        },
+        "b715eb00f8a0648950e959444c6d4ec2cdd45067791919a6c920814a449b5778": {
+          "page": 494,
+          "structural_path": [
+            "SOCIAL ENCOUNTERS"
+          ],
+          "source_unit_ids": [
+            "cf1ac7f854848153e59a9ec889891145305ea838f005b59c70022c850f37ea0c",
+            "61f712f1358fdf9a9413441d7da9d6f87cd77bb9cf1eef925e4b7763108cb7a8",
+            "576456b917bcf4ef8116d0a07383c08dc8868f16e73c5f1eba183e19683d63af"
+          ]
+        },
+        "af42e6a15a57b5576949a06924f01df878101a1d72ff72da35b15dc944620945": {
+          "page": 506,
+          "structural_path": [
+            "SOCIAL SKILLS"
+          ],
+          "source_unit_ids": [
+            "258abfb64a224c0d495d760e890e8325f39c29e92d5bb3a02781d8bc35612c9c"
+          ]
+        },
+        "c1611c1eafe6d5b874cfbad65c7c8405c353698f161705f5fbe578e2b30abd5f": {
+          "page": 247,
+          "structural_path": [
+            "AUDITORY CONCENTRATE EMOTION EXPLORATION LINGUISTIC"
+          ],
+          "source_unit_ids": [
+            "ad403661677560ddc86ee7380844052c09709b2738d2cb029bbe1415a340e2f9",
+            "f66ba6f7b5039f9fe4d26849a3517e4f39a56ca4d74793805f3441945eb4b41c"
+          ]
+        },
+        "b658a95e8a8898b423b8002f281857d7aeccbe8fd90b36d0b3ac3dc232d4a98a": {
+          "page": 246,
+          "structural_path": [
+            "AUDITORY CONCENTRATE EXPLORATION LINGUISTIC MENTAL"
+          ],
+          "source_unit_ids": [
+            "2b30d298bc7fd783530214545b797dd707e81e0eb53ab9fe479e154d00e10d75",
+            "65a7f43a295443417e49d65c66aa92f54b9b81714a25647d5f9966f116a40c0d",
+            "1fc1e17fd18277cdd58eee4f8419f013ab03373f9551cfd51bea8ecb035983c1",
+            "f0929314b0672cd8b8237b370c7c595c14e040c039ebf3781df6603069eba856",
+            "9130f8ba777d64bb539b8f24d93c377c12b3905771795273a53f74893a4a5563",
+            "f0557a0725304e528aec456748b472e839dbcac06ddc892b7c7b1925edd9fcb9",
+            "834ffd5237741e051b9415d717b0ab1c80b266af8f15c4b0cbcf4921f6a9c1f8",
+            "a33b9932301fe5dd1bb6f40af5485e46b6a2297b2ee7941398060606196a5c85"
+          ]
+        },
+        "96a9c9eaf4154c88981a7db88c34229cd2b2eea90fe868c36a0942a95e24f53d": {
+          "page": 246,
+          "structural_path": [
+            "Changing Attitudes"
+          ],
+          "source_unit_ids": [
+            "f672b369fabda703eef9d920c1e552d0b9dec0d5124cf55d08f76c2cfa9f8733",
+            "15c1703ac5d98f1951844fa514ddb0ed534edeeb42e79ef78dfeadafe9d567c6",
+            "cde3522c3e682efb960af2e9d46a73630060652100e28e6e53be67e93e6eba15",
+            "68ada061259acded75fa4ca829ef1228cbf9d107f5c60aaddf20388ad8801083",
+            "0e5eb4d49778c05257e8351e32a459034d6d4a0e9b42f48dea05ff28a503bd11"
+          ]
+        }
+      },
+      "required_gold": [
+        "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf"
+      ],
+      "supporting_gold": [
+        "b715eb00f8a0648950e959444c6d4ec2cdd45067791919a6c920814a449b5778",
+        "af42e6a15a57b5576949a06924f01df878101a1d72ff72da35b15dc944620945",
+        "c1611c1eafe6d5b874cfbad65c7c8405c353698f161705f5fbe578e2b30abd5f",
+        "b658a95e8a8898b423b8002f281857d7aeccbe8fd90b36d0b3ac3dc232d4a98a",
+        "96a9c9eaf4154c88981a7db88c34229cd2b2eea90fe868c36a0942a95e24f53d"
+      ],
+      "required_gold_rationale": {
+        "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf": "This is the core rule text for resolving uncertain social outcomes at the encounter/procedure level. It explicitly says the GM must decide how to measure success in social encounters, gives the resolution methods (set DCs for social skill actions, often against Will DC; use simple or level-based DCs for unstatted targets; track attitude changes; or track accumulated successes/failures), and identifies the main inputs that modify resolution (target Will DC, estimated level/challenge, and encounter progress metrics)."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf",
+          "bucket": "required",
+          "page": 495,
+          "structural_path": [
+            "Measuring Success and Progress"
+          ],
+          "text": "Measuring Success and Progress — You’ll need to decide how to measure the characters’ success in social encounters, because there’s no AC to target or HP to whittle down. Chapter 4 includes guidance on setting DCs for social skill actions, often using a target’s Will DC. If you need a DC for people who don’t have stats, such as a crowd or an NPC for whom you haven’t already generated statistics, use the guidelines on setting DCs, found on page 503. You can either pick a simple DC or use a level-based DC, estimating a level for the subject or how challenging it should be to sway them. — The attitude conditions—hostile, unfriendly, indifferent, friendly, and helpful—provide a useful way to track the progress of a social encounter. Use these to represent the attitude of an authority, a crowd, a jury, or the like. A typical goal for a social encounter is to change the attitude of a person or group to helpful so they assist you, or calming a hostile group or person to defuse a situation. Try to give the players a clear idea of how much they’ve progressed as the encounter proceeds. — Another option is to track the number of successes or failures the characters accrue. For instance, you might need to trick four guards into leaving their posts, and count each successful attempt to Lie or Create a Diversion toward a total of four necessary successes. You can combine these two methods; if the PCs need a group of important nobles to vote their way, the goal of the encounter might be to ensure that a majority of the nobles have a better attitude toward the PCs than they have of a rival—all within a limited time frame."
+        },
+        {
+          "id": "b715eb00f8a0648950e959444c6d4ec2cdd45067791919a6c920814a449b5778",
+          "bucket": "supporting",
+          "page": 494,
+          "structural_path": [
+            "SOCIAL ENCOUNTERS"
+          ],
+          "text": "SOCIAL ENCOUNTERS — Most conversations play best as free-form roleplaying, with maybe one or two checks for social skills involved. Sometimes, though, a tense situation or crucial parlay requires a social encounter that uses initiative, much like a combat encounter. As with any other encounter, the stakes of a social encounter need to be high! A failed social encounter could mean a character is imprisoned or put to death, a major rival becomes a political powerhouse, or a key ally is disgraced and ostracized. — Using the structure of an encounter is helpful because it makes the timing clearer than in free-form play, and each character feels like they’re contributing. When running a social encounter, establish the stakes up front, so the players know the consequences of success or failure and the circumstances that will cause the encounter to end. — You have much more flexibility in how you run a social encounter than in a combat encounter. Extending the length of rounds beyond 6 seconds, allowing more improvisation, and focusing less on special attacks and spells all differentiate a social encounter from a combat one. In most cases, you don’t need to worry about character’s movements, nor do you need a map. Some examples of social encounters include: — Proving someone’s innocence in front of a judge. — Convincing a neighboring monarch to help defend against an invasion. — Besting a rival bard in a battle of wits. — Exposing a villain’s deception before a noble court. — INITIATIVE AND ACTIONS — Initiative in a social encounter typically has characters rolling Society or a Charisma-based skill, such as"
+        },
+        {
+          "id": "af42e6a15a57b5576949a06924f01df878101a1d72ff72da35b15dc944620945",
+          "bucket": "supporting",
+          "page": 506,
+          "structural_path": [
+            "SOCIAL SKILLS"
+          ],
+          "text": "the level of the creature and use that DC. A commoner is usually level 0 or 1. Don’t worry about being exact. It often makes sense to adjust the DC based on the target’s attitude for Deception, Diplomacy, or Performance, making the DC easy for a friendly creature, very easy for a helpful one, hard for an unfriendly one, or very hard for a hostile one. You might adjust the DC further or differently based on the PC’s goal; for instance, the DC to Request something an indifferent NPC is fundamentally opposed to might be incredibly hard or impossible, and it might be easy to convince an unfriendly creature to do something it already wants to do."
+        },
+        {
+          "id": "c1611c1eafe6d5b874cfbad65c7c8405c353698f161705f5fbe578e2b30abd5f",
+          "bucket": "supporting",
+          "page": 247,
+          "structural_path": [
+            "AUDITORY CONCENTRATE EMOTION EXPLORATION LINGUISTIC"
+          ],
+          "text": "Critical Success The target agrees to your request without qualifications. — Success The target agrees to your request, but they might demand added provisions or alterations to the request. — Failure The target refuses the request, though they might propose an alternative that is less extreme. — Critical Failure Not only does the target refuse the request, but their attitude toward you decreases by one step due to the temerity of the request. — INTIMIDATION (CHA) — You bend others to your will using threats. — COERCE — AUDITORY CONCENTRATE EMOTION EXPLORATION LINGUISTIC — With threats either veiled or overt, you attempt to bully a creature into doing what you want. You must spend at least 1 minute of conversation with a creature you can see and that can either see or sense you. At the end of the conversation, attempt an Intimidation check against the target's Will DC, modified by any circumstances the GM determines. The attitudes referenced in the effects below are summarized in the Changing Attitudes sidebar on page 246 and described in full in the Conditions Appendix, starting on page 618. — Critical Success The target gives you the information you seek or agrees to follow your directives so long as they aren’t likely to harm the target in any way. The target continues to comply for an amount of time determined by the GM but not exceeding 1 day, at which point the target becomes unfriendly (if they weren’t already unfriendly or hostile). However, the target is too scared of you to retaliate—at least in the short term.\nSuccess As critical success, but once the target becomes unfriendly, they might decide to act against you—for example, by reporting you to the authorities or assisting your enemies."
+        },
+        {
+          "id": "b658a95e8a8898b423b8002f281857d7aeccbe8fd90b36d0b3ac3dc232d4a98a",
+          "bucket": "supporting",
+          "page": 246,
+          "structural_path": [
+            "AUDITORY CONCENTRATE EXPLORATION LINGUISTIC MENTAL"
+          ],
+          "text": "Success You collect information about the individual or topic. The GM determines the specifics. — Critical Failure You collect incorrect information about the individual or topic. — Sample Gather Information Tasks — Untrained talk of the town — Trained common rumor — Expert obscure rumor, poorly guarded secret — Master well-guarded or esoteric information — Legendary information known only to an incredibly select few, or only to extraordinary beings — MAKE AN IMPRESSION — AUDITORY CONCENTRATE EXPLORATION LINGUISTIC MENTAL — With at least 1 minute of conversation, during which you engage in charismatic overtures, flattery, and other acts of goodwill, you seek to make a good impression on someone to make them temporarily agreeable. At the end of the conversation, attempt a Diplomacy check against the Will DC of one target, modified by any circumstances the GM sees fit. Good impressions (or bad impressions, on a critical failure) last for only the current social interaction unless the GM decides otherwise."
+        },
+        {
+          "id": "96a9c9eaf4154c88981a7db88c34229cd2b2eea90fe868c36a0942a95e24f53d",
+          "bucket": "supporting",
+          "page": 246,
+          "structural_path": [
+            "Changing Attitudes"
+          ],
+          "text": "Critical Success The target’s attitude toward you improves by two steps. — Success The target’s attitude toward you improves by one step. — Critical Failure The target’s attitude toward you decreases by one step. — Changing Attitudes — Your influence on NPCs is measured with a set of attitudes that reflect how they view your character. These are only a brief summary of a creature's disposition. The GM will supply additional nuance based on the history and beliefs of the characters you're interacting with, and their attitudes can change in accordance with the story. The attitudes are detailed in the Conditions Appendix and are summarized here. — Helpful: Willing to help you and respond favorably to your requests."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [
+        "ga_63d8fee58123478b"
+      ],
+      "supporting_anchor_ids": [
+        "ga_fe1c01470c1c55d0",
+        "ga_7ed8cb58ecc5d840",
+        "ga_c8e4356e1f4043d2",
+        "ga_38f0af8109d201bc",
+        "ga_d5c2aa4604f80861"
+      ]
+    },
+    {
+      "id": "atomic_m02_resource_depletion_and_resupply",
+      "tier": "T3",
+      "question_type": "atomic_rules",
+      "question": "Which consumable resources are expected to deplete during play, and how are they restored or replenished?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "",
+      "gold_unit_ids": [
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d",
+        "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad",
+        "2b91a2bc779d04875fed490d08d9bc132db57efc97eb1dee7aa0752bc5b13880",
+        "7d9ea32d15711a460938de8fbd7da22a3e9d415e57de1648521487da8fedf484",
+        "2f707f0fb7c024b7fd20137d4dd7d1519a222ba9e4c8ecf64f7792240381376e",
+        "b83026dc97bff408d6c42c1774aa1d3444b83fd34746b62add619ef041955a0d",
+        "1366fab9fe3d815803340365d2129039ca7907a4d948cc1837e2eea91c65738a"
+      ],
+      "gold_locations": {
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d": {
+          "page": 559,
+          "structural_path": [
+            "CONSUMABLES"
+          ],
+          "source_unit_ids": [
+            "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d"
+          ]
+        },
+        "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad": {
+          "page": 500,
+          "structural_path": [
+            "STARVATION AND THIRST"
+          ],
+          "source_unit_ids": [
+            "6a9057028037a292205638b32c46e168a2cdd90d5723145a0e7bc63c8225a46e",
+            "95064f8acda3b5ea80e147db8ff56adb6c3aff030373aeb29897c2eef3fde127",
+            "098a065e387a14dd00c24d7f882626177a944280368f9e1ab6a72e4e3248979e",
+            "71e28299d8fcae1e6c557fa26bcbfde686f396571ad2b26d1347c080deec3a7b",
+            "f51bfdf1a3a8050d61c9a9144ef7640bee9fff9293f0ae0801d309bceb49ad56"
+          ]
+        },
+        "2b91a2bc779d04875fed490d08d9bc132db57efc97eb1dee7aa0752bc5b13880": {
+          "page": 533,
+          "structural_path": [
+            "ITEM CATEGORIES"
+          ],
+          "source_unit_ids": [
+            "8030b58f9cc2e17cc0a3bee556287f99c3edf799424b6eeb68977ef538d904f9"
+          ]
+        },
+        "7d9ea32d15711a460938de8fbd7da22a3e9d415e57de1648521487da8fedf484": {
+          "page": 533,
+          "structural_path": [
+            "ITEM CATEGORIES"
+          ],
+          "source_unit_ids": [
+            "da8c63d678c967866f33138cb615e53d72ad34dc66ab8656cabd8ecd38175476"
+          ]
+        },
+        "2f707f0fb7c024b7fd20137d4dd7d1519a222ba9e4c8ecf64f7792240381376e": {
+          "page": 291,
+          "structural_path": [
+            "Adventuring Gear"
+          ],
+          "source_unit_ids": [
+            "6bc542ad0f3511e39768acebb28020d15b6e4a380cc61152c4398b997efef671",
+            "c6104e6fe2a0b55dba959602abc7291932c22398979b61c412e72277db68194c",
+            "7afe44249e585763fa15321d6c8b5e694bc10fdb753982d5e87958eaecdf5296",
+            "36af0c3b68d06c277d02bf86a331d0a7bf6aeef869e75c455f894cf9e0cee529",
+            "8869db766abf1ff4323c0346f384b9c293ad29e0aa33decafa64515e7cbf70f8"
+          ]
+        },
+        "b83026dc97bff408d6c42c1774aa1d3444b83fd34746b62add619ef041955a0d": {
+          "page": 292,
+          "structural_path": [],
+          "source_unit_ids": [
+            "9d3e15dc3df21849792bc4886a1287aef30b42360945ac94c1f7b2d42800f156",
+            "5a723006fe4baee9e5348193ebab9643be3f04a001e828a5b970cf0d927e50d8",
+            "a8329a59e55e5d5399676bfddc09d34e982f8e5d42d95ca5516e1849b13c5c10"
+          ]
+        },
+        "1366fab9fe3d815803340365d2129039ca7907a4d948cc1837e2eea91c65738a": {
+          "page": 510,
+          "structural_path": [
+            "ADJUSTING TREASURE"
+          ],
+          "source_unit_ids": [
+            "f65d90eccc1289fc5847d8b17745cd1523bc55b4f47c3f2662c54f12550f4aa2",
+            "969293ce19563de5a809fbff82da3146d9ae89f35ae20bbe8a8f51589ae56d18"
+          ]
+        }
+      },
+      "required_gold": [
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d",
+        "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad"
+      ],
+      "supporting_gold": [
+        "2b91a2bc779d04875fed490d08d9bc132db57efc97eb1dee7aa0752bc5b13880",
+        "7d9ea32d15711a460938de8fbd7da22a3e9d415e57de1648521487da8fedf484",
+        "2f707f0fb7c024b7fd20137d4dd7d1519a222ba9e4c8ecf64f7792240381376e",
+        "b83026dc97bff408d6c42c1774aa1d3444b83fd34746b62add619ef041955a0d",
+        "1366fab9fe3d815803340365d2129039ca7907a4d948cc1837e2eea91c65738a"
+      ],
+      "required_gold_rationale": {
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d": "Establishes the core rule that consumable magic items are single-use and typically destroyed after activation, directly answering what resources deplete during play.",
+        "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad": "Provides the restoration side: daily preparations refresh Focus Points and other per-day abilities, and also notes food and water as consumable necessities that must be replenished by eating and drinking."
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_chunks": [
+        {
+          "id": "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d",
+          "bucket": "required",
+          "page": 559,
+          "structural_path": [
+            "CONSUMABLES"
+          ],
+          "text": "CONSUMABLES — This section includes magic items with the consumable trait. An item with this trait can be used only once. Unless stated otherwise, it is destroyed after activation. When a character creates consumable items, they can make them in batches of four, as described in the Craft activity. Consumables includes the following subcategories, with any special rules appearing at the start of the section."
+        },
+        {
+          "id": "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad",
+          "bucket": "required",
+          "page": 500,
+          "structural_path": [
+            "STARVATION AND THIRST"
+          ],
+          "text": "Spellcasters who prepare spells choose which spells they’ll have available that day. — Focus Points and other abilities that reset during daily preparations refresh. This includes abilities that can be used only a certain number of times per day. — Each character equips their gear. This includes donning their armor and strapping on their weapons. — Characters invest up to 10 worn magic items to gain their benefits for the day (page 531). — STARVATION AND THIRST — Typically characters eat and drink enough to survive comfortably. When they can’t, they’re fatigued until they do. Without water, after a number of days equal to a creature’s Constitution modifier +1, the creature takes 1d4 damage each hour that can’t be healed until it quenches its thirst. After the same amount of time without food, it takes 1 damage each day that can’t be healed until it eats."
+        },
+        {
+          "id": "2b91a2bc779d04875fed490d08d9bc132db57efc97eb1dee7aa0752bc5b13880",
+          "bucket": "supporting",
+          "page": 533,
+          "structural_path": [
+            "ITEM CATEGORIES"
+          ],
+          "text": "Ammunition (page 559), in Consumables, includes different types of magical arrows, crossbow bolts, and other types of ammunition. — Apex Items (page 603) are a subcategory of worn items of a high level that increase an ability score. — Armor (page 555) includes the rules for basic magical armor as well as special suits of armor. — Companion Items (page 604) are a category of worn items meant for animal companions and mounts. — Consumables (page 559) are used up when you activate them, and include ammunition, oils, potions, scrolls, and talismans, among others. Categories of items that are consumables but have specific rules, such as alchemical items, are presented separately. — Held Items (page 572) include a wide variety of items you use with your hands. This doesn’t include more narrow categories of held items, such as weapons. — Materials (page 577) can be used to make items with unique properties and other advantages. — Oils (page 561) are consumables applied to the surface of an object or person. — Potions (page 562) are consumable magical liquids you drink to activate. — Runes (page 580) modify armor and weapons when etched onto them. This section includes fundamental runes for weapons (weapon potency and striking) and armor (armor potency and resilient). — Scrolls (page 564) are consumables that allow spellcasters to cast more spells. — Shields (page 586) include more durable shields and ones with special magical powers. — Snares (page 589) are single-use traps typically made by rangers. — Staves (page 592) provide flexible spellcasting options. — Structures (page 596) include buildings, tents, and other larger items. — Talismans (page 565) are consumables that are affixed to items and then activated for a one-time combat or physical benefit. — Wands (page 597) hold a spell of the crafter’s choice, and can be used to repeatedly cast that spell. — Weapons (page 599) include the rules for basic magical weapons, weapons made from precious materials, and specific magic weapons. — Worn Items (page 603) consist of a vast collection of clothing and other items you wear on your body."
+        },
+        {
+          "id": "7d9ea32d15711a460938de8fbd7da22a3e9d415e57de1648521487da8fedf484",
+          "bucket": "supporting",
+          "page": 533,
+          "structural_path": [
+            "ITEM CATEGORIES"
+          ],
+          "text": "SUSTAINING ACTIVATIONS — Some items, once activated, have effects that can be sustained if you concentrate on them. This works much — ITEM CATEGORIES — Items are grouped into the following categories, shown here with the page number where those items appear and a brief description of the category. — Alchemical Items (page 543) are powered by the reactions of alchemical reagents. Almost all alchemical items are consumable items that are used up when you activate them. This category includes bombs, elixirs (including mutagens), poisons, and alchemical tools."
+        },
+        {
+          "id": "2f707f0fb7c024b7fd20137d4dd7d1519a222ba9e4c8ecf64f7792240381376e",
+          "bucket": "supporting",
+          "page": 291,
+          "structural_path": [
+            "Adventuring Gear"
+          ],
+          "text": "Though the components are used up over time, you can refill spent components during your daily preparations. — Musical Instrument: Handheld instruments include bagpipes, a small set of chimes, small drums, fiddles and viols, flutes and recorders, small harps, lutes, trumpets, and similarly sized instruments. The GM might rule that an especially large handheld instrument (like a tuba) has greater Bulk. Heavy instruments such as large drums, a full set of chimes, and keyboard instruments are less portable and generally need to be stationary while being played. — A virtuoso instrument gives a +1 item bonus to Performance checks using that instrument. — Oil: You can use oil to fuel lanterns, but you can also set a pint of oil aflame and throw it. You must first spend an Interact action preparing the oil, then throw it with another action as a ranged attack. If you hit, it splatters on the creature or in a single 5-foot square you target. You must succeed at a DC 10 flat check for the oil to ignite successfully when it hits. If the oil ignites, the target takes 1d6 fire damage. — Piton: These small spikes can be used as anchors to make climbing easier. To affix a piton, you must hold it in one hand and use a hammer to drive it in with your other hand. You can attach a rope to the hammered piton so that you don’t fall all the way to the ground on a critical failure while Climbing. — Religious Symbol: This piece of wood or silver is emblazoned with an image representing a deity. Some divine spellcasters, such as clerics, can use a religious symbol of their deity as a divine focus to use certain abilities and cast some spells. A religious symbol must be held in one hand to use it. — Religious Text: This manuscript contains scripture of a particular religion. Some divine spellcasters, such as clerics, can use a religious text as a divine focus to use certain abilities and cast some spells. A religious text must be held in one hand to use it."
+        },
+        {
+          "id": "b83026dc97bff408d6c42c1774aa1d3444b83fd34746b62add619ef041955a0d",
+          "bucket": "supporting",
+          "page": 292,
+          "structural_path": [],
+          "text": "Torch: A torch sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 1 hour. It can be used as an improvised weapon that deals 1d4 bludgeoning damage plus 1 fire damage. — Waterskin: When it’s full, a waterskin contains roughly 1 day’s worth of water for a Small or Medium creature. — Writing Set: Using a writing set, you can draft correspondence and scribe scrolls. A set includes stationery, including a variety of paper and parchment, as well as ink, a quill or inkpen, sealing wax, and a simple seal. If you’ve written a large amount, you can refill your kit with extra ink and paper."
+        },
+        {
+          "id": "1366fab9fe3d815803340365d2129039ca7907a4d948cc1837e2eea91c65738a",
+          "bucket": "supporting",
+          "page": 510,
+          "structural_path": [
+            "ADJUSTING TREASURE"
+          ],
+          "text": "ADJUSTING TREASURE — The treasure you award to the party should be monitored and adjusted as you play. You might need to give out treasure you hadn't originally planned for, especially if the group bypasses part of an adventure. Keep an eye on the party's resources. If they're running out of consumables or money, or if they're having trouble in combat because their items aren't up to the task, you can make adjustments. — This is especially common in adventures that have little downtime or that take place far from civilization. If the group goes a long time without being able to purchase or Craft useful items, the PCs will be flush with coins and valuables but behind on useful equipment. In a situation like this, you can either place more useful treasure in the adventure or introduce NPCs who are willing to trade."
+        }
+      ],
+      "benchmark_track": "ratified_core",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [
+        "ga_5aa2b87a85c4c933",
+        "ga_bf2447b54903914c"
+      ],
+      "supporting_anchor_ids": [
+        "ga_295e3abca1a136b9",
+        "ga_9c493736c09eb95e",
+        "ga_65f1b2c9008fdd8f",
+        "ga_a53674d750af7a73",
+        "ga_564258d8ddd5b3ae"
+      ]
+    }
+  ],
+  "anchors": {
+    "ga_e0e68884c738388d": {
+      "anchor_id": "ga_e0e68884c738388d",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 8,
+      "structural_path": [
+        "THE GAME MASTER"
+      ],
+      "anchor_quote": "THE GAME MASTER — While the other players create and control their characters, the Game Master (or GM) is in charge of the story and world.",
+      "quote_normalized_hash": "6644aed527bf37c04b51d18153186da8",
+      "cached_unit_ids": [
+        "22ae2ed84b940730557a484d8b26861eef7121759e1651b04f5ed529bf4e6d29"
+      ],
+      "cached_source_unit_ids": [
+        "e4e64bd756da42bbe4d41aab031b4a18dac14a133d23ac9f6e655cd76bb54b4c",
+        "71332b9a7ec153eb2bc6161196bd52aaeb0abeac7bd332a98f222dfa7f76a937",
+        "5dd1ac3de33d0547229d87937937afeb2c6afe5f6bab39ac05b8a58a7c80b502"
+      ]
+    },
+    "ga_60c6f9c6cc8b82fc": {
+      "anchor_id": "ga_60c6f9c6cc8b82fc",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 443,
+      "structural_path": [
+        "CHECKS"
+      ],
+      "anchor_quote": "But sometimes what happens as a result of your choices is less than certain.",
+      "quote_normalized_hash": "2396dd88ae17c0c6f719e849d4595fba",
+      "cached_unit_ids": [
+        "9d89d7556d82b555921460cf4e8bed526fed7fa99302897bbfb3d36bb6e21fe5"
+      ],
+      "cached_source_unit_ids": [
+        "6de4e619d9ac0e870cd05de73295a72503c6d1e842156413446401d57adc9d00",
+        "f4a5007212d46a30022083d4aa3749793caec48be3a51dffe3ab8f21d1c8da53"
+      ]
+    },
+    "ga_7163d48e68143bf4": {
+      "anchor_id": "ga_7163d48e68143bf4",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 10,
+      "structural_path": [
+        "PLAYING THE GAME"
+      ],
+      "anchor_quote": "Once a check is rolled, the GM compares the result to a target number called the difficulty class (DC) to determine the outcome.",
+      "quote_normalized_hash": "2864d1a3bd926a58f80ee1b7ee5bebe4",
+      "cached_unit_ids": [
+        "8ec8dcc69d7e1efefaf6cb0c675d51d08e1ae05fb22e3a8f1b76dcd6055d6a84"
+      ],
+      "cached_source_unit_ids": [
+        "b4944a0412c8d8c51dcd8ebb038767c935eadd84a6dba4252a3fc889ff8d12b3"
+      ]
+    },
+    "ga_fb8f629e6a0aac73": {
+      "anchor_id": "ga_fb8f629e6a0aac73",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 443,
+      "structural_path": [
+        "CHAPTER 9: PLAYING THE GAME"
+      ],
+      "anchor_quote": "In exploration mode, time is more flexible and the play more free form.",
+      "quote_normalized_hash": "cf31f6d6de668f8f2023dc46cad63796",
+      "cached_unit_ids": [
+        "5f35abaf7b901b4d8569e5023705b5ddafd94cef5bf5d0473fd880184ab9afba"
+      ],
+      "cached_source_unit_ids": [
+        "7c177246fc8289f713ae994940c59a5ee3378ad65f7a83e28454871599dd96cb",
+        "28bc182edae8baf6c0355dc9ac12ad8ed6c5778713a9c013e0af8380d375d07f"
+      ]
+    },
+    "ga_c439559a3f43975e": {
+      "anchor_id": "ga_c439559a3f43975e",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 11,
+      "structural_path": [
+        "ENCOUNTERS"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "4bf6c6b6fb132e365bce3a664ceb00f47c0623fa76fa1a721f3159a4461ef856"
+      ],
+      "cached_source_unit_ids": [
+        "5f93fc782eebc7a9cdb1fc673a6a368c2db5dde82dbc273100b51da109a7581c",
+        "c8052dae3c4a7ddbcd0d07338c00ef23798d961dbab221d2f3a55984df1b5808",
+        "c36a0c7f53c803f8f6a4e6f7465663da37a561878d4e1fb8b147e04de229c463"
+      ]
+    },
+    "ga_551c928aa339d460": {
+      "anchor_id": "ga_551c928aa339d460",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 26,
+      "structural_path": [
+        "CHARACTER SHEET"
+      ],
+      "anchor_quote": "CHARACTER SHEET — Write your character’s total Hit Points on the first page of your character sheet.",
+      "quote_normalized_hash": "852a326d5cb8576adf2d0e66e94e202b",
+      "cached_unit_ids": [
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9"
+      ],
+      "cached_source_unit_ids": [
+        "8c01ee74d3775fbf01ee4f5439adce30bc874db48dfd0e8d33f2f45abb29c5d9"
+      ]
+    },
+    "ga_fba0371af43c7c7d": {
+      "anchor_id": "ga_fba0371af43c7c7d",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 8,
+      "structural_path": [
+        "TOOLS OF PLAY"
+      ],
+      "anchor_quote": "TOOLS OF PLAY — In addition to this book, there are a few things you will need to play Pathfinder.",
+      "quote_normalized_hash": "2a65dbd5835f777454a0d212bd225d73",
+      "cached_unit_ids": [
+        "f4a36ca78626c0808c9cd8a30f7de78728c6506a9d4c2b218e1a5bfddcd8bf3f"
+      ],
+      "cached_source_unit_ids": [
+        "dcc98791f03fcc7b65e3cdc005768c4ee54a6ddade45d48e96c33079cc9ecd4b",
+        "54be8f2316c3f83cd18ea8c58c7e67f80af197d460a0eda4b5368c72e66acc79",
+        "c6112ac7ab80fc4c9d101f1e0ebd3b81b720457c3d0b9dfb369665cbcba0ef4a",
+        "c9aa81bb7dd03cde4e1045e2a8ad692ae7c020c0b4c8f47d8b847e9964a57bdb",
+        "e5684c4ea09e4329f8f876c49dc886b20609242850554ce4f900824c673f021b"
+      ]
+    },
+    "ga_41f9cd986ca47938": {
+      "anchor_id": "ga_41f9cd986ca47938",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 468,
+      "structural_path": [
+        "STEP 1: START YOUR TURN"
+      ],
+      "anchor_quote": "STEP 1: START YOUR TURN — Many things happen automatically at the start of your turn—it’s a common point for tracking the passage of time for effects that last multiple rounds.",
+      "quote_normalized_hash": "bb4ec3de1f2547e7894259caa0a4f3e7",
+      "cached_unit_ids": [
+        "a6a9b703afce2574f16fd114b933023771350231bc610b2ae5af1f5f66459c1a"
+      ],
+      "cached_source_unit_ids": [
+        "a68cce322af6954a7c4813bb839e6c85e2374e48baf53e468f581e9213eff2e6",
+        "613c35704d9aefc693b0221874df22ebd38ae65137e2064ca4982fa643a7abd2"
+      ]
+    },
+    "ga_e520d283b98cc91b": {
+      "anchor_id": "ga_e520d283b98cc91b",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 468,
+      "structural_path": [
+        "STEP 1: ROLL INITIATIVE"
+      ],
+      "anchor_quote": "STEP 1: ROLL INITIATIVE — When the GM calls for it, you’ll roll initiative to determine your place in the initiative order, which is the sequence in which the encounter’s participants will take their",
+      "quote_normalized_hash": "9bb792cd0a52a7328babd7a1c20cf755",
+      "cached_unit_ids": [
+        "e2c0827733da4818af6da2ea4fe0b239efad7f7deb97ac04e34d4af717d61d9e"
+      ],
+      "cached_source_unit_ids": [
+        "7f30ed4bd91f39481ab01cfaa9dc36405ed733e8fedece14fe55a5f3de13c049",
+        "418bef60f16d0e8581df4d80a33f7a8fdfabe65f3b50880e1d40952addc50640",
+        "9e0da34a39332a53bd2e48502411013495375794addcda2b88b18000ef26217e",
+        "7e5bceeaa86c71d8502623595e402af67ddf5346cb48b5765a0dc96c7f3d602e",
+        "25ba567fd6fe636675f3df9fd4e472018c3a49b8b7ed049dc5ced8ee12a79768"
+      ]
+    },
+    "ga_8158d730fe1d50a7": {
+      "anchor_id": "ga_8158d730fe1d50a7",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 468,
+      "structural_path": [
+        "STEP 2: PLAY A ROUND"
+      ],
+      "anchor_quote": "STEP 2: PLAY A ROUND — A round begins when the participant with the highest initiative roll result starts their turn, and it ends when the one with the lowest initiative ends their turn.",
+      "quote_normalized_hash": "0e0cf00b87fe8bdc41646a441d587d22",
+      "cached_unit_ids": [
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be"
+      ],
+      "cached_source_unit_ids": [
+        "b144439a4c367d73f10b6556d5262f6e61b1c44204e979df02c8635115ef75be"
+      ]
+    },
+    "ga_e87ca366b65f7191": {
+      "anchor_id": "ga_e87ca366b65f7191",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 468,
+      "structural_path": [
+        "STEP 3: BEGIN THE NEXT ROUND"
+      ],
+      "anchor_quote": "STEP 3: BEGIN THE NEXT ROUND — Once everyone in the encounter has taken a turn, the round is over and the next one begins.",
+      "quote_normalized_hash": "feab341b6beea57736a44e5ddfe88eef",
+      "cached_unit_ids": [
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+      ],
+      "cached_source_unit_ids": [
+        "fbf2ac7bdbe8778ca753536f987d294aac73246ec0b071518b5ab4abe3c9d0f4"
+      ]
+    },
+    "ga_20c69d7c59acd6ca": {
+      "anchor_id": "ga_20c69d7c59acd6ca",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 480,
+      "structural_path": [
+        "REST AND DAILY"
+      ],
+      "anchor_quote": "REST AND DAILY — PREPARATIONS — You perform at your best when you take enough time to rest and prepare.",
+      "quote_normalized_hash": "9c186509d884a3c3ce5e9fbfac2b3a85",
+      "cached_unit_ids": [
+        "e45f4a5de6c7069f62eb57222a3b239f91d66948c3580ad48aecbd5c03a5c590"
+      ],
+      "cached_source_unit_ids": [
+        "2f628eb50dcdfac50264c92b83fe88f5167f91892151af197f2b15992123dcaa",
+        "530ba55f6b4cce6336ef6f5b8e4d724bc7cd3efe0fb5c54ffe5e3da9ae8b3524",
+        "2778ee5c24103ad16daf91759c4120f979d290d4e331db7a0f1129a609a92380",
+        "46d955261acc018cafe8b75fd3ad287eb5b0925c6c0dba9c2e94d7ec2c1cd7e6",
+        "92bfd195521001e9e7ea03598eb9e35948c105f95cfb40e18de9b9ae67e93054",
+        "45ea8997b38c89dc635ca855506d81f920a081d30f580be00b4372981f242b19",
+        "2a71bd55409b43a95ed547c36681815b27ff0e459bab8341086665fd149ac35a"
+      ]
+    },
+    "ga_ec3dac88535f9c3f": {
+      "anchor_id": "ga_ec3dac88535f9c3f",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 302,
+      "structural_path": [
+        "CAST A SPELL"
+      ],
+      "anchor_quote": "CAST A SPELL — You cast a spell you have prepared or in your repertoire.",
+      "quote_normalized_hash": "97b19f094683568d64c9af026d0727da",
+      "cached_unit_ids": [
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
+      "cached_source_unit_ids": [
+        "655c51953ea5a994a0ce7d4c8718f004b0e85c7405a29b95a68e341a69b83b3f",
+        "111af6016c2065b59f5a115de526c402d9beb70b3c23aa2efd083f839ef16306",
+        "081228bacf389bf45834b0ce2e4e31489c4e259a39b73681ab94434547b2b472"
+      ]
+    },
+    "ga_a4c1682df3731295": {
+      "anchor_id": "ga_a4c1682df3731295",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 459,
+      "structural_path": [
+        "KNOCKED OUT AND DYING"
+      ],
+      "anchor_quote": "KNOCKED OUT AND DYING — Creatures cannot be reduced to fewer than 0 Hit Points.",
+      "quote_normalized_hash": "b68ac9a7a33a102ef9771b1af4ae039d",
+      "cached_unit_ids": [
+        "4e25774305504ca32ed7075d066a8c0dca4e38a3ca9783a74fb88421216fc174"
+      ],
+      "cached_source_unit_ids": [
+        "2a6d7007ea699695ecf6ff1f172846e1bae5f4be66cb0f0cd0da58410c2c829e",
+        "9408313e49cbfed6379a252849addab53c273c1c00a15ceef24820f3084c8bf0",
+        "6067caf3e4d1bd6f2ae395a787e8d56444178f5620d994348892a2b67742fdb1"
+      ]
+    },
+    "ga_72d766bf885f4fb9": {
+      "anchor_id": "ga_72d766bf885f4fb9",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 459,
+      "structural_path": [
+        "Dying"
+      ],
+      "anchor_quote": "Dying — You are bleeding out or otherwise at death’s door.",
+      "quote_normalized_hash": "8940a87b1c26889d5535d0ff3b2d0bcf",
+      "cached_unit_ids": [
+        "02657ea06c5da287f6eab283e64f90898e3a9d65287a88f43b48786ad714b857"
+      ],
+      "cached_source_unit_ids": [
+        "808628efdc2c17eafd7bc8152a7f1e610618f87b1927b2b28b2533f630388f36",
+        "a9cca713875f3188261855f80aab63287568dfe27a48f4e064cf87d58d7c3ecd"
+      ]
+    },
+    "ga_b7d3321046cf39ca": {
+      "anchor_id": "ga_b7d3321046cf39ca",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 461,
+      "structural_path": [
+        "TEMPORARY HIT POINTS"
+      ],
+      "anchor_quote": "MASSIVE DAMAGE — You die instantly if you ever take damage equal to or greater than double your maximum Hit Points in one blow.",
+      "quote_normalized_hash": "b8a94fb0278059ee79dffc92ffe0e0e1",
+      "cached_unit_ids": [
+        "0a234259424811a20cdfa1618273960eb5c80e21e4e7e1c3908d2320c33bb110"
+      ],
+      "cached_source_unit_ids": [
+        "a4a04e650c26939fdcd7bc334f4f308e216cba64efc5bae27018098410615099",
+        "79980dc90daf6075903668924473725efbcb9ddc5d442929f68bb02dd2b99ce4"
+      ]
+    },
+    "ga_7ddc0a456533a806": {
+      "anchor_id": "ga_7ddc0a456533a806",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 29,
+      "structural_path": [
+        "BULK"
+      ],
+      "anchor_quote": "BULK — Your character’s maximum Bulk determines how much weight they can comfortably carry.",
+      "quote_normalized_hash": "7096f8ea68842f8988b547675069f3b7",
+      "cached_unit_ids": [
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23"
+      ],
+      "cached_source_unit_ids": [
+        "79d06a1b6a080eed7a38f7fc224045ae40a370947037e110e8dfe1b442eced23"
+      ]
+    },
+    "ga_edd3e6937850ac02": {
+      "anchor_id": "ga_edd3e6937850ac02",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 272,
+      "structural_path": [
+        "Encumbered"
+      ],
+      "anchor_quote": "Encumbered — You are carrying more weight than you can manage.",
+      "quote_normalized_hash": "517ec90a48d62000d202056f6437c743",
+      "cached_unit_ids": [
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+      ],
+      "cached_source_unit_ids": [
+        "ef8ac0c13ca13341a90672901338940240f4e49b41b63523b9c2724efcb74a41"
+      ]
+    },
+    "ga_c0848125eb70ad9f": {
+      "anchor_id": "ga_c0848125eb70ad9f",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 498,
+      "structural_path": [
+        "ROLLING INITIATIVE"
+      ],
+      "anchor_quote": "ROLLING INITIATIVE — Transitioning from exploration to an encounter usually involves rolling for initiative.",
+      "quote_normalized_hash": "fab8f9fad94f428465ab1e651b962670",
+      "cached_unit_ids": [
+        "8fc558d261f95e49db9d6c4d3eabe95b1c1260d9394a7e010c5aff1d7ee95288"
+      ],
+      "cached_source_unit_ids": [
+        "07d518c8c09fd21ead3457badfc9c4189ab640bc2538460efde164c21dbcd128",
+        "3478038bc476fa3fbe46ec266f000a32f8a7958f69bb26b5d23b972e5fb23c74"
+      ]
+    },
+    "ga_8150da045283e196": {
+      "anchor_id": "ga_8150da045283e196",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 31,
+      "structural_path": [
+        "LEVELING UP"
+      ],
+      "anchor_quote": "You can find all the new abilities specific to your class, including class feats, right in your class entry, though you can also use class feats to take an archetype (page 219).",
+      "quote_normalized_hash": "bf4b6d2b79820209e0c1573512ab7ed0",
+      "cached_unit_ids": [
+        "a7f5a56d0244bfaf92c00be921c75fe70c67552338f4aa9874271241f3cf9db6"
+      ],
+      "cached_source_unit_ids": [
+        "614a8cd3d49aaadcead60d07d55217116c3490a9d0840919427c4d172c579c90",
+        "3292a4a08d85be5bfefbf1a06e36f1fbcb86918e5ae62e240cda868499fe327e"
+      ]
+    },
+    "ga_67a40367d3bee49b": {
+      "anchor_id": "ga_67a40367d3bee49b",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 31,
+      "structural_path": [
+        "LEVELING-UP CHECKLIST"
+      ],
+      "anchor_quote": "LEVELING-UP CHECKLIST — Every time you gain a level, make sure you do each of the following: — Increase your level by 1 and subtract 1,000 XP from your XP total.",
+      "quote_normalized_hash": "5d57f33c5468a90e431355264ead0277",
+      "cached_unit_ids": [
+        "f008c348d046a13d3f130896123493178fa8c2e7d069b07a27d32d394da6b34c"
+      ],
+      "cached_source_unit_ids": [
+        "c8b2d448b8b8042da1aab93b728b6132a54d7a5a9e3c872ac6d89c350dd60972",
+        "9864271dbd1372deb2290dc2051ce1b42c4c1fcc819ced97c745547ba6a63b77",
+        "07704e54f962e269cb21cee9a6bc90cf59e7c8680352d70df6cbd4088a9427e6",
+        "b52e39b4771e7a6961e691a479af15c641dacd14eee5ffa2d3b57fdd844b12dc",
+        "93b37284d50b95a5794c575bc9d2060b8cf8ae76c8a9dbfa0a4119e42098cdc0",
+        "020dbd245771df684c395e0470783af984eb3f5863a77b842806fd5466f3a29c",
+        "f7fabe75b2655abab33b52c145fd40730cd954e4283fefab74898f6e5d1a2d42",
+        "db7787bee8c029c9424c0a6a3665903a548d2cbd1275b83d6fd68fdd076b6c86",
+        "28b6f91f15185b4c3d1ca76f2b274ee5813983911dcf064a338bb9f21eb69909",
+        "348c605dec17242dda83a28ea9e1d68273b522cc79c541add5d54a89536a7124",
+        "3ddfb2de99f99b4191c2b05e3ccc03981f10e33563f8c806006a2ba5ee2ba98b",
+        "0296fac3f37f7c4466fc62dd5c50dc285e3f9682da97f486510430f5e05a63b0",
+        "913909d68af5adddf547842937f0e24c825a76048a3210d1e467929e87df8017",
+        "62cc8bbc86e4fa8dee938c5faabf94503e41df13f974da2008d3f54d65d5d5b3",
+        "56cbecab7f52a29093d25893922b0896fbff7466ebcc17e9af16b084b8e4ab27",
+        "c07e50dea95fbe9a506609d5d644907db31241526e20814628b66d927751a436",
+        "09dae180242f0d904277654e8ba5ba08dd73e0bc3bad11c9946e043878fe828b",
+        "55eca53c9e95d20f64423025dd090b76c0ffd5986aba0f7a6e8684463f52311b",
+        "5416a6c3dc658ed27bf24af3969dabd573aaa8cf0b076eb16e6033c45f573fe5",
+        "90afb74d12ffbf1b05706cced99aa487c50b36d3be8a9d696764d2a7ab4574c6",
+        "297982e12efd40dc1306ec4faaffce0641e9c52d12063d2559f8efd1d1bca7ad"
+      ]
+    },
+    "ga_e34d2a3eccaf2fd6": {
+      "anchor_id": "ga_e34d2a3eccaf2fd6",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 68,
+      "structural_path": [
+        "ADVANCEMENT TABLE"
+      ],
+      "anchor_quote": "ADVANCEMENT TABLE — This table summarizes the feats, skill increases, ability boosts, and other benefits your character gains as they advance in level.",
+      "quote_normalized_hash": "e1b41d2e28fe7c0c087f49167d1d6851",
+      "cached_unit_ids": [
+        "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de"
+      ],
+      "cached_source_unit_ids": [
+        "a3ab08456623a6a8e5e01b1c2a223ce2f0a8ed8f3d6cf7045ec197cfad4bb7de"
+      ]
+    },
+    "ga_8133c5a2e2845bc1": {
+      "anchor_id": "ga_8133c5a2e2845bc1",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 68,
+      "structural_path": [
+        "SKILL INCREASES"
+      ],
+      "anchor_quote": "SKILL INCREASES — This section specifies the levels at which your character can increase their proficiency rank in a skill.",
+      "quote_normalized_hash": "e0088db063029e82e2519c785d8c6e14",
+      "cached_unit_ids": [
+        "c9fad371599b8de7c20f07e99f4cb09fc126945c7a6fa9196ad4345eab093d95"
+      ],
+      "cached_source_unit_ids": [
+        "5b4ede889897f4163e35186f0808050520f34f83351952a8526d002182b7e24c",
+        "cdbafabb00c44a405810245efe7a6c3d98d18762b6cfa7b98c0155b9c0eae6f4"
+      ]
+    },
+    "ga_5360d9ff03aee651": {
+      "anchor_id": "ga_5360d9ff03aee651",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 19,
+      "structural_path": [
+        "CHARACTER CREATION"
+      ],
+      "anchor_quote": "CHARACTER CREATION — Unless you’re the GM, the first thing you need to do when playing Pathfinder is create your character.",
+      "quote_normalized_hash": "0f914999dd82fb0177436f025479f0de",
+      "cached_unit_ids": [
+        "42038d67660b7e6360641c3d16f372a0107e53ef06714334c7cec0c5910df020"
+      ],
+      "cached_source_unit_ids": [
+        "d02f966e84232fb157ed1493f30595c55af3403900a8d1e32b5b6a60ae3a0f74",
+        "4f5385ab4de37010a50ff32c6b4c6626d96fa0723e30aa640901b4de2216f735",
+        "b2f2849f9408e460eb456ffa5a5d1510137c214d60aeccb69f2fff6462a5da61",
+        "16ce7f3bae0e00f930be256a9d9510aa85cb273934f3e053509628e88f7cdb4e"
+      ]
+    },
+    "ga_cbec4242e5df2732": {
+      "anchor_id": "ga_cbec4242e5df2732",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 21,
+      "structural_path": [
+        "CREATE A CONCEPT"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "e1a3f9b698f3d87740980bc211256597ed7c9234edf7d7f285dd4ab6a92770a3"
+      ],
+      "cached_source_unit_ids": [
+        "5a636edf1ab0053d6e68b34168910ac7beb55cd786cbb8dbab8a7f760d0d6584",
+        "5fab2303c9ab34b1042de8676ee7ca098db37be5e94fb6fab6a430d4cf926374"
+      ]
+    },
+    "ga_85f77985eab2a9ec": {
+      "anchor_id": "ga_85f77985eab2a9ec",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 24,
+      "structural_path": [
+        "ABILITY SCORES"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "5dc5f60e75287891e5f71ac9c5bc6d123446abaf78fd18738846308f2cf88a50"
+      ],
+      "cached_source_unit_ids": [
+        "10b1642eb9b1a0c299228664ce91c72a1bccbaa2ddebed9106e1d25e7e72473f",
+        "329a5b9e108ab0c1c80495dbff4c060a95d941c67a8fa04544ac4d8b461fd90a"
+      ]
+    },
+    "ga_3413211c3b581a66": {
+      "anchor_id": "ga_3413211c3b581a66",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 25,
+      "structural_path": [
+        "CHOOSE A CLASS"
+      ],
+      "anchor_quote": "![](images/2.",
+      "quote_normalized_hash": "982d2e5026c68bcde9d249dcb193c628",
+      "cached_unit_ids": [
+        "42c3fe7f1c1accc00d59bb2525a6e37287fddf997cdedbb2609cad88763cf9ee"
+      ],
+      "cached_source_unit_ids": [
+        "9c65bdbbd9e1c47185b43af62c266043a042336654cb6825802d99dd93e5c282",
+        "7128ed889ed910cf72a59386dcd13dd3b922ec71fbb56fe74cfacafc758f947a"
+      ]
+    },
+    "ga_36569b2ed9818ae9": {
+      "anchor_id": "ga_36569b2ed9818ae9",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 26,
+      "structural_path": [
+        "RECORD CLASS DETAILS"
+      ],
+      "anchor_quote": "![](images/0.",
+      "quote_normalized_hash": "66cdf131d69d96c1db9b258865dd3ca6",
+      "cached_unit_ids": [
+        "93f6361ad822e7f66d0ce1e67cc75b8b8f609bc3c8bc4f934be8708e055d9720"
+      ],
+      "cached_source_unit_ids": [
+        "301c7567b58acc11d955dbb1be624dba716b7ea0deb0e395cd8c2f929c0eef14",
+        "566c26ea1d54abfda829a1c15f8c94f86d39bd99eb86eaa06fc2f6e5c927ade4",
+        "054157d9dc1a6fff964085d635829d67ceb1f3f6c80df5e579ec6f45a74e47a0"
+      ]
+    },
+    "ga_566c870887910ff2": {
+      "anchor_id": "ga_566c870887910ff2",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 9,
+      "structural_path": [],
+      "anchor_quote": "Your player character is also defined by some key choices you make.",
+      "quote_normalized_hash": "b1688b6c1bc2438858eee1f668981c0c",
+      "cached_unit_ids": [
+        "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda"
+      ],
+      "cached_source_unit_ids": [
+        "69b8d3f74a075d1aee32a87c82f0fb7d5575baebea9abfd63f043a5f3d1c7eda"
+      ]
+    },
+    "ga_a56473db8ef8371e": {
+      "anchor_id": "ga_a56473db8ef8371e",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 503,
+      "structural_path": [
+        "DIFFICULTY CLASSES"
+      ],
+      "anchor_quote": "DIFFICULTY CLASSES — As the Game Master, it’s up to you to set the difficulty classes (DCs) for checks that don’t use a predefined DC.",
+      "quote_normalized_hash": "2cab54c24f57451d423ff3b13c3aff20",
+      "cached_unit_ids": [
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f"
+      ],
+      "cached_source_unit_ids": [
+        "c61eb753e6b83bfa2917a4bacf8c51664e9d1d8cbbe63a49d3a5cc421466c80f"
+      ]
+    },
+    "ga_bc1e32e486ae40f0": {
+      "anchor_id": "ga_bc1e32e486ae40f0",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 504,
+      "structural_path": [],
+      "anchor_quote": "ones, and are broken into increments of 2, 5, and 10.",
+      "quote_normalized_hash": "1045f885df2a3a2ea1f3d41c608f8435",
+      "cached_unit_ids": [
+        "d1ce7a4c3aaddb34899beb0b19b59bf534d5f4b2431add75becf98c81c6904ff"
+      ],
+      "cached_source_unit_ids": [
+        "c6fad8b5b0c2155fb81f068a058bc8472330a93c5712be95890986f4d247e78a",
+        "a4ab503f5bafe6c8f8edf7ee478383fa73f1341e4b8976581413e23b6340b5d4",
+        "6f69fcc3591a65e7b688495aba051f19ed51ad58f0cf5fa95ee63df99fe2d53b"
+      ]
+    },
+    "ga_2d5fea849883737f": {
+      "anchor_id": "ga_2d5fea849883737f",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 12,
+      "structural_path": [
+        "BONUSES AND PENALTIES"
+      ],
+      "anchor_quote": "BONUSES AND PENALTIES — Bonuses and penalties apply to checks and certain statistics.",
+      "quote_normalized_hash": "3bb9d512074a8e3077fa79ac061b28d6",
+      "cached_unit_ids": [
+        "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe"
+      ],
+      "cached_source_unit_ids": [
+        "d17419b9e21af23a06789f2c5de23606748b0eb20e684cf0115a687d2368d8fe"
+      ]
+    },
+    "ga_84c2a70817ddeaf0": {
+      "anchor_id": "ga_84c2a70817ddeaf0",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 505,
+      "structural_path": [],
+      "anchor_quote": "Once the PC has decided on a particular level of task from those available, use the DC for that level from Table 10–5.",
+      "quote_normalized_hash": "16900f4581123e4018baafdb267f8075",
+      "cached_unit_ids": [
+        "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b"
+      ],
+      "cached_source_unit_ids": [
+        "a29062579743f8e3dd6ecfc260a9dfcdd0bc055274596333ecf4613209ff331b"
+      ]
+    },
+    "ga_683d94d046c46be7": {
+      "anchor_id": "ga_683d94d046c46be7",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 504,
+      "structural_path": [
+        "SPECIFIC ACTIONS"
+      ],
+      "anchor_quote": "SPECIFIC ACTIONS — Several parts of this book, most notably Chapter 4: Skills, state that you as the GM set the DCs for certain checks or determine other parameters.",
+      "quote_normalized_hash": "fc251fe80a055e916f2a7f697c8efea7",
+      "cached_unit_ids": [
+        "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f"
+      ],
+      "cached_source_unit_ids": [
+        "dc1375f20f59074bf71348ad02d85da7ea87787db22bb8d77447788dc46ba72f"
+      ]
+    },
+    "ga_fefec0e28248c2d7": {
+      "anchor_id": "ga_fefec0e28248c2d7",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 491,
+      "structural_path": [
+        "OFF-SESSION GAMING"
+      ],
+      "anchor_quote": "If an effect raises or lowers chances of success, grant a +1 circumstance bonus or a -1 circumstance penalty.",
+      "quote_normalized_hash": "59e81b739272b4b4a4ae45c1ba2a2c9d",
+      "cached_unit_ids": [
+        "f1976861bd0dc1be8c3a942d25720df1b8fe52904642173ae6e1c62465a20951"
+      ],
+      "cached_source_unit_ids": [
+        "aded2d66694e222daa8e081627bf67903d80b3bf58bdcc034271ebeb9058d7d3"
+      ]
+    },
+    "ga_47eea726eafd7cf3": {
+      "anchor_id": "ga_47eea726eafd7cf3",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 234,
+      "structural_path": [
+        "Skill modifier = modifier of the skill's key ability score + proficiency bonus + other bonuses + penalties"
+      ],
+      "anchor_quote": "The GM sets the DC of a skill check, using the guidelines in Chapter 10: Game Mastering.",
+      "quote_normalized_hash": "a4f8b361997ded11355489a25c2d85b4",
+      "cached_unit_ids": [
+        "724cf010d7b188e48e36c97d7e4321d599db3206ba8af9b0ac8db6ea3ca3a239"
+      ],
+      "cached_source_unit_ids": [
+        "89bccbb2c6379f1e96821d88d6c8ef746280b5987c09cefcdc8a07e102872649",
+        "9f6e6ccfd978fb93f3a3b24a7e5989b101c22a1c14a6c4459e65e135b572560f"
+      ]
+    },
+    "ga_4527e398015ffc1a": {
+      "anchor_id": "ga_4527e398015ffc1a",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 450,
+      "structural_path": [
+        "DAMAGE"
+      ],
+      "anchor_quote": "DAMAGE — In the midst of combat, you attempt checks to determine if you can damage your foe with weapons, spells, or alchemical concoctions.",
+      "quote_normalized_hash": "29488a89a0c7354c2658c3c2c3474cab",
+      "cached_unit_ids": [
+        "b166b3b03750333ae75c32bd0dbc011a0b3f29851c69bd83242456c76edfbd20"
+      ],
+      "cached_source_unit_ids": [
+        "aa06d88a1d2bc233014c631c4281d32164f3670ffebc99c87373ae2453afe1e3",
+        "a04583c140a103d5b449005398857bb71cd1578dbb2b88d0274d6a5e85d831a5"
+      ]
+    },
+    "ga_7328069cff042b5b": {
+      "anchor_id": "ga_7328069cff042b5b",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 450,
+      "structural_path": [
+        "STEP 1: ROLL THE DAMAGE DICE AND APPLY MODIFIERS, BONUSES, AND PENALTIES"
+      ],
+      "anchor_quote": "1.",
+      "quote_normalized_hash": "c977dbe785221d34114d345fdf8ff4e1",
+      "cached_unit_ids": [
+        "fdd0e4df848cb267396503c2d65c252c28379c91c2fd584f8597c44dc7454754"
+      ],
+      "cached_source_unit_ids": [
+        "ef89e1b0fe63aaeffedaa22c2e240eed832c17e41cb52c1d20e5afc3f11495e7",
+        "f154eab5d661a1c53bd0822f892bbd2565b2693e5e5a68d0523cd9b0f1532a94",
+        "51a65b279f544b8b52e5a1072faff6c8778f916fac521c567459fdbb52bf8663"
+      ]
+    },
+    "ga_4ca80082451718a6": {
+      "anchor_id": "ga_4ca80082451718a6",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 451,
+      "structural_path": [
+        "STEP 3: APPLY THE TARGET'S IMMUNITIES, WEAKNESSES, AND RESISTANCES"
+      ],
+      "anchor_quote": "STEP 3: APPLY THE TARGET'S IMMUNITIES, WEAKNESSES, AND RESISTANCES — Defenses against certain types of damage or effects are called immunities or resistances, while vulnerabilities are called weakness",
+      "quote_normalized_hash": "ea3608c5dbb498f2f2fcaa70b5c85fac",
+      "cached_unit_ids": [
+        "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b"
+      ],
+      "cached_source_unit_ids": [
+        "a98eb2c29ec33dde0d963e0cd8314bd7e3f0290bc01753b5549bf41a040b5c6b"
+      ]
+    },
+    "ga_1337f66f0e5a3300": {
+      "anchor_id": "ga_1337f66f0e5a3300",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 453,
+      "structural_path": [
+        "STEP 4: IF DAMAGE REMAINS, REDUCE THE TARGET'S HIT POINTS"
+      ],
+      "anchor_quote": "STEP 4: IF DAMAGE REMAINS, REDUCE THE TARGET'S HIT POINTS — After applying the target’s immunities, resistances, and weaknesses to the damage, the damage reduces the target’s Hit Points on a 1-to-1 ba",
+      "quote_normalized_hash": "559073b6ad06fcc8ef58424bd81d0774",
+      "cached_unit_ids": [
+        "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458"
+      ],
+      "cached_source_unit_ids": [
+        "0a0135e86610e9755b7741318063b2f83cc859682cfbdc6bbc1d65b210aeb458"
+      ]
+    },
+    "ga_502a9338f324c2fe": {
+      "anchor_id": "ga_502a9338f324c2fe",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 12,
+      "structural_path": [
+        "Hit POINTS [HP]"
+      ],
+      "anchor_quote": "Hit POINTS [HP] — Hit Points represent the amount of punishment a creature can take before it falls unconscious and begins dying.",
+      "quote_normalized_hash": "3fda2b949aaca87fc453015a958cd02b",
+      "cached_unit_ids": [
+        "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909"
+      ],
+      "cached_source_unit_ids": [
+        "f8453de38cf6ae9e60c6bca347566160288b8804e1b2cb1af0ec47491beba909"
+      ]
+    },
+    "ga_e88d8fb771f5edbb": {
+      "anchor_id": "ga_e88d8fb771f5edbb",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 623,
+      "structural_path": [
+        "WOUNDED"
+      ],
+      "anchor_quote": "for abilities that can be used only against targets totally unaware of your presence.",
+      "quote_normalized_hash": "43150370499c734b979d37cd0e79a5ae",
+      "cached_unit_ids": [
+        "240b5aa0880e06dbb5a83e6f22be855ec0676f5062f470edb5f3bd0cebddaeab"
+      ],
+      "cached_source_unit_ids": [
+        "6495cfbc676ee64a98fb5dcf6d8d3e474c64c2f38fa78aae49187c78a8dffd4d",
+        "a36c274733b63913c92aad5678ee140742413039c3e97e81c8a2d49e61515818",
+        "8610824522ddd1e3a3e5457af4d593e0f5efa597ddd70eee458442bdf3dcde7d"
+      ]
+    },
+    "ga_032000c72d7922b4": {
+      "anchor_id": "ga_032000c72d7922b4",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 461,
+      "structural_path": [
+        "FAST HEALING AND REGENERATION"
+      ],
+      "anchor_quote": "FAST HEALING AND REGENERATION — A creature with fast healing or regeneration regains the listed amount of Hit Points each round at the beginning of its turn.",
+      "quote_normalized_hash": "c0eb0ad851e78a3cc762c881ad037e35",
+      "cached_unit_ids": [
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719"
+      ],
+      "cached_source_unit_ids": [
+        "68ff23778c64c41159b84099c6782e32b6bc209b013b5ac98ae3af7eb3f1b719"
+      ]
+    },
+    "ga_13271984e43eb456": {
+      "anchor_id": "ga_13271984e43eb456",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 364,
+      "structural_path": [
+        "RESTORATION"
+      ],
+      "anchor_quote": "RESTORATION — SPELL 2 — HEALING NECROMANCY — Traditions divine, occult, primal — Cast 1 minute (somatic, verbal) — Range touch; Targets 1 creature — Restorative magic counters the effects of toxins or",
+      "quote_normalized_hash": "531c2323782f6ed846d0541ea617ea8a",
+      "cached_unit_ids": [
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7"
+      ],
+      "cached_source_unit_ids": [
+        "b8ddd673b0dcc79abdb0373d3c4b2f6b54f3ee5c9c13db1683edb974f8a2c5fa",
+        "5b7f752168802cd7f62525c3aab9359cfd3a98f1ec0f38386b3ea08f71818f68",
+        "2520f1d62f5115fda97ad415c0d3cf2d93875804783c1b41a43ab21f511711f0"
+      ]
+    },
+    "ga_01457fb397685d25": {
+      "anchor_id": "ga_01457fb397685d25",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 621,
+      "structural_path": [
+        "Assisted Recovery"
+      ],
+      "anchor_quote": "Assisted Recovery — You can take steps to help yourself recover from persistent damage, or an ally can help you, allowing you to attempt an additional flat check before the end of your turn.",
+      "quote_normalized_hash": "aa86afeb183ceeaae4fc420b323a4f07",
+      "cached_unit_ids": [
+        "b022c672d9f4af8e46d78889c9ca91669a15868cba5509acbae3fff24f4ac682"
+      ],
+      "cached_source_unit_ids": [
+        "527015ed8364d65a365bcf47fa180907f06ae91da6b88364ff4e02f10639a1bd",
+        "02d63a0ed9da08bce078c1d7f67ee8d2533fee1f06b759de96fc058250fcf371"
+      ]
+    },
+    "ga_1c275e5c8a9bc02e": {
+      "anchor_id": "ga_1c275e5c8a9bc02e",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 363,
+      "structural_path": [
+        "HEALING NECROMANCY POSITIVE"
+      ],
+      "anchor_quote": "REGENERATE — SPELL 7 — HEALING NECROMANCY POSITIVE — Traditions divine, primal — Cast  \\( \\leftrightarrow \\)  somatic, verbal — Range touch; Targets 1 willing living creature — Duration 1 minute — An",
+      "quote_normalized_hash": "811900634c2edf3fe4de81c6dafb3faa",
+      "cached_unit_ids": [
+        "a6a3d4929ede2ce88faef3e005b72592977d02a1902c1d7e10a59260c5b75741"
+      ],
+      "cached_source_unit_ids": [
+        "da91ef621c87fca110e83d9f7700e8a99aa43b4c391b3f437ba686236fc09d50",
+        "15a0a85d525e091ea68cfa547163a9323364bfe06391e17dd23a9b348c91119f"
+      ]
+    },
+    "ga_2aa7066cfc679447": {
+      "anchor_id": "ga_2aa7066cfc679447",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 260,
+      "structural_path": [
+        "Prerequisites expert in Medicine"
+      ],
+      "anchor_quote": "CONTINUAL RECOVERY — FEAT 2 — GENERAL SKILL — Prerequisites expert in Medicine — You zealously monitor a patient’s progress to administer treatment faster.",
+      "quote_normalized_hash": "553b16a85f1933873153a33cb52ac63c",
+      "cached_unit_ids": [
+        "9d86b2009687db97bcf299ba138672080165e129da136672f99e81acef6ef272"
+      ],
+      "cached_source_unit_ids": [
+        "20d30789babc7ccec35370fd894ef34efc496b530fbda010fba307ed3777aa81",
+        "79a2acee87c9972c9174bbc5f482308b6d6d5e956d68c14a220e74a4ef864110"
+      ]
+    },
+    "ga_63d8fee58123478b": {
+      "anchor_id": "ga_63d8fee58123478b",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 495,
+      "structural_path": [
+        "Measuring Success and Progress"
+      ],
+      "anchor_quote": "Measuring Success and Progress — You’ll need to decide how to measure the characters’ success in social encounters, because there’s no AC to target or HP to whittle down.",
+      "quote_normalized_hash": "7f78b82544b3d32aeee47c6ce0cf37b6",
+      "cached_unit_ids": [
+        "99caee5221a30d8621fddd368dafb46e0bc648eebe692d2caaa8d66ad3111adf"
+      ],
+      "cached_source_unit_ids": [
+        "07a205dbd1b11ad8d23fd5ae8aff1faa1125bbed829864a699eb7da207b07d34",
+        "f0e3dfdef1cf50d7ff1e7086ac2aed531b4c6c171b8cae6a6b6fffa36dfbde36",
+        "ba9d8856673534660630e6d777c3bc4275e7cf0fe9f81e42a305d0e64ced0c97"
+      ]
+    },
+    "ga_fe1c01470c1c55d0": {
+      "anchor_id": "ga_fe1c01470c1c55d0",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 494,
+      "structural_path": [
+        "SOCIAL ENCOUNTERS"
+      ],
+      "anchor_quote": "SOCIAL ENCOUNTERS — Most conversations play best as free-form roleplaying, with maybe one or two checks for social skills involved.",
+      "quote_normalized_hash": "5a09f42652bccd353ea680ecb84e93d3",
+      "cached_unit_ids": [
+        "b715eb00f8a0648950e959444c6d4ec2cdd45067791919a6c920814a449b5778"
+      ],
+      "cached_source_unit_ids": [
+        "cf1ac7f854848153e59a9ec889891145305ea838f005b59c70022c850f37ea0c",
+        "61f712f1358fdf9a9413441d7da9d6f87cd77bb9cf1eef925e4b7763108cb7a8",
+        "576456b917bcf4ef8116d0a07383c08dc8868f16e73c5f1eba183e19683d63af"
+      ]
+    },
+    "ga_7ed8cb58ecc5d840": {
+      "anchor_id": "ga_7ed8cb58ecc5d840",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 506,
+      "structural_path": [
+        "SOCIAL SKILLS"
+      ],
+      "anchor_quote": "the level of the creature and use that DC.",
+      "quote_normalized_hash": "95d6e0919c1c1e7a6c2f36111c9698d2",
+      "cached_unit_ids": [
+        "af42e6a15a57b5576949a06924f01df878101a1d72ff72da35b15dc944620945"
+      ],
+      "cached_source_unit_ids": [
+        "258abfb64a224c0d495d760e890e8325f39c29e92d5bb3a02781d8bc35612c9c"
+      ]
+    },
+    "ga_c8e4356e1f4043d2": {
+      "anchor_id": "ga_c8e4356e1f4043d2",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 247,
+      "structural_path": [
+        "AUDITORY CONCENTRATE EMOTION EXPLORATION LINGUISTIC"
+      ],
+      "anchor_quote": "Critical Success The target agrees to your request without qualifications.",
+      "quote_normalized_hash": "3ae1c8680255628559dbd9ef740497da",
+      "cached_unit_ids": [
+        "c1611c1eafe6d5b874cfbad65c7c8405c353698f161705f5fbe578e2b30abd5f"
+      ],
+      "cached_source_unit_ids": [
+        "ad403661677560ddc86ee7380844052c09709b2738d2cb029bbe1415a340e2f9",
+        "f66ba6f7b5039f9fe4d26849a3517e4f39a56ca4d74793805f3441945eb4b41c"
+      ]
+    },
+    "ga_38f0af8109d201bc": {
+      "anchor_id": "ga_38f0af8109d201bc",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 246,
+      "structural_path": [
+        "AUDITORY CONCENTRATE EXPLORATION LINGUISTIC MENTAL"
+      ],
+      "anchor_quote": "Success You collect information about the individual or topic.",
+      "quote_normalized_hash": "686a8e670721855e08d4bbbf462bfe7b",
+      "cached_unit_ids": [
+        "b658a95e8a8898b423b8002f281857d7aeccbe8fd90b36d0b3ac3dc232d4a98a"
+      ],
+      "cached_source_unit_ids": [
+        "2b30d298bc7fd783530214545b797dd707e81e0eb53ab9fe479e154d00e10d75",
+        "65a7f43a295443417e49d65c66aa92f54b9b81714a25647d5f9966f116a40c0d",
+        "1fc1e17fd18277cdd58eee4f8419f013ab03373f9551cfd51bea8ecb035983c1",
+        "f0929314b0672cd8b8237b370c7c595c14e040c039ebf3781df6603069eba856",
+        "9130f8ba777d64bb539b8f24d93c377c12b3905771795273a53f74893a4a5563",
+        "f0557a0725304e528aec456748b472e839dbcac06ddc892b7c7b1925edd9fcb9",
+        "834ffd5237741e051b9415d717b0ab1c80b266af8f15c4b0cbcf4921f6a9c1f8",
+        "a33b9932301fe5dd1bb6f40af5485e46b6a2297b2ee7941398060606196a5c85"
+      ]
+    },
+    "ga_d5c2aa4604f80861": {
+      "anchor_id": "ga_d5c2aa4604f80861",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 246,
+      "structural_path": [
+        "Changing Attitudes"
+      ],
+      "anchor_quote": "Critical Success The target’s attitude toward you improves by two steps.",
+      "quote_normalized_hash": "9648c04151bebba7c342ff5e3f151b8f",
+      "cached_unit_ids": [
+        "96a9c9eaf4154c88981a7db88c34229cd2b2eea90fe868c36a0942a95e24f53d"
+      ],
+      "cached_source_unit_ids": [
+        "f672b369fabda703eef9d920c1e552d0b9dec0d5124cf55d08f76c2cfa9f8733",
+        "15c1703ac5d98f1951844fa514ddb0ed534edeeb42e79ef78dfeadafe9d567c6",
+        "cde3522c3e682efb960af2e9d46a73630060652100e28e6e53be67e93e6eba15",
+        "68ada061259acded75fa4ca829ef1228cbf9d107f5c60aaddf20388ad8801083",
+        "0e5eb4d49778c05257e8351e32a459034d6d4a0e9b42f48dea05ff28a503bd11"
+      ]
+    },
+    "ga_5aa2b87a85c4c933": {
+      "anchor_id": "ga_5aa2b87a85c4c933",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 559,
+      "structural_path": [
+        "CONSUMABLES"
+      ],
+      "anchor_quote": "CONSUMABLES — This section includes magic items with the consumable trait.",
+      "quote_normalized_hash": "248cdf10b4eb86810c52ecb193349ce7",
+      "cached_unit_ids": [
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d"
+      ],
+      "cached_source_unit_ids": [
+        "ce7aa2d86d849e1f83fef7017c49b176ab7ff4ab95250d42f3b494c090f6710d"
+      ]
+    },
+    "ga_bf2447b54903914c": {
+      "anchor_id": "ga_bf2447b54903914c",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 500,
+      "structural_path": [
+        "STARVATION AND THIRST"
+      ],
+      "anchor_quote": "Spellcasters who prepare spells choose which spells they’ll have available that day.",
+      "quote_normalized_hash": "4b8978ca6765660f3033ffca1ffc9cb8",
+      "cached_unit_ids": [
+        "fee808850352310242df419f67d922a347e81ec0976f60c543ebeccba86832ad"
+      ],
+      "cached_source_unit_ids": [
+        "6a9057028037a292205638b32c46e168a2cdd90d5723145a0e7bc63c8225a46e",
+        "95064f8acda3b5ea80e147db8ff56adb6c3aff030373aeb29897c2eef3fde127",
+        "098a065e387a14dd00c24d7f882626177a944280368f9e1ab6a72e4e3248979e",
+        "71e28299d8fcae1e6c557fa26bcbfde686f396571ad2b26d1347c080deec3a7b",
+        "f51bfdf1a3a8050d61c9a9144ef7640bee9fff9293f0ae0801d309bceb49ad56"
+      ]
+    },
+    "ga_9c493736c09eb95e": {
+      "anchor_id": "ga_9c493736c09eb95e",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 533,
+      "structural_path": [
+        "ITEM CATEGORIES"
+      ],
+      "anchor_quote": "SUSTAINING ACTIVATIONS — Some items, once activated, have effects that can be sustained if you concentrate on them.",
+      "quote_normalized_hash": "fa80f11eb76f044e9584e436145d0320",
+      "cached_unit_ids": [
+        "7d9ea32d15711a460938de8fbd7da22a3e9d415e57de1648521487da8fedf484"
+      ],
+      "cached_source_unit_ids": [
+        "da8c63d678c967866f33138cb615e53d72ad34dc66ab8656cabd8ecd38175476"
+      ]
+    },
+    "ga_65f1b2c9008fdd8f": {
+      "anchor_id": "ga_65f1b2c9008fdd8f",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 291,
+      "structural_path": [
+        "Adventuring Gear"
+      ],
+      "anchor_quote": "Though the components are used up over time, you can refill spent components during your daily preparations.",
+      "quote_normalized_hash": "ce70945f3c9452a0e73e943312b3f7c0",
+      "cached_unit_ids": [
+        "2f707f0fb7c024b7fd20137d4dd7d1519a222ba9e4c8ecf64f7792240381376e"
+      ],
+      "cached_source_unit_ids": [
+        "6bc542ad0f3511e39768acebb28020d15b6e4a380cc61152c4398b997efef671",
+        "c6104e6fe2a0b55dba959602abc7291932c22398979b61c412e72277db68194c",
+        "7afe44249e585763fa15321d6c8b5e694bc10fdb753982d5e87958eaecdf5296",
+        "36af0c3b68d06c277d02bf86a331d0a7bf6aeef869e75c455f894cf9e0cee529",
+        "8869db766abf1ff4323c0346f384b9c293ad29e0aa33decafa64515e7cbf70f8"
+      ]
+    },
+    "ga_a53674d750af7a73": {
+      "anchor_id": "ga_a53674d750af7a73",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 292,
+      "structural_path": [],
+      "anchor_quote": "Torch: A torch sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 1 hour.",
+      "quote_normalized_hash": "68ae77d8061a77338913254e5fc25172",
+      "cached_unit_ids": [
+        "b83026dc97bff408d6c42c1774aa1d3444b83fd34746b62add619ef041955a0d"
+      ],
+      "cached_source_unit_ids": [
+        "9d3e15dc3df21849792bc4886a1287aef30b42360945ac94c1f7b2d42800f156",
+        "5a723006fe4baee9e5348193ebab9643be3f04a001e828a5b970cf0d927e50d8",
+        "a8329a59e55e5d5399676bfddc09d34e982f8e5d42d95ca5516e1849b13c5c10"
+      ]
+    },
+    "ga_564258d8ddd5b3ae": {
+      "anchor_id": "ga_564258d8ddd5b3ae",
+      "document_id": "Pathfinder2ePlayerCore",
+      "anchor_type": "prose",
+      "page": 510,
+      "structural_path": [
+        "ADJUSTING TREASURE"
+      ],
+      "anchor_quote": "ADJUSTING TREASURE — The treasure you award to the party should be monitored and adjusted as you play.",
+      "quote_normalized_hash": "10d2ca723f1b3f337614fe1c722eb46c",
+      "cached_unit_ids": [
+        "1366fab9fe3d815803340365d2129039ca7907a4d948cc1837e2eea91c65738a"
+      ],
+      "cached_source_unit_ids": [
+        "f65d90eccc1289fc5847d8b17745cd1523bc55b4f47c3f2662c54f12550f4aa2",
+        "969293ce19563de5a809fbff82da3146d9ae89f35ae20bbe8a8f51589ae56d18"
+      ]
+    }
+  }
+}

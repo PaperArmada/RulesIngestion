@@ -43,6 +43,8 @@ def _candidate_source_sets(
 ) -> List[set[str]]:
     """Return source-id set per ranked candidate.
 
+    Always include the ranked candidate's own id so metrics work whether gold is
+    annotated at the merged chunk level or at the underlying source-unit level.
     If candidate_source_ids is omitted, each candidate maps to itself.
     """
     if not candidate_source_ids:
@@ -50,7 +52,9 @@ def _candidate_source_sets(
     out: List[set[str]] = []
     for i, uid in enumerate(ranked_ids):
         if i < len(candidate_source_ids) and candidate_source_ids[i]:
-            out.append(set(candidate_source_ids[i]))
+            source_set = {str(x).strip() for x in candidate_source_ids[i] if str(x).strip()}
+            source_set.add(uid)
+            out.append(source_set)
         else:
             out.append({uid})
     return out

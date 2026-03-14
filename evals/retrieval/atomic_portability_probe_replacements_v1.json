@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "batch_id": "atomic_portability_probe_replacements_v1",
+    "created_by": "agent",
+    "pdf_source": "cross_ruleset_probe",
+    "creation_method": "portability_probe",
+    "created_at": "2026-03-09",
+    "notes": "Two replacement questions proposed for the atomic benchmark to replace PF2E-nonportable items. This batch is probe-only and intentionally leaves gold empty so we can inspect top hits across rule systems."
+  },
+  "queries": [
+    {
+      "id": "probe_r01_off_turn_actions_and_triggers",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "How can characters act outside their turn, and what triggers or limits those actions?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Replacement candidate for morale/reaction-roll portability slot.",
+      "gold_unit_ids": [],
+      "gold_locations": {},
+      "required_gold": [],
+      "supporting_gold": [],
+      "required_gold_rationale": {},
+      "_mode": "single_cite",
+      "_status": "pending",
+      "_required_gold": [],
+      "_supporting_gold": []
+    },
+    {
+      "id": "probe_r02_exploration_time_and_transition_to_encounters",
+      "tier": "T2",
+      "question_type": "atomic_rules",
+      "question": "Outside combat, how does the game structure exploration time and transition into encounters?",
+      "answer": "",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Replacement candidate for wandering-monster exploration slot.",
+      "gold_unit_ids": [],
+      "gold_locations": {},
+      "required_gold": [],
+      "supporting_gold": [],
+      "required_gold_rationale": {},
+      "_mode": "single_cite",
+      "_status": "pending",
+      "_required_gold": [],
+      "_supporting_gold": []
+    }
+  ]
+}

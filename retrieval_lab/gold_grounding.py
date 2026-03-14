@@ -167,16 +167,24 @@ def resolve_gold_ids_for_query(
                 merged_id = original_to_merged.get(source_id)
                 if merged_id:
                     out.append(merged_id)
-            return list(dict.fromkeys(out))
+            if out:
+                return list(dict.fromkeys(out))
+            # source_unit_ids exist but none mapped — fall through to page+path
 
         page = loc.get("page")
         structural_path = loc.get("structural_path") or []
-        if page is None or not structural_path:
+        if page is None:
             return []
         target_page = int(page)
         target_parts = _normalize_structural_path_parts(structural_path)
         if not target_parts:
-            return []
+            # No structural_path — return unheaded units on this page
+            return [
+                unit_id
+                for unit_id, unit in merged_by_id.items()
+                if int(unit.get("page", -1)) == target_page
+                and not _normalize_structural_path_parts(unit.get("structural_path") or [])
+            ]
         matches: list[str] = []
         for unit_id, unit in merged_by_id.items():
             if int(unit.get("page", -1)) != target_page:
@@ -493,6 +501,54 @@ def flatten_query_batches(batch_paths: List[str]) -> Tuple[List[Dict[str, Any]],
 
 
 INTERNAL_QUERY_KEYS = frozenset({"_source_path", "_batch_id", "_suite", "_tier"})
+
+
+def apply_gold_recommendations_to_queries(
+    flat_queries: List[Dict[str, Any]],
+    recommendations: List[Dict[str, Any]],
+) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
+    """Apply reviewed gold recommendations onto flattened queries.
+
+    Recommendations are expected to contain `query_id`, `proposed_required_gold`,
+    `proposed_supporting_gold`, `required_gold_rationale`, `gold_locations`, and
+    `applyable`.
+    """
+    rec_by_qid = {
+        str(rec.get("query_id") or ""): rec
+        for rec in recommendations
+        if str(rec.get("query_id") or "").strip()
+    }
+    applied = 0
+    skipped = 0
+    updated_queries: List[Dict[str, Any]] = []
+    for query in flat_queries:
+        qid = str(query.get("id") or "")
+        rec = rec_by_qid.get(qid)
+        if not rec or not rec.get("applyable"):
+            updated_queries.append(_normalize_query(dict(query)))
+            if rec is not None:
+                skipped += 1
+            continue
+        required = [str(x).strip() for x in (rec.get("proposed_required_gold") or []) if str(x).strip()]
+        supporting = [
+            str(x).strip()
+            for x in (rec.get("proposed_supporting_gold") or [])
+            if str(x).strip() and str(x).strip() not in set(required)
+        ]
+        updated = dict(query)
+        updated["required_gold"] = required
+        updated["supporting_gold"] = supporting
+        updated["gold_unit_ids"] = list(dict.fromkeys(required + supporting))
+        updated["gold_locations"] = dict(rec.get("gold_locations") or {})
+        updated["required_gold_rationale"] = dict(rec.get("required_gold_rationale") or {})
+        updated_queries.append(_normalize_query(updated))
+        applied += 1
+    return updated_queries, {
+        "queries_total": len(flat_queries),
+        "queries_with_recommendations": len(rec_by_qid),
+        "queries_applied": applied,
+        "queries_skipped": skipped,
+    }
 
 
 def _strip_internal_query_keys(q: Dict[str, Any]) -> Dict[str, Any]:

@@ -1,0 +1,1037 @@
+{
+  "anchors": {
+    "ga_0d2998e242eb40de": {
+      "anchor_id": "ga_0d2998e242eb40de",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "HOW TO PLAY"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+      ],
+      "cached_source_unit_ids": [
+        "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+      ]
+    },
+    "ga_fc5b570afd0bc587": {
+      "anchor_id": "ga_fc5b570afd0bc587",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+      ],
+      "cached_source_unit_ids": [
+        "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+      ]
+    },
+    "ga_023abd8fb5305999": {
+      "anchor_id": "ga_023abd8fb5305999",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "GETTING STARTED"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+      ],
+      "cached_source_unit_ids": [
+        "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+      ]
+    },
+    "ga_96bc104b4601f326": {
+      "anchor_id": "ga_96bc104b4601f326",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 73,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure",
+        "When in doubt, make a ruling."
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+      ],
+      "cached_source_unit_ids": [
+        "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+      ]
+    },
+    "ga_84537c5ef93ef00d": {
+      "anchor_id": "ga_84537c5ef93ef00d",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "DICE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+      ],
+      "cached_source_unit_ids": [
+        "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+      ]
+    },
+    "ga_b5a86142e334d243": {
+      "anchor_id": "ga_b5a86142e334d243",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "3. ROLL INITIATIVE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927"
+      ],
+      "cached_source_unit_ids": [
+        "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927"
+      ]
+    },
+    "ga_067e03c1ed875cf6": {
+      "anchor_id": "ga_067e03c1ed875cf6",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "INITIATIVE AND ORDER OF BATTLE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2"
+      ],
+      "cached_source_unit_ids": [
+        "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2"
+      ]
+    },
+    "ga_e7bd1d210ac41c87": {
+      "anchor_id": "ga_e7bd1d210ac41c87",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 37,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "THE ATTACK ROLL"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f"
+      ],
+      "cached_source_unit_ids": [
+        "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f"
+      ]
+    },
+    "ga_f65edc939800dac2": {
+      "anchor_id": "ga_f65edc939800dac2",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 42,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Turning the Undead"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+      ],
+      "cached_source_unit_ids": [
+        "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+      ]
+    },
+    "ga_39bc25c702d0ae32": {
+      "anchor_id": "ga_39bc25c702d0ae32",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "TIME"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b"
+      ],
+      "cached_source_unit_ids": [
+        "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b"
+      ]
+    },
+    "ga_bde04f6fd44ca2db": {
+      "anchor_id": "ga_bde04f6fd44ca2db",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 88,
+      "structural_path": [
+        "Referee Guide",
+        "Wilderness Adventures",
+        "Special Combat Rules",
+        "INITIATIVE AND COMBAT ROUNDS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+      ],
+      "cached_source_unit_ids": [
+        "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+      ]
+    },
+    "ga_ba09889a4cf46db6": {
+      "anchor_id": "ga_ba09889a4cf46db6",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 36,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Alternate Combat Sequence Method No. 1 (Core Rules System)"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+      ],
+      "cached_source_unit_ids": [
+        "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+      ]
+    },
+    "ga_0b5a4c5cb99aaa29": {
+      "anchor_id": "ga_0b5a4c5cb99aaa29",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "4. MOVEMENT AND MISSILES PHASE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d"
+      ],
+      "cached_source_unit_ids": [
+        "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d"
+      ]
+    },
+    "ga_437a79072c7cbf9f": {
+      "anchor_id": "ga_437a79072c7cbf9f",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 36,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Alternate Combat Sequence Method No. 3 (Modified Supplement 3 Rules)"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09"
+      ],
+      "cached_source_unit_ids": [
+        "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09"
+      ]
+    },
+    "ga_70e2de144145b913": {
+      "anchor_id": "ga_70e2de144145b913",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 36,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "(This system comes from the 1978 “Holmes Blue Book Set”)"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+      ],
+      "cached_source_unit_ids": [
+        "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+      ]
+    },
+    "ga_77b11a047e5d0896": {
+      "anchor_id": "ga_77b11a047e5d0896",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "MOVEMENT WITHIN MELEE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+      ],
+      "cached_source_unit_ids": [
+        "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+      ]
+    },
+    "ga_f4405b9755137c76": {
+      "anchor_id": "ga_f4405b9755137c76",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "SETTING UP YOUR CHARACTER SHEET"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90"
+      ],
+      "cached_source_unit_ids": [
+        "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90"
+      ]
+    },
+    "ga_4480814881b8a514": {
+      "anchor_id": "ga_4480814881b8a514",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 1,
+      "structural_path": [
+        "TABLE OF CONTENTS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495"
+      ],
+      "cached_source_unit_ids": [
+        "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495"
+      ]
+    },
+    "ga_512cfca2ef9e3380": {
+      "anchor_id": "ga_512cfca2ef9e3380",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 39,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Quick Method for Ascending AC Combat (Secret Formula!)"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c"
+      ],
+      "cached_source_unit_ids": [
+        "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c"
+      ]
+    },
+    "ga_5f8073ef8e13eb83": {
+      "anchor_id": "ga_5f8073ef8e13eb83",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 5,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "COMMON TERMS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd"
+      ],
+      "cached_source_unit_ids": [
+        "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd"
+      ]
+    },
+    "ga_8d3ca1d736f0dbae": {
+      "anchor_id": "ga_8d3ca1d736f0dbae",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 2,
+      "structural_path": [
+        "FOREWORD"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+      ],
+      "cached_source_unit_ids": [
+        "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+      ]
+    },
+    "ga_4f78252f9bb5b504": {
+      "anchor_id": "ga_4f78252f9bb5b504",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 131,
+      "structural_path": [
+        "Monsters",
+        "Treasure",
+        "Generating a Random Treasure Hoard"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+      ],
+      "cached_source_unit_ids": [
+        "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+      ]
+    },
+    "ga_dc35605eb8d6a28c": {
+      "anchor_id": "ga_dc35605eb8d6a28c",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 33,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "GAINING EXPERIENCE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398"
+      ],
+      "cached_source_unit_ids": [
+        "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398"
+      ]
+    },
+    "ga_6b41be7ba6d2f979": {
+      "anchor_id": "ga_6b41be7ba6d2f979",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 95,
+      "structural_path": [
+        "Monsters",
+        "Monster Descriptions",
+        "READING THE MONSTER DESCRIPTIONS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf"
+      ],
+      "cached_source_unit_ids": [
+        "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf"
+      ]
+    },
+    "ga_1f668217ceaa444c": {
+      "anchor_id": "ga_1f668217ceaa444c",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 11,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Cleric"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+      ],
+      "cached_source_unit_ids": [
+        "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+      ]
+    },
+    "ga_35f35268697c6e5a": {
+      "anchor_id": "ga_35f35268697c6e5a",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "6. COMPLETE THE ROUND"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee"
+      ],
+      "cached_source_unit_ids": [
+        "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee"
+      ]
+    },
+    "ga_620564dab9e21bdd": {
+      "anchor_id": "ga_620564dab9e21bdd",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "5. MELEE AND SPELLS PHASE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383"
+      ],
+      "cached_source_unit_ids": [
+        "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383"
+      ]
+    },
+    "ga_94e17c49dabdbd25": {
+      "anchor_id": "ga_94e17c49dabdbd25",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "A Quick Introduction"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+      ],
+      "cached_source_unit_ids": [
+        "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+      ]
+    },
+    "ga_1d8f1480ee571c59": {
+      "anchor_id": "ga_1d8f1480ee571c59",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 16,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Magic-User",
+        "MAGIC-USER CLASS ABILITIES"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a"
+      ],
+      "cached_source_unit_ids": [
+        "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a"
+      ]
+    },
+    "ga_85cd6a2a6877b5b9": {
+      "anchor_id": "ga_85cd6a2a6877b5b9",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "SPELLS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+      ],
+      "cached_source_unit_ids": [
+        "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+      ]
+    },
+    "ga_67729731770c1b5a": {
+      "anchor_id": "ga_67729731770c1b5a",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "2. DECLARE SPELLS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+      ],
+      "cached_source_unit_ids": [
+        "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+      ]
+    },
+    "ga_5cd75675ea765d41": {
+      "anchor_id": "ga_5cd75675ea765d41",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 10,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Cleric",
+        "CLERIC CLASS ABILITIES"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958"
+      ],
+      "cached_source_unit_ids": [
+        "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958"
+      ]
+    },
+    "ga_c41886c78190e424": {
+      "anchor_id": "ga_c41886c78190e424",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 7,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Roll Attribute Scores",
+        "WISDOM"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18"
+      ],
+      "cached_source_unit_ids": [
+        "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18"
+      ]
+    },
+    "ga_c069e028905f0140": {
+      "anchor_id": "ga_c069e028905f0140",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 41,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "DAMAGE AND DEATH"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af"
+      ],
+      "cached_source_unit_ids": [
+        "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af"
+      ]
+    },
+    "ga_cbb451b86454d122": {
+      "anchor_id": "ga_cbb451b86454d122",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 41,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "HEALING"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+      ],
+      "cached_source_unit_ids": [
+        "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+      ]
+    },
+    "ga_50154ef14b701ae1": {
+      "anchor_id": "ga_50154ef14b701ae1",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "MISSILE ATTACKS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+      ],
+      "cached_source_unit_ids": [
+        "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+      ]
+    },
+    "ga_44cf270a34813f34": {
+      "anchor_id": "ga_44cf270a34813f34",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "SAVING THROWS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b"
+      ],
+      "cached_source_unit_ids": [
+        "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b"
+      ]
+    },
+    "ga_c7dc81ad683de2ab": {
+      "anchor_id": "ga_c7dc81ad683de2ab",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 26,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Thief",
+        "SAVING THROWS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43"
+      ],
+      "cached_source_unit_ids": [
+        "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43"
+      ]
+    },
+    "ga_8186837cfd702a23": {
+      "anchor_id": "ga_8186837cfd702a23",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Saving Throw Categories (Alternative Method)"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c"
+      ],
+      "cached_source_unit_ids": [
+        "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c"
+      ]
+    },
+    "ga_4edc08f823ef259c": {
+      "anchor_id": "ga_4edc08f823ef259c",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 34,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Different Categories of Saving Throws"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+      ],
+      "cached_source_unit_ids": [
+        "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+      ]
+    },
+    "ga_8c6fa679328eda56": {
+      "anchor_id": "ga_8c6fa679328eda56",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 39,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "How it works"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+      ],
+      "cached_source_unit_ids": [
+        "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+      ]
+    },
+    "ga_5c64185d3f11a6cf": {
+      "anchor_id": "ga_5c64185d3f11a6cf",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 40,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "NEGOTIATION AND DIPLOMACY"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594"
+      ],
+      "cached_source_unit_ids": [
+        "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594"
+      ]
+    },
+    "ga_1c080e87474320ed": {
+      "anchor_id": "ga_1c080e87474320ed",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 39,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "Optional Morale Rules"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8"
+      ],
+      "cached_source_unit_ids": [
+        "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8"
+      ]
+    },
+    "ga_612dba3599f02910": {
+      "anchor_id": "ga_612dba3599f02910",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 32,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "Weight and Movement",
+        "Base Movement Rate"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503"
+      ],
+      "cached_source_unit_ids": [
+        "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503"
+      ]
+    },
+    "ga_9b0342cdb03491a8": {
+      "anchor_id": "ga_9b0342cdb03491a8",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 32,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "Weight and Movement",
+        "WEIGHT AND MOVEMENT"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+      ],
+      "cached_source_unit_ids": [
+        "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+      ]
+    },
+    "ga_67ec08516e6e607d": {
+      "anchor_id": "ga_67ec08516e6e607d",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 79,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure",
+        "Monsters in the Dungeon",
+        "MIXING MONSTERS IN AN ENCOUNTER"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa"
+      ],
+      "cached_source_unit_ids": [
+        "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa"
+      ]
+    },
+    "ga_a3d086a50f892e82": {
+      "anchor_id": "ga_a3d086a50f892e82",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 45,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Gameplay Example",
+        "TRAPS AND LOOT"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf"
+      ],
+      "cached_source_unit_ids": [
+        "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf"
+      ]
+    },
+    "ga_cc1bf17eacc2f915": {
+      "anchor_id": "ga_cc1bf17eacc2f915",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 74,
+      "structural_path": [
+        "Referee Guide",
+        "Designing a Dungeon Adventure",
+        "Sample Dungeon Map",
+        "WANDERING MONSTERS ON"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff"
+      ],
+      "cached_source_unit_ids": [
+        "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff"
+      ]
+    },
+    "ga_7ad82890e19e1466": {
+      "anchor_id": "ga_7ad82890e19e1466",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 32,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "Weight and Movement",
+        "Indoor, Underground, and City Movement"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+      ],
+      "cached_source_unit_ids": [
+        "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+      ]
+    },
+    "ga_def0ac7fea6861fa": {
+      "anchor_id": "ga_def0ac7fea6861fa",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 29,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Buy Equipment",
+        "Item Descriptions",
+        "ITEM DESCRIPTIONS"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+      ],
+      "cached_source_unit_ids": [
+        "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+      ]
+    },
+    "ga_abc54a3147bdb7e5": {
+      "anchor_id": "ga_abc54a3147bdb7e5",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 35,
+      "structural_path": [
+        "Player Guide",
+        "How to Play",
+        "Combat",
+        "1. SURPRISE"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94"
+      ],
+      "cached_source_unit_ids": [
+        "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94"
+      ]
+    },
+    "ga_256478a4070b36e8": {
+      "anchor_id": "ga_256478a4070b36e8",
+      "document_id": "",
+      "anchor_type": "prose",
+      "page": 22,
+      "structural_path": [
+        "Player Guide",
+        "Creating a Character",
+        "Choose a Character Class",
+        "Ranger",
+        "RANGER CLASS ABILITIES"
+      ],
+      "anchor_quote": "",
+      "quote_normalized_hash": "e3b0c44298fc1c149afbf4c8996fb924",
+      "cached_unit_ids": [
+        "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+      ],
+      "cached_source_unit_ids": [
+        "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+      ]
+    }
+  }
+}

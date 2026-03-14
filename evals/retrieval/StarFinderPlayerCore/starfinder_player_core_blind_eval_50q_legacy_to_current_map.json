@@ -1,0 +1,1052 @@
+{
+  "metadata": {
+    "created_at": "2026-02-28T18:09:57.988037+00:00",
+    "run_id": "retrieval_lab_StarFinderPlayerCore_3c35ef696820",
+    "retrieved_chunks_path": "out/retrieval_lab/experiments/starfinder_player_core_50q_20260228_180950/retrieved_chunks.json",
+    "model_key": "all-mpnet-base-v2",
+    "query_count": 50
+  },
+  "queries": [
+    {
+      "query_id": "blind_001_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/9/Text/12",
+          "legacy_text_excerpt": "You vent gas to propel yourself forward. All squares in a  5-foot emanation become filled with gas. All creatures in  the gas become concealed, and all creatures outside the gas  become concealed to creatures within it. This gas disperses a"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-330-363::/page/6/Text/2",
+          "legacy_text_excerpt": "**GUST OF WIND **[two-actions] **SPELL 1**\n\n**AIR** **CONCENTRATE** **MANIPULATE**\n\n**Traditions** arcane, primal\n\n**Area** 60-foot line\n\n**Defense** Fortitude; **Duration** until the start of your next turn A violent wind issues forth from"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/7/Text/7",
+          "legacy_text_excerpt": "Some spells, such as *dispel magic*, can be used to eliminate  the effects of other spells. At least one creature, object, or  manifestation of the spell you are trying to counteract must  be within range of the spell that you are using. Yo"
+        }
+      ],
+      "current_selected_required": [
+        "271eb51a3b9144aaa9d5b0ad5719688fee26bc505f2792feff2c93c868c7c1f5"
+      ],
+      "current_selected_supporting": [
+        "0ef31bc8ad12cbcb0533aeca28d28089d1ad66ff43c809e80c7540aa47517d12",
+        "b61fd9558967da95d47aad1db47300d1808c2a9fe99296254c712b556c3b6076"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=11, score=0.881 (jac=0.980, seq=0.977, contains=0.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "blind_001_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/1/Text/12",
+          "legacy_text_excerpt": "Damayas tend to be tall and graceful with delicate features and  are traditionally pushed toward artistic or intellectual pursuits  and political occupations. Korashas are shorter, more muscular,  and gravitate toward military service, manu"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/24",
+          "legacy_text_excerpt": "**GUARDED THOUGHTS** **FEAT 9**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/3/SectionHeader/28",
+          "legacy_text_excerpt": "**PSYCHIC MASTERY** **FEAT 9**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/2/Table/2",
+          "legacy_text_excerpt": "Your LevelClass Features1Ancestry and background, attribute boosts,\ninitial proficiencies, stellar attunement, solar\nmanifestations, solarian feat2Skill feat, solarian feat3General feat, skill increase, stellar resilience4Skill feat, solari"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/8",
+          "legacy_text_excerpt": "Through sheer will, you call forth a tangible weapon forged  from the essence of stars. This weapon is an extension of  yourself, and you can change its form with meditation. When  manifesting your weapon, it appears in a free hand of your "
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 5
+    },
+    {
+      "query_id": "blind_001_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/17",
+          "legacy_text_excerpt": "**Redirect Current** [reaction] (electricity) **Frequency** once per hour;  **Trigger** You take electricity damage, and your electricity  resistance doesn't reduce this damage to 0; **Effect** After  being shocked, you seize the electricit"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/20",
+          "legacy_text_excerpt": "Your body produces an overabundance of electrical energy,  which you can emit as a blast of lightning or use to power  technological devices. You can cast the *electric arc* cantrip as  a divine innate spell at will. A cantrip is heightened"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/16/Text/34",
+          "legacy_text_excerpt": "Your ability to control and empower technological devices"
+        }
+      ],
+      "current_selected_required": [
+        "8ed348fae82675c0b4d711a2be2d0b3a4f01076e8a5a9c31f0860f8db32a9e76"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=3, score=0.428 (jac=0.487, seq=0.456, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "blind_001_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/13/SectionHeader/37",
+          "legacy_text_excerpt": "**SIDESTEP **[reaction] **FEAT 8**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/12/Text/44",
+          "legacy_text_excerpt": "**Trigger** A creature misses you with a melee Strike."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-232-249::/page/4/Text/20",
+          "legacy_text_excerpt": "Inanimate objects and hazards are immune to bleed, death effects, disease, healing, mental effects, nonlethal attacks, poison, spirit, vitality, void, as well as the doomed, drained, fatigued, paralyzed, sickened, and unconscious conditions"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/9",
+          "legacy_text_excerpt": "You were created to fight other synthetic creatures. When  you roll a critical hit against a creature with the tech trait, the  target becomes glitching 1."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 4
+    },
+    {
+      "query_id": "blind_001_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/SectionHeader/21",
+          "legacy_text_excerpt": "PERCEPTION"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/22",
+          "legacy_text_excerpt": "Perception measures your ability to be aware of your  environment. Every creature has Perception, which works  with and is limited by a creature's senses. (Details on senses  and detecting things begin on page 424.) Whenever you need  to at"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/8/Text/23",
+          "legacy_text_excerpt": "**Perception check result = d20 roll + Wisdom modifier + ** **proficiency bonus + other bonuses + penalties**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/1",
+          "legacy_text_excerpt": "Nearly all creatures are at least trained in Perception,  so you will almost always add a proficiency bonus to your  Perception modifier. You might add a circumstance bonus  for advantageous situations or environments and typically  get sta"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/3",
+          "legacy_text_excerpt": "Many abilities are compared to your **Perception DC** to  determine whether they succeed. As with any DC based on  a modifier, your Perception DC is 10 + your total Perception  modifier."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/9/Text/5",
+          "legacy_text_excerpt": "Often, you'll roll a Perception check to determine your order  in initiative. When you do this, instead of comparing the  result against a DC, the GM will put the results for everyone  in the encounter in order. The creature with the highes"
+        }
+      ],
+      "current_selected_required": [
+        "880310aae85411a2a62d1f9df0bb02085c6c7ad4b6c98c589fc516b2889c4381"
+      ],
+      "current_selected_supporting": [
+        "dd5f6322e96b3ab414e4a02067365aac3870e32f357c80ce2584306e39888821",
+        "7f7e9c45611e4a9c84d9d21b711a5d09ff5c0cd22c33da53496f2fb666f55bca"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.847 (jac=0.918, seq=0.978, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 3
+    },
+    {
+      "query_id": "blind_001_06",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/5",
+          "legacy_text_excerpt": "**COVERING FIRE **[one-action]** OR **[two-actions] **FEAT 6**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/8",
+          "legacy_text_excerpt": "You make a well placed shot or unleash a hail of fire to cover  your allies. Make a ranged Strike against a target and select  one ally within range of the same attack. If your Strike hits  your target, you deal no damage, but the targeted "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/9",
+          "legacy_text_excerpt": "You can use Covering Fire as a 2-action activity to Area  Fire or Auto-Fire instead of making a ranged Strike, affecting  targets that fail their save."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/SectionHeader/15",
+          "legacy_text_excerpt": "**I'LL BE BACK **[free-action] **FEAT 6**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/18",
+          "legacy_text_excerpt": "**Frequency** once per day"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/19",
+          "legacy_text_excerpt": "**Trigger** You regain consciousness after being unconscious. Even when you're downed, you get right back into the thick"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-150-161::/page/7/Text/20",
+          "legacy_text_excerpt": "of things once recovered. You Stand and Interact to draw a  weapon or grab an unattended weapon."
+        }
+      ],
+      "current_selected_required": [
+        "7dfadb2177379d718b7222f7a59e7714af7c867d4748f1dd472753eea0722c04"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=8, score=0.422 (jac=0.441, seq=0.512, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 5
+    },
+    {
+      "query_id": "blind_001_07",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/SectionHeader/1",
+          "legacy_text_excerpt": "**NIMBUS SURGE **[reaction]"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/3",
+          "legacy_text_excerpt": "**Trigger** A creature within your reach uses a manipulate action  or a move action, makes a ranged attack, or leaves a square  during a move action it's using."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/3/Text/4",
+          "legacy_text_excerpt": "Your nimbus surges with energy, forcing an opening in your foe's  defenses. Make a melee Strike against the triggering creature.  This Strike doesn't count toward your multiple attack penalty,  and your multiple attack penalty doesn't apply"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/SectionHeader/42",
+          "legacy_text_excerpt": "**SOLAR NIMBUS** **FEAT 6**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-174-181::/page/4/Text/46",
+          "legacy_text_excerpt": "You gain the Nimbus Surge reaction (page 141), but do not  gain any additional benefits based on your attunement."
+        }
+      ],
+      "current_selected_required": [
+        "1daaee27f13b6396f0e890a375bc9ab89cce0334075d8e3146d358ef5b722165"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=2, score=0.554 (jac=0.475, seq=0.549, contains=1.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 4
+    },
+    {
+      "query_id": "blind_001_08",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+          "legacy_text_excerpt": "**REVIVIFICATION PROTOCOL **[free-action] **FEAT 13**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+          "legacy_text_excerpt": "**Trigger** You have the dying condition and are about to  attempt a recovery check."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+          "legacy_text_excerpt": "Your nanites are programmed to automatically revive you.  You are restored to 1 Hit Point, lose the dying and unconscious  conditions, and can act normally on this turn. You gain or  increase the wounded condition as normal when losing the "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/SectionHeader/3",
+          "legacy_text_excerpt": "RECOVERY CHECKS"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4",
+          "legacy_text_excerpt": "While you're dying, attempt a recovery check at the start  of each of your turns. This is a flat check with a DC equal  to 10 + your current dying value to see if you get better  or worse."
+        }
+      ],
+      "current_selected_required": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=7, score=0.832 (jac=0.909, seq=0.948, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 3
+    },
+    {
+      "query_id": "blind_001_09",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+          "legacy_text_excerpt": "**UNDYING **[reaction] **FEAT 17**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+          "legacy_text_excerpt": "**Trigger** You have the dying condition and are about to  attempt a recovery check."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51",
+          "legacy_text_excerpt": "You have died once before and have no intention of dying  ever again; your soul stubbornly resuscitates your body  when you would otherwise perish. You are restored to 1  Hit Point, lose the dying and unconscious conditions, and  can act no"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 3
+    },
+    {
+      "query_id": "blind_001_10",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/SectionHeader/37",
+          "legacy_text_excerpt": "**REVIVIFICATION PROTOCOL **[free-action] **FEAT 13**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+          "legacy_text_excerpt": "**Trigger** You have the dying condition and are about to  attempt a recovery check."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/42",
+          "legacy_text_excerpt": "Your nanites are programmed to automatically revive you.  You are restored to 1 Hit Point, lose the dying and unconscious  conditions, and can act normally on this turn. You gain or  increase the wounded condition as normal when losing the "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/SectionHeader/46",
+          "legacy_text_excerpt": "**UNDYING **[reaction] **FEAT 17**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/50",
+          "legacy_text_excerpt": "**Trigger** You have the dying condition and are about to  attempt a recovery check."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/13/Text/51",
+          "legacy_text_excerpt": "You have died once before and have no intention of dying  ever again; your soul stubbornly resuscitates your body  when you would otherwise perish. You are restored to 1  Hit Point, lose the dying and unconscious conditions, and  can act no"
+        }
+      ],
+      "current_selected_required": [
+        "63ed9141b7ee3f764385bc9b7973547b832139b80dacb600926f7ec195cfe592"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=15, score=0.306 (jac=0.269, seq=0.165, contains=1.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 5
+    },
+    {
+      "query_id": "batch_002_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/13/Text/96",
+          "legacy_text_excerpt": "**Prone:** You're lying on the ground and easier to attack."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6",
+          "legacy_text_excerpt": "You're lying on the ground. You are off-guard and take a \u20132  circumstance penalty to attack rolls. The only move actions  you can use while you're prone are Crawl and Stand. Standing  up ends the prone condition. You can Take Cover while pr"
+        }
+      ],
+      "current_selected_required": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.842 (jac=0.911, seq=0.976, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_002_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/25/Text/9",
+          "legacy_text_excerpt": "You huddle behind cover or greater cover or deeper into  concealment to become hidden, rather than observed.  The GM rolls your Stealth check in secret and compares  the result to the Perception DC of each creature you're  observed by but t"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6",
+          "legacy_text_excerpt": "You're lying on the ground. You are off-guard and take a \u20132  circumstance penalty to attack rolls. The only move actions  you can use while you're prone are Crawl and Stand. Standing  up ends the prone condition. You can Take Cover while pr"
+        }
+      ],
+      "current_selected_required": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "current_selected_supporting": [
+        "f17c808167b06146703b66605c18563f4d4a5da79957b6ebdd7b3017be6002f8"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=2, score=0.842 (jac=0.911, seq=0.976, contains=0.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_002_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/23",
+          "legacy_text_excerpt": "and don't already have the wounded condition, you become  wounded 1. If you already have the wounded condition  when you lose the dying condition, your wounded condition  value increases by 1. If you gain the dying condition while  wounded,"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/17/Text/24",
+          "legacy_text_excerpt": "The wounded condition ends if someone successfully  restores Hit Points to you using Treat Wounds, or if you  are restored to full Hit Points by any means and rest for 10  minutes."
+        }
+      ],
+      "current_selected_required": [
+        "e8a200407b8560409ecc57730bcd514fa41bdc1a3fe22087a8acd0948ccf3ac0"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.362 (jac=0.434, seq=0.354, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_002_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+          "legacy_text_excerpt": "You're bleeding out or otherwise at death's door. While you  have this condition, you're unconscious. Dying always includes  a value, and if it ever reaches dying 4, you die. When you're  dying, you must attempt a recovery check (page 403) "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20",
+          "legacy_text_excerpt": "If you have a persistent damage condition, you take the  damage at this point. After you take the damage, you can  attempt the flat check to end the persistent damage. You  then attempt any saving throws for ongoing afflictions.  Many other"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+          "legacy_text_excerpt": "You're taking damage from an ongoing effect, such as from  being lit on fire. This appears as \"X persistent [type] damage,\"  where \"X\" is the amount of damage dealt and \"[type]\" is the  damage type. Like normal damage, it can be doubled or "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/15/Text/4",
+          "legacy_text_excerpt": "While you're dying, attempt a recovery check at the start  of each of your turns. This is a flat check with a DC equal  to 10 + your current dying value to see if you get better  or worse."
+        }
+      ],
+      "current_selected_required": [
+        "525d712108183aa9033cda354f5ea3a17627aed6487da9e0866cca470aa80469"
+      ],
+      "current_selected_supporting": [
+        "ed8db48a07a8942c66d886ce431fc36cca3735675cde2deefad11ce2ae4ce0d6",
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10",
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=3, score=0.832 (jac=0.909, seq=0.948, contains=0.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_002_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/2/Text/6",
+          "legacy_text_excerpt": "A concealed creature is in mist, within dim light, or amid  something else that obscures sight but isn't a physical  barrier. When you target a creature that's concealed  from you, you must attempt a DC 5 flat check before  you roll to dete"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/17",
+          "legacy_text_excerpt": "You're difficult for one or more creatures to see due to thick  fog or some other obscuring feature. You can be concealed  to some creatures but not others. While concealed, you can  still be observed, but you're tougher to target. A creatu"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Text/9",
+          "legacy_text_excerpt": "When you're behind an obstacle that could block weapons,  guard you against explosions, and make you harder to detect,  you're behind cover. Standard cover gives you a +2 circumstance  bonus to AC, to Reflex saves against area effects, and "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/10/Table/10",
+          "legacy_text_excerpt": "Type of CoverBonusCan HideLesser+1 to ACNoStandard+2 to AC, Reflex,\nStealthYesGreater+4 to AC, Reflex,\nStealthYes"
+        }
+      ],
+      "current_selected_required": [
+        "0e35c679786d3762f90d94e59bb1e25b14b14a977583397255c348a799c02a13"
+      ],
+      "current_selected_supporting": [
+        "dddcf23a5ef1abcd1df6ad15bd39dc217263c27d0b8699dbf22385460d8e5791",
+        "10059ef4b1d74ca00ee79f87185ea6dfbb790048865b0ad002f3b2482af21e26"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=5, score=0.996 (jac=1.000, seq=0.987, contains=1.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_002_06",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/11/Text/10",
+          "legacy_text_excerpt": "You can't see. All normal terrain is difficult terrain to you.  You can't detect anything using vision. You automatically  critically fail Perception checks that require you to be able  to see, and if vision is your only precise sense, you "
+        }
+      ],
+      "current_selected_required": [
+        "6971353010aa536f088cea6ae66f69670f2fb6cb941d39af201af158ff248b70"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.778 (jac=0.826, seq=0.926, contains=0.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_002_07",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/ListItem/10",
+          "legacy_text_excerpt": "You gain the dying 1 condition. If the effect that  knocked you out was a critical success from the  attacker or the result of your critical failure, you  gain the dying 2 condition instead. If you have the  wounded condition, increase thes"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-388-405::/page/14/Text/17",
+          "legacy_text_excerpt": "Creatures can't be reduced to fewer than 0  Hit Points. When most creatures reach  0 Hit Points, they die and are removed  from play unless the attack was  nonlethal, in which case they're instead  knocked out for a significant amount of  t"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-250-267::/page/6/Text/17",
+          "legacy_text_excerpt": "**Nonlethal:** Attacks with this weapon are nonlethal (page  399) and are used to knock creatures unconscious instead of  kill them. You can use a nonlethal weapon to make a lethal  attack with a \u20132 circumstance penalty."
+        }
+      ],
+      "current_selected_required": [
+        "2f8fa33399a1d2cc0b3015c7f9ea8fc817bb3e085a52359dbcf8fa6281d56f90"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=3, score=0.434 (jac=0.368, seq=0.375, contains=1.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_002_08",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/17",
+          "legacy_text_excerpt": "**Requirements** You're prone, and your Speed is at least 10 feet. You move 5 feet by crawling and continue to stay prone."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/6",
+          "legacy_text_excerpt": "You're lying on the ground. You are off-guard and take a \u20132  circumstance penalty to attack rolls. The only move actions  you can use while you're prone are Crawl and Stand. Standing  up ends the prone condition. You can Take Cover while pr"
+        }
+      ],
+      "current_selected_required": [
+        "c01e7e592b86d6ce6035c0b3b44ffd6c57a522cb77dea06d42152ca9572e0436"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.842 (jac=0.911, seq=0.976, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/11/Text/7",
+          "legacy_text_excerpt": "When you and an ally are flanking a foe, it has a harder time  defending against you. A creature is off-guard (taking a \u20132  circumstance penalty to AC) to melee attacks from creatures  that are flanking it."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14",
+          "legacy_text_excerpt": "**Frequency** The limit on how often you can use the ability. **Trigger** Reactions and some free actions have triggers that  must be met before they can be used."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/19",
+          "legacy_text_excerpt": "**Name** [one-action] (traits) **Frequency** how often it can be used;  **Trigger** when a reaction or free action can be  used; **Requirements** some actions require specific  circumstances, listed here; **Effect** this section explains  h"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_003_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
+          "legacy_text_excerpt": "**Requirements** The ally is willing to accept your aid, and you've  prepared to help (see below)."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/10",
+          "legacy_text_excerpt": "You try to help your ally with a task. To use this reaction, you  must first prepare to help, usually by using an action during  your turn. You must explain to the GM exactly how you're trying  to help, and they determine whether you can Ai"
+        }
+      ],
+      "current_selected_required": [
+        "e07b57bda93dbf1ab20cba6283da70fd704585f92489749d4a38b1b5b76a478c"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.468 (jac=0.417, seq=0.397, contains=1.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1",
+          "legacy_text_excerpt": "free actions limit when you can use those actions. You can use  only one action in response to a given trigger. For example, if  you had a reaction and a free action that both had a trigger  of \"your turn begins,\" you could use either of th"
+        }
+      ],
+      "current_selected_required": [
+        "fc5612b0622d20f80d7b25af0e437400f40b506dcb1a25b49cef91a77275c378"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=5, score=0.382 (jac=0.413, seq=0.443, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_003_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/4/SectionHeader/25",
+          "legacy_text_excerpt": "**NANITE SURGE **[reaction] **FEAT 1**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/36",
+          "legacy_text_excerpt": "body's efficiency more often. You can use Nanite Surge with a  frequency of once per 10 minutes, rather than once per hour."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_003_06",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+          "legacy_text_excerpt": "Reactions use this symbol: [reaction]. These actions can be used even  when it's not your turn. You only get one reaction per encounter  round, and you can use it only when its specific trigger is  fulfilled. Often, the trigger is another c"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25",
+          "legacy_text_excerpt": "**reaction** ([reaction]) An action you can use even if it's not your turn.  You can use 1 reaction per round. 15, **406** reactions in encounters 428\u2013429"
+        }
+      ],
+      "current_selected_required": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=3, score=0.552 (jac=0.623, seq=0.599, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_07",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1",
+          "legacy_text_excerpt": "free actions limit when you can use those actions. You can use  only one action in response to a given trigger. For example, if  you had a reaction and a free action that both had a trigger  of \"your turn begins,\" you could use either of th"
+        }
+      ],
+      "current_selected_required": [
+        "fc5612b0622d20f80d7b25af0e437400f40b506dcb1a25b49cef91a77275c378"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=12, score=0.382 (jac=0.413, seq=0.443, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_003_08",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+          "legacy_text_excerpt": "Reactions use this symbol: [reaction]. These actions can be used even  when it's not your turn. You only get one reaction per encounter  round, and you can use it only when its specific trigger is  fulfilled. Often, the trigger is another c"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25",
+          "legacy_text_excerpt": "**reaction** ([reaction]) An action you can use even if it's not your turn.  You can use 1 reaction per round. 15, **406** reactions in encounters 428\u2013429"
+        }
+      ],
+      "current_selected_required": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=4, score=0.552 (jac=0.623, seq=0.599, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_09",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19",
+          "legacy_text_excerpt": "Before creating your first character or adventure, you should  understand a number of basic concepts used in the game.  New concepts are presented in bold to make them easy to  find, but this chapter is only an introduction to the basics of"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_10",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21",
+          "legacy_text_excerpt": "Many things happen automatically at the start of your turn it's a common point for tracking the passage of time for  effects that last multiple rounds. At the start of each of your  turns, take these steps in any order you choose."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+          "legacy_text_excerpt": "You're bleeding out or otherwise at death's door. While you  have this condition, you're unconscious. Dying always includes  a value, and if it ever reaches dying 4, you die. When you're  dying, you must attempt a recovery check (page 403) "
+        }
+      ],
+      "current_selected_required": [
+        "ed8db48a07a8942c66d886ce431fc36cca3735675cde2deefad11ce2ae4ce0d6"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=7, score=0.527 (jac=0.576, seq=0.601, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_003_11",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/5/Text/43",
+          "legacy_text_excerpt": "**free action** ([free-action]) An action you can use without spending one  of your actions. Free actions with triggers can be used at  any time, but they don't use up your 1 reaction per round.  15, **406**"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/10/Text/25",
+          "legacy_text_excerpt": "**reaction** ([reaction]) An action you can use even if it's not your turn.  You can use 1 reaction per round. 15, **406** reactions in encounters 428\u2013429"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_003_12",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/1/Text/12",
+          "legacy_text_excerpt": "Reactions use this symbol: [reaction]. These actions can be used even  when it's not your turn. You only get one reaction per encounter  round, and you can use it only when its specific trigger is  fulfilled. Often, the trigger is another c"
+        }
+      ],
+      "current_selected_required": [
+        "7afcd96d19ba87c7cabb19ff9b742dfb5c63c48c2ef7f1dc957a050e6c142c86"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=4, score=0.552 (jac=0.623, seq=0.599, contains=0.0).",
+      "confidence": "high",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_003_13",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/1/Text/1",
+          "legacy_text_excerpt": "free actions limit when you can use those actions. You can use  only one action in response to a given trigger. For example, if  you had a reaction and a free action that both had a trigger  of \"your turn begins,\" you could use either of th"
+        }
+      ],
+      "current_selected_required": [
+        "fc5612b0622d20f80d7b25af0e437400f40b506dcb1a25b49cef91a77275c378"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=5, score=0.382 (jac=0.413, seq=0.443, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_003_14",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/5/Text/19",
+          "legacy_text_excerpt": "Before creating your first character or adventure, you should  understand a number of basic concepts used in the game.  New concepts are presented in bold to make them easy to  find, but this chapter is only an introduction to the basics of"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_004_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+          "legacy_text_excerpt": "You're bleeding out or otherwise at death's door. While you  have this condition, you're unconscious. Dying always includes  a value, and if it ever reaches dying 4, you die. When you're  dying, you must attempt a recovery check (page 403) "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/3/Text/21",
+          "legacy_text_excerpt": "Many things happen automatically at the start of your turn it's a common point for tracking the passage of time for  effects that last multiple rounds. At the start of each of your  turns, take these steps in any order you choose."
+        }
+      ],
+      "current_selected_required": [
+        "ed8db48a07a8942c66d886ce431fc36cca3735675cde2deefad11ce2ae4ce0d6"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=5, score=0.527 (jac=0.576, seq=0.601, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_004_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/15/Text/2",
+          "legacy_text_excerpt": "You're taking damage from an ongoing effect, such as from  being lit on fire. This appears as \"X persistent [type] damage,\"  where \"X\" is the amount of damage dealt and \"[type]\" is the  damage type. Like normal damage, it can be doubled or "
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/4/ListItem/20",
+          "legacy_text_excerpt": "If you have a persistent damage condition, you take the  damage at this point. After you take the damage, you can  attempt the flat check to end the persistent damage. You  then attempt any saving throws for ongoing afflictions.  Many other"
+        }
+      ],
+      "current_selected_required": [
+        "dc46f4118b34a764757fc32fba6e919ff0dd41f1688a8f1066df39c4e7d07f10"
+      ],
+      "current_selected_supporting": [
+        "b95d8ac4ba757f81251679c58dde95c3c1211052601438df314666d532d4f1c4"
+      ],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=3, score=0.428 (jac=0.448, seq=0.519, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_004_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/Text/41",
+          "legacy_text_excerpt": "**Trigger** You have the dying condition and are about to  attempt a recovery check."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/25",
+          "legacy_text_excerpt": "You're bleeding out or otherwise at death's door. While you  have this condition, you're unconscious. Dying always includes  a value, and if it ever reaches dying 4, you die. When you're  dying, you must attempt a recovery check (page 403) "
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_004_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-138-149::/page/10/Text/50",
+          "legacy_text_excerpt": "**Graviton-Attuned** You can Stride up to half your speed once  as a free action immediately before or after making your  attacks."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_004_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/45",
+          "legacy_text_excerpt": "**Trigger** A creature critically fails a melee Strike against you. **Requirements** The triggering creature is within your reach,  you have at least one free active hand, and your target is  no more than one size larger than you."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-058-073::/page/15/Text/46",
+          "legacy_text_excerpt": "You seize the opportunity to give your foe a big hug to help  them feel better or calm down. You attempt an Athletics  check to Grapple the triggering creature."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_004_06",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/8/Text/8",
+          "legacy_text_excerpt": "You can use more than one Strike action on your turn, but  each additional attack after the first becomes less accurate.  This is reflected by a **multiple attack penalty** that starts at  \u20135 on the second attack, but increases to \u201310 on th"
+        }
+      ],
+      "current_selected_required": [
+        "fc8a2200bea3d97c4dfbe8ca67a151a5ea6ea7a870763681d8bbbe0ba14b2f7c"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=6, score=0.309 (jac=0.427, seq=0.212, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_005_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-001-013::/page/4/Text/17",
+          "legacy_text_excerpt": "Everyone involved in a Starfinder game is a player, including  the Game Master, but for the sake of simplicity, \"player\"  usually refers to participants other than the GM. Before  the game begins, players invent a history and personality  f"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_005_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/19",
+          "legacy_text_excerpt": "You attempt to grab a creature or object with your free hand.  Attempt an Athletics check against the target's Fortitude  DC. You can Grapple a target you already have grabbed or  restrained without having a hand free."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/21",
+          "legacy_text_excerpt": "**Success** Your target is grabbed until the end of your next turn  unless you move or your target Escapes."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/12/Text/22",
+          "legacy_text_excerpt": "**Failure** You fail to grab your target. If you already had the target  grabbed or restrained using a Grapple, those conditions on  the target end."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 3
+    },
+    {
+      "query_id": "batch_005_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-074-091::/page/7/Text/24",
+          "legacy_text_excerpt": "**Frequency** once per round"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/15/Text/20",
+          "legacy_text_excerpt": "modifier, recalculate their maximum Hit  Points using their new Constitution modifier  (typically, this adds 1 Hit Point per level). If  an attribute boost increases your character's  Intelligence modifier, they become trained in an  additi"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_005_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/11/Text/33",
+          "legacy_text_excerpt": "You create an advanced, martial, or simple weapon out  of elemental energy that materializes in the hands of a  bonded creature. Select an elemental trait for the created  weapon: air, earth, fire, metal, water, or wood. The weapon  is tact"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_005_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-364-387::/page/13/Text/9",
+          "legacy_text_excerpt": "**Failure** The target is swallowed by its own shadow until the  beginning of your next turn. The target is invisible and  paralyzed, cannot experience or interact with the outside  world, and cannot be targeted by any attacks or other  eff"
+        }
+      ],
+      "current_selected_required": [
+        "1cbab9843c83af4e5a418dbc5dba4ae105d117daeaad30fe267b97b50afc4905"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.378 (jac=0.388, seq=0.470, contains=0.0).",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_005_06",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-098-113::/page/11/Text/12",
+          "legacy_text_excerpt": "When the target you directed your allies to take down falls  unconscious or is destroyed, you quickly direct them at another  target. You use Get 'Em! against a new target following all the  normal targeting restrictions for Get 'Em! You do"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-406-423::/page/2/Text/9",
+          "legacy_text_excerpt": "**Requirements** The ally is willing to accept your aid, and you've  prepared to help (see below)."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_005_07",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/5/ListItem/58",
+          "legacy_text_excerpt": "You're immune to the grabbed, prone, and restrained  conditions."
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-040-057::/page/8/Text/24",
+          "legacy_text_excerpt": "**Piercing Spikes** [reaction] **Trigger** You become grabbed by a  creature; **Effect** You twist and thrash your body around,  dealing 1d4 plus your Strength modifier piercing damage  to the triggering creature. This damage increases by 1"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_006_01",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2",
+          "legacy_text_excerpt": "Some conditions exist relative to one another or share  a similar theme. It can be useful to look at these  conditions together to understand how they interact."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_006_02",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-442-464::/page/1/Text/6",
+          "legacy_text_excerpt": "**archetype** A special additional theme for your character that  you can choose using your class feats. 174\u2013181"
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 1
+    },
+    {
+      "query_id": "batch_006_03",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-294-329::/page/4/Text/4",
+          "legacy_text_excerpt": "Spellcasting creates obvious sensory manifestations, such  as bright lights, crackling sounds, and sharp smells from the  gathering magic. Nearly all spells manifest a spell signature\u2014a  colorful, glowing ring of magical runes or circuitry "
+        }
+      ],
+      "current_selected_required": [
+        "c51d41e6166029b71fbb6122f3b4866eb8bebaedf104270d382820d3ea7a6a86"
+      ],
+      "current_selected_supporting": [],
+      "selection_rationale": "Selected by highest text overlap between legacy gold chunk_text and current retrieved chunks; top match rank=1, score=0.457 (jac=0.482, seq=0.547, contains=0.0).",
+      "confidence": "medium",
+      "unmapped_legacy_gold_count": 0
+    },
+    {
+      "query_id": "batch_006_04",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-182-209::/page/1/Text/6",
+          "legacy_text_excerpt": "A character's acumen in skills can come from all sorts of  training, from piloting starships to researching a topic on  an infosphere to rehearsing a performing art. When you  create your character and as they advance in level, you  have fl"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-424-441::/page/12/Text/2",
+          "legacy_text_excerpt": "Some conditions exist relative to one another or share  a similar theme. It can be useful to look at these  conditions together to understand how they interact."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    },
+    {
+      "query_id": "batch_006_05",
+      "legacy_gold": [
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-030-039::/page/5/Text/1",
+          "legacy_text_excerpt": "Technology and scientific knowledge flourish across the galaxy, but these advancements can't  solve every problem or answer all existential questions. Many turn to religion to understand their  place in the cosmos. Some people worship an an"
+        },
+        {
+          "legacy_chunk_id": "sf2e-playercore-PZO22001-Starfinder-Player-Core-014-029::/page/2/Text/14",
+          "legacy_text_excerpt": "**Frequency** The limit on how often you can use the ability. **Trigger** Reactions and some free actions have triggers that  must be met before they can be used."
+        }
+      ],
+      "current_selected_required": [],
+      "current_selected_supporting": [],
+      "selection_rationale": "No reliable current-corpus equivalent found in top-20 retrieved chunks.",
+      "confidence": "low",
+      "unmapped_legacy_gold_count": 2
+    }
+  ]
+}

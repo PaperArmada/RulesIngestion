@@ -26,6 +26,15 @@ def _parse_page_from_dir_name(dir_name: str, document_id: str) -> int | None:
     return None
 
 
+def _page_dir_sort_key(page_dir: Path, document_id: str) -> Tuple[str, int, str]:
+    """Sort nested stageB page directories by parent then numeric page."""
+    page_num = _parse_page_from_dir_name(page_dir.name, document_id)
+    if page_num is None:
+        match = re.search(r"_p(\d+)$", page_dir.name)
+        page_num = int(match.group(1)) if match else -1
+    return (page_dir.parent.name, page_num, page_dir.name)
+
+
 def load_evidence_units(
     phb_dir: str | Path,
     document_id: str,
@@ -47,7 +56,7 @@ def load_evidence_units(
     units_file_name = "stageB.evidence_units.json"
     page_dirs = sorted(
         [f.parent for f in phb_path.rglob(units_file_name) if f.name == units_file_name and f.parent.is_dir()],
-        key=lambda d: (d.parent.name, d.name),
+        key=lambda d: _page_dir_sort_key(d, document_id),
     )
     for page_dir in page_dirs:
         units_file = page_dir / units_file_name
@@ -75,6 +84,8 @@ def load_evidence_units(
                 "document_id": document_id,
                 "join_metadata": join_metadata,
                 "table_title": table_title,
+                "source_page_dir": page_dir.name,
+                "source_parent_dir": page_dir.parent.name,
             })
     return corpus
 
@@ -365,12 +376,28 @@ def merge_enrichments_into_corpus(
                     id_to_enr[uid] = enr
         except Exception as e:
             logger.warning("Could not load enrichments from %s: %s", f, e)
+    matched = 0
     for u in corpus:
         uid = u.get("id", "")
         enr = id_to_enr.get(uid)
         if enr:
             u["topic_tags"] = enr.get("topic_tags", [])
             u["co_retrieval_hints"] = enr.get("co_retrieval_hints", [])
+            matched += 1
+    total = len(corpus)
+    pct = 100.0 * matched / total if total else 0.0
+    if id_to_enr and pct < 10.0:
+        logger.warning(
+            "merge_enrichments_into_corpus: low coverage — %d/%d units matched enrichment records (%.1f%%). "
+            "Enrichments may be keyed to stale unit IDs from an older corpus extraction. "
+            "BM25 enrichment will have minimal effect on this corpus until enrichments are re-generated.",
+            matched, total, pct,
+        )
+    else:
+        logger.info(
+            "merge_enrichments_into_corpus: merged enrichments into %d/%d units (%.1f%%)",
+            matched, total, pct,
+        )
     return corpus
 
 

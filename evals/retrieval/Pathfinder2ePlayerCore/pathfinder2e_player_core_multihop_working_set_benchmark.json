@@ -1,0 +1,1843 @@
+{
+  "metadata": {
+    "batch_ids": [
+      "mh001"
+    ],
+    "source": "Pathfinder2e Player Core multihop working-set benchmark (draft, uncited)",
+    "merged_at": "2026-03-14T00:00:00+00:00",
+    "query_count": 20,
+    "current_run_id": null,
+    "created_by": "agent",
+    "creation_method": "multihop_working_set_design_draft",
+    "notes": "Diagnostic PF2E multihop benchmark derived from a 30-prompt challenge bank. This draft intentionally preserves only the retained working-set queries, leaves gold fields empty pending grounding, and is designed for bounded multihop retrieval, reranking, and answer-assembly evaluation rather than immediate ratified-core promotion. Pilot grounding pass: grounded current-corpus entries for ws_001, ws_002, ws_003, ws_005, ws_007, ws_010, ws_011, ws_014, ws_016, and ws_019. ws_009 remains blocked by corpus mismatch because the active substrate lacks the witch class.",
+    "schema_version": "retrieval_benchmark_v1",
+    "ratification_policy": {
+      "ratified_track": "ratified_core",
+      "working_track": "working_set",
+      "max_required_gold": 2
+    }
+  },
+  "queries": [
+    {
+      "id": "pf2e_mh_ws_001",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "Which arcane spells of rank 3 or lower in Player Core use spell attack rolls and increase their damage when heightened, and how do their targets and heightening entries differ?",
+      "expected_answer_summary": "Enumerate low-rank arcane spell-attack spells with damage-scaling heightening clauses and compare target and heightening text.",
+      "source_page": null,
+      "notes": "Derived from seed 3. Tests spell-list filtering plus individual spell text lookup and heightening comparison.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
+        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
+        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
+        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+      ],
+      "required_gold": [
+        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
+        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
+        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
+        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
+        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
+        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
+        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad": {
+          "page": 307,
+          "structural_path": [
+            "SPELL LISTS"
+          ],
+          "source_unit_ids": [
+            "bd9b801a9075a6c93c0f3849f340be5f817a1344694ea70d7c5304bd5506c9ea",
+            "7a1e33c3230fe70b8ab1df05980ff1f55ab2acf554a21ec4b8fce460626ae12f",
+            "20f0eee826c028b0bcbe90210d09c64331a75a222f9a6089b718a228e90257d6",
+            "542fa20c74fcf4f352033c4e99d111475025359dabce7394fc0fdf7207e24ba2",
+            "ecd1310e3f6a00c216f66a124c69bab488743ea4544da9404376cd61334e5c0a",
+            "a9c2d9725ea5bb0b8ace49475c8f7030f6975e7ab2b253eb48753119ec50ea4d",
+            "813a67d53be75635b2afe9e254f2f279c2a1be36d59f5dfd4365bf6c4e88a922",
+            "2d3f8ca63c8659c1c55d7491fa05e8744d0fdd1837832306f62a405ba7ebf00a",
+            "a9418363fc8ef1c6a600b4a484ea8da390256f5c1a980350c3704b95466c6782",
+            "28898266bc731ec57796b89b33f78c1b5ec7e3d430bc65d975b3879bc46a83e2",
+            "33bf7bcee1bda0dd92c3b4b01d09c93d9710511ad1f4c640662bbd20d1942c9d",
+            "18ba047ac4ab3fd3dff4ee105797c214b0b5c3bd7ff1393cc5e910aff5f22b9c",
+            "efeb46102af3fd210db7ce7072d26d826f0af8863d9dd5331f8e0e2d793e0bad",
+            "aa93e89ee9faf1a6d7c794215e3bd64106522e72214e5696834140f58dc051f3",
+            "f5e80ea71f4c08433f887a435b92c307d69c61b331c95faac0ae808fe4e4c9e9",
+            "a9ce817787ec72b8630e3fd3846d6534976e2b342c1ef492e6f5f24ee5789717",
+            "b13a7cbcdb5f00db6c8134ed0bca2b1477adf8204f457572adeea6b6154c5adb",
+            "512a183c39fef7e79f46b01cffe81434d77855559da76126c300f04a98d95a3a",
+            "92385fdfd79d920afd3ddc4d81ca1bc043fe8b9deb1a9e7e1e54d284e8745914",
+            "cd1d5b8f412bdc6ec12d4cbb10fa5593cddba3a8a1622f3bf8933cfd04610d57",
+            "97bc6b9f397c31de05e027980597f77faf23f45d49e5648b9c7d75697a3e41b5",
+            "a4ab5be43edfc44cfe0de900cdcab1360424892f5d01bae116edb219e9d3b90a",
+            "36bebd37fba79ac91e6866c74fbef24756a9482ae5cae0ffe48972bd2a089213",
+            "15c34d166eae5774bf2b059a0ef7869a28a9a0cccd61a6ecc48bf74b4f638868",
+            "8b0d071e6b473e611fc9083c77452a5577b739c544587d18b46748dc3c6c5b90",
+            "36fca7b874fab060d4c214ef44aa0327b6f1a1b7f948bdadeecbcf3948ba41db",
+            "c0dab47fe81431342fd3fe0c9c10b632eb32a01441a94945083cdd18701eef5d",
+            "6665d34985acaaf1527f78cabcb79ac481f9a87fd89493643a658ae98a30a645",
+            "6836926e2ae8a81e4002862f430c38194866715fc18e5c7b6920f15923bf3836",
+            "7d535d12959873983649ba828b88add6791d5fa33752a7003b857e2d2bf09700",
+            "dda0b2618ccd88709631453ee7bb06ff227a683d53a6eec5ebf1804f838dbf02",
+            "a0cb188e71712514798741a04a8f34c95f80d604e57dd5317fcf9008cd580993",
+            "bee3c72dd9ea3a3f4d3d36a45b03f3602e0402db4590ee96e5f27f826dbe7391",
+            "dddaa2f11466a6606dd42d93a06d3714984fe0078d942277d3a9c4864bdef8c8",
+            "2968398158dd8c7bda3ea9896e299b0b9fd9ca1c369c751996758c2709b3bfab",
+            "057db1543f499eaae07a030628b0977fb21c2c641921631dfb9af3f29f1698f7",
+            "bdbbb9699ed4d2cf015e3fd933b291ce3ab6fd883370b4df3ec9c0e80b71e8f3",
+            "5d3088e2df9f65f4f03820d46eef73447fcbd7e3c2800ca16705286198d8e5ab",
+            "46c605171d0dc0f20844e66f4671c21aa461a5b88a204f993d83f98656ea6f2f",
+            "e0638ced759f42977979b8cf4d48ee2e25a2a4d039780e0f543646dadfdc07b0",
+            "fbf72b20c1800e01587168fb2244d3403caf135791158f35326b5eea68718dd5",
+            "aeda4721401ddf794a1cf66b98a30edc94e62eb1cd4aa35249ef5cb0f5c4486d",
+            "b0ffc5fab7695f6f87a0689b96dfed0884708fdf6f5db37457587e3f9abb94cb",
+            "e6667f1964f5473130f4b9c26cfcfee6cdd7e570cf38bd39d8d4c65c5d99b598",
+            "5547457bb092e130bd14080127c2c7b9ce60673ffbae1b96ea9c78952d3dee8d",
+            "be35fc0c7c720709a50a253f18154cdf4264af5b79abfe728c34d3c2c54cf663",
+            "19d8875f0e291bd9fe982f39621e03c6d41675c6dc15304e882e8f8079264935",
+            "b542cabac852a3dfa760ef5dcabab8d107a67014054fc530724395767d2fdb98",
+            "986c8ede28ed092bcb9e671328d27522a816a48d9cfa4829688f932565b25ef4",
+            "777ecaedc14fd00409b3ed654a2bd5b3d664a9d802f1a14aaed6d3fac1089db3",
+            "78641a2d03e242c4caca299f45595ca04db10e369789daef046608897e12ec27",
+            "5dac3ffffa616112110d90a8c185aba756d15570a68402f591c29f62a7e471ed",
+            "f13cbc7c3ecd6666dd521d4f1ada160dce4b89129fcff0932495762ead7e9407",
+            "e13f43171b69bc309172ca4ed778ae697807b9ed17de6b8d230296b2983f8c6c",
+            "ee16d94669574184063e543e9ed9bbae99c82db67a3d34bd41104e4cfa57cd13",
+            "ed963d18c79c68c1dada0c2e6161dc301cac8f963821efd67728e0e2fd0f9f92",
+            "e0ca1902a11d5b532e610f0ebc6223ef29973b91a5894597b59b41b6810125b0",
+            "ec065bd24e68bdd8e14b90e428f92ec214d18665480895bc4cbcabeb4ef90774",
+            "a47708a5ab2fb06cf0ce3d9813d880719dc9886e067ceac97bbdc5b464db0c4d",
+            "c706efbe9fe134924002c448d15aeaa3128a67ecf6b4fd201bb63e8f38f20030",
+            "75153c24a5bf2ec14c636047312454e6614cb7c7948929ec48d2dc75fd190180",
+            "f90886a1e8d433d3f3c873cd1dd394be0dee88a5ea5cecd854d24c90f974b408",
+            "61ced4ca3c3c3b1db2c3f903252d4de4f05db658bef144689856234f60a81868",
+            "d0130583862ccc8e45390972376eb5ecef0692c61bdda8b23942dfd8c3874dc0",
+            "40ce8cd2a87885854cafa25768b0e684fd6cadb7b7162e35571be4f23b31790a",
+            "a2d463c149f55707703c8e7a617758cbe87f3dd8c8d6eadc0e6fcc1cc3ddf65d",
+            "7cea0b0b4f79db4b04639a418a7d035d51d18c37febd9fcc42d0467f0c45e54f",
+            "b4a540e898a34a3ebf68f5b11e3afafb105547cb5369b83ef89d47a84dbe4554",
+            "e092e5714c86f276d148d703324c608b0857390c913ff2b45609e80667803df2",
+            "20074ab30ebab04c179730409382836680d65b2c3d1ddd55d49cf0bbcb1fef84",
+            "435e995ef2b2c5ec0713f3f188f60e4a17e8b1a2be5c8c87b32ee1412ddcd36f",
+            "f73c0eb98ec420817e8d72d70b51ccb4e9121f0ba7b7954caab818f163efeec3",
+            "a3223f60e2f4878b27b1c6fdd12554417d5d2a8f2ea8adc9f23f329deda866be",
+            "8cd52d03460f0578f19d22f3b72764856c5cbe73d12777d4d21fe9ff90a7c504",
+            "d956441d3546ca959b00e7eb0760a9131287f032b8a5e08f9e10f3d20d197f85",
+            "3833831f626f8a59f83f739ef32d51c98d9e131de0bb53f2350c5a6209d33760",
+            "740df090a4b64b5809709268d3971053ba8f5c52c7929f471093af3ad9c46d6c",
+            "cc435fa9e3a2fb31fccdf16fbef17a36918da3ed0331208d84ecf6b4364dec5a",
+            "188029230ed997047075e4efdd6b49cfb5dad0212bd44488900a41e803285587",
+            "c5c11f2a17118851becf118a545dd62ea1c2dea747fdff9f0cd1491f94ee164f",
+            "319a27f2de53772290afc142da7c0b351ec7485e54b47d9eef4d7a8d0c392943",
+            "145b9958421856449b21f7088f2b82135d69985ca0075d0890e44c49024b0185",
+            "85561ef80289b4d6ab748d3455cf65f2f38511c99b00c94b99e89c8996490565",
+            "99026190cfd70f14c462d22adcdf0ee6760548af495fba8fbbb7b4c5ed70b359",
+            "837546c1d62e511518e34408f256384507b003033bf6e9f8902bc4de0e1818a7",
+            "28b22b49c1f54b950ce2515b879518f555b20e19e247573427159cf82dcd906c",
+            "465317eda98229f94bfb3a1c4c26206891a476351099877f3a7e23fc4d59c92d",
+            "1ee61483dcdf5b09f2cb07eedbb5326286d26e10e974c0f0603c4e0e71636289",
+            "8c6843ec34565f146d5308bf92907329ca23592fe2b689da0038d76357512119",
+            "4219b0b9dfa4deb1e1a59d237d013695268d988c3400b528ffe828bba34619d0",
+            "6c62d6084008e1ceaaa215aaba85a64b86763eea3d12671466ebe00d53ba3696",
+            "549da3f6bd691f5f42a77ac6388bdf864ae8e88540832f3fb8c8e232b88dc6ec"
+          ]
+        },
+        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8": {
+          "page": 316,
+          "structural_path": [
+            "ACID SPLASH"
+          ],
+          "source_unit_ids": [
+            "cf01833f6b825a39d427066b421aa7e6364064cd8b2f20955a807443b273a2e0",
+            "27ed9bc0cdbf8a4971d437b87c7ca1d78badb552e914efb366ebbbbf92228018",
+            "5f30b2b02ea02cd7c9be500b0ec3e4ed7c389104000535e349523bb724565721",
+            "152d5771056e19ed7bbc997a8c66b88b2fa4a2ebd23c425fd2bb8c81d65f4452",
+            "57883b00b12d5d222e910b54158fc5e0bb453b6edb7f8ff043e1c80342e2c5aa",
+            "4521a3c6f9978888aa96efffc1f74f71a459d13a01bece6322d1a75529e96c5a"
+          ]
+        },
+        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816": {
+          "page": 360,
+          "structural_path": [
+            "PRODUCE FLAME"
+          ],
+          "source_unit_ids": [
+            "f208f152c8081b16565174aea11e32380f1990824729c027e069460632ae5fab",
+            "dbd1f051189a16c274e4893757093bcf40658abfea97e5600990d2e26ac035e7",
+            "e4ea56a758fa4baceec45c9ba11d6a32373dc3b708aea88ddb0e57e203e2b68f",
+            "5a813cb3a9ab24c597693db648376e904accdacb8822a7d5d2bc2e0018dc564b",
+            "66a7ed10e7b29864dcabbe10816a9ef4862e8d1dbff462a43a1ee495d9312b80",
+            "3b3748dee05f2423125cfae192040f6cd5a51c62d1f64bccadf3f03f9f551c5f",
+            "0ec2cf74817a409832d496214d095210a7604eba390791d802e5d12cd4bada54",
+            "bd68c418e5c1b17364d5a03bfaddd7d62508d8ab7bf345c410cfcb7c4ddb3884",
+            "d39e98ba4b19d0b3c8512a2acc2852bd9c89ce503bd0deea3060e91a5677edf1",
+            "2ae667c320fa0bfcd6961989712e1c2e2a92635bc2e0476ccbd290f7f1943281",
+            "5c5bd86f56b7595a1501e7ffca4aa17bb2f1515401b435801ae11d9ea05aead6",
+            "989c2c3eef3900a43d35b1f45431d4626272a6f840d64ea09ce3c067a254e9b2",
+            "d33d9f12d33776031edc9e7a89b68b6a566a96295197259ebba4e0cb38418163",
+            "7bb8617d70d2ac73772573e8cb2c86c2837b96f562a1303d71faf5eb7efde63c",
+            "03bfed9d5f382d98cccfc675184411a46de57a97bb827d45c7cbd4299ebc0d8f",
+            "26f0ffc31d13b20761d17648722ce4a7f02c77ba7dc29be62591f81c9e1c91f3"
+          ]
+        },
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a": {
+          "page": 362,
+          "structural_path": [
+            "RAY OF ENFEELEMENT"
+          ],
+          "source_unit_ids": [
+            "21078c9c44c981d1a8b2f6ae2f32352eb1982328125e5c702b6c34ccd970f154",
+            "d13eea4f591da8cc5f85b581cfd821f5d0a58be32637ec19318b692849bdd62a",
+            "e8e6e6333cacaafddc9261327464b829cdcc46f41b3e2a1ef21e547e11dd6de5",
+            "fd3c3ac9c0c6c37ae4a7dec533e04be867743b13f494987faf00a7405e59bcd3",
+            "9f4b5e502c654c940074e92787406c522b2c2fb6bd597f1a0893705b46cfac8d",
+            "7091eec5507f44648bcfa9e99a1f8764a546c4d66ce0844a8a6b5f934570cfe7",
+            "41419e4fc658b14bfe434caa417cccff6c1e58c17ebc1b25751c6f9632983f6e",
+            "990b87a13c678c44a3a084e2d656b3f98a584bfeafc1c2161d059d804f36e0a4",
+            "66b3c2e2f73d3a9665d28c434863212b72590ee7d261108fe6b2782621e85720",
+            "60bc9e9871cac2ada0c081b50e746655a297b2673b5a5162f85247db14e5359a",
+            "1a8f567ebbcc95de1698d4519e615da1c0d54570561e68fbf466768f9b794477",
+            "d3b0d6a4c6a33aec045411c215a75aec7bf13131595f2906581434347ece2e08",
+            "4c1a21eb7a0b597829282114324d62afeb9cfda9a15a3caf8b7c55262575c66b",
+            "01f34143d5f08fe4854d0246814c22de9b6cbe7cba21234e95ac639348836ba2",
+            "cf3cdde9aabe2b2005d4a71a50e10a3493d96ddc88a5913df8cbbb868783d572",
+            "ac550384e54060a6b47b388426c54ae9a5560f047d3e71ab75751621874d4e58",
+            "420abade0b4469c5b9da3b54cfa8971db7cea0c05bc589c95fb2a0643f47c25d",
+            "8e91ee0e9dc43d6d46b2ed11540efb2f326821e9370c1cb87783e01db19b26c3",
+            "87996fe56106379678ebc342cae89dd26be6ac422f606bafdc389953bf2bd6bd",
+            "4974ef1810facb404283baa6fb401b2f2a68918344fcc0e70498430c00908be4",
+            "77df7bee8364b0fa7c33380fe5b0b763548cd1534dc90f122a1f5853b824d081",
+            "24e24e91a85d053ceb59f796084d61542e7203ed20a31a653ddaafbb6140b827",
+            "db66d1f34a6b4529c9f2aa2c9f67f85fa1211fa372d7941c58da4d4a065e4b90",
+            "ba78efb9b89a3e4e1b0952bf32714b79d5c5eb224773bb4f37b033e1f4f086c7",
+            "4117c656d9f4ac5153d448f8b811319d2de3db8628570e3c936b3ce0b81db22f",
+            "d530f35f40d34e5f0178aea6496a6051a6f25963e3289c182ff060c9ac1588b7",
+            "737f7c0e1e2f8a9c6c17caea87a068a6b70158ec42bb31b94afa8266892f9165",
+            "56e7501142c078f49870e2f61f0dcfde7d31845d4ae5ccb1ae06cdb3a811ad23",
+            "991ead808aa1dc654abfad33faed6ab1bc0377a4a602fa192942d90cde34f3aa"
+          ]
+        },
+        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482": {
+          "page": 344,
+          "structural_path": [
+            "HYDRAULIC TORRENT"
+          ],
+          "source_unit_ids": [
+            "77b7e7eba3368616e1fddc9ac5b1b5898fcb82ee1698a5df4e93a40f2dd73d32",
+            "138aaee466903013d1c575f1536e0cbd5285433af5eab6764a4efbd92cd848f5",
+            "6d59a5f72567ffae0be3ad458735a0853a3206106981e3fa0d2bd9e4e02e809a",
+            "7ccb1c7b55e573bdcb5ae3d70238f93533afa058f77cb4f1cc46cedfc827960a",
+            "c54e16a52064a0fc3245203092dc49b64d00ca84226bf93ae3be85d291891a43",
+            "37076085b8f6471b76f24af78bbe0f53138a99697d5b13f8830c1d055c808438",
+            "857f09a47716f2a925ce369762f7c282f664f116abeb5a551b20cc5567062c14",
+            "cf35d85e81c047fce009a28de54a67203caefc1d820a9c0e563c477d214e861d",
+            "35c254270331b35e805fea95b6451eecb7f46ade81d9c99b8bb968e3a60d68fb",
+            "006d127e30a90f981010f01496894f45cb546827fe9d126c4985b2dac60e51e1",
+            "f6eabf80068872f4713c4f6d1595221093d9214ea5649c4537d4cc50782bfadb",
+            "198688017921475f9c3ddb2193045ba09b600e6b9a438fbfd72e52096f0e0e7f",
+            "cb519b43e2a0638819c852d5be0f07c7aa81fa6b34db719f863dc5426cc178e8",
+            "28b7edaf09d30c967a3ff4aca7043e9e13963f081df68dde5fbd6d346798276b",
+            "c5661d98fa7be6b4cbcf807009fdda19f5a1ef249d7c3a879bf2213daccc3f0b"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad": "This spell-list chunk is the filtering anchor: it identifies the arcane spell list, marks which low-rank spells have heightened entries, and shows which cantrip and rank-1 candidates belong in scope before individual spell comparison.",
+        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8": "This chunk contains Acid Splash, including its spell attack usage, target, and heightened damage clause.",
+        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816": "This chunk contains Produce Flame, including its spell attack usage, target, and heightened damage clause.",
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a": "This chunk contains Ray of Frost, including its spell attack usage, target, and heightened damage clause.",
+        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482": "This chunk contains Hydraulic Push, the low-rank non-cantrip arcane attack spell in scope that explicitly increases damage when heightened."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
+          "bucket": "required",
+          "page": 307,
+          "structural_path": [
+            "SPELL LISTS"
+          ],
+          "text": "SPELL LISTS \u2014 These lists include the spells for each tradition, including cantrips. (Focus spells appear on pages 386\u2013407.) A superscript \u201cH\u201d indicates a spell has extra effects when heightened, and a spell whose rarity is greater than common has a superscript with the first letter of that rarity. An abbreviation in parentheses indicates a spell\u2019s school. \u2014 ARCANE SPELLS \u2014 ARCANE CANTRIPS \u2014 Acid Splash \\( ^{h} \\) (evo): Damage creatures with acid. \u2014 Chill Touch \\( ^{h} \\) (nec): Your touch hurts the living or disorients undead. \u2014 Dancing Lights (evo): Create four floating lights you can move. \u2014 Daze \\( ^{h} \\) (enc): Damage a creature\u2019s mind and possibly stun it. \u2014 Detect Magic \\( ^{h} \\) (div): Sense whether magic is nearby. \u2014 Electric Arc \\( ^{h} \\) (evo): Zap one or two creatures with lightning. \u2014 Ghost Sound \\( ^{h} \\) (ill): Make false sounds. \u2014 Light \\( ^{h} \\) (evo): Make an object glow. \u2014 Mage Hand \\( ^{h} \\) (evo): Command a floating hand to move an object. \u2014 Message \\( ^{h} \\) (ill): Speak a message to a distant creature, who can reply. \u2014 Prestidigitation (evo): Perform a minor magical trick. \u2014 Produce Flame \\( ^{h} \\) (evo): Kindle small flames to attack close or at range. \u2014 Ray of Frost \\( ^{h} \\) (evo): Damage a creature with cold. \u2014 Read Aura \\( ^{h} \\) (div): Detect if an object is magical, and determine the school of its magic. \u2014 Shield \\( ^{h} \\) (abj): A shield of magical force blocks attacks and magic missiles. \u2014 Sigil \\( ^{h} \\) (tra): Leave a magical mark. \u2014 Tanglefoot \\( ^{h} \\) (con): Conjure a vine to entangle a creature. \u2014 Telekineotic Projectile \\( ^{h} \\) (evo): Fling an object at a creature. \u2014 ARCANE 1ST-LEVEL SPELLS \u2014 Air Bubble (con): React to create air for a creature to breathe. \u2014 Alarm \\( ^{h} \\) (abj): Be alerted if a creature enters a warded area. \u2014 Ant Haul (tra): Target can carry more. \u2014 Burning Hands \\( ^{h} \\) (evo): A small cone of flame rushes from your hands. \u2014 Charm \\( ^{h} \\) (enc): A creature becomes more friendly to you. \u2014 Color Spray (ill): Swirling colors dazzle or stun creatures. \u2014 Command \\( ^{h} \\) (enc): Bid a creature to approach, run, release something, lie prone, or stand up. Create Water (con): Conjure 2 gallons of water. \u2014 Fear \\( ^{h} \\) (enc): Frighten a creature, possibly making it flee. \u2014 Feather Fall (abj): React to slow a creature\u2019s fall. \u2014 Fleet Step (tra): Make your Speed much faster. \u2014 Floating Disk (con): A disk of energy follows you, carrying objects. \u2014 Goblin Pox (nec): Infect a creature with goblin pox. \u2014 Grease (con): Coat a surface or object in slippery grease. \u2014 Grim Tendrils \\( ^{h} \\) (nec): Creatures in a line take negative damage and bleed. \u2014 Gust of Wind (evo): Wind blows out fires and knocks back objects and creatures. \u2014 Hydraulic Push \\( ^{h} \\) (evo): Damage and push a creature with a blast of water. \u2014 Illusory Disguise \\( ^{h} \\) (ill): Make yourself look like a different creature. \u2014 Illusory Object \\( ^{h} \\) (ill): Form a convincing illusion of an object. \u2014 Item Facade \\( ^{h} \\) (ill): Disguise an item to look perfect or shoddy. \u2014 Jump \\( ^{h} \\) (tra): Make an impressive leap. \u2014 Lock \\( ^{h} \\) (abj): Make a lock hard to open. \u2014 Longstrider \\( ^{h} \\) (tra): Increase your Speed for an hour. \u2014 Mage Armor \\( ^{h} \\) (abj): Ward yourself with magical armor. \u2014 Magic Aura \\( ^{h} \\) \\( ^{h} \\) (ill): Change how an item\u2019s magic appears to detecting spells. \u2014 Magic Missile \\( ^{h} \\) (evo): Peltt creatures \u2014 with unerring bolts of magical force. \u2014 Magic Weapon (tra): Make a weapon temporarily magical. \u2014 Mending \\( ^{h} \\) (tra): Repair one non-magical item. \u2014 Negate Aroma \\( ^{h} \\) (abj): Suppress a creature\u2019s scent. \u2014 Pest Form \\( ^{h} \\) (tra): Turn into a nonthreatening animal. \u2014 Ray of Enfeeblement (nec): Sap a creature\u2019s strength. \u2014 Shocking Grasp \\( ^{h} \\) (evo): Zap a creature with electricity. \u2014 Sleep \\( ^{h} \\) (enc): Cause creatures in a small area to fall asleep. \u2014 Spider Sting (nec): Damage a creature and afflict it with spider venom. \u2014 Summon Animal \\( ^{h} \\) (con): Conjure an animal to fight on your behalf. \u2014 Summon Construct \\( ^{h} \\) (con): Conjure a construct to fight on your behalf. \u2014 True Strike (div): Make your next attack especially accurate. \u2014 Unseen Servant (con): Create an invisible creature to help you. \u2014 Ventriloquism \\( ^{h} \\) (ill): Throw your voice. \u2014 ARCANE 2ND-LEVEL SPELLS \u2014 Acid Arrow \\( ^{h} \\) (evo): Magical arrow deals acid damage persistently. Blur (ill): Cause a target\u2019s form to become blurry and hard to hit. \u2014 Comprehend Language \\( ^{h} \\) (div): A creature understands one language. \u2014 Continual Flame \\( ^{h} \\) (evo): A magical flame burns indefinitely. \u2014 Create Food \\( ^{h} \\) (con): Conjure food that can feed multiple creatures. \u2014 Darkness \\( ^{h} \\) (evo): Suppress all light in an area. \u2014 Darkvision \\( ^{h} \\) (div): See in the dark. Deafness (nec): Make a creature deaf. \u2014 Dispel Magic (abj): End a spell or suppress an item\u2019s magic. \u2014 Endure Elements \\( ^{h} \\) (abj): Protect a creature from severe cold or heat. \u2014 Enlarge \\( ^{h} \\) (tra): A creature grows in size. \u2014 False Life \\( ^{h} \\) (nec): Gain temporary HP. Flaming Sphere \\( ^{h} \\) (evo): A ball of fire \u2014 rolls about at your command. Gentle Repose \\( ^{h} \\) (nec): A corpse doesn\u2019t \u2014 decay and can\u2019t become undead. Glitterdust (evo): Sparkling dust breaks \u2014 invisibility and impedes vision. \u2014 Hideous Laughter (enc): Fits of laughter make a creature unable to take all its actions. \u2014 Humanoid Form \\( ^{h} \\) (tra): Take the shape of a humanoid. \u2014 Illusory Creature \\( ^{h} \\) (ill): Form a convincing illusion of a creature. \u2014 Invisibility \\( ^{h} \\) (ill): A creature can\u2019t be seen until it attacks. \u2014 Knock (tra): Make a door, lock, or container easier to open, and possibly open it immediately. \u2014 Magic Mouth (ill): Make an illusory \u2014 mouth appear to speak a message. \u2014 Mirror Image (ill): Illusory duplicates of you cause attacks to miss. \u2014 Misdirection (ill): Cause one creature\u2019s auras to appear to be another\u2019s. \u2014 Obscuring Mist (con): Conceal creatures in a cloud of mist. \u2014 Phantom Steed \\( ^{h} \\) (con): Conjure a magical horse. \u2014 Resist Energy \\( ^{h} \\) (abj): Protect a creature from one type of energy damage. \u2014 See Invisibility \\( ^{h} \\) (div): See invisible creatures and objects. \u2014 Shrink \\( ^{h} \\) (tra): Reduce a willing creature to Tiny size. \u2014 Spectral Hand (nec): Semicorporeal hand touches creatures to target them with your spells. \u2014 Spider Climb \\( ^{h} \\) (tra): Give a creature a climb Speed. \u2014 Summon Elemental \\( ^{h} \\) (con): Conjure an elemental to fight on your behalf. \u2014 Telekinetic Maneuver (evo): Disarm, Shove, or Trip a creature telekinetically. \u2014 Touch of Idioxy (enc): Dull a target\u2019s mind with a touch. \u2014 Water Breathing \\( ^{h} \\) (tra): Allow creatures to breathe underwater."
+        },
+        {
+          "id": "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
+          "bucket": "required",
+          "page": 316,
+          "structural_path": [
+            "ACID SPLASH"
+          ],
+          "text": "Heightened (+2) The initial damage increases by 2d8, and the persistent acid damage increases by 1d6. \u2014 ACID SPLASH \u2014 CANTRIP 1 \u2014 ACID ATTACK CANTRIP EVOCATION \u2014 Traditions arcane, primal Cast \u27a4 \u27a4 somatic, verbal. \u2014 Range 30 feet; Targets 1 creature \u2014 You splash a glob of acid that splatters your target and nearby creatures. Make a spell attack. If you hit, you deal 1d6 acid damage plus 1 splash acid damage. On a critical success, the target also takes 1 persistent acid damage."
+        },
+        {
+          "id": "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+          "bucket": "required",
+          "page": 360,
+          "structural_path": [
+            "PRODUCE FLAME"
+          ],
+          "text": "PRODUCE FLAME \u2014 CANTRIP 1 \u2014 ATTACK CANTIRIP EVOCATION FIRE \u2014 Traditions arcane, primal \u2014 Cast \\( \\leftrightarrow \\) somatic, verbal \u2014 Range 30 feet; Targets 1 creature \u2014 A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach. The flame deals fire damage equal to 1d4 + your spellcasting ability modifier. \u2014 Critical Success The target takes double damage and 1d4 persistent fire damage. \u2014 Success The target takes full damage. \u2014 Heightened (+1) Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4. \u2014 PROJECT IMAGE \u2014 SPELL 7 \u2014 ILLUSION MENTAL \u2014 Traditions arcane, occult \u2014 Cast \\( \\leftrightarrow \\) somatic, verbal \u2014 Range 30 feet \u2014 Duration sustained up to 1 minute \u2014 You project an illusory image of yourself. You must stay within range of the image, and if at any point you can't see the image, the spell ends. Whenever you Cast a Spell other than one"
+        },
+        {
+          "id": "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
+          "bucket": "required",
+          "page": 362,
+          "structural_path": [
+            "RAY OF ENFEELEMENT"
+          ],
+          "text": "Heightened (7th) The maximum level of the target increases to 15. \u2014 The cost increases to the target's level (minimum 1) \u00d7 400 gp. \u2014 Heightened (8th) The maximum level of the target increases to 17. The cost increases to the target's level (minimum 1) \u00d7 800 gp. \u2014 Heightened (9th) The maximum level of the target increases to 19. The cost increases to the target's level (minimum 1) \u00d7 1,600 gp. \u2014 Heightened (10th) The maximum level of the target increases to 21. The cost increases to the target's level (minimum 1) \u00d7 3,200 gp. \u2014 RAY OF ENFEELEMENT \u2014 SPELL 1 \u2014 ATTACK NECROMANCY \u2014 Traditions arcane, divine, occult \u2014 Cast \\( \\rightarrow \\) somatic, verbal \u2014 Range 30 feet; Targets 1 creature \u2014 Saving Throw Fortitude; Duration 1 minute \u2014 A ray that saps a foe\u2019s strength flashes from your hand. Attempt a ranged spell attack against the target. If you succeed, that creature attempts a Fortitude save to determine the spell\u2019s effect. If your attack roll is a critical success, use the outcome for one degree of success worse than the result of its save. \u2014 Critical Success The target is unaffected. \u2014 Success The target becomes enfeebled 1. \u2014 Failure The target becomes enfeebled 2. \u2014 Critical Failure The target becomes enfeebled 3. \u2014 RAY OF FROST \u2014 CANTRIP 1 \u2014 ATTACK CANTRIP COLD EVOCATION \u2014 Traditions arcane, primal \u2014 Cast \\( \\rightarrow \\) somatic, verbal \u2014 Range 120 feet; Targets 1 creature \u2014 You blast an icy ray. Make a spell attack roll. The ray deals cold damage equal to 1d4 + your spellcasting ability modifier. \u2014 Critical Success The target takes double damage and takes a -10-foot status penalty to its Speeds for 1 round. \u2014 Success The target takes normal damage. \u2014 Heightened (+1) The damage increases by 1d4. \u2014 READ AURA \u2014 CANTRIP 1 \u2014 CANTRIP DETECTION DIVINATION \u2014 Traditions arcane, divine, occult, primal Cast 1 minute (somatic, verbal) \u2014 Range 30 feet; Targets 1 object You focus on the target object, opening your mind to perceive magical auras. When the casting is complete, you know"
+        },
+        {
+          "id": "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482",
+          "bucket": "required",
+          "page": 344,
+          "structural_path": [
+            "HYDRAULIC TORRENT"
+          ],
+          "text": "Heightened [3rd] You gain darkvision or low-light vision if the form you assume has that ability. \u2014 Heightened [5th] You can take on the appearance of a Large humanoid. If this increases your size, you gain the effects of the enlarge spell. \u2014 HYDRAULIC PUSH \u2014 SPELL 1 \u2014 ATTACK EVOCATION WATER \u2014 Traditions arcane, primal Cast \u27a4 \u27a4 somatic, verbal. \u2014 Range 60 feet; Targets 1 creature or unattended object \u2014 You call forth a powerful blast of pressurized water that bludgeons the target and knocks it back. Make a ranged spell attack roll. \u2014 Critical Success The target takes 6d6 bludgeoning damage and is knocked back 10 feet. \u2014 Success The target takes 3d6 bludgeoning damage and is knocked back 5 feet. \u2014 Heightened (+1) The damage increases by 2d6. \u2014 HYDRAULIC TORRENT \u2014 SPELL 4 \u2014 EVOCATION WATER \u2014 Traditions primal Cast \u27a4 \u27a4 somatic, verbal \u2014 Area 60-foot line Saving Throw Fortitude \u2014 A swirling torrent of water manifests along a straight line, battering creatures and unattended objects in its path and possibly pushing them away from you. The torrent deals 8d6 bludgeoning damage. Each creature in the area must attempt a basic Fortitude save; unattended objects automatically fail. Creatures and objects that fail the save are also knocked back 5 feet (10 feet on a critical failure)."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_002",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Which ranger feats in Player Core modify Hunt Prey or add benefits that apply specifically to your hunted prey, and what new benefit does each feat grant?",
+      "expected_answer_summary": "Inventory the Hunt Prey modifier feats with level, benefit, and key trait or stance distinctions.",
+      "source_page": null,
+      "notes": "Derived from seed 4. Tests feat-table scanning plus feat-text expansion within one class neighborhood.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
+        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+      ],
+      "required_gold": [
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
+        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
+        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "source_unit_ids": [
+            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
+          ]
+        },
+        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d": {
+          "page": 170,
+          "structural_path": [
+            "RANGER FEATS"
+          ],
+          "source_unit_ids": [
+            "d91a9b911bb6741be986ea330cad2f5fb08974f65fcfe22b0759ce452028eb2e",
+            "7bf788106fbb34fa0181cf914215a30f4715c5a11b75387d86d09d1b1667441e"
+          ]
+        },
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786": {
+          "page": 170,
+          "structural_path": [
+            "ANIMAL COMPANION"
+          ],
+          "source_unit_ids": [
+            "7f1ef26eba9a50800c0d5af85be9827087e0ae582b5e1a14cc488d51b2f9365e",
+            "eaa20f8d9aae02aff41b7096b644718a5a8d7c16604d70f94420062de76070ce",
+            "35ae0d870ce74492064fc5d6e3eee13d83b8aea1b3939592ece0117089772091",
+            "2981fe7f7a080a160ae4f2c1d5864ee3697364a75ca36489c946545820926311"
+          ]
+        },
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd": {
+          "page": 172,
+          "structural_path": [
+            "RANGER"
+          ],
+          "source_unit_ids": [
+            "1b3c385f1e341fcddf05780ea499b917c03c0c99fd653f0d9030438252f0089b",
+            "47f1fc4522e076c908b6b79126837798ccdb30da2ecbb1e3a8882d265c49d811",
+            "2ffa9f3ae3782c94eb3e76bd889222f8156c3d24934a2f45c22ff017470aa1bc",
+            "40c3b973417d18c061a2fd60a603d7b1974fb569adc1edac00b5de1fca3a7259"
+          ]
+        },
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": {
+          "page": 174,
+          "structural_path": [
+            "WARDEN'S BOON"
+          ],
+          "source_unit_ids": [
+            "808e2c83704d6eaf7ce6d19d696c1abb5f478e25f3855cc5498e3c45a7d46cf6",
+            "f8a7d31f3c0ba80df940e4528df6899e500baf240c06d34465a29847aabfb4cf",
+            "740aee31ef94f181517f22cfca7e666705497f79de2c548fe1db5ffa99137f71",
+            "a4de6c3f97c7ab1ce48f90b2442fdc50e5393569e0bf334820e24da65ff6d62d",
+            "87f7a2c81584f20934323b7fbfe20cfe7de6d3a964ca760ee56336d1e6dbe335",
+            "c7ffb2f3dcd3cce0907c3eb89ebb6657575c7b84a381f23c6af4a0588056f8ef",
+            "9034d00d5608548722dc89eb27d6e19c8682ff2c1dc475c33310be526c881f53"
+          ]
+        },
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6": {
+          "page": 175,
+          "structural_path": [
+            "RANGER"
+          ],
+          "source_unit_ids": [
+            "f186beba35a3d04d71d6a4cacd061cdd6813a059a80198f243aab9bfd5afafa5",
+            "7c8914708f2727f9495eb71039a9a4a7bf4d1addc20f56ac239e5efa54b26567",
+            "63c14fe5e8749835aeba59e2fb5ad0d0ae85c1e988f09b32c06f3ba5b307c447"
+          ]
+        },
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": {
+          "page": 175,
+          "structural_path": [
+            "RANGER"
+          ],
+          "source_unit_ids": [
+            "c0e48f8a8a536091b037907e0f342941e96267e01fc2add4dbc0c8f270b863e3",
+            "ee8c4befca3bd7593578fba0824813512233a3a8c40cb70cb880f8bc99e212b1",
+            "8af5150b2449e7167042e1061dfd13e34645782f18017206b1083f9febd848fa"
+          ]
+        },
+        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8": {
+          "page": 177,
+          "structural_path": [
+            "Prerequisites Shared Prey"
+          ],
+          "source_unit_ids": [
+            "cf9a3946b44435784488fa723f4b668c54bb4aac4cfbaa04fe38d6ba54c04db5",
+            "582ac48d68688815821e53bcecc1b9d856c1a0224d3cfd00a74323cc391bb86f"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This is the base Hunt Prey action needed to interpret every feat that modifies the designation or benefits of hunted prey.",
+        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d": "This ranger feat index chunk is the inventory anchor: it identifies the relevant feat names and levels that must then be expanded in neighboring rules text.",
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786": "This chunk supplies Swift Prey and the animal-companion Hunt Prey rider, both of which change how quickly or widely Hunt Prey benefits apply.",
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd": "This chunk supplies Disrupt Prey and Favored Enemy, two explicit hunted-prey modifiers that add new prey-triggered or free-action benefits.",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": "This chunk supplies Warden's Boon, which shares Hunt Prey and hunter's edge benefits with an ally.",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6": "This chunk supplies Double Prey and Distracting Shot, both of which add prey-specific benefits beyond the base action.",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": "This chunk supplies Shared Prey, which extends Hunt Prey benefits to an ally when you designate a single prey.",
+        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8": "This chunk supplies Triple Threat, the late-game extension that expands how many creatures or allies can benefit from a single Hunt Prey use."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+          "bucket": "required",
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "text": "You can have only one creature designated as your prey at a time. If you use Hunt Prey against a creature when you already have a creature designated, the prior creature loses the designation and the new prey gains the designation. Your designation lasts until your next daily preparations."
+        },
+        {
+          "id": "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
+          "bucket": "required",
+          "page": 170,
+          "structural_path": [
+            "RANGER FEATS"
+          ],
+          "text": "RANGER FEATS \u2014 If you need to look up a ranger feat by name instead of by level, use this table. \u2014 Feat Level Animal Companion 1 Blind-Fight 8 Camouflage 10 Companion's Cry 4 Crossbow Ace 1 Deadly Aim 8 Disrupt Prey 4 Distracting Shot 12 Double Prey 12 Far Shot 4 Favored Enemy 4 Favored Terrain 2 Greater Distracting Shot 16 Hazard Finder 8 Hunted Shot 1 Hunter's Aim 2 Impossible Flurry 18 Impossible Volley 18 Improved Twin Riposte 16 Incredible Companion 10 Legendary Monster Hunter 16 Legendary Shot 20 Lightning Snares 12 Manifold Edge 18 Master Monster Hunter 10 Masterful Companion 18 Mature Animal Companion 6 Monster Hunter 1 Monster Warden 2 Penetrating Shot 10 Perfect Shot 18 Powerful Snares 8 Quick Draw 2 Quick Snares 6 Running Reload 4 Scout's Warning 4 Second Sting 12 Sense the Unseen 14 Shadow Hunter 18 Shared Prey 14 Side by Side 12 Skirmish Strike 6 Snap Shot 6 Snare Specialist 4 Specialized Companion 16 Stealthy Companion 14 Swift Tracker 6 Targeting Shot 14 Terrain Master 8 To the Ends of the Earth 20 Triple Threat 20 Twin Parry 4 Twin Riposte 10 Twin Takedown 1 Ubiquitous Snares 16 Ultimate Skirmisher 20 Warden's Boon 8 Warden's Guidance 14 Warden's Step 10 Wild Empathy 2"
+        },
+        {
+          "id": "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
+          "bucket": "required",
+          "page": 170,
+          "structural_path": [
+            "ANIMAL COMPANION"
+          ],
+          "text": "SWIFT PREY \u2014 You size up your prey with only a glance. You can use Hunt Prey as a free action if it\u2019s your first action of your turn. \u2014 RANGER FEATS \u2014 At every level that you gain a ranger feat, you can select one of the following. You must satisfy any prerequisites before taking the feat. \u2014 1ST LEVEL \u2014 ANIMAL COMPANION \u2014 RANGER \u2014 You gain the service of a young animal companion that travels with you and obeys simple commands as best as it can. See Animal Companions on page 214. When you Hunt Prey, your animal companion gains the action's benefits and your hunter's edge benefit if you have one."
+        },
+        {
+          "id": "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+          "bucket": "required",
+          "page": 172,
+          "structural_path": [
+            "RANGER"
+          ],
+          "text": "DISRUPT PREY \u2014 RANGER \u2014 Trigger Your hunted prey is within your reach, and it uses a manipulate action, uses a move action, or leaves a square during a move action it's using. \u2014 Make a melee Strike against your prey. If the attack is a critical hit, you disrupt the triggering action. \u2014 FAR SHOT \u2014 RANGER \u2014 Your experience in the field has taught you how to focus \u2014 your aim at a distance, increasing your accuracy. Double your weapons' range increments. \u2014 FAVORED ENEMY \u2014 RANGER \u2014 FEAT 4 \u2014 You have studied a specific type of wild creature and can hunt it more easily. When you gain this feat, choose animals, beasts, dragons, or both fungi and plants as your favored enemy. When you roll initiative and can see an enemy that belongs to the chosen category, you can Hunt Prey as a free action, designating that enemy. \u2014 You can use this free action even if you haven't identified the creature yet with Recall Knowledge. The benefit doesn't apply against favored enemies disguised as other creatures, and the GM determines whether it applies against a creature disguised as a favored enemy. \u2014 RUNNING RELOAD \u2014 RANGER \u2014 FEAT 4 \u2014 You can reload your weapon on the move. You Stride, Step, or Sneak, then Interact to reload. \u2014 SCOUT'S WARNING \u2014 RANGER \u2014 FEAT 4 \u2014 Trigger You are about to roll a Perception or Survival check for initiative. \u2014 You visually or audibly warn your allies of danger, granting them each a +1 circumstance bonus to their initiative rolls. Depending on whether you use gestures or call out, this action gains either the visual or the auditory trait, respectively. \u2014 SNARE SPECIALIST \u2014 RANGER \u2014 FEAT 4 \u2014 Prerequisites expert in Crafting, Snare Crafting \u2014 You specialize in creating quick traps to obstruct your enemies on the battlefield. If your proficiency rank in Crafting is expert, you gain the formulas for three common or uncommon snares (page 589). If your rank is master, you gain 6. If your rank is legendary, you gain 9."
+        },
+        {
+          "id": "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
+          "bucket": "required",
+          "page": 174,
+          "structural_path": [
+            "WARDEN'S BOON"
+          ],
+          "text": "WARDEN'S BOON \u2014 FEAT 8 \u2014 RANGER \u2014 By pointing out vulnerabilities, you grant the benefits listed in Hunt Prey and your hunter's edge benefit to an ally until the end of their next turn. Depending on whether you call out or use gestures, this action gains either the auditory or visual trait. \u2014 10TH LEVEL \u2014 CAMOUFLAGE \u2014 FEAT 10 \u2014 RANGER \u2014 Prerequisites master in Stealth \u2014 You alter your appearance to blend in to the wilderness. In natural terrain, you can Hide and Sneak even without cover or being concealed."
+        },
+        {
+          "id": "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+          "bucket": "required",
+          "page": 175,
+          "structural_path": [
+            "RANGER"
+          ],
+          "text": "WARDENS STEP \u2014 RANGER \u2014 Prerequisites master in Stealth \u2014 You can guide your allies to move quietly through the wilderness. When you Avoid Notice during exploration in natural terrain, you can designate any number of your allies to gain the benefits as if they were using that activity during that exploration. This requires no action on their part. \u2014 1 \\( _{2} \\) TH LEVEL \u2014 DISTRACTING SHOT \u2014 RANGER \u2014 The sheer power of your attacks, or the overwhelming number of them, leaves an enemy flustered. If you critically hit your hunted prey with a ranged weapon, or hit it at least twice on the same turn with a ranged weapon, it's flat-footed until the start of your next turn. \u2014 DOUBLE PREY \u2014 RANGER \u2014 You can focus on two foes at once, hunting both of them down. When you use the Hunt Prey action, you can pick two creatures as your prey. \u2014 LIGHTNING SNARES \u2014 RANGER \u2014 Prerequisites master in Crafting, Quick Snares, Snare Specialist You can rig a trap with incredible speed. When you create a snare that normally takes 1 minute to Craft, you can Craft it using a single Interact action instead."
+        },
+        {
+          "id": "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
+          "bucket": "required",
+          "page": 175,
+          "structural_path": [
+            "RANGER"
+          ],
+          "text": "SIDE BY SIDE \u2014 RANGER \u2014 Prerequisites an animal companion \u2014 You and your animal companion fight in tandem, distracting your foes and keeping them off balance. Whenever you and your animal companion are adjacent to the same foe, you are both flanking that foe with each other, regardless of your actual positions. \u2014 1 \\( _{4} \\) TH LEVEL \u2014 SENSE THE UNSEEN \u2014 RANGER \u2014 Trigger You fail a check to Seek. \u2014 When you look for foes, you can catch even the slightest cues, such as their minute movements or the shifting of air currents on your skin. Even though you failed at the triggering check, you automatically sense any undetected creatures in the area where you're Seeking, making them merely hidden to you. \u2014 SHARED PREY \u2014 RANGER \u2014 Prerequisites Double Prey, Warden's Boon \u2014 Hunting as a duo, you and your ally both single out your prey. When you use Hunt Prey and select only one prey, you can grant your Hunt Prey benefits and hunter's edge to an ally in addition to gaining them yourself. The ally retains these benefits until you use Hunt Prey again. \u2014 INTRODUCTION \u2014 ANCESTRIES & BACKGROUNDS \u2014 CLASSES \u2014 SKILLS \u2014 FEATS \u2014 EQUIPMENT \u2014 SPELLS \u2014 THE AGE OF LOST OMENS \u2014 PLAYING THE GAME \u2014 GAME MASTERING \u2014 CRAFTING & TREASURE \u2014 APPENDIX"
+        },
+        {
+          "id": "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8",
+          "bucket": "required",
+          "page": 177,
+          "structural_path": [
+            "Prerequisites Shared Prey"
+          ],
+          "text": "TRIPLE THREAT \u2014 FEAT 20 \u2014 RANGER \u2014 Prerequisites Shared Prey \u2014 You can divide your attention three ways when hunting. When you use Hunt Prey, you can designate three creatures as prey, designate two creatures as prey and share the effect with one ally (as Shared Prey), or designate one creature as prey and share the effect with two allies."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_003",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "How do Twin Takedown and Double Slice differ in action cost, requirements, combined-damage handling, and multiple attack penalty treatment?",
+      "expected_answer_summary": "Compare the two feats on actions, prerequisites, damage-combination rules, and MAP handling.",
+      "source_page": null,
+      "notes": "Derived from seed 5. Cross-class feat comparison with MAP-sensitive answer assembly.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+      ],
+      "required_gold": [
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": {
+          "page": 171,
+          "structural_path": [
+            "TWIN TAKEDOWN"
+          ],
+          "source_unit_ids": [
+            "d40a49831cc3ec768711c66649f57772e230421fda0f73ebcd615c4d78da6569",
+            "6615d327df8f397119f9697df64a9ae33739e27502c08967af5c672e34438f64",
+            "06b0606e10ca90390925ac6ee90d1086405e893f10b1a620a2c4cfb55daa63e7",
+            "547498282ccae12ad86169268d34ac5a36c9ea7e0968fc84edb352343a32d30c"
+          ]
+        },
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": {
+          "page": 144,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "fd6a3086f504319600fcfb0a60715f244988f0f4bd25280b959313b86071b745",
+            "eeb348c53f26d6d321c0094dd06f4865868af638cbf84f468e754f48cb92a541"
+          ]
+        },
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": {
+          "page": 446,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "source_unit_ids": [
+            "7d831cb8419891230da92f2484edf3ae267422cb5f6007841aa0c92f0df3537a"
+          ]
+        },
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "source_unit_ids": [
+            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This chunk contains Twin Takedown's requirements, combined-damage handling, and same-activity attack treatment against hunted prey.",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This chunk contains Double Slice's requirements, same-target restriction, damage-combination rule, and MAP wording.",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": "This chunk is the core multiple-attack-penalty rule needed to compare how each feat interacts with attack-trait sequencing.",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This chunk defines the hunted-prey designation that Twin Takedown depends on and that differentiates it from Double Slice."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+          "bucket": "required",
+          "page": 171,
+          "structural_path": [
+            "TWIN TAKEDOWN"
+          ],
+          "text": "TWIN TAKEDOWN \u2014 FLOURISH RANGER \u2014 Frequency once per round \u2014 Requirements You are wielding two melee weapons, each in a different hand. \u2014 You swiftly attack your hunted prey with both weapons. Make two Strikes against your hunted prey, one with each of the required weapons. If both hit the same hunted prey, combine their damage for the purpose of"
+        },
+        {
+          "id": "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+          "bucket": "required",
+          "page": 144,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "text": "FIGHTER FEATS \u2014 At each level that you gain a fighter feat, you can select one of the following feats. You must satisfy any prerequisites before taking the feat. \u2014 1ST LEVEL \u2014 DOUBLE SLICE \u2014 FEAT 1 \u2014 FIGHTER \u2014 Requirements You are wielding two melee weapons, each in a different hand. You lash out at your foe with both weapons. Make two Strikes, one with each of your two melee weapons, each using your current multiple attack penalty. Both Strikes must have the same target. If the second Strike is made with a weapon that doesn't have the agile trait, it takes a -2 penalty. \u2014 If both attacks hit, combine their damage, and then add any other applicable effects from both weapons. You add any precision damage only once, to the attack of your choice. Combine the damage from both Strikes and apply resistances and weaknesses only once. This counts as two attacks when calculating your multiple attack penalty."
+        },
+        {
+          "id": "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
+          "bucket": "required",
+          "page": 446,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "text": "MULTIPLE ATTACK PENALTY \u2014 The more attacks you make beyond your first in a single turn, the less accurate you become, represented by the multiple attack penalty. The second time you use an attack action during your turn, you take a -5 penalty to your check. The third time you attack, and on any subsequent attacks, you take a -10 penalty to your check. Every check that has the attack trait counts toward your multiple attack penalty, including Strikes, spell attack rolls, certain skill actions like Shove, and many others."
+        },
+        {
+          "id": "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+          "bucket": "required",
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "text": "You can have only one creature designated as your prey at a time. If you use Hunt Prey against a creature when you already have a creature designated, the prior creature loses the designation and the new prey gains the designation. Your designation lasts until your next daily preparations."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_004",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What champion causes are available in Player Core, and what reaction, tenets, and deity or cause restrictions does each one grant?",
+      "expected_answer_summary": "Enumerate the champion causes and connect each one to its reaction and restrictions.",
+      "source_page": null,
+      "notes": "Derived from seed 10. Tests class doctrine plus cause-specific reaction lookup.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_005",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Disruptive Stance modify Reactive Strike against actions with the concentrate trait, and what changes from the baseline Reactive Strike disruption rule?",
+      "expected_answer_summary": "Explain the baseline Reactive Strike disruption behavior and the extra concentrate-action coverage from Disruptive Stance.",
+      "source_page": null,
+      "notes": "Derived from seed 11. Tests fighter feat plus reaction interaction and trait-aware answer assembly.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": {
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "source_unit_ids": [
+            "43c90c33f0c44b268a8a8caf10cd447b3483d37ea5cd4a210e87547b09333266",
+            "ad82b5cab6bdf2ad54faa3629fab081700f3f61499c3f46451406104008acb99",
+            "fb73f79e57712b09eb275d3a4beee9f45c15e3bd9ce6a194cfffcad500426bcd",
+            "53dbd9ac81fae64e3290530bd4627c6549f3ca5c76e3132d9500610bb6fe6f1d",
+            "b03264178ff5b0b14c1127004034a130ad7e584d623f7ffc661624d86c8fe293",
+            "3c8dcf286e3bcc41ba5bec88a15824d7d16e3c1855d2b6567a1800890b25d63c"
+          ]
+        },
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": {
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "source_unit_ids": [
+            "94b759f8db5fb7f08ade0e8f3dd72a2653904c312e93d1556cb0cde22c07e062",
+            "c35c353324fde5d01bb40b6efb5c507954907c91bcb68ce4b7cc28946a80254f",
+            "a5ee62f1f009e442eca63f22a2205439a24dcb03f752cf219551b47c83661e1e"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": "This fighter class-feature chunk gives the baseline Attack of Opportunity trigger set and its normal disruption rule on a critical hit against manipulate actions.",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "This chunk contains Disruptive Stance and states both changes at issue: concentrate actions now trigger the reaction, and concentrate actions are disrupted on a hit rather than only manipulate actions on a critical hit."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+          "bucket": "required",
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "text": "CLASS FEATURES \u2014 You gain these abilities as a fighter. Abilities gained at higher levels list the level at which you gain them next to the features' names. \u2014 ANCESTRY AND BACKGROUND \u2014 In addition to the abilities provided by your class at 1st level, you have the benefits of your selected ancestry and background, as described in Chapter 2. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level you gain a number of proficiencies that represent your basic training. These proficiencies are noted at the start of this class. \u2014 ATTACK OF OPPORTUNITY \u2014 Ever watchful for weaknesses, you can quickly attack foes that leave an opening in their defenses. You gain the Attack of Opportunity reaction. \u2014 ATTACK OF OPPORTUNITY 2 \u2014 Trigger A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using. \u2014 You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn\u2019t count toward your multiple attack penalty, and your multiple attack penalty doesn\u2019t apply to this Strike."
+        },
+        {
+          "id": "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+          "bucket": "required",
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "text": "Failure The target is flat-footed until the end of your current turn. \u2014 DISRUPTIVE STANCE \u2014 FEAT 10 \u2014 FIGHTER STANCE \u2014 The slightest distraction can provoke your wrath, and you\u2019re prepared to foil enemies\u2019 actions. As long as you are in this stance, you can use Attack of Opportunity when a creature within your reach uses a concentrate action, in addition to manipulate and move actions. Furthermore, you disrupt a"
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_006",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How do Shield Block and shield-related reaction abilities interact in the same round, and what timing limits apply when a character has more than one shield-based defensive option available?",
+      "expected_answer_summary": "Explain same-round reaction limits and whether shield defenses stack, replace, or compete.",
+      "source_page": null,
+      "notes": "Derived from seed 12. Normalize around concrete shield-reaction timing and stacking limits rather than a named build alone.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_007",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "How do Courageous Anthem and Dirge of Doom affect the same encounter, and which parts of their effects stack, overlap, or conflict?",
+      "expected_answer_summary": "Compare areas, durations, and overlap behavior for the two bard compositions.",
+      "source_page": null,
+      "notes": "Derived from seed 13 and serves as the retained focused descendant of the broader bard composition inventory prompt.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
+        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+      ],
+      "required_gold": [
+        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
+        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
+        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818": {
+          "page": 386,
+          "structural_path": [
+            "INSPIRE COURAGE"
+          ],
+          "source_unit_ids": [
+            "74dcc2589c6082358efbf2cda7c0a6180f548a8b7e015eb04bbc495d27e50ffb",
+            "54e46a21b021ed1250d33889cc8ddec1a27a8548d91bc0ed1a35afef7e8e4629",
+            "2b0d2dce3468395dcca24d76b71607c0bc35bd1b4d7164b07d21ee84fa977a30",
+            "1394ec15a96772ce38148b706f32688ec2f9f75c2b7d550e167902658b22acff",
+            "9abfccbddb0c94e538b3ab7a0ba49296716b891b48a3a081329591e49949fa7e",
+            "d15b15f3fcfeaf440bb7c33929640057b7089c6b7f17df1691dac920fdfbbbfa",
+            "fe918b1b9bfe885b46d61979b069c646e7d97aa271c7b0a25c05f205f270536c"
+          ]
+        },
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf": {
+          "page": 386,
+          "structural_path": [
+            "FATAL ARIA"
+          ],
+          "source_unit_ids": [
+            "9364b160c911c0346caa02bf22b1d7fd65a0c5ac2665060afcae02dbc10e2f6c",
+            "f7c996041d3a80a8de7a30ee88e78f267f8846a12d031dda5d3cd7d96fc78b83",
+            "b9c581810031a3ed79b5d190c4c0b8183e16171e55a66e3ab7f0d2c7222c1e44",
+            "f743271fa89b9a4a5635cb920cebe7bf128b8a0cf54930f2f7b731e448128d2c",
+            "08b93c65f4ab963dc9d90ab561d31f11e51cbfa01090829eca466300386fb31f",
+            "cbc1df578dff9fd4e1c15b18ce04c1c540df206e1dae401a6453fb9f93904242",
+            "4d9de951255419830159cb0614c63745364d71c4d212c1adcecba981a8e8db0f",
+            "f41f62f4b7ff9be6f31048ebfd4b4ed571b6f686c4dcf71677db53fd959d5ba2",
+            "2b0b76fd15a2b618b8204ca5a38a4ca5fd8c2b66db67af778dd2ece3d3cafaff",
+            "a4cdb6865fb3a12f6d28c25d8fd192f0f1bd77452e9aaca758458c320eeeac60"
+          ]
+        },
+        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca": {
+          "page": 99,
+          "structural_path": [
+            "KEY TERMS"
+          ],
+          "source_unit_ids": [
+            "84222b20389acb1e658a96ba46fe3bde8aa92b3af79100d3f489584e1f0776ab",
+            "fdacc9ebc8f44ec8732068f84006ed0bf006454bf0ab8aa5ae369e4214707093"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818": "This chunk contains Inspire Courage, the pre-remaster equivalent of Courageous Anthem in the active corpus, including area, duration, and bonuses.",
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf": "This chunk contains Dirge of Doom, including its area, duration, and frightened effect on foes.",
+        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca": "This bard key-terms chunk defines the normal composition limit of one composition each turn and one active composition at a time, which is the rule needed to explain overlap and conflict."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
+          "bucket": "required",
+          "page": 386,
+          "structural_path": [
+            "INSPIRE COURAGE"
+          ],
+          "text": "The GM might rule that you can't use this ability if the act of encouraging your ally would interfere with the skill check (such as a check to Sneak quietly or maintain a disguise). \u2014 INSPIRE COURAGE \u2014 CANTRIP 1 \u2014 UNCOMMON BARD CANTRIP COMPOSITION EMOTION ENCHANTMNT MENTAL \u2014 Cast \u2713 verbal Area 60-foot emanation \u2014 Duration 1 round You inspire yourself and your allies with words or tunes of encouragement. You and all allies in the area gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects. \u2014 INSPIRE DEFENSE \u2014 CANTRIP 2 \u2014 UNCOMMON BARD CANTRIP COMPOSITION EMOTION ENCHANTMEN MENTAL Cast \u2713 verbal Area 60-foot emanation Duration 1 round"
+        },
+        {
+          "id": "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
+          "bucket": "required",
+          "page": 386,
+          "structural_path": [
+            "FATAL ARIA"
+          ],
+          "text": "DIRGE OF DOOM \u2014 CANTRIP 3 \u2014 UNCOMMON BARD CANTRIP COMPOSITION EMOTION ENCHANTMENTS \u2014 FEAR MENTAL \u2014 Cast \u2713 verbal \u2014 Area 30-foot emanation Duration 1 round \u2014 Foes within the area are frightened 1. They can't reduce their frightened value below 1 while they remain in the area. \u2014 FATAL ARIA \u2014 FOCUS 10 \u2014 UNCOMMON BARD COMPOSITION DEATH EMOTION ENCHANTMENT MENTAL Cast \u2713 verbal \u2014 Range 30 feet; Targets 1 creature \u2014 You perform music so perfect that the target may die of joy or sorrow. Once targeted, the creature becomes temporarily immune for 1 minute. The effect of the spell depends on the target's level and current Hit Points."
+        },
+        {
+          "id": "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca",
+          "bucket": "required",
+          "page": 99,
+          "structural_path": [
+            "KEY TERMS"
+          ],
+          "text": "KEY TERMS \u2014 You\u2019ll see the following key terms in many bard class features. \u2014 Composition: To cast a composition cantrip or focus spell, you use a type of Performance (page 250). If the spell includes a verbal component, you must use an auditory performance, and if it includes a somatic component, you must use a visual one. The spell gains all the traits of the performance you used. You can cast only one composition spell each turn, and you can have only one active at a time. If you cast a new composition spell, any ongoing effects from your previous composition spell end immediately. \u2014 Metamagic: Actions with the metamagic trait tweak the properties of your spells. These actions usually come from metamagic feats. You must use a metamagic action directly before Casting the Spell you want to alter. If you use any action (including free actions and reactions) other than Cast a Spell directly after, you waste the benefits of the metamagic action. Any additional effects added by a metamagic action are part of the spell\u2019s effect, not of the metamagic action itself."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_008",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "How do Skirmish Strike and Opportune Backstab differ in trigger, action cost, and multiple attack penalty handling, and can a character use both in the same round?",
+      "expected_answer_summary": "Compare trigger timing, action or reaction cost, MAP handling, and same-round compatibility.",
+      "source_page": null,
+      "notes": "Derived from seed 14. Cross-class tactical comparison with MAP and round-usage analysis.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_009",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How do witch familiar abilities that add focus utility or spell delivery change the way a witch can cast hexes or spells, and what class features or feats limit or expand that usage?",
+      "expected_answer_summary": "Explain how familiar-based support changes hex or spell delivery and focus management.",
+      "source_page": null,
+      "notes": "Derived from seed 15. Tests class feature plus familiar-ability interaction; verify exact named familiar options during grounding. Active corpus note: the current Pathfinder2ePlayerCore substrate is the older Core Rulebook surface and does not contain the witch class, so this query remains intentionally uncited pending corpus swap or pilot replacement.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_010",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "What limits does Player Core place on casting spells underwater, especially spells with verbal components, and what feats, spells, or abilities mitigate those limits?",
+      "expected_answer_summary": "Connect underwater breathing or speaking limits to spell component requirements and mitigation options.",
+      "source_page": null,
+      "notes": "Derived from seed 16. Environment rule plus spellcasting component interaction and mitigation lookup.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "required_gold": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": {
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "source_unit_ids": [
+            "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+          ]
+        },
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": {
+          "page": 478,
+          "structural_path": [
+            "DROWNING AND SUFFOCATING"
+          ],
+          "source_unit_ids": [
+            "78c3d7b57f1985d473e77e19fc0124668dfdedeb8575a616b292fe0e8aed691b",
+            "3dacf776193bce09f522ccd883b998a506a4b77ada1597c646a42cfaa97d829c"
+          ]
+        },
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": {
+          "page": 384,
+          "structural_path": [
+            "TRANSMUTATION"
+          ],
+          "source_unit_ids": [
+            "f5c6961889ffa214316eaca5f7fe0710caf91dcf1000daebf6a5420bfbdad6a0",
+            "b91599e1a691fa9d1095fe5c9892952c55d29c0bf563804a066dc2b4a410d62c",
+            "08f538ae3426e477b0a9389d7f029e98918b5b3c0524648c48a981d1de9eedd0",
+            "820980fb8aa101cf59dcb59c619722a81089eece6a7e30a0a86a7c0aa8faa04a",
+            "8a8632541e1787b05d27e6a90a484ff6eb2aae918b1a556cfe96a2357ae8efe0",
+            "18308c693624b900f5d86270ac5db8280c187d8779b417f7c7102c9428083866",
+            "3223d72ffe4963c0a13cb2673bb6531bdda2bbe6f5e8bf196fdb9ba915149fd7",
+            "5f477ccada4e8a8207034b3451015d30d6841efd834472f1d381184b4edf1e82",
+            "62cfcd766b7320012eb419f0b27b3a15fc30565327600931593a7d6d8d8cfec0",
+            "764a763a55735c8c5d1cddae2593a63a93c48239e2807ba040b88777991bcf6c",
+            "deb83070a613ad100904b5b03c02a52c463daef55456a0633a22c81c549ae1ba",
+            "3b8bcaca2357ffd7e55adc1c63ae685fd2728a138bd24a6b360ec68d61d4c376",
+            "51775915cb8d6419b648c3c9cd44b892a20c89e93f3317a34aa8a4e20d1025d6",
+            "18308c693624b900f5d86270ac5db8280c187d8779b417f7c7102c9428083866",
+            "f87b9503709f08f27f62f69a405027006b7cefef442f64b07ad5685e1fe8fe95",
+            "4829c8b0bf6da1e0bc29f4927c459856f8e4a63a82665b2624494b35c47a9214",
+            "e7ffefed98566c2d4c21de4f11d5efe60cca8739cb16bb1158ced49895226417"
+          ]
+        },
+        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db": {
+          "page": 268,
+          "structural_path": [
+            "UNIFIED THEORY"
+          ],
+          "source_unit_ids": [
+            "c0c4e6384961470db79064ab03f32c50273e14bf7f17a9cfdec7f712d5828622",
+            "d02f81e4e5490b4abf71f66bd201c760e20177d2dbaea1dbe703feba300d9a9f",
+            "e35b81df6eebc7d262cf4bebf5fe81d5bfc621ef47d3d92d08ac27e9914e3af5",
+            "b38c8832ea7287581ee5d4f22981e40e73d86f11e5cb0dba056df5312a1aa6d3",
+            "e1b95d8caf7962af9be6ed9c0f6c4162fc05a44722155909f828923c9ac42cc2",
+            "83bb78f9a79897f80e865cd6332cb4856cbec0cfe455503fafe60e710707678b",
+            "c90644faa1adb929fbfaaa5addcc2e837df5b6e2b2e7f618e6a043791a957428",
+            "7b189cdc75601940e355fad7f82778d83e1ed735d65048cfc1f0aee0814eaf56",
+            "c709a06ef70f4e6a6424d572263b3a05bca3b448629e5ab7292d26d9327f482b"
+          ]
+        },
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": {
+          "page": 512,
+          "structural_path": [
+            "ENVIRONMENT",
+            "AQUATIC"
+          ],
+          "source_unit_ids": [
+            "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": "This is the operative verbal-component rule: it says you must be able to speak to provide the component.",
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": "This aquatic-combat chunk states the underwater casting limit directly: speaking underwater, including spells with verbal components, expends all remaining air.",
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": "This chunk supplies Water Breathing, the primary rules-text mitigation that lets characters breathe underwater even though it does not remove verbal components from the spell.",
+        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db": "This chunk supplies Underwater Marauder, the relevant feat-side mitigation in the active corpus for underwater fighting limitations.",
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": "This chunk anchors the general aquatic-environment rule that characters usually need a way to breathe underwater and should interpret casting limits through aquatic-combat and drowning rules."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+          "bucket": "required",
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "text": "VERBAL \u2014 A verbal component is a vocalization of words of power. You must speak them in a strong voice, so it\u2019s hard to conceal that you\u2019re Casting a Spell. The spell gains the concentrate trait. You must be able to speak to provide this component."
+        },
+        {
+          "id": "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+          "bucket": "required",
+          "page": 478,
+          "structural_path": [
+            "DROWNING AND SUFFOCATING"
+          ],
+          "text": "You can\u2019t cast fire spells or use actions with the fire trait underwater. \u2014 At the GM\u2019s discretion, some ground-based actions might not work underwater or while floating. \u2014 DROWNING AND SUFFOCATING \u2014 You can hold your breath for a number of rounds equal to 5 + your Constitution modifier. Reduce your remaining air by 1 round at the end of each of your turns, or by 2 if you attacked or cast any spells that turn. You also lose 1 round worth of air each time you are critically hit or critically fail a save against a damaging effect. If you speak (including casting spells with verbal components or activating items with command components) you lose all remaining air. \u2014 When you run out of air, you fall unconscious and start suffocating. You can\u2019t recover from being unconscious and must attempt a DC 20 Fortitude save at the end of each of your turns. On a failure, you take 1d10 damage, and on a critical failure, you die. On each check after the first, the DC increases by 5 and the damage by 1d10; these increases are cumulative. Once your access to air is restored, you stop suffocating and are no longer unconscious (unless you\u2019re at 0 Hit Points)."
+        },
+        {
+          "id": "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+          "bucket": "required",
+          "page": 384,
+          "structural_path": [
+            "TRANSMUTATION"
+          ],
+          "text": "Critical Success The target is unaffected. \u2014 Success The target spends the first action on its next turn with the confused condition. \u2014 Failure The target is confused for 1 minute. \u2014 Critical Failure The target is confused permanently. \u2014 WATER BREATHING \u2014 SPELL 2 \u2014 TRANSMUTATION \u2014 Traditions arcane, divine, primal \u2014 Cast 1 minute (somatic, verbal) \u2014 Range 30 feet; Targets up to 5 creatures \u2014 Duration 1 hour \u2014 The targets can breathe underwater. \u2014 Heightened (3rd) The duration increases to 8 hours. \u2014 Heightened (4th) The duration increases to until your next daily preparations. \u2014 WATER WALK \u2014 SPELL 2 \u2014 TRANSMUTATION \u2014 Traditions arcane, divine, primal \u2014 Range touch; Targets 1 creature \u2014 Duration 10 minutes \u2014 The target can walk on the surface of water and other liquids without falling through. It can go underwater if it wishes, but in that case it must Swim normally. This spell doesn\u2019t grant the ability to breathe underwater."
+        },
+        {
+          "id": "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
+          "bucket": "required",
+          "page": 268,
+          "structural_path": [
+            "UNIFIED THEORY"
+          ],
+          "text": "Success For the rest of the current turn, you can spend actions to activate the item as if you could normally use it. \u2014 Failure You can\u2019t use the item or try to trick it again this turn, but you can try again on subsequent turns. \u2014 Critical Failure You can\u2019t use the item, and you can\u2019t try to trick it again until your next daily preparations. \u2014 UNDERWATER MARAUDER \u2014 GENERAL SKILL \u2014 Prerequisites trained in Athletics \u2014 You\u2019ve learned to fight underwater. You are not flat-footed while in water, and you don\u2019t take the usual penalties for using a bludgeoning or slashing melee weapon in water. \u2014 UNIFIED THEORY \u2014 GENERAL SKILL \u2014 Prerequisites legendary in Arcana \u2014 You\u2019ve started to make a meaningful connection about the common underpinnings of the four traditions of magic and magical essences, allowing you to understand them all through an arcane lens. Whenever you use a skill action or a skill feat that requires a Nature, Occultism, or Religion check, depending on the magic tradition, you can use Arcana instead. If you would normally take a penalty or have a higher DC for using Arcana on other magic (such as when using Identify Magic), you no longer do so."
+        },
+        {
+          "id": "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411",
+          "bucket": "required",
+          "page": 512,
+          "structural_path": [
+            "ENVIRONMENT",
+            "AQUATIC"
+          ],
+          "text": "AQUATIC \u2014 Aquatic environments are among the most challenging for PCs short of other worlds and unusual planes. PCs in an aquatic environment need a way to breathe (typically a water breathing spell) and must usually Swim to move, though a PC who sinks to the bottom can walk awkwardly, using the rules for greater difficult terrain. Characters in aquatic environments make frequent use of the aquatic combat (page 478) and drowning and suffocation rules (page 478)."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_011",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "If a ranger gains Double Slice through multiclassing, how do Twin Takedown and Double Slice interact in the same turn, and how does hunted prey affect the damage calculation?",
+      "expected_answer_summary": "Explain same-turn compatibility, action sequencing, and whether hunted-prey benefits apply across both feats.",
+      "source_page": null,
+      "notes": "Derived from seed 17. Multiclass legality plus same-turn sequencing and prey-benefit reasoning.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+      ],
+      "required_gold": [
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": {
+          "page": 226,
+          "structural_path": [
+            "FIGHTER DEDICATION"
+          ],
+          "source_unit_ids": [
+            "6764fb18928e916c09be3f8088f8d3dd1d486cdccd45cd5b1c6b0abf4daf4359",
+            "bc9749b4200bc1ee2b6861be8c7b938ecfcb917dd06c155c51f127cb548451e5",
+            "a3bc47c5f8b99a9537ead751482cadd744fc0a2be73b9648257e9d3ef93250a6",
+            "d70dda001c519e44ef6b2bdcb4fc4a8cab82301f0cdd6a3c7fb14f5fd516ccbc",
+            "b14ed9b5fa87f59dc3521fb374a4cf6716fba2a4948fe9bc9bd9b64484af5a86",
+            "2fe2f2780edb387b2de951c8db35cfc82b2225cfa7a952a260507d073ef60299",
+            "bf9f697a4b2bab438437a287488845292776a693a83c5a11d61fe338728303d8",
+            "1ac1d27383f0c3a4daa0861d4d9f669d538a717e8e5c696f21a7ee24fecc0225",
+            "a42a3ae300c75f663f2163dfc8be3da160636a1ff7d02b37e6707c154a8a3b0e",
+            "0e594737c7f6bce3a990e0943180639fc6fbd3fbe8b1151a16f64f005b5b652e",
+            "fa3bc8f3e343dfb06c60c53753d5ba2e1d2f6aeb9198efec90e1572870a7489b",
+            "11448fe1be7c664215f51f0132105bba36853a99c6b79cf648afb7fd829a3e25",
+            "0af89938a53a873abc6e0a5e0b8335b53043a14ffed061346d91b8f28227d62c",
+            "132352117be69a46bf0e51df11a6357c8e859eb6187f673a84fb036090546b2a",
+            "97dc3c4e9da3176f5c0834ae2592aa2b17c84b020f412b1d6b6f8dc8431449d0",
+            "f9d9c4f60ad4f720ddb1f207bde4dfcaad88b436deb6a465641747b40bf03887",
+            "ed15e8c7b487158acffefcf5c55d1988e6460b3bf5a19357110b16873afd81a1",
+            "77f2dfad30bc1e35faee3b3672735e6698bcde61fe652facd2b1935cadac2bff",
+            "56bcb6ecdd74c21619b413bc218985accb745359f75fdb468496d7da3cea8fee",
+            "23b569d074a1f60e772b730add00bcf6bf889f75998b2a49f34068ca9c63cbe4",
+            "876a89836255c3784dc1874b368473fc3c6ef2eb8134cdbc3e3fa587544e5a84",
+            "783a54f223f61c8863084deef9483bed57899cdf2ed0c366576243346ae5df93",
+            "f0aa7193014ba4f4a90569e73a361ead03707e50889b5d5a1a689f4cea8594cb",
+            "82a3640a08207c31565fd36e23899daaf521a5a1704e8e8337a87282f5ee3220",
+            "218295330089448f584cf3da6c798125f88b1f8dddf19848be53cbe805bacdce",
+            "a568e2e6a3079ad9c26f492d5a3fdba3e274a40dc143a3bd34db052c9a9ccc99",
+            "00156934955ddbb041b700fcee9646286d3e452fb7c3f385083a0faafe7555cb",
+            "bae209b176d62914b0b5400455f7a236a5c6b3b01eaca3be7e47db793eb54435",
+            "b2a389c3d0d2b3d70b14f14a6399aa3ca38ee10b5e02ba1f5cef3eab4e3c6154",
+            "c23870abcf9a1fc1fc4dc8485274e0f38acbeec1563c5cc2ce812957719b94c4",
+            "00170d45eb7e11258f7009ad8d2d2d518ccdddc3d1df27adb980c6a65bd93116",
+            "d7c23ad85de2a2c1da21f3044afb57f39618d955cb7498a0392ce03ec5fa333a",
+            "f1f44970b58d860386cb288e72c891030dbe2f4f3a0792cb348ed60ac0935a73",
+            "16a4be8e4b8a5152f244a7616cd89067b12ad6913db82dfd0cbde685e5432cab"
+          ]
+        },
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": {
+          "page": 171,
+          "structural_path": [
+            "TWIN TAKEDOWN"
+          ],
+          "source_unit_ids": [
+            "d40a49831cc3ec768711c66649f57772e230421fda0f73ebcd615c4d78da6569",
+            "6615d327df8f397119f9697df64a9ae33739e27502c08967af5c672e34438f64",
+            "06b0606e10ca90390925ac6ee90d1086405e893f10b1a620a2c4cfb55daa63e7",
+            "547498282ccae12ad86169268d34ac5a36c9ea7e0968fc84edb352343a32d30c"
+          ]
+        },
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": {
+          "page": 144,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "fd6a3086f504319600fcfb0a60715f244988f0f4bd25280b959313b86071b745",
+            "eeb348c53f26d6d321c0094dd06f4865868af638cbf84f468e754f48cb92a541"
+          ]
+        },
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "source_unit_ids": [
+            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
+          ]
+        },
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": {
+          "page": 168,
+          "structural_path": [
+            "HUNTER'S EDGE"
+          ],
+          "source_unit_ids": [
+            "88cd335f9277e971c1b2c143af4fc52ccaa78f2fdf49c06739ef5004c1c331a4",
+            "e109c8615edd20654501b19d77f4fcb29f0816d45e961eb61e5699f6219847cb",
+            "f84b200d81a8907270a5aca59dcdb98fb3121f4eb9382276f1c8d0c71fa8e4bb",
+            "d553dde433b78a99be3dd05945e9df98674e4a40b3002523522268a82f32736f"
+          ]
+        },
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": {
+          "page": 446,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "source_unit_ids": [
+            "7d831cb8419891230da92f2484edf3ae267422cb5f6007841aa0c92f0df3537a"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": "This fighter-archetype chunk is the multiclass legality anchor: it shows how a ranger gains access to fighter feats such as Double Slice through Fighter Dedication and Basic Maneuver.",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This chunk contains Twin Takedown's action structure and combined-damage treatment against hunted prey.",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This chunk contains Double Slice's action structure, MAP wording, and combined-damage treatment.",
+        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This chunk defines the hunted-prey designation that Twin Takedown requires.",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": "This chunk defines hunter's edge, which is the rules surface where hunted-prey benefits can change damage or MAP treatment.",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": "This chunk provides the general MAP sequencing needed to reason about using both feats in the same turn."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+          "bucket": "required",
+          "page": 226,
+          "structural_path": [
+            "FIGHTER DEDICATION"
+          ],
+          "text": "Barbarian fighters can combine their talents with two-handed weapons with some of the fighter\u2019s two-handed feats to devastating effect. \u2014 Champion fighters focus on a style of combat exemplified by their deity. A shield-using champion benefits from the best of both worlds in shield feats. \u2014 Monk fighters are great at combining unusual \u2014 weapon styles. For instance, a monks isn\u2019t hindered by a restriction to keep one hand free, because they want to punch you with that hand anyway. \u2014 ![](images/0.jpg) \u2014 Ranger fighters can either specialize in archery or use their fighter feats to pick up an unusual combat style combination. \u2014 Rogue fighters can make good use of fighter\u2019s free hand, two-weapon fighting, or archery feats. \u2014 Spellcaster fighters benefit greatly from the additional weapon proficiencies, and fighter is a solid choice for any spellcaster of a particularly martial bent. \u2014 FIGHTER DEDICATION \u2014 FEAT 2 \u2014 ARCHETYPE DEDICATION MULTICLASS \u2014 Prerequisites Strength 14, Dexterity 14 \u2014 You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics; if you are already trained in both of these skills, you instead become trained in a skill of your choice. You become trained in fighter class DC. \u2014 Special You cannot select another dedication feat until you have gained two other feats from the fighter archetype. \u2014 BASIC MANEUVER \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication \u2014 You gain a 1st- or 2nd-level fighter feat. \u2014 FIGHTER RESILIENCE \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication, class granting no more Hit Points per level than 8 + your Constitution modifier \u2014 You gain 3 additional Hit Points for each fighter archetype class feat you have. As you continue selecting fighter archetype class feats, you continue to gain additional Hit Points in this way. \u2014 OPPORTUNIST \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication \u2014 You gain the Attack of Opportunity reaction, found on page 142. \u2014 ADVANCED MANEUVER \u2014 FEAT 6 \u2014 ARCHETYPE \u2014 Prerequisites Basic Maneuver \u2014 You gain a fighter feat. For the purpose of meeting its prerequisites, your fighter level is equal to half your character level. \u2014 Special You can select this feat more than once. Each time you select it, you gain another fighter feat. \u2014 DIVERSE WEAPON EXPERT \u2014 FEAT 12 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication, expert in any kind of weapon or unarmed attack \u2014 Your proficiency ranks for simple weapons and martial weapons increase to expert, and your proficiency rank for advanced weapons increases to trained."
+        },
+        {
+          "id": "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+          "bucket": "required",
+          "page": 171,
+          "structural_path": [
+            "TWIN TAKEDOWN"
+          ],
+          "text": "TWIN TAKEDOWN \u2014 FLOURISH RANGER \u2014 Frequency once per round \u2014 Requirements You are wielding two melee weapons, each in a different hand. \u2014 You swiftly attack your hunted prey with both weapons. Make two Strikes against your hunted prey, one with each of the required weapons. If both hit the same hunted prey, combine their damage for the purpose of"
+        },
+        {
+          "id": "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+          "bucket": "required",
+          "page": 144,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "text": "FIGHTER FEATS \u2014 At each level that you gain a fighter feat, you can select one of the following feats. You must satisfy any prerequisites before taking the feat. \u2014 1ST LEVEL \u2014 DOUBLE SLICE \u2014 FEAT 1 \u2014 FIGHTER \u2014 Requirements You are wielding two melee weapons, each in a different hand. You lash out at your foe with both weapons. Make two Strikes, one with each of your two melee weapons, each using your current multiple attack penalty. Both Strikes must have the same target. If the second Strike is made with a weapon that doesn't have the agile trait, it takes a -2 penalty. \u2014 If both attacks hit, combine their damage, and then add any other applicable effects from both weapons. You add any precision damage only once, to the attack of your choice. Combine the damage from both Strikes and apply resistances and weaknesses only once. This counts as two attacks when calculating your multiple attack penalty."
+        },
+        {
+          "id": "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
+          "bucket": "required",
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "text": "You can have only one creature designated as your prey at a time. If you use Hunt Prey against a creature when you already have a creature designated, the prior creature loses the designation and the new prey gains the designation. Your designation lasts until your next daily preparations."
+        },
+        {
+          "id": "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+          "bucket": "required",
+          "page": 168,
+          "structural_path": [
+            "HUNTER'S EDGE"
+          ],
+          "text": "HUNTER'S EDGE \u2014 You have trained for countless hours to become a more skilled hunter and tracker, gaining an additional benefit when you Hunt Prey depending on the focus of your training. Choose a hunter\u2019s edge. \u2014 Flurry: You have trained to unleash a devastating flurry of attacks upon your prey. Your multiple attack penalty for attacks against your hunted prey is -3 (-2 with an agile weapon) on your second attack of the turn instead of -5, and -6 (-4 with an agile weapon) on your third or subsequent attack of the turn, instead of -10. \u2014 Precision: You have trained to aim for your prey\u2019s weak points. The first time you hit your hunted prey in a round, you also deal 1d8 additional precision damage. (Precision damage increases the damage you already deal, using the same type, but is ineffective against creatures that lack vital organs or weak points.) At 11th level, the extra damage increases to 2d8 precision damage, and at 19th level, the extra damage increases to 3d8 precision damage. \u2014 Outwit: You are talented at outwitting and evading your prey. You gain a +2 circumstance bonus to Deception checks, Intimidation checks, Stealth checks, and any checks to Recall Knowledge about the prey, and a +1 circumstance bonus to AC against your prey\u2019s attacks."
+        },
+        {
+          "id": "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
+          "bucket": "required",
+          "page": 446,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "text": "MULTIPLE ATTACK PENALTY \u2014 The more attacks you make beyond your first in a single turn, the less accurate you become, represented by the multiple attack penalty. The second time you use an attack action during your turn, you take a -5 penalty to your check. The third time you attack, and on any subsequent attacks, you take a -10 penalty to your check. Every check that has the attack trait counts toward your multiple attack penalty, including Strikes, spell attack rolls, certain skill actions like Shove, and many others."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_012",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "How do Sneak Attack, Dread Striker, frightened, and off-guard interact when a rogue attacks a frightened enemy?",
+      "expected_answer_summary": "Explain how frightened can create off-guard access through Dread Striker and when Sneak Attack then applies.",
+      "source_page": null,
+      "notes": "Derived from seed 18. Normalized to remaster terminology by using off-guard instead of flat-footed.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_013",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "While in Disruptive Stance, which concentrate actions or spells can a fighter interfere with using Reactive Strike, and what determines whether the action is actually disrupted?",
+      "expected_answer_summary": "Explain the spell-facing case for Disruptive Stance, including trigger coverage and the condition for actual disruption.",
+      "source_page": null,
+      "notes": "Derived from seed 19. Kept separate from the baseline feat interaction query because it focuses on spell-facing disruption and action loss.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_014",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Which divine or primal spells in Player Core can remove poison or the poisoned condition, and how do their rank, casting time, and secondary effects differ?",
+      "expected_answer_summary": "Enumerate poison-removal spells and compare rank, casting time, and any added healing, immunity, or related effects.",
+      "source_page": null,
+      "notes": "Derived from seed 22. Tradition filtering plus spell-text comparison.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+      ],
+      "required_gold": [
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9": {
+          "page": 354,
+          "structural_path": [
+            "ILLUSION MENTAL"
+          ],
+          "source_unit_ids": [
+            "ee05d403d507f60def2d8394ad310df9f6188b53c85a239b001d79bc9d8b78ab",
+            "b6726e0ac38188e920439190fa57395596f78512a5aa73a7b8c8f29ca1c6d149",
+            "728e3353638111751ceda2102d77e8398fcafeb0109f0b1c36686c3dfbbb5749",
+            "e83544bda921f978ed8c8b449caf7ffe711e3f98f85b01d78345c13c0bb472bc",
+            "28cb9c3cead12394896883466e1ac879ebc5e33c02b622c3f32bfdad8fc8b250",
+            "8be2e44d2318263af644881fdb68c91bf04efb2a5b77f355a347558cfcf2f64d",
+            "6f9545461be7a1cb7a834d5d8fc43c734694f0dd79447881de694e19d6b4d89e",
+            "ad4c0b80caf059ddb32dfc66e67b5c908d75581b3eea62f796ae6f2bcf0f0ca5",
+            "efd70eba513ce5b5c643f6b30888837b4c65ab76eb4f293bd4bd53fad14ad5b0",
+            "96691db0c0fda04bed3c70bff2ecec1312218e1a4d5020a244e3f1b5dc0a8044",
+            "d61407b58332b311d079d67dc1263bda9542f7b7453df51fe3d10506cccd497d"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9": "This chunk contains Neutralize Poison, the operative divine/primal poison-removal spell in the active corpus, including rank, casting time, traditions, and its counteract-based removal effect."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9",
+          "bucket": "required",
+          "page": 354,
+          "structural_path": [
+            "ILLUSION MENTAL"
+          ],
+          "text": "Heightened (5th) The range increases to 30 feet, and you can target up to 10 creatures. \u2014 NEUTRALIZE POISON \u2014 SPELL 3 \u2014 HEALING NECROMANCY \u2014 Traditions divine, primal \u2014 Cast \\( \\leftrightarrow \\) somatic, verbal \u2014 Range touch; Targets 1 creature \u2014 You pour healing magic through the target in an attempt to cure one poison afflicting it. Attempt a counteract check against the poison. \u2014 NIGHTMARE \u2014 SPELL 4 \u2014 ILLUSION MENTAL \u2014 Traditions arcane, occult \u2014 Cast 10 minutes (material, somatic, verbal) \u2014 Range planetary; Targets 1 creature you know by name Saving Throw Will; Duration 1 day \u2014 You send disturbing nightmares to your target. The next time the target falls asleep, it must attempt a Will save. If you know the target only by name and have never met them, the target gets a +4 circumstance bonus to the Will save."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_015",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "How do Aggressive Block and Shield Warden change the use of Shield Block, and what differs about their tactical outcome when a shield is raised?",
+      "expected_answer_summary": "Compare the two feats in terms of their relationship to Shield Block and their ally or enemy-facing outcome.",
+      "source_page": null,
+      "notes": "Derived from seed 23. Focused shield-feat comparison cleaner than the broader shield cluster.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_016",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Which backgrounds in Player Core grant Warfare Lore, and how does starting with Warfare Lore interact with the fighter's level-1 skill training choices?",
+      "expected_answer_summary": "Enumerate Warfare Lore backgrounds and explain how that changes the fighter's initial training flexibility.",
+      "source_page": null,
+      "notes": "Derived from seed 24. Lower-noise control case that still requires cross-referencing backgrounds and class training.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "required_gold": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": {
+          "page": 63,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "source_unit_ids": [
+            "675acffcfd53cbae9f587b780678ab29d57c9645491f7e103e0696909328b18b",
+            "c0e7942254ffcdcf962f8801492b4b398a4d3b53f9c2d09a14f56c752c2e5a9c",
+            "26e6c889b23795a58164f6b3cc60c7027beee4df29244f681b70da97bf2235a7",
+            "fe50b8f1d0c622515585e9f30f0f153bcc33387c5591eb116a9211a0bb64bb22"
+          ]
+        },
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": {
+          "page": 64,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "source_unit_ids": [
+            "134cb9b58308c38f4af799ab638ade9fe0da3da3791365b92fa475b0f2c7f72b"
+          ]
+        },
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": {
+          "page": 141,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "683dd2121541e3e3ed159a2aaae9a5d4cbff57bf2e6cd30fecdb8799099ee135",
+            "e03734b7906780f1237114b6fb6a4683b550b3b8c847bea388a07dcafc899ca6",
+            "216934c9029a0a141ef3ea9f696c5b4206350d318f3291c45094aad0035c12b5",
+            "fa0806ed706c3120f92fcf915fe82ac27411929381ee3dfa558e1aa37fc03272",
+            "28b2360000c019999d3cd43c7416a6deea92edabb426ada6807ea3e6d579461d",
+            "dec25ea538208346180aefddde23635be45308dad3d432fc6661fdda2fa75698",
+            "d92159c78648133eaa59cb90ebe489c21819af7dde38b37c54d8683c9617246f",
+            "3a00ed90ae7043b2dd70d8e2cc853c669bb856b5ff553348aef876ecef795788",
+            "df0ac34a006ea59777597928a02af5c1ded63b4a9913256dfcee958edb39d24f",
+            "20deed45035a5ba8f5bbd277fe135288aa536d5fc728c3aad894dd5078fb9192",
+            "7f8e9dd4375b1b20a779f0d7f31a6be8c941c488c5e8061818deb742589b3487",
+            "583f407c68c8e3ad92b937c0fd484d089e578e27e31fb4792ec08aa02631317a",
+            "9edfcca0a2e27ca0d151e0acf94311e4893314b6643967ebcf68e2e319651b8f"
+          ]
+        },
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": {
+          "page": 68,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "b84c4bb7a2e14d086422c7bdf34d05c2bce15e7e011b3f56090979fb4d2df3e5",
+            "94a8ac2ad8330d3e501ce46037817bc9dea681a293b31093d623157659ca296c",
+            "b4d545b018a3b23ad8610d543bc6047257d18a4ca3df683aaa8516283691e519",
+            "7c71fa1279d5753f04bb9aa6e7e84f8e6185c5f1bd05e5ce39b8aee77379c4c0"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": "This background chunk contains Martial Disciple, which grants Warfare Lore and overlaps with the fighter's Acrobatics-or-Athletics training choice.",
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": "This background chunk contains Warrior, the other background in the active corpus that grants Warfare Lore.",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": "This fighter initial-proficiencies chunk shows the fighter's automatic skill training choices at 1st level.",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": "This general proficiency rule resolves the interaction: if class training would duplicate a skill you already got from background, you select another trained skill instead of advancing early to expert."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+          "bucket": "required",
+          "page": 63,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "text": "You\u2019re trained in the Athletics skill and the Labor Lore skill. You gain the Hefty Hauler skill feat. \u2014 MARTIAL DISCIPLE \u2014 BACKGROUND \u2014 You dedicated yourself to intense training and rigorous study to become a great warrior. The school you attended might have been a traditionalist monastery, an elite military academy, or the local branch of a prestigious mercenary organization. \u2014 Choose two ability boosts. One must be to Strength or Dexterity, and one is a free ability boost. \u2014 You\u2019re trained in your choice of the Acrobatics or Athletics skill. You gain a skill feat: Cat Fall if you chose Acrobatics or Quick Jump if you chose Athletics. You\u2019re also trained in the Warfare Lore skill. \u2014 MERCHANT \u2014 BACKGROUND \u2014 In a dusty shop, market stall, or merchant caravan, you bartered wares for coin and trade goods. The skills you picked up still apply in the adventuring life, in which a good deal on a suit of armor could prevent your death. \u2014 Choose two ability boosts. One must be to Intelligence or Charisma, and one is a free ability boost. \u2014 You\u2019re trained in the Diplomacy skill and the Mercantile Lore skill. You gain the Bargain Hunter skill feat. \u2014 MINER \u2014 BACKGROUND \u2014 You earned a living wrenching precious minerals from the lightless depths of the earth. Adventuring might have seemed lucrative or glamorous compared to this backbreaking labor\u2014and if you have to head back underground, this time you plan to do so armed with a real weapon instead of a miner\u2019s pick."
+        },
+        {
+          "id": "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
+          "bucket": "required",
+          "page": 64,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "text": "Choose two ability boosts. One must be to Dexterity or Intelligence, and one is a free ability boost. \u2014 You\u2019re trained in the Crafting skill and the Engineering Lore skill. You gain the Specialty Crafting skill feat. \u2014 WARRIOR \u2014 BACKGROUND \u2014 In your younger days, you waded into battle as a mercenary, a warrior defending a nomadic people, or a member of a militia or army. You might have wanted to break out from the regimented structure of these forces, or you could have always been as independent a warrior as you are now. \u2014 Choose two ability boosts. One must be to Strength or Constitution, and one is a free ability boost. \u2014 You\u2019re trained in the Intimidation skill and the Warfare Lore skill. You gain the Intimidating Glare skill feat."
+        },
+        {
+          "id": "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+          "bucket": "required",
+          "page": 141,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "text": "YOU MIGHT... \u2014 Know the purpose and quality of every weapon and piece of armor you own. \u2014 Recognize that the danger of an adventurer\u2019s life must be balanced out with great revelry or ambitious works. \u2014 Have little patience for puzzles or problems that require detailed logic or study. \u2014 OTHERS PROBABLY... \u2014 Find you intimidating until they get to know you\u2014and maybe even after they get to know you. \u2014 Expect you\u2019re all brawn and no brains. \u2014 Respect your expertise in the art of warfare and value your opinion on the quality of armaments. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level, you gain the listed proficiency ranks in the following statistics. You are untrained in anything not listed unless you gain a better proficiency rank in some other way. \u2014 PERCEPTION \u2014 Expert in Perception \u2014 SAVING THROWS \u2014 Expert in Fortitude Expert in Reflex Trained in Will \u2014 SKILLS \u2014 Trained in your choice of Acrobatics or Athletics Trained in a number of additional skills equal to 3 plus your Intelligence modifier \u2014 ATTACKS \u2014 Expert in simple weapons Expert in martial weapons Trained in advanced weapons Expert in unarmed attacks \u2014 DEFENSES \u2014 Trained in all armor Trained in unarmored defense \u2014 CLASS DC \u2014 Trained in fighter class DC"
+        },
+        {
+          "id": "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978",
+          "bucket": "required",
+          "page": 68,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "text": "INITIAL PROFICIENCIES \u2014 When you choose your character\u2019s class, they gain a set of initial proficiencies. Proficiencies measure your character\u2019s ability to perform tasks, use abilities, and succeed at checks. Proficiency ranks range from trained to legendary. For instance, a character who is trained with a longbow can use it effectively, while a person who is legendary with the weapon might be able to split an arrow from 100 paces away! \u2014 Each class entry specifies your character\u2019s initial proficiency rank in Perception, saving throws, attacks, defenses, and either spells or class DC. You gain the trained proficiency rank in several skills\u2014the exact number depends on your class, and some classes specify certain additional skills that you\u2019re trained in. If your class would make you trained in a skill you\u2019re already trained in (typically due to your background), you can select another skill to become trained in. \u2014 A proficiency rank can unlock various feats and class features, and it also helps determine the modifier for any check you roll or DC you calculate related to that statistic. If your character is trained in Perception, a saving throw, or another statistic, they gain a proficiency bonus equal to their level +2, while if they have expert proficiency, they gain a proficiency bonus equal to their level +4. For more about proficiency ranks, see page 13. \u2014 Spellcasting classes grant a proficiency rank for spell attacks and DCs, which are further detailed in each class\u2019s entry. \u2014 If something isn\u2019t listed in your character\u2019s class entry, their proficiency rank in that statistic is untrained unless they gain training from another source. If your character is untrained in something, you add a proficiency bonus of +0 when attempting a check or calculating a DC related to that statistic."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_017",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How do the ranger's Warden Spells progression and the druid's primal spellcasting progression differ between levels 1 and 5, including spell access, focus or spell-slot progression, and multiclass implications?",
+      "expected_answer_summary": "Compare early progression shape, spell access model, and multiclass consequences for ranger and druid.",
+      "source_page": null,
+      "notes": "Derived from seed 25. Cross-class progression comparison with mixed subsystem evidence.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_018",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "Which witch hexes or focus spells in Player Core penalize Armor Class or saving throws, how do they scale, and how do they combine with conditions such as frightened or slowed?",
+      "expected_answer_summary": "Enumerate defense-affecting witch options and explain scaling plus interaction with common conditions.",
+      "source_page": null,
+      "notes": "Derived from seed 27. Focused witch debuff query with stacking and condition interplay.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    },
+    {
+      "id": "pf2e_mh_ws_019",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does a champion's proficiency with a deity's favored weapon interact with the fighter's weapon proficiency progression for a multiclass character?",
+      "expected_answer_summary": "Explain which class sets the operative proficiency rank over time and whether favored-weapon benefits change the schedule.",
+      "source_page": null,
+      "notes": "Derived from seed 28. Cross-class proficiency progression and override reasoning.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
+        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
+        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+      ],
+      "required_gold": [
+        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
+        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
+        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
+        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
+        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5": {
+          "page": 105,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "0212df7d44dac68e5b50f8702bdbfda8b63b865c729d150e94783d35407f2727",
+            "2c4be4d2ac58f7a9ea759426638f8c83da746614db413c6596c083d51a76adde",
+            "5ab800d0e8e1d96b1e7a87ec2cfc68ba15352287091724fc5db21f8db0403a9c",
+            "d5fc7f0a8716cb5d9110c607c54398a139a0a76ad440803fad4e95b81809472c",
+            "4e37b733610bfc147bba30f2a04a013d155392ab5baf9128a8ad1fc74b3b2c33",
+            "995f9cec2e6628bac1eb92885b983b092307cbf2dd8401d4e8397d8dd071a79e",
+            "d92159c78648133eaa59cb90ebe489c21819af7dde38b37c54d8683c9617246f",
+            "0357bf73a0f74f856e8d385492c9030eaba1f1eacb60c5a34cbf63f8e35e6255",
+            "d3771c9d23a740f663755df472f342ba90bc609c4c31bbf8e74845fee6fc8b7c",
+            "fefb5d6280438f6cf2f0cc9ab59a8aae51ef17f64141fd9a3e19241c4cc7cc48",
+            "02a1054cd552e57a455f02f139d5c6625f9ca8e5499e039b7cbaeae49abb1d17",
+            "583f407c68c8e3ad92b937c0fd484d089e578e27e31fb4792ec08aa02631317a",
+            "a557138c40a27b43650cb382a558648ba13b6d4797cd2c1cbefe3e9a45a52a6d",
+            "ee34c146c07870860d15f18aba2232f5353898a83c0af19e789fc074cc3e86f1"
+          ]
+        },
+        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e": {
+          "page": 107,
+          "structural_path": [
+            "DEIFIC WEAPON"
+          ],
+          "source_unit_ids": [
+            "2302c98030527ce9c9ea4ea05100d723bc7664b40a35acbeea46a3903b34e1a6",
+            "d28f7831f3c16f46cd7aaa34f4c7e901c18f00ec997137b9d8b4d7e0764f68f1",
+            "db4327dc48baa8fdfe70cf68631487b586b7ab83fc7d5d08e6d480539a4a6364",
+            "d349345b0ac3c2f7edcff312e75750e14edc80cc3fcbebc2e5072841fbf41764",
+            "0497e9f289561979394516b8f1e8547875a30c37ba0bf8943ad37044b19bc1b2",
+            "08eac9cdfc6828f6a2c9bd2dd87a378264c57da6ac6b204b6a8e76e725faa170"
+          ]
+        },
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": {
+          "page": 226,
+          "structural_path": [
+            "FIGHTER DEDICATION"
+          ],
+          "source_unit_ids": [
+            "6764fb18928e916c09be3f8088f8d3dd1d486cdccd45cd5b1c6b0abf4daf4359",
+            "bc9749b4200bc1ee2b6861be8c7b938ecfcb917dd06c155c51f127cb548451e5",
+            "a3bc47c5f8b99a9537ead751482cadd744fc0a2be73b9648257e9d3ef93250a6",
+            "d70dda001c519e44ef6b2bdcb4fc4a8cab82301f0cdd6a3c7fb14f5fd516ccbc",
+            "b14ed9b5fa87f59dc3521fb374a4cf6716fba2a4948fe9bc9bd9b64484af5a86",
+            "2fe2f2780edb387b2de951c8db35cfc82b2225cfa7a952a260507d073ef60299",
+            "bf9f697a4b2bab438437a287488845292776a693a83c5a11d61fe338728303d8",
+            "1ac1d27383f0c3a4daa0861d4d9f669d538a717e8e5c696f21a7ee24fecc0225",
+            "a42a3ae300c75f663f2163dfc8be3da160636a1ff7d02b37e6707c154a8a3b0e",
+            "0e594737c7f6bce3a990e0943180639fc6fbd3fbe8b1151a16f64f005b5b652e",
+            "fa3bc8f3e343dfb06c60c53753d5ba2e1d2f6aeb9198efec90e1572870a7489b",
+            "11448fe1be7c664215f51f0132105bba36853a99c6b79cf648afb7fd829a3e25",
+            "0af89938a53a873abc6e0a5e0b8335b53043a14ffed061346d91b8f28227d62c",
+            "132352117be69a46bf0e51df11a6357c8e859eb6187f673a84fb036090546b2a",
+            "97dc3c4e9da3176f5c0834ae2592aa2b17c84b020f412b1d6b6f8dc8431449d0",
+            "f9d9c4f60ad4f720ddb1f207bde4dfcaad88b436deb6a465641747b40bf03887",
+            "ed15e8c7b487158acffefcf5c55d1988e6460b3bf5a19357110b16873afd81a1",
+            "77f2dfad30bc1e35faee3b3672735e6698bcde61fe652facd2b1935cadac2bff",
+            "56bcb6ecdd74c21619b413bc218985accb745359f75fdb468496d7da3cea8fee",
+            "23b569d074a1f60e772b730add00bcf6bf889f75998b2a49f34068ca9c63cbe4",
+            "876a89836255c3784dc1874b368473fc3c6ef2eb8134cdbc3e3fa587544e5a84",
+            "783a54f223f61c8863084deef9483bed57899cdf2ed0c366576243346ae5df93",
+            "f0aa7193014ba4f4a90569e73a361ead03707e50889b5d5a1a689f4cea8594cb",
+            "82a3640a08207c31565fd36e23899daaf521a5a1704e8e8337a87282f5ee3220",
+            "218295330089448f584cf3da6c798125f88b1f8dddf19848be53cbe805bacdce",
+            "a568e2e6a3079ad9c26f492d5a3fdba3e274a40dc143a3bd34db052c9a9ccc99",
+            "00156934955ddbb041b700fcee9646286d3e452fb7c3f385083a0faafe7555cb",
+            "bae209b176d62914b0b5400455f7a236a5c6b3b01eaca3be7e47db793eb54435",
+            "b2a389c3d0d2b3d70b14f14a6399aa3ca38ee10b5e02ba1f5cef3eab4e3c6154",
+            "c23870abcf9a1fc1fc4dc8485274e0f38acbeec1563c5cc2ce812957719b94c4",
+            "00170d45eb7e11258f7009ad8d2d2d518ccdddc3d1df27adb980c6a65bd93116",
+            "d7c23ad85de2a2c1da21f3044afb57f39618d955cb7498a0392ce03ec5fa333a",
+            "f1f44970b58d860386cb288e72c891030dbe2f4f3a0792cb348ed60ac0935a73",
+            "16a4be8e4b8a5152f244a7616cd89067b12ad6913db82dfd0cbde685e5432cab"
+          ]
+        },
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": {
+          "page": 142,
+          "structural_path": [
+            "TABLE 3-12: FIGHTER ADVANCEMENT"
+          ],
+          "source_unit_ids": [
+            "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7"
+          ]
+        },
+        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549": {
+          "page": 143,
+          "structural_path": [
+            "FIGHTER WEAPON MASTERY"
+          ],
+          "source_unit_ids": [
+            "5efa560d4eb39c6bcaa12804734318266f876c67531a77f5c0cf8cefa9dfaadb",
+            "e5f0c4613ca4c0a08c0dca34d08e6e1d2fa431dcc233a6b4d6d4f9127e8d085a"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5": "This champion initial-proficiencies chunk establishes the class's baseline weapon proficiencies before any deity or multiclass adjustments.",
+        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e": "This deific-weapon chunk shows what the champion actually gets from the deity's favored weapon in the active corpus: access and possible damage-die improvement, not a separate proficiency ladder.",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": "This fighter-dedication chunk shows what a champion actually gains from multiclassing into fighter: training and fighter class DC access, rather than automatic fighter class features.",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": "This fighter advancement table places Fighter Weapon Mastery as a core fighter class feature at fighter level 5, which is critical for answering whether a multiclass dedication reaches it.",
+        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549": "This chunk defines Fighter Weapon Mastery itself and shows the master-proficiency benefit that only the full fighter class progression reaches."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
+          "bucket": "required",
+          "page": 105,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "text": "YOU MIGHT... \u2014 Believe there is always hope that good will triumph over evil, no matter how grim the odds. \u2014 Know the ends don\u2019t justify the means, since evil acts increase the power of evil. \u2014 Have a strong sense of right and wrong, and grow frustrated when greed or shortsightedness breeds evil. \u2014 OTHERS PROBABLY... \u2014 See you as a symbol of hope, especially in a time of great need. \u2014 Worry you secretly despise them for not living up to your impossible standard, or that you are unwilling to compromise when necessary. \u2014 Know that you\u2019ve sworn divine oaths of service they can trust you to keep. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level, you gain the listed proficiency ranks in the following statistics. You are untrained in anything not listed unless you gain a better proficiency rank in some other way. \u2014 PERCEPTION \u2014 Trained in Perception \u2014 SAVING THROWS \u2014 Expert in Fortitude Trained in Reflex Expert in Will \u2014 SKILLS \u2014 Trained in Religion Trained in one skill determined by your choice of deity Trained in a number of additional skills equal to 2 plus your Intelligence modifier \u2014 ATTACKS \u2014 Trained in simple weapons Trained in martial weapons Trained in unarmed attacks \u2014 DEFENSES \u2014 Trained in all armor Trained in unarmored defense \u2014 CLASS DC \u2014 Trained in champion class DC \u2014 SPELLS \u2014 Trained in divine spell attacks Trained in divine spell DCs"
+        },
+        {
+          "id": "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
+          "bucket": "required",
+          "page": 107,
+          "structural_path": [
+            "DEIFIC WEAPON"
+          ],
+          "text": "You must first try to redeem those who commit evil acts, rather than killing them or meting out punishment. If they then continue on a wicked path, you might need to take more extreme measures. \u2014 You must show compassion for others, regardless of their authority or station. \u2014 LIBERATOR [CHAOTIC GOOD] \u2014 You defend the freedom of others. You gain the Liberating Step champion\u2019s reaction and the lay on hands devotion spell. After the tenets of good, add these tenets: \u2014 You must respect the choices others make over their own lives, and you can\u2019t force someone to act in a particular way or threaten them if they don\u2019t. \u2014 You must demand and fight for others\u2019 freedom to make their own decisions. You may never engage in or countenance slavery or tyranny. \u2014 DEIFIC WEAPON \u2014 You zealously bear your deity\u2019s favored weapon. If it\u2019s uncommon, you gain access to it. If it\u2019s an unarmed attack with a d4 damage die or a simple weapon, increase the damage die by one step (d4 to d6, d6 to d8, d8 to d10, d10 to d12)."
+        },
+        {
+          "id": "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
+          "bucket": "required",
+          "page": 226,
+          "structural_path": [
+            "FIGHTER DEDICATION"
+          ],
+          "text": "Barbarian fighters can combine their talents with two-handed weapons with some of the fighter\u2019s two-handed feats to devastating effect. \u2014 Champion fighters focus on a style of combat exemplified by their deity. A shield-using champion benefits from the best of both worlds in shield feats. \u2014 Monk fighters are great at combining unusual \u2014 weapon styles. For instance, a monks isn\u2019t hindered by a restriction to keep one hand free, because they want to punch you with that hand anyway. \u2014 ![](images/0.jpg) \u2014 Ranger fighters can either specialize in archery or use their fighter feats to pick up an unusual combat style combination. \u2014 Rogue fighters can make good use of fighter\u2019s free hand, two-weapon fighting, or archery feats. \u2014 Spellcaster fighters benefit greatly from the additional weapon proficiencies, and fighter is a solid choice for any spellcaster of a particularly martial bent. \u2014 FIGHTER DEDICATION \u2014 FEAT 2 \u2014 ARCHETYPE DEDICATION MULTICLASS \u2014 Prerequisites Strength 14, Dexterity 14 \u2014 You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics; if you are already trained in both of these skills, you instead become trained in a skill of your choice. You become trained in fighter class DC. \u2014 Special You cannot select another dedication feat until you have gained two other feats from the fighter archetype. \u2014 BASIC MANEUVER \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication \u2014 You gain a 1st- or 2nd-level fighter feat. \u2014 FIGHTER RESILIENCE \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication, class granting no more Hit Points per level than 8 + your Constitution modifier \u2014 You gain 3 additional Hit Points for each fighter archetype class feat you have. As you continue selecting fighter archetype class feats, you continue to gain additional Hit Points in this way. \u2014 OPPORTUNIST \u2014 FEAT 4 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication \u2014 You gain the Attack of Opportunity reaction, found on page 142. \u2014 ADVANCED MANEUVER \u2014 FEAT 6 \u2014 ARCHETYPE \u2014 Prerequisites Basic Maneuver \u2014 You gain a fighter feat. For the purpose of meeting its prerequisites, your fighter level is equal to half your character level. \u2014 Special You can select this feat more than once. Each time you select it, you gain another fighter feat. \u2014 DIVERSE WEAPON EXPERT \u2014 FEAT 12 \u2014 ARCHETYPE \u2014 Prerequisites Fighter Dedication, expert in any kind of weapon or unarmed attack \u2014 Your proficiency ranks for simple weapons and martial weapons increase to expert, and your proficiency rank for advanced weapons increases to trained."
+        },
+        {
+          "id": "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
+          "bucket": "required",
+          "page": 142,
+          "structural_path": [
+            "TABLE 3-12: FIGHTER ADVANCEMENT"
+          ],
+          "text": "TABLE 3-12: FIGHTER ADVANCEMENT \u2014 <table><tr><td colspan=\"2\">Your</td></tr><tr><td>Level</td><td>Class Features</td></tr><tr><td>1</td><td>Ancestry and background, initial proficiencies, Attack of Opportunity, fighter feat, Shield Block</td></tr><tr><td>2</td><td>Fighter feat, skill feat</td></tr><tr><td>3</td><td>Bravery, general feat, skill increase</td></tr><tr><td>4</td><td>Fighter feat, skill feat</td></tr><tr><td>5</td><td>Ability boosts, ancestry feat, fighter weapon mastery, skill increase</td></tr><tr><td>6</td><td>Fighter feat, skill feat</td></tr><tr><td>7</td><td>Battlefield surveyor, general feat, skill increase, weapon specialization</td></tr><tr><td>8</td><td>Fighter feat, skill feat</td></tr><tr><td>9</td><td>Ancestry feat, combat flexibility, juggernaut, skill increase</td></tr><tr><td>10</td><td>Ability boosts, fighter feat, skill feat</td></tr><tr><td>11</td><td>Armor expertise, fighter expertise, general feat, skill increase</td></tr><tr><td>12</td><td>Fighter feat, skill feat</td></tr><tr><td>13</td><td>Ancestry feat, skill increase, weapon legend</td></tr><tr><td>14</td><td>Fighter feat, skill feat</td></tr><tr><td>15</td><td>Ability boosts, evasion, general feat, greater weapon specialization, improved flexibility, skill increase</td></tr><tr><td>16</td><td>Fighter feat, skill feat</td></tr><tr><td>17</td><td>Ancestry feat, armor mastery, skill increase</td></tr><tr><td>18</td><td>Fighter feat, skill feat</td></tr><tr><td>19</td><td>General feat, skill increase, versatile legend</td></tr><tr><td>20</td><td>Ability boosts, fighter feat, skill feat</td></tr></table>"
+        },
+        {
+          "id": "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549",
+          "bucket": "required",
+          "page": 143,
+          "structural_path": [
+            "FIGHTER WEAPON MASTERY"
+          ],
+          "text": "The list of ancestry feats available to you can be found in your ancestry\u2019s entry in Chapter 2. \u2014 FIGHTER WEAPON MASTERY \u2014 Hours spent training with your preferred weapons, learning and developing new combat techniques, have made you particularly effective with your weapons of choice. Choose one weapon group. Your proficiency rank increases to master with the simple weapons, martial weapons, and unarmed attacks in that group, and to expert with the advanced weapons in that group. You gain access to the critical specialization effects (page 283) of all weapons and unarmed attacks for which you have master proficiency."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_ws_020",
+      "tier": "T2",
+      "question_type": "reasoning",
+      "question": "What paths in Player Core let a rogue gain arcane spellcasting, what are the prerequisites for each path, and when does the rogue first gain access to spells?",
+      "expected_answer_summary": "Compare the rogue's arcane-access paths by prerequisite, level gate, and initial spell access.",
+      "source_page": null,
+      "notes": "Derived from seed 30. Class-option comparison with prerequisite and access timing analysis.",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [],
+      "required_gold": [],
+      "supporting_gold": [],
+      "_required_gold": [],
+      "_supporting_gold": [],
+      "gold_locations": {},
+      "_mode": "multi_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {},
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": []
+    }
+  ]
+}

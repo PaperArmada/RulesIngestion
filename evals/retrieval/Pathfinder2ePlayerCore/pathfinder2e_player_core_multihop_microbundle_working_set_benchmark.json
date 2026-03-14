@@ -1,0 +1,678 @@
+{
+  "metadata": {
+    "batch_ids": [
+      "mh_micro_001"
+    ],
+    "source": "Pathfinder2e Player Core multihop micro-bundle working-set benchmark",
+    "merged_at": "2026-03-14T00:00:00+00:00",
+    "query_count": 10,
+    "current_run_id": null,
+    "created_by": "agent",
+    "creation_method": "microbundle_decomposition_from_grounded_multihop_parents",
+    "notes": "Diagnostic PF2E multihop micro-bundle working set derived from grounded parent queries pf2e_mh_ws_005, pf2e_mh_ws_010, and pf2e_mh_ws_016. Intended for sharper per-hop retrieval diagnostics alongside the end-to-end multihop surface.",
+    "schema_version": "retrieval_benchmark_v1",
+    "substrate_version": "",
+    "substrate_path": "out/Pathfinder2ePlayerCore",
+    "document_id": "PathCore",
+    "chunk_recipe": {
+      "min_chars": 200,
+      "merge_chunks": true,
+      "merge_max_chars": 2000
+    },
+    "surface_label": "pf2e_multihop_microbundle_working_set",
+    "ratification_policy": {
+      "ratified_track": "ratified_core",
+      "working_track": "working_set",
+      "max_required_gold": 2
+    }
+  },
+  "queries": [
+    {
+      "id": "pf2e_mh_mb_005a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What is the baseline Attack of Opportunity disruption rule against manipulate actions?",
+      "expected_answer_summary": "Identify the normal trigger and critical-hit disruption rule for Attack of Opportunity against manipulate actions.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_005. Isolates the baseline reaction rule before stance modifications.",
+      "parent_query_id": "pf2e_mh_ws_005",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": {
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "source_unit_ids": [
+            "43c90c33f0c44b268a8a8caf10cd447b3483d37ea5cd4a210e87547b09333266",
+            "ad82b5cab6bdf2ad54faa3629fab081700f3f61499c3f46451406104008acb99",
+            "fb73f79e57712b09eb275d3a4beee9f45c15e3bd9ce6a194cfffcad500426bcd",
+            "53dbd9ac81fae64e3290530bd4627c6549f3ca5c76e3132d9500610bb6fe6f1d",
+            "b03264178ff5b0b14c1127004034a130ad7e584d623f7ffc661624d86c8fe293",
+            "3c8dcf286e3bcc41ba5bec88a15824d7d16e3c1855d2b6567a1800890b25d63c"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": "This fighter class-feature chunk gives the baseline Attack of Opportunity trigger set and its normal disruption rule on a critical hit against manipulate actions."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+          "bucket": "required",
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "text": "CLASS FEATURES \u2014 You gain these abilities as a fighter. Abilities gained at higher levels list the level at which you gain them next to the features' names. \u2014 ANCESTRY AND BACKGROUND \u2014 In addition to the abilities provided by your class at 1st level, you have the benefits of your selected ancestry and background, as described in Chapter 2. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level you gain a number of proficiencies that represent your basic training. These proficiencies are noted at the start of this class. \u2014 ATTACK OF OPPORTUNITY \u2014 Ever watchful for weaknesses, you can quickly attack foes that leave an opening in their defenses. You gain the Attack of Opportunity reaction. \u2014 ATTACK OF OPPORTUNITY 2 \u2014 Trigger A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using. \u2014 You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn\u2019t count toward your multiple attack penalty, and your multiple attack penalty doesn\u2019t apply to this Strike."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_005b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What additional trigger and disruption behavior does Disruptive Stance add to Attack of Opportunity?",
+      "expected_answer_summary": "Identify the extra concentrate-action trigger and the changed disruption threshold granted by Disruptive Stance.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_005. Isolates the stance text itself.",
+      "parent_query_id": "pf2e_mh_ws_005",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "required_gold": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": {
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "source_unit_ids": [
+            "94b759f8db5fb7f08ade0e8f3dd72a2653904c312e93d1556cb0cde22c07e062",
+            "c35c353324fde5d01bb40b6efb5c507954907c91bcb68ce4b7cc28946a80254f",
+            "a5ee62f1f009e442eca63f22a2205439a24dcb03f752cf219551b47c83661e1e"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "This chunk contains Disruptive Stance and states both changes at issue: concentrate actions now trigger the reaction, and concentrate actions are disrupted on a hit rather than only manipulate actions on a critical hit."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+          "bucket": "required",
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "text": "Failure The target is flat-footed until the end of your current turn. \u2014 DISRUPTIVE STANCE \u2014 FEAT 10 \u2014 FIGHTER STANCE \u2014 The slightest distraction can provoke your wrath, and you\u2019re prepared to foil enemies\u2019 actions. As long as you are in this stance, you can use Attack of Opportunity when a creature within your reach uses a concentrate action, in addition to manipulate and move actions. Furthermore, you disrupt a"
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_005c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Disruptive Stance change the normal disruption threshold of Attack of Opportunity?",
+      "expected_answer_summary": "Compare baseline critical-hit disruption on manipulate actions with the stance-driven hit-based disruption on concentrate actions.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_005. Tests the comparison hop rather than simple local lookup.",
+      "parent_query_id": "pf2e_mh_ws_005",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": {
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "source_unit_ids": [
+            "43c90c33f0c44b268a8a8caf10cd447b3483d37ea5cd4a210e87547b09333266",
+            "ad82b5cab6bdf2ad54faa3629fab081700f3f61499c3f46451406104008acb99",
+            "fb73f79e57712b09eb275d3a4beee9f45c15e3bd9ce6a194cfffcad500426bcd",
+            "53dbd9ac81fae64e3290530bd4627c6549f3ca5c76e3132d9500610bb6fe6f1d",
+            "b03264178ff5b0b14c1127004034a130ad7e584d623f7ffc661624d86c8fe293",
+            "3c8dcf286e3bcc41ba5bec88a15824d7d16e3c1855d2b6567a1800890b25d63c"
+          ]
+        },
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": {
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "source_unit_ids": [
+            "94b759f8db5fb7f08ade0e8f3dd72a2653904c312e93d1556cb0cde22c07e062",
+            "c35c353324fde5d01bb40b6efb5c507954907c91bcb68ce4b7cc28946a80254f",
+            "a5ee62f1f009e442eca63f22a2205439a24dcb03f752cf219551b47c83661e1e"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": "This fighter class-feature chunk gives the baseline Attack of Opportunity trigger set and its normal disruption rule on a critical hit against manipulate actions.",
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "This chunk contains Disruptive Stance and states both changes at issue: concentrate actions now trigger the reaction, and concentrate actions are disrupted on a hit rather than only manipulate actions on a critical hit."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
+          "bucket": "required",
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "text": "CLASS FEATURES \u2014 You gain these abilities as a fighter. Abilities gained at higher levels list the level at which you gain them next to the features' names. \u2014 ANCESTRY AND BACKGROUND \u2014 In addition to the abilities provided by your class at 1st level, you have the benefits of your selected ancestry and background, as described in Chapter 2. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level you gain a number of proficiencies that represent your basic training. These proficiencies are noted at the start of this class. \u2014 ATTACK OF OPPORTUNITY \u2014 Ever watchful for weaknesses, you can quickly attack foes that leave an opening in their defenses. You gain the Attack of Opportunity reaction. \u2014 ATTACK OF OPPORTUNITY 2 \u2014 Trigger A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using. \u2014 You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn\u2019t count toward your multiple attack penalty, and your multiple attack penalty doesn\u2019t apply to this Strike."
+        },
+        {
+          "id": "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+          "bucket": "required",
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "text": "Failure The target is flat-footed until the end of your current turn. \u2014 DISRUPTIVE STANCE \u2014 FEAT 10 \u2014 FIGHTER STANCE \u2014 The slightest distraction can provoke your wrath, and you\u2019re prepared to foil enemies\u2019 actions. As long as you are in this stance, you can use Attack of Opportunity when a creature within your reach uses a concentrate action, in addition to manipulate and move actions. Furthermore, you disrupt a"
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_010a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What rule makes verbal spell components depend on being able to speak?",
+      "expected_answer_summary": "Identify the verbal component rule that requires the caster to be able to speak.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_010. Isolates the component rule.",
+      "parent_query_id": "pf2e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "required_gold": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": {
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "source_unit_ids": [
+            "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": "This is the operative verbal-component rule: it says you must be able to speak to provide the component."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+          "bucket": "required",
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "text": "VERBAL \u2014 A verbal component is a vocalization of words of power. You must speak them in a strong voice, so it\u2019s hard to conceal that you\u2019re Casting a Spell. The spell gains the concentrate trait. You must be able to speak to provide this component."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_010b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What underwater rule penalizes speaking or casting spells with verbal components?",
+      "expected_answer_summary": "Identify the drowning and suffocating rule that says speaking underwater, including verbal spellcasting, costs all remaining air.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_010. Isolates the direct underwater speaking penalty.",
+      "parent_query_id": "pf2e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c"
+      ],
+      "required_gold": [
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": {
+          "page": 478,
+          "structural_path": [
+            "DROWNING AND SUFFOCATING"
+          ],
+          "source_unit_ids": [
+            "78c3d7b57f1985d473e77e19fc0124668dfdedeb8575a616b292fe0e8aed691b",
+            "3dacf776193bce09f522ccd883b998a506a4b77ada1597c646a42cfaa97d829c"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": "This aquatic-combat chunk states the underwater casting limit directly: speaking underwater, including spells with verbal components, expends all remaining air."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+          "bucket": "required",
+          "page": 478,
+          "structural_path": [
+            "DROWNING AND SUFFOCATING"
+          ],
+          "text": "You can\u2019t cast fire spells or use actions with the fire trait underwater. \u2014 At the GM\u2019s discretion, some ground-based actions might not work underwater or while floating. \u2014 DROWNING AND SUFFOCATING \u2014 You can hold your breath for a number of rounds equal to 5 + your Constitution modifier. Reduce your remaining air by 1 round at the end of each of your turns, or by 2 if you attacked or cast any spells that turn. You also lose 1 round worth of air each time you are critically hit or critically fail a save against a damaging effect. If you speak (including casting spells with verbal components or activating items with command components) you lose all remaining air. \u2014 When you run out of air, you fall unconscious and start suffocating. You can\u2019t recover from being unconscious and must attempt a DC 20 Fortitude save at the end of each of your turns. On a failure, you take 1d10 damage, and on a critical failure, you die. On each check after the first, the DC increases by 5 and the damage by 1d10; these increases are cumulative. Once your access to air is restored, you stop suffocating and are no longer unconscious (unless you\u2019re at 0 Hit Points)."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_010c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "Which spell lets a character breathe underwater, and why does that not by itself remove the need to handle verbal components?",
+      "expected_answer_summary": "Retrieve Water Breathing plus the verbal component rule to show that underwater breathing and verbal casting constraints are related but not identical.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_010. Tests mitigation retrieval plus applicability reasoning.",
+      "parent_query_id": "pf2e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "required_gold": [
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": {
+          "page": 384,
+          "structural_path": [
+            "TRANSMUTATION"
+          ],
+          "source_unit_ids": [
+            "f5c6961889ffa214316eaca5f7fe0710caf91dcf1000daebf6a5420bfbdad6a0",
+            "b91599e1a691fa9d1095fe5c9892952c55d29c0bf563804a066dc2b4a410d62c",
+            "08f538ae3426e477b0a9389d7f029e98918b5b3c0524648c48a981d1de9eedd0",
+            "820980fb8aa101cf59dcb59c619722a81089eece6a7e30a0a86a7c0aa8faa04a",
+            "8a8632541e1787b05d27e6a90a484ff6eb2aae918b1a556cfe96a2357ae8efe0",
+            "18308c693624b900f5d86270ac5db8280c187d8779b417f7c7102c9428083866",
+            "3223d72ffe4963c0a13cb2673bb6531bdda2bbe6f5e8bf196fdb9ba915149fd7",
+            "5f477ccada4e8a8207034b3451015d30d6841efd834472f1d381184b4edf1e82",
+            "62cfcd766b7320012eb419f0b27b3a15fc30565327600931593a7d6d8d8cfec0",
+            "764a763a55735c8c5d1cddae2593a63a93c48239e2807ba040b88777991bcf6c",
+            "deb83070a613ad100904b5b03c02a52c463daef55456a0633a22c81c549ae1ba",
+            "3b8bcaca2357ffd7e55adc1c63ae685fd2728a138bd24a6b360ec68d61d4c376",
+            "51775915cb8d6419b648c3c9cd44b892a20c89e93f3317a34aa8a4e20d1025d6",
+            "18308c693624b900f5d86270ac5db8280c187d8779b417f7c7102c9428083866",
+            "f87b9503709f08f27f62f69a405027006b7cefef442f64b07ad5685e1fe8fe95",
+            "4829c8b0bf6da1e0bc29f4927c459856f8e4a63a82665b2624494b35c47a9214",
+            "e7ffefed98566c2d4c21de4f11d5efe60cca8739cb16bb1158ced49895226417"
+          ]
+        },
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": {
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "source_unit_ids": [
+            "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": "This chunk supplies Water Breathing, the primary rules-text mitigation that lets characters breathe underwater even though it does not remove verbal components from the spell.",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": "This is the operative verbal-component rule: it says you must be able to speak to provide the component."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
+          "bucket": "required",
+          "page": 384,
+          "structural_path": [
+            "TRANSMUTATION"
+          ],
+          "text": "Critical Success The target is unaffected. \u2014 Success The target spends the first action on its next turn with the confused condition. \u2014 Failure The target is confused for 1 minute. \u2014 Critical Failure The target is confused permanently. \u2014 WATER BREATHING \u2014 SPELL 2 \u2014 TRANSMUTATION \u2014 Traditions arcane, divine, primal \u2014 Cast 1 minute (somatic, verbal) \u2014 Range 30 feet; Targets up to 5 creatures \u2014 Duration 1 hour \u2014 The targets can breathe underwater. \u2014 Heightened (3rd) The duration increases to 8 hours. \u2014 Heightened (4th) The duration increases to until your next daily preparations. \u2014 WATER WALK \u2014 SPELL 2 \u2014 TRANSMUTATION \u2014 Traditions arcane, divine, primal \u2014 Range touch; Targets 1 creature \u2014 Duration 10 minutes \u2014 The target can walk on the surface of water and other liquids without falling through. It can go underwater if it wishes, but in that case it must Swim normally. This spell doesn\u2019t grant the ability to breathe underwater."
+        },
+        {
+          "id": "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
+          "bucket": "required",
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "text": "VERBAL \u2014 A verbal component is a vocalization of words of power. You must speak them in a strong voice, so it\u2019s hard to conceal that you\u2019re Casting a Spell. The spell gains the concentrate trait. You must be able to speak to provide this component."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_010d",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What general aquatic-environment rule says a character usually needs a way to breathe underwater?",
+      "expected_answer_summary": "Identify the aquatic environment rule that establishes the need for underwater breathing support.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_010. Isolates the environment anchor that supports mitigation interpretation.",
+      "parent_query_id": "pf2e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "required_gold": [
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": {
+          "page": 512,
+          "structural_path": [
+            "ENVIRONMENT",
+            "AQUATIC"
+          ],
+          "source_unit_ids": [
+            "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": "This chunk anchors the general aquatic-environment rule that characters usually need a way to breathe underwater and should interpret casting limits through aquatic-combat and drowning rules."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411",
+          "bucket": "required",
+          "page": 512,
+          "structural_path": [
+            "ENVIRONMENT",
+            "AQUATIC"
+          ],
+          "text": "AQUATIC \u2014 Aquatic environments are among the most challenging for PCs short of other worlds and unusual planes. PCs in an aquatic environment need a way to breathe (typically a water breathing spell) and must usually Swim to move, though a PC who sinks to the bottom can walk awkwardly, using the rules for greater difficult terrain. Characters in aquatic environments make frequent use of the aquatic combat (page 478) and drowning and suffocation rules (page 478)."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_016a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Which background in Player Core grants Warfare Lore alongside a choice of Acrobatics or Athletics training?",
+      "expected_answer_summary": "Identify Martial Disciple as the Warfare Lore background with the Acrobatics-or-Athletics choice.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_016. Isolates one background anchor.",
+      "parent_query_id": "pf2e_mh_ws_016",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389"
+      ],
+      "required_gold": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": {
+          "page": 63,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "source_unit_ids": [
+            "675acffcfd53cbae9f587b780678ab29d57c9645491f7e103e0696909328b18b",
+            "c0e7942254ffcdcf962f8801492b4b398a4d3b53f9c2d09a14f56c752c2e5a9c",
+            "26e6c889b23795a58164f6b3cc60c7027beee4df29244f681b70da97bf2235a7",
+            "fe50b8f1d0c622515585e9f30f0f153bcc33387c5591eb116a9211a0bb64bb22"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": "This background chunk contains Martial Disciple, which grants Warfare Lore and overlaps with the fighter's Acrobatics-or-Athletics training choice."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+          "bucket": "required",
+          "page": 63,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "text": "You\u2019re trained in the Athletics skill and the Labor Lore skill. You gain the Hefty Hauler skill feat. \u2014 MARTIAL DISCIPLE \u2014 BACKGROUND \u2014 You dedicated yourself to intense training and rigorous study to become a great warrior. The school you attended might have been a traditionalist monastery, an elite military academy, or the local branch of a prestigious mercenary organization. \u2014 Choose two ability boosts. One must be to Strength or Dexterity, and one is a free ability boost. \u2014 You\u2019re trained in your choice of the Acrobatics or Athletics skill. You gain a skill feat: Cat Fall if you chose Acrobatics or Quick Jump if you chose Athletics. You\u2019re also trained in the Warfare Lore skill. \u2014 MERCHANT \u2014 BACKGROUND \u2014 In a dusty shop, market stall, or merchant caravan, you bartered wares for coin and trade goods. The skills you picked up still apply in the adventuring life, in which a good deal on a suit of armor could prevent your death. \u2014 Choose two ability boosts. One must be to Intelligence or Charisma, and one is a free ability boost. \u2014 You\u2019re trained in the Diplomacy skill and the Mercantile Lore skill. You gain the Bargain Hunter skill feat. \u2014 MINER \u2014 BACKGROUND \u2014 You earned a living wrenching precious minerals from the lightless depths of the earth. Adventuring might have seemed lucrative or glamorous compared to this backbreaking labor\u2014and if you have to head back underground, this time you plan to do so armed with a real weapon instead of a miner\u2019s pick."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_016b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Which other background in the active Player Core corpus grants Warfare Lore?",
+      "expected_answer_summary": "Identify Warrior as the other active-corpus background that grants Warfare Lore.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_016. Isolates the second background anchor.",
+      "parent_query_id": "pf2e_mh_ws_016",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43"
+      ],
+      "required_gold": [
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": {
+          "page": 64,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "source_unit_ids": [
+            "134cb9b58308c38f4af799ab638ade9fe0da3da3791365b92fa475b0f2c7f72b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": "This background chunk contains Warrior, the other background in the active corpus that grants Warfare Lore."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
+          "bucket": "required",
+          "page": 64,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "text": "Choose two ability boosts. One must be to Dexterity or Intelligence, and one is a free ability boost. \u2014 You\u2019re trained in the Crafting skill and the Engineering Lore skill. You gain the Specialty Crafting skill feat. \u2014 WARRIOR \u2014 BACKGROUND \u2014 In your younger days, you waded into battle as a mercenary, a warrior defending a nomadic people, or a member of a militia or army. You might have wanted to break out from the regimented structure of these forces, or you could have always been as independent a warrior as you are now. \u2014 Choose two ability boosts. One must be to Strength or Constitution, and one is a free ability boost. \u2014 You\u2019re trained in the Intimidation skill and the Warfare Lore skill. You gain the Intimidating Glare skill feat."
+        }
+      ]
+    },
+    {
+      "id": "pf2e_mh_mb_016c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "If a fighter background already grants a trained skill that overlaps a fighter level-1 training choice, what happens to the duplicate training?",
+      "expected_answer_summary": "Use the fighter initial proficiencies plus the duplicate-training rule to show the fighter chooses another trained skill rather than advancing early to expert.",
+      "source_page": null,
+      "notes": "Micro-bundle from pf2e_mh_ws_016. Tests the class-training interaction hop.",
+      "parent_query_id": "pf2e_mh_ws_016",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "required_gold": [
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": {
+          "page": 141,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "683dd2121541e3e3ed159a2aaae9a5d4cbff57bf2e6cd30fecdb8799099ee135",
+            "e03734b7906780f1237114b6fb6a4683b550b3b8c847bea388a07dcafc899ca6",
+            "216934c9029a0a141ef3ea9f696c5b4206350d318f3291c45094aad0035c12b5",
+            "fa0806ed706c3120f92fcf915fe82ac27411929381ee3dfa558e1aa37fc03272",
+            "28b2360000c019999d3cd43c7416a6deea92edabb426ada6807ea3e6d579461d",
+            "dec25ea538208346180aefddde23635be45308dad3d432fc6661fdda2fa75698",
+            "d92159c78648133eaa59cb90ebe489c21819af7dde38b37c54d8683c9617246f",
+            "3a00ed90ae7043b2dd70d8e2cc853c669bb856b5ff553348aef876ecef795788",
+            "df0ac34a006ea59777597928a02af5c1ded63b4a9913256dfcee958edb39d24f",
+            "20deed45035a5ba8f5bbd277fe135288aa536d5fc728c3aad894dd5078fb9192",
+            "7f8e9dd4375b1b20a779f0d7f31a6be8c941c488c5e8061818deb742589b3487",
+            "583f407c68c8e3ad92b937c0fd484d089e578e27e31fb4792ec08aa02631317a",
+            "9edfcca0a2e27ca0d151e0acf94311e4893314b6643967ebcf68e2e319651b8f"
+          ]
+        },
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": {
+          "page": 68,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "b84c4bb7a2e14d086422c7bdf34d05c2bce15e7e011b3f56090979fb4d2df3e5",
+            "94a8ac2ad8330d3e501ce46037817bc9dea681a293b31093d623157659ca296c",
+            "b4d545b018a3b23ad8610d543bc6047257d18a4ca3df683aaa8516283691e519",
+            "7c71fa1279d5753f04bb9aa6e7e84f8e6185c5f1bd05e5ce39b8aee77379c4c0"
+          ]
+        }
+      },
+      "_mode": "multi_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": "This fighter initial-proficiencies chunk shows the fighter's automatic skill training choices at 1st level.",
+        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": "This general proficiency rule resolves the interaction: if class training would duplicate a skill you already got from background, you select another trained skill instead of advancing early to expert."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": [
+        {
+          "id": "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
+          "bucket": "required",
+          "page": 141,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "text": "YOU MIGHT... \u2014 Know the purpose and quality of every weapon and piece of armor you own. \u2014 Recognize that the danger of an adventurer\u2019s life must be balanced out with great revelry or ambitious works. \u2014 Have little patience for puzzles or problems that require detailed logic or study. \u2014 OTHERS PROBABLY... \u2014 Find you intimidating until they get to know you\u2014and maybe even after they get to know you. \u2014 Expect you\u2019re all brawn and no brains. \u2014 Respect your expertise in the art of warfare and value your opinion on the quality of armaments. \u2014 INITIAL PROFICIENCIES \u2014 At 1st level, you gain the listed proficiency ranks in the following statistics. You are untrained in anything not listed unless you gain a better proficiency rank in some other way. \u2014 PERCEPTION \u2014 Expert in Perception \u2014 SAVING THROWS \u2014 Expert in Fortitude Expert in Reflex Trained in Will \u2014 SKILLS \u2014 Trained in your choice of Acrobatics or Athletics Trained in a number of additional skills equal to 3 plus your Intelligence modifier \u2014 ATTACKS \u2014 Expert in simple weapons Expert in martial weapons Trained in advanced weapons Expert in unarmed attacks \u2014 DEFENSES \u2014 Trained in all armor Trained in unarmored defense \u2014 CLASS DC \u2014 Trained in fighter class DC"
+        },
+        {
+          "id": "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978",
+          "bucket": "required",
+          "page": 68,
+          "structural_path": [
+            "INITIAL PROFICIENCIES"
+          ],
+          "text": "INITIAL PROFICIENCIES \u2014 When you choose your character\u2019s class, they gain a set of initial proficiencies. Proficiencies measure your character\u2019s ability to perform tasks, use abilities, and succeed at checks. Proficiency ranks range from trained to legendary. For instance, a character who is trained with a longbow can use it effectively, while a person who is legendary with the weapon might be able to split an arrow from 100 paces away! \u2014 Each class entry specifies your character\u2019s initial proficiency rank in Perception, saving throws, attacks, defenses, and either spells or class DC. You gain the trained proficiency rank in several skills\u2014the exact number depends on your class, and some classes specify certain additional skills that you\u2019re trained in. If your class would make you trained in a skill you\u2019re already trained in (typically due to your background), you can select another skill to become trained in. \u2014 A proficiency rank can unlock various feats and class features, and it also helps determine the modifier for any check you roll or DC you calculate related to that statistic. If your character is trained in Perception, a saving throw, or another statistic, they gain a proficiency bonus equal to their level +2, while if they have expert proficiency, they gain a proficiency bonus equal to their level +4. For more about proficiency ranks, see page 13. \u2014 Spellcasting classes grant a proficiency rank for spell attacks and DCs, which are further detailed in each class\u2019s entry. \u2014 If something isn\u2019t listed in your character\u2019s class entry, their proficiency rank in that statistic is untrained unless they gain training from another source. If your character is untrained in something, you add a proficiency bonus of +0 when attempting a check or calculating a DC related to that statistic."
+        }
+      ]
+    }
+  ]
+}

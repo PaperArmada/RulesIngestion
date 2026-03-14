@@ -1,0 +1,1911 @@
+[
+  {
+    "id": "sw_rev_u01_roles_and_authority",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What are the roles at the table (players vs GM/referee/judge/MC), and what decisions does each role control?",
+    "answer": "Players decide what their characters do, describing their actions and choices. The Referee decides and describes the setting and what characters perceive, decides what happens as a result of the characters’ actions, creates and runs the adventure (including monsters), and decides the results of player decisions for their characters. The Referee does not tell players what their characters do; instead the Referee referees the results according to the rules and interprets what the rules mean. The rules are presented as guidelines rather than a complete procedure for every possibility: there is not a rule for everything, and when in doubt, the Referee makes a ruling.",
+    "expected_answer_summary": "Players choose and describe character actions; the Referee runs the world/adventure and adjudicates results, interpreting the rules and making rulings when needed.",
+    "source_page": "33, 73",
+    "gold_unit_ids": [
+      "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054",
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9",
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80",
+      "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+    ],
+    "gold_locations": {
+      "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e"
+        ]
+      },
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054": {
+        "page": 73,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure"
+        ],
+        "source_unit_ids": [
+          "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+        ]
+      },
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "GETTING STARTED"
+        ],
+        "source_unit_ids": [
+          "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+        ]
+      },
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80": {
+        "page": 73,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure",
+          "When in doubt, make a ruling."
+        ],
+        "source_unit_ids": [
+          "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+        ]
+      },
+      "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "HOW TO PLAY"
+        ],
+        "source_unit_ids": [
+          "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+        ]
+      }
+    },
+    "required_gold": [
+      "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+    ],
+    "supporting_gold": [
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9",
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80",
+      "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+    ],
+    "required_gold_rationale": {
+      "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e": "Directly states the player/Referee split in play: the Referee describes the setting, the player describes what their character does, and the Referee tells what happens as a result. This anchors the players' control over character actions and the Referee's control over outcomes/world details.",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054": "Directly states the Referee's authority: creates the adventure, runs monsters, decides results of player decisions, does not control player characters, referees according to the rules, and interprets what the rules mean. This is necessary for the adjudication/rulings part of the answer."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "7f3b1076a19f257df057e27e600cf6daa5291458e23abf3613961556d2b1a61e",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+    ],
+    "_supporting_gold": [
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9",
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80",
+      "8b3a130c14b1bb84f70eb48a43c23ed5361f1c8e1be5d2d8b146e9b8d47682d2"
+    ],
+    "required_anchor_ids": [
+      "ga_0d2998e242eb40de",
+      "ga_fc5b570afd0bc587"
+    ],
+    "supporting_anchor_ids": [
+      "ga_023abd8fb5305999",
+      "ga_96bc104b4601f326"
+    ]
+  },
+  {
+    "id": "sw_rev_u02_uncertainty_core_mechanic",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "When the outcome is uncertain, what is the default way to resolve it (dice/cards/other), and how do you read the result (target number, degrees of success, opposing rolls, etc.)?",
+    "answer": "The game resolves uncertainty using dice, with the specific die and success rule defined by the procedure you are using. The rules define standard polyhedral dice notation (d4, d6, d8, d10, d12, d20) and percentile dice (d100 as two d10s for tens and ones). For example, saving throws are resolved by rolling 1d20 and succeeding if the result is equal to or higher than the character’s saving throw target number (which depends on class/level, and monsters have a listed target number). In combat, initiative is resolved by each side rolling 1d6; the higher result wins initiative for that round. Surprise (when applicable) is checked by rolling 1d6 for a side: on a 1–2 the group is surprised (with stated class-based exceptions).",
+    "expected_answer_summary": "Uncertainty is resolved with dice; each procedure specifies what die to roll and how to read it (e.g., saves: d20 ≥ target; initiative: sides roll d6 high wins; surprise: d6 with 1–2 surprised).",
+    "source_page": "5, 34, 35",
+    "gold_unit_ids": [
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7",
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+    ],
+    "gold_locations": {
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "DICE"
+        ],
+        "source_unit_ids": [
+          "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+        ]
+      },
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "3. ROLL INITIATIVE"
+        ],
+        "source_unit_ids": [
+          "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927"
+        ]
+      },
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2"
+        ]
+      },
+      "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f": {
+        "page": 37,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "THE ATTACK ROLL"
+        ],
+        "source_unit_ids": [
+          "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f"
+        ]
+      },
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062": {
+        "page": 42,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+        ]
+      }
+    },
+    "required_gold": [
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+    ],
+    "supporting_gold": [
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+    ],
+    "required_gold_rationale": {
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7": "This is the only candidate that directly establishes the default uncertainty mechanic is dice, listing the game’s dice conventions and making clear outcomes are resolved by rolling dice as specified by the rules. The question asks for the default way to resolve uncertainty; this chunk is the core anchor for that."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "c5e4e2378a99497c30d5b6423a27845ffd7bd340aca3a864d64ec460c31559d7"
+    ],
+    "_supporting_gold": [
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "506aab2db1ffbad3432dd39f707ed0e7145360cae14ab94c6d29b8001e70df0f",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+    ],
+    "required_anchor_ids": [
+      "ga_84537c5ef93ef00d"
+    ],
+    "supporting_anchor_ids": [
+      "ga_b5a86142e334d243",
+      "ga_067e03c1ed875cf6",
+      "ga_e7bd1d210ac41c87",
+      "ga_fab14d8122f20d13"
+    ]
+  },
+  {
+    "id": "sw_rev_u03_time_progression_model",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How does time advance during play (turns/rounds/scenes/phases/ticks), and what causes the game to move from one step to the next?",
+    "answer": "Time can advance in larger jumps when the Referee rules that hours or months pass, but the rules call out two key time units used for procedures: the turn and the combat round. A turn represents 10 minutes and is used to measure normal movement in dangerous places; a combat round represents 1 minute and is used to measure time while the party is in combat. The movement tables apply these units directly (walking/running speeds per turn, and combat movement per round). In combat, time advances round-by-round following an ordered sequence (check surprise if needed, declare spells, determine initiative, resolve movement/missile fire, resolve melee/spells, then the round ends and you repeat from declaring spells until combat ends). Special case: the Referee Guide describes a mass-combat procedure where combat rounds are longer (5 minutes for five-man units, 10 minutes for ten-man units), and initiative determines whether a side moves/attacks first or last within that larger-scale round.",
+    "expected_answer_summary": "Procedural time uses turns (10 minutes) and combat rounds (1 minute) for movement/combat; combat advances by repeating a step-by-step round sequence; mass combat can use longer 5–10 minute rounds (special rule).",
+    "source_page": "32, 33, 35, 88",
+    "gold_unit_ids": [
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30",
+      "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+    ],
+    "gold_locations": {
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2"
+        ]
+      },
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b"
+        ]
+      },
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30": {
+        "page": 88,
+        "structural_path": [
+          "Referee Guide",
+          "Wilderness Adventures",
+          "Special Combat Rules",
+          "INITIATIVE AND COMBAT ROUNDS"
+        ],
+        "source_unit_ids": [
+          "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+        ]
+      },
+      "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe": {
+        "page": 36,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Alternate Combat Sequence Method No. 1 (Core Rules System)"
+        ],
+        "source_unit_ids": [
+          "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+        ]
+      }
+    },
+    "required_gold": [
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+    ],
+    "supporting_gold": [
+      "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+    ],
+    "required_gold_rationale": {
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2": "Defines the core time units and their durations: a turn is 10 minutes and a combat round is 1 minute.",
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b": "Explains when each unit is used in play: turns for normal movement in dangerous places, combat rounds for combat.",
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30": "Covers the special mass-combat timing rule: combat rounds become 5 or 10 minutes depending on unit grouping, and shows round-to-round advancement via initiative with sides moving/attacking in sequence."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8f13a5dda0b7663813a20122f7766d81fd685856adab8ecff155275056791d30"
+    ],
+    "_supporting_gold": [
+      "08a2dc5a248b378fe2b196d8d0bcd2c6f129681870d9c8b1e1fdedb9939becbe"
+    ],
+    "required_anchor_ids": [
+      "ga_39bc25c702d0ae32",
+      "ga_bde04f6fd44ca2db"
+    ],
+    "supporting_anchor_ids": [
+      "ga_ba09889a4cf46db6"
+    ]
+  },
+  {
+    "id": "sw_rev_u04_player_actions_in_combat",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What can a player character do when they act (actions, movement, reactions/interrupts, free actions), and what limits apply?",
+    "answer": "Combat actions are defined by the round procedure and its phases. In the standard combat sequence, each round follows an order of battle: check surprise (if needed), declare spells, roll initiative, then resolve movement and missile fire for the winning side and then the losing side, and finally resolve melee attacks and spellcasting for the winning side and then the losing side before completing the round and repeating. Within this structure, a combatant can take movement (including movement-like actions such as climbing onto tables or swinging from ropes) or fire missile weapons during the movement/missiles phase; and can make melee attacks (if in melee range) or cast spells during the melee/spells phase. Spellcasting has explicit limits: a spell must be declared before the initiative roll, and spells cannot be cast if the caster is in melee combat with enemies; if the enemy wins initiative and damages the spellcaster, the spell’s casting may be disturbed and the spell lost. The book also presents alternate combat sequences: Method 1 keeps a three-phase round where the initiative winner may move and attack or may hold initiative to act later (the initiative loser cannot hold); Method 2 resolves actions in dexterity order with spells first, then missiles, then melee, then movement; Method 3 uses a segmented round with action intervals modified by armor, spell level, dexterity, and other factors, allowing faster characters to act more often.",
+    "expected_answer_summary": "Combat options are phase-structured: move or fire missiles, then melee or cast spells, with limits like declaring spells before initiative and no spellcasting in melee; alternate sequences add holding initiative (Method 1), dex-order phases (Method 2), or segmented action timing (Method 3).",
+    "source_page": "35, 36",
+    "gold_unit_ids": [
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09",
+      "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb",
+      "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce",
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+    ],
+    "gold_locations": {
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "4. MOVEMENT AND MISSILES PHASE"
+        ],
+        "source_unit_ids": [
+          "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d"
+        ]
+      },
+      "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09": {
+        "page": 36,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Alternate Combat Sequence Method No. 3 (Modified Supplement 3 Rules)"
+        ],
+        "source_unit_ids": [
+          "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09"
+        ]
+      },
+      "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb": {
+        "page": 36,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "(This system comes from the 1978 “Holmes Blue Book Set”)"
+        ],
+        "source_unit_ids": [
+          "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb"
+        ]
+      },
+      "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce": {
+        "page": 36,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "(This system comes from the 1978 “Holmes Blue Book Set”)"
+        ],
+        "source_unit_ids": [
+          "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+        ]
+      },
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d"
+        ]
+      },
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "3. ROLL INITIATIVE"
+        ],
+        "source_unit_ids": [
+          "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927"
+        ]
+      },
+      "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926": {
+        "page": 40,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "MOVEMENT WITHIN MELEE"
+        ],
+        "source_unit_ids": [
+          "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+        ]
+      }
+    },
+    "required_gold": [
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09",
+      "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb",
+      "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+    ],
+    "supporting_gold": [
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+    ],
+    "required_gold_rationale": {
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d": "Provides the core default combat action structure: on a side's turn in the movement/missiles phase, combatants may move or fire missiles, and winners cannot delay to react after seeing foes act. This is essential to answer what a character can do when acting and one key limit.",
+      "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09": "Anchors Alternate Combat Sequence Method 3, explicitly stating segmented timing and that characters move and take other actions at six-segment intervals modified by armor/spellcasting/etc. This is necessary because the expected answer includes segmented action timing as one of the alternate methods.",
+      "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb": "Anchors Alternate Combat Sequence Method 2 by showing movement occurs in dexterity order. This is needed because the expected answer specifically mentions dex-order phases.",
+      "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce": "Completes Alternate Combat Sequence Method 2 by showing missile attacks and melee are resolved in dexterity order, covering the other main action types beyond movement."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "677cd90242edcb9500761e1a043f5477ca2aa965f43501919f02ca14cae0fa09",
+      "c47de9aec5414e89e6438db73b085ffd4de42a91c9c9ccc849ae7b4511965ddb",
+      "befddcdd6d1b049ca021fd3d6510dee51c8641082e01e3af80dfe3a4a987a4ce"
+    ],
+    "_supporting_gold": [
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "47acdb21f5161017c8e8fe35d5593dd17c257073feb6fa0503d7b025cc38d926"
+    ],
+    "required_anchor_ids": [
+      "ga_0b5a4c5cb99aaa29",
+      "ga_437a79072c7cbf9f",
+      "ga_70e2de144145b913"
+    ],
+    "supporting_anchor_ids": [
+      "ga_067e03c1ed875cf6",
+      "ga_b5a86142e334d243",
+      "ga_77b11a047e5d0896"
+    ]
+  },
+  {
+    "id": "sw_rev_u05_what_must_be_tracked",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "What information must be tracked to play correctly (character stats/resources/conditions, positioning, clocks/time), and where is it recorded (character sheet, tokens, track, notes)?",
+    "answer": "The rules call out that you complete a character sheet by recording your character’s statistics and equipment, and then play at the table with dice. Attribute scores (rolled 3d6 each) have mechanical effects that you should record, including bonuses/penalties (e.g., missile to-hit and Armor Class adjustments from Dexterity; Strength modifiers and carrying capacity/weight allowances; Constitution modifiers to hit points per hit die; Charisma limits on special hirelings and morale adjustments; and XP bonuses tied to Prime Attributes/Charisma/Wisdom). Treasure and money are tracked as gold pieces and other coinage, and treasure weight is tracked for encumbrance: weight is listed in pounds, a normal equipment load is assumed, and coins/gems have a defined weight; total carried weight determines base movement rate. Time is tracked in explicit procedural units (turns and combat rounds) that drive movement rates and other procedures. Consumable exploration resources like light sources have explicit durations (e.g., torch duration and lantern oil duration), which must be tracked to maintain light. Combat and exploration positioning/ranges are tracked at least in terms of distances/movement rates (feet per turn/round underground; yards per round outdoors), and combat procedures rely on tracked values like Armor Class and hit points.",
+    "expected_answer_summary": "Track character sheet stats and equipment; attribute-derived bonuses; treasure/coin and its weight for encumbrance and movement; procedural time units (turn/round); consumables like light duration; and combat-relevant values like AC/HP and distances/movement.",
+    "source_page": "5, 6, 7, 29, 32, 33",
+    "gold_unit_ids": [
+      "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f",
+      "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90",
+      "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495",
+      "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c",
+      "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd",
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+    ],
+    "gold_locations": {
+      "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "GETTING STARTED"
+        ],
+        "source_unit_ids": [
+          "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f"
+        ]
+      },
+      "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "SETTING UP YOUR CHARACTER SHEET"
+        ],
+        "source_unit_ids": [
+          "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90"
+        ]
+      },
+      "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495": {
+        "page": 1,
+        "structural_path": [
+          "TABLE OF CONTENTS"
+        ],
+        "source_unit_ids": [
+          "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495"
+        ]
+      },
+      "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c": {
+        "page": 39,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Quick Method for Ascending AC Combat (Secret Formula!)"
+        ],
+        "source_unit_ids": [
+          "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c"
+        ]
+      },
+      "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "COMMON TERMS"
+        ],
+        "source_unit_ids": [
+          "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd"
+        ]
+      },
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9": {
+        "page": 5,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "GETTING STARTED"
+        ],
+        "source_unit_ids": [
+          "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+        ]
+      }
+    },
+    "required_gold": [
+      "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f",
+      "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90"
+    ],
+    "supporting_gold": [
+      "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495",
+      "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c",
+      "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd",
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+    ],
+    "required_gold_rationale": {
+      "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f": "Directly states that players record their character’s statistics and equipment, which is the core required tracking content in the question.",
+      "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90": "Directly states where that information is recorded: on a character sheet."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "36d74e304a600df92a09c68f0b7a15018f7c520ddef84a2623a00473686e6e0f",
+      "1c6c1eb74f2fd77a9764649d1b59c78ab3d0e5c21190d67ff46c94b6018efd90"
+    ],
+    "_supporting_gold": [
+      "a1c75bd2bf2651f46b60c097c981d207c84a1d97edfcd47f76a19a8e4f41c495",
+      "45b46dfa1b9dd25535f6b756b05497ce2777b60e6564be0544f65c1f88e7fb7c",
+      "385021a4f4cbc5367dd8c1f83c742f3fbf69800b117088d7a577a7fab43e7bdd",
+      "5b6261caa0c49010145c6e5b3c83d83a26e8c014fdcbf390caf341a250c85cf9"
+    ],
+    "required_anchor_ids": [
+      "ga_023abd8fb5305999",
+      "ga_f4405b9755137c76"
+    ],
+    "supporting_anchor_ids": [
+      "ga_4480814881b8a514",
+      "ga_512cfca2ef9e3380",
+      "ga_5f8073ef8e13eb83"
+    ]
+  },
+  {
+    "id": "sw_rev_s01_rules_silent_referee_ruling",
+    "tier": "T1",
+    "question_type": "reasoning",
+    "question": "If the rules don’t cover a situation, what are you supposed to do at the table?",
+    "answer": "The Referee makes the call. The rules are guidelines, not a complete procedure for every possibility: by design, Swords & Wizardry does not try to cover every single possibility for what players will do. The three most important principles stated explicitly on this point are: the rules are just guidelines; there is not a rule for everything; and when in doubt, make a ruling.",
+    "expected_answer_summary": "When rules don't cover it, the Referee makes a ruling; the book explicitly states: rules are guidelines, no rule for everything, when in doubt make a ruling.",
+    "source_page": "73",
+    "gold_unit_ids": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80",
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054",
+      "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+    ],
+    "gold_locations": {
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80": {
+        "page": 73,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure",
+          "When in doubt, make a ruling."
+        ],
+        "source_unit_ids": [
+          "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+        ]
+      },
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054": {
+        "page": 73,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure"
+        ],
+        "source_unit_ids": [
+          "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054"
+        ]
+      },
+      "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d": {
+        "page": 2,
+        "structural_path": [
+          "FOREWORD"
+        ],
+        "source_unit_ids": [
+          "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+        ]
+      }
+    },
+    "required_gold": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+    ],
+    "supporting_gold": [
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054",
+      "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+    ],
+    "required_gold_rationale": {
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80": "This chunk directly states the needed rule: 'The rules are just guidelines,' 'There is not a rule for everything,' and crucially, 'When in doubt, make a ruling.' That fully grounds the answer that if the rules do not cover a situation, the Referee should make a ruling at the table."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+    ],
+    "_supporting_gold": [
+      "bf4752d04f05981fd66034e63bc140892440a217672532da41ddcc1acd0a1054",
+      "73bd09b33c1bef5c7dc9d25d47fe13c3e1afeb8e5d7974a9f61f20d7706bd11d"
+    ],
+    "required_anchor_ids": [
+      "ga_96bc104b4601f326"
+    ],
+    "supporting_anchor_ids": [
+      "ga_fc5b570afd0bc587",
+      "ga_8d3ca1d736f0dbae"
+    ]
+  },
+  {
+    "id": "sw_rev_s02_treasure_division_procedure",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Does the game give a default procedure for dividing treasure or money among the party?",
+    "answer": "The book provides no explicit procedure for dividing treasure among the party. Treasure division is a player-driven table decision: deciding how to split loot is part of what players do for their characters, and the Referee does not dictate those choices. If a dispute arises, the Referee adjudicates as with any other uncovered situation. This absence is consistent with the book's explicit design philosophy: there is not a rule for everything, the rules are guidelines, and when in doubt the Referee makes a ruling.",
+    "expected_answer_summary": "No explicit procedure given; treasure division is a player table decision. The Referee adjudicates disputes if needed, consistent with the book's 'no rule for everything' philosophy.",
+    "source_page": "33, 73",
+    "gold_unit_ids": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80",
+      "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+    ],
+    "gold_locations": {
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80": {
+        "page": 73,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure",
+          "When in doubt, make a ruling."
+        ],
+        "source_unit_ids": [
+          "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+        ]
+      },
+      "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a": {
+        "page": 131,
+        "structural_path": [
+          "Monsters",
+          "Treasure",
+          "Generating a Random Treasure Hoard"
+        ],
+        "source_unit_ids": [
+          "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+        ]
+      }
+    },
+    "required_gold": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+    ],
+    "supporting_gold": [
+      "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+    ],
+    "required_gold_rationale": {
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80": "This is the only candidate that directly supports the expected answer's core point: the book does not provide a rule for everything and tells the Referee to make a ruling when needed. That grounds the claim that there is no explicit default treasure-division procedure and that disputes would be adjudicated by the Referee."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "6d6889a20cf598bd77c01ca4f443c6a94aba79443bb0239392b7bfee575c9c80"
+    ],
+    "_supporting_gold": [
+      "9d15a21a18b5af1ea8b841c9ef32f7204b6f509003b4b6faf61503f1805a841a"
+    ],
+    "required_anchor_ids": [
+      "ga_96bc104b4601f326"
+    ],
+    "supporting_anchor_ids": [
+      "ga_4f78252f9bb5b504"
+    ]
+  },
+  {
+    "id": "sw_rev_s03_treasure_to_xp_rule",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "How does treasure translate into experience points (if at all)?",
+    "answer": "Characters earn experience points (XP) for two things: killing monsters and accumulating treasure. Each monster has a set XP value listed in its statistics. For treasure, the conversion is explicit: each gold piece acquired earns one XP. The book notes this rewards clever play — outwitting or bypassing monsters to secure loot counts just as much as combat.",
+    "expected_answer_summary": "1 gp = 1 XP; XP is also awarded for killing monsters (per listed monster value). Both treasure and monster kills are explicit XP sources.",
+    "source_page": "33",
+    "gold_unit_ids": [
+      "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398",
+      "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464"
+    ],
+    "gold_locations": {
+      "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "GAINING EXPERIENCE"
+        ],
+        "source_unit_ids": [
+          "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398"
+        ]
+      },
+      "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464": {
+        "page": 95,
+        "structural_path": [
+          "Monsters",
+          "Monster Descriptions",
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464"
+        ]
+      }
+    },
+    "required_gold": [
+      "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398"
+    ],
+    "supporting_gold": [
+      "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464"
+    ],
+    "required_gold_rationale": {
+      "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398": "This chunk directly states both parts needed for the answer: characters gain XP for killing monsters and accumulating treasure, monsters have listed XP values, and each gold piece acquired earns one XP."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "e73203b54bf3528f2b63ab8e1279933e6fce68481de201d36677e68febec9398"
+    ],
+    "_supporting_gold": [
+      "6d3fe36470cb610a8fa28c9cf5bf3ec829277f311418a42bd7cb745f870fd464"
+    ],
+    "required_anchor_ids": [
+      "ga_dc35605eb8d6a28c"
+    ],
+    "supporting_anchor_ids": [
+      "ga_6b41be7ba6d2f979"
+    ]
+  },
+  {
+    "id": "sw_rev_s04_advancement_tables_where",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Where do you find the XP thresholds for leveling up, and are they class-specific?",
+    "answer": "XP thresholds for leveling up are class-specific. Each class has its own advancement table located on its class page: Assassin (p.9), Cleric (p.11), Druid (p.14), Fighter (p.15), Magic-User (p.17), Monk (p.19), Paladin (p.21), Ranger (p.23), and Thief (p.25). There is no single unified advancement table; each class defines its own XP thresholds independently. For multi-classed characters, XP earned is divided evenly among all classes regardless of attribute bonuses, and a new hit die is only gained when the character has advanced a level in all classes.",
+    "expected_answer_summary": "Class-specific tables on each class's page (Assassin p.9, Cleric p.11, Druid p.14, Fighter p.15, Magic-User p.17, Monk p.19, Paladin p.21, Ranger p.23, Thief p.25); no single unified table.",
+    "source_page": "9, 11, 14, 15, 17, 19, 21, 23, 25, 27",
+    "gold_unit_ids": [
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "gold_locations": {
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4": {
+        "page": 11,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Cleric"
+        ],
+        "source_unit_ids": [
+          "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+        ]
+      }
+    },
+    "required_gold": [
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4": "This chunk directly shows a class-specific advancement table ('Cleric Advancement Table'), which is the key evidence needed to ground the answer that XP thresholds are found on individual class pages rather than in one unified table. The candidate set does not include the other class table pages, so this is the minimal available anchor for the class-specific location claim."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "_supporting_gold": [],
+    "required_anchor_ids": [
+      "ga_1f668217ceaa444c"
+    ],
+    "supporting_anchor_ids": []
+  },
+  {
+    "id": "sw_rev_s05_combat_sequence_group_initiative",
+    "tier": "T1",
+    "question_type": "atomic_rules",
+    "question": "How does initiative work and what is the basic combat sequence for resolving a round?",
+    "answer": "Each combat round follows a fixed 6-step sequence: (1) Check for Surprise — the Referee determines whether a surprise roll is needed; each side rolls 1d6 and is surprised on a 1 or 2 (Monk/Ranger parties are surprised only on a 1); one roll per side, not per individual. (2) Declare Spells — any player intending to cast must declare before the initiative roll; a surprised side skips this step and waits until the next round. (3) Determine Initiative — each side rolls 1d6; highest result wins; on a tie the Referee may treat actions as simultaneous or have both sides re-roll. (4) Movement and Missile Fire — initiative winners move or fire first; then losers do the same; winners cannot hold to see what foes do. (5) Melee Combat and Spells — initiative winners attack in melee and cast spells first; losers follow; creatures killed by winners are already dead and cannot act; Turning Undead also occurs here. (6) Round Complete — check ongoing effects, then return to step 2 and repeat until combat ends (one side flees, surrenders, or is entirely slain). Spells declared in step 2 may be lost if the caster takes damage before the melee/spells phase resolves. The book also presents alternate combat sequences (Method No. 1–3) that change the initiative/action ordering (including holding initiative, dexterity-ordered casting/attacks, and segmented action intervals), but the standard 6-step order above is the basic procedure.",
+    "expected_answer_summary": "6-step round: Surprise check, Declare Spells, Roll initiative (d6 per side, high wins), Movement/Missiles (winners first), Melee/Spells (winners first), then repeat from step 2.",
+    "source_page": "35, 36",
+    "gold_unit_ids": [
+      "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e",
+      "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee",
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383",
+      "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+    ],
+    "gold_locations": {
+      "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c"
+        ]
+      },
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2"
+        ]
+      },
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d"
+        ]
+      },
+      "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e"
+        ]
+      },
+      "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "6. COMPLETE THE ROUND"
+        ],
+        "source_unit_ids": [
+          "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee"
+        ]
+      },
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "3. ROLL INITIATIVE"
+        ],
+        "source_unit_ids": [
+          "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927"
+        ]
+      },
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "4. MOVEMENT AND MISSILES PHASE"
+        ],
+        "source_unit_ids": [
+          "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d"
+        ]
+      },
+      "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "5. MELEE AND SPELLS PHASE"
+        ],
+        "source_unit_ids": [
+          "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383"
+        ]
+      },
+      "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0": {
+        "page": 34,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "A Quick Introduction"
+        ],
+        "source_unit_ids": [
+          "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+        ]
+      }
+    },
+    "required_gold": [
+      "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e",
+      "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee"
+    ],
+    "supporting_gold": [
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383",
+      "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+    ],
+    "required_gold_rationale": {
+      "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c": "Needed as the anchor introducing the official 'Initiative and Order of Battle' sequence; it grounds that the answer is about the ordered combat-round procedure rather than an alternate method.",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2": "Provides the initiative rule itself: each side rolls one d6, highest wins, and also notes surprise affecting the first round. This is essential for the 'group initiative' part of the question.",
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d": "Provides step 4 of the round sequence: movement and missile fire, with winners acting first, which is required for the basic combat sequence.",
+      "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e": "Provides step 5 of the round sequence: melee combat and spells, with winners acting first, which is required for the basic combat sequence.",
+      "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee": "Provides step 6 and the loop structure: complete the round, then return to declaring spells and repeat. This is necessary to capture the round cadence in the expected answer."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "7d15963a813bc918c58a3c465c75b6774f828bb154ead5e546cc0df123a5ee8c",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "f424905880ab89a2b39bdbc5b53de6c0806607c327ae8157dce2e5bb977ff61d",
+      "816f150995ea16eefdb374ae9cc23b30f3a4bf217bce6c0c97ca367ee550596e",
+      "550d5e02a7c236054144bbb53cd796623945f6ea108c5b1171aa0ffe325afaee"
+    ],
+    "_supporting_gold": [
+      "b39ea1c6b4b0fc60d1773be93179865e48e96a71688c3db57d74e9b029bcd927",
+      "1a47bcfdbc15c1add023d4ed36137114c00b1cd5c0cfc7dafb664171a8a4b16d",
+      "93460ba20df1fae321ebc7ced6099158c6b4331436828fbbac28e2bb481fe383",
+      "71dfc0d46f6777f17a68cc97550941055e5062cda353a7ca507876f36627bcc0"
+    ],
+    "required_anchor_ids": [
+      "ga_067e03c1ed875cf6",
+      "ga_35f35268697c6e5a"
+    ],
+    "supporting_anchor_ids": [
+      "ga_b5a86142e334d243",
+      "ga_0b5a4c5cb99aaa29",
+      "ga_620564dab9e21bdd",
+      "ga_94e17c49dabdbd25"
+    ]
+  },
+  {
+    "id": "sw_rev_s06_spell_preparation_reprepare_and_interruption",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How often can a magic-user prepare spells, and what happens if they take damage while preparing/casting?",
+    "answer": "Magic-Users prepare spells by reading from their spellbook and forcing selected spell formulae into their minds, preparing as many spells as they can mentally sustain; a spell can be prepared multiple times using available memory slots. Once a prepared spell is cast, it disappears from the Magic-User’s ability to cast until it is prepared again. The text does not state a fixed daily cadence for Magic-User preparation (unlike Clerics and Druids, who explicitly select and pray for a set of spells each day). If a spellcaster suffers damage while casting, the spell is lost; in the standard combat procedure, spells are declared before the initiative roll and casting starts at the beginning of the round, so if the enemy wins initiative and damages the spellcaster, the casting may be disturbed and the spell lost.",
+    "expected_answer_summary": "Magic-Users prepare from a spellbook into memory slots (can prepare a spell multiple times); after casting it must be prepared again. If damaged while casting, the spell is lost; in combat, declaring happens before initiative and damage before resolution can lose the spell.",
+    "source_page": "10, 13, 16, 35, 40",
+    "gold_unit_ids": [
+      "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a",
+      "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e",
+      "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+    ],
+    "gold_locations": {
+      "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a": {
+        "page": 16,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Magic-User",
+          "MAGIC-USER CLASS ABILITIES"
+        ],
+        "source_unit_ids": [
+          "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a"
+        ]
+      },
+      "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e": {
+        "page": 40,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "SPELLS"
+        ],
+        "source_unit_ids": [
+          "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+        ]
+      },
+      "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "2. DECLARE SPELLS"
+        ],
+        "source_unit_ids": [
+          "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+        ]
+      }
+    },
+    "required_gold": [
+      "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a",
+      "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+    ],
+    "supporting_gold": [
+      "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+    ],
+    "required_gold_rationale": {
+      "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a": "Provides the core magic-user preparation rule: spells are prepared from a spellbook into limited memory slots, a spell may be prepared multiple times, and once cast it is gone until prepared again.",
+      "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e": "Provides the interruption rule in general: casting starts at the beginning of the combat round, and if the spellcaster suffers damage while casting, the spell is lost."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "ea5adb3872bbca4f2d698d7d1e44962d5e8212d1ded0a063ac2447e4f002749a",
+      "885c6821c5a5b0050c710254602a6e81e58ace4cccd8db21df12dde3965fc87e"
+    ],
+    "_supporting_gold": [
+      "3575f3445fd98f205932bfb576ece9ad28a655c0682f2af7a5461525b518bea0"
+    ],
+    "required_anchor_ids": [
+      "ga_1d8f1480ee571c59",
+      "ga_85cd6a2a6877b5b9"
+    ],
+    "supporting_anchor_ids": [
+      "ga_67729731770c1b5a"
+    ]
+  },
+  {
+    "id": "sw_rev_s07_turn_undead_table_symbols",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "On the Turn Undead table, what does a “T” result mean compared to a number?",
+    "answer": "On the Turning the Undead table, a number is the minimum 2d10 result needed: if the roll is equal to or greater than that number, 2d6 of the targeted undead type are turned and depart (not returning for 3d6 rounds). If the table shows “T”, then 2d6 of the targeted undead are automatically turned and depart for 3d6 rounds (no roll threshold). If the table shows “D”, then 2d6 of the targeted undead are automatically destroyed and crumble to dust.",
+    "expected_answer_summary": "Number = minimum 2d10 needed to turn; “T” = automatically turned; “D” = automatically destroyed (each affects 2d6 undead).",
+    "source_page": "42",
+    "gold_unit_ids": [
+      "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062",
+      "fd4ef4fc72718e92bfad05b819246e54df1bf8ea4c2ba40f1c536cdfa2f99bc3",
+      "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+    ],
+    "gold_locations": {
+      "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2": {
+        "page": 42,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2"
+        ]
+      },
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062": {
+        "page": 42,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+        ]
+      },
+      "fd4ef4fc72718e92bfad05b819246e54df1bf8ea4c2ba40f1c536cdfa2f99bc3": {
+        "page": 42,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "TURNING THE UNDEAD"
+        ],
+        "source_unit_ids": [
+          "fd4ef4fc72718e92bfad05b819246e54df1bf8ea4c2ba40f1c536cdfa2f99bc3"
+        ]
+      },
+      "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4": {
+        "page": 42,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Turning the Undead"
+        ],
+        "source_unit_ids": [
+          "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+        ]
+      }
+    },
+    "required_gold": [
+      "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+    ],
+    "supporting_gold": [
+      "fd4ef4fc72718e92bfad05b819246e54df1bf8ea4c2ba40f1c536cdfa2f99bc3",
+      "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+    ],
+    "required_gold_rationale": {
+      "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2": "Directly defines what a “T” result means: 2d6 undead of the targeted type are automatically turned and depart for 3d6 rounds.",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062": "Provides the contrast with a numeric table entry: if the 2d10 roll is equal to or greater than the number shown, 2d6 creatures are turned. This operationalizes that a number is the threshold needed on 2d10, unlike automatic “T.”"
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "a8a79631440e5f2950c90cff259ab1d940712f33cbda2dba9c99f165526734b2",
+      "d79218fdb1aaa186d77d1c96a9b8e8bace409965cde4de55f90dde9621174062"
+    ],
+    "_supporting_gold": [
+      "fd4ef4fc72718e92bfad05b819246e54df1bf8ea4c2ba40f1c536cdfa2f99bc3",
+      "e8d12f97733f14c0da14bab2bcc6afe494d255cd57662bf024db42f86530dba4"
+    ],
+    "required_anchor_ids": [
+      "ga_fab14d8122f20d13"
+    ],
+    "supporting_anchor_ids": [
+      "ga_f65edc939800dac2"
+    ]
+  },
+  {
+    "id": "sw_rev_s08_first_level_cleric_spells",
+    "tier": "T1",
+    "question_type": "lookup",
+    "question": "Does a 1st-level cleric get to cast spells?",
+    "answer": "No. The Cleric Advancement Table shows no spells available at 1st level (all spell-level columns are blank). Clerics begin spellcasting at 2nd level, when they gain 1 first-level spell.",
+    "expected_answer_summary": "No; 1st-level clerics have no spells. Spellcasting starts at 2nd level (1 first-level spell).",
+    "source_page": "11",
+    "gold_unit_ids": [
+      "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958",
+      "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18",
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "gold_locations": {
+      "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958": {
+        "page": 10,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Cleric",
+          "CLERIC CLASS ABILITIES"
+        ],
+        "source_unit_ids": [
+          "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958"
+        ]
+      },
+      "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18": {
+        "page": 7,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Roll Attribute Scores",
+          "WISDOM"
+        ],
+        "source_unit_ids": [
+          "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18"
+        ]
+      },
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4": {
+        "page": 11,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Cleric"
+        ],
+        "source_unit_ids": [
+          "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+        ]
+      }
+    },
+    "required_gold": [
+      "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958"
+    ],
+    "supporting_gold": [
+      "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18",
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "required_gold_rationale": {
+      "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958": "This chunk explicitly states that cleric spellcasting uses the Cleric Advancement Table for spell numbers. That table is the operative source for whether a 1st-level cleric has any spells, so this is the minimal anchor among the provided candidates."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "7f8c889f35d16e2cee44e53bb7691b01f274df2f9e2fd37dab87c02448de7958"
+    ],
+    "_supporting_gold": [
+      "31316f44f1925b1ea4cab2e304f3433a080d3fab129fb50e2eb313cf461edb18",
+      "689d66b58a4ca98d5a67b1f90b81c2d73a125500871ffd09b33c5d4a52bc75d4"
+    ],
+    "required_anchor_ids": [
+      "ga_5cd75675ea765d41"
+    ],
+    "supporting_anchor_ids": [
+      "ga_c41886c78190e424",
+      "ga_1f668217ceaa444c"
+    ]
+  },
+  {
+    "id": "sw_rev_s09_zero_hp_death_and_healing",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "What happens at 0 hit points, and when does a character die from damage?",
+    "answer": "When damage reduces a character (or creature) to 0 hit points, the character is unconscious. If hit points are brought down to –1 or lower, the character dies. The book also describes a potential house rule: a character remains alive (bleeding at 1 hp/round without assistance) until reaching negative hit points equal to the character’s level (e.g., a 5th-level character dies at –5). For healing, natural recovery is 1 hit point per 2 days of uninterrupted rest (many Referees accelerate this to 1/day), and four weeks of rest returns a character to full hit points regardless of how many were lost.",
+    "expected_answer_summary": "0 HP = unconscious; –1 HP or lower = dead. Natural healing is 1 HP per 2 days of uninterrupted rest; four weeks restores to full.",
+    "source_page": "41",
+    "gold_unit_ids": [
+      "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af",
+      "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+    ],
+    "gold_locations": {
+      "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af": {
+        "page": 41,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "DAMAGE AND DEATH"
+        ],
+        "source_unit_ids": [
+          "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af"
+        ]
+      },
+      "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03": {
+        "page": 41,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "HEALING"
+        ],
+        "source_unit_ids": [
+          "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+        ]
+      }
+    },
+    "required_gold": [
+      "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af",
+      "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af": "Provides the core death threshold rule: at 0 hit points a character is unconscious, and at -1 or lower the character dies.",
+      "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03": "Provides the natural healing rule: 1 hit point per 2 days of uninterrupted rest, and four weeks of rest restores full hit points."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "02c2c18f3d274c7da4f0d677dee891d517b9817eeebf19594eaca14f328335af",
+      "d1ca3aa5782fec617d0f41ffc4287939e9a00ad4e6f3aad1015b8567b1edfa03"
+    ],
+    "_supporting_gold": [],
+    "required_anchor_ids": [
+      "ga_c069e028905f0140",
+      "ga_cbb451b86454d122"
+    ],
+    "supporting_anchor_ids": []
+  },
+  {
+    "id": "sw_rev_s10_firing_missiles_into_melee",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "What happens if you fire a missile weapon into a melee where allies and enemies are mixed together?",
+    "answer": "When attacking into a melee with missile weapons, it is usually not possible to choose which participant (opponent or friend) is hit. Instead, the Referee determines the actual target randomly.",
+    "expected_answer_summary": "Missile fire into melee usually cannot pick a specific target; the Referee randomizes who is hit.",
+    "source_page": "40",
+    "gold_unit_ids": [
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+    ],
+    "gold_locations": {
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921": {
+        "page": 40,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "MISSILE ATTACKS"
+        ],
+        "source_unit_ids": [
+          "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+        ]
+      }
+    },
+    "required_gold": [
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921": "Directly states the rule for firing missiles into a melee: you usually cannot choose which participant, friend or foe, is hit, and the Referee determines the target randomly. This fully covers the expected answer."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "36925484fd7e096432ae5dc774d30732b41ae967aa227ec11f11d98040af5921"
+    ],
+    "_supporting_gold": [],
+    "required_anchor_ids": [
+      "ga_50154ef14b701ae1"
+    ],
+    "supporting_anchor_ids": []
+  },
+  {
+    "id": "sw_rev_s11_saving_throw_procedure",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "How do saving throws work (what categories exist, what do you roll, and what number do you need)?",
+    "answer": "In Swords & Wizardry, a saving throw is a d20 roll to avoid or lessen a hazard’s effect. Each class has a saving throw target number that gets lower (easier) as the character gains levels. To make a saving throw, roll 1d20; if the result is equal to or higher than the character’s saving throw target number, the saving throw succeeds. Some classes have bonuses against particular hazards (e.g., Magic-Users get +2 on saving throws against spells), and these bonuses are described in the class write-ups. Multi-classed characters use the best available saving throw option from their classes, including any class bonuses, but you do not combine one class’s target number with another class’s bonus. Monsters also make saving throws: a monster’s saving throw target number may be listed in its description, and the book provides a monster saving throw table keyed by Hit Dice. The book also describes an alternative (Original Game) method with multiple saving-throw categories, but notes it does not integrate directly without house-ruling changes.",
+    "expected_answer_summary": "Roll d20; succeed on result ≥ saving throw target number (class-based, improves with level; bonuses by class). Multi-class uses best option (don’t mix bonus/target). Monsters use listed target or HD table; an alternative multi-category save method is provided but is a house-rule variant.",
+    "source_page": "26, 34, 38",
+    "gold_unit_ids": [
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+      "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf",
+      "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c",
+      "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+    ],
+    "gold_locations": {
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b": {
+        "page": 34,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b"
+        ]
+      },
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43": {
+        "page": 26,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Thief",
+          "SAVING THROWS"
+        ],
+        "source_unit_ids": [
+          "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43"
+        ]
+      },
+      "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf": {
+        "page": 95,
+        "structural_path": [
+          "Monsters",
+          "Monster Descriptions",
+          "READING THE MONSTER DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf"
+        ]
+      },
+      "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c": {
+        "page": 34,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Saving Throw Categories (Alternative Method)"
+        ],
+        "source_unit_ids": [
+          "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c"
+        ]
+      },
+      "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4": {
+        "page": 34,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Different Categories of Saving Throws"
+        ],
+        "source_unit_ids": [
+          "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+        ]
+      }
+    },
+    "required_gold": [
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+      "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf",
+      "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c"
+    ],
+    "supporting_gold": [
+      "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+    ],
+    "required_gold_rationale": {
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b": "Primary rule anchor for player-character saving throws: states you roll a d20, succeed on a result equal to or higher than the class saving throw target number, that the target improves with level, and that some classes get bonuses against certain hazards.",
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43": "Needed for the multiclass rule in the expected answer: use the best available saving throw option including class bonuses, but do not combine one class's target with another class's bonus.",
+      "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf": "Needed to ground the monster procedure from the expected answer: monsters have a listed saving throw target number that must be met or exceeded on a d20.",
+      "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c": "Needed for the 'categories exist' and 'house-rule variant' part: this chunk explicitly presents the multi-category saving throw method as an alternative method, supporting that categories are not the default but a variant."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "5cd110faa584338d939368486f3aac020a14d0b6c21767662c3f16dc1c64fd6b",
+      "d694e3f44dfd86bc6067beeece2889e55a4eaa31906ac28b462917049b955f43",
+      "7f5a3326f66c712633ff3a272ca78073a83db7a583f283d2a49c3b0c7fb655cf",
+      "5052e6ed48c624cfc3093c3bfa70f8471e7ad644bed0549c1350cb5ab256a12c"
+    ],
+    "_supporting_gold": [
+      "da8907aea112339e8dbce8de518ec88e83d08eacebbd5accc4376b8d154c71f4"
+    ],
+    "required_anchor_ids": [
+      "ga_44cf270a34813f34",
+      "ga_c7dc81ad683de2ab",
+      "ga_6b41be7ba6d2f979",
+      "ga_8186837cfd702a23"
+    ],
+    "supporting_anchor_ids": [
+      "ga_4edc08f823ef259c"
+    ]
+  },
+  {
+    "id": "sw_rev_s12_morale_and_reaction_rolls",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How do reaction rolls and morale checks work (when to roll, what dice, and how to interpret results)?",
+    "answer": "Reaction: monsters do not always attack on sight. In particular, if monsters surprise the adventurers and are not on the alert for intruders, the Referee may roll 2d6 to determine their initial reaction: 2–6 = hostile and attack; 7–9 = withhold judgment and wait to see if the adventurers are hostile; 10–12 = positive initial reaction and may even offer help (possibly for pay). Morale: most monsters will not fight a hopeless battle; they may retreat, flee, or surrender. The Referee decides when monsters abandon the battle based on the situation and the monsters’ intelligence, and NPC allies may also flee if survival looks grim. The book points to an optional morale system elsewhere.",
+    "expected_answer_summary": "Reaction can be a 2d6 roll (2–6 hostile attack; 7–9 wait; 10–12 positive) in the surprise/alertness context. Morale is primarily Referee-adjudicated unless using the optional morale system.",
+    "source_page": "35, 41",
+    "gold_unit_ids": [
+      "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6",
+      "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594",
+      "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8",
+      "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+    ],
+    "gold_locations": {
+      "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6": {
+        "page": 39,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "How it works"
+        ],
+        "source_unit_ids": [
+          "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6"
+        ]
+      },
+      "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594": {
+        "page": 40,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "NEGOTIATION AND DIPLOMACY"
+        ],
+        "source_unit_ids": [
+          "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594"
+        ]
+      },
+      "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8": {
+        "page": 39,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "Optional Morale Rules"
+        ],
+        "source_unit_ids": [
+          "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8"
+        ]
+      },
+      "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd": {
+        "page": 39,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "How it works"
+        ],
+        "source_unit_ids": [
+          "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+        ]
+      }
+    },
+    "required_gold": [
+      "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6",
+      "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594"
+    ],
+    "supporting_gold": [
+      "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8",
+      "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+    ],
+    "required_gold_rationale": {
+      "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6": "Provides the concrete morale procedure: when checks occur (first casualty and half the side lost), the die used (2d6), and how to interpret failure (roll higher than morale rating means surrender/retreat). This is the main operational rule for morale checks.",
+      "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594": "Anchors the reaction-roll concept by stating that using dice to determine a monster’s initial reaction before negotiations start is acceptable. This is the only candidate that directly ties reaction rolls to when they are used."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "54267c41a5c30c23dca7abbff19f807dd7fd50245cfd75d19b65c10f6c65c8c6",
+      "fe4e77aeaec82833fdc3870e2e3729f8089e6a0a63d2f326e87eab6596163594"
+    ],
+    "_supporting_gold": [
+      "5922ba0310d2341f05f3a85fea6274f1f484f4722d5acfc128f90bf00d4a11e8",
+      "baabcbc2f704c59c31a8aee64fdfc65c23aa8d1ef3819d725a05e707e5378fbd"
+    ],
+    "required_anchor_ids": [
+      "ga_8c6fa679328eda56",
+      "ga_5c64185d3f11a6cf"
+    ],
+    "supporting_anchor_ids": [
+      "ga_1c080e87474320ed"
+    ]
+  },
+  {
+    "id": "sw_rev_s13_encumbrance_and_movement",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How does encumbrance affect movement and what needs to be tracked to apply it?",
+    "answer": "Encumbrance is tracked as carried weight (in pounds), including gear and treasure. A normal load of miscellaneous equipment (excluding armor and weapons) is assumed to be 10 pounds, and treasure adds weight: each coin and gem weighs one-tenth of a pound. Total carried weight determines base movement rate: up to 75 lb = 12; 76–100 lb = 9; 101–150 lb = 6; 151–300 lb (300-lb max) = 3. Any Strength-based Carry Modifier is added to the total for determining which bracket you fall into (e.g., +10 increases the threshold before dropping a movement category; –10 reduces it).",
+    "expected_answer_summary": "Track carried pounds (gear + treasure; coin/gem = 0.1 lb each). Movement brackets: ≤75→12, 76–100→9, 101–150→6, 151–300→3 (300 max), adjusted by Strength Carry Modifier.",
+    "source_page": "32",
+    "gold_unit_ids": [
+      "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1",
+      "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503",
+      "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd",
+      "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+    ],
+    "gold_locations": {
+      "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1": {
+        "page": 32,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "Weight and Movement",
+          "Base Movement Rate"
+        ],
+        "source_unit_ids": [
+          "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1"
+        ]
+      },
+      "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503": {
+        "page": 32,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "Weight and Movement",
+          "Base Movement Rate"
+        ],
+        "source_unit_ids": [
+          "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503"
+        ]
+      },
+      "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd": {
+        "page": 32,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "Weight and Movement",
+          "WEIGHT AND MOVEMENT"
+        ],
+        "source_unit_ids": [
+          "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd"
+        ]
+      },
+      "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0": {
+        "page": 32,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "Weight and Movement",
+          "WEIGHT AND MOVEMENT"
+        ],
+        "source_unit_ids": [
+          "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+        ]
+      }
+    },
+    "required_gold": [
+      "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1",
+      "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503",
+      "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd"
+    ],
+    "supporting_gold": [
+      "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+    ],
+    "required_gold_rationale": {
+      "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1": "Provides the core encumbrance-to-movement brackets: up to 75->12, 76-100->9, 101-150->6, 151-300->3, including the 300-pound maximum.",
+      "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503": "Needed because the expected answer specifies that Strength's Carry Modifier adjusts the thresholds; this chunk explicitly states how the modifier is added to carrying capacity brackets.",
+      "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd": "Needed for what must be tracked to apply encumbrance: carried pounds including miscellaneous gear/treasure, and specifically that each coin and gem weighs 0.1 lb."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "f0e2c5a4e998928b5f90c320c127ad487dcd3f403a94fe6b72f275422fd884d1",
+      "265a3d8f62b73a43047933f549834f6198c864ba7f804b88b875cb3a483eb503",
+      "939b4a503af88161b01717074fa47b2998ee6e4ddf7070ac97c1acda0e449dcd"
+    ],
+    "_supporting_gold": [
+      "d38fd48b3f27593416d552f8cbabe815f01de2c09c325af7427b463a6e689de0"
+    ],
+    "required_anchor_ids": [
+      "ga_612dba3599f02910",
+      "ga_9b0342cdb03491a8"
+    ],
+    "supporting_anchor_ids": []
+  },
+  {
+    "id": "sw_rev_s14_exploration_time_and_encounter_checks",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "In dungeon exploration (outside combat), how is time tracked and when do you check for wandering monsters or other time-based events?",
+    "answer": "In dungeon exploration outside combat, procedural time is tracked in turns: a turn represents 10 minutes and is used for normal movement in dangerous places. Wandering monster checks are commonly handled as a 1-in-6 chance on a d6 each turn (with the Referee free to make them less common, such as checking once every three turns). The example of play makes this concrete: searching a 10-by-10 area for secret doors takes a full turn, and the Referee makes a wandering-monster check for that turn. Some keyed dungeon material also specifies a cadence explicitly (e.g., check once every three turns with a 1-in-6 chance per check).",
+    "expected_answer_summary": "Dungeon exploration uses 10-minute turns; wandering monsters are often checked on 1-in-6 each turn (or less often, e.g. once per three turns), and time-consuming actions like searching a 10×10 area consume a full turn and trigger checks.",
+    "source_page": "33, 45, 74, 79",
+    "gold_unit_ids": [
+      "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa",
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf",
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff",
+      "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+    ],
+    "gold_locations": {
+      "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa": {
+        "page": 79,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure",
+          "Monsters in the Dungeon",
+          "MIXING MONSTERS IN AN ENCOUNTER"
+        ],
+        "source_unit_ids": [
+          "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa"
+        ]
+      },
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2"
+        ]
+      },
+      "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf": {
+        "page": 45,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Gameplay Example",
+          "TRAPS AND LOOT"
+        ],
+        "source_unit_ids": [
+          "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf"
+        ]
+      },
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b": {
+        "page": 33,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "TIME"
+        ],
+        "source_unit_ids": [
+          "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b"
+        ]
+      },
+      "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff": {
+        "page": 74,
+        "structural_path": [
+          "Referee Guide",
+          "Designing a Dungeon Adventure",
+          "Sample Dungeon Map",
+          "WANDERING MONSTERS ON"
+        ],
+        "source_unit_ids": [
+          "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff"
+        ]
+      },
+      "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97": {
+        "page": 32,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "Weight and Movement",
+          "Indoor, Underground, and City Movement"
+        ],
+        "source_unit_ids": [
+          "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+        ]
+      }
+    },
+    "required_gold": [
+      "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa",
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf"
+    ],
+    "supporting_gold": [
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff",
+      "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+    ],
+    "required_gold_rationale": {
+      "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa": "Provides the core wandering-monster procedure for dungeon exploration: usually 1-in-6 each turn, with the explicit variant of checking only once per three turns.",
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2": "Defines the exploration time unit by stating that a turn represents 10 minutes.",
+      "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf": "Anchors the time-consuming-action part of the answer by showing that searching uses full turns and that the Referee checks for wandering monsters when a full turn is spent."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "387f2072ec1ef410b50d2b04187b7068ba063a5ee071db016647a93b4db49caa",
+      "abc4a8bf197daa813880a6ae2f49fdf0770698570dafcd9ffa9185386765b1a2",
+      "9077c0de29ca00b10b74b5c9d25d313c9df0120eeca2ee34425b7844c4c7becf"
+    ],
+    "_supporting_gold": [
+      "d91f0275e35e4a6f0ffaf3df8faf9cc971bf4bbbbd76cc0f6033abe42e39a50b",
+      "8726e00090f76a4fce57fdd737d707ab9d5ab073fe94e3f08d8b7ff46c585cff",
+      "9a67ff51160be374c6e35528709386172f26d38acf0e1ffe9e16ec6dfec92d97"
+    ],
+    "required_anchor_ids": [
+      "ga_67ec08516e6e607d",
+      "ga_39bc25c702d0ae32",
+      "ga_a3d086a50f892e82"
+    ],
+    "supporting_anchor_ids": [
+      "ga_cc1bf17eacc2f915",
+      "ga_7ad82890e19e1466"
+    ]
+  },
+  {
+    "id": "sw_rev_s15_light_sources_duration",
+    "tier": "T2",
+    "question_type": "lookup",
+    "question": "How long do common light sources last (torches/lantern oil/etc.), and what time unit is that duration measured in?",
+    "answer": "Common light sources have explicit real-time durations measured in hours. A pint of lamp oil keeps a lantern (bullseye or hooded) burning for 4 hours. Torches burn for 1 hour.",
+    "expected_answer_summary": "Lantern oil: 4 hours per pint. Torches: 1 hour.",
+    "source_page": "29",
+    "gold_unit_ids": [
+      "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47",
+      "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+    ],
+    "gold_locations": {
+      "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47": {
+        "page": 29,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47"
+        ]
+      },
+      "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026": {
+        "page": 29,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Buy Equipment",
+          "Item Descriptions",
+          "ITEM DESCRIPTIONS"
+        ],
+        "source_unit_ids": [
+          "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+        ]
+      }
+    },
+    "required_gold": [
+      "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47",
+      "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+    ],
+    "supporting_gold": [],
+    "required_gold_rationale": {
+      "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47": "Provides the torch duration explicitly: torches burn for one hour, establishing both the item and the time unit.",
+      "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026": "Provides the lantern oil duration explicitly: a pint of oil keeps a lantern burning for four hours, establishing both the quantity and the time unit."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "41eafbede4399d91432d4736c6ce5db539035bd8913b3f12ef290ed765c2cf47",
+      "e6847fd63539eb98fc9717066c1a75e241819cdc8bc6433a82feff1d63ad1026"
+    ],
+    "_supporting_gold": [],
+    "required_anchor_ids": [
+      "ga_def0ac7fea6861fa"
+    ],
+    "supporting_anchor_ids": []
+  },
+  {
+    "id": "sw_rev_s16_surprise_procedure",
+    "tier": "T2",
+    "question_type": "atomic_rules",
+    "question": "How does surprise work and what advantage does the surprising side get?",
+    "answer": "If surprise is a possibility, roll 1d6 once per side (not per individual). A side is surprised on a 1–2; a party that includes a Monk or Ranger is surprised only on a 1. It is possible for both groups to be surprised, canceling out the effect. A group generally cannot be surprised if it is already aware of an opponent’s presence. If one side is surprised, the other side automatically gets to take actions before the first initiative roll; if that side also wins the first initiative roll, it can take two actions before the surprised side can do anything. Additionally, if a group is surprised, each person (or creature) in it has a 1-in-4 chance to drop one or more handheld items.",
+    "expected_answer_summary": "Surprise is a 1d6 roll per side (1–2 surprised; Monk/Ranger party only on 1); surprised side grants opponents actions before initiative (potentially two actions before it can act).",
+    "source_page": "35",
+    "gold_unit_ids": [
+      "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94",
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+    ],
+    "gold_locations": {
+      "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "1. SURPRISE"
+        ],
+        "source_unit_ids": [
+          "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94"
+        ]
+      },
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2": {
+        "page": 35,
+        "structural_path": [
+          "Player Guide",
+          "How to Play",
+          "Combat",
+          "INITIATIVE AND ORDER OF BATTLE"
+        ],
+        "source_unit_ids": [
+          "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2"
+        ]
+      },
+      "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335": {
+        "page": 22,
+        "structural_path": [
+          "Player Guide",
+          "Creating a Character",
+          "Choose a Character Class",
+          "Ranger",
+          "RANGER CLASS ABILITIES"
+        ],
+        "source_unit_ids": [
+          "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+        ]
+      }
+    },
+    "required_gold": [
+      "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94"
+    ],
+    "supporting_gold": [
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+    ],
+    "required_gold_rationale": {
+      "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94": "This single chunk fully states the surprise procedure and advantage: roll 1d6 once per side, 1–2 means surprised, Monk or Ranger party surprised only on 1, and the unsurprised side acts before initiative and can potentially get two actions before the other side acts if it also wins initiative."
+    },
+    "_mode": "single_cite",
+    "_status": "uncited",
+    "_required_gold": [
+      "051c0efe993025fcc50db31ba75096d8f09c1f8a8775cc22f687da7ee4d2bf94"
+    ],
+    "_supporting_gold": [
+      "7030b943d3faf1171bd6711b365f7366b7e8e3dfd656ef900e8495c26ffd75c2",
+      "3623968227307000a8ca467040feb2bae87e7c6b744c9b6dcaf6a7ccbf85a335"
+    ],
+    "required_anchor_ids": [
+      "ga_abc54a3147bdb7e5"
+    ],
+    "supporting_anchor_ids": [
+      "ga_067e03c1ed875cf6",
+      "ga_256478a4070b36e8"
+    ]
+  }
+]
