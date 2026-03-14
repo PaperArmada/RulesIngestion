@@ -1,0 +1,40 @@
+# Pathfinder 2e Player Core — auto-gold pilot (GPT-5.4 reviewer).
+# Output: out/retrieval_lab/experiments/pf2e_autogold_pilot_20260306_010204
+#
+# 1) Embed once (from RulesIngestion root):
+#    uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/dense/pf2e_autogold_pilot.yaml --embed-only
+# 2) Run retrieval + auto-gold (use run_id from step 1):
+#    uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/dense/pf2e_autogold_pilot.yaml --run-id <run_id>
+#
+retrieval_mode: dense
+experiment_name: "pf2e_autogold_pilot"
+experiment_id: "pf2e_autogold_pilot_20260306_010204"
+substrate_path: "out/Pathfinder2ePlayerCore"
+document_id: "PathCore"
+query_batches:
+  - "evals/retrieval/Pathfinder2ePlayerCore/pathfinder2e_player_core_50q_benchmark.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+reuse_embeddings: true
+gold_jaccard_threshold: 0.15
+batch_size: 16
+min_chars: 200
+merge_chunks: true
+merge_max_chars: 2000
+
+# Auto-gold review: GPT-5.4 assigns required/supporting gold from top-k retrieval.
+auto_gold_review:
+  enabled: true
+  llm_model_id: "gpt-5.4"
+  candidate_top_k: 20
+  retrieval_model_id: ""
+  max_queries: 0
+  max_chars_per_chunk: 1600
+  max_required_gold: 5
+  max_supporting_gold: 5
+  review_queue_challenge_sample_size: 10
+  max_required_overlap: 2
+  persist_benchmark: true

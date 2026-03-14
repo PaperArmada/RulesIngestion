@@ -1,0 +1,26 @@
+# D&D 5e 2024 Player's Handbook atomic rules benchmark.
+# Keep query text language-locked to the shared atomic template so cross-ruleset
+# comparisons reflect retrieval behavior and vocabulary drift, not benchmark rewrites.
+retrieval_mode: dense
+experiment_name: "phb5e_2024_atomic_rules"
+substrate_path: "out/DnD_PHB_5.5"
+document_id: "DnD_PHB_5.5"
+substrate_version: "v2_merged2000_min200"
+query_batches:
+  - "evals/retrieval/PHB5e/dnd_5e_2024_atomic_rules_benchmark.v2_merged2000_min200.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+reuse_embeddings: true
+seed: 42
+gold_jaccard_threshold: 0.15
+batch_size: 16
+min_chars: 200
+merge_chunks: true
+merge_max_chars: 2000
+chunk_quality_gate_enabled: true
+chunk_quality_max_short_le_40_rate: 0.10
+chunk_quality_max_short_le_80_rate: 0.20
+chunk_quality_max_duplicate_text_entry_rate: 0.05

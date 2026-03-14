@@ -1,0 +1,22 @@
+# Starfinder Player Core atomic rules benchmark — run retrieval and cite gold from top-k
+retrieval_mode: dense
+experiment_name: "starfinder_player_core_atomic_rules"
+substrate_path: "out/StarFinderPlayerCore"
+document_id: "StarFinderPlayerCore"
+query_batches:
+  - "evals/retrieval/StarFinderPlayerCore/starfinder_player_core_atomic_rules_benchmark.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20]
+output_dir: "out/retrieval_lab/experiments"
+mongo_uri: null
+reuse_embeddings: false
+gold_jaccard_threshold: 0.15
+batch_size: 16
+min_chars: 200
+merge_chunks: true
+merge_max_chars: 2000
+chunk_quality_gate_enabled: true
+chunk_quality_max_short_le_40_rate: 0.10
+chunk_quality_max_short_le_80_rate: 0.20
+chunk_quality_max_duplicate_text_entry_rate: 0.05

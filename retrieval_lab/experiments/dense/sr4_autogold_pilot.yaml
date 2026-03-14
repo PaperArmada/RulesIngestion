@@ -37,6 +37,3 @@ auto_gold_review:
   review_queue_challenge_sample_size: 5
   max_required_overlap: 2
   persist_benchmark: true
-
-# Allow run when benchmark has no .contract.json yet (blank-for-autogold).
-allow_benchmark_contract_mismatch: true

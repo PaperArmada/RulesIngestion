@@ -351,6 +351,7 @@ def run_bm25_mode(
     )
 
     query_reviews = []
+    unit_by_id = {str(unit.get("id") or ""): unit for unit in corpus if unit.get("id")}
     pf_policy = ParentFetchConfig(
         depth=flags.parent_fetch_depth,
         char_cap=flags.parent_fetch_cap,
@@ -360,12 +361,16 @@ def run_bm25_mode(
         pq = metrics.per_query[i]
         retrieved = []
         for r, (cid, sc) in enumerate(zip(ranked_lists[i], score_lists[i]), start=1):
+            unit = unit_by_id.get(cid, {})
             retrieved.append(
                 {
                     "rank": r,
                     "chunk_id": cid,
                     "score": round(sc, 4),
                     "text": id_to_text.get(cid, ""),
+                    "page": unit.get("page"),
+                    "structural_path": list(unit.get("structural_path") or []),
+                    "source_unit_ids": list(unit.get("source_unit_ids") or id_to_source_ids.get(cid, [cid])),
                 }
             )
         if pf_policy.enabled:
@@ -377,6 +382,9 @@ def run_bm25_mode(
                 "query_id": q.get("id", ""),
                 "question": q.get("question", ""),
                 "expected_answer_summary": q.get("expected_answer_summary", ""),
+                "notes": q.get("notes", ""),
+                "tier": q.get("tier", q.get("_tier", "")),
+                "question_type": q.get("question_type", ""),
                 "gold_unit_ids": list(q.get("gold_unit_ids") or []),
                 "first_gold_rank": pq.get("first_gold_rank"),
                 "failure_type": pq.get("failure_type", ""),

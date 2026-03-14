@@ -68,7 +68,13 @@ class OpenAIAnswerGenerator:
         except Exception:
             pass
 
-        resp = client.responses.create(**kwargs)
+        try:
+            resp = client.responses.create(**kwargs)
+        except TypeError as exc:
+            if "response_format" not in str(exc):
+                raise
+            kwargs.pop("response_format", None)
+            resp = client.responses.create(**kwargs)
         raw_text = getattr(resp, "output_text", None) or ""
         if not raw_text:
             # Fallback: attempt to stitch text outputs.
