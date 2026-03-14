@@ -236,6 +236,15 @@ class ExperimentConfig:
     parent_fetch_enabled: bool = False
     # R11: Cross-encoder reranker model name (optional). When set, re-rank hybrid top-50 to top-10.
     reranker: Optional[str] = None
+    # LLM listwise reranker (fixed-pool reorder only).
+    llm_rerank_enabled: bool = False
+    llm_rerank_method: str = "listwise"  # listwise
+    llm_rerank_model: str = ""
+    llm_rerank_admission_k: int = 40
+    llm_rerank_text_char_limit: int = 900
+    llm_rerank_prompt_template_id: str = "pf2e_listwise_v1"
+    llm_rerank_max_output_tokens: int = 1200
+    llm_rerank_cache_dir: str = ""
     # R6: Expand candidate set using co_retrieval_hints (when hint.related_topic matches unit topic_tags).
     co_retrieval_expand: bool = False
     # Phase-0 metric contract and guardrails.
@@ -317,6 +326,8 @@ class ExperimentConfig:
             self.query_enhancement.profile_path = str((base / self.query_enhancement.profile_path).resolve())
         if self.source_config_path:
             self.source_config_path = str((base / self.source_config_path).resolve())
+        if self.llm_rerank_cache_dir:
+            self.llm_rerank_cache_dir = str((base / self.llm_rerank_cache_dir).resolve())
 
     def validate(self, embed_only: bool = False, eval_only: bool = False) -> None:
         """Raise ValueError if config is invalid. Use embed_only=True or eval_only=True for single-step validation."""
@@ -328,6 +339,23 @@ class ExperimentConfig:
             raise ValueError("retrieval_mode must be 'dense', 'hybrid', 'hybrid+rerank', or 'bm25'")
         if self.retrieval_mode == "hybrid+rerank" and not self.reranker:
             raise ValueError("retrieval_mode='hybrid+rerank' requires reranker")
+        if self.llm_rerank_enabled:
+            if self.retrieval_mode not in ("hybrid", "hybrid+rerank"):
+                raise ValueError("llm_rerank_enabled requires retrieval_mode='hybrid' or 'hybrid+rerank'")
+            if self.llm_rerank_method not in ("listwise",):
+                raise ValueError("llm_rerank_method must be 'listwise'")
+            if not str(self.llm_rerank_model).strip():
+                raise ValueError("llm_rerank_model is required when llm_rerank_enabled=true")
+            if int(self.llm_rerank_admission_k) < 1:
+                raise ValueError("llm_rerank_admission_k must be >= 1")
+            if int(self.llm_rerank_admission_k) < max(self.top_k):
+                raise ValueError("llm_rerank_admission_k must be >= max(top_k)")
+            if int(self.llm_rerank_text_char_limit) < 100:
+                raise ValueError("llm_rerank_text_char_limit must be >= 100")
+            if int(self.llm_rerank_max_output_tokens) < 64:
+                raise ValueError("llm_rerank_max_output_tokens must be >= 64")
+            if not str(self.llm_rerank_prompt_template_id).strip():
+                raise ValueError("llm_rerank_prompt_template_id is required when llm_rerank_enabled=true")
         if self.retrieval_mode == "bm25" and self.dual_list_fusion:
             raise ValueError("dual_list_fusion is not supported in bm25 mode")
         if self.bm25_tokenizer_mode not in ("basic", "hyphenated"):
@@ -547,6 +575,14 @@ class ExperimentConfig:
             parent_fetch_cap=int(data.get("parent_fetch_cap", 2000)),
             parent_fetch_enabled=bool(data.get("parent_fetch_enabled", False)),
             reranker=str(data["reranker"]) if data.get("reranker") else None,
+            llm_rerank_enabled=bool(data.get("llm_rerank_enabled", False)),
+            llm_rerank_method=str(data.get("llm_rerank_method", "listwise")),
+            llm_rerank_model=str(data.get("llm_rerank_model", "")),
+            llm_rerank_admission_k=int(data.get("llm_rerank_admission_k", 40)),
+            llm_rerank_text_char_limit=int(data.get("llm_rerank_text_char_limit", 900)),
+            llm_rerank_prompt_template_id=str(data.get("llm_rerank_prompt_template_id", "pf2e_listwise_v1")),
+            llm_rerank_max_output_tokens=int(data.get("llm_rerank_max_output_tokens", 1200)),
+            llm_rerank_cache_dir=str(data.get("llm_rerank_cache_dir", "")),
             co_retrieval_expand=bool(data.get("co_retrieval_expand", False)),
             guardrail_t1_mrr_drop_max=float(data.get("guardrail_t1_mrr_drop_max", 0.02)),
             clause_family_projection=bool(data.get("clause_family_projection", False)),

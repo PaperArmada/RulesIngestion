@@ -62,6 +62,22 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.parent_fetch_enabled = True
     if hasattr(args, "reranker") and args.reranker:
         config.reranker = args.reranker
+    if getattr(args, "llm_rerank_enabled", False):
+        config.llm_rerank_enabled = True
+    if getattr(args, "llm_rerank_method", None) is not None:
+        config.llm_rerank_method = str(args.llm_rerank_method)
+    if getattr(args, "llm_rerank_model", None) is not None:
+        config.llm_rerank_model = str(args.llm_rerank_model)
+    if getattr(args, "llm_rerank_admission_k", None) is not None:
+        config.llm_rerank_admission_k = int(args.llm_rerank_admission_k)
+    if getattr(args, "llm_rerank_text_char_limit", None) is not None:
+        config.llm_rerank_text_char_limit = int(args.llm_rerank_text_char_limit)
+    if getattr(args, "llm_rerank_prompt_template_id", None) is not None:
+        config.llm_rerank_prompt_template_id = str(args.llm_rerank_prompt_template_id)
+    if getattr(args, "llm_rerank_max_output_tokens", None) is not None:
+        config.llm_rerank_max_output_tokens = int(args.llm_rerank_max_output_tokens)
+    if getattr(args, "llm_rerank_cache_dir", None) is not None:
+        config.llm_rerank_cache_dir = str(args.llm_rerank_cache_dir)
     if getattr(args, "clause_family_projection", False):
         config.clause_family_projection = True
     if getattr(args, "crossref_sidecar_expand", False):
@@ -162,6 +178,28 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         ]
         if not config.answer_evaluation.enabled:
             config.answer_evaluation.enabled = True
+    if getattr(args, "auto_gold_review", False):
+        config.auto_gold_review.enabled = True
+    if getattr(args, "auto_gold_model", None) is not None:
+        config.auto_gold_review.llm_model_id = str(args.auto_gold_model or "")
+        if not config.auto_gold_review.enabled:
+            config.auto_gold_review.enabled = True
+    if getattr(args, "auto_gold_retrieval_model", None) is not None:
+        config.auto_gold_review.retrieval_model_id = str(args.auto_gold_retrieval_model or "")
+    if getattr(args, "auto_gold_top_k", None) is not None:
+        config.auto_gold_review.candidate_top_k = int(args.auto_gold_top_k)
+        if not config.auto_gold_review.enabled:
+            config.auto_gold_review.enabled = True
+    if getattr(args, "auto_gold_max_queries", None) is not None:
+        config.auto_gold_review.max_queries = int(args.auto_gold_max_queries)
+    if getattr(args, "auto_gold_max_chars_per_chunk", None) is not None:
+        config.auto_gold_review.max_chars_per_chunk = int(args.auto_gold_max_chars_per_chunk)
+    if getattr(args, "auto_gold_challenge_sample", None) is not None:
+        config.auto_gold_review.review_queue_challenge_sample_size = int(args.auto_gold_challenge_sample)
+    if getattr(args, "auto_gold_max_required_overlap", None) is not None:
+        config.auto_gold_review.max_required_overlap = int(args.auto_gold_max_required_overlap)
+    if getattr(args, "allow_benchmark_contract_mismatch", False):
+        config.allow_benchmark_contract_mismatch = True
     if getattr(args, "enhancement_mode", None) is not None:
         config.query_enhancement.enabled = args.enhancement_mode != "none"
         config.query_enhancement.mode = args.enhancement_mode

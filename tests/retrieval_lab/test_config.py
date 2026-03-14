@@ -230,3 +230,52 @@ def test_config_parses_allow_benchmark_contract_mismatch_flag() -> None:
         }
     )
     assert cfg.allow_benchmark_contract_mismatch is True
+
+
+def test_config_parses_llm_rerank_fields() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "llm_rerank_enabled": True,
+            "llm_rerank_method": "listwise",
+            "llm_rerank_model": "gpt-4o-mini",
+            "llm_rerank_admission_k": 40,
+            "llm_rerank_text_char_limit": 800,
+            "llm_rerank_prompt_template_id": "pf2e_listwise_v1",
+            "llm_rerank_max_output_tokens": 1000,
+            "llm_rerank_cache_dir": "out/cache/llm_rerank",
+        }
+    )
+    assert cfg.llm_rerank_enabled is True
+    assert cfg.llm_rerank_method == "listwise"
+    assert cfg.llm_rerank_model == "gpt-4o-mini"
+    assert cfg.llm_rerank_admission_k == 40
+    assert cfg.llm_rerank_text_char_limit == 800
+    assert cfg.llm_rerank_prompt_template_id == "pf2e_listwise_v1"
+    assert cfg.llm_rerank_max_output_tokens == 1000
+    assert cfg.llm_rerank_cache_dir == "out/cache/llm_rerank"
+
+
+def test_config_validate_llm_rerank_requires_model() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "llm_rerank_enabled": True,
+            "llm_rerank_model": "",
+        }
+    )
+    with pytest.raises(ValueError, match="llm_rerank_model is required"):
+        cfg.validate()
+
+
+def test_config_validate_llm_rerank_requires_hybrid_mode() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "retrieval_mode": "dense",
+            "llm_rerank_enabled": True,
+            "llm_rerank_model": "gpt-4o-mini",
+        }
+    )
+    with pytest.raises(ValueError, match="llm_rerank_enabled requires retrieval_mode='hybrid' or 'hybrid\\+rerank'"):
+        cfg.validate()

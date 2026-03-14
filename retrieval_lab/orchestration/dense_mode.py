@@ -135,6 +135,18 @@ def _minmax_normalize(values: Dict[str, float]) -> Dict[str, float]:
     return {k: (v - lo) / denom for k, v in values.items()}
 
 
+def _required_gold_ids(query: Dict[str, Any]) -> List[str]:
+    required = query.get("required_gold")
+    if not isinstance(required, list) or not required:
+        required = query.get("gold_unit_ids") or []
+    out: List[str] = []
+    for item in required:
+        cid = str(item).strip()
+        if cid and cid not in out:
+            out.append(cid)
+    return out
+
+
 def _compute_hybrid_contribution(
     *,
     grounded_queries: List[Dict[str, Any]],
@@ -250,14 +262,15 @@ def _load_or_compute_corpus_embeddings(
     npy_path = embed_dir / "embeddings" / f"{safe_model_id}_corpus.npy"
     index_path = embed_dir / "embeddings" / "corpus_index.json"
 
-    def _stored_identity(index_data: Dict[str, Any]) -> tuple[str, str]:
+    def _stored_identity(index_data: Dict[str, Any]) -> tuple[str, str, bool]:
         stored_fp = str(index_data.get("corpus_fingerprint") or "").strip()
         if not stored_fp:
             stored_fp = corpus_fingerprint_from_index_map(index_data.get("unit_id_to_index", {}))
+        has_content_fp = "corpus_content_fingerprint" in index_data or "ordered_corpus_records" in index_data
         stored_content_fp = str(index_data.get("corpus_content_fingerprint") or "").strip()
         if not stored_content_fp:
             stored_content_fp = corpus_content_fingerprint_from_index_payload(index_data)
-        return stored_fp, stored_content_fp
+        return stored_fp, stored_content_fp, has_content_fp
 
     if not (npy_path.exists() and index_path.exists()) and eval_only_run_id:
         for subdir in Path(config.output_dir).iterdir():
@@ -269,14 +282,14 @@ def _load_or_compute_corpus_embeddings(
             try:
                 index_data = json.loads(idx_path.read_text(encoding="utf-8"))
                 if index_data.get("run_id") == run_id:
-                    stored_fp, stored_content_fp = _stored_identity(index_data)
+                    stored_fp, stored_content_fp, has_content_fp = _stored_identity(index_data)
                     if stored_fp and stored_fp != current_corpus_fingerprint:
                         raise ValueError(
                             "Eval-only preflight failed: run_id incompatible with current corpus shape; "
                             f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
                             f"stored={stored_fp[:12]}"
                         )
-                    if stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
+                    if has_content_fp and stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
                         raise ValueError(
                             "Eval-only preflight failed: run_id incompatible with current corpus content; "
                             f"re-embed with same config. current={current_corpus_content_fingerprint[:12]} "
@@ -296,14 +309,14 @@ def _load_or_compute_corpus_embeddings(
     if eval_only_run_id and npy_path.exists() and index_path.exists():
         loaded = np.load(npy_path)
         index_data = json.loads(index_path.read_text(encoding="utf-8"))
-        stored_fp, stored_content_fp = _stored_identity(index_data)
+        stored_fp, stored_content_fp, has_content_fp = _stored_identity(index_data)
         if stored_fp and stored_fp != current_corpus_fingerprint:
             raise ValueError(
                 "Eval-only preflight failed: run_id incompatible with current corpus shape; "
                 f"re-embed with same config. current={current_corpus_fingerprint[:12]} "
                 f"stored={stored_fp[:12]}"
             )
-        if stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
+        if has_content_fp and stored_content_fp and stored_content_fp != current_corpus_content_fingerprint:
             raise ValueError(
                 "Eval-only preflight failed: run_id incompatible with current corpus content; "
                 f"re-embed with same config. current={current_corpus_content_fingerprint[:12]} "
@@ -329,8 +342,10 @@ def _load_or_compute_corpus_embeddings(
             except (json.JSONDecodeError, OSError):
                 cache_index_data = None
         if cached and len(cached) == len(corpus_ids) and cache_index_data is not None:
-            stored_fp, stored_content_fp = _stored_identity(cache_index_data)
-            if stored_fp == current_corpus_fingerprint and stored_content_fp == current_corpus_content_fingerprint:
+            stored_fp, stored_content_fp, has_content_fp = _stored_identity(cache_index_data)
+            id_ok = stored_fp == current_corpus_fingerprint
+            content_ok = (not has_content_fp) or (stored_content_fp == current_corpus_content_fingerprint)
+            if id_ok and content_ok:
                 id_to_emb = {r["chunk_id"]: r["embedding"] for r in cached}
                 corpus_embeddings = np.array([id_to_emb[uid] for uid in corpus_ids], dtype=np.float32)
                 logger.info("Loaded %d embeddings from MongoDB cache", len(corpus_embeddings))
@@ -875,6 +890,7 @@ def _run_ranking_pipeline(
         )
 
     reranker_model = getattr(config, "reranker", None)
+    llm_rerank_debug: Optional[List[Dict[str, Any]]] = None
     if config.retrieval_mode == "hybrid+rerank" and not reranker_model:
         reranker_model = "cross-encoder/ms-marco-MiniLM-L6-v2"
     if use_two_stage:
@@ -955,6 +971,99 @@ def _run_ranking_pipeline(
                 score_lists[i] = [r.get("rerank_score", 0.0) for r in reranked]
             logger.info("Reranked hybrid top-50 to top-%d with %s", rerank_top_k, reranker_model)
         query_embeddings = query_embeddings_stage1
+
+    if bool(getattr(config, "llm_rerank_enabled", False)):
+        from retrieval_lab.llm_reranker import rerank_candidates_listwise
+
+        llm_rerank_model = str(getattr(config, "llm_rerank_model", "")).strip()
+        llm_admission_k = int(getattr(config, "llm_rerank_admission_k", 40))
+        llm_text_char_limit = int(getattr(config, "llm_rerank_text_char_limit", 900))
+        llm_prompt_template_id = str(getattr(config, "llm_rerank_prompt_template_id", "pf2e_listwise_v1"))
+        llm_max_output_tokens = int(getattr(config, "llm_rerank_max_output_tokens", 1200))
+        llm_cache_dir = (
+            str(getattr(config, "llm_rerank_cache_dir", "")).strip()
+            or str((Path(getattr(config, "output_dir", "out/retrieval_lab/experiments")) / ".cache" / "llm_rerank").resolve())
+        )
+        eval_k = max(config.top_k) if config.top_k else 10
+        unit_by_id = {str(unit.get("id") or ""): unit for unit in corpus if unit.get("id")}
+        llm_rerank_debug = []
+
+        for i, q in enumerate(grounded_queries):
+            base_ids = list(ranked_lists[i] or [])
+            base_scores = list(score_lists[i] or [])
+            n0 = min(len(base_ids), len(base_scores))
+            base_ids = base_ids[:n0]
+            base_scores = base_scores[:n0]
+            admitted_ids = base_ids[:llm_admission_k]
+            admitted_scores = base_scores[:llm_admission_k]
+            baseline_rank_by_id = {cid: rank for rank, cid in enumerate(admitted_ids, start=1)}
+            candidate_rows: List[Dict[str, Any]] = []
+            for rank, cid in enumerate(admitted_ids, start=1):
+                unit = unit_by_id.get(cid, {})
+                raw_text = str(id_to_text.get(cid, ""))
+                excerpt = raw_text[:llm_text_char_limit].rstrip() if llm_text_char_limit > 0 else raw_text
+                candidate_rows.append(
+                    {
+                        "candidate_id": cid,
+                        "baseline_rank": rank,
+                        "structural_path": list(unit.get("structural_path") or []),
+                        "unit_type": str(unit.get("unit_type") or ""),
+                        "excerpt": excerpt,
+                    }
+                )
+            rerank_resp = rerank_candidates_listwise(
+                query=str(q.get("question") or ""),
+                candidates=candidate_rows,
+                model_id=llm_rerank_model,
+                max_output_tokens=llm_max_output_tokens,
+                prompt_template_id=llm_prompt_template_id,
+                cache_dir=llm_cache_dir,
+            )
+            ordered_admitted = [str(x) for x in (rerank_resp.get("ordered_candidate_ids") or [])]
+            ordered_admitted = ordered_admitted[: len(admitted_ids)]
+            ordered_set = set(ordered_admitted)
+            tail_ids = [cid for cid in base_ids if cid not in ordered_set]
+            tail_score_by_id = {cid: float(sc) for cid, sc in zip(base_ids, base_scores)}
+            ranked_lists[i] = ordered_admitted + tail_ids
+            score_lists[i] = [float(len(ordered_admitted) - pos) for pos in range(len(ordered_admitted))] + [
+                float(tail_score_by_id.get(cid, 0.0)) for cid in tail_ids
+            ]
+
+            required_ids = _required_gold_ids(q)
+            before_top = base_ids[:eval_k]
+            after_top = ranked_lists[i][:eval_k]
+            rank_before = {cid: rank for rank, cid in enumerate(base_ids, start=1)}
+            rank_after = {cid: rank for rank, cid in enumerate(ranked_lists[i], start=1)}
+            movement: Dict[str, Dict[str, Any]] = {}
+            for cid in required_ids:
+                rb = rank_before.get(cid)
+                ra = rank_after.get(cid)
+                movement[cid] = {
+                    "before_rank": rb,
+                    "after_rank": ra,
+                    "crossed_into_top10": bool((rb is None or rb > 10) and (ra is not None and ra <= 10)),
+                    "crossed_out_of_top10": bool((rb is not None and rb <= 10) and (ra is None or ra > 10)),
+                }
+            llm_rerank_debug.append(
+                {
+                    "query_id": q.get("id", ""),
+                    "candidate_pool_size": len(admitted_ids),
+                    "pre_rerank_top10": before_top[:10],
+                    "post_rerank_top10": after_top[:10],
+                    "required_gold_in_pool": sorted([cid for cid in required_ids if cid in baseline_rank_by_id]),
+                    "required_rank_before": {cid: rank_before.get(cid) for cid in required_ids},
+                    "required_rank_after": {cid: rank_after.get(cid) for cid in required_ids},
+                    "required_top10_crossings": movement,
+                    "rationale_tags": rerank_resp.get("rationale_tags") or {},
+                    "rerank_metadata": rerank_resp.get("metadata") or {},
+                }
+            )
+        logger.info(
+            "LLM rerank applied for %d queries with model=%s admission_k=%d",
+            len(grounded_queries),
+            llm_rerank_model,
+            llm_admission_k,
+        )
 
     ranked_source_id_lists: Optional[List[List[List[str]]]] = None
     final_id_to_text = dict(id_to_text)
@@ -1300,6 +1409,8 @@ def _run_ranking_pipeline(
         result["qe_expansion_logs"] = qe_expansion_logs
     if qe_fusion_debug is not None:
         result["qe_fusion_debug"] = qe_fusion_debug
+    if llm_rerank_debug is not None:
+        result["llm_rerank_debug"] = llm_rerank_debug
     if hybrid_contribution_payload is not None:
         result["hybrid_contribution"] = hybrid_contribution_payload
     return result
@@ -1327,6 +1438,7 @@ def _build_metrics_and_reviews(
     final_id_to_text: Optional[Dict[str, str]] = None,
     raw_merge_diagnostics: Optional[Dict[str, Any]] = None,
     qe_fusion_debug: Optional[List[Dict[str, Any]]] = None,
+    llm_rerank_debug: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """Score retrieval outputs and assemble query-review artifacts."""
     text_map = final_id_to_text or id_to_text
@@ -1393,6 +1505,8 @@ def _build_metrics_and_reviews(
             qe_fusion_debug[i]["baseline_gold_in_candidates"] = bool(gold & baseline_top)
             qe_fusion_debug[i]["new_gold_added_by_variants"] = sorted(list((gold & final_admitted) - baseline_top))
             review_entry["qe_fusion"] = qe_fusion_debug[i]
+        if llm_rerank_debug is not None and i < len(llm_rerank_debug):
+            review_entry["llm_rerank"] = llm_rerank_debug[i]
         query_reviews.append(review_entry)
         top3_ids = ranked_lists[i][:3]
         top3_scores = [round(s, 3) for s in score_lists[i][:3]]
@@ -1432,6 +1546,22 @@ def _build_metrics_and_reviews(
     }
     if raw_merge_diagnostics:
         out["results"]["raw_merge_rerank_diagnostics"] = raw_merge_diagnostics
+    if llm_rerank_debug:
+        cache_hit_count = sum(
+            1
+            for item in llm_rerank_debug
+            if bool(((item.get("rerank_metadata") or {}).get("cache_hit", False)))
+        )
+        fallback_count = sum(
+            1
+            for item in llm_rerank_debug
+            if str(((item.get("rerank_metadata") or {}).get("fallback_reason", "")).strip())
+        )
+        out["results"]["llm_rerank_summary"] = {
+            "query_count": len(llm_rerank_debug),
+            "cache_hit_count": cache_hit_count,
+            "fallback_count": fallback_count,
+        }
     return out
 
 
@@ -1697,6 +1827,7 @@ def run_dense_mode(
             final_id_to_text=rank_out.get("final_id_to_text"),
             raw_merge_diagnostics=rank_out.get("raw_merge_diagnostics"),
             qe_fusion_debug=rank_out.get("qe_fusion_debug"),
+            llm_rerank_debug=rank_out.get("llm_rerank_debug"),
         )
         retrieved_chunks_by_model[model_id] = model_out["query_reviews"]
         logger.info("Model %s: retrieval done for %d queries; review in retrieved_chunks.json", model_id, len(grounded_queries))
