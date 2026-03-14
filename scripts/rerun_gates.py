@@ -25,8 +25,6 @@ import re
 import sys
 from pathlib import Path
 
-import blake3
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -37,6 +35,7 @@ from extraction.orphan_header import (
     run_orphan_header_pass,
 )
 from extraction.schemas import EvidenceUnit
+from extraction.unit_identity import compute_evidence_unit_id
 
 DEFAULT_EVAL_DIR = REPO_ROOT / "out" / "mark3_evaluation" / "DnD5eBrutalChapters"
 
@@ -59,9 +58,15 @@ def _parse_page_number(dir_name: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def _recompute_unit_id(text: str, structural_path: list[str]) -> str:
-    path_str = " > ".join(structural_path)
-    return blake3.blake3(f"{text}|{path_str}".encode()).hexdigest()
+def _recompute_unit_id(unit: EvidenceUnit, structural_path: list[str]) -> str:
+    return compute_evidence_unit_id(
+        text=unit.text,
+        structural_path=structural_path,
+        page_fingerprint=unit.page_fingerprint,
+        source_line_start=unit.source_line_start,
+        source_line_end=unit.source_line_end,
+        unit_type=unit.unit_type,
+    )
 
 
 def main() -> None:
@@ -112,7 +117,7 @@ def main() -> None:
             for u in units_raw:
                 unit = EvidenceUnit.from_dict(u)
                 new_unit = EvidenceUnit(
-                    unit_id=_recompute_unit_id(unit.text, path),
+                    unit_id=_recompute_unit_id(unit, path),
                     unit_type=unit.unit_type,
                     text=unit.text,
                     structural_path=path,

@@ -7,6 +7,7 @@ from extraction.gates_b import (
     gate_join_unit_id_conservation,
     gate_orphan,
     gate_table_integrity,
+    gate_unit_size,
     run_stage_b_gates,
 )
 from extraction.schemas import EvidenceUnit
@@ -54,6 +55,22 @@ def test_gate_table_integrity_fails_on_unbalanced_table() -> None:
     diag = gate_table_integrity([table])
     assert not diag.passed
     assert diag.detail["issue_count"] == 1
+
+
+def test_gate_unit_size_allows_large_complete_tables_under_table_cap() -> None:
+    large_table = _unit(
+        "t1",
+        text="<table>" + ("<tr><td>row</td></tr>" * 300) + "</table>",
+        structural_path=["Equipment"],
+        start=0,
+        end=4,
+        unit_type="table",
+    )
+
+    diag = gate_unit_size([large_table])
+
+    assert diag.passed
+    assert diag.detail["oversized_count"] == 0
 
 
 def test_run_stage_b_gates_includes_contract_order() -> None:

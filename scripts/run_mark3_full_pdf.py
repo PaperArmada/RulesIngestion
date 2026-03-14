@@ -24,7 +24,6 @@ import sys
 import time
 from pathlib import Path
 
-import blake3
 import fitz  # pymupdf
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -44,6 +43,7 @@ from extraction.toc_parser import (
     reconstruct_hierarchy,
     write_toc_artifacts,
 )
+from extraction.unit_identity import compute_evidence_unit_id
 
 logger = logging.getLogger(__name__)
 
@@ -53,9 +53,15 @@ def _parse_page_number(dir_name: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def _recompute_unit_id(text: str, structural_path: list[str]) -> str:
-    path_str = " > ".join(structural_path)
-    return blake3.blake3(f"{text}|{path_str}".encode()).hexdigest()
+def _recompute_unit_id(unit: EvidenceUnit, structural_path: list[str]) -> str:
+    return compute_evidence_unit_id(
+        text=unit.text,
+        structural_path=structural_path,
+        page_fingerprint=unit.page_fingerprint,
+        source_line_start=unit.source_line_start,
+        source_line_end=unit.source_line_end,
+        unit_type=unit.unit_type,
+    )
 
 
 def _load_env_development() -> None:
@@ -354,7 +360,7 @@ def main() -> None:
             for u in units_raw:
                 unit = EvidenceUnit.from_dict(u)
                 updated_units.append(EvidenceUnit(
-                    unit_id=_recompute_unit_id(unit.text, path),
+                    unit_id=_recompute_unit_id(unit, path),
                     unit_type=unit.unit_type,
                     text=unit.text,
                     structural_path=path,

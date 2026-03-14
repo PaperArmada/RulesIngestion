@@ -17,8 +17,6 @@ import statistics
 import sys
 from pathlib import Path
 
-import blake3
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -31,6 +29,7 @@ from extraction.orphan_header import (  # noqa: E402
 )
 from extraction.schemas import EvidenceUnit               # noqa: E402
 from extraction.stage_b import run_stage_b                # noqa: E402
+from extraction.unit_identity import compute_evidence_unit_id  # noqa: E402
 
 OCR_BRUTAL_DIR = REPO_ROOT / "out" / "deepseek_ocr2_brutal"
 OUT_DIR = REPO_ROOT / "out" / "mark3_evaluation"
@@ -50,9 +49,15 @@ def _load_env_development() -> None:
                     os.environ[key] = value
 
 
-def _recompute_unit_id(text: str, structural_path: list[str]) -> str:
-    path_str = " > ".join(structural_path)
-    return blake3.blake3(f"{text}|{path_str}".encode()).hexdigest()
+def _recompute_unit_id(unit: EvidenceUnit, structural_path: list[str]) -> str:
+    return compute_evidence_unit_id(
+        text=unit.text,
+        structural_path=structural_path,
+        page_fingerprint=unit.page_fingerprint,
+        source_line_start=unit.source_line_start,
+        source_line_end=unit.source_line_end,
+        unit_type=unit.unit_type,
+    )
 
 
 def load_ocr_markdown(ocr_json_path: Path) -> tuple[str, dict]:
@@ -198,7 +203,7 @@ def main() -> None:
                 updated_units = []
                 for u in units:
                     updated_units.append(EvidenceUnit(
-                        unit_id=_recompute_unit_id(u.text, path),
+                        unit_id=_recompute_unit_id(u, path),
                         unit_type=u.unit_type,
                         text=u.text,
                         structural_path=path,

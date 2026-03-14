@@ -6,7 +6,8 @@ Four gates per the Stage B contract:
      Exemption: image+caption-only pages (1–2 children: paragraph + image_ref) pass.
   2. Bleed    — Flag units whose source line ranges overlap (section bleed).
   3. Table integrity — Each table EvidenceUnit contains a complete table.
-  4. Unit size bounds — Flag units shorter than 20 chars or longer than 5000 chars.
+  4. Unit size bounds — Flag units shorter than 20 chars, prose units longer than
+     5000 chars, or table units longer than 12000 chars.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ _HTML_TABLE_CLOSE_RE = re.compile(r"</table>", re.IGNORECASE)
 # Thresholds
 MIN_UNIT_CHARS = 20
 MAX_UNIT_CHARS = 5000
+MAX_TABLE_UNIT_CHARS = 12000
 
 
 def _run_core_gates(
@@ -227,6 +229,7 @@ def gate_unit_size(
     *,
     min_chars: int = MIN_UNIT_CHARS,
     max_chars: int = MAX_UNIT_CHARS,
+    max_table_chars: int = MAX_TABLE_UNIT_CHARS,
     undersized_fail_ratio: float = 1.0,
 ) -> GateDiagnostic:
     """Unit size bounds gate: flag units outside [min_chars, max_chars].
@@ -242,6 +245,7 @@ def gate_unit_size(
 
     for u in units:
         char_count = len(u.text)
+        unit_max_chars = max_table_chars if u.unit_type == "table" else max_chars
         if char_count < min_chars:
             undersized.append({
                 "unit_id": u.unit_id[:16],
@@ -249,11 +253,12 @@ def gate_unit_size(
                 "char_count": char_count,
                 "text_preview": u.text[:80],
             })
-        elif char_count > max_chars:
+        elif char_count > unit_max_chars:
             oversized.append({
                 "unit_id": u.unit_id[:16],
                 "unit_type": u.unit_type,
                 "char_count": char_count,
+                "max_chars": unit_max_chars,
                 "text_preview": u.text[:80],
             })
 
@@ -269,6 +274,7 @@ def gate_unit_size(
         "total_units": len(units),
         "min_chars": min_chars,
         "max_chars": max_chars,
+        "max_table_chars": max_table_chars,
         "undersized_count": len(undersized),
         "oversized_count": len(oversized),
         "undersized_ratio": round(undersized_ratio, 4),

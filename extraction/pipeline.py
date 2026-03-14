@@ -179,7 +179,7 @@ def run_a_b_aprime(
     dpi: int = 200,
     skip_ocr: bool = False,
     raw_markdown_override: str | None = None,
-    model: str = "gpt-5.2",
+    model: str = "gpt-5-mini",
     openai_client: Any | None = None,
     concurrency: int = 10,
 ) -> dict[str, Any]:

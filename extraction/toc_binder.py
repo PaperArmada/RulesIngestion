@@ -14,10 +14,9 @@ import logging
 from pathlib import Path
 from typing import Any
 
-import blake3
-
 from extraction.schemas import EvidenceUnit
 from extraction.toc_parser import TocNode
+from extraction.unit_identity import compute_evidence_unit_id
 
 logger = logging.getLogger(__name__)
 
@@ -76,9 +75,15 @@ def _find_deepest_covering_node(
     return None
 
 
-def _recompute_unit_id(text: str, structural_path: list[str]) -> str:
-    path_str = " > ".join(structural_path)
-    return blake3.blake3(f"{text}|{path_str}".encode()).hexdigest()
+def _recompute_unit_id(unit: EvidenceUnit, structural_path: list[str]) -> str:
+    return compute_evidence_unit_id(
+        text=unit.text,
+        structural_path=structural_path,
+        page_fingerprint=unit.page_fingerprint,
+        source_line_start=unit.source_line_start,
+        source_line_end=unit.source_line_end,
+        unit_type=unit.unit_type,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -177,7 +182,7 @@ def bind_units_to_toc(
             if last_existing not in toc_path:
                 new_path = toc_path + [last_existing]
 
-        new_unit_id = _recompute_unit_id(unit.text, new_path)
+        new_unit_id = _recompute_unit_id(unit, new_path)
 
         meta = dict(unit.join_metadata) if unit.join_metadata else {}
         meta["original_structural_path"] = original_path

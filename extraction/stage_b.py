@@ -27,6 +27,7 @@ from typing import Any
 import blake3
 
 from extraction.schemas import EvidenceUnit, GateDiagnostic, SurfaceAST, SurfaceASTNode
+from extraction.unit_identity import compute_evidence_unit_id
 
 logger = logging.getLogger(__name__)
 
@@ -123,11 +124,24 @@ _NODE_TYPE_TO_UNIT_TYPE = {
 }
 
 
-def _make_unit_id(text: str, structural_path: list[str]) -> str:
-    """Deterministic unit ID: blake3(text + "|" + joined path)."""
-    path_str = " > ".join(structural_path)
-    payload = f"{text}|{path_str}"
-    return blake3.blake3(payload.encode("utf-8")).hexdigest()
+def _make_unit_id(
+    text: str,
+    structural_path: list[str],
+    *,
+    page_fingerprint: str,
+    source_line_start: int,
+    source_line_end: int,
+    unit_type: str,
+) -> str:
+    """Deterministic unit ID with page-local provenance for uniqueness."""
+    return compute_evidence_unit_id(
+        text=text,
+        structural_path=structural_path,
+        page_fingerprint=page_fingerprint,
+        source_line_start=source_line_start,
+        source_line_end=source_line_end,
+        unit_type=unit_type,
+    )
 
 
 def _walk_ast(
@@ -207,7 +221,14 @@ def _walk_ast(
         anomaly_flags.append("no_heading_parent")
 
     unit = EvidenceUnit(
-        unit_id=_make_unit_id(text, path),
+        unit_id=_make_unit_id(
+            text,
+            path,
+            page_fingerprint=page_fingerprint,
+            source_line_start=line_start,
+            source_line_end=line_end,
+            unit_type=unit_type,
+        ),
         unit_type=unit_type,
         text=text,
         structural_path=list(path),
@@ -243,7 +264,14 @@ def _flush_pending_headings(
     for heading_text, line_start, line_end in pending_heading:
         content_hash = blake3.blake3(heading_text.encode("utf-8")).hexdigest()
         unit = EvidenceUnit(
-            unit_id=_make_unit_id(heading_text, path),
+            unit_id=_make_unit_id(
+                heading_text,
+                path,
+                page_fingerprint=page_fingerprint,
+                source_line_start=line_start,
+                source_line_end=line_end,
+                unit_type="heading",
+            ),
             unit_type="heading",
             text=heading_text,
             structural_path=list(path),
