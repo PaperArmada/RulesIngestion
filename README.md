@@ -66,6 +66,7 @@ Every experiment run should now be treated as an auditable contract bundle, not 
 - **Ingestion best practices:** [Docs/Workflows/WORKFLOW-Ingestion-Best-Practices.md](Docs/Workflows/WORKFLOW-Ingestion-Best-Practices.md)
 - **Retrieval best practices:** [Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md](Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md)
 - **Retrieval benchmark curation:** [Docs/Workflows/WORKFLOW-RetrievalBenchmark-ManualCuration.md](Docs/Workflows/WORKFLOW-RetrievalBenchmark-ManualCuration.md)
+- **Desktop-to-laptop migration:** [Docs/Workflows/WORKFLOW-Desktop-to-Laptop-Migration.md](Docs/Workflows/WORKFLOW-Desktop-to-Laptop-Migration.md)
 
 ## Fast Command Reference
 
