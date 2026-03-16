@@ -3,6 +3,13 @@
     "batch_ids": [
       "mh001"
     ],
+    "substrate_path": "out/Pathfinder2ePlayerCore",
+    "document_id": "PathCore",
+    "chunk_recipe": {
+      "min_chars": 200,
+      "merge_chunks": true,
+      "merge_max_chars": 2000
+    },
     "source": "Pathfinder2e Player Core multihop working-set benchmark (draft, uncited)",
     "merged_at": "2026-03-14T00:00:00+00:00",
     "query_count": 20,
@@ -28,165 +35,92 @@
       "notes": "Derived from seed 3. Tests spell-list filtering plus individual spell text lookup and heightening comparison.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
-        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
-        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "aad1590abb8d991a9cf885c089860022c09f0ed5000be307b40c73e06b87d00e",
+        "29e9fafb5c26684446d48181cabcee3489360397b5041d82e7f56ff6051e51d7",
         "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
-        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+        "14d22c912185a337967a820c2421610fbb18d51e25b8b0cce53dc0f49b98c59c",
+        "62c240434df7d18d047a08cea60cb35b9e3e4629bd761254c6d9475c4f8dd43a",
+        "ed78b2c3546816329daa5f6d58c1354d62a3fc6bc45bbfd8282464fe6de5d3fa",
+        "896a3a30d4bd8f22404147e9df88ad00f8aa5cdd7c865aadb0f3042202eb7dca",
+        "97baad6bbce7751d354207df1f3f2af76f9d8b8b320009be5042830f4c50f23c",
+        "f9badbf107f5c3e41afc923513c9514a1f37f070c0f28c35638c9d1d6e461986",
+        "29302ce628ccc29d7729a7b889767623a796f59612c15cd707525270eeb2c4eb"
       ],
       "required_gold": [
-        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
-        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
-        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "aad1590abb8d991a9cf885c089860022c09f0ed5000be307b40c73e06b87d00e",
+        "29e9fafb5c26684446d48181cabcee3489360397b5041d82e7f56ff6051e51d7",
         "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
-        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+        "14d22c912185a337967a820c2421610fbb18d51e25b8b0cce53dc0f49b98c59c",
+        "62c240434df7d18d047a08cea60cb35b9e3e4629bd761254c6d9475c4f8dd43a"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "ed78b2c3546816329daa5f6d58c1354d62a3fc6bc45bbfd8282464fe6de5d3fa",
+        "896a3a30d4bd8f22404147e9df88ad00f8aa5cdd7c865aadb0f3042202eb7dca",
+        "97baad6bbce7751d354207df1f3f2af76f9d8b8b320009be5042830f4c50f23c",
+        "f9badbf107f5c3e41afc923513c9514a1f37f070c0f28c35638c9d1d6e461986",
+        "29302ce628ccc29d7729a7b889767623a796f59612c15cd707525270eeb2c4eb"
+      ],
       "_required_gold": [
-        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad",
-        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8",
-        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816",
+        "aad1590abb8d991a9cf885c089860022c09f0ed5000be307b40c73e06b87d00e",
+        "29e9fafb5c26684446d48181cabcee3489360397b5041d82e7f56ff6051e51d7",
         "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a",
-        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482"
+        "14d22c912185a337967a820c2421610fbb18d51e25b8b0cce53dc0f49b98c59c",
+        "62c240434df7d18d047a08cea60cb35b9e3e4629bd761254c6d9475c4f8dd43a"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "ed78b2c3546816329daa5f6d58c1354d62a3fc6bc45bbfd8282464fe6de5d3fa",
+        "896a3a30d4bd8f22404147e9df88ad00f8aa5cdd7c865aadb0f3042202eb7dca",
+        "97baad6bbce7751d354207df1f3f2af76f9d8b8b320009be5042830f4c50f23c",
+        "f9badbf107f5c3e41afc923513c9514a1f37f070c0f28c35638c9d1d6e461986",
+        "29302ce628ccc29d7729a7b889767623a796f59612c15cd707525270eeb2c4eb"
+      ],
       "gold_locations": {
-        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad": {
-          "page": 307,
+        "aad1590abb8d991a9cf885c089860022c09f0ed5000be307b40c73e06b87d00e": {
+          "page": 404,
           "structural_path": [
-            "SPELL LISTS"
+            "ELEMENTAL TOSS"
           ],
           "source_unit_ids": [
-            "bd9b801a9075a6c93c0f3849f340be5f817a1344694ea70d7c5304bd5506c9ea",
-            "7a1e33c3230fe70b8ab1df05980ff1f55ab2acf554a21ec4b8fce460626ae12f",
-            "20f0eee826c028b0bcbe90210d09c64331a75a222f9a6089b718a228e90257d6",
-            "542fa20c74fcf4f352033c4e99d111475025359dabce7394fc0fdf7207e24ba2",
-            "ecd1310e3f6a00c216f66a124c69bab488743ea4544da9404376cd61334e5c0a",
-            "a9c2d9725ea5bb0b8ace49475c8f7030f6975e7ab2b253eb48753119ec50ea4d",
-            "813a67d53be75635b2afe9e254f2f279c2a1be36d59f5dfd4365bf6c4e88a922",
-            "2d3f8ca63c8659c1c55d7491fa05e8744d0fdd1837832306f62a405ba7ebf00a",
-            "a9418363fc8ef1c6a600b4a484ea8da390256f5c1a980350c3704b95466c6782",
-            "28898266bc731ec57796b89b33f78c1b5ec7e3d430bc65d975b3879bc46a83e2",
-            "33bf7bcee1bda0dd92c3b4b01d09c93d9710511ad1f4c640662bbd20d1942c9d",
-            "18ba047ac4ab3fd3dff4ee105797c214b0b5c3bd7ff1393cc5e910aff5f22b9c",
-            "efeb46102af3fd210db7ce7072d26d826f0af8863d9dd5331f8e0e2d793e0bad",
-            "aa93e89ee9faf1a6d7c794215e3bd64106522e72214e5696834140f58dc051f3",
-            "f5e80ea71f4c08433f887a435b92c307d69c61b331c95faac0ae808fe4e4c9e9",
-            "a9ce817787ec72b8630e3fd3846d6534976e2b342c1ef492e6f5f24ee5789717",
-            "b13a7cbcdb5f00db6c8134ed0bca2b1477adf8204f457572adeea6b6154c5adb",
-            "512a183c39fef7e79f46b01cffe81434d77855559da76126c300f04a98d95a3a",
-            "92385fdfd79d920afd3ddc4d81ca1bc043fe8b9deb1a9e7e1e54d284e8745914",
-            "cd1d5b8f412bdc6ec12d4cbb10fa5593cddba3a8a1622f3bf8933cfd04610d57",
-            "97bc6b9f397c31de05e027980597f77faf23f45d49e5648b9c7d75697a3e41b5",
-            "a4ab5be43edfc44cfe0de900cdcab1360424892f5d01bae116edb219e9d3b90a",
-            "36bebd37fba79ac91e6866c74fbef24756a9482ae5cae0ffe48972bd2a089213",
-            "15c34d166eae5774bf2b059a0ef7869a28a9a0cccd61a6ecc48bf74b4f638868",
-            "8b0d071e6b473e611fc9083c77452a5577b739c544587d18b46748dc3c6c5b90",
-            "36fca7b874fab060d4c214ef44aa0327b6f1a1b7f948bdadeecbcf3948ba41db",
-            "c0dab47fe81431342fd3fe0c9c10b632eb32a01441a94945083cdd18701eef5d",
-            "6665d34985acaaf1527f78cabcb79ac481f9a87fd89493643a658ae98a30a645",
-            "6836926e2ae8a81e4002862f430c38194866715fc18e5c7b6920f15923bf3836",
-            "7d535d12959873983649ba828b88add6791d5fa33752a7003b857e2d2bf09700",
-            "dda0b2618ccd88709631453ee7bb06ff227a683d53a6eec5ebf1804f838dbf02",
-            "a0cb188e71712514798741a04a8f34c95f80d604e57dd5317fcf9008cd580993",
-            "bee3c72dd9ea3a3f4d3d36a45b03f3602e0402db4590ee96e5f27f826dbe7391",
-            "dddaa2f11466a6606dd42d93a06d3714984fe0078d942277d3a9c4864bdef8c8",
-            "2968398158dd8c7bda3ea9896e299b0b9fd9ca1c369c751996758c2709b3bfab",
-            "057db1543f499eaae07a030628b0977fb21c2c641921631dfb9af3f29f1698f7",
-            "bdbbb9699ed4d2cf015e3fd933b291ce3ab6fd883370b4df3ec9c0e80b71e8f3",
-            "5d3088e2df9f65f4f03820d46eef73447fcbd7e3c2800ca16705286198d8e5ab",
-            "46c605171d0dc0f20844e66f4671c21aa461a5b88a204f993d83f98656ea6f2f",
-            "e0638ced759f42977979b8cf4d48ee2e25a2a4d039780e0f543646dadfdc07b0",
-            "fbf72b20c1800e01587168fb2244d3403caf135791158f35326b5eea68718dd5",
-            "aeda4721401ddf794a1cf66b98a30edc94e62eb1cd4aa35249ef5cb0f5c4486d",
-            "b0ffc5fab7695f6f87a0689b96dfed0884708fdf6f5db37457587e3f9abb94cb",
-            "e6667f1964f5473130f4b9c26cfcfee6cdd7e570cf38bd39d8d4c65c5d99b598",
-            "5547457bb092e130bd14080127c2c7b9ce60673ffbae1b96ea9c78952d3dee8d",
-            "be35fc0c7c720709a50a253f18154cdf4264af5b79abfe728c34d3c2c54cf663",
-            "19d8875f0e291bd9fe982f39621e03c6d41675c6dc15304e882e8f8079264935",
-            "b542cabac852a3dfa760ef5dcabab8d107a67014054fc530724395767d2fdb98",
-            "986c8ede28ed092bcb9e671328d27522a816a48d9cfa4829688f932565b25ef4",
-            "777ecaedc14fd00409b3ed654a2bd5b3d664a9d802f1a14aaed6d3fac1089db3",
-            "78641a2d03e242c4caca299f45595ca04db10e369789daef046608897e12ec27",
-            "5dac3ffffa616112110d90a8c185aba756d15570a68402f591c29f62a7e471ed",
-            "f13cbc7c3ecd6666dd521d4f1ada160dce4b89129fcff0932495762ead7e9407",
-            "e13f43171b69bc309172ca4ed778ae697807b9ed17de6b8d230296b2983f8c6c",
-            "ee16d94669574184063e543e9ed9bbae99c82db67a3d34bd41104e4cfa57cd13",
-            "ed963d18c79c68c1dada0c2e6161dc301cac8f963821efd67728e0e2fd0f9f92",
-            "e0ca1902a11d5b532e610f0ebc6223ef29973b91a5894597b59b41b6810125b0",
-            "ec065bd24e68bdd8e14b90e428f92ec214d18665480895bc4cbcabeb4ef90774",
-            "a47708a5ab2fb06cf0ce3d9813d880719dc9886e067ceac97bbdc5b464db0c4d",
-            "c706efbe9fe134924002c448d15aeaa3128a67ecf6b4fd201bb63e8f38f20030",
-            "75153c24a5bf2ec14c636047312454e6614cb7c7948929ec48d2dc75fd190180",
-            "f90886a1e8d433d3f3c873cd1dd394be0dee88a5ea5cecd854d24c90f974b408",
-            "61ced4ca3c3c3b1db2c3f903252d4de4f05db658bef144689856234f60a81868",
-            "d0130583862ccc8e45390972376eb5ecef0692c61bdda8b23942dfd8c3874dc0",
-            "40ce8cd2a87885854cafa25768b0e684fd6cadb7b7162e35571be4f23b31790a",
-            "a2d463c149f55707703c8e7a617758cbe87f3dd8c8d6eadc0e6fcc1cc3ddf65d",
-            "7cea0b0b4f79db4b04639a418a7d035d51d18c37febd9fcc42d0467f0c45e54f",
-            "b4a540e898a34a3ebf68f5b11e3afafb105547cb5369b83ef89d47a84dbe4554",
-            "e092e5714c86f276d148d703324c608b0857390c913ff2b45609e80667803df2",
-            "20074ab30ebab04c179730409382836680d65b2c3d1ddd55d49cf0bbcb1fef84",
-            "435e995ef2b2c5ec0713f3f188f60e4a17e8b1a2be5c8c87b32ee1412ddcd36f",
-            "f73c0eb98ec420817e8d72d70b51ccb4e9121f0ba7b7954caab818f163efeec3",
-            "a3223f60e2f4878b27b1c6fdd12554417d5d2a8f2ea8adc9f23f329deda866be",
-            "8cd52d03460f0578f19d22f3b72764856c5cbe73d12777d4d21fe9ff90a7c504",
-            "d956441d3546ca959b00e7eb0760a9131287f032b8a5e08f9e10f3d20d197f85",
-            "3833831f626f8a59f83f739ef32d51c98d9e131de0bb53f2350c5a6209d33760",
-            "740df090a4b64b5809709268d3971053ba8f5c52c7929f471093af3ad9c46d6c",
-            "cc435fa9e3a2fb31fccdf16fbef17a36918da3ed0331208d84ecf6b4364dec5a",
-            "188029230ed997047075e4efdd6b49cfb5dad0212bd44488900a41e803285587",
-            "c5c11f2a17118851becf118a545dd62ea1c2dea747fdff9f0cd1491f94ee164f",
-            "319a27f2de53772290afc142da7c0b351ec7485e54b47d9eef4d7a8d0c392943",
-            "145b9958421856449b21f7088f2b82135d69985ca0075d0890e44c49024b0185",
-            "85561ef80289b4d6ab748d3455cf65f2f38511c99b00c94b99e89c8996490565",
-            "99026190cfd70f14c462d22adcdf0ee6760548af495fba8fbbb7b4c5ed70b359",
-            "837546c1d62e511518e34408f256384507b003033bf6e9f8902bc4de0e1818a7",
-            "28b22b49c1f54b950ce2515b879518f555b20e19e247573427159cf82dcd906c",
-            "465317eda98229f94bfb3a1c4c26206891a476351099877f3a7e23fc4d59c92d",
-            "1ee61483dcdf5b09f2cb07eedbb5326286d26e10e974c0f0603c4e0e71636289",
-            "8c6843ec34565f146d5308bf92907329ca23592fe2b689da0038d76357512119",
-            "4219b0b9dfa4deb1e1a59d237d013695268d988c3400b528ffe828bba34619d0",
-            "6c62d6084008e1ceaaa215aaba85a64b86763eea3d12671466ebe00d53ba3696",
-            "549da3f6bd691f5f42a77ac6388bdf864ae8e88540832f3fb8c8e232b88dc6ec"
+            "78041b120068b03e29000d0b50158d2ac8be578a85c5f85607a686d02aefb1d0",
+            "285ef3bd58b99ee4abecd3df297c46803cc300b3357af1eedd2c3e21b8e8fc32",
+            "bddb5f65817496a1d4839e441c4694ffcc8cf06d6bcf78c56fd829946e5fca41",
+            "a7f83f96e724cb3406577b2cf313972467218c69c396d9f6586228f3f78dde68",
+            "3d2845903fda76827e3479bd1244a0ea6a0c07aa4faedf75a7113fb96de49e1b",
+            "3e3556c5d33ea6eafae87230228dd7156db6582c225dff2cb7a6852af6572d5d",
+            "6aae85159343e289db7e0f734381d8b6679275f64294b6db6b8199e1f66128c2",
+            "1d10398e74105ef4d613517fe758db2310d3381ebcf48809f405e542d16eeb54",
+            "8ab621170e121b4745aeea1855aa6424a385f37277f6ea8d29c46e3a5f842d77",
+            "82d14365996188eda0e317a3b5c36f2ea2bc04c2c34c695748688dab24b4e5bc",
+            "edf87c4b269b589ef927a0b99c67c4f3d6fda8cf3eebc6d660b1ba26e1afd200",
+            "9738f1d7db136153018cb660817211cf6fc93466c02408f28e2aa24d8888f0c8",
+            "cfcbe1628c2b85c8c6fe6f7708015f342801ecc79d0403fc62309cf4105d23c2",
+            "569bc221b460511dc8dd4b673fea2cd060a4fcd99a284800ed3bbdc541c71c45",
+            "36c497c534a8d9fdf76b2fceefbdac305bac909faef90011f555dbdb02fd7186"
           ]
         },
-        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8": {
-          "page": 316,
+        "29e9fafb5c26684446d48181cabcee3489360397b5041d82e7f56ff6051e51d7": {
+          "page": 394,
           "structural_path": [
-            "ACID SPLASH"
+            "MYSTIC BEACON"
           ],
           "source_unit_ids": [
-            "cf01833f6b825a39d427066b421aa7e6364064cd8b2f20955a807443b273a2e0",
-            "27ed9bc0cdbf8a4971d437b87c7ca1d78badb552e914efb366ebbbbf92228018",
-            "5f30b2b02ea02cd7c9be500b0ec3e4ed7c389104000535e349523bb724565721",
-            "152d5771056e19ed7bbc997a8c66b88b2fa4a2ebd23c425fd2bb8c81d65f4452",
-            "57883b00b12d5d222e910b54158fc5e0bb453b6edb7f8ff043e1c80342e2c5aa",
-            "4521a3c6f9978888aa96efffc1f74f71a459d13a01bece6322d1a75529e96c5a"
-          ]
-        },
-        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816": {
-          "page": 360,
-          "structural_path": [
-            "PRODUCE FLAME"
-          ],
-          "source_unit_ids": [
-            "f208f152c8081b16565174aea11e32380f1990824729c027e069460632ae5fab",
-            "dbd1f051189a16c274e4893757093bcf40658abfea97e5600990d2e26ac035e7",
-            "e4ea56a758fa4baceec45c9ba11d6a32373dc3b708aea88ddb0e57e203e2b68f",
-            "5a813cb3a9ab24c597693db648376e904accdacb8822a7d5d2bc2e0018dc564b",
-            "66a7ed10e7b29864dcabbe10816a9ef4862e8d1dbff462a43a1ee495d9312b80",
-            "3b3748dee05f2423125cfae192040f6cd5a51c62d1f64bccadf3f03f9f551c5f",
-            "0ec2cf74817a409832d496214d095210a7604eba390791d802e5d12cd4bada54",
-            "bd68c418e5c1b17364d5a03bfaddd7d62508d8ab7bf345c410cfcb7c4ddb3884",
-            "d39e98ba4b19d0b3c8512a2acc2852bd9c89ce503bd0deea3060e91a5677edf1",
-            "2ae667c320fa0bfcd6961989712e1c2e2a92635bc2e0476ccbd290f7f1943281",
-            "5c5bd86f56b7595a1501e7ffca4aa17bb2f1515401b435801ae11d9ea05aead6",
-            "989c2c3eef3900a43d35b1f45431d4626272a6f840d64ea09ce3c067a254e9b2",
-            "d33d9f12d33776031edc9e7a89b68b6a566a96295197259ebba4e0cb38418163",
-            "7bb8617d70d2ac73772573e8cb2c86c2837b96f562a1303d71faf5eb7efde63c",
-            "03bfed9d5f382d98cccfc675184411a46de57a97bb827d45c7cbd4299ebc0d8f",
-            "26f0ffc31d13b20761d17648722ce4a7f02c77ba7dc29be62591f81c9e1c91f3"
+            "32c1f49f780c644d810731ae25c2cc3f1643604b6b3838d702613d0367cdc38c",
+            "33c97e062369aa8819016460ecc94002f00ddc916ac7fd3022bb1c5433ab6d0f",
+            "6af021cf94b031263dbf8e165ec93f38cbd27eae0bd79223eff1a68f11182d21",
+            "843ebca7d0df9118b83c81a9d55b06285aed58507921795f768640d52605b878",
+            "61791377ae40c1050f43179e61cf0d829f2a6ae8f04e5a672a9e46d74edfd78f",
+            "7571860b5b856309ee08b7388849480dee74f9b2ff1740b8e7a9ae75421bbe2f",
+            "da4401c3cb930d396165badb35b94e66b25d68d2bc1c67bcd885239ce5756fce",
+            "67dd44e0d1ae4fd05ee049905f655256946e7eef72dcee2ef29378c2d73e7350",
+            "daf9a34eb64372a4b31fe1a69356a1b2e8edf9b099809b7718b9ea574998d2c1",
+            "3e1109ffc8851b7bc4411aef915ed94f1678c9d63af8b2b7c12338da4c9e134e",
+            "38ffec88028f430c55b03316e21db4787cedc8a1c7cf3fd54e4b9b4b8c87a434",
+            "5c604d7dba52fe5e93f1627ce77001f7d5d766c351c60f490e408c9aa9f51d1c",
+            "8fe3b38b9d0ab9d7fbbc733b6c0e9127ad38cb459e16a61560ed65a0f8cab758",
+            "10821fa39f5244cdfcd8f117d6f6d5180d4ecf183a63e1abf66cefdd4d4f2111",
+            "9ecd7ce22e8208ecef3e5823812da3ae523868071406f57db1b146d3173f4c9e",
+            "bf1e673082f34544391204c92bbcaa94cf66b3b7a93fc10f7bd92e066c1c436b",
+            "b4436dc9ea71b0a7f9ca1676e0a9535600ad7f347cd0ee2c91bc8c286fbfda85"
           ]
         },
         "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a": {
@@ -226,38 +160,125 @@
             "991ead808aa1dc654abfad33faed6ab1bc0377a4a602fa192942d90cde34f3aa"
           ]
         },
-        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482": {
-          "page": 344,
+        "14d22c912185a337967a820c2421610fbb18d51e25b8b0cce53dc0f49b98c59c": {
+          "page": 390,
           "structural_path": [
-            "HYDRAULIC TORRENT"
+            "CRY OF DESTRUCTION"
           ],
           "source_unit_ids": [
-            "77b7e7eba3368616e1fddc9ac5b1b5898fcb82ee1698a5df4e93a40f2dd73d32",
-            "138aaee466903013d1c575f1536e0cbd5285433af5eab6764a4efbd92cd848f5",
-            "6d59a5f72567ffae0be3ad458735a0853a3206106981e3fa0d2bd9e4e02e809a",
-            "7ccb1c7b55e573bdcb5ae3d70238f93533afa058f77cb4f1cc46cedfc827960a",
-            "c54e16a52064a0fc3245203092dc49b64d00ca84226bf93ae3be85d291891a43",
-            "37076085b8f6471b76f24af78bbe0f53138a99697d5b13f8830c1d055c808438",
-            "857f09a47716f2a925ce369762f7c282f664f116abeb5a551b20cc5567062c14",
-            "cf35d85e81c047fce009a28de54a67203caefc1d820a9c0e563c477d214e861d",
-            "35c254270331b35e805fea95b6451eecb7f46ade81d9c99b8bb968e3a60d68fb",
-            "006d127e30a90f981010f01496894f45cb546827fe9d126c4985b2dac60e51e1",
-            "f6eabf80068872f4713c4f6d1595221093d9214ea5649c4537d4cc50782bfadb",
-            "198688017921475f9c3ddb2193045ba09b600e6b9a438fbfd72e52096f0e0e7f",
-            "cb519b43e2a0638819c852d5be0f07c7aa81fa6b34db719f863dc5426cc178e8",
-            "28b7edaf09d30c967a3ff4aca7043e9e13963f081df68dde5fbd6d346798276b",
-            "c5661d98fa7be6b4cbcf807009fdda19f5a1ef249d7c3a879bf2213daccc3f0b"
+            "d2f5fe6ad07268468380c67a1fa291cbc37f6859c99ac050a463e9e2a565a928",
+            "a701f795892a8daab516797c7ea44b6597f2c95f9126338e92b9913de6a291cb",
+            "fd0b50fc55f7f67f2014c190c81c7e1727099ed284a491c4bee63bf52973a42f",
+            "cd73f9fc8a31b6439baea19c4184ce4cda43540a989fd81674c533415e4fd1f9",
+            "f58bdc74f9f80b3aff209f79bdf70128d7a98fbb20811491634a39cb8d569875",
+            "51c9f9947ca55cc07df05f22bb9f8a4f36fc3b420b6a9ca9aab55548b5b2f6ba",
+            "9ce84dec0969082d7828a77a83c6deb91761b7f0af9d29a91bb67c52d59fb946",
+            "8e2e89cd920da2bba013410d1b7aa35752756eb17572e4eee26155426faa79d0",
+            "b3779c8551f6e8b2b20c1df4ffe1d3c0e7d51b62a5b66f5c19c4754cf3cfbce2",
+            "d427ecf9302a84afd4b93b944dd47a6b2f6fba0b8959a479933562efea32b2fd",
+            "4009ffe5aa0b0c3cb19b1229f262297a361bf3953b9e57990b08551e5c67c347",
+            "bb2b896f2179fdc4b5452cd8ba1754fe60b5c49ec202654e2c3b0d0ac25b54d9",
+            "ffb854808e285fbb6fccd19adfdcd85849676318800ebdfa4d3d32f8419f21b5",
+            "270b1e88307ebf4cabde2814d4d8e4934495da2c44f04da8ad707f06094d9461",
+            "5ad681efb36dfc52eec05404c6fcd7cad8be6bb53d8b77f25aa4e1c7a5ad01d6",
+            "7fdb85d9a1452334db0fa62ea4e5cdcfc4f6e98270ea410ecb1f34cbdca07aa0",
+            "002c1cd1481f71adac5eba3437039be4b0a2de107a1ea0930ea09e1a3acf0782",
+            "31ec881cdf34b04372dcb4c8aad8eb660859eec5ff6585e4a47d33b90a44a2b2",
+            "c23a70fd1c1abe3aafacdf491a7e9690ea666209ae3b8b8fa23e865a18495476",
+            "339dc0b07008d8f232fa87d76bc6b25450a46e622f3612847370dd7171a109c3",
+            "f158d283a319ab1c2f08de4d5459e183e5f755b42c6aedbde18c4acd96aa477f"
+          ]
+        },
+        "62c240434df7d18d047a08cea60cb35b9e3e4629bd761254c6d9475c4f8dd43a": {
+          "page": 299,
+          "structural_path": [
+            "Primal"
+          ],
+          "source_unit_ids": [
+            "aa5eb4faa27fefcf9bb24b6489e6390f88c594963ac50704882c08ef555e1e38",
+            "6a9206a404df545b18f4c88a5b371aaed153d7943755dbc23ab89d99cbe0897f"
+          ]
+        },
+        "ed78b2c3546816329daa5f6d58c1354d62a3fc6bc45bbfd8282464fe6de5d3fa": {
+          "page": 368,
+          "structural_path": [
+            "ABJURATION CANTRIP FORCE"
+          ],
+          "source_unit_ids": [
+            "f21486b449770d16c61524630c5a031e5131d1009935937c0ba389037a73ad3d",
+            "2568234f38b5d2863c54d0542dbb59373551284e27aabb7dd82a799904d59890",
+            "fb1ce1ea6693170e58c5a9bedf882124178f7a9265962861237583d41240a9ec",
+            "73ee433d79f0e779518610b8a80ef6962cb66fc47d840b212ab09be478c1af08",
+            "f0b382c0e5e4b159d6cb2480ed9454c29eb9921b2c844d922e8286841167325f",
+            "2da6e9ffacf64d5e44fb13444419d548c3554dec46d918100c5871fc94eccfd3",
+            "533b179282c09b4a2600802ee12ff6e81d543809ce0a3ab9d4b7833c07bef45a",
+            "e9e9c0a826056b3f2c37c1357c6b89fee3d4264eab121f58b15cacbbcdf13a72",
+            "945be465fb6e5e920c2f889743076cb2cf075b78c78529ad966958410dd07044",
+            "29d19395be17b036e3b766909329c76eeed995ea2ffe181b5e5b5840333a534e",
+            "d542f50b03118ba98fa3690d46f131d0e74abb4ce7d1dda4488c8c3000499752",
+            "3db9c4f7112e528d8c483e0efb22ced8e46a47ece2d4471ebe17b2908726feb7",
+            "9e74db4cfccb6c5e4a4a39d9f213d512ed9efef0a5dad826f1560d610b71a0c9"
+          ]
+        },
+        "896a3a30d4bd8f22404147e9df88ad00f8aa5cdd7c865aadb0f3042202eb7dca": {
+          "page": 331,
+          "structural_path": [
+            "DIVINE AURA"
+          ],
+          "source_unit_ids": [
+            "7a52550ba530e1466712ac666c41c2c7d6e9570fdd1cced0dab2f6ef7c7205d4",
+            "999fd651d640da96c642258443d3b959ce1af776da22814b53a1d89f85c480df",
+            "e54b147bdd2f57bae985b3b4a37bdfe589a4d0d82ce75f663831b268d8cddb45",
+            "883769deb1dd8e5628c59d328dcc8a08d53609319499ad3d6dcfb09d88b4db21",
+            "390de0e2d589f9b51e6af00056027f33d5331dd98a8a95a9a97308b14d26e905",
+            "c54ed928bbd3b640443985a72fa20bfd75a4614bd10a601c838eb1a939ac9efd",
+            "1baf782f032299629fd153b51d0c8a3705b1b902318764afa4f045033555c8ad",
+            "fa35009a915b1b57dbf6bc5d8c8a491535fcd7c2fdf91f37d76d7f91fb7a813d",
+            "9baacf4f22e2030d9099c8873eba63a2a0721a66ef309e14a2b2133b6875526f",
+            "32f6ecf3f955ef5ad97071c56ab1678245d4a99bcf7bea8107f0bd81931356e7",
+            "da9c1640e0fedaece6b07780d0890a291a120265b24fb15ded60f432ec4bb602",
+            "9b624096b962e72187700b79e6b3f1ca7297d66ce5c291215dfba6f7568e9554",
+            "1340b60ed88d1be103fc12fd1a66282b8ae2a36915950959f11dfa7282367fc7",
+            "8e053f831858252b3c44b9d6cec73ce7705c9469516489be5f5f33750f332786"
+          ]
+        },
+        "97baad6bbce7751d354207df1f3f2af76f9d8b8b320009be5042830f4c50f23c": {
+          "page": 403,
+          "structural_path": [
+            "ARCANE COUNTERMEASURE"
+          ],
+          "source_unit_ids": [
+            "ac456587d0c80f95bbba43aef2a7edeb6221371fd219f466e291bd2d1855caec",
+            "a123e29fb6fa89ca912a4b20be6b579e7cbd9b9a148d84abfc1eb1e56aa3f796"
+          ]
+        },
+        "f9badbf107f5c3e41afc923513c9514a1f37f070c0f28c35638c9d1d6e461986": {
+          "page": 204,
+          "structural_path": [
+            "HEIGHTENING SPELLS"
+          ],
+          "source_unit_ids": [
+            "f9badbf107f5c3e41afc923513c9514a1f37f070c0f28c35638c9d1d6e461986"
+          ]
+        },
+        "29302ce628ccc29d7729a7b889767623a796f59612c15cd707525270eeb2c4eb": {
+          "page": 130,
+          "structural_path": [
+            "HEIGHTENING SPELLS"
+          ],
+          "source_unit_ids": [
+            "29302ce628ccc29d7729a7b889767623a796f59612c15cd707525270eeb2c4eb"
           ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "d86ed0c7e435834e1aee7c7ee4648ca5849cd86f240aff6036b9390be0ccc8ad": "This spell-list chunk is the filtering anchor: it identifies the arcane spell list, marks which low-rank spells have heightened entries, and shows which cantrip and rank-1 candidates belong in scope before individual spell comparison.",
-        "3848384734c0bd919e475a383bf1cee52321546a4d7bbf55a49ba734d1d60cc8": "This chunk contains Acid Splash, including its spell attack usage, target, and heightened damage clause.",
-        "4151aad8f3841c605189ac30c2899cd05b052a22dd8b6bb6d599424ebdaa1816": "This chunk contains Produce Flame, including its spell attack usage, target, and heightened damage clause.",
-        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a": "This chunk contains Ray of Frost, including its spell attack usage, target, and heightened damage clause.",
-        "f55f08b0c9cf5c3912b25d01b44b67ecbe51472102a65ad14c75bf19d9ea8482": "This chunk contains Hydraulic Push, the low-rank non-cantrip arcane attack spell in scope that explicitly increases damage when heightened."
+        "aad1590abb8d991a9cf885c089860022c09f0ed5000be307b40c73e06b87d00e": "ELEMENTAL TOSS is a rank 1 arcane spell that uses a spell attack roll and has a heightening clause that increases damage.",
+        "29e9fafb5c26684446d48181cabcee3489360397b5041d82e7f56ff6051e51d7": "MOONBEAM is a rank 1 arcane spell that uses a spell attack roll and has a heightening clause that increases damage.",
+        "1f90a192539c85687ba3bc609a4dedab5c587215b98d5ed8e3693c0a20545c7a": "RAY OF ENFEELEMENT is a rank 1 arcane spell that uses a spell attack roll and has a heightening clause that increases damage.",
+        "14d22c912185a337967a820c2421610fbb18d51e25b8b0cce53dc0f49b98c59c": "CRY OF DESTRUCTION is a rank 1 arcane spell that uses a spell attack roll and has a heightening clause that increases damage.",
+        "62c240434df7d18d047a08cea60cb35b9e3e4629bd761254c6d9475c4f8dd43a": "The entry provides context on the heightening of spells, which is essential for understanding how the damage increases when heightened."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -321,55 +342,92 @@
       "notes": "Derived from seed 4. Tests feat-table scanning plus feat-text expansion within one class neighborhood.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
-        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
         "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
         "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
-        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
         "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
-        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
-        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+        "121e9d6a89f543de2ee7404ecf1c821b52c00f3d74ee663377e9b0324e823302",
+        "d83b9c9f844468ecdf08f19ea1fdc81fe6e6bc764a688f1bc37035e0bb768c4f",
+        "d105c4cece8ba059a203f575525ebe8859737b0da43cde98a32a4aae4b53558f"
       ],
       "required_gold": [
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
-        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
-        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
-        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3",
         "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
-        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
         "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
-        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+        "121e9d6a89f543de2ee7404ecf1c821b52c00f3d74ee663377e9b0324e823302",
+        "d83b9c9f844468ecdf08f19ea1fdc81fe6e6bc764a688f1bc37035e0bb768c4f",
+        "d105c4cece8ba059a203f575525ebe8859737b0da43cde98a32a4aae4b53558f"
+      ],
       "_required_gold": [
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
-        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d",
-        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786",
-        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3",
         "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691",
-        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
         "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160",
-        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8"
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd",
+        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6",
+        "121e9d6a89f543de2ee7404ecf1c821b52c00f3d74ee663377e9b0324e823302",
+        "d83b9c9f844468ecdf08f19ea1fdc81fe6e6bc764a688f1bc37035e0bb768c4f",
+        "d105c4cece8ba059a203f575525ebe8859737b0da43cde98a32a4aae4b53558f"
+      ],
       "gold_locations": {
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": {
           "page": 168,
           "structural_path": [
-            "CONCENTRATE RANGER"
+            "HUNTER'S EDGE"
           ],
           "source_unit_ids": [
-            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
+            "88cd335f9277e971c1b2c143af4fc52ccaa78f2fdf49c06739ef5004c1c331a4",
+            "e109c8615edd20654501b19d77f4fcb29f0816d45e961eb61e5699f6219847cb",
+            "f84b200d81a8907270a5aca59dcdb98fb3121f4eb9382276f1c8d0c71fa8e4bb",
+            "d553dde433b78a99be3dd05945e9df98674e4a40b3002523522268a82f32736f"
           ]
         },
-        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d": {
-          "page": 170,
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3": {
+          "page": 171,
           "structural_path": [
-            "RANGER FEATS"
+            "RANGER"
           ],
           "source_unit_ids": [
-            "d91a9b911bb6741be986ea330cad2f5fb08974f65fcfe22b0759ce452028eb2e",
-            "7bf788106fbb34fa0181cf914215a30f4715c5a11b75387d86d09d1b1667441e"
+            "8b9f652ac78721b0def03274cd7170cfb1481bd1d48088d17d6ff413a40c0f3f",
+            "c8cc59dad55768e79d0d6633a42ed7a293066243933c24a682a7371ca2b617d2"
+          ]
+        },
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": {
+          "page": 174,
+          "structural_path": [
+            "WARDEN'S BOON"
+          ],
+          "source_unit_ids": [
+            "808e2c83704d6eaf7ce6d19d696c1abb5f478e25f3855cc5498e3c45a7d46cf6",
+            "f8a7d31f3c0ba80df940e4528df6899e500baf240c06d34465a29847aabfb4cf",
+            "740aee31ef94f181517f22cfca7e666705497f79de2c548fe1db5ffa99137f71",
+            "a4de6c3f97c7ab1ce48f90b2442fdc50e5393569e0bf334820e24da65ff6d62d",
+            "87f7a2c81584f20934323b7fbfe20cfe7de6d3a964ca760ee56336d1e6dbe335",
+            "c7ffb2f3dcd3cce0907c3eb89ebb6657575c7b84a381f23c6af4a0588056f8ef",
+            "9034d00d5608548722dc89eb27d6e19c8682ff2c1dc475c33310be526c881f53"
+          ]
+        },
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": {
+          "page": 175,
+          "structural_path": [
+            "RANGER"
+          ],
+          "source_unit_ids": [
+            "c0e48f8a8a536091b037907e0f342941e96267e01fc2add4dbc0c8f270b863e3",
+            "ee8c4befca3bd7593578fba0824813512233a3a8c40cb70cb880f8bc99e212b1",
+            "8af5150b2449e7167042e1061dfd13e34645782f18017206b1083f9febd848fa"
           ]
         },
         "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786": {
@@ -396,21 +454,6 @@
             "40c3b973417d18c061a2fd60a603d7b1974fb569adc1edac00b5de1fca3a7259"
           ]
         },
-        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": {
-          "page": 174,
-          "structural_path": [
-            "WARDEN'S BOON"
-          ],
-          "source_unit_ids": [
-            "808e2c83704d6eaf7ce6d19d696c1abb5f478e25f3855cc5498e3c45a7d46cf6",
-            "f8a7d31f3c0ba80df940e4528df6899e500baf240c06d34465a29847aabfb4cf",
-            "740aee31ef94f181517f22cfca7e666705497f79de2c548fe1db5ffa99137f71",
-            "a4de6c3f97c7ab1ce48f90b2442fdc50e5393569e0bf334820e24da65ff6d62d",
-            "87f7a2c81584f20934323b7fbfe20cfe7de6d3a964ca760ee56336d1e6dbe335",
-            "c7ffb2f3dcd3cce0907c3eb89ebb6657575c7b84a381f23c6af4a0588056f8ef",
-            "9034d00d5608548722dc89eb27d6e19c8682ff2c1dc475c33310be526c881f53"
-          ]
-        },
         "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6": {
           "page": 175,
           "structural_path": [
@@ -422,39 +465,48 @@
             "63c14fe5e8749835aeba59e2fb5ad0d0ae85c1e988f09b32c06f3ba5b307c447"
           ]
         },
-        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": {
-          "page": 175,
-          "structural_path": [
-            "RANGER"
-          ],
-          "source_unit_ids": [
-            "c0e48f8a8a536091b037907e0f342941e96267e01fc2add4dbc0c8f270b863e3",
-            "ee8c4befca3bd7593578fba0824813512233a3a8c40cb70cb880f8bc99e212b1",
-            "8af5150b2449e7167042e1061dfd13e34645782f18017206b1083f9febd848fa"
-          ]
-        },
-        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8": {
+        "121e9d6a89f543de2ee7404ecf1c821b52c00f3d74ee663377e9b0324e823302": {
           "page": 177,
           "structural_path": [
-            "Prerequisites Shared Prey"
+            "Prerequisites masterful hunter, Animal Companion"
           ],
           "source_unit_ids": [
-            "cf9a3946b44435784488fa723f4b668c54bb4aac4cfbaa04fe38d6ba54c04db5",
-            "582ac48d68688815821e53bcecc1b9d856c1a0224d3cfd00a74323cc391bb86f"
+            "6373fd0c078c0030575ecf9740a2c64642ddf001c73e23f2cf852922fe896c0b",
+            "3ef749e30df40e50c61db40bf1912b73cea011880dbf9bca68d563ded0b43070"
+          ]
+        },
+        "d83b9c9f844468ecdf08f19ea1fdc81fe6e6bc764a688f1bc37035e0bb768c4f": {
+          "page": 170,
+          "structural_path": [
+            "MASTERFUL HUNTER"
+          ],
+          "source_unit_ids": [
+            "4b0c0fbbe14e25837f5f8cafdf22d660e757dd734df95a1c4450b81b07f5da9d",
+            "1d77c7885000bc80a8a77a5154e165ae02dacd11c0f70ca69ff9b551f0047b05",
+            "f6d6b6125ebe5f36e03efd045f20285778756614121c44c1a34a4ba05d324bad",
+            "96e38ea36802cc4dbd33c725a88fd7d98101d5eb4b1521ffb25f3c6ef4ea377b",
+            "60650a16243ac750b1b4405611a4d4cce34e78a8e56bec9c845d9cdcefa912e7"
+          ]
+        },
+        "d105c4cece8ba059a203f575525ebe8859737b0da43cde98a32a4aae4b53558f": {
+          "page": 176,
+          "structural_path": [
+            "Ranger"
+          ],
+          "source_unit_ids": [
+            "f43326708dc4e765d9cd3e15d0d2b7de837d8288c41d76dd8328f87fc09fd5ec",
+            "0106ceaccd03132ec0c37e55ba7decaa6b71b77c6c1a42c0fbaf3b46b88f6276"
           ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This is the base Hunt Prey action needed to interpret every feat that modifies the designation or benefits of hunted prey.",
-        "161063b73fb75a280c3163c4f009b878ee909d1fa21c8c68a6538e041591436d": "This ranger feat index chunk is the inventory anchor: it identifies the relevant feat names and levels that must then be expanded in neighboring rules text.",
-        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786": "This chunk supplies Swift Prey and the animal-companion Hunt Prey rider, both of which change how quickly or widely Hunt Prey benefits apply.",
-        "62c5116868836f8d80d72acc52b3dcd062140b17062e032ebe6c98f6b26e65bd": "This chunk supplies Disrupt Prey and Favored Enemy, two explicit hunted-prey modifiers that add new prey-triggered or free-action benefits.",
-        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": "This chunk supplies Warden's Boon, which shares Hunt Prey and hunter's edge benefits with an ally.",
-        "d3964c29247fd3da5ca32af24b71ce1523e0a37ca8ad9988642510176fcf6ac6": "This chunk supplies Double Prey and Distracting Shot, both of which add prey-specific benefits beyond the base action.",
-        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": "This chunk supplies Shared Prey, which extends Hunt Prey benefits to an ally when you designate a single prey.",
-        "7bb15c9fcc0ca3386adaee98e6d452897d29ba9a285234fefb76317e512fd6a8": "This chunk supplies Triple Threat, the late-game extension that expands how many creatures or allies can benefit from a single Hunt Prey use."
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": "Details the Hunter's Edge feats, which modify Hunt Prey and provide specific benefits.",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3": "Describes the Monster Hunter feat, which enhances the Hunt Prey action with a bonus for identifying prey.",
+        "9c7990cf11fd7ba59a375e637bcf8021abf2ecaf9351a5f0f14c9dbb30ce3691": "Introduces Warden's Boon, which extends Hunt Prey benefits to allies.",
+        "a55afe990b5ba65cdac29fb111c7ac674409e0913576ca596e4fd78043054160": "Covers Shared Prey, allowing benefits to be shared with an ally when using Hunt Prey.",
+        "57a94bc2054334bad83d4e5f931cf48a581af337c8cb4544cc5ff8cf9a5b7786": "Explains Swift Prey, which modifies the Hunt Prey action for quicker use."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -545,26 +597,41 @@
       "notes": "Derived from seed 5. Cross-class feat comparison with MAP-sensitive answer assembly.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "8f7118cc1c40504092c1f797f56e3c97511b3b0c770d5abae6765306288f353d"
       ],
       "required_gold": [
-        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "8f7118cc1c40504092c1f797f56e3c97511b3b0c770d5abae6765306288f353d"
+      ],
       "_required_gold": [
-        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd"
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "8f7118cc1c40504092c1f797f56e3c97511b3b0c770d5abae6765306288f353d"
+      ],
       "gold_locations": {
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": {
+          "page": 144,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "fd6a3086f504319600fcfb0a60715f244988f0f4bd25280b959313b86071b745",
+            "eeb348c53f26d6d321c0094dd06f4865868af638cbf84f468e754f48cb92a541"
+          ]
+        },
         "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": {
           "page": 171,
           "structural_path": [
@@ -577,16 +644,6 @@
             "547498282ccae12ad86169268d34ac5a36c9ea7e0968fc84edb352343a32d30c"
           ]
         },
-        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": {
-          "page": 144,
-          "structural_path": [
-            "FIGHTER"
-          ],
-          "source_unit_ids": [
-            "fd6a3086f504319600fcfb0a60715f244988f0f4bd25280b959313b86071b745",
-            "eeb348c53f26d6d321c0094dd06f4865868af638cbf84f468e754f48cb92a541"
-          ]
-        },
         "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": {
           "page": 446,
           "structural_path": [
@@ -596,23 +653,33 @@
             "7d831cb8419891230da92f2484edf3ae267422cb5f6007841aa0c92f0df3537a"
           ]
         },
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
-          "page": 168,
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8": {
+          "page": 446,
           "structural_path": [
-            "CONCENTRATE RANGER"
+            "MULTIPLE ATTACK PENALTY"
           ],
           "source_unit_ids": [
-            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
+            "a102db00a141e302854dbd37c9df454bcf0655308cd6828627e81b4ffff1b12d",
+            "2ef014ded49caffd9ef279cf2f49d6e632990caea2439721400f811863960071"
+          ]
+        },
+        "8f7118cc1c40504092c1f797f56e3c97511b3b0c770d5abae6765306288f353d": {
+          "page": 153,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "source_unit_ids": [
+            "c23200da72f8fcfefddb6480250abe4bd9b7630edc9f4c3750e2f92f56d4ce39",
+            "e71d32b90959dfb866b9a05d92fb42e0dadb8f6b8619b8071ba353bed1284ce9"
           ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This chunk contains Twin Takedown's requirements, combined-damage handling, and same-activity attack treatment against hunted prey.",
-        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This chunk contains Double Slice's requirements, same-target restriction, damage-combination rule, and MAP wording.",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": "This chunk is the core multiple-attack-penalty rule needed to compare how each feat interacts with attack-trait sequencing.",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This chunk defines the hunted-prey designation that Twin Takedown depends on and that differentiates it from Double Slice."
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This token provides the details of the Double Slice feat, including its action cost, requirements, and damage handling.",
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This token outlines the Twin Takedown feat, which is essential for comparing its action cost and requirements against Double Slice.",
+        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": "This token explains the multiple attack penalty, which is crucial for understanding how both feats handle penalties during attacks."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -666,15 +733,152 @@
       "source_page": null,
       "notes": "Derived from seed 10. Tests class doctrine plus cause-specific reaction lookup.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "2938a93bc0aecfcbe8b97876bba7105ae2498c742829a54b811650185ae22293",
+        "4ad658c0c00cac5591332e184a3552e84cd276d445b7d59094910bf4890b3867",
+        "3db590347a5981973abc42dcaa067b5629dd0e165d8b9b49a59ec1e084f8e20b",
+        "2a68ae151dd6f31b4514bc3474631b4d0fc2b27c4ecc2baae11609911275c77e",
+        "afe1a1dc4fa83e5594269ae03ec86de37c8f90ca99204fc9d10d28c0c516c97b",
+        "7c42fc5db44122b285b8343f4804018ed0d7d0705acf54fce130184f0d17ee8d"
+      ],
+      "required_gold": [
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "2938a93bc0aecfcbe8b97876bba7105ae2498c742829a54b811650185ae22293",
+        "4ad658c0c00cac5591332e184a3552e84cd276d445b7d59094910bf4890b3867",
+        "3db590347a5981973abc42dcaa067b5629dd0e165d8b9b49a59ec1e084f8e20b"
+      ],
+      "supporting_gold": [
+        "2a68ae151dd6f31b4514bc3474631b4d0fc2b27c4ecc2baae11609911275c77e",
+        "afe1a1dc4fa83e5594269ae03ec86de37c8f90ca99204fc9d10d28c0c516c97b",
+        "7c42fc5db44122b285b8343f4804018ed0d7d0705acf54fce130184f0d17ee8d"
+      ],
+      "_required_gold": [
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "2938a93bc0aecfcbe8b97876bba7105ae2498c742829a54b811650185ae22293",
+        "4ad658c0c00cac5591332e184a3552e84cd276d445b7d59094910bf4890b3867",
+        "3db590347a5981973abc42dcaa067b5629dd0e165d8b9b49a59ec1e084f8e20b"
+      ],
+      "_supporting_gold": [
+        "2a68ae151dd6f31b4514bc3474631b4d0fc2b27c4ecc2baae11609911275c77e",
+        "afe1a1dc4fa83e5594269ae03ec86de37c8f90ca99204fc9d10d28c0c516c97b",
+        "7c42fc5db44122b285b8343f4804018ed0d7d0705acf54fce130184f0d17ee8d"
+      ],
+      "gold_locations": {
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d": {
+          "page": 106,
+          "structural_path": [
+            "DEITY AND CAUSE"
+          ],
+          "source_unit_ids": [
+            "cb76d1206f82eeb4575c05a8351099d3039986a29e69a32b19b8de498c2115cf",
+            "fa3815475a367588b68280c707c059c72eaeeb07bf04166317628131b2927287"
+          ]
+        },
+        "2938a93bc0aecfcbe8b97876bba7105ae2498c742829a54b811650185ae22293": {
+          "page": 107,
+          "structural_path": [
+            "CHAMPION"
+          ],
+          "source_unit_ids": [
+            "05de9069778c5782ed42c3e91f636fa55435655c6956dbd5b74a0421adfac430",
+            "b228cc4505d46ca9cf5441a8fff568867cc4d69b3a72742692c516275a1898c0",
+            "baeaec89d42eb08ec354c263cc5abe62e992847692cb311e424bf24b22acc0a6",
+            "847a6a9c91e4cd222b35d23c25ea2585a2401a845f86e46f6b3e7d0d322c82a8",
+            "6cc75bb244726c770b3bbee0cd234d074989ba224737217e5211cad7ba9ae974",
+            "31abcd79e2b66f6eb9bc834520290cfe06765715d975fe3d67cf0ee509b15661",
+            "07f44ce23a9ac0483286e6c539a31fb1794675e34d654974e6af5da2c8b77426",
+            "43e564ce7d0658923a64ba737967a474fe407b002c3e90cc941bdf4708cb568f",
+            "0561108a0a3332b5d140e15558a256c578b1f6b58ce39477eacc1d38484bc06b"
+          ]
+        },
+        "4ad658c0c00cac5591332e184a3552e84cd276d445b7d59094910bf4890b3867": {
+          "page": 114,
+          "structural_path": [
+            "CHAMPION"
+          ],
+          "source_unit_ids": [
+            "61fc16b5047c82abff40805fa7448f2246d4d9487acfbb9b12b47150fcb28b1f",
+            "b7dff380064d85297c2a9583002ed8a061fca60e37040306dd0a5c249363ecb9",
+            "e61d0085ed54093770a4abd57beb3da72f5bdf31a927560635e83fddb9debea0",
+            "a445f2cd468a62a2ed961dfd82d4aae357a009dd650e27766a7c459b940b0f13",
+            "323535ef7f4c0a679b566bd5c12ec57e1b95196ef87dd44eb611f04a46cd14b8",
+            "b172fad4d79174faf16f9ab1936a0f2d7cbb8bdb27e9220e58c7d8081607119a",
+            "27fa5d5223da0eaa7fe54ce43851c89e64a194e12d0e35d0717d1c098280ead6",
+            "e798460a911c2c703ca356a9d5b7f745ef855ac0b2f12918fbd84139313b0a81",
+            "2c88e73e739e19cea556caa61cbd7b7f22fc6401ae8fd5752afae3ecdafa7421",
+            "afc6a5bcda75c008926bf80462861b0efa4e2936249c476f0b326ece28e6a542",
+            "b120de9647b9f9705e76bc9f9017c16f72f9c9669df6dec6919be8b6d97a2046",
+            "0a43d2cf023dc52c8c80a0d30d515c82ee59871a96efa1f33d52e16f939ad0b4",
+            "c70a3a4a011702b4e581d70b5aae0693b7585447cc8d7031833567e7dafea20e",
+            "0a9e161ea2710c124a847fa6a5f021420aed8adfe3a79750c82bdbeaa44fcc06",
+            "09fb726328e641b431dbcac36f661754a775aab6c430c019c5bacb1c45350d47",
+            "9a36e7d433071a8aa3ba8ae2015e5793c60afdf4fcddc61654e3e11954d326ac",
+            "10a69e31258422af35d0bebcd58302e195c38a65f8de90ba43fc9a15be6df4bf",
+            "10a69e31258422af35d0bebcd58302e195c38a65f8de90ba43fc9a15be6df4bf",
+            "10a69e31258422af35d0bebcd58302e195c38a65f8de90ba43fc9a15be6df4bf",
+            "10a69e31258422af35d0bebcd58302e195c38a65f8de90ba43fc9a15be6df4bf",
+            "43d796babd204b76fbdb43779886c0ebc0c3ecab0636dad737be2a9a2eeabcc6",
+            "43d796babd204b76fbdb43779886c0ebc0c3ecab0636dad737be2a9a2eeabcc6",
+            "43d796babd204b76fbdb43779886c0ebc0c3ecab0636dad737be2a9a2eeabcc6",
+            "43d796babd204b76fbdb43779886c0ebc0c3ecab0636dad737be2a9a2eeabcc6"
+          ]
+        },
+        "3db590347a5981973abc42dcaa067b5629dd0e165d8b9b49a59ec1e084f8e20b": {
+          "page": 106,
+          "structural_path": [
+            "PALADIN [LAWFUL GOOD]"
+          ],
+          "source_unit_ids": [
+            "2f1133bc61fd2190ae343191c65004333d3b3b7d9a25f78947cf8c61dee3a190",
+            "5ae1133ef4769cd005a2c5fb54fa46208d37f29be4fb37b5252d933f86fa4b30",
+            "4beffa5a7f8d8dffb225b60513b6516a7041a14cb0bf600c73e1948fb91554a5",
+            "98d62e0e91f34007302e3b74e437b82c93b3fb7ca765f1277996cce9ce2c1fb9"
+          ]
+        },
+        "2a68ae151dd6f31b4514bc3474631b4d0fc2b27c4ecc2baae11609911275c77e": {
+          "page": 109,
+          "structural_path": [
+            "EXALT"
+          ],
+          "source_unit_ids": [
+            "6fcc728cac1b31b7ad28615af047f1fa51499f0d7b389b7b2d4bcf2a829322ee",
+            "9a29558205690ccb65d09f12e3753e38fdd0cdb88247ed52830560f4258b9aee"
+          ]
+        },
+        "afe1a1dc4fa83e5594269ae03ec86de37c8f90ca99204fc9d10d28c0c516c97b": {
+          "page": 108,
+          "structural_path": [
+            "DIVINE SMITE"
+          ],
+          "source_unit_ids": [
+            "7dcd513262494e70ed2fceb6daa61ede200b8680db594086989ad0abc7508d5f",
+            "2489d9702716f7e5a89c8eb507b6ee8d060e991000ed792d3f7def5c19b88d9e",
+            "64ac60ddce18749764f9c9a31042a28ca3a2df42ed5caa8b42c65488d1fc29a1",
+            "bd55c415bde984bdc2c40d5e19845f17a9b66a5c50090c43e08a0dce8fbdce54",
+            "60ec1feaca6da517bb21b5e10073ef0fd3b4fe4355672b5a602891576c20fedf"
+          ]
+        },
+        "7c42fc5db44122b285b8343f4804018ed0d7d0705acf54fce130184f0d17ee8d": {
+          "page": 113,
+          "structural_path": [
+            "CHAMPION"
+          ],
+          "source_unit_ids": [
+            "0234aa92bb5a18b852a535f7c16f03f9376ac0fa34aef5fb564dda0e2d48daa9",
+            "7d5a32d34292b2b36d723b5b89b4745fd48ff5c17ce14f609e876c16292bd361",
+            "3d2b285b9f036a32552a0f54b3a1a92f1f671f76e2b7d6e9a077f99af48415e7"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d": "This token provides foundational information about champion causes and their alignment with deities, which is essential for understanding the context of the question.",
+        "2938a93bc0aecfcbe8b97876bba7105ae2498c742829a54b811650185ae22293": "This token details the specific reactions associated with each champion cause, which is crucial for answering the question about what each cause grants.",
+        "4ad658c0c00cac5591332e184a3552e84cd276d445b7d59094910bf4890b3867": "This token outlines specific champion abilities and their prerequisites, which are necessary to understand the restrictions and tenets associated with each cause.",
+        "3db590347a5981973abc42dcaa067b5629dd0e165d8b9b49a59ec1e084f8e20b": "This token specifies the champion causes (Paladin, Redeemer, Liberator) and their associated reactions, which directly answers the query."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -690,34 +894,28 @@
       "notes": "Derived from seed 11. Tests fighter feat plus reaction interaction and trait-aware answer assembly.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
-        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66",
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f"
       ],
       "required_gold": [
-        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
-        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f"
+      ],
       "_required_gold": [
-        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51",
-        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9"
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f"
+      ],
       "gold_locations": {
-        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": {
-          "page": 142,
-          "structural_path": [
-            "ATTACK OF OPPORTUNITY 2"
-          ],
-          "source_unit_ids": [
-            "43c90c33f0c44b268a8a8caf10cd447b3483d37ea5cd4a210e87547b09333266",
-            "ad82b5cab6bdf2ad54faa3629fab081700f3f61499c3f46451406104008acb99",
-            "fb73f79e57712b09eb275d3a4beee9f45c15e3bd9ce6a194cfffcad500426bcd",
-            "53dbd9ac81fae64e3290530bd4627c6549f3ca5c76e3132d9500610bb6fe6f1d",
-            "b03264178ff5b0b14c1127004034a130ad7e584d623f7ffc661624d86c8fe293",
-            "3c8dcf286e3bcc41ba5bec88a15824d7d16e3c1855d2b6567a1800890b25d63c"
-          ]
-        },
         "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": {
           "page": 150,
           "structural_path": [
@@ -728,13 +926,40 @@
             "c35c353324fde5d01bb40b6efb5c507954907c91bcb68ce4b7cc28946a80254f",
             "a5ee62f1f009e442eca63f22a2205439a24dcb03f752cf219551b47c83661e1e"
           ]
+        },
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66": {
+          "page": 473,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY"
+          ],
+          "source_unit_ids": [
+            "fdf0e7987be50afbdd73a56d8a7325031d65d9415d92959563d1f4542d9027c9",
+            "3ce5cfebd8872b3e2977302d66310ff4e171af820e414a6e041f0bbe5595d327",
+            "774201bda4f15f2e132a90ef28cb2b81566df7d2f9a15d2f4b342ac59a96d726"
+          ]
+        },
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0": {
+          "page": 463,
+          "structural_path": [],
+          "source_unit_ids": [
+            "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0"
+          ]
+        },
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f": {
+          "page": 462,
+          "structural_path": [
+            "DISRUPTING ACTIONS"
+          ],
+          "source_unit_ids": [
+            "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f"
+          ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": "This fighter class-feature chunk gives the baseline Attack of Opportunity trigger set and its normal disruption rule on a critical hit against manipulate actions.",
-        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "This chunk contains Disruptive Stance and states both changes at issue: concentrate actions now trigger the reaction, and concentrate actions are disrupted on a hit rather than only manipulate actions on a critical hit."
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "This token provides the specific details of the Disruptive Stance, including its ability to disrupt concentrate actions.",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66": "This token outlines the baseline Reactive Strike behavior, detailing how it disrupts manipulate actions and the conditions under which it operates."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -770,15 +995,119 @@
       "source_page": null,
       "notes": "Derived from seed 12. Normalize around concrete shield-reaction timing and stacking limits rather than a named build alone.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac",
+        "cad73eb279d85d5d6bc2b767470b69c84b59ca8c06fd243d3ab52e744a178020",
+        "33a3dc62e8f263fa35132344e453c12ae655ca35be6592b1ba89c28a0dd8ef12",
+        "ec504c5ebc78dca654148c043d2872c7fc7486e43c97c09f5873bf8e982fcaf8",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "ef715ea61c7d18156dd47f92bd4d0d4d093b9cf51d3ef44ec5f93ff464899d57"
+      ],
+      "required_gold": [
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac",
+        "cad73eb279d85d5d6bc2b767470b69c84b59ca8c06fd243d3ab52e744a178020",
+        "33a3dc62e8f263fa35132344e453c12ae655ca35be6592b1ba89c28a0dd8ef12"
+      ],
+      "supporting_gold": [
+        "ec504c5ebc78dca654148c043d2872c7fc7486e43c97c09f5873bf8e982fcaf8",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "ef715ea61c7d18156dd47f92bd4d0d4d093b9cf51d3ef44ec5f93ff464899d57"
+      ],
+      "_required_gold": [
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac",
+        "cad73eb279d85d5d6bc2b767470b69c84b59ca8c06fd243d3ab52e744a178020",
+        "33a3dc62e8f263fa35132344e453c12ae655ca35be6592b1ba89c28a0dd8ef12"
+      ],
+      "_supporting_gold": [
+        "ec504c5ebc78dca654148c043d2872c7fc7486e43c97c09f5873bf8e982fcaf8",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "ef715ea61c7d18156dd47f92bd4d0d4d093b9cf51d3ef44ec5f93ff464899d57"
+      ],
+      "gold_locations": {
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e": {
+          "page": 266,
+          "structural_path": [
+            "GENERAL"
+          ],
+          "source_unit_ids": [
+            "e5dfc7f550178e37ab22a899c704b0ab6d22d79aa6f873bf4ef20c6683f1d238",
+            "f306fad8ba6de519da8552341b9a8addf27261601530a568e29ea3ea3c0e54b1"
+          ]
+        },
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac": {
+          "page": 369,
+          "structural_path": [
+            "SHIELD BLOCK"
+          ],
+          "source_unit_ids": [
+            "cce2b8fb77d5e17e6869f67785bdc301834875acf18d5fa2192c5ce83f611b8f",
+            "c2503091b876a789dcea725eecf89d4419910d5e3546c0eb343c4d8d158bd516",
+            "7e3b7918c9a947d0b291b94d034910e10d155ac48b5be127b9462c41c977c938"
+          ]
+        },
+        "cad73eb279d85d5d6bc2b767470b69c84b59ca8c06fd243d3ab52e744a178020": {
+          "page": 277,
+          "structural_path": [
+            "SHIELDS"
+          ],
+          "source_unit_ids": [
+            "9b5896d68928a53f3c24bf0465f7a9681e1ff687ba3c3f35c968bf68d075c036",
+            "7c20cfbc0607486bd9103ac29d3b603c79c58136c805cbd8d90fcd91743b0874",
+            "5ec171f2882126c6d6361c007aaf2bf25b19859e047b2a4679e1fb2cf6fc6614",
+            "0c563e7ed496064e2b25795b995b33db96689e886cc137dd34fc2e3924a8924f"
+          ]
+        },
+        "33a3dc62e8f263fa35132344e453c12ae655ca35be6592b1ba89c28a0dd8ef12": {
+          "page": 149,
+          "structural_path": [
+            "Prerequisites Shield Block"
+          ],
+          "source_unit_ids": [
+            "8e22197d9b8b0b39ad377709d81a3e8ac5fbb87edfe3c7671ecfc0287e473f04",
+            "b331df5e8582ad69ba8d1c1adebd132316563d2b166803f3a932aca2a7ee6d90"
+          ]
+        },
+        "ec504c5ebc78dca654148c043d2872c7fc7486e43c97c09f5873bf8e982fcaf8": {
+          "page": 145,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "2aa6b185f59eac81d28f157ee1ad11ceaaecf4dc93f82e12433ca8c66bbd6cd3",
+            "b3e4d9f2116aa53ea0dba63301829a25fd49f8eea7e38d03fa7e47e96022db6a"
+          ]
+        },
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01": {
+          "page": 149,
+          "structural_path": [
+            "Prerequisites Shield Block"
+          ],
+          "source_unit_ids": [
+            "727bfd5cb6643c963c5d9b3ee0e58a968596fb443658275b321b1a06a1b903ae",
+            "e44c0dee8c99578c1c61c35465b8ea492cea7fd20a83fa5309683f31dd4c7388"
+          ]
+        },
+        "ef715ea61c7d18156dd47f92bd4d0d4d093b9cf51d3ef44ec5f93ff464899d57": {
+          "page": 113,
+          "structural_path": [
+            "CHAMPION FLOURISH"
+          ],
+          "source_unit_ids": [
+            "ef715ea61c7d18156dd47f92bd4d0d4d093b9cf51d3ef44ec5f93ff464899d57"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e": "Defines the Shield Block reaction and its trigger conditions.",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac": "Clarifies the interaction of the shield spell with Shield Block.",
+        "cad73eb279d85d5d6bc2b767470b69c84b59ca8c06fd243d3ab52e744a178020": "Explains the mechanics of raising a shield and its effects on AC.",
+        "33a3dc62e8f263fa35132344e453c12ae655ca35be6592b1ba89c28a0dd8ef12": "Introduces the Quick Shield Block feat, which provides additional reactions."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -794,38 +1123,28 @@
       "notes": "Derived from seed 13 and serves as the retained focused descendant of the broader bard composition inventory prompt.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
         "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
-        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+        "bd94d7b22c3d91c25404b273559ed67f63e237b5b70f3c3470176d262de65bd2",
+        "4262d323e3f999336244c9fe36cbd87f52d448788a2e89c09690b52a0b190a47",
+        "f3d4e0cf378e2f4dd863350847da699e44c05edfb7979613289184993cc948a3"
       ],
       "required_gold": [
-        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
         "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
-        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+        "bd94d7b22c3d91c25404b273559ed67f63e237b5b70f3c3470176d262de65bd2"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "4262d323e3f999336244c9fe36cbd87f52d448788a2e89c09690b52a0b190a47",
+        "f3d4e0cf378e2f4dd863350847da699e44c05edfb7979613289184993cc948a3"
+      ],
       "_required_gold": [
-        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818",
         "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf",
-        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca"
+        "bd94d7b22c3d91c25404b273559ed67f63e237b5b70f3c3470176d262de65bd2"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "4262d323e3f999336244c9fe36cbd87f52d448788a2e89c09690b52a0b190a47",
+        "f3d4e0cf378e2f4dd863350847da699e44c05edfb7979613289184993cc948a3"
+      ],
       "gold_locations": {
-        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818": {
-          "page": 386,
-          "structural_path": [
-            "INSPIRE COURAGE"
-          ],
-          "source_unit_ids": [
-            "74dcc2589c6082358efbf2cda7c0a6180f548a8b7e015eb04bbc495d27e50ffb",
-            "54e46a21b021ed1250d33889cc8ddec1a27a8548d91bc0ed1a35afef7e8e4629",
-            "2b0d2dce3468395dcca24d76b71607c0bc35bd1b4d7164b07d21ee84fa977a30",
-            "1394ec15a96772ce38148b706f32688ec2f9f75c2b7d550e167902658b22acff",
-            "9abfccbddb0c94e538b3ab7a0ba49296716b891b48a3a081329591e49949fa7e",
-            "d15b15f3fcfeaf440bb7c33929640057b7089c6b7f17df1691dac920fdfbbbfa",
-            "fe918b1b9bfe885b46d61979b069c646e7d97aa271c7b0a25c05f205f270536c"
-          ]
-        },
         "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf": {
           "page": 386,
           "structural_path": [
@@ -844,23 +1163,63 @@
             "a4cdb6865fb3a12f6d28c25d8fd192f0f1bd77452e9aaca758458c320eeeac60"
           ]
         },
-        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca": {
-          "page": 99,
+        "bd94d7b22c3d91c25404b273559ed67f63e237b5b70f3c3470176d262de65bd2": {
+          "page": 101,
           "structural_path": [
-            "KEY TERMS"
+            "BARD CONCENTRATE MANIPULATE METAMAGIC"
           ],
           "source_unit_ids": [
-            "84222b20389acb1e658a96ba46fe3bde8aa92b3af79100d3f489584e1f0776ab",
-            "fdacc9ebc8f44ec8732068f84006ed0bf006454bf0ab8aa5ae369e4214707093"
+            "be4783668c782a8f8822810c44f26e03910fb06c0db50e0d31240592cfaf7ac8",
+            "1b2ef7af7c205bcd703aefbfe7f0a220347c5969c22784fbd5594c4d18691735",
+            "acc25c1af469d88f1e6cd4629d2647e56b3889e6049b7980205a00aa8c14a4ef",
+            "fbf85898f0acaf2a1b57ed3a58bb796192b987c4f557f75ed8df5810025321a6",
+            "226339b669a3ded9367a6c5a4455949fc116b8758d1849d8c41512454f0e8cb1",
+            "75587b17b693fc3f56ea4939caa0fcfabfd180507937a284f6c6d49fa39ab82d",
+            "ce4525fe12e187d57bb3fd6c1b64341aa35434e08d86d84d4980373fd5b24bc1",
+            "a8ce153c66fe6fae70e97d57c674539bfebad8da4bcb5f5cbaa0bb9cdd573e42",
+            "565dc1e1df4b5a9f429153bcc1e663b1caa91ed6251523b33100b022d7a58674",
+            "723dfe2ff024e7e7a5edc062f77ac13e09fc841ee999d4dff1b911004f2104b0",
+            "cfb11cbda12ff1f85c8e6a28d9511eedcba3c67afeb67462208cc36f9f53557f",
+            "a8bf24f6148e9d14abd041958322535c28d0636e815e1060641f6d8a035bf0a3",
+            "b6ed01027d783933fc2539daa0da222826e9ae82297d10d41b45c4521c014d05",
+            "b21ca3297fef94e53656939f385b9ff1148eff4cbfb63273982bcd496835e754",
+            "2bb29e48900dbe078dc3276d118c3a3235fba07f8d07382308b54f8bbc7d8150",
+            "e6fc56ef01128e1aa032064fce594c92ee122dd662eccd74cecb8dca6674cb84",
+            "812de8ac0d877aafdd23240d553b39f7bd09ee0bf3aced767cc8e32e2ad170de",
+            "812de8ac0d877aafdd23240d553b39f7bd09ee0bf3aced767cc8e32e2ad170de",
+            "812de8ac0d877aafdd23240d553b39f7bd09ee0bf3aced767cc8e32e2ad170de"
+          ]
+        },
+        "4262d323e3f999336244c9fe36cbd87f52d448788a2e89c09690b52a0b190a47": {
+          "page": 387,
+          "structural_path": [
+            "UNCOMMON BARD ENCHANTMENT METAMAGIC"
+          ],
+          "source_unit_ids": [
+            "53c761fbf4c56b88823ed21bdecab0925419f06f561d51af12a4b8d2f6f4f13d",
+            "d1431fce4b7ff3b877f19715ef9b495b019cf249f3d16af6560196262a643da9",
+            "336cb36bc2305bdee439336b070be16efc130a1d9fb114a9e4adcfa76e197469",
+            "fdae11bce09a96e59fb7d5a05eb12b81aa922f6d00ed172b0d701d5859edabf6",
+            "4f44ee6065abeb5e1f396852852de89dbd9fb8cdbe46fc6d4876d963019725ac",
+            "62d516633c11ea4d2fbb124f3cfb1010dd0f4d2df27c4ba75e16de6975b3af4d"
+          ]
+        },
+        "f3d4e0cf378e2f4dd863350847da699e44c05edfb7979613289184993cc948a3": {
+          "page": 387,
+          "structural_path": [
+            "Cast \u2717 verbal"
+          ],
+          "source_unit_ids": [
+            "3510e280cc7747b72ed1b8cd8f385dc1be4875df614ed41e457221786990dc1a",
+            "85e410cfb8c5e6db28192042601ae88b10ee52e61e4d430dadcd3148ebdd38a4"
           ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "ef66a05d67e0bea6c0c318d6edfbbfd00e4ab1b7b7c86e0061af499967b0c818": "This chunk contains Inspire Courage, the pre-remaster equivalent of Courageous Anthem in the active corpus, including area, duration, and bonuses.",
-        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf": "This chunk contains Dirge of Doom, including its area, duration, and frightened effect on foes.",
-        "32c9718cfc5c4dbd4500826e71c63df2fc6795f1e063c272730a3640c3276aca": "This bard key-terms chunk defines the normal composition limit of one composition each turn and one active composition at a time, which is the rule needed to explain overlap and conflict."
+        "c64540cc0c1c2843795117269384ffdc394ecef056edad9ceaf2166cdacc3ccf": "This token provides the details of the 'Dirge of Doom' composition, including its area, duration, and effects, which are essential for comparing it with 'Courageous Anthem'.",
+        "bd94d7b22c3d91c25404b273559ed67f63e237b5b70f3c3470176d262de65bd2": "This token describes the 'Courageous Anthem' composition, which is necessary to understand how it interacts with 'Dirge of Doom' in the same encounter."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -905,15 +1264,126 @@
       "source_page": null,
       "notes": "Derived from seed 14. Cross-class tactical comparison with MAP and round-usage analysis.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "0a038ef11b8b5bf3420aed8ee0dabb6f24152f0525050c5c9298d892cd1dc76d",
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "5556bd0c9eea7269c59c4411f7d34b8edaa10c2d4c0618e8fa9e1664dc5b94f5",
+        "c7e7b4fd29f4ebb2e957c9c2b3a4f2d0cf7ee27f343e082de4098a820b82e076",
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66",
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "required_gold": [
+        "0a038ef11b8b5bf3420aed8ee0dabb6f24152f0525050c5c9298d892cd1dc76d",
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "5556bd0c9eea7269c59c4411f7d34b8edaa10c2d4c0618e8fa9e1664dc5b94f5",
+        "c7e7b4fd29f4ebb2e957c9c2b3a4f2d0cf7ee27f343e082de4098a820b82e076"
+      ],
+      "supporting_gold": [
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66",
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "_required_gold": [
+        "0a038ef11b8b5bf3420aed8ee0dabb6f24152f0525050c5c9298d892cd1dc76d",
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8",
+        "5556bd0c9eea7269c59c4411f7d34b8edaa10c2d4c0618e8fa9e1664dc5b94f5",
+        "c7e7b4fd29f4ebb2e957c9c2b3a4f2d0cf7ee27f343e082de4098a820b82e076"
+      ],
+      "_supporting_gold": [
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66",
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51"
+      ],
+      "gold_locations": {
+        "0a038ef11b8b5bf3420aed8ee0dabb6f24152f0525050c5c9298d892cd1dc76d": {
+          "page": 187,
+          "structural_path": [
+            "ROGUE"
+          ],
+          "source_unit_ids": [
+            "472e82565847e11e0c05accb971c17351e0ab7c8f4ec71a209b5bc45186b6767",
+            "0e558d0ea0cbf539656ecc0d45963a043b15e485299311eda290c8c16dfbe66d",
+            "53f41e912d54981faccd15db3ef9056dd76104ad2f40bb2cce391b76027b5b4f",
+            "bd698d4fd42e2fe4549615afdca26cc27f67c69842c8b79461fa63af09748afc"
+          ]
+        },
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8": {
+          "page": 446,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "source_unit_ids": [
+            "a102db00a141e302854dbd37c9df454bcf0655308cd6828627e81b4ffff1b12d",
+            "2ef014ded49caffd9ef279cf2f49d6e632990caea2439721400f811863960071"
+          ]
+        },
+        "5556bd0c9eea7269c59c4411f7d34b8edaa10c2d4c0618e8fa9e1664dc5b94f5": {
+          "page": 461,
+          "structural_path": [
+            "ACTION ICON KEY"
+          ],
+          "source_unit_ids": [
+            "cc38a6ac08bfd54e2c9fea675390443f4de70f6eeed2231a715ebd4f1afaa12f",
+            "200f7070152e92010e29a0d61c9520243315efe997d28b9f28324ddcaabdd5fe",
+            "6505925ae761bdde44b26b4303f949c7905440ced34613cae4c16a1eac044876",
+            "a5c8297df495e9aded4071ba99ccdac2b91bc538342044a86f902caab37cb7e8"
+          ]
+        },
+        "c7e7b4fd29f4ebb2e957c9c2b3a4f2d0cf7ee27f343e082de4098a820b82e076": {
+          "page": 278,
+          "structural_path": [
+            "MULTIPLE ATTACK PENALTY"
+          ],
+          "source_unit_ids": [
+            "a102fd04617f26ac20b05a0081e3a15061a26f5aa1a7161d4cd581d4b0d5a5e0",
+            "e1bf6dde636348bbb748fc8bd2fb02490212f544c2ed361e923326d674bd0b35"
+          ]
+        },
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557": {
+          "page": 90,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY"
+          ],
+          "source_unit_ids": [
+            "d8e87d137af58ee8fab42a93927ad90890a19c819867c36c9e512516454b02d1",
+            "d4fce09d2d14bb2e3784320077b3b1557a0d62020e374223086d78da04a067c8"
+          ]
+        },
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66": {
+          "page": 473,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY"
+          ],
+          "source_unit_ids": [
+            "fdf0e7987be50afbdd73a56d8a7325031d65d9415d92959563d1f4542d9027c9",
+            "3ce5cfebd8872b3e2977302d66310ff4e171af820e414a6e041f0bbe5595d327",
+            "774201bda4f15f2e132a90ef28cb2b81566df7d2f9a15d2f4b342ac59a96d726"
+          ]
+        },
+        "da5d7a49441e8720988fb870b1dc2cf2592d96d01d42c8ba6dbd202f9201dd51": {
+          "page": 142,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY 2"
+          ],
+          "source_unit_ids": [
+            "43c90c33f0c44b268a8a8caf10cd447b3483d37ea5cd4a210e87547b09333266",
+            "ad82b5cab6bdf2ad54faa3629fab081700f3f61499c3f46451406104008acb99",
+            "fb73f79e57712b09eb275d3a4beee9f45c15e3bd9ce6a194cfffcad500426bcd",
+            "53dbd9ac81fae64e3290530bd4627c6549f3ca5c76e3132d9500610bb6fe6f1d",
+            "b03264178ff5b0b14c1127004034a130ad7e584d623f7ffc661624d86c8fe293",
+            "3c8dcf286e3bcc41ba5bec88a15824d7d16e3c1855d2b6567a1800890b25d63c"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "0a038ef11b8b5bf3420aed8ee0dabb6f24152f0525050c5c9298d892cd1dc76d": "This token provides the specific triggers and actions for both Skirmish Strike and Opportune Backstab, which is essential for comparing their mechanics.",
+        "2e888e3661a4b43dd0752ccb1c1357cca39ed9ff4648c6b7c6ee994aa9ed6ed8": "This token explains how multiple attack penalties are calculated, which is crucial for understanding how each ability interacts with these penalties.",
+        "5556bd0c9eea7269c59c4411f7d34b8edaa10c2d4c0618e8fa9e1664dc5b94f5": "This token outlines the types of actions, including reactions, which is necessary to determine the action costs associated with each ability.",
+        "c7e7b4fd29f4ebb2e957c9c2b3a4f2d0cf7ee27f343e082de4098a820b82e076": "This token details the multiple attack penalty rules, which is important for assessing how each ability handles attack penalties."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -928,15 +1398,125 @@
       "source_page": null,
       "notes": "Derived from seed 15. Tests class feature plus familiar-ability interaction; verify exact named familiar options during grounding. Active corpus note: the current Pathfinder2ePlayerCore substrate is the older Core Rulebook surface and does not contain the witch class, so this query remains intentionally uncited pending corpus swap or pilot replacement.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "8e3658bc6ecc6b96e5d1f473de72e8441ba0529ede98a3265feb2fe2cb09629f",
+        "c213d7b2c6bdefe255073b04693d7952a5280f21f4eea8589b3797f1826d21f0",
+        "81852f6943c1d169bd5df1ad6c46d4fab62c15610a6e48c429c072d2ce281171",
+        "61a1b7b8c02e0faa837566d46eb235569d58436666417ad8864f3d506040a996",
+        "37c7a7d489f14b3d9860abe2c37f6cf96f88db0d84f8d69fe11296d2da2c81ad",
+        "5a77ae21c7441edf241c6f4128bca35f42dbd549e3cbb51f220c11e493384b6f"
+      ],
+      "required_gold": [
+        "8e3658bc6ecc6b96e5d1f473de72e8441ba0529ede98a3265feb2fe2cb09629f",
+        "c213d7b2c6bdefe255073b04693d7952a5280f21f4eea8589b3797f1826d21f0",
+        "81852f6943c1d169bd5df1ad6c46d4fab62c15610a6e48c429c072d2ce281171"
+      ],
+      "supporting_gold": [
+        "61a1b7b8c02e0faa837566d46eb235569d58436666417ad8864f3d506040a996",
+        "37c7a7d489f14b3d9860abe2c37f6cf96f88db0d84f8d69fe11296d2da2c81ad",
+        "5a77ae21c7441edf241c6f4128bca35f42dbd549e3cbb51f220c11e493384b6f"
+      ],
+      "_required_gold": [
+        "8e3658bc6ecc6b96e5d1f473de72e8441ba0529ede98a3265feb2fe2cb09629f",
+        "c213d7b2c6bdefe255073b04693d7952a5280f21f4eea8589b3797f1826d21f0",
+        "81852f6943c1d169bd5df1ad6c46d4fab62c15610a6e48c429c072d2ce281171"
+      ],
+      "_supporting_gold": [
+        "61a1b7b8c02e0faa837566d46eb235569d58436666417ad8864f3d506040a996",
+        "37c7a7d489f14b3d9860abe2c37f6cf96f88db0d84f8d69fe11296d2da2c81ad",
+        "5a77ae21c7441edf241c6f4128bca35f42dbd549e3cbb51f220c11e493384b6f"
+      ],
+      "gold_locations": {
+        "8e3658bc6ecc6b96e5d1f473de72e8441ba0529ede98a3265feb2fe2cb09629f": {
+          "page": 218,
+          "structural_path": [
+            "MASTER ABILITIES"
+          ],
+          "source_unit_ids": [
+            "36d9a1d78131d261ff62c041b06087ba3a6a039ceb19f4fc6de7d46045def87b",
+            "fc290c89f2643b77ea7519010b4281b12f399566007fde5975c4a49fe782dd7e",
+            "a96094471057108fb49c03bdcfcc4032b988276107094fdae88b0f19acd5ddc1",
+            "9fde1613b06e06613a6ea57a866807b3e42211141fe8a8cc96ea48bad7defd13",
+            "2b0702c740f9a61ced60cc4e24fc642396327f605f1b37da64327738f5ed1f96"
+          ]
+        },
+        "c213d7b2c6bdefe255073b04693d7952a5280f21f4eea8589b3797f1826d21f0": {
+          "page": 205,
+          "structural_path": [
+            "IMPROVED FAMILIAR ATTUNEMENT"
+          ],
+          "source_unit_ids": [
+            "340ea14cb1db5d2c47deb25ab1555ce86b925de1bc4484dcc50fcd2dd7f00140",
+            "b3c2fae0b431472dcba141a74e1d8e41f6683849ee77d777330ca3fdc4ba1a54"
+          ]
+        },
+        "81852f6943c1d169bd5df1ad6c46d4fab62c15610a6e48c429c072d2ce281171": {
+          "page": 218,
+          "structural_path": [
+            "FAMILIAR AND MASTER ABILITIES"
+          ],
+          "source_unit_ids": [
+            "7993f869df5d0fa572ce195b67761b0e93d968366c9df35201c1eb71f813cfb1",
+            "d9b0a925488d60f6b61c14e721ebeea5a98a5c6b026d27236f7e5b330df30d19"
+          ]
+        },
+        "61a1b7b8c02e0faa837566d46eb235569d58436666417ad8864f3d506040a996": {
+          "page": 210,
+          "structural_path": [
+            "CONCENTRATE METAMAGIC WIZARD"
+          ],
+          "source_unit_ids": [
+            "affacc9930e8da5e8c21d0463e3d12f158bbfdf31f7afaee50e13e61c5e1ac53",
+            "6b49d2c463401ac59056905341441c4fbe091f02a1231d8a0fc0368fcf45abe7",
+            "a3fb313112266d67935ec96dbaf567cd165d69f5102dd426ec5b153ee5fcba50",
+            "3924e4bca5b29842eec3d89d8e04319f045e3f6f939b7f962d2529930f05c9b7",
+            "b054928a53f8000e10e08cd15041fc311f16670bdeb8e3f1b1acb2c9cd685b38",
+            "60a23161d3ade4d0aa4c0a17a1bce231ad9a51948303130832bdb5033ebb8a8d",
+            "26a16c07944ef9dfb67c3b03f1d25e1c224da8f288e9b4d82287432f20e21967",
+            "2a5224f683b4a8aa3c9f42ea1ce0c1c2c450c400b871945feb693f4184d7102c",
+            "b5410ef65420067b6213094b58f7571f066387596b7e1d4e3b9e959e2a799711",
+            "fdeda65e74aa750a47678f37e2d636e6ba0b68ab0b39045277d3f6cb93849815",
+            "0341169511ce0c0a13c5b87a9ad699938065c2da495cc922c051d76d3ee9128b",
+            "060327b96dfe5df4c0dfd556d880ca36497e79dd391137b194a511273e5aaafb",
+            "886ee788a66935aa6eb3447aa27fe4572ba12236b7711f6e2b40ae82aa5a08a9",
+            "99a9a2bd05c06d7504546697a03bb9936cb40a58a175837fee4df4a34aeb672e",
+            "130a1d2c6dbaca6f39e040bf49d00d2a14cfdb9a30cc8c24a8cb270f66973a2c",
+            "eea07477a87eede47650f7e6b27eecdd5045a88b3019d15c4ca495a1392f1ffb",
+            "63573d9ac6b67abce8f061139478baf123e8f3ccd006b378c0ea71d918dcb086"
+          ]
+        },
+        "37c7a7d489f14b3d9860abe2c37f6cf96f88db0d84f8d69fe11296d2da2c81ad": {
+          "page": 199,
+          "structural_path": [
+            "Prerequisites bloodline that grants arcane spells"
+          ],
+          "source_unit_ids": [
+            "2c70c95c1c1eb0d7abc421cadf2cf1990fd591adfbe82336c4eccd6efaedb27d",
+            "a62f1df5b08320a59bc6aee10bd4d2d928c24662cc39fe722ee7b82f49b380ae"
+          ]
+        },
+        "5a77ae21c7441edf241c6f4128bca35f42dbd549e3cbb51f220c11e493384b6f": {
+          "page": 211,
+          "structural_path": [
+            "WIZARD FEATS"
+          ],
+          "source_unit_ids": [
+            "b44012520b9a68c09bf7f4e68794d46cd950addec17e0a3aa5767be2ec094801",
+            "c35f2ce1d5c412493fc753eca8ab8fd4883dcf95753b6195353b74a2cf231f75",
+            "7b3f3c32f9d9ec39576bb7db7618e1250be02280e5964812aaab815876afefea",
+            "fe1aca05050f7637fe7cab00f36deb8b1e14aea1635af8fbd143bca62ce3a0e8",
+            "e0ec9a3bfee369cfb7d320f9cc061b737d62c296c11f923af65cee9a9929b6d4",
+            "e0ec9a3bfee369cfb7d320f9cc061b737d62c296c11f923af65cee9a9929b6d4"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "8e3658bc6ecc6b96e5d1f473de72e8441ba0529ede98a3265feb2fe2cb09629f": "This token provides essential information about familiar abilities, including spell delivery and focus management, which are crucial for understanding how a witch can cast hexes or spells.",
+        "c213d7b2c6bdefe255073b04693d7952a5280f21f4eea8589b3797f1826d21f0": "This token details the improved familiar attunement, which enhances the bond between a witch and their familiar, affecting spellcasting capabilities.",
+        "81852f6943c1d169bd5df1ad6c46d4fab62c15610a6e48c429c072d2ce281171": "This token outlines the mechanics of familiar and master abilities, which are necessary to understand the limitations and expansions of spellcasting through familiars."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -952,38 +1532,37 @@
       "notes": "Derived from seed 16. Environment rule plus spellcasting component interaction and mitigation lookup.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
-        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
-        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411",
+        "4d004399113e80794d052e25fe7764458532fb82a9e9fba85820243c649ca4f8",
+        "4d8a3a7da2c90925d56206af535aaf1d4853d1235a1127d8b38cdce5534f72d7",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
       ],
       "required_gold": [
-        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
-        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
         "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "4d004399113e80794d052e25fe7764458532fb82a9e9fba85820243c649ca4f8",
+        "4d8a3a7da2c90925d56206af535aaf1d4853d1235a1127d8b38cdce5534f72d7",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
       "_required_gold": [
-        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71",
         "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507",
-        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db",
         "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "4d004399113e80794d052e25fe7764458532fb82a9e9fba85820243c649ca4f8",
+        "4d8a3a7da2c90925d56206af535aaf1d4853d1235a1127d8b38cdce5534f72d7",
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42"
+      ],
       "gold_locations": {
-        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": {
-          "page": 303,
-          "structural_path": [
-            "VERBAL"
-          ],
-          "source_unit_ids": [
-            "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
-          ]
-        },
         "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": {
           "page": 478,
           "structural_path": [
@@ -992,6 +1571,15 @@
           "source_unit_ids": [
             "78c3d7b57f1985d473e77e19fc0124668dfdedeb8575a616b292fe0e8aed691b",
             "3dacf776193bce09f522ccd883b998a506a4b77ada1597c646a42cfaa97d829c"
+          ]
+        },
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": {
+          "page": 303,
+          "structural_path": [
+            "VERBAL"
+          ],
+          "source_unit_ids": [
+            "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71"
           ]
         },
         "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": {
@@ -1019,23 +1607,6 @@
             "e7ffefed98566c2d4c21de4f11d5efe60cca8739cb16bb1158ced49895226417"
           ]
         },
-        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db": {
-          "page": 268,
-          "structural_path": [
-            "UNIFIED THEORY"
-          ],
-          "source_unit_ids": [
-            "c0c4e6384961470db79064ab03f32c50273e14bf7f17a9cfdec7f712d5828622",
-            "d02f81e4e5490b4abf71f66bd201c760e20177d2dbaea1dbe703feba300d9a9f",
-            "e35b81df6eebc7d262cf4bebf5fe81d5bfc621ef47d3d92d08ac27e9914e3af5",
-            "b38c8832ea7287581ee5d4f22981e40e73d86f11e5cb0dba056df5312a1aa6d3",
-            "e1b95d8caf7962af9be6ed9c0f6c4162fc05a44722155909f828923c9ac42cc2",
-            "83bb78f9a79897f80e865cd6332cb4856cbec0cfe455503fafe60e710707678b",
-            "c90644faa1adb929fbfaaa5addcc2e837df5b6e2b2e7f618e6a043791a957428",
-            "7b189cdc75601940e355fad7f82778d83e1ed735d65048cfc1f0aee0814eaf56",
-            "c709a06ef70f4e6a6424d572263b3a05bca3b448629e5ab7292d26d9327f482b"
-          ]
-        },
         "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": {
           "page": 512,
           "structural_path": [
@@ -1045,16 +1616,53 @@
           "source_unit_ids": [
             "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411"
           ]
+        },
+        "4d004399113e80794d052e25fe7764458532fb82a9e9fba85820243c649ca4f8": {
+          "page": 576,
+          "structural_path": [
+            "TRITON'S CONCH"
+          ],
+          "source_unit_ids": [
+            "bd4ee0eb2170c0c7915f3974a13414097080d7a7b1280e7a9610e273d9cd61da",
+            "3188513dc5b48ff03f27f5e2da6969fec66113f4865e5521304b4aeba0c5ca77",
+            "b5b29095f8a511d8561ec943de87c97b3bb4867f547e7909e73fecb95f457716",
+            "76c12f2ac7fe1fbfdc0820155d4d332ababa9e8389d6fc643a9af4a37d3d2557",
+            "496c449743ff618dfc45314044612573dfed16a147a4820a971192dae7702081",
+            "d88d08e6803d35abdbc025278e92abc2688253e031b50070fa10758de4c30eed"
+          ]
+        },
+        "4d8a3a7da2c90925d56206af535aaf1d4853d1235a1127d8b38cdce5534f72d7": {
+          "page": 478,
+          "structural_path": [
+            "AQUATIC COMBAT"
+          ],
+          "source_unit_ids": [
+            "dc2d1763e83bf6c038807dd063133a449cbb13956109e6a18dda3285fedc3de0",
+            "11b35001a760bcdfa911aa5fbe31a5029fbf561b9b3fefa75a35a34b21829f4f",
+            "ab11400ee6c24b40f4d17a860c1e03c7677e906848e86b1d22856fe4dbec56d4",
+            "ce10857475a0b08da940296d2c98898bd4b8ca07399616ef56deb88c6dfcba86",
+            "c694edcab068164946908b37b411a4c94e1baf187fd74aa7057c2461a7913877"
+          ]
+        },
+        "991af5eea208b4e47a3932934d9c114b8a5d8b1624d38e6f79ddf4678f123f42": {
+          "page": 302,
+          "structural_path": [
+            "CAST A SPELL"
+          ],
+          "source_unit_ids": [
+            "655c51953ea5a994a0ce7d4c8718f004b0e85c7405a29b95a68e341a69b83b3f",
+            "111af6016c2065b59f5a115de526c402d9beb70b3c23aa2efd083f839ef16306",
+            "081228bacf389bf45834b0ce2e4e31489c4e259a39b73681ab94434547b2b472"
+          ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": "This is the operative verbal-component rule: it says you must be able to speak to provide the component.",
-        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": "This aquatic-combat chunk states the underwater casting limit directly: speaking underwater, including spells with verbal components, expends all remaining air.",
-        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": "This chunk supplies Water Breathing, the primary rules-text mitigation that lets characters breathe underwater even though it does not remove verbal components from the spell.",
-        "838743f57469247237fbab7fb745a05c3d5afead67411ddb663bca3a1de6b3db": "This chunk supplies Underwater Marauder, the relevant feat-side mitigation in the active corpus for underwater fighting limitations.",
-        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": "This chunk anchors the general aquatic-environment rule that characters usually need a way to breathe underwater and should interpret casting limits through aquatic-combat and drowning rules."
+        "0a94c83a0707a6411318e532a38e8627be50e00af7f39b83a8274b05a893c19c": "Details the consequences of casting spells underwater, specifically the loss of air when speaking.",
+        "db53190382ec01e058f6605986f047a0cf511fe1fb52b48b634e6fbfb2a10e71": "Defines the verbal component requirement for spellcasting, which is crucial for understanding the limitations underwater.",
+        "8f888b5723863a514239cad8325d269d5f9c72b971bbc87d28df3b9eb278e507": "Introduces the Water Breathing spell, which mitigates the limitations of casting spells underwater.",
+        "2a23ba092673343cfb8ec6e12dae52b12849e6581a6b8efefede61b0b5e76411": "Explains the general challenges of aquatic environments, emphasizing the need for air and the implications for spellcasting."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -1119,74 +1727,31 @@
       "notes": "Derived from seed 17. Multiclass legality plus same-turn sequencing and prey-benefit reasoning.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
         "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
         "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+        "602ed0c4d38cc0d6e3125a9bf3e130886cd589bbbdede8019770b4d1629e7ee3",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3"
       ],
       "required_gold": [
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
         "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
-        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "602ed0c4d38cc0d6e3125a9bf3e130886cd589bbbdede8019770b4d1629e7ee3",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3"
+      ],
       "_required_gold": [
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
         "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca",
         "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd",
-        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33"
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "602ed0c4d38cc0d6e3125a9bf3e130886cd589bbbdede8019770b4d1629e7ee3",
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3"
+      ],
       "gold_locations": {
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": {
-          "page": 226,
-          "structural_path": [
-            "FIGHTER DEDICATION"
-          ],
-          "source_unit_ids": [
-            "6764fb18928e916c09be3f8088f8d3dd1d486cdccd45cd5b1c6b0abf4daf4359",
-            "bc9749b4200bc1ee2b6861be8c7b938ecfcb917dd06c155c51f127cb548451e5",
-            "a3bc47c5f8b99a9537ead751482cadd744fc0a2be73b9648257e9d3ef93250a6",
-            "d70dda001c519e44ef6b2bdcb4fc4a8cab82301f0cdd6a3c7fb14f5fd516ccbc",
-            "b14ed9b5fa87f59dc3521fb374a4cf6716fba2a4948fe9bc9bd9b64484af5a86",
-            "2fe2f2780edb387b2de951c8db35cfc82b2225cfa7a952a260507d073ef60299",
-            "bf9f697a4b2bab438437a287488845292776a693a83c5a11d61fe338728303d8",
-            "1ac1d27383f0c3a4daa0861d4d9f669d538a717e8e5c696f21a7ee24fecc0225",
-            "a42a3ae300c75f663f2163dfc8be3da160636a1ff7d02b37e6707c154a8a3b0e",
-            "0e594737c7f6bce3a990e0943180639fc6fbd3fbe8b1151a16f64f005b5b652e",
-            "fa3bc8f3e343dfb06c60c53753d5ba2e1d2f6aeb9198efec90e1572870a7489b",
-            "11448fe1be7c664215f51f0132105bba36853a99c6b79cf648afb7fd829a3e25",
-            "0af89938a53a873abc6e0a5e0b8335b53043a14ffed061346d91b8f28227d62c",
-            "132352117be69a46bf0e51df11a6357c8e859eb6187f673a84fb036090546b2a",
-            "97dc3c4e9da3176f5c0834ae2592aa2b17c84b020f412b1d6b6f8dc8431449d0",
-            "f9d9c4f60ad4f720ddb1f207bde4dfcaad88b436deb6a465641747b40bf03887",
-            "ed15e8c7b487158acffefcf5c55d1988e6460b3bf5a19357110b16873afd81a1",
-            "77f2dfad30bc1e35faee3b3672735e6698bcde61fe652facd2b1935cadac2bff",
-            "56bcb6ecdd74c21619b413bc218985accb745359f75fdb468496d7da3cea8fee",
-            "23b569d074a1f60e772b730add00bcf6bf889f75998b2a49f34068ca9c63cbe4",
-            "876a89836255c3784dc1874b368473fc3c6ef2eb8134cdbc3e3fa587544e5a84",
-            "783a54f223f61c8863084deef9483bed57899cdf2ed0c366576243346ae5df93",
-            "f0aa7193014ba4f4a90569e73a361ead03707e50889b5d5a1a689f4cea8594cb",
-            "82a3640a08207c31565fd36e23899daaf521a5a1704e8e8337a87282f5ee3220",
-            "218295330089448f584cf3da6c798125f88b1f8dddf19848be53cbe805bacdce",
-            "a568e2e6a3079ad9c26f492d5a3fdba3e274a40dc143a3bd34db052c9a9ccc99",
-            "00156934955ddbb041b700fcee9646286d3e452fb7c3f385083a0faafe7555cb",
-            "bae209b176d62914b0b5400455f7a236a5c6b3b01eaca3be7e47db793eb54435",
-            "b2a389c3d0d2b3d70b14f14a6399aa3ca38ee10b5e02ba1f5cef3eab4e3c6154",
-            "c23870abcf9a1fc1fc4dc8485274e0f38acbeec1563c5cc2ce812957719b94c4",
-            "00170d45eb7e11258f7009ad8d2d2d518ccdddc3d1df27adb980c6a65bd93116",
-            "d7c23ad85de2a2c1da21f3044afb57f39618d955cb7498a0392ce03ec5fa333a",
-            "f1f44970b58d860386cb288e72c891030dbe2f4f3a0792cb348ed60ac0935a73",
-            "16a4be8e4b8a5152f244a7616cd89067b12ad6913db82dfd0cbde685e5432cab"
-          ]
-        },
         "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": {
           "page": 171,
           "structural_path": [
@@ -1209,15 +1774,6 @@
             "eeb348c53f26d6d321c0094dd06f4865868af638cbf84f468e754f48cb92a541"
           ]
         },
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": {
-          "page": 168,
-          "structural_path": [
-            "CONCENTRATE RANGER"
-          ],
-          "source_unit_ids": [
-            "701363b0a4700d370cc0c236da0a7244141f85ea8f2a9ff12eb737345aae261e"
-          ]
-        },
         "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": {
           "page": 168,
           "structural_path": [
@@ -1230,25 +1786,34 @@
             "d553dde433b78a99be3dd05945e9df98674e4a40b3002523522268a82f32736f"
           ]
         },
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": {
-          "page": 446,
+        "602ed0c4d38cc0d6e3125a9bf3e130886cd589bbbdede8019770b4d1629e7ee3": {
+          "page": 177,
           "structural_path": [
-            "MULTIPLE ATTACK PENALTY"
+            "Prerequisites hunter's edge, masterful hunter"
           ],
           "source_unit_ids": [
-            "7d831cb8419891230da92f2484edf3ae267422cb5f6007841aa0c92f0df3537a"
+            "40bb040bf5c807906e97ff5e291ff7d194936d76e524cb41cc89a17d2470800a",
+            "72e482a83dbe3a878f018e280d8444c56b42041c9045f3ce795fab0992436b1e",
+            "69c8e0fa996023b4d782bda5a5c6c8e979701062edd5f0f279db07da772b398b"
+          ]
+        },
+        "644cdb866a8b155863f01d49298872a16dd7a674e5a162b8e18bff5dffc335c3": {
+          "page": 171,
+          "structural_path": [
+            "RANGER"
+          ],
+          "source_unit_ids": [
+            "8b9f652ac78721b0def03274cd7170cfb1481bd1d48088d17d6ff413a40c0f3f",
+            "c8cc59dad55768e79d0d6633a42ed7a293066243933c24a682a7371ca2b617d2"
           ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": "This fighter-archetype chunk is the multiclass legality anchor: it shows how a ranger gains access to fighter feats such as Double Slice through Fighter Dedication and Basic Maneuver.",
-        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This chunk contains Twin Takedown's action structure and combined-damage treatment against hunted prey.",
-        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This chunk contains Double Slice's action structure, MAP wording, and combined-damage treatment.",
-        "fbb3dace69565e2cdfbf63262ad645ab325922bf744668606aefe3632924b9fd": "This chunk defines the hunted-prey designation that Twin Takedown requires.",
-        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": "This chunk defines hunter's edge, which is the rules surface where hunted-prey benefits can change damage or MAP treatment.",
-        "b307bdd13954671c24628b4689e95c535715caa4eba66ab594a6157b308c5f33": "This chunk provides the general MAP sequencing needed to reason about using both feats in the same turn."
+        "39690e8acc644e2ee9d3a735da48cd7b2ca12ad991ed83ceb2813986272101ca": "This token provides the mechanics of Twin Takedown, which is essential for understanding how it functions in conjunction with Double Slice.",
+        "c9eb2de04d197fec891c5aac9bfa08fc96d5dd4787870160f58f91230f287423": "This token details Double Slice, which is necessary to explain its interaction with Twin Takedown and how both can be used in the same turn.",
+        "40b6a4098b5ccba74310a0d740e143a6451cde7ca6ebfb0a1876a99ddb2e3646": "This token explains the benefits of Hunted Prey, which is crucial for determining how damage calculations are affected when using both feats."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -1320,15 +1885,128 @@
       "source_page": null,
       "notes": "Derived from seed 18. Normalized to remaster terminology by using off-guard instead of flat-footed.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef",
+        "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96",
+        "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2",
+        "5db87f9759ab4eb747a267a047b2268d14cae204b1d84cea147f37b2a0aa250e",
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "c7a6563856f062d62cc6ab49eddf7ef7f311c5ab6568682267557f6dd3c519dc",
+        "e6a906802562a3b759f3c8d1110a064fd72f296546512294048820cf1a592445",
+        "9761f1784454aef9d8999362b1c3679f46f0f26d138a3e56540e0287dcbe377e"
+      ],
+      "required_gold": [
+        "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef",
+        "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96",
+        "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2",
+        "5db87f9759ab4eb747a267a047b2268d14cae204b1d84cea147f37b2a0aa250e"
+      ],
+      "supporting_gold": [
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "c7a6563856f062d62cc6ab49eddf7ef7f311c5ab6568682267557f6dd3c519dc",
+        "e6a906802562a3b759f3c8d1110a064fd72f296546512294048820cf1a592445",
+        "9761f1784454aef9d8999362b1c3679f46f0f26d138a3e56540e0287dcbe377e"
+      ],
+      "_required_gold": [
+        "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef",
+        "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96",
+        "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2",
+        "5db87f9759ab4eb747a267a047b2268d14cae204b1d84cea147f37b2a0aa250e"
+      ],
+      "_supporting_gold": [
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "c7a6563856f062d62cc6ab49eddf7ef7f311c5ab6568682267557f6dd3c519dc",
+        "e6a906802562a3b759f3c8d1110a064fd72f296546512294048820cf1a592445",
+        "9761f1784454aef9d8999362b1c3679f46f0f26d138a3e56540e0287dcbe377e"
+      ],
+      "gold_locations": {
+        "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef": {
+          "page": 181,
+          "structural_path": [
+            "SNEAK ATTACK"
+          ],
+          "source_unit_ids": [
+            "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef"
+          ]
+        },
+        "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96": {
+          "page": 620,
+          "structural_path": [
+            "FRIGHTENED"
+          ],
+          "source_unit_ids": [
+            "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96"
+          ]
+        },
+        "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2": {
+          "page": 187,
+          "structural_path": [
+            "Prerequisites sneak attack"
+          ],
+          "source_unit_ids": [
+            "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2"
+          ]
+        },
+        "5db87f9759ab4eb747a267a047b2268d14cae204b1d84cea147f37b2a0aa250e": {
+          "page": 184,
+          "structural_path": [
+            "ROGUE"
+          ],
+          "source_unit_ids": [
+            "59b43dfeab26f112502038900995b2cad3bf76aa0779781dab32a09ca8ba7b22",
+            "c00d4a82add1532b8d56b26816109d4ef7f208e9c5a6d8545c6a8b1185503770"
+          ]
+        },
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b": {
+          "page": 184,
+          "structural_path": [
+            "ROGUE"
+          ],
+          "source_unit_ids": [
+            "503b23e7da45c75f0957245f62b498019a563215e36fa4fa74af10a6a6f7ac85",
+            "7a4bdd11327797832d9261d2a7c72c4e0a135f7324e4fb7c8d8aea4bab98c461",
+            "923db1175bcf5a34c413001a7648ab999f4051430f2ba64f8e800d3980c8cf51"
+          ]
+        },
+        "c7a6563856f062d62cc6ab49eddf7ef7f311c5ab6568682267557f6dd3c519dc": {
+          "page": 151,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "1b26b298a07a372eebbb45e5337717839a36e42b38eb4b577c6e7f4dea1ea56a",
+            "561a29fb88a6cbbe71ceff37ce6fbec450f257228319131c31da4874f7e65061"
+          ]
+        },
+        "e6a906802562a3b759f3c8d1110a064fd72f296546512294048820cf1a592445": {
+          "page": 181,
+          "structural_path": [
+            "SURPRISE ATTACK"
+          ],
+          "source_unit_ids": [
+            "d9d5aae208e955a3cda991014a0d1ec2c1a25996e773f3a0de1fbcbf238d325d",
+            "cc91063bf6ea4f736f51b12b7674fc0a7283ae8045d105a3224c884a2b603486"
+          ]
+        },
+        "9761f1784454aef9d8999362b1c3679f46f0f26d138a3e56540e0287dcbe377e": {
+          "page": 186,
+          "structural_path": [
+            "ROGUE"
+          ],
+          "source_unit_ids": [
+            "28870a779658289a6a2ef4fcfe3e5c1970d1b9b896a7e1fc9e2f7f0d3f62b57d",
+            "439e8aa443674fcd463808adc2ac55b89cfc479502fd928eb564716f8d87d008"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "be92d0a06e97807677d9337b0cb05e8fe22fb12dcff8f1904cda8873e3fa21ef": "Defines Sneak Attack and its conditions for applying extra damage.",
+        "2cf4aee800ce709a9e2c09789e27d0e9303051105f4ce49c53b975caeeb50d96": "Explains the frightened condition and its effects on the target.",
+        "c0899dd5a086010cdf7bf00e7df6236344ee5dd19e42037bcd989b418f95cbe2": "Details the Sly Striker ability, which is relevant for understanding damage against non-flat-footed targets.",
+        "5db87f9759ab4eb747a267a047b2268d14cae204b1d84cea147f37b2a0aa250e": "Describes the Dread Striker ability, which allows a rogue to exploit the frightened condition to make the target flat-footed."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -1343,15 +2021,103 @@
       "source_page": null,
       "notes": "Derived from seed 19. Kept separate from the baseline feat interaction query because it focuses on spell-facing disruption and action loss.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f",
+        "7b8726de8009e0fc559ee531fe2e4417b9f4b4d3ee0bca02fb851b32d75583eb",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66",
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557"
+      ],
+      "required_gold": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f",
+        "7b8726de8009e0fc559ee531fe2e4417b9f4b4d3ee0bca02fb851b32d75583eb",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66"
+      ],
+      "supporting_gold": [
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557"
+      ],
+      "_required_gold": [
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f",
+        "7b8726de8009e0fc559ee531fe2e4417b9f4b4d3ee0bca02fb851b32d75583eb",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66"
+      ],
+      "_supporting_gold": [
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0",
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557"
+      ],
+      "gold_locations": {
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": {
+          "page": 150,
+          "structural_path": [
+            "FIGHTER STANCE"
+          ],
+          "source_unit_ids": [
+            "94b759f8db5fb7f08ade0e8f3dd72a2653904c312e93d1556cb0cde22c07e062",
+            "c35c353324fde5d01bb40b6efb5c507954907c91bcb68ce4b7cc28946a80254f",
+            "a5ee62f1f009e442eca63f22a2205439a24dcb03f752cf219551b47c83661e1e"
+          ]
+        },
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f": {
+          "page": 462,
+          "structural_path": [
+            "DISRUPTING ACTIONS"
+          ],
+          "source_unit_ids": [
+            "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f"
+          ]
+        },
+        "7b8726de8009e0fc559ee531fe2e4417b9f4b4d3ee0bca02fb851b32d75583eb": {
+          "page": 303,
+          "structural_path": [],
+          "source_unit_ids": [
+            "c9d4a5bb54bc4b0d2118908432cbe4f1e4132e8e9d95134463c1cc397efc05f2",
+            "ac4a98c12937b6adf6a85dcb1644efb4b8a8ca27c32d46428d5fcd4239daac1b",
+            "12f9fb6238cf417a826ebcea2dd728acec4a79912617a77403f193f02d27b747",
+            "24223b54ce378b93922dad405a20fc54754044b16ff416c5cf74e04a4122a8c7",
+            "a4fe0b18905e259a0e4a7cdbddbd21fef9388dfb1fbed9bb770cae2968d276a4"
+          ]
+        },
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66": {
+          "page": 473,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY"
+          ],
+          "source_unit_ids": [
+            "fdf0e7987be50afbdd73a56d8a7325031d65d9415d92959563d1f4542d9027c9",
+            "3ce5cfebd8872b3e2977302d66310ff4e171af820e414a6e041f0bbe5595d327",
+            "774201bda4f15f2e132a90ef28cb2b81566df7d2f9a15d2f4b342ac59a96d726"
+          ]
+        },
+        "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0": {
+          "page": 463,
+          "structural_path": [],
+          "source_unit_ids": [
+            "32d4085505e0505554de0fa9903536ec6667053340ac488cfaed43e4324529e0"
+          ]
+        },
+        "304762748d5a622fe4ccc26f2d380d391c897da7bc7f965634fde014c36a4557": {
+          "page": 90,
+          "structural_path": [
+            "ATTACK OF OPPORTUNITY"
+          ],
+          "source_unit_ids": [
+            "d8e87d137af58ee8fab42a93927ad90890a19c819867c36c9e512516454b02d1",
+            "d4fce09d2d14bb2e3784320077b3b1557a0d62020e374223086d78da04a067c8"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "b115e4d5ee152bb0a5a2d1207b91444377b7b7d01d2b40f914d72110c0c4b2e9": "Defines Disruptive Stance and its ability to use Attack of Opportunity against concentrate actions.",
+        "a81ebe2ac4345c575426c5db1acbfc81e6a5fd45f5281401316f1b2d6f6ee28f": "Explains the general mechanics of disrupting actions, which is crucial for understanding how Disruptive Stance functions.",
+        "7b8726de8009e0fc559ee531fe2e4417b9f4b4d3ee0bca02fb851b32d75583eb": "Details the types of actions that can be disrupted, specifically focusing on manipulate and concentrate actions.",
+        "6a81fe1cfa0a1e0ac1f2b86dd350a9b1aacd36efa322ad37572caf99150a2d66": "Provides specific examples of how Attack of Opportunity can disrupt actions, which is directly relevant to the question."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -1367,16 +2133,30 @@
       "notes": "Derived from seed 22. Tradition filtering plus spell-text comparison.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9",
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+        "09b7a6c18951b516742d883a4751ad2d876a84d1f26cad4bd8955b68b303bb9b",
+        "a62b87f2f2c5f3bbe7599ea09ec479bc0487f75cfe46f502e61fd53125aa09b2",
+        "8955a13c6060b04ac650a72fd10f2de23266e8e71681fc6e8cb7dfe7a9f6cebc"
       ],
       "required_gold": [
-        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9",
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+        "09b7a6c18951b516742d883a4751ad2d876a84d1f26cad4bd8955b68b303bb9b"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "a62b87f2f2c5f3bbe7599ea09ec479bc0487f75cfe46f502e61fd53125aa09b2",
+        "8955a13c6060b04ac650a72fd10f2de23266e8e71681fc6e8cb7dfe7a9f6cebc"
+      ],
       "_required_gold": [
-        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9"
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9",
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7",
+        "09b7a6c18951b516742d883a4751ad2d876a84d1f26cad4bd8955b68b303bb9b"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "a62b87f2f2c5f3bbe7599ea09ec479bc0487f75cfe46f502e61fd53125aa09b2",
+        "8955a13c6060b04ac650a72fd10f2de23266e8e71681fc6e8cb7dfe7a9f6cebc"
+      ],
       "gold_locations": {
         "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9": {
           "page": 354,
@@ -1396,12 +2176,76 @@
             "96691db0c0fda04bed3c70bff2ecec1312218e1a4d5020a244e3f1b5dc0a8044",
             "d61407b58332b311d079d67dc1263bda9542f7b7453df51fe3d10506cccd497d"
           ]
+        },
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7": {
+          "page": 364,
+          "structural_path": [
+            "RESTORATION"
+          ],
+          "source_unit_ids": [
+            "b8ddd673b0dcc79abdb0373d3c4b2f6b54f3ee5c9c13db1683edb974f8a2c5fa",
+            "5b7f752168802cd7f62525c3aab9359cfd3a98f1ec0f38386b3ea08f71818f68",
+            "2520f1d62f5115fda97ad415c0d3cf2d93875804783c1b41a43ab21f511711f0"
+          ]
+        },
+        "09b7a6c18951b516742d883a4751ad2d876a84d1f26cad4bd8955b68b303bb9b": {
+          "page": 363,
+          "structural_path": [
+            "ENCHANTMENT"
+          ],
+          "source_unit_ids": [
+            "adca5c32281bc7b9d9b3daf1b99cc27a506304b4b74fd0dc18d29881c0062267",
+            "4105d83c60a56948427eb83afc9b743d78aa2db94d00803086d56e35ac619ad2",
+            "28cb9c3cead12394896883466e1ac879ebc5e33c02b622c3f32bfdad8fc8b250",
+            "8cd2ff1d80d53a9d21f7bf41a9952b5397ed275fa4630814386904116a34fea1",
+            "a8bb71102b6d71786b640c989afbc95b7f0e7ef7668329e634c8c47f4e75ebc9",
+            "db2fa759fe7d0e927603d6a4d7940399cfd81838d0c0e5a2acb7407ac82d757e",
+            "8b8e6ee9b09f1c3607908f7b317d151eee1d61bbfa64c0ad279756cfc9bc12c9"
+          ]
+        },
+        "a62b87f2f2c5f3bbe7599ea09ec479bc0487f75cfe46f502e61fd53125aa09b2": {
+          "page": 363,
+          "structural_path": [
+            "HEALING NECROMANCY"
+          ],
+          "source_unit_ids": [
+            "49e6403222757e8f354591bf6a72ee40ec48f430d4ac07e61c077f2844693055",
+            "b690c67c966e3f9f33fb1494532d513fc37d7580f3322ac60b2c8376bf7829d1",
+            "28cb9c3cead12394896883466e1ac879ebc5e33c02b622c3f32bfdad8fc8b250",
+            "a9a7de7c5fd7ee0e6b1bb2f2312319f363a1325480b5552a934441151e082560"
+          ]
+        },
+        "8955a13c6060b04ac650a72fd10f2de23266e8e71681fc6e8cb7dfe7a9f6cebc": {
+          "page": 402,
+          "structural_path": [
+            "WILD WINDS STANCE"
+          ],
+          "source_unit_ids": [
+            "3380d70cb05e249f9496678df6eb5b044e3b6774afe5581b82026371603fc131",
+            "aaf04ccd3d49795b507caa2d317cd4d9f0ec9115445c3592cf918e8eb1abbfa8",
+            "b47a643b5e1899705071d1e92577d4e8add9536a323007c55658a419e919fbed",
+            "b37b659b46f5a2b96bea55ab205675bc13f5eb4fa67d4890ca5aedf4d0f87aab",
+            "2e75c3f82b1109001cca796b425ae61d1baeb7f271f2d78143c10024b45df883",
+            "01bc93d6bd7296842cec229191596e627bb1f8283d06377c687201454b645f7a",
+            "6e51774f6031b912ae3fcc32c8d3743310a38c9ab5d422935b5aec3888774352",
+            "aebb1ad6c44ebe3fcb694b7ee717f4a0f0944533064573d2c2029f933471ca07",
+            "626850f6292507998b1974b94027611085d9147634b8ff298d2cbcc77401a3cb",
+            "427ffecf71beaec17d04b4dea61420acba47888afff992103b72aa99c0c3c772",
+            "0ef341b0a8ccb67d80b4145fdd9df9f72bea74898e3ba546974f573ffc9702f7",
+            "57072387c515bb3a68d015b936098d01b3161c17c11cee343d91d7ff5e87ce21",
+            "7bdb5b430c311afa2927f500e497cffa1e59e3fd5dc2937852ae14e7291a805e",
+            "d37178616366b1947f90e74e959254369d73d17381335958b702cd924fa3686d",
+            "aee8d82c120a1ce274e549c3f49e44c7b42d36d5f817d1b7af7a1881487505c7",
+            "ffd58cb7b810396fd966f8842a52847bbdfd22122b909800550389da5ddcef66"
+          ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9": "This chunk contains Neutralize Poison, the operative divine/primal poison-removal spell in the active corpus, including rank, casting time, traditions, and its counteract-based removal effect."
+        "25a8680310b2e545be40bb966048c50a735c79674193b733918d40ac808e84d9": "Contains the spell 'Neutralize Poison', which is essential for identifying a poison-removal spell.",
+        "5024be437e0ef373e17307a9d18bd75450fe2df14c6be3326831e05b1836a9f7": "Describes the spell 'Restoration', another key spell for removing poison or conditions.",
+        "09b7a6c18951b516742d883a4751ad2d876a84d1f26cad4bd8955b68b303bb9b": "Includes 'Remove Disease', which is relevant for understanding the context of poison removal spells."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -1428,15 +2272,90 @@
       "source_page": null,
       "notes": "Derived from seed 23. Focused shield-feat comparison cleaner than the broader shield cluster.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "40d0007837392543e1cafa1ae371709e221b62aad93448073da31add5aebb82b",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e",
+        "606077cda5c792ac36f1bc6aabdaf0c348d857649a02610ba5e4ed19ffea5725",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac"
+      ],
+      "required_gold": [
+        "40d0007837392543e1cafa1ae371709e221b62aad93448073da31add5aebb82b",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e"
+      ],
+      "supporting_gold": [
+        "606077cda5c792ac36f1bc6aabdaf0c348d857649a02610ba5e4ed19ffea5725",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac"
+      ],
+      "_required_gold": [
+        "40d0007837392543e1cafa1ae371709e221b62aad93448073da31add5aebb82b",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01",
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e"
+      ],
+      "_supporting_gold": [
+        "606077cda5c792ac36f1bc6aabdaf0c348d857649a02610ba5e4ed19ffea5725",
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac"
+      ],
+      "gold_locations": {
+        "40d0007837392543e1cafa1ae371709e221b62aad93448073da31add5aebb82b": {
+          "page": 145,
+          "structural_path": [
+            "FIGHTER"
+          ],
+          "source_unit_ids": [
+            "f23d2172ea35e203d4190c179ef8bd5865a379246c63a04eef9e2a585e02607c",
+            "88691a3cdcf54452ed2edd09e8271faea9ad46ec0c951808d1ecfd7872eaec94"
+          ]
+        },
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01": {
+          "page": 149,
+          "structural_path": [
+            "Prerequisites Shield Block"
+          ],
+          "source_unit_ids": [
+            "727bfd5cb6643c963c5d9b3ee0e58a968596fb443658275b321b1a06a1b903ae",
+            "e44c0dee8c99578c1c61c35465b8ea492cea7fd20a83fa5309683f31dd4c7388"
+          ]
+        },
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e": {
+          "page": 266,
+          "structural_path": [
+            "GENERAL"
+          ],
+          "source_unit_ids": [
+            "e5dfc7f550178e37ab22a899c704b0ab6d22d79aa6f873bf4ef20c6683f1d238",
+            "f306fad8ba6de519da8552341b9a8addf27261601530a568e29ea3ea3c0e54b1"
+          ]
+        },
+        "606077cda5c792ac36f1bc6aabdaf0c348d857649a02610ba5e4ed19ffea5725": {
+          "page": 112,
+          "structural_path": [
+            "Prerequisites divine ally (shield), tenets of good"
+          ],
+          "source_unit_ids": [
+            "606077cda5c792ac36f1bc6aabdaf0c348d857649a02610ba5e4ed19ffea5725"
+          ]
+        },
+        "77c2aa4cdda73d4bd205022a19638f1f9be6e04ce9c6b01fa39662fa598273ac": {
+          "page": 369,
+          "structural_path": [
+            "SHIELD BLOCK"
+          ],
+          "source_unit_ids": [
+            "cce2b8fb77d5e17e6869f67785bdc301834875acf18d5fa2192c5ce83f611b8f",
+            "c2503091b876a789dcea725eecf89d4419910d5e3546c0eb343c4d8d158bd516",
+            "7e3b7918c9a947d0b291b94d034910e10d155ac48b5be127b9462c41c977c938"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "40d0007837392543e1cafa1ae371709e221b62aad93448073da31add5aebb82b": "This token describes the Aggressive Block feat, which is essential for understanding how it modifies the Shield Block reaction.",
+        "63e56189bf489f29727584726fd428cec16320b128078e505cb68e0497951c01": "This token details the Shield Warden feat, which is crucial for comparing its effects on Shield Block with those of Aggressive Block.",
+        "3144be4febec0fa6cfb7d27b24957f990134f408aba347ba910e1704d7c3b03e": "This token provides the basic mechanics of Shield Block, necessary for contextualizing the changes introduced by the two feats."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],
@@ -1452,26 +2371,40 @@
       "notes": "Derived from seed 24. Lower-noise control case that still requires cross-referencing backgrounds and class training.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
         "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
-        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
-        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
+        "927f97a9b2c93e48a195389c7cef0ae29d1b2255b155295362ef360f2931f811",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46"
       ],
       "required_gold": [
-        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
         "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
-        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
-        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "927f97a9b2c93e48a195389c7cef0ae29d1b2255b155295362ef360f2931f811",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46"
+      ],
       "_required_gold": [
-        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
         "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43",
-        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46",
-        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978"
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "927f97a9b2c93e48a195389c7cef0ae29d1b2255b155295362ef360f2931f811",
+        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46"
+      ],
       "gold_locations": {
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": {
+          "page": 64,
+          "structural_path": [
+            "BACKGROUND"
+          ],
+          "source_unit_ids": [
+            "134cb9b58308c38f4af799ab638ade9fe0da3da3791365b92fa475b0f2c7f72b"
+          ]
+        },
         "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": {
           "page": 63,
           "structural_path": [
@@ -1484,13 +2417,24 @@
             "fe50b8f1d0c622515585e9f30f0f153bcc33387c5591eb116a9211a0bb64bb22"
           ]
         },
-        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": {
-          "page": 64,
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": {
+          "page": 142,
           "structural_path": [
-            "BACKGROUND"
+            "TABLE 3-12: FIGHTER ADVANCEMENT"
           ],
           "source_unit_ids": [
-            "134cb9b58308c38f4af799ab638ade9fe0da3da3791365b92fa475b0f2c7f72b"
+            "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7"
+          ]
+        },
+        "927f97a9b2c93e48a195389c7cef0ae29d1b2255b155295362ef360f2931f811": {
+          "page": 60,
+          "structural_path": [
+            "BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "f2013244830f3933077ea1896647b2712f2b55e73c74f66a7fc2e39f4e3e7536",
+            "49ab20a068916e679b8d18c53cf6335c6bdae43f3c18b206a43150a3af4f0095",
+            "9e2f938e7224f888c3de22a75879fec3384ae1bb1dcdef2ac52c0658a36f3da7"
           ]
         },
         "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": {
@@ -1513,27 +2457,14 @@
             "583f407c68c8e3ad92b937c0fd484d089e578e27e31fb4792ec08aa02631317a",
             "9edfcca0a2e27ca0d151e0acf94311e4893314b6643967ebcf68e2e319651b8f"
           ]
-        },
-        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": {
-          "page": 68,
-          "structural_path": [
-            "INITIAL PROFICIENCIES"
-          ],
-          "source_unit_ids": [
-            "b84c4bb7a2e14d086422c7bdf34d05c2bce15e7e011b3f56090979fb4d2df3e5",
-            "94a8ac2ad8330d3e501ce46037817bc9dea681a293b31093d623157659ca296c",
-            "b4d545b018a3b23ad8610d543bc6047257d18a4ca3df683aaa8516283691e519",
-            "7c71fa1279d5753f04bb9aa6e7e84f8e6185c5f1bd05e5ce39b8aee77379c4c0"
-          ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": "This background chunk contains Martial Disciple, which grants Warfare Lore and overlaps with the fighter's Acrobatics-or-Athletics training choice.",
-        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": "This background chunk contains Warrior, the other background in the active corpus that grants Warfare Lore.",
-        "23099c680e8bc0dbba3b1ac9463d9a3c18b8c6c16e62a5e8c7f37a90e109ab46": "This fighter initial-proficiencies chunk shows the fighter's automatic skill training choices at 1st level.",
-        "3b30996049d3eba8e308cc4bc65163e16de6f2eab21e75ef37107a8ea7b80978": "This general proficiency rule resolves the interaction: if class training would duplicate a skill you already got from background, you select another trained skill instead of advancing early to expert."
+        "8b4a983d280cbe711ff7e53b618d828f034acfb0c287fcaede8e6be197131b43": "This token provides information about the Warrior background, which grants Warfare Lore.",
+        "eb50455be5046ba533a9c7cf33b2f18e115e8030ff86dd44dbac0a5d448b8389": "This token details the Martial Disciple background, which also grants Warfare Lore.",
+        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": "This token outlines the fighter's initial proficiencies and how starting with Warfare Lore affects skill training choices."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -1585,21 +2516,114 @@
       "question": "How do the ranger's Warden Spells progression and the druid's primal spellcasting progression differ between levels 1 and 5, including spell access, focus or spell-slot progression, and multiclass implications?",
       "expected_answer_summary": "Compare early progression shape, spell access model, and multiclass consequences for ranger and druid.",
       "source_page": null,
-      "notes": "Derived from seed 25. Cross-class progression comparison with mixed subsystem evidence.",
+      "notes": "Derived from seed 25. Cross-class progression comparison with mixed subsystem evidence. Gold manually grounded from top retrieval (auto-gold parse_error fallback).",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
-      "_status": "uncited",
-      "required_gold_rationale": {},
+      "gold_unit_ids": [
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b",
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483",
+        "6add2c2f4f787a41a4e35f18f48a490e2a026b90a15518a22201cbd582ce0837",
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "b260209dceaa6f2ae75e04ab9104590590f17a9f9de7d4d441c9af394f85afc8",
+        "4aeced55cc1166d274a97f4c49f997c959b578047c2270dfb7dd96ab06f0f9ea"
+      ],
+      "required_gold": [
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b",
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483"
+      ],
+      "supporting_gold": [
+        "6add2c2f4f787a41a4e35f18f48a490e2a026b90a15518a22201cbd582ce0837",
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "b260209dceaa6f2ae75e04ab9104590590f17a9f9de7d4d441c9af394f85afc8",
+        "4aeced55cc1166d274a97f4c49f997c959b578047c2270dfb7dd96ab06f0f9ea"
+      ],
+      "_required_gold": [
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b",
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483"
+      ],
+      "_supporting_gold": [
+        "6add2c2f4f787a41a4e35f18f48a490e2a026b90a15518a22201cbd582ce0837",
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "b260209dceaa6f2ae75e04ab9104590590f17a9f9de7d4d441c9af394f85afc8",
+        "4aeced55cc1166d274a97f4c49f997c959b578047c2270dfb7dd96ab06f0f9ea"
+      ],
+      "gold_locations": {
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b": {
+          "page": 130,
+          "structural_path": [
+            "PRIMAL SPELLCASTING"
+          ],
+          "source_unit_ids": [
+            "ded4fd97f237ca96ff10a91875a35f22c2647a159bd94b5604d979397eed48de"
+          ]
+        },
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483": {
+          "page": 168,
+          "structural_path": [
+            "CONCENTRATE RANGER"
+          ],
+          "source_unit_ids": [
+            "89907e3de172c3c270d033353f8a80af4287635a38c926ce2c0808168708c2ce"
+          ]
+        },
+        "6add2c2f4f787a41a4e35f18f48a490e2a026b90a15518a22201cbd582ce0837": {
+          "page": 225,
+          "structural_path": [
+            "Prerequisites Wisdom 14"
+          ],
+          "source_unit_ids": [
+            "15e86ca993ec296ff422cc7f98cd05a3a5a2d03de397a15b0fe248a6faadf1e1",
+            "ea193e23d8a38be1b1853ebdcec87968e2b9f3675bbadbbce89e27ae0a252672"
+          ]
+        },
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548": {
+          "page": 219,
+          "structural_path": [
+            "ARCHETYPES",
+            "SPELLCASTING ARCHETYPES"
+          ],
+          "source_unit_ids": [
+            "39418e1d9945bc73b937b8b2ece0044993209cc9d9b313ae1f6cc3f84ffb0b94",
+            "bcecc32e9eb1317526e7e453e42bd35ce349235139cf53ff3ad7825dbb89b21f",
+            "b8e17b102b5710fb582b6c158e9d014a6fc0ef9ed86dc9a49b106ed2420c8c04"
+          ]
+        },
+        "b260209dceaa6f2ae75e04ab9104590590f17a9f9de7d4d441c9af394f85afc8": {
+          "page": 225,
+          "structural_path": [
+            "MULTICLASS DRUID CHARACTERS"
+          ],
+          "source_unit_ids": [
+            "d8b8662882b1b9bb8f5263a96e4b4bea11af333a7e4c3ec3c947213c66591cf9",
+            "1f2bdb102bacda4a37fcabdba0dc97e49c10663052f64f9fd97c41c4c2ab380f"
+          ]
+        },
+        "4aeced55cc1166d274a97f4c49f997c959b578047c2270dfb7dd96ab06f0f9ea": {
+          "page": 228,
+          "structural_path": [
+            "MULTICLASS RANGER CHARACTERS"
+          ],
+          "source_unit_ids": [
+            "81358d163af75ff754e0f774f58f4984f80c4f1e2ba1d312256f63506e0bd7dc",
+            "c42ccde099db7288af3be319bab81e15052e3e8b3ccc2a74454ae76a881069b9"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b": "This token provides the druid's spellcasting progression details, including spell access and features at levels 1 and 5.",
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483": "This token outlines the ranger's spellcasting progression, detailing class features and spell access at levels 1 and 5."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
-      "required_anchor_ids": [],
-      "supporting_anchor_ids": []
+      "required_anchor_ids": [
+        "973a30e8734c72beb909a8546e6f15504ceee5a362565853182968404c710b3b",
+        "0cb8899be04055cde32f1d074127c481838917d248c7189bfdaf8c1149869483"
+      ],
+      "supporting_anchor_ids": [
+        "6add2c2f4f787a41a4e35f18f48a490e2a026b90a15518a22201cbd582ce0837",
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548"
+      ]
     },
     {
       "id": "pf2e_mh_ws_018",
@@ -1608,21 +2632,161 @@
       "question": "Which witch hexes or focus spells in Player Core penalize Armor Class or saving throws, how do they scale, and how do they combine with conditions such as frightened or slowed?",
       "expected_answer_summary": "Enumerate defense-affecting witch options and explain scaling plus interaction with common conditions.",
       "source_page": null,
-      "notes": "Derived from seed 27. Focused witch debuff query with stacking and condition interplay.",
+      "notes": "Derived from seed 27. Focused witch debuff query with stacking and condition interplay. Gold manually grounded from top retrieval (auto-gold invalid_candidate_reference fallback).",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [],
       "required_gold": [],
       "supporting_gold": [],
       "_required_gold": [],
       "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
-      "_status": "uncited",
-      "required_gold_rationale": {},
+      "gold_locations": {
+        "8c44eb5c7a78c4f8a159a23d15be7d2942d911fea2f756e488bc2afd793902db": {
+          "page": 405,
+          "structural_path": [
+            "HORRIFIC VISAGE"
+          ],
+          "source_unit_ids": [
+            "5496083c41b569ca1e8a5b579b35be2e4d1fbf30e1c6ccc6bf6b33d82f9a7f54",
+            "e8340a885b798aaf6114410dd855de36215d5d6ac58c421f06b43620c49ca484",
+            "e00be9213f071615b533da7506289e59bcc9df9e7592ac894ef8c835ee243724",
+            "13da129ad6a777c5e59d8c5989382298acafdd4bbc46d398bd33e246024fdffb",
+            "aace0db5f41e7b14f60b8602f4d2bdd4b234debd6fdbbb03531927596e4ea00b",
+            "9249c138dd3f7e576b4a1a0d6daf2a84e4e3850ae346a3ba1f2e6aa08f5b95fd",
+            "19e3a988613ad6bca92364a5e548622991c07e0cfab94aead19b6ad94112c24d",
+            "cbd70372bd06432c11388924bee8763f5604ef8c560904a9d5ed0e24b1ff0feb",
+            "9ac70b81eca472a1484c2b6875b7ae82a51135d737ae7386cdd4b3276064d0f5",
+            "1c4432076c8ec19852fc29bafe35350f77c4dd8f3696685ea9a69fc8b423a1de",
+            "9f72bba1400b65883855224a7cccb518de9433fe4b45b17732c033c5f625577f",
+            "5977f851062b100b808c42051c2d085e07fb8b7ba55a0a4e1fa7ed03b256ba76",
+            "306e370f2f61f0cc9cebd142c18d17a566d0b1362e03cfbf7fe02473fcfdf2a6",
+            "80e79684146c480e46db82be989e2588bd91565ce4833b2a867980158d43c4e9",
+            "5546f4a18003b6314392e0194d5d65cdbfd0b2fe7267e9fb0b95f840150b7511",
+            "c9e406e2a91c90f24024fab87daaa941de28672861ba90e907eadcec0c30838c",
+            "e88bd056f14496c3ed196da269cb92ebd92d8a2b7eb004273337f460fa5e903c",
+            "76d3edca01879aceadc1fe1c782c1de906bfde51fc6306c1318dbf82cdd051c2"
+          ]
+        },
+        "7855b6d8774cfa945e5875c9216fa1c539fcfe9ae83ac5ae620273b6e1ecdecd": {
+          "page": 332,
+          "structural_path": [
+            "DOMINATE"
+          ],
+          "source_unit_ids": [
+            "c9fc5513f0860942ede93325f159cb710cd77525624cb52a5ce45af75e2aa6d2",
+            "bbab4d7a296cec433e48cfbedd745f02bec8fcc684b0c24d6180a54decc2d1d5",
+            "f834deea371f3b20725dd3704770b6a4bc719893d5b61d2829be24b1da41c7fb",
+            "646ab5f1680d52109a53fac0777ab0f22f66e86138bb917ecd81205efaf4e1bb",
+            "9cf93d0afeda41af3eb42e0d2713a3f58f8b2651ac11d9c5d4cfca17ce01c5e3",
+            "16ca52a157d9802507844fe4b94d6a0b35a7367490b36c7f0a89e33a7f8d8067",
+            "e4e87a1232844d1b050f0e9c238ad293654d473e932a104a509adf8257377261"
+          ]
+        },
+        "ce9b3735eea54c3c950e37af9deb315ead62075e97374d9f8a398c168992397d": {
+          "page": 370,
+          "structural_path": [
+            "SOOTHE"
+          ],
+          "source_unit_ids": [
+            "59368b31a6dd6b909d6b95c3f85b149bbdf404215822f228db3cd804263956e9",
+            "8a868ed790bbf19ecb902e24ed057fc053b8d4cd7ea084c808a017bad048c4e3",
+            "ca4cb4977cbcbf23fdfccea8df4be552c8a4ad0378833842456c30920c905cc6",
+            "8860b017914e46034ca21a85fcc7fd17ddbf13cbd1e8bbcde54479d204c407d6",
+            "b06bea4dec32640711e6343fd8435390c024697ccb8e2a05e57b420e2c3c1837",
+            "c85717a9f7eed13b9833b9edfdd574794abd859731053183472f6c772c56eac1",
+            "6557d7d2557ae96b250a40f8f7f18a023f1c83c961e38918df33f87688d383fd",
+            "9a8f26c5ab027a6ac171d5a7863e7776b53daf315ba65c314f14c7e994203110",
+            "12c962231e90a5825918bbcd86aeba7c9c01a67044243ef97fdf9a535775fd1a",
+            "cdfbc5fcb68ca26ea8a512fadcca4005e10c111d2fd5dee8797f96fb7e6ca6ca",
+            "957eb4aaee26d5abf664fac8f4d4d983b06ac52d18a6cd29abf68d4c9463d10c",
+            "c8d08f8371cb9564c8ffb8957e51f5c7418330a8b9c797059678dcb810a5d3ee",
+            "59d0f986fac973c320ee18c0fa5a9ce5e60a607b84bbbe9fff566c04f067fedb",
+            "d8528c9f20eb7799a4ea0b25c6f0de5e759f34f73e263bbb0d695484cc612629",
+            "bffb031a12a3e496d876ffd5472b576dffbfa0878248702b4636a66998468d15",
+            "123b096a25b7c252580d5ffb11a2d381f4781472db8223f5ce7b29319b9e5a20",
+            "54cf0f7d99cd9ae43a7d4a5230158153610cd57775c924259a67a5467475151f",
+            "2023e7855ae288579f8af15e5c8595ec192dec287d5e0148666ad6b202c7be45",
+            "a02fd642aa6f2964b30414e9bec332b444c90587c87658c5b99f1a7735e8dfb5",
+            "87d16b86cb939db233e728f5fc2fc1072dbaa807edd2ca814c77e8e7e67a65fb",
+            "555479773439ce15522048e3b6cdb791135b46722590de4dd4d63f1a1a16034d",
+            "1d9fe7659c07f666b7ad7b60fdb9241d343ae42b346188b4f0665012391965bd",
+            "210d3be7d91daaa3014183bf48992ee2b1ce3ec22b4df9ea6d38cf811771e88f",
+            "05458b7e22aab38a0e29cf0e83345714f6043c411c613b28c15bcfc4e6bd5c27"
+          ]
+        },
+        "e4a35d60860871d5b6c547ff68e12d3228be005712a39d22143bbad06f33acd4": {
+          "page": 406,
+          "structural_path": [
+            "ELEMENTAL TEMPEST"
+          ],
+          "source_unit_ids": [
+            "832817a923c6b23e5f099a2c9ef75cd13edce10d0627d52c5cb5588dbe2b6f9c",
+            "8f113c6ac61ef9a113bcc3a8ad16fe16cee27bbf8745b0111560d6681ac6ac97",
+            "9a68de28e975727a0b01d76080d090a64dfd6754da0412fb5e1079b37956d6de",
+            "7ec535762f98fda9c444cd13ba350be2f8c75d046ee8959d029390dbdd38c15e",
+            "7f08e2ff87ab4478971dac55d2c1c3de46241a3a5bd15659e1164523e8c0113b",
+            "1eaf3c442198bebc886b44392c824f95e859ad9fc6956464be9291c9f422eb8f",
+            "c795e4b80e0424b8f0b56bad23c49d18a782ae6e089dd6e561d076ae5cf6773f",
+            "21d0c6d1326ff2f882fdeb5f5460eb7614dc997892bc7c0df0a82367e24e4f2e",
+            "3ea10f74d9d8b7bd00f8b67092579ab9917cbd2ad817f2b574b7f7333bd763ef",
+            "68f2bb1964a4540c407a858181fa532b5a3da86e483776f211e4191d972b0f27"
+          ]
+        },
+        "e10b6c08c56edab3ba7e9b30823096bf2166b56afaeda16dd81b062aa4fb6e68": {
+          "page": 406,
+          "structural_path": [
+            "DIVINER'S SIGHT"
+          ],
+          "source_unit_ids": [
+            "4d8528e2b5b1e8fdb7fe252983c7b2b2452c6b6095ccd17bcee4a21d5efb0f77",
+            "78b3ee439aa5986a98f2c2fbd721719b55c908f373c5f3849a37b04ca229fd22",
+            "77ce09d967f7e9d18bdbc13204eb8677eff1f32bb6b1589e2026915231c62070",
+            "94fa2a2d8b1e6302cc4e51db7b4db294d5120e6f2c641d0165e46a54554856ad",
+            "51ca7b021d2754b72ed0574d96e49e1f05d8c6d285a973e5994e169c3a99883b",
+            "c19898d32e0d3ed2635ab1bf7bd9e9c608f3ead75f6c6df2f47ea7b8bd3bb748",
+            "34d3167304d6896a211c17c6500a995156e1dffd4d17cc2c9a9626dd2519a809",
+            "0e3a1569957422bec1a10c56adcb45009ca4ef02f7f56cd1effe0cfe631f2313",
+            "80560434819297a03dd5d14308061d9566af78f2c807942775158548bd1a018a",
+            "8cd7a1dba719cef17262aca30b02fa05a3b1d5cb652513b4840a66cb71dba324",
+            "30c9f7bb433809d9084d829069dc245af1561e29c85a868c760934956755f49e",
+            "733ae1e74a87a6e43af5b1bd80e5e7a4180014c1e1d2b4bbdd60b312d107e682",
+            "e6b3c1075711bb45f00eafadfd531a59600f5399abdb9ab0cf3839c3839204c7",
+            "e15ef9c4bafcc9a4acc33b1b1d3362bec6b2e5fce952ee9545d19706d9182176",
+            "0d66aa6b0902f8b53c1b2aac0c1ddbb9369087ac57b624f4cb5cd2b9841099df",
+            "6c964ef83a63c159810473a59ee2093f9fe86228cb64913aea19e109513a2e66",
+            "36086cfce3a3e3b1875b98241c5e21046da9133e6980fad1bc58d149a63b4065",
+            "2ee6576063336b63a9c8f2a920c01a907172f71004424d8e89030388783f4c85",
+            "b4f7e36e36931c7ec45045a668290ba1b5da2b7ea9705f4eac30ee25f6babe15",
+            "2649d3804868fa7d98775488af8e4082a7733b0f1a599525134c4ae1314963d3",
+            "69c7b0be632ec721edecc7d6487986c581958743cbf548317687676c4d31867f",
+            "417efb51c4f06a4965d9f2e3a5d50edc099f5e5a54d4d1718a6281159b79909f",
+            "2b95c45175d25d6f83bbe9bc5f5fa0c3a087f4a21837df02178a905f0ffc1639",
+            "ab34a8bb82e16827ff2abfbd0220c4084d1d904c693c17f547fc1087d4eabb37",
+            "f4753706fa037f24ffccc7f16cdb381ea1fc380f0714400147dd9a8416ea10bc",
+            "bee521c5f1080faae022eebc7064322cdc0d7793159d8215408c4ae0d6acd296",
+            "74b86f4e28efc023524514866aad6b3efb25436c79d78c4c1069e341fdbd8a93",
+            "cd37c18faa6497ed09eb71b15761ec5c99c397c0378112edb3088e0a4551ef73",
+            "5423e053a0c800eb953069ab068514d62fd78c8f14cb564159e985a3b07189f4",
+            "1a1f5bcb82d6366d352ad4cbdbd40dc04d115c198dddb38e4d30ff4d568b1032"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "cited",
+      "required_gold_rationale": {
+        "8c44eb5c7a78c4f8a159a23d15be7d2942d911fea2f756e488bc2afd793902db": "Describes the 'Horrific Visage' spell, which penalizes foes' saving throws by inflicting the frightened condition.",
+        "7855b6d8774cfa945e5875c9216fa1c539fcfe9ae83ac5ae620273b6e1ecdecd": "Details the 'Dominate' spell, which can impose the sickened condition, affecting saving throws and movement.",
+        "ce9b3735eea54c3c950e37af9deb315ead62075e97374d9f8a398c168992397d": "Explains the 'Slow' spell, which directly penalizes the target's actions and can stack with other conditions."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
-      "required_anchor_ids": [],
-      "supporting_anchor_ids": []
+      "required_anchor_ids": [
+        "e4a35d60860871d5b6c547ff68e12d3228be005712a39d22143bbad06f33acd4",
+        "8c44eb5c7a78c4f8a159a23d15be7d2942d911fea2f756e488bc2afd793902db"
+      ],
+      "supporting_anchor_ids": [
+        "7855b6d8774cfa945e5875c9216fa1c539fcfe9ae83ac5ae620273b6e1ecdecd",
+        "39b8e0b6e8c2fc82385878e61b47c88f01727db28bf80c67d16df1915e7b3f9d"
+      ]
     },
     {
       "id": "pf2e_mh_ws_019",
@@ -1634,63 +2798,91 @@
       "notes": "Derived from seed 28. Cross-class proficiency progression and override reasoning.",
       "legacy_gold_chunk_ids": [],
       "gold_unit_ids": [
-        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
-        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
-        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
-        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+        "f081825e1cf1f61016381f9b4595c40ea1857937eaef9cbd02cc75c35742c6c5",
+        "89b8a4a4cefda38931990e9ea0db43bf5db84bd4daabdaedf36b364ecfff0171",
+        "1578890fa77257bedcac849c2b22f6e5bb6e22ce6d5dda5556ffc683ab01c159",
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "c592656b6a75dfcaed1d3aadfc5f04c3d12adfdefad6158ab0f0b6d5b4906bec",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8"
       ],
       "required_gold": [
-        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
-        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
-        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
-        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+        "f081825e1cf1f61016381f9b4595c40ea1857937eaef9cbd02cc75c35742c6c5",
+        "89b8a4a4cefda38931990e9ea0db43bf5db84bd4daabdaedf36b364ecfff0171",
+        "1578890fa77257bedcac849c2b22f6e5bb6e22ce6d5dda5556ffc683ab01c159"
       ],
-      "supporting_gold": [],
+      "supporting_gold": [
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "c592656b6a75dfcaed1d3aadfc5f04c3d12adfdefad6158ab0f0b6d5b4906bec",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8"
+      ],
       "_required_gold": [
-        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5",
-        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e",
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8",
-        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7",
-        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549"
+        "f081825e1cf1f61016381f9b4595c40ea1857937eaef9cbd02cc75c35742c6c5",
+        "89b8a4a4cefda38931990e9ea0db43bf5db84bd4daabdaedf36b364ecfff0171",
+        "1578890fa77257bedcac849c2b22f6e5bb6e22ce6d5dda5556ffc683ab01c159"
       ],
-      "_supporting_gold": [],
+      "_supporting_gold": [
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d",
+        "c592656b6a75dfcaed1d3aadfc5f04c3d12adfdefad6158ab0f0b6d5b4906bec",
+        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8"
+      ],
       "gold_locations": {
-        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5": {
-          "page": 105,
+        "f081825e1cf1f61016381f9b4595c40ea1857937eaef9cbd02cc75c35742c6c5": {
+          "page": 223,
           "structural_path": [
-            "INITIAL PROFICIENCIES"
+            "ARCHETYPE DEDICATION MULTICLASS"
           ],
           "source_unit_ids": [
-            "0212df7d44dac68e5b50f8702bdbfda8b63b865c729d150e94783d35407f2727",
-            "2c4be4d2ac58f7a9ea759426638f8c83da746614db413c6596c083d51a76adde",
-            "5ab800d0e8e1d96b1e7a87ec2cfc68ba15352287091724fc5db21f8db0403a9c",
-            "d5fc7f0a8716cb5d9110c607c54398a139a0a76ad440803fad4e95b81809472c",
-            "4e37b733610bfc147bba30f2a04a013d155392ab5baf9128a8ad1fc74b3b2c33",
-            "995f9cec2e6628bac1eb92885b983b092307cbf2dd8401d4e8397d8dd071a79e",
-            "d92159c78648133eaa59cb90ebe489c21819af7dde38b37c54d8683c9617246f",
-            "0357bf73a0f74f856e8d385492c9030eaba1f1eacb60c5a34cbf63f8e35e6255",
-            "d3771c9d23a740f663755df472f342ba90bc609c4c31bbf8e74845fee6fc8b7c",
-            "fefb5d6280438f6cf2f0cc9ab59a8aae51ef17f64141fd9a3e19241c4cc7cc48",
-            "02a1054cd552e57a455f02f139d5c6625f9ca8e5499e039b7cbaeae49abb1d17",
-            "583f407c68c8e3ad92b937c0fd484d089e578e27e31fb4792ec08aa02631317a",
-            "a557138c40a27b43650cb382a558648ba13b6d4797cd2c1cbefe3e9a45a52a6d",
-            "ee34c146c07870860d15f18aba2232f5353898a83c0af19e789fc074cc3e86f1"
+            "ff945fea27dfb0534639b900b0a0fdcdd406869be8df698175f2caf0a143c017",
+            "56fc653b54be97a055a7ff0dbd90b76d8c19beb095e6c7fdf62ba620ce0ade2b",
+            "12bd8c2984915be4f83426542e640915734c26dd429fa043599611aec5d76e63",
+            "c78887545fd279401918ed5f6ef32c47755ba12467c24e72e3aa83dedc24adba",
+            "9ed1c4e7a9e84166f9feaf7021a2404024d7276501f91578bbd8b5564e07bb82"
           ]
         },
-        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e": {
-          "page": 107,
+        "89b8a4a4cefda38931990e9ea0db43bf5db84bd4daabdaedf36b364ecfff0171": {
+          "page": 269,
           "structural_path": [
-            "DEIFIC WEAPON"
+            "WEAPON PROFICIENCY"
           ],
           "source_unit_ids": [
-            "2302c98030527ce9c9ea4ea05100d723bc7664b40a35acbeea46a3903b34e1a6",
-            "d28f7831f3c16f46cd7aaa34f4c7e901c18f00ec997137b9d8b4d7e0764f68f1",
-            "db4327dc48baa8fdfe70cf68631487b586b7ab83fc7d5d08e6d480539a4a6364",
-            "d349345b0ac3c2f7edcff312e75750e14edc80cc3fcbebc2e5072841fbf41764",
-            "0497e9f289561979394516b8f1e8547875a30c37ba0bf8943ad37044b19bc1b2",
-            "08eac9cdfc6828f6a2c9bd2dd87a378264c57da6ac6b204b6a8e76e725faa170"
+            "aa0026cee315d662162930277ff19bb70889299bb79b5fa6560d321bb5a74801",
+            "2c231141884e804bf626074a2acc80e31c6b73b8d180767f50e7a5e96860e8b5",
+            "6c6433a9726545c26f75bd27a7fdd5f989714e45032c2cee05212142f504812b",
+            "b0a2dfd1c2d10b37292a522558b881501df7bcedd89f14bdbe9f4a722da5179a"
+          ]
+        },
+        "1578890fa77257bedcac849c2b22f6e5bb6e22ce6d5dda5556ffc683ab01c159": {
+          "page": 106,
+          "structural_path": [
+            "CHAMPION'S CODE"
+          ],
+          "source_unit_ids": [
+            "e6e2b5ef6765b15adac2a25883e68a039911379c1f5082b51c8a5495e213db79"
+          ]
+        },
+        "7b8df341c21c61c91828a59ef470763a8601c08cb69d904aec39152f012edb9d": {
+          "page": 106,
+          "structural_path": [
+            "DEITY AND CAUSE"
+          ],
+          "source_unit_ids": [
+            "cb76d1206f82eeb4575c05a8351099d3039986a29e69a32b19b8de498c2115cf",
+            "fa3815475a367588b68280c707c059c72eaeeb07bf04166317628131b2927287"
+          ]
+        },
+        "c592656b6a75dfcaed1d3aadfc5f04c3d12adfdefad6158ab0f0b6d5b4906bec": {
+          "page": 119,
+          "structural_path": [
+            "Cloistered Cleric"
+          ],
+          "source_unit_ids": [
+            "dda9775f6916f7a9029d643941e864c9acc3df7616846e269afdafe57fcdade7",
+            "b8214f80ac559c6f41e598ce69a040c61545b3f4fb312b656ad4f9b0c0167cd7",
+            "d97a0beecda0916bf03770a7941214fec06e4ddf7b8273632b6b408e391f2e71",
+            "91f3d8df67dbf9cb4a7e393cf9b5acd9502eeddc01226cbde5230def68682925",
+            "ff94634ba8ce2a888837734743b4c8bddd96d1b3b89eb03d8f3782246928ea03",
+            "e565d741ad839e4bc9e980615339980b02ef11d1f39459c619dd396bfb828135",
+            "89a40f17841e5d52860378b9621b298e79ec41dcd4965e07b39c06a4e6d37176"
           ]
         },
         "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": {
@@ -1734,35 +2926,14 @@
             "f1f44970b58d860386cb288e72c891030dbe2f4f3a0792cb348ed60ac0935a73",
             "16a4be8e4b8a5152f244a7616cd89067b12ad6913db82dfd0cbde685e5432cab"
           ]
-        },
-        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": {
-          "page": 142,
-          "structural_path": [
-            "TABLE 3-12: FIGHTER ADVANCEMENT"
-          ],
-          "source_unit_ids": [
-            "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7"
-          ]
-        },
-        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549": {
-          "page": 143,
-          "structural_path": [
-            "FIGHTER WEAPON MASTERY"
-          ],
-          "source_unit_ids": [
-            "5efa560d4eb39c6bcaa12804734318266f876c67531a77f5c0cf8cefa9dfaadb",
-            "e5f0c4613ca4c0a08c0dca34d08e6e1d2fa431dcc233a6b4d6d4f9127e8d085a"
-          ]
         }
       },
-      "_mode": "multi_cite",
+      "_mode": "single_cite",
       "_status": "cited",
       "required_gold_rationale": {
-        "7b3c33aa89526576f9a969de059e4afdcd4e683549aabb00a8d70722a56c44a5": "This champion initial-proficiencies chunk establishes the class's baseline weapon proficiencies before any deity or multiclass adjustments.",
-        "7d586d002f7b5c02f38533b7b32a236ad9aa36ee5ff374837ddfc18468e3ed2e": "This deific-weapon chunk shows what the champion actually gets from the deity's favored weapon in the active corpus: access and possible damage-die improvement, not a separate proficiency ladder.",
-        "df35611911f1604eecdb5658b504a4dd8bfd83e16ef3b94e39cddb61edfac8a8": "This fighter-dedication chunk shows what a champion actually gains from multiclassing into fighter: training and fighter class DC access, rather than automatic fighter class features.",
-        "e91fa2cfa1560877a003fa449f9788e5b8de040f163e0ab94d670d9b97a06df7": "This fighter advancement table places Fighter Weapon Mastery as a core fighter class feature at fighter level 5, which is critical for answering whether a multiclass dedication reaches it.",
-        "cfc99265a8b71f75e161bed3fae9fffa3f010aa9608ab755b7541ab2b768b549": "This chunk defines Fighter Weapon Mastery itself and shows the master-proficiency benefit that only the full fighter class progression reaches."
+        "f081825e1cf1f61016381f9b4595c40ea1857937eaef9cbd02cc75c35742c6c5": "This token provides essential information about the champion class and its multiclassing mechanics, which is crucial for understanding how proficiency works.",
+        "89b8a4a4cefda38931990e9ea0db43bf5db84bd4daabdaedf36b364ecfff0171": "This token details the weapon proficiency progression, which is necessary to explain how a champion's favored weapon interacts with the fighter's weapon proficiency.",
+        "1578890fa77257bedcac849c2b22f6e5bb6e22ce6d5dda5556ffc683ab01c159": "This token outlines the proficiency ranks gained over time for champions, which is vital for addressing the question of how proficiency progression is determined."
       },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
@@ -1825,15 +2996,134 @@
       "source_page": null,
       "notes": "Derived from seed 30. Class-option comparison with prerequisite and access timing analysis.",
       "legacy_gold_chunk_ids": [],
-      "gold_unit_ids": [],
-      "required_gold": [],
-      "supporting_gold": [],
-      "_required_gold": [],
-      "_supporting_gold": [],
-      "gold_locations": {},
-      "_mode": "multi_cite",
+      "gold_unit_ids": [
+        "007965ca4e1ec9d95f2912ecdded72eefcb50cfed41e3904beca17d89593fd26",
+        "aea845669e7f6e9e8d1175335a2b1ab63c5ae4f8c41fb889f323119f0e792958",
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "ed6beb053808915908f8527597e8ab3f02efe543e5442f6d86d1b4a00faf54ef",
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "9df43655160ea2d8a5a22f8b72b9fad3503969c3384f71eacb4da7da82597810"
+      ],
+      "required_gold": [
+        "007965ca4e1ec9d95f2912ecdded72eefcb50cfed41e3904beca17d89593fd26",
+        "aea845669e7f6e9e8d1175335a2b1ab63c5ae4f8c41fb889f323119f0e792958",
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "ed6beb053808915908f8527597e8ab3f02efe543e5442f6d86d1b4a00faf54ef"
+      ],
+      "supporting_gold": [
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "9df43655160ea2d8a5a22f8b72b9fad3503969c3384f71eacb4da7da82597810"
+      ],
+      "_required_gold": [
+        "007965ca4e1ec9d95f2912ecdded72eefcb50cfed41e3904beca17d89593fd26",
+        "aea845669e7f6e9e8d1175335a2b1ab63c5ae4f8c41fb889f323119f0e792958",
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b",
+        "ed6beb053808915908f8527597e8ab3f02efe543e5442f6d86d1b4a00faf54ef"
+      ],
+      "_supporting_gold": [
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548",
+        "9df43655160ea2d8a5a22f8b72b9fad3503969c3384f71eacb4da7da82597810"
+      ],
+      "gold_locations": {
+        "007965ca4e1ec9d95f2912ecdded72eefcb50cfed41e3904beca17d89593fd26": {
+          "page": 231,
+          "structural_path": [
+            "Prerequisites Intelligence 14"
+          ],
+          "source_unit_ids": [
+            "963372797f085e784ca48e2a5e00ac81b729f699c3bb4c1dcf6db9bee264000e",
+            "ad2f1f589dd8ac3113155633bc146b3619bc2047130af982896b1f5c633d709f",
+            "cc0ff400855ec401d8a4de00577d2d7379ac43ce4fb768070a78109440bcd170",
+            "d293899d2e32cd7bafc5a6bee7ba6b7a1041f0f00473b48a952991bd2f68c62c",
+            "412666b11c98ad9e1410c08a24c2388fbffe6565dc6d58627c0ab3706f136fae",
+            "94d6161c580e4376de2f670e3e5ca5c6c9625eb75d58ded1556703e91f4eb83a",
+            "3d3a19d66ca9340032bdc79f297905060b1c3bcfc00e1cb27924b0ad9fed5ad7",
+            "8a411cf96315703fb7ef40fe32682e73e39ba14e343930128637e2a87dd91f48",
+            "5d3f839e1fd062542099de6c845eb3fbeb06d27255267cf53069c453fba52e48",
+            "ebc7e62674c49bef6afea0d1bd413d47b82b1eb028234847dc86d5a324842098",
+            "41fff4f8c257cdb80a91b71dabd270b3738298519936746bd21539dfe4cb99bd",
+            "0d60418e8ebfae0e2ca25ef137707ff70e2f18a8eb92009a20f780ea5fb2b497",
+            "0ef301b503a5fa6825df1794f9674abacabc858a1bb5a9d0f7a343a6ba4a47e9",
+            "39522479b2c43fa1ec8b67b9c828a2bbe5f84cbb3d97cd9ff4a2bab96183c0cc",
+            "5e59daeb49dbab6082bb89a7d98b084e6c4d26196bfd75a98a7e0cf647506bad",
+            "6620d489e9fb0e85da24bc4d3fe6ae3d03b2d6a1e518640113c988ba71cd2139",
+            "8c9fb8b29b0ba9913a454cd033138ea99ea08e47063afaf5a166a11700f82e30",
+            "4b9f7c3bb01f8b965fadfc6e3c6acdbab3d8520b05ce0846f810af608987429a",
+            "d6cf1cab9ebc3a0eae5e31fdab7a0cf381625dfc9eef2f1dea6ae9a5bde1f648",
+            "9c07b8b6fa163ae7516c06f46be68db5188365ec490aa7eba889c95955a9498f",
+            "09cda2d969dfd4fd5f17ff602f2366f4c3af2f2dca09932e58067f8757a7f32d",
+            "a585f6f53ff8266e3fe88085847d1dc220a1536165a39c1970861bc23edc8aec",
+            "a0addefdf4a10b3ac60b4130d959188158feb0509888dc43fbab529aec4a707e",
+            "a9a96063fb9d3697396d25a896fc630f84f107922754f1f79fbea2fa8aaea0c9",
+            "13e41f4a1b0fa58d03e3453506ea4b622cc7b4906cf80b4cbff54bdef5deaca0",
+            "78218f017882e0fc8493d496f6575d8194c063ce5013af0dd968b9bf79b5628b",
+            "dd00f6a136ecb7fa218c47402f74c54a1fe4f9dac316af5a265f8bb50918aebf"
+          ]
+        },
+        "aea845669e7f6e9e8d1175335a2b1ab63c5ae4f8c41fb889f323119f0e792958": {
+          "page": 230,
+          "structural_path": [
+            "Prerequisites Charisma 14"
+          ],
+          "source_unit_ids": [
+            "e91cc8633b49572da907fb2165370e1c7abef2c988358a86e000cef7b9805d1b",
+            "2da26976c9d675f7c7bbaf2be0307fd70460a2f56bb212325fa7f3bebc266ce1"
+          ]
+        },
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b": {
+          "page": 184,
+          "structural_path": [
+            "ROGUE"
+          ],
+          "source_unit_ids": [
+            "503b23e7da45c75f0957245f62b498019a563215e36fa4fa74af10a6a6f7ac85",
+            "7a4bdd11327797832d9261d2a7c72c4e0a135f7324e4fb7c8d8aea4bab98c461",
+            "923db1175bcf5a34c413001a7648ab999f4051430f2ba64f8e800d3980c8cf51"
+          ]
+        },
+        "ed6beb053808915908f8527597e8ab3f02efe543e5442f6d86d1b4a00faf54ef": {
+          "page": 222,
+          "structural_path": [
+            "Prerequisites Charisma 14"
+          ],
+          "source_unit_ids": [
+            "5079296c9ab4387029ee6c431a8b6c272145784fa23356ff96a790d748d6d8d1",
+            "7fc3031ffb311ed8ca21c02d76aba9e50baa239ac209af7d54c94aa841df0dd0",
+            "cb5cbef300011b3ff7995d65d605b3652c5b721ae066caad732ed330685d57e7",
+            "56befbbcdaeda04f4f951fb410fa7c6aca65274e6195eb6ccce7d6c43ff8f210"
+          ]
+        },
+        "26e307dfc8ce9842275501108785102d9077b48297fe12c8881c0590d887c548": {
+          "page": 219,
+          "structural_path": [
+            "ARCHETYPES",
+            "SPELLCASTING ARCHETYPES"
+          ],
+          "source_unit_ids": [
+            "39418e1d9945bc73b937b8b2ece0044993209cc9d9b313ae1f6cc3f84ffb0b94",
+            "bcecc32e9eb1317526e7e453e42bd35ce349235139cf53ff3ad7825dbb89b21f",
+            "b8e17b102b5710fb582b6c158e9d014a6fc0ef9ed86dc9a49b106ed2420c8c04"
+          ]
+        },
+        "9df43655160ea2d8a5a22f8b72b9fad3503969c3384f71eacb4da7da82597810": {
+          "page": 204,
+          "structural_path": [
+            "SPELLBOOK"
+          ],
+          "source_unit_ids": [
+            "c7253f2820820fcafe4fefc5255d3f7dd8698dba4ee0d2a72e298dd7690c0665",
+            "17d79e3215e3fd9d091cf17141db0b5608c03555a2952dcd3754ea050118bbe2"
+          ]
+        }
+      },
+      "_mode": "single_cite",
       "_status": "uncited",
-      "required_gold_rationale": {},
+      "required_gold_rationale": {
+        "007965ca4e1ec9d95f2912ecdded72eefcb50cfed41e3904beca17d89593fd26": "Details the prerequisites and initial spell access for the Wizard path.",
+        "aea845669e7f6e9e8d1175335a2b1ab63c5ae4f8c41fb889f323119f0e792958": "Details the prerequisites and initial spell access for the Sorcerer path.",
+        "ad5df48eacfca7017bbe84982075148127ed879edba8a5e1ca64e828fcad332b": "Describes the rogue's ability to gain minor magic, including initial spell access.",
+        "ed6beb053808915908f8527597e8ab3f02efe543e5442f6d86d1b4a00faf54ef": "Details the prerequisites and initial spell access for the Bard path."
+      },
       "benchmark_track": "working_set",
       "evidence_scope": "multi_anchor",
       "required_anchor_ids": [],

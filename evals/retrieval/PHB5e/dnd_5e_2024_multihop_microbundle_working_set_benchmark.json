@@ -1,0 +1,3547 @@
+{
+  "metadata": {
+    "batch_ids": [
+      "mh_micro_001"
+    ],
+    "source": "DnD 5e 2024 PHB multihop micro-bundle working-set benchmark",
+    "merged_at": "2026-03-16T00:00:00+00:00",
+    "query_count": 37,
+    "current_run_id": null,
+    "created_by": "agent",
+    "creation_method": "microbundle_decomposition_from_multihop_design_draft",
+    "notes": "Diagnostic D&D 5e 2024 multihop micro-bundle working set derived from representative parent queries phb5e_mh_ws_001, phb5e_mh_ws_007, phb5e_mh_ws_018, phb5e_mh_ws_020, and phb5e_mh_ws_029, then expanded with bounded decomposition children for harder PHB parents phb5e_mh_ws_003, phb5e_mh_ws_004, phb5e_mh_ws_005, phb5e_mh_ws_009, phb5e_mh_ws_010, phb5e_mh_ws_014, phb5e_mh_ws_015, phb5e_mh_ws_016, phb5e_mh_ws_017, phb5e_mh_ws_024, and phb5e_mh_ws_027. Existing grounded entries were preserved; newly added decomposition entries (22) grounded via autogold 2026-03-16; decomposition surface is scoreable.",
+    "schema_version": "retrieval_benchmark_v1",
+    "substrate_version": "v2",
+    "substrate_path": "out/DnD_PHB_5.5",
+    "document_id": "DnD_PHB_5.5",
+    "chunk_recipe": {
+      "min_chars": 200,
+      "merge_chunks": true,
+      "merge_max_chars": 2000
+    },
+    "surface_label": "phb5e_2024_multihop_microbundle_working_set",
+    "ratification_policy": {
+      "ratified_track": "ratified_core",
+      "working_track": "working_set",
+      "max_required_gold": 2
+    }
+  },
+  "queries": [
+    {
+      "id": "phb5e_mh_mb_001a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiency, and starting feat does the Acolyte background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_001 during D&D 5e 2024 multihop benchmark intake: Acolyte background benefits.",
+      "parent_query_id": "phb5e_mh_ws_001",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "3f55ed4decadde55903db2dc02d4e08bd4200c36cde1a854244b05c235d19631",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "3f55ed4decadde55903db2dc02d4e08bd4200c36cde1a854244b05c235d19631"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "3f55ed4decadde55903db2dc02d4e08bd4200c36cde1a854244b05c235d19631"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "3f55ed4decadde55903db2dc02d4e08bd4200c36cde1a854244b05c235d19631": {
+          "page": 176,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "ACOLYTE"
+          ],
+          "source_unit_ids": [
+            "6c9c3647568e9416eca38ae1fcf4c8e3c10d22796c9237403c3791a3c4da53f8",
+            "fe995cc853504dbff465f37ad8bea8d56916253b7d60c749dc059a96f4d280aa"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "3f55ed4decadde55903db2dc02d4e08bd4200c36cde1a854244b05c235d19631": "Contains the Acolyte background\u2019s specific benefits: ability scores (Intelligence, Wisdom, Charisma), feat (Magic Initiate [Cleric]), skill proficiencies (Insight and Religion), and tool proficiency (Calligrapher's Supplies). This single chunk directly answers all parts of the question."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_001b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What spells and casting options does Magic Initiate (Cleric) grant under the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_001 during D&D 5e 2024 multihop benchmark intake: Magic Initiate (Cleric) spell grant.",
+      "parent_query_id": "phb5e_mh_ws_001",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360"
+      ],
+      "required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "supporting_gold": [
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360"
+      ],
+      "_required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "_supporting_gold": [
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360"
+      ],
+      "gold_locations": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": {
+          "page": 199,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "Feat Descriptions",
+            "Origin Feat"
+          ],
+          "source_unit_ids": [
+            "37472245c8d8cdf0415a375a90f49043f75ee1b20ae948114d15bddd12e719b5",
+            "d6d92ebda82b1fd42dada64e7b440721a42e35b7206fd374d851af46985dc513"
+          ]
+        },
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360": {
+          "page": 69,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "CLERIC SPELL LIST"
+          ],
+          "source_unit_ids": [
+            "056c6c6d34dac54f4e30278d257a64dc1f9d2468227c4f63f01e3c85299cb7bb",
+            "acc6f0f9a0ea646b0ed49ee32cd3855b08d1b9ea9e9c02a902e14889716fbac3"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": "This is the only candidate that directly contains the Magic Initiate feat text, which is the primary rule needed to answer what Magic Initiate (Cleric) grants and its casting option."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_001c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Magic Initiate (Cleric) interact with a character's existing class spellcasting ability and spellcasting feature?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_001 during D&D 5e 2024 multihop benchmark intake: Magic Initiate with class spellcasting.",
+      "parent_query_id": "phb5e_mh_ws_001",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68",
+        "e99a8aca87803763f6e1662ce174cc547d55ee25e687fd5b17483fe102e8b8bc",
+        "f8676780f7300236e4cb7f5f3c6d6dbd9331d144b73d0ccc721db5204a859235"
+      ],
+      "required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68"
+      ],
+      "supporting_gold": [
+        "e99a8aca87803763f6e1662ce174cc547d55ee25e687fd5b17483fe102e8b8bc",
+        "f8676780f7300236e4cb7f5f3c6d6dbd9331d144b73d0ccc721db5204a859235"
+      ],
+      "_required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68"
+      ],
+      "_supporting_gold": [
+        "e99a8aca87803763f6e1662ce174cc547d55ee25e687fd5b17483fe102e8b8bc",
+        "f8676780f7300236e4cb7f5f3c6d6dbd9331d144b73d0ccc721db5204a859235"
+      ],
+      "gold_locations": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": {
+          "page": 199,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "Feat Descriptions",
+            "Origin Feat"
+          ],
+          "source_unit_ids": [
+            "37472245c8d8cdf0415a375a90f49043f75ee1b20ae948114d15bddd12e719b5",
+            "d6d92ebda82b1fd42dada64e7b440721a42e35b7206fd374d851af46985dc513"
+          ]
+        },
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68": {
+          "page": 67,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "College of Valor",
+            "LEVEL 1: SPELLCASTING"
+          ],
+          "source_unit_ids": [
+            "0855a818805e98d6161fb08c0d3ebe7f8defe8dde315c8cbe45bdbdc234b0980",
+            "eeb6c7df452b9e8f1337eab1bbc6e60639ef9e4538aae666f7e078143f6ca396"
+          ]
+        },
+        "e99a8aca87803763f6e1662ce174cc547d55ee25e687fd5b17483fe102e8b8bc": {
+          "page": 233,
+          "structural_path": [
+            "Ch. 6: Equipment",
+            "Crafting Equipment",
+            "GAINING SPELLS"
+          ],
+          "source_unit_ids": [
+            "e99a8aca87803763f6e1662ce174cc547d55ee25e687fd5b17483fe102e8b8bc"
+          ]
+        },
+        "f8676780f7300236e4cb7f5f3c6d6dbd9331d144b73d0ccc721db5204a859235": {
+          "page": 233,
+          "structural_path": [
+            "Ch. 6: Equipment",
+            "Crafting Equipment",
+            "SPELL LEVEL"
+          ],
+          "source_unit_ids": [
+            "5cf3d51e78c2b81f79b9241b0bea88ba6931099e10b2e613e7a02b7249687ba6",
+            "147267ad08e683084890c2cafa9ad75546b76ae3ad27f8b029071b834b573c0c",
+            "d1f3b66b6168863de71ea52731b2fba54042d1bedea8426c927498bdd00cd1a9"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": "Provides the Magic Initiate feat text, which is the anchor for how the feat grants spells and specifies its spellcasting-ability behavior.",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68": "Provides the Cleric class Spellcasting feature, including that Cleric spells use Wisdom and that Cleric spellcasting is a class feature, which is needed to reason about interaction with an existing class's spellcasting."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_007a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How does Savage Attacker work in the 2024 PHB, and does it apply to both melee and ranged weapon attacks?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_007 during D&D 5e 2024 multihop benchmark intake: Savage Attacker weapon coverage.",
+      "parent_query_id": "phb5e_mh_ws_007",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "b16e4d9d636aa7c4d4bfed4a4a66045bac2191ce853a85aa469143855c1ee141",
+        "70dd222bad394020d746cb89cdf37b3dd280f37665ef2d243cddc0219fbe3424",
+        "c1cd921a898bcc89138b314c0e6e79a81f3d220e17d9c934e084fc7973633e09"
+      ],
+      "required_gold": [
+        "b16e4d9d636aa7c4d4bfed4a4a66045bac2191ce853a85aa469143855c1ee141"
+      ],
+      "supporting_gold": [
+        "70dd222bad394020d746cb89cdf37b3dd280f37665ef2d243cddc0219fbe3424",
+        "c1cd921a898bcc89138b314c0e6e79a81f3d220e17d9c934e084fc7973633e09"
+      ],
+      "_required_gold": [
+        "b16e4d9d636aa7c4d4bfed4a4a66045bac2191ce853a85aa469143855c1ee141"
+      ],
+      "_supporting_gold": [
+        "70dd222bad394020d746cb89cdf37b3dd280f37665ef2d243cddc0219fbe3424",
+        "c1cd921a898bcc89138b314c0e6e79a81f3d220e17d9c934e084fc7973633e09"
+      ],
+      "gold_locations": {
+        "b16e4d9d636aa7c4d4bfed4a4a66045bac2191ce853a85aa469143855c1ee141": {
+          "page": 24,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "Combat",
+            "Movement and Position",
+            "RANGE"
+          ],
+          "source_unit_ids": [
+            "ef59d1e153267c01ba0e215578b274d41b1173d120887c63d414ddea23b19221",
+            "628567de400939483da666e563704a2e74f2cd62260ce77b444e11e278dad060",
+            "88f65e3f01d0bb0729e9f2989ca5e64102d52a6fbd1626a2139a49be25fe0479"
+          ]
+        },
+        "70dd222bad394020d746cb89cdf37b3dd280f37665ef2d243cddc0219fbe3424": {
+          "page": 24,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "Combat",
+            "Movement and Position",
+            "MELEE ATTACKS"
+          ],
+          "source_unit_ids": [
+            "70dd222bad394020d746cb89cdf37b3dd280f37665ef2d243cddc0219fbe3424"
+          ]
+        },
+        "c1cd921a898bcc89138b314c0e6e79a81f3d220e17d9c934e084fc7973633e09": {
+          "page": 23,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "Combat",
+            "The Order of Combat",
+            "MAKING AN ATTACK"
+          ],
+          "source_unit_ids": [
+            "48a501f10ade4dc0061e8da84d7ada4f9485587d34cfd9f98966ea6cba9ee4c2",
+            "396521bd86fa43033c2c3d158b7f0400cbc21493892293d7dcdd0dba42beafda",
+            "925b69841f51d5aa84a14ecf6d09cfa2e4ec10a12aad0e3c897b394642e1665b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "b16e4d9d636aa7c4d4bfed4a4a66045bac2191ce853a85aa469143855c1ee141": "Provides the needed rules anchor distinguishing ranged attacks from melee attacks, which is necessary to answer whether Savage Attacker can apply to ranged weapon attacks as well as melee ones."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_007b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiencies, and starting equipment does the Soldier background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_007 during D&D 5e 2024 multihop benchmark intake: Soldier background package.",
+      "parent_query_id": "phb5e_mh_ws_007",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2": {
+          "page": 183,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Sage",
+            "SOLDIER"
+          ],
+          "source_unit_ids": [
+            "647f09f3fad036f1d3e9ad7e50d1946ad61d68423f3c1a6fb34cac1833db20a6",
+            "db742e264314889064c5f4f41194038826084a943501763447fc2cdb76ccd142"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2": "Contains the Soldier background entry with all requested specifics: ability score options, skill proficiencies, tool proficiency, and starting equipment."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_007c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How can Savage Attacker combine with class features such as Extra Attack or Reckless Attack to improve a Soldier-background character's combat output?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_007 during D&D 5e 2024 multihop benchmark intake: Savage Attacker with class attack features.",
+      "parent_query_id": "phb5e_mh_ws_007",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2",
+        "c7a569490d3fb42b5ff737541feea59d39af0efcd0ea3167301ea8c37eab19c5",
+        "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b",
+        "dd9a5142bcc79dc1051407baeeeb7962d514944d9b5143d11691ec295ecb2088",
+        "ab3ceb7910a2d93cd1b56324c7f63d723505402d0a459238030e13de3299f32c",
+        "93b08c47f25ed11903110b6bc152494f01a745614797969ac64f810228958fe9",
+        "b97f8e22eb9daf7287b1f72fbcc4ce58489b2f461ba1c6aba3cdf5339e83ecc7"
+      ],
+      "required_gold": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2",
+        "c7a569490d3fb42b5ff737541feea59d39af0efcd0ea3167301ea8c37eab19c5",
+        "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b"
+      ],
+      "supporting_gold": [
+        "dd9a5142bcc79dc1051407baeeeb7962d514944d9b5143d11691ec295ecb2088",
+        "ab3ceb7910a2d93cd1b56324c7f63d723505402d0a459238030e13de3299f32c",
+        "93b08c47f25ed11903110b6bc152494f01a745614797969ac64f810228958fe9",
+        "b97f8e22eb9daf7287b1f72fbcc4ce58489b2f461ba1c6aba3cdf5339e83ecc7"
+      ],
+      "_required_gold": [
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2",
+        "c7a569490d3fb42b5ff737541feea59d39af0efcd0ea3167301ea8c37eab19c5",
+        "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b"
+      ],
+      "_supporting_gold": [
+        "dd9a5142bcc79dc1051407baeeeb7962d514944d9b5143d11691ec295ecb2088",
+        "ab3ceb7910a2d93cd1b56324c7f63d723505402d0a459238030e13de3299f32c",
+        "93b08c47f25ed11903110b6bc152494f01a745614797969ac64f810228958fe9",
+        "b97f8e22eb9daf7287b1f72fbcc4ce58489b2f461ba1c6aba3cdf5339e83ecc7"
+      ],
+      "gold_locations": {
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2": {
+          "page": 183,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Sage",
+            "SOLDIER"
+          ],
+          "source_unit_ids": [
+            "647f09f3fad036f1d3e9ad7e50d1946ad61d68423f3c1a6fb34cac1833db20a6",
+            "db742e264314889064c5f4f41194038826084a943501763447fc2cdb76ccd142"
+          ]
+        },
+        "c7a569490d3fb42b5ff737541feea59d39af0efcd0ea3167301ea8c37eab19c5": {
+          "page": 51,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "LEVEL 9: BRUTAL STRIKE"
+          ],
+          "source_unit_ids": [
+            "ac0be2ba0046d0cc84d4c8f076d1f3d61aafbb36bb1d1a289a445e5ce133f7f3",
+            "3552f5acf00478001e2596d79a583e0be9f018cfc16f78d8c7e90b533376c13c",
+            "1718104039f49bdb7c96a614c1827afee5c7b751d4178d0b24ee8d5e09a869cb",
+            "1d19e2f0e905057e60ba7a57ce78e95e98a20c7bd15ede8ce4ca149104ae4fdd",
+            "7272af1af5ddb96776cf8e25503f5736d81ef323fd22cd3a7a9754d82eb9ec1e"
+          ]
+        },
+        "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b": {
+          "page": 50,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "LEVEL 2: RECKLESS ATTACK"
+          ],
+          "source_unit_ids": [
+            "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b"
+          ]
+        },
+        "dd9a5142bcc79dc1051407baeeeb7962d514944d9b5143d11691ec295ecb2088": {
+          "page": 90,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Fighter",
+            "LEVEL 13: STUDIED ATTACKS"
+          ],
+          "source_unit_ids": [
+            "d270cb8ad85e0e08361bfdcde54303b9d9484ccfe2a3562e1d20d30c92a19534",
+            "1e6d13f473a9576da14ea2b03919323605b55659f53772f39d58e8ba0ae89c23",
+            "0200cd4a0d3d01b066dd4c6da50b053bbc4cc82d44abc2f0a8d09eef6fa1739f",
+            "9f2f181422b30b1c1d4282cf03f77b89d1cc4ddaebeedccdc51b8ebad26dd9f7",
+            "bd499903c71b9760b09e366a561789c44be1ab76339fd66868fbdb8a084a6e6e"
+          ]
+        },
+        "ab3ceb7910a2d93cd1b56324c7f63d723505402d0a459238030e13de3299f32c": {
+          "page": 90,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Fighter"
+          ],
+          "source_unit_ids": [
+            "ab3ceb7910a2d93cd1b56324c7f63d723505402d0a459238030e13de3299f32c"
+          ]
+        },
+        "93b08c47f25ed11903110b6bc152494f01a745614797969ac64f810228958fe9": {
+          "page": 42,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Level Advancement",
+            "EXTRA ATTACK"
+          ],
+          "source_unit_ids": [
+            "93b08c47f25ed11903110b6bc152494f01a745614797969ac64f810228958fe9"
+          ]
+        },
+        "b97f8e22eb9daf7287b1f72fbcc4ce58489b2f461ba1c6aba3cdf5339e83ecc7": {
+          "page": 50,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian"
+          ],
+          "source_unit_ids": [
+            "b97f8e22eb9daf7287b1f72fbcc4ce58489b2f461ba1c6aba3cdf5339e83ecc7"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "56d9ef79622414da588d0a0828522a077c948b06f799899669bb05df684ff2c2": "Establishes that the Soldier background grants the Savage Attacker feat, which is the starting point of the question.",
+        "c7a569490d3fb42b5ff737541feea59d39af0efcd0ea3167301ea8c37eab19c5": "Provides the Extra Attack feature and explicitly ties later Barbarian damage output to using Reckless Attack via Brutal Strike, showing how multiple attacks and Reckless-based features can increase combat output.",
+        "5f41b3bdf370e36007c10cb05a83f026a1bb2a83177e166ac19aac4f4b58289b": "Defines Reckless Attack, namely that it grants Advantage on Strength-based attack rolls, which explains how Savage Attacker can combine with a class feature that improves hit reliability and thus overall damage output."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_018a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "Under the 2024 PHB, what triggers Wild Magic Surge for a Wild Magic Sorcerer, and how does that change its expected frequency?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_018 during D&D 5e 2024 multihop benchmark intake: Wild Magic Surge trigger.",
+      "parent_query_id": "phb5e_mh_ws_018",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646",
+        "ddfdd31c06b09890fdac9769c18b1062422995e0427e3e2eebdb42b8f9aa4231",
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "required_gold": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646"
+      ],
+      "supporting_gold": [
+        "ddfdd31c06b09890fdac9769c18b1062422995e0427e3e2eebdb42b8f9aa4231",
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "_required_gold": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646"
+      ],
+      "_supporting_gold": [
+        "ddfdd31c06b09890fdac9769c18b1062422995e0427e3e2eebdb42b8f9aa4231",
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "gold_locations": {
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 3: TIDES OF CHAOS"
+          ],
+          "source_unit_ids": [
+            "38b0877196596139b420b5916a4d4dbab18d782033e7f8c9079250c7d3110da3",
+            "55009b6f4b6074ebe87e4c18ed79eec869374c2bbc5d9ecd91dc87d89f17e43c"
+          ]
+        },
+        "ddfdd31c06b09890fdac9769c18b1062422995e0427e3e2eebdb42b8f9aa4231": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "Unleash Chaotic Magic"
+          ],
+          "source_unit_ids": [
+            "edf702d3375420a0505a9f5094b6582c279bfeb342ebc2c697789aae234f16a9",
+            "41b7d9218975a40a1797aa021130529f9fe0933d4c1115993d326e3cb5cc15b1"
+          ]
+        },
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 3: WILD MAGIC SURGE"
+          ],
+          "source_unit_ids": [
+            "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e"
+          ]
+        },
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 6: BEND LUCK"
+          ],
+          "source_unit_ids": [
+            "ed42e7fa1a2c44e67beb9575000f7243874400512b87e08c34fbf99dab3a023c",
+            "759fa75ff0f159874f9162718f5b8a171eb6b0373433a4102669fe14a0b5bea4",
+            "17c88bf6728d6a86a82ae6f928e29cffea85382ea503887ee11cf3da7d5922ba",
+            "4101fd8ada3295daa4cb38e006f2cf459d91f67da15a36f8ba947c5c04fd6d18"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": "Contains both parts needed to answer the question: the 2024 Wild Magic Surge trigger ('once per turn, you can roll 1d20 immediately after you cast a Sorcerer spell with a spell slot; on a 20, roll on the table') and the Tides of Chaos rider that if you cast a Sorcerer spell with a spell slot before a Long Rest, you automatically roll on the Wild Magic Surge table. This is sufficient to explain both what triggers a surge and how that changes expected frequency."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_018b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What do Tides of Chaos, Bend Luck, and Tamed Surge do for a 2024 Wild Magic Sorcerer?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_018 during D&D 5e 2024 multihop benchmark intake: Wild Magic support features.",
+      "parent_query_id": "phb5e_mh_ws_018",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646",
+        "c2dac8dbcf84760b9e775d230144383ffe3b457489420bd47e4018a576c41c27",
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "56df8f8be16d782b1d02fd31805898ff51029739d66b04fe647e20a3e3eeafe8",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "required_gold": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646",
+        "c2dac8dbcf84760b9e775d230144383ffe3b457489420bd47e4018a576c41c27"
+      ],
+      "supporting_gold": [
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "56df8f8be16d782b1d02fd31805898ff51029739d66b04fe647e20a3e3eeafe8",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "_required_gold": [
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646",
+        "c2dac8dbcf84760b9e775d230144383ffe3b457489420bd47e4018a576c41c27"
+      ],
+      "_supporting_gold": [
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e",
+        "56df8f8be16d782b1d02fd31805898ff51029739d66b04fe647e20a3e3eeafe8",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "gold_locations": {
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 3: TIDES OF CHAOS"
+          ],
+          "source_unit_ids": [
+            "38b0877196596139b420b5916a4d4dbab18d782033e7f8c9079250c7d3110da3",
+            "55009b6f4b6074ebe87e4c18ed79eec869374c2bbc5d9ecd91dc87d89f17e43c"
+          ]
+        },
+        "c2dac8dbcf84760b9e775d230144383ffe3b457489420bd47e4018a576c41c27": {
+          "page": 148,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Draconic Sorcery",
+            "1d100 Effect"
+          ],
+          "source_unit_ids": [
+            "b083052b709369a360895b88a0b91513cd7fecaa13148edcb15a312a893580a0",
+            "bf0d7d048faab3d3f7083fd3450ba668a70c7a9a891acbb677809f5ad7479703",
+            "dffde71be0a9ad775241e944e8826ed83e1c3f6b12789d228da600d5a607abb1"
+          ]
+        },
+        "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 3: WILD MAGIC SURGE"
+          ],
+          "source_unit_ids": [
+            "4a4bc8bac3731facae2baf75141e6dde6f7fd501561e06389d72120fb130f75e"
+          ]
+        },
+        "56df8f8be16d782b1d02fd31805898ff51029739d66b04fe647e20a3e3eeafe8": {
+          "page": 148,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Draconic Sorcery",
+            "LEVEL 18: TAMED SURGE"
+          ],
+          "source_unit_ids": [
+            "56df8f8be16d782b1d02fd31805898ff51029739d66b04fe647e20a3e3eeafe8"
+          ]
+        },
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 6: BEND LUCK"
+          ],
+          "source_unit_ids": [
+            "ed42e7fa1a2c44e67beb9575000f7243874400512b87e08c34fbf99dab3a023c",
+            "759fa75ff0f159874f9162718f5b8a171eb6b0373433a4102669fe14a0b5bea4",
+            "17c88bf6728d6a86a82ae6f928e29cffea85382ea503887ee11cf3da7d5922ba",
+            "4101fd8ada3295daa4cb38e006f2cf459d91f67da15a36f8ba947c5c04fd6d18"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": "Provides the definitions of Tides of Chaos and Bend Luck, including their exact effects and usage conditions.",
+        "c2dac8dbcf84760b9e775d230144383ffe3b457489420bd47e4018a576c41c27": "Provides the definition of Tamed Surge, including choosing an effect from the Wild Magic Surge table and its once-per-Long-Rest limit."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_018c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How do the Wild Magic Sorcerer's revised subclass features interact with core Sorcerer resources such as Font of Magic and Metamagic?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_018 during D&D 5e 2024 multihop benchmark intake: Wild Magic with core sorcerer features.",
+      "parent_query_id": "phb5e_mh_ws_018",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "333f85e86a89cffde6da794ebf8aac0ce6543660a9af8e53ceeff86fd866e64b",
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646",
+        "36aaf5f61a653767c2f7c0d6918e241aa78e8ce4ef8f35aa0733bf03298acb7a",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "required_gold": [
+        "333f85e86a89cffde6da794ebf8aac0ce6543660a9af8e53ceeff86fd866e64b",
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646"
+      ],
+      "supporting_gold": [
+        "36aaf5f61a653767c2f7c0d6918e241aa78e8ce4ef8f35aa0733bf03298acb7a",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "_required_gold": [
+        "333f85e86a89cffde6da794ebf8aac0ce6543660a9af8e53ceeff86fd866e64b",
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646"
+      ],
+      "_supporting_gold": [
+        "36aaf5f61a653767c2f7c0d6918e241aa78e8ce4ef8f35aa0733bf03298acb7a",
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d"
+      ],
+      "gold_locations": {
+        "333f85e86a89cffde6da794ebf8aac0ce6543660a9af8e53ceeff86fd866e64b": {
+          "page": 138,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "LEVEL 1: INNATE SORCERY"
+          ],
+          "source_unit_ids": [
+            "8c5d4eedf5936e63d510469d048cc9dfda8a435f437ba506d92d69e2eae78d61",
+            "59b0372a0069c346599a834f27368528694cb3d3579121314cc1575ff21474b3",
+            "1054ed4944b6e8b8dc5b7afd85b721d07f848185f071a15525fefb9cebdb61bf",
+            "3658e0e0b6fa5a808416a24a019b32344de3e4b1e62979bff481a4ab61ad028a",
+            "f8eed646dc556d340b7fd3aba90517d7c1c8ee611a6ce266ef190d414680714b",
+            "06983edd0a67fced37df58406158f8619a934043bd9d13178e8d7596ff54b9bd",
+            "5bd4bef549124d55d06b83e5bdf953a93ebe910f1afa7588e37a646424fd6a9c",
+            "fbc02dc88e41711380ad8191e50e5060b17b5f9e0911e0c362710c6958fe0155"
+          ]
+        },
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 3: TIDES OF CHAOS"
+          ],
+          "source_unit_ids": [
+            "38b0877196596139b420b5916a4d4dbab18d782033e7f8c9079250c7d3110da3",
+            "55009b6f4b6074ebe87e4c18ed79eec869374c2bbc5d9ecd91dc87d89f17e43c"
+          ]
+        },
+        "36aaf5f61a653767c2f7c0d6918e241aa78e8ce4ef8f35aa0733bf03298acb7a": {
+          "page": 139,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "LEVEL 3: SORCERER SUBCLASS"
+          ],
+          "source_unit_ids": [
+            "c6a000a9c4aefb3dc4da45812b6549d208ac8d1f9221ca191c46c693ef3298d2",
+            "045b1abc26a9104aa592eb5f3e8f9fccb41223ecaeec835f93d74db431383909",
+            "4da489def9ac1627cf4c688747ba5104d42e4a3ebf6f99c8948c069bee837b8e"
+          ]
+        },
+        "45f5548fbbf5503d7b8b08dbc793a07ad4a556573ff66f7dc5c07d4a672a943d": {
+          "page": 147,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Sorcerer",
+            "Sorcerer Spell List",
+            "Clockwork Sorcery",
+            "LEVEL 6: BEND LUCK"
+          ],
+          "source_unit_ids": [
+            "ed42e7fa1a2c44e67beb9575000f7243874400512b87e08c34fbf99dab3a023c",
+            "759fa75ff0f159874f9162718f5b8a171eb6b0373433a4102669fe14a0b5bea4",
+            "17c88bf6728d6a86a82ae6f928e29cffea85382ea503887ee11cf3da7d5922ba",
+            "4101fd8ada3295daa4cb38e006f2cf459d91f67da15a36f8ba947c5c04fd6d18"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "333f85e86a89cffde6da794ebf8aac0ce6543660a9af8e53ceeff86fd866e64b": "Provides the core Sorcerer resource framework: Font of Magic creates Sorcery Points, and Metamagic spends Sorcery Points to modify spells. This is necessary to explain how subclass features interact with those core resources.",
+        "115bfa4962615efa52bb94ec9a3f1cd361eccc3084d2b0666acba9f9987dd646": "Provides the revised Wild Magic subclass interactions: Wild Magic Surge triggers after casting a Sorcerer spell with a spell slot, surge-created spells can't be affected by Metamagic, Tides of Chaos also keys off casting a Sorcerer spell with a spell slot, and Bend Luck spends 1 Sorcery Point. This is the key subclass evidence for interaction with Font of Magic and Metamagic."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_020a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "When do Clerics gain their Divine Domain in the 2024 PHB, and how does Divine Spark relate to Channel Divinity?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_020 during D&D 5e 2024 multihop benchmark intake: Cleric subclass timing and Divine Spark.",
+      "parent_query_id": "phb5e_mh_ws_020",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "37752d2134c6b395bee9d2f49a8dbe6da2fd38f4c017d86dfa55bd550d3de11a",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1",
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be",
+        "0948728cf7e4f2aa0b0709ff6f175f3d08b29d8d50a7054e45ee0a87ed13efaa",
+        "23f6dfce4dff0ca19eb1334107e0c6bfa4e623a2dc1fb5a4d372f3bab0a326eb"
+      ],
+      "required_gold": [
+        "37752d2134c6b395bee9d2f49a8dbe6da2fd38f4c017d86dfa55bd550d3de11a",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1"
+      ],
+      "supporting_gold": [
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be",
+        "0948728cf7e4f2aa0b0709ff6f175f3d08b29d8d50a7054e45ee0a87ed13efaa",
+        "23f6dfce4dff0ca19eb1334107e0c6bfa4e623a2dc1fb5a4d372f3bab0a326eb"
+      ],
+      "_required_gold": [
+        "37752d2134c6b395bee9d2f49a8dbe6da2fd38f4c017d86dfa55bd550d3de11a",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1"
+      ],
+      "_supporting_gold": [
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be",
+        "0948728cf7e4f2aa0b0709ff6f175f3d08b29d8d50a7054e45ee0a87ed13efaa",
+        "23f6dfce4dff0ca19eb1334107e0c6bfa4e623a2dc1fb5a4d372f3bab0a326eb"
+      ],
+      "gold_locations": {
+        "37752d2134c6b395bee9d2f49a8dbe6da2fd38f4c017d86dfa55bd550d3de11a": {
+          "page": 68,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "LEVEL 1: DIVINE ORDER"
+          ],
+          "source_unit_ids": [
+            "b863ece987807463b5366d0f475b9bb3aa26728e7db61005a2490e5c88edd494",
+            "b766e47216dda3e22c4d5efe8237e19a0b9fd009a8c8914323795754b8179dad",
+            "2c84ee33db7d3c51e47f06f01e6d779896e94632c65141eb9786a04a8cda4a4d"
+          ]
+        },
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1": {
+          "page": 68,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "LEVEL 2: CHANNEL DIVINITY"
+          ],
+          "source_unit_ids": [
+            "99418d532f1c5dbf62a1438fc18858e5f0a4c661e71322598f7615cf5ddb717e",
+            "6f7ade77d0640fb51a69c378ed17f021c1e669edcbbd6d86abc96a9440b6c7d5",
+            "667c8ff0c1dd5696077d9f0dea6dc1d8bb671d0ec1f88926c550dffb8a930b87",
+            "53031e93a929c1db27cd7475aeab861c5058d0a2e34d9eebd92baaf32abdc956"
+          ]
+        },
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be": {
+          "page": 69,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "LEVEL 4: ABILITY SCORE IMPROVEMENT"
+          ],
+          "source_unit_ids": [
+            "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be"
+          ]
+        },
+        "0948728cf7e4f2aa0b0709ff6f175f3d08b29d8d50a7054e45ee0a87ed13efaa": {
+          "page": 71,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "CLERIC SUBCLASSES"
+          ],
+          "source_unit_ids": [
+            "0948728cf7e4f2aa0b0709ff6f175f3d08b29d8d50a7054e45ee0a87ed13efaa"
+          ]
+        },
+        "23f6dfce4dff0ca19eb1334107e0c6bfa4e623a2dc1fb5a4d372f3bab0a326eb": {
+          "page": 71,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "LEVEL 9 CLERIC SPELLS"
+          ],
+          "source_unit_ids": [
+            "23f6dfce4dff0ca19eb1334107e0c6bfa4e623a2dc1fb5a4d372f3bab0a326eb"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "37752d2134c6b395bee9d2f49a8dbe6da2fd38f4c017d86dfa55bd550d3de11a": "Needed because it explicitly shows the Cleric Features table with level 3 listed as 'Cleric Subclass,' establishing when Clerics gain their Divine Domain/subclass in the 2024 PHB.",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1": "Needed because it states that at level 2 Clerics gain Channel Divinity and 'start with two such effects: Divine Spark and Turn Undead,' directly grounding how Divine Spark relates to Channel Divinity."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_020b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How do domain spells interact with the Cleric's general spell list and preparation rules in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_020 during D&D 5e 2024 multihop benchmark intake: Domain spells and cleric spell list.",
+      "parent_query_id": "phb5e_mh_ws_020",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68",
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360",
+        "7ea1a04405d8ff33f43981dfb58bc3df7e0f6e3624319d055473dcb1cdd9779e",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a"
+      ],
+      "required_gold": [
+        "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68"
+      ],
+      "supporting_gold": [
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360",
+        "7ea1a04405d8ff33f43981dfb58bc3df7e0f6e3624319d055473dcb1cdd9779e",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a"
+      ],
+      "_required_gold": [
+        "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68"
+      ],
+      "_supporting_gold": [
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360",
+        "7ea1a04405d8ff33f43981dfb58bc3df7e0f6e3624319d055473dcb1cdd9779e",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a"
+      ],
+      "gold_locations": {
+        "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063": {
+          "page": 75,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Trickery Domain",
+            "WAR DOMAIN SPELLS"
+          ],
+          "source_unit_ids": [
+            "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063"
+          ]
+        },
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68": {
+          "page": 67,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "College of Valor",
+            "LEVEL 1: SPELLCASTING"
+          ],
+          "source_unit_ids": [
+            "0855a818805e98d6161fb08c0d3ebe7f8defe8dde315c8cbe45bdbdc234b0980",
+            "eeb6c7df452b9e8f1337eab1bbc6e60639ef9e4538aae666f7e078143f6ca396"
+          ]
+        },
+        "55d7e92fafab79005d5a2c4343bd0d7b1cd16d335328893a4a262250dc2ed360": {
+          "page": 69,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "CLERIC SPELL LIST"
+          ],
+          "source_unit_ids": [
+            "056c6c6d34dac54f4e30278d257a64dc1f9d2468227c4f63f01e3c85299cb7bb",
+            "acc6f0f9a0ea646b0ed49ee32cd3855b08d1b9ea9e9c02a902e14889716fbac3"
+          ]
+        },
+        "7ea1a04405d8ff33f43981dfb58bc3df7e0f6e3624319d055473dcb1cdd9779e": {
+          "page": 72,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "LEVEL 3: RADIANCE OF THE DAWN"
+          ],
+          "source_unit_ids": [
+            "6f51c584f2974aca5dbb411110854c93b6a816d90aad509f59713f4b67e36d3f",
+            "f217a2fc18c87abc43986cfa41606d9da5210e90de8ce5067c33bc148ea1768c",
+            "252e02cf1f3aaf0c4c44b45d4e96dfad908765f960805d82c8a375696f2f1c88",
+            "095d52519d660b40bffcf8af5e40f147efd2af1a33c91dbf1bedf271d52a526f",
+            "52b05c3e2c9bfba9d6784456e1aabb59004abc63b6eac30d95523fb4b8f91c5e",
+            "ed46227cf2b40fc70fc9713a59242b4761d00c7a8d335b8dce19428d5c075cca"
+          ]
+        },
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a": {
+          "page": 71,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "LEVEL 3: PRESERVE LIFE"
+          ],
+          "source_unit_ids": [
+            "a8c632cf5febd0f6ce7156ae511f543c04ec321c803319f95980a99f7201f044",
+            "04e0a9c0061c1d44c795ea87ac2d0fcba38480823ae06915b77f23eef05a2837",
+            "92dd71203819d28a1024b217489ac8c8feedc602ac8e0169b67438504fa7fa9e",
+            "8f28208c7a72b605f5c6fdb661a2d5f64ef2832eee5a014ebcee1427a1330122",
+            "421d23d00ee859109afb6a3ca2fe45a03027c8739f677fd7c5f0c78549cf6933",
+            "dd1c9a5657d6f55ca8b96015a33f7ac047aefb46a7b2449cbb8fac811658ac80",
+            "8560dee6eff2032e37dfde9c3474bbd1cdfca7d8e1b3c4f6835e72538cad4ba2"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "012d350cde3643fd0bb88a17a89da93a86e40fcb0cd519f58d39c17fbc76c063": "Provides the key domain-spell rule for Clerics: domain spells are always prepared once you reach the listed Cleric levels. This directly answers how domain spells function.",
+        "f8450f090e086ca8ccc5b62bab02842131779b69dfe87d33a3834f11bfa69f68": "Provides the Cleric's general spellcasting/preparation framework, including that Cleric spells come from the Cleric spell list and that the class uses prepared spells. This is needed to explain interaction with the normal preparation rules."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_020c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How can a background-granted feat such as Healer enhance a Cleric's Divine Spark, Channel Divinity, and domain-based healing play?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_020 during D&D 5e 2024 multihop benchmark intake: Healer feat with cleric features.",
+      "parent_query_id": "phb5e_mh_ws_020",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a",
+        "f1f57650143e684f126cb5004693835ec6e0ccdf939b67b3c031bd3d0a026e85",
+        "92eacdfef3a08beaf4f784fe8debc87cdd31720f28ce9744269ff10d40c7286b",
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be"
+      ],
+      "required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a"
+      ],
+      "supporting_gold": [
+        "f1f57650143e684f126cb5004693835ec6e0ccdf939b67b3c031bd3d0a026e85",
+        "92eacdfef3a08beaf4f784fe8debc87cdd31720f28ce9744269ff10d40c7286b",
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be"
+      ],
+      "_required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a"
+      ],
+      "_supporting_gold": [
+        "f1f57650143e684f126cb5004693835ec6e0ccdf939b67b3c031bd3d0a026e85",
+        "92eacdfef3a08beaf4f784fe8debc87cdd31720f28ce9744269ff10d40c7286b",
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be"
+      ],
+      "gold_locations": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": {
+          "page": 199,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "Feat Descriptions",
+            "Origin Feat"
+          ],
+          "source_unit_ids": [
+            "37472245c8d8cdf0415a375a90f49043f75ee1b20ae948114d15bddd12e719b5",
+            "d6d92ebda82b1fd42dada64e7b440721a42e35b7206fd374d851af46985dc513"
+          ]
+        },
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1": {
+          "page": 68,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "LEVEL 2: CHANNEL DIVINITY"
+          ],
+          "source_unit_ids": [
+            "99418d532f1c5dbf62a1438fc18858e5f0a4c661e71322598f7615cf5ddb717e",
+            "6f7ade77d0640fb51a69c378ed17f021c1e669edcbbd6d86abc96a9440b6c7d5",
+            "667c8ff0c1dd5696077d9f0dea6dc1d8bb671d0ec1f88926c550dffb8a930b87",
+            "53031e93a929c1db27cd7475aeab861c5058d0a2e34d9eebd92baaf32abdc956"
+          ]
+        },
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a": {
+          "page": 71,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "LEVEL 3: PRESERVE LIFE"
+          ],
+          "source_unit_ids": [
+            "a8c632cf5febd0f6ce7156ae511f543c04ec321c803319f95980a99f7201f044",
+            "04e0a9c0061c1d44c795ea87ac2d0fcba38480823ae06915b77f23eef05a2837",
+            "92dd71203819d28a1024b217489ac8c8feedc602ac8e0169b67438504fa7fa9e",
+            "8f28208c7a72b605f5c6fdb661a2d5f64ef2832eee5a014ebcee1427a1330122",
+            "421d23d00ee859109afb6a3ca2fe45a03027c8739f677fd7c5f0c78549cf6933",
+            "dd1c9a5657d6f55ca8b96015a33f7ac047aefb46a7b2449cbb8fac811658ac80",
+            "8560dee6eff2032e37dfde9c3474bbd1cdfca7d8e1b3c4f6835e72538cad4ba2"
+          ]
+        },
+        "f1f57650143e684f126cb5004693835ec6e0ccdf939b67b3c031bd3d0a026e85": {
+          "page": 71,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "Soothe the Hurts of the World"
+          ],
+          "source_unit_ids": [
+            "b03d241b6cb9c3e7bbcbe306e02e5a6ced927e8fe7d138534699176e73e1d355",
+            "46fa50190019bc9768edd560ef41be49527b5965947bfc0bb0edc55486b0e1be"
+          ]
+        },
+        "92eacdfef3a08beaf4f784fe8debc87cdd31720f28ce9744269ff10d40c7286b": {
+          "page": 72,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "Cleric Spell List",
+            "LEVEL 6: BLESSED HEALER"
+          ],
+          "source_unit_ids": [
+            "92eacdfef3a08beaf4f784fe8debc87cdd31720f28ce9744269ff10d40c7286b"
+          ]
+        },
+        "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be": {
+          "page": 69,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Cleric",
+            "LEVEL 4: ABILITY SCORE IMPROVEMENT"
+          ],
+          "source_unit_ids": [
+            "10414d528c23ed86d822430023b9687be29fbf3df57bf691e499c7adabd5b5be"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": "Provides the Healer feat text, including Battle Medic and Healing Rerolls, which is the background-granted feat the question asks about and the key mechanical enhancer for healing play.",
+        "688d966a3015e7bb94e9b17201824e4aca90485d390312dc90f300562991fdf1": "Provides Cleric Channel Divinity and Divine Spark, establishing the base healing feature that Healer can complement in overall healing action economy and reliability discussion.",
+        "af09c282821f4ef2884292623847a863c6e75fd1fe4bcbfd33d69b0d9b8af86a": "Provides Life Domain healing play via Preserve Life and domain spells, giving the domain-based healing anchor needed to explain how Healer fits alongside subclass healing options."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_029a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What counts as a Magic action under the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_029 during D&D 5e 2024 multihop benchmark intake: Magic action definition.",
+      "parent_query_id": "phb5e_mh_ws_029",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2",
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88"
+      ],
+      "required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+      ],
+      "supporting_gold": [
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88"
+      ],
+      "_required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+      ],
+      "_supporting_gold": [
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88"
+      ],
+      "gold_locations": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": {
+          "page": 13,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Attack Rolls",
+            "Proficiency",
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+          ]
+        },
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb": {
+          "page": 13,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Attack Rolls",
+            "Proficiency",
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "0196b5bbdc98e2238f8c7e658111f78affd48f785ebcefdcdf563007a1be7543"
+          ]
+        },
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88": {
+          "page": 135,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "Soulknife",
+            "LEVEL 13: USE MAGIC DEVICE"
+          ],
+          "source_unit_ids": [
+            "1377f565f5cf4ec245b13c86ac2827c08dbcbef1dcba1a13a6a8b1891109e91b",
+            "08396ce513d9448e8b39c6dfd705d9c349e8880b154b06e9c4df03559316f5f6",
+            "f071b99bc8d14c28d83c2c2959269c8d59113344fbdfd0fc813361543a472dcc",
+            "441f503106e5ecb7a7f722e63095c2206733d8864319e273a6e37592dda2a5c2",
+            "a0ba6746a3f9bbf56d49350bda92f81be1d51286b894cbe0756862055d116bdb",
+            "b74a3327cdcd989a23f2040b4d71bdad8b93f09007d85f202311206576efaa2f",
+            "46781a41440c238f3d2e42cb36b4e2ace9a0f766eddcd1c38429ba81b1f4c3d4",
+            "68602b5dc7a26b604c2c8772ad79869243c9219bfe838cc904ee73bf5e1b21b4",
+            "102732463c1ea1550e7c82000becc0dfd4e75157073921b3d3eb366cb758f1a9",
+            "b25710295c732803310df945154707aa37f15e8cadd9bad37fa81e7946a9297a",
+            "ca55d791e6358dd0e7bad1c922a54fe42ca2d043266c5dbc9965b9ac1eb2ac8a",
+            "21d500d10dfb1abc5ea75986fab841dc88c27bd8a85fb7fe352f68362e650306"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": "It directly defines the Magic action in the Actions table: 'Cast a spell, use a magic item, or use a magical feature,' which fully answers what counts as a Magic action under the 2024 PHB."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_029b",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does the 2024 Magic action classification interact with antimagic fields or dispel magic when a character casts a spell or activates a magic item?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_029 during D&D 5e 2024 multihop benchmark intake: Magic action with antimagic and dispel.",
+      "parent_query_id": "phb5e_mh_ws_029",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2",
+        "93b86bcd40b61bb247e1e735adb2d150a7014e6f260da066900ff690ebf46f6b"
+      ],
+      "required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2",
+        "93b86bcd40b61bb247e1e735adb2d150a7014e6f260da066900ff690ebf46f6b"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2",
+        "93b86bcd40b61bb247e1e735adb2d150a7014e6f260da066900ff690ebf46f6b"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": {
+          "page": 13,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Attack Rolls",
+            "Proficiency",
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+          ]
+        },
+        "93b86bcd40b61bb247e1e735adb2d150a7014e6f260da066900ff690ebf46f6b": {
+          "page": 239,
+          "structural_path": [
+            "Ch. 7: Spells",
+            "Spell Descriptions",
+            "ANTIMAGIC FIELD"
+          ],
+          "source_unit_ids": [
+            "9175bb708eb8a45cbc958a5825e50996c14607fb6447def63c6e0e67e17c7960",
+            "df7636d5bc3763d3bd0e4f34727608a846a450cc05a29b7b2d705ca860232c4d"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": "Establishes what the 2024 Magic action is: casting a spell, using a magic item, or using a magical feature. This is necessary to connect the question's 'casts a spell or activates a magic item' to the Magic action classification.",
+        "93b86bcd40b61bb247e1e735adb2d150a7014e6f260da066900ff690ebf46f6b": "Provides the operative interaction with antimagic field: creatures inside can't cast spells or take Magic actions, magic items' properties don't function there, magical effects are suppressed, and Dispel Magic has no effect on the aura. This directly answers both the antimagic-field and dispel-magic parts."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_029c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "Which example abilities or features count as Magic actions under the 2024 rules, and which instead use another action type, such as Metamagic, Lay on Hands, or Hunter's Mark?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_029 during D&D 5e 2024 multihop benchmark intake: Class feature examples under Magic action.",
+      "parent_query_id": "phb5e_mh_ws_029",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2",
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88",
+        "71d163b9f863b75eb3d53e85ac6991bd188f7e8108334e1b2dd6ca1f2172006f"
+      ],
+      "required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+      ],
+      "supporting_gold": [
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88",
+        "71d163b9f863b75eb3d53e85ac6991bd188f7e8108334e1b2dd6ca1f2172006f"
+      ],
+      "_required_gold": [
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+      ],
+      "_supporting_gold": [
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb",
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88",
+        "71d163b9f863b75eb3d53e85ac6991bd188f7e8108334e1b2dd6ca1f2172006f"
+      ],
+      "gold_locations": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": {
+          "page": 13,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Attack Rolls",
+            "Proficiency",
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2"
+          ]
+        },
+        "dee504e576d2d1d8c7de0bdc6b2c9903be100185e2ad60f5175adb44495a48fb": {
+          "page": 13,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Attack Rolls",
+            "Proficiency",
+            "ACTIONS"
+          ],
+          "source_unit_ids": [
+            "0196b5bbdc98e2238f8c7e658111f78affd48f785ebcefdcdf563007a1be7543"
+          ]
+        },
+        "55f30fc4e0e5b5674ab1d2a753d3da3058b079a7f6893446cfc986b383e79c88": {
+          "page": 135,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "Soulknife",
+            "LEVEL 13: USE MAGIC DEVICE"
+          ],
+          "source_unit_ids": [
+            "1377f565f5cf4ec245b13c86ac2827c08dbcbef1dcba1a13a6a8b1891109e91b",
+            "08396ce513d9448e8b39c6dfd705d9c349e8880b154b06e9c4df03559316f5f6",
+            "f071b99bc8d14c28d83c2c2959269c8d59113344fbdfd0fc813361543a472dcc",
+            "441f503106e5ecb7a7f722e63095c2206733d8864319e273a6e37592dda2a5c2",
+            "a0ba6746a3f9bbf56d49350bda92f81be1d51286b894cbe0756862055d116bdb",
+            "b74a3327cdcd989a23f2040b4d71bdad8b93f09007d85f202311206576efaa2f",
+            "46781a41440c238f3d2e42cb36b4e2ace9a0f766eddcd1c38429ba81b1f4c3d4",
+            "68602b5dc7a26b604c2c8772ad79869243c9219bfe838cc904ee73bf5e1b21b4",
+            "102732463c1ea1550e7c82000becc0dfd4e75157073921b3d3eb366cb758f1a9",
+            "b25710295c732803310df945154707aa37f15e8cadd9bad37fa81e7946a9297a",
+            "ca55d791e6358dd0e7bad1c922a54fe42ca2d043266c5dbc9965b9ac1eb2ac8a",
+            "21d500d10dfb1abc5ea75986fab841dc88c27bd8a85fb7fe352f68362e650306"
+          ]
+        },
+        "71d163b9f863b75eb3d53e85ac6991bd188f7e8108334e1b2dd6ca1f2172006f": {
+          "page": 96,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Fighter",
+            "Eldritch Knight",
+            "LEVEL 18: IMPROVED WAR MAGIC"
+          ],
+          "source_unit_ids": [
+            "46d9c392cdd8b289f32f58f531812b9eb374dddc487aef02e7c544d6512c0778",
+            "ec31d325cbaf16836e4c75394b73fcf088b32d879b4ef42e0ff2eb6e68f13b2f"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "fb02cc9abfe3b6e0c65ffdba3ef1ef72d1f5845a431a88f1bdf241d6a03fccd2": "Defines the Magic action as casting a spell, using a magic item, or using a magical feature, which is the core rule needed to classify example abilities/features as Magic actions versus other action types."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_003a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiency, and granted feat does the Charlatan background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_003 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Charlatan background package.",
+      "parent_query_id": "phb5e_mh_ws_003",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "required_gold": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e"
+      ],
+      "supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "_required_gold": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e"
+      ],
+      "_supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "gold_locations": {
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e": {
+          "page": 177,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "CHARLATAN"
+          ],
+          "source_unit_ids": [
+            "7dc068535292f9ee41114b15a5b9f33d408ef0fa6bdf892ad760c4aec672a294",
+            "1b2ee31ee9a55fb379fb6e7bc28d78cc4395084969d80826e4decd27d2b5fe11"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        },
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e": "Contains the Charlatan background entry with all requested specifics: ability score options, the two skill proficiencies, the tool proficiency, and the granted feat."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_003b",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Rogue Expertise interact with skill proficiencies gained from a background or feat such as Charlatan plus Skilled?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_003 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Charlatan plus Rogue Expertise interaction.",
+      "parent_query_id": "phb5e_mh_ws_003",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e",
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9"
+      ],
+      "required_gold": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e",
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c"
+      ],
+      "supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9"
+      ],
+      "_required_gold": [
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e",
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c"
+      ],
+      "_supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9"
+      ],
+      "gold_locations": {
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e": {
+          "page": 177,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "CHARLATAN"
+          ],
+          "source_unit_ids": [
+            "7dc068535292f9ee41114b15a5b9f33d408ef0fa6bdf892ad760c4aec672a294",
+            "1b2ee31ee9a55fb379fb6e7bc28d78cc4395084969d80826e4decd27d2b5fe11"
+          ]
+        },
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad": {
+          "page": 127,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Ranger",
+            "Hunter",
+            "Level 1: SNEAK ATTACK"
+          ],
+          "source_unit_ids": [
+            "b9bf3b1ef5c7ff786c5ed890f7e37c42813e545c62ca7e943e5c0c2c388204ed",
+            "25bafddbdf82158cd5f6b815918d57a09230ea6ac1bfe9ebb06851af1ea079a8"
+          ]
+        },
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c": {
+          "page": 365,
+          "structural_path": [
+            "App. C: Rules Glossary",
+            "EXPERTISE"
+          ],
+          "source_unit_ids": [
+            "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        },
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9": {
+          "page": 11,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Saving Throws",
+            "SKILL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "f9ff6126f625123feb545ede49ad6e423a7a4dc1490e38391659d6aa758a9e93",
+            "1e6d4f3c4644bda224511ca38ea6bb0fed3d1d75c1c3ef4b474448ad72f75973"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "96215fe4a9f973ffbfd4026cb1da9002274e36edc0680710e63ac31ae65c543e": "Establishes the Charlatan background grants Deception and Sleight of Hand and the Skilled feat, which is the concrete source of extra skill proficiencies in the question.",
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad": "States the Rogue Expertise feature lets you choose two of your skill proficiencies, showing that any existing skill proficiency can be selected, not only Rogue-class skills.",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c": "Defines Expertise mechanically: it applies only to a skill in which you already have proficiency, doubles the Proficiency Bonus, and cannot be gained in the same skill more than once."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_004a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiency, and granted feat does the Criminal background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_004 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Criminal background package.",
+      "parent_query_id": "phb5e_mh_ws_004",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "3166f38c98f43c726ab48529cd3434dffaabeb97cd4589906946a35b6330fb32",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "3166f38c98f43c726ab48529cd3434dffaabeb97cd4589906946a35b6330fb32"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "3166f38c98f43c726ab48529cd3434dffaabeb97cd4589906946a35b6330fb32"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "3166f38c98f43c726ab48529cd3434dffaabeb97cd4589906946a35b6330fb32": {
+          "page": 177,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "CRIMINAL"
+          ],
+          "source_unit_ids": [
+            "a2a8e1bb5e12a2f5ca2e1d54f7eb2d3a743df2388c11975e9c204823dcff1305",
+            "94cf929003ece0fe9f2ecfcdab18d20904ebb9dd9360e868a60b636db2a3d751"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "3166f38c98f43c726ab48529cd3434dffaabeb97cd4589906946a35b6330fb32": "Contains the Criminal background entry with all asked-for specifics: ability scores (Dexterity, Constitution, Intelligence), feat (Alert), skill proficiencies (Sleight of Hand and Stealth), and tool proficiency (Thieves' Tools)."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_004b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What benefits does the Alert feat provide under the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_004 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Alert feat benefits from Criminal-derived parent.",
+      "parent_query_id": "phb5e_mh_ws_004",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "required_gold": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": {
+          "page": 198,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "ALERT"
+          ],
+          "source_unit_ids": [
+            "b63434718ded44b172e6d65b4dc61fe00e6fb1cabc49d84f2762aea3879a9281",
+            "b03808926f523a113a6592b82f589cc903abcd0d35ab2bab68eb913f660634ed",
+            "b6bfc363894057d9083a80a3f1e8ca3ce815f7d36b47cc9df6e874be2f4a9f84",
+            "6cd946f5361661738056f4fd3ee7dbd38f05c523c069ae34e984da9e1f974538",
+            "3ecd056326d427e5ce84ac0736b95331dd151bf5973f00573dcb8f27364ca3ec",
+            "9fd346aefd7349a189aa18efcea4fcd33f7d5399318a4fbaa01754d69a0c341b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": "Contains the Alert feat entry and directly lists its benefits: Initiative Proficiency and Initiative Swap, which fully answer the question."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_005a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiencies, starting equipment, and granted feat does the Entertainer background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_005 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Entertainer background package.",
+      "parent_query_id": "phb5e_mh_ws_005",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70"
+      ],
+      "required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70"
+      ],
+      "_required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70"
+      ],
+      "gold_locations": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": {
+          "page": 178,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Artisan",
+            "ENTERTAINER"
+          ],
+          "source_unit_ids": [
+            "181c2815afc87ddf2c879cd5027012097dfe7c64ab5f9b0b2a16bf5d362b0d23",
+            "42a7a53112c3efee0ce7538916058480bd5bb80d8bfc0bc99fbcfe9513b28138"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "852ab44936f90195095a64d631dba89435416fe3f27e1f84c504ece6e8fbff70"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": "Contains the Entertainer background entry with all requested specifics: listed ability scores, feat, skill proficiencies, tool proficiency, and starting equipment options."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_005c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does the Entertainer background's Musician feat complement Bardic Inspiration for a Bard?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_005 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Musician with Bardic Inspiration.",
+      "parent_query_id": "phb5e_mh_ws_005",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55",
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2"
+      ],
+      "required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "supporting_gold": [
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2"
+      ],
+      "_required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "_supporting_gold": [
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2"
+      ],
+      "gold_locations": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": {
+          "page": 178,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Artisan",
+            "ENTERTAINER"
+          ],
+          "source_unit_ids": [
+            "181c2815afc87ddf2c879cd5027012097dfe7c64ab5f9b0b2a16bf5d362b0d23",
+            "42a7a53112c3efee0ce7538916058480bd5bb80d8bfc0bc99fbcfe9513b28138"
+          ]
+        },
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": {
+          "page": 57,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "Path of the Zealot",
+            "LEVEL 1: BARDIC INSPIRATION"
+          ],
+          "source_unit_ids": [
+            "0ced16c2da31536c83cc37ace3a27f4348a61c3778dcf70f5ac6c9df169218fc",
+            "0d0572564cf53295e31bac0d41f63f0a8ca67ed5be77a2e8dea589b320974765",
+            "7bcee1b03ba82b54e80fc8aa413054d82ede59cbb0a508f99d49cdfb39ef1d49"
+          ]
+        },
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2": {
+          "page": 57,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "Path of the Zealot",
+            "AS A MULTICLASS CHARACTER"
+          ],
+          "source_unit_ids": [
+            "e1de04042be6ba6c703e55c84d60ca2df79a3270c2375a1e714148b81c50de83",
+            "fd6b22a567b24a5a4b47c553a22f202c6740a84a3ce561f9485afb1d188cf06c",
+            "1786e076c7e7b96f5189d02d264beef3dc4c64f6118cdf1d7daacd3e7c9a884f"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": "Establishes that the Entertainer background grants the Musician feat, which is the background-side element the question asks about.",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": "Defines Bardic Inspiration and how a Bard uses it to inspire allies, which is necessary to explain how Musician complements that core Bard feature."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_009a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiency, starting equipment, and granted feat does the Noble background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_009 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Noble background package.",
+      "parent_query_id": "phb5e_mh_ws_009",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "required_gold": [
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "_required_gold": [
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "gold_locations": {
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8": {
+          "page": 181,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Guide",
+            "NOBLE"
+          ],
+          "source_unit_ids": [
+            "c811f78062654d87609c7dbae9cabb5226926a8f0202c952492cbd695cc57feb",
+            "cb3a1ed36254fde47ed79b9f37ca44f3932c6284ae626ea468381410307423b4",
+            "e699f683b0623635ddd6de742f314a126461661e3cabdb6dacfaa1932e1d2b74"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8": "Contains the Noble background entry with all requested specifics: listed ability scores for the background, feat, skill proficiencies, tool proficiency, and equipment options."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_009c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How can a class such as Rogue leverage Noble plus Skilled to build broader skill coverage?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_009 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Noble plus class skill leverage.",
+      "parent_query_id": "phb5e_mh_ws_009",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12",
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8",
+        "ab0fc1802067b5ede729a7c0d05752ec092e68b9aa91a30a07301c0d50145340"
+      ],
+      "required_gold": [
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12",
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8"
+      ],
+      "supporting_gold": [
+        "ab0fc1802067b5ede729a7c0d05752ec092e68b9aa91a30a07301c0d50145340"
+      ],
+      "_required_gold": [
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12",
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8"
+      ],
+      "_supporting_gold": [
+        "ab0fc1802067b5ede729a7c0d05752ec092e68b9aa91a30a07301c0d50145340"
+      ],
+      "gold_locations": {
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12": {
+          "page": 127,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Ranger",
+            "Hunter",
+            "AS A MULTICLASS CHARACTER"
+          ],
+          "source_unit_ids": [
+            "e98a3cdaf9f0fbb73626557bfdd9e701df1dffb9a3cacd6d1496fb83131c4dd6",
+            "0681b80688862e3a43880882dd79fb13e095378e007041403e2d7984256ef327",
+            "4a32518aed877d372f524c88ed81ea46f3a9957433f618c3771b4e3890e6882d"
+          ]
+        },
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8": {
+          "page": 181,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Guide",
+            "NOBLE"
+          ],
+          "source_unit_ids": [
+            "c811f78062654d87609c7dbae9cabb5226926a8f0202c952492cbd695cc57feb",
+            "cb3a1ed36254fde47ed79b9f37ca44f3932c6284ae626ea468381410307423b4",
+            "e699f683b0623635ddd6de742f314a126461661e3cabdb6dacfaa1932e1d2b74"
+          ]
+        },
+        "ab0fc1802067b5ede729a7c0d05752ec092e68b9aa91a30a07301c0d50145340": {
+          "page": 127,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Ranger",
+            "Hunter",
+            "Level 1: THIEVES' CANT"
+          ],
+          "source_unit_ids": [
+            "7d37249cfadce4520da6bf5bf37e6afd09d9a76b71f4cedf3080b74165c9e791",
+            "09749e7d168968715e0f8fb1c89f0ed5b2d00ac4670fea1d0160d3a64f111647",
+            "750d7a77f1f370b187d9a22a7e765893fd43aa4e70ff56a2559fb3c4f7e988c2",
+            "b2722ef248641b318aa5c954d05691408009d515864fa32998f632bf164c800e"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12": "Provides the Rogue class skill coverage anchor: Rogues choose 4 skill proficiencies from their class list, which is the core class-side fact needed to explain how the class contributes broad coverage.",
+        "ec8cad7338bfafa1434265da5c34512b5c0419d76d89db508e32eb4b549d9dc8": "Provides the Noble background facts: Noble grants History and Persuasion plus the Skilled feat. This is the key background-side anchor showing the extra skills/feat that broaden coverage."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_010a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What ability score increases, skill proficiencies, tool proficiency, and granted feat does the Hermit background provide in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_010 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Hermit background package.",
+      "parent_query_id": "phb5e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef",
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef"
+      ],
+      "supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef"
+      ],
+      "_supporting_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef": {
+          "page": 180,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Farmer",
+            "HERMIT"
+          ],
+          "source_unit_ids": [
+            "58d166d7d3b8e625becd1777a4a18feba085d3ec0e27fe2cca194aec26443c53",
+            "ed04a45e53d8114579c5293fe25ef0e06958adc2c8e62b638799c43025d18f4d"
+          ]
+        },
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef": "Contains the Hermit background\u2019s specific package: ability scores (Constitution, Wisdom, Charisma), skill proficiencies (Medicine and Religion), tool proficiency (Herbalism Kit), and feat (Healer), which directly answers all parts of the question."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_010b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How do the 2024 background rules package ability score increases, skills, tools, and a granted origin feat for backgrounds such as Hermit or Guide?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_010 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: General 2024 background packaging rules.",
+      "parent_query_id": "phb5e_mh_ws_010",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65",
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "supporting_gold": [
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65"
+      ],
+      "_supporting_gold": [
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": {
+          "page": 175,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Illusionist",
+            "CHARACTER SPECIES"
+          ],
+          "source_unit_ids": [
+            "1f94d6cb46745e590deb3ad8aa0543c708a25a6a6aaf4aaf0f45fe012d984d90",
+            "cde48c1814788e412a9af41a0466ea5c2a7c0118c3f0982c7367b3d169e8e576",
+            "436de5ac3884af1b04247bde2d61d4b744950b3c9eb55253c1336650b152a713"
+          ]
+        },
+        "91c4c1685d8b1d59f74f96cfcaeb3bb9b5a7e63d420fc3698d6cb3232ba79fef": {
+          "page": 180,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Farmer",
+            "HERMIT"
+          ],
+          "source_unit_ids": [
+            "58d166d7d3b8e625becd1777a4a18feba085d3ec0e27fe2cca194aec26443c53",
+            "ed04a45e53d8114579c5293fe25ef0e06958adc2c8e62b638799c43025d18f4d"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "ed2ea0d177ef54bb3b9c5edc7001d0cf5a59652d49fc0a898f4f36a1792baa65": "Provides the general 2024 background packaging rules directly: each background lists three ability scores with the +2/+1 or +1/+1/+1 increase options, grants a specified Origin feat, gives proficiency in two specified skills, and one tool proficiency. This is sufficient to answer how backgrounds such as Hermit or Guide are packaged."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_014a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How does Bardic Inspiration work on ability checks, attack rolls, and saving throws in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_014 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: 2024 Bardic Inspiration uses.",
+      "parent_query_id": "phb5e_mh_ws_014",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55",
+        "76261cd7592e01cbe5e52cb50bdfa83d37b8cb05b0e7e161d3287c02ff24e330",
+        "2f9dada0c72f87eda084198f69276fd1c40e8c10b6cddafd5b92981f58062809",
+        "7b3229f734724787b98d12ca286d4b87e1c4f547fed969b9e40185290f60418e"
+      ],
+      "required_gold": [
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "supporting_gold": [
+        "76261cd7592e01cbe5e52cb50bdfa83d37b8cb05b0e7e161d3287c02ff24e330",
+        "2f9dada0c72f87eda084198f69276fd1c40e8c10b6cddafd5b92981f58062809",
+        "7b3229f734724787b98d12ca286d4b87e1c4f547fed969b9e40185290f60418e"
+      ],
+      "_required_gold": [
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "_supporting_gold": [
+        "76261cd7592e01cbe5e52cb50bdfa83d37b8cb05b0e7e161d3287c02ff24e330",
+        "2f9dada0c72f87eda084198f69276fd1c40e8c10b6cddafd5b92981f58062809",
+        "7b3229f734724787b98d12ca286d4b87e1c4f547fed969b9e40185290f60418e"
+      ],
+      "gold_locations": {
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": {
+          "page": 57,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "Path of the Zealot",
+            "LEVEL 1: BARDIC INSPIRATION"
+          ],
+          "source_unit_ids": [
+            "0ced16c2da31536c83cc37ace3a27f4348a61c3778dcf70f5ac6c9df169218fc",
+            "0d0572564cf53295e31bac0d41f63f0a8ca67ed5be77a2e8dea589b320974765",
+            "7bcee1b03ba82b54e80fc8aa413054d82ede59cbb0a508f99d49cdfb39ef1d49"
+          ]
+        },
+        "76261cd7592e01cbe5e52cb50bdfa83d37b8cb05b0e7e161d3287c02ff24e330": {
+          "page": 59,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "LEVEL 7: COUNTERCHARM"
+          ],
+          "source_unit_ids": [
+            "18d50413f664f501402c05a52e677fa1316fb7dc06008db2088beb598f73eb28",
+            "b27c2f9c94b79152949a569b26d5efae99e79a4d6cb68ca4a1fa50954155c472",
+            "51c95d8dd79a55ca2a37a05816cfde264b80ea798bb474f07b942728ff424d5f"
+          ]
+        },
+        "2f9dada0c72f87eda084198f69276fd1c40e8c10b6cddafd5b92981f58062809": {
+          "page": 65,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "College of Glamour",
+            "LEVEL 3: COMBAT INSPIRATION"
+          ],
+          "source_unit_ids": [
+            "f591fad395e7c4dddf46397982af149ee94edd33b3d382686aa643658eb5b4cb",
+            "f9a666b5b94dba946882e2823267d74e1fe19eab8e3f2483c8a090cfb5d12354",
+            "f049fb578e91336437446d9701b1b798ada084ca21d8b25036cc6980d5f35e7b",
+            "2d2ef6b98b7d8355f2f18e8fbada1434ad595291f77a0b730af1338ab7ea2774",
+            "50bf24c2ce329709192b974a9d61d0f9e433666567c892cc710160ec43d1a7d7",
+            "24e0304184131d97dc4e07609a493437ec049876150d4051c2258054d1b587c4",
+            "b365348f73ef105c492e8e83a4b9e1270e4046a99c16b4a3b99e91a2029f4f4b",
+            "2014a08f65aa4ddb4c31907f4caae86bd5489293786eaef3c38a29e5dbb7831d",
+            "7b750844153770529e951da43304bc858393d2af51694054bb04583e8b097f2d"
+          ]
+        },
+        "7b3229f734724787b98d12ca286d4b87e1c4f547fed969b9e40185290f60418e": {
+          "page": 65,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "College of Glamour",
+            "LEVEL 14: PEERLESS SKILL"
+          ],
+          "source_unit_ids": [
+            "e2541891b80e811ab6fc681f334bbff46c93c04f89f26c870d78e8689f4346b0",
+            "32488579a9b46f994b8e82ece6544628d14f5164c8003a79e4e43b7920fce1d0"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": "This is the core 2024 PHB Bardic Inspiration rule. It states that a creature with your Bardic Inspiration die can, once within the next hour when it fails a D20 Test, roll the die and add it to the d20, potentially turning the failure into a success. Since ability checks, attack rolls, and saving throws are all D20 Tests in the 2024 rules, this single anchor operationalizes how Bardic Inspiration works for all three."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_014c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How can a Bard with the Entertainer background leverage Musician plus Bardic Inspiration during play?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_014 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Entertainer/Musician plus Bardic Inspiration.",
+      "parent_query_id": "phb5e_mh_ws_014",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55",
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8",
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2",
+        "fd47431b2d88035029abbc8d3562c025dbceb71bb82117d91f74489902d03786"
+      ],
+      "required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "supporting_gold": [
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8",
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2",
+        "fd47431b2d88035029abbc8d3562c025dbceb71bb82117d91f74489902d03786"
+      ],
+      "_required_gold": [
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55"
+      ],
+      "_supporting_gold": [
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8",
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2",
+        "fd47431b2d88035029abbc8d3562c025dbceb71bb82117d91f74489902d03786"
+      ],
+      "gold_locations": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": {
+          "page": 178,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Artisan",
+            "ENTERTAINER"
+          ],
+          "source_unit_ids": [
+            "181c2815afc87ddf2c879cd5027012097dfe7c64ab5f9b0b2a16bf5d362b0d23",
+            "42a7a53112c3efee0ce7538916058480bd5bb80d8bfc0bc99fbcfe9513b28138"
+          ]
+        },
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": {
+          "page": 57,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "Path of the Zealot",
+            "LEVEL 1: BARDIC INSPIRATION"
+          ],
+          "source_unit_ids": [
+            "0ced16c2da31536c83cc37ace3a27f4348a61c3778dcf70f5ac6c9df169218fc",
+            "0d0572564cf53295e31bac0d41f63f0a8ca67ed5be77a2e8dea589b320974765",
+            "7bcee1b03ba82b54e80fc8aa413054d82ede59cbb0a508f99d49cdfb39ef1d49"
+          ]
+        },
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8": {
+          "page": 59,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "LEVEL 4: ABILITY SCORE IMPROVEMENT"
+          ],
+          "source_unit_ids": [
+            "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8"
+          ]
+        },
+        "2e1347378d8a659e07b93d041b5b252f308ff3a32261587d6be071bd6206a2c2": {
+          "page": 57,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Barbarian",
+            "Path of the Zealot",
+            "AS A MULTICLASS CHARACTER"
+          ],
+          "source_unit_ids": [
+            "e1de04042be6ba6c703e55c84d60ca2df79a3270c2375a1e714148b81c50de83",
+            "fd6b22a567b24a5a4b47c553a22f202c6740a84a3ce561f9485afb1d188cf06c",
+            "1786e076c7e7b96f5189d02d264beef3dc4c64f6118cdf1d7daacd3e7c9a884f"
+          ]
+        },
+        "fd47431b2d88035029abbc8d3562c025dbceb71bb82117d91f74489902d03786": {
+          "page": 59,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "A BARD'S REPERTOIRE"
+          ],
+          "source_unit_ids": [
+            "5da0fffc53850c79979409a6749948a374428b6c84ecf1c10faaee0f632caea5",
+            "722d38d19b69d2b67b92a333dfef567ecc1d644df334b33a726f02e8ca400319"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "50b4d984098f28d1cf010f527ad8ea8bc9169d3b3ac2c5d30bba7187e8cd62cd": "Establishes that the Entertainer background grants the Musician feat, which is the background-side prerequisite for the question.",
+        "5d5766c313562deb23843c1fc4db5d3bad1592de2be525371e3f3127360e1e55": "Defines Bardic Inspiration and how a Bard uses it in play, which is needed to explain how the Bard can combine their class feature with Musician during play."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_015a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How does the Lucky feat scale with proficiency bonus, and what can its luck points do under the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_015 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Lucky feat scaling and spend options.",
+      "parent_query_id": "phb5e_mh_ws_015",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "b6bbdb4d7c6fa30101b811b451a9ae34bc749d09466bb17703110fea383c7877"
+      ],
+      "required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "supporting_gold": [
+        "b6bbdb4d7c6fa30101b811b451a9ae34bc749d09466bb17703110fea383c7877"
+      ],
+      "_required_gold": [
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "_supporting_gold": [
+        "b6bbdb4d7c6fa30101b811b451a9ae34bc749d09466bb17703110fea383c7877"
+      ],
+      "gold_locations": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": {
+          "page": 199,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "Feat Descriptions",
+            "Origin Feat"
+          ],
+          "source_unit_ids": [
+            "37472245c8d8cdf0415a375a90f49043f75ee1b20ae948114d15bddd12e719b5",
+            "d6d92ebda82b1fd42dada64e7b440721a42e35b7206fd374d851af46985dc513"
+          ]
+        },
+        "b6bbdb4d7c6fa30101b811b451a9ae34bc749d09466bb17703110fea383c7877": {
+          "page": 11,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Saving Throws",
+            "PROFICIENCY"
+          ],
+          "source_unit_ids": [
+            "3da773f96441f57059f5e03892c199b49c29aaa7b6c793aa080c34164f55de5e",
+            "6835cb5026629be832d5ea9e447c0616b5b93c1b4ecdc57f96bd3f25de449fd9"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": "Contains the Lucky feat text directly, including both scaling ('number of Luck Points equal to your Proficiency Bonus') and the two spend options (spend 1 to give yourself Advantage on a D20 Test; spend 1 to impose Disadvantage on an attack roll against you), plus recharge on a Long Rest."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_015b",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does the Lucky feat interact with Divination Wizard Portent and other d20-altering features?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_015 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Lucky with Portent-style features.",
+      "parent_query_id": "phb5e_mh_ws_015",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "95aa86ebfd73f22b9dd2a3de53334e5bd38a4b2fde98edbfd7ba847841affcb9",
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da",
+        "b6ac936237f7e14157a84ac8200cd7ec8123f9acdc377dccd197bb169e927a96",
+        "dad6c7b30e287777994c1fa1332580396853b27ec08082ab0867c05f731924c4",
+        "02bcfa790d3560ed7ee3a82c1aa942a5cd595fa4dd19c1ffbbfd1b1d88fa7d2d",
+        "98c59163a7ab9967c8ceada0421c643a1bafda111ad7c121b96e1f46441fec76"
+      ],
+      "required_gold": [
+        "95aa86ebfd73f22b9dd2a3de53334e5bd38a4b2fde98edbfd7ba847841affcb9",
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "supporting_gold": [
+        "b6ac936237f7e14157a84ac8200cd7ec8123f9acdc377dccd197bb169e927a96",
+        "dad6c7b30e287777994c1fa1332580396853b27ec08082ab0867c05f731924c4",
+        "02bcfa790d3560ed7ee3a82c1aa942a5cd595fa4dd19c1ffbbfd1b1d88fa7d2d",
+        "98c59163a7ab9967c8ceada0421c643a1bafda111ad7c121b96e1f46441fec76"
+      ],
+      "_required_gold": [
+        "95aa86ebfd73f22b9dd2a3de53334e5bd38a4b2fde98edbfd7ba847841affcb9",
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da"
+      ],
+      "_supporting_gold": [
+        "b6ac936237f7e14157a84ac8200cd7ec8123f9acdc377dccd197bb169e927a96",
+        "dad6c7b30e287777994c1fa1332580396853b27ec08082ab0867c05f731924c4",
+        "02bcfa790d3560ed7ee3a82c1aa942a5cd595fa4dd19c1ffbbfd1b1d88fa7d2d",
+        "98c59163a7ab9967c8ceada0421c643a1bafda111ad7c121b96e1f46441fec76"
+      ],
+      "gold_locations": {
+        "95aa86ebfd73f22b9dd2a3de53334e5bd38a4b2fde98edbfd7ba847841affcb9": {
+          "page": 171,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "LEVEL 6: EXPERT DIVINATION"
+          ],
+          "source_unit_ids": [
+            "a09b5a1c9b5b486aed6d118a1c574420078ebce0c01dc78d36ae601769096201",
+            "0ad6730af7cac52748e07b88ac546be5b159a22c9ca969dfa364809d95248ada"
+          ]
+        },
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": {
+          "page": 199,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "Feat Descriptions",
+            "Origin Feat"
+          ],
+          "source_unit_ids": [
+            "37472245c8d8cdf0415a375a90f49043f75ee1b20ae948114d15bddd12e719b5",
+            "d6d92ebda82b1fd42dada64e7b440721a42e35b7206fd374d851af46985dc513"
+          ]
+        },
+        "b6ac936237f7e14157a84ac8200cd7ec8123f9acdc377dccd197bb169e927a96": {
+          "page": 8,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "An Ongoing Game",
+            "D20 TESTS"
+          ],
+          "source_unit_ids": [
+            "3c18c717d1e396951c01865c1236f53375a8cd783fdcaea91347c55cd5a558f9",
+            "847a562c2ed4b418e1156ef9b1ef82ffba9de6bfb3090364ec95e95c2626947b",
+            "00565360f6f6d9370c33c085f5966b7cab54415779c370d8f600a1f60009a899",
+            "d5192cd9d39142d700082909f2a14a437c938aa894c5fba71e9fea08e13ab19f"
+          ]
+        },
+        "dad6c7b30e287777994c1fa1332580396853b27ec08082ab0867c05f731924c4": {
+          "page": 87,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Druid",
+            "Circle of the Sea",
+            "LEVEL 6: COSMIC OMEN"
+          ],
+          "source_unit_ids": [
+            "88ddad068a94a7f21907c8612f38f70da1b13b3e2c56977075174b6eba3e5446",
+            "898c2a7db3f946c59748c9c8a6529fea6ad5f0c25fd66eb7e2552c818ff13b67"
+          ]
+        },
+        "02bcfa790d3560ed7ee3a82c1aa942a5cd595fa4dd19c1ffbbfd1b1d88fa7d2d": {
+          "page": 160,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Warlock",
+            "Warlock Spell List",
+            "Celestial Patron",
+            "LEVEL 6: DARK ONE'S OWN LUCK"
+          ],
+          "source_unit_ids": [
+            "ba274016b40532fe57ec57c13a701b9553704c9487ec8bfc67ed4f50166f4c68",
+            "aea5d47b6933095b7c2fa238648172bc0a18823dcb7adda4b9a6dc506889dadf"
+          ]
+        },
+        "98c59163a7ab9967c8ceada0421c643a1bafda111ad7c121b96e1f46441fec76": {
+          "page": 208,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "General Feats",
+            "BOON OF FORTITUDE"
+          ],
+          "source_unit_ids": [
+            "e52e9b3e01bdabf9570043e392d0757c26660a870ca7eceec7046707e358eb84",
+            "77b7a8f875c5cfb4ffc17ec222dd79dfadd6377565e2196fa8470dae32e92878",
+            "093ed8d805700882270faa077e740c9954d3cf8eda19f3bf4df8626d8be93d88",
+            "3df7bceb3551d9069e8be7e61786678b71d439f5ed79f644fc87cf44986dd68d"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "95aa86ebfd73f22b9dd2a3de53334e5bd38a4b2fde98edbfd7ba847841affcb9": "Provides Portent's core rule: it replaces a D20 Test before the roll, which is essential to determine interaction timing with Lucky and similar d20-altering features.",
+        "00e119dbcbe1af5bab334fe123d2ee456af4e12047d832499a3b2f7ded3c71da": "Provides Lucky's core rule: you spend a Luck Point when you roll a d20 for a D20 Test to give yourself Advantage, or impose Disadvantage on an attack roll against you. This is necessary to compare Lucky's trigger/timing against Portent."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_016a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What benefits does the Alert feat provide under the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_016 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Alert feat benefits.",
+      "parent_query_id": "phb5e_mh_ws_016",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "required_gold": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "supporting_gold": [],
+      "_required_gold": [
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "_supporting_gold": [],
+      "gold_locations": {
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": {
+          "page": 198,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "ALERT"
+          ],
+          "source_unit_ids": [
+            "b63434718ded44b172e6d65b4dc61fe00e6fb1cabc49d84f2762aea3879a9281",
+            "b03808926f523a113a6592b82f589cc903abcd0d35ab2bab68eb913f660634ed",
+            "b6bfc363894057d9083a80a3f1e8ca3ce815f7d36b47cc9df6e874be2f4a9f84",
+            "6cd946f5361661738056f4fd3ee7dbd38f05c523c069ae34e984da9e1f974538",
+            "3ecd056326d427e5ce84ac0736b95331dd151bf5973f00573dcb8f27364ca3ec",
+            "9fd346aefd7349a189aa18efcea4fcd33f7d5399318a4fbaa01754d69a0c341b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": "Contains the Alert feat entry and directly lists its benefits under the 2024 PHB: Initiative Proficiency and Initiative Swap."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_016c",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How do the 2024 feat rules limit stacking when multiple background options point to Alert?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_016 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Alert stacking and duplicate-feat limits.",
+      "parent_query_id": "phb5e_mh_ws_016",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "b3b1280e916c0b2043899c1dd82f522e71ad92a806a14368b79b7b45649cc31e",
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "required_gold": [
+        "b3b1280e916c0b2043899c1dd82f522e71ad92a806a14368b79b7b45649cc31e",
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_required_gold": [
+        "b3b1280e916c0b2043899c1dd82f522e71ad92a806a14368b79b7b45649cc31e",
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9"
+      ],
+      "_supporting_gold": [
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "gold_locations": {
+        "b3b1280e916c0b2043899c1dd82f522e71ad92a806a14368b79b7b45649cc31e": {
+          "page": 197,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Species Descriptions",
+            "Tiefling",
+            "PARTS OF A FEAT"
+          ],
+          "source_unit_ids": [
+            "438d146835d6f48a58e89352c26ab8d04a1e3ca7a4d4b4e91323c64e09a7bf8d",
+            "a711489fb08a7e01edaafac5cd33f5402ee4a83024837421899f4be99612d424"
+          ]
+        },
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": {
+          "page": 198,
+          "structural_path": [
+            "Ch. 5: Feats",
+            "ALERT"
+          ],
+          "source_unit_ids": [
+            "b63434718ded44b172e6d65b4dc61fe00e6fb1cabc49d84f2762aea3879a9281",
+            "b03808926f523a113a6592b82f589cc903abcd0d35ab2bab68eb913f660634ed",
+            "b6bfc363894057d9083a80a3f1e8ca3ce815f7d36b47cc9df6e874be2f4a9f84",
+            "6cd946f5361661738056f4fd3ee7dbd38f05c523c069ae34e984da9e1f974538",
+            "3ecd056326d427e5ce84ac0736b95331dd151bf5973f00573dcb8f27364ca3ec",
+            "9fd346aefd7349a189aa18efcea4fcd33f7d5399318a4fbaa01754d69a0c341b"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "b3b1280e916c0b2043899c1dd82f522e71ad92a806a14368b79b7b45649cc31e": "Provides the core duplicate-feat rule: a feat can be taken only once unless its description says otherwise, regardless of how you acquire it. This is the key rule that limits stacking when multiple backgrounds point to the same feat.",
+        "2393aa0649e227beceb1165b59e60fa7a2c1dadc83782b2e11d8bb24212dbab9": "Identifies Alert as an Origin feat and shows no repeatable exception in its description, so the general one-time-only feat rule applies to Alert specifically."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_017a",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Bard Jack of All Trades interact with gaining additional skill proficiencies from a background or feat?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_017 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Jack of All Trades with added proficiencies.",
+      "parent_query_id": "phb5e_mh_ws_017",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "f46db0237d310cc6e018534762490f415563e0272747faf9534f5fdcd20d5b1e",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9",
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "cd25ace68cb150cbf0ac127a9a3e0ceef78b0e32caa8824776027d724c2de746",
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8"
+      ],
+      "required_gold": [
+        "f46db0237d310cc6e018534762490f415563e0272747faf9534f5fdcd20d5b1e",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9"
+      ],
+      "supporting_gold": [
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "cd25ace68cb150cbf0ac127a9a3e0ceef78b0e32caa8824776027d724c2de746",
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8"
+      ],
+      "_required_gold": [
+        "f46db0237d310cc6e018534762490f415563e0272747faf9534f5fdcd20d5b1e",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9"
+      ],
+      "_supporting_gold": [
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "cd25ace68cb150cbf0ac127a9a3e0ceef78b0e32caa8824776027d724c2de746",
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8"
+      ],
+      "gold_locations": {
+        "f46db0237d310cc6e018534762490f415563e0272747faf9534f5fdcd20d5b1e": {
+          "page": 58,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "LEVEL 3: BARD SUBCLASS"
+          ],
+          "source_unit_ids": [
+            "d2c530a9be3957ef5037bad4a070d4946f035b80025d9d97bf77ef4cef82727b",
+            "26026c4c32381cdf7b3ebffcce159245b142e9c9cabeecc2a302e0f2c83418d8"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        },
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9": {
+          "page": 11,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Saving Throws",
+            "SKILL PROFICIENCIES"
+          ],
+          "source_unit_ids": [
+            "f9ff6126f625123feb545ede49ad6e423a7a4dc1490e38391659d6aa758a9e93",
+            "1e6d4f3c4644bda224511ca38ea6bb0fed3d1d75c1c3ef4b474448ad72f75973"
+          ]
+        },
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975": {
+          "page": 11,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Saving Throws",
+            "The Bonus Doesn't Stack"
+          ],
+          "source_unit_ids": [
+            "75628ac9a073bb71136ca696ba5d877d8219832a544ae61cf59cc4b2a3878b5d",
+            "e6ca9f0240b0facfa3c7a502f9dc8d1d90a668d1ee5fe4c85bf3ff1b750025fd"
+          ]
+        },
+        "cd25ace68cb150cbf0ac127a9a3e0ceef78b0e32caa8824776027d724c2de746": {
+          "page": 180,
+          "structural_path": [
+            "Ch. 4: Character Origins",
+            "Background Descriptions",
+            "Farmer",
+            "MERCHANT"
+          ],
+          "source_unit_ids": [
+            "00a6daefa646aa870e3db661bd3d0bb51036e61d5e15af9e91f408421c9e50f8",
+            "d933d4fbe011bca294a76d52919f2ce99b58e06bf11b0b671f6d6e2831a73c83"
+          ]
+        },
+        "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8": {
+          "page": 59,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Bard",
+            "LEVEL 4: ABILITY SCORE IMPROVEMENT"
+          ],
+          "source_unit_ids": [
+            "50a8700fa20b87ad906f6cc1421a4eda7e4ca26ea7d108fa76b949d0464a07e8"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "f46db0237d310cc6e018534762490f415563e0272747faf9534f5fdcd20d5b1e": "Defines Jack of All Trades: half proficiency applies to ability checks using a skill proficiency you lack and that otherwise doesn't use your Proficiency Bonus.",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": "Establishes that backgrounds grant skill proficiencies and a feat, so added proficiencies can come from background/feat sources.",
+        "1ae4b8a44600e359fe8fc0d5bc97a083307f8fb260430165c75c15938b75e0b9": "Provides the core rule that if you are proficient in a skill, you add your Proficiency Bonus; this shows that once a background or feat grants proficiency, the skill is no longer one you lack, so Jack of All Trades no longer applies."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_017b",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "How does Rogue Expertise interact with a wider proficiency package from backgrounds and feats?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_017 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Expertise with expanded skill package.",
+      "parent_query_id": "phb5e_mh_ws_017",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe",
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "d529916d9410dd1911e0419be1022627b3776864f66b735fda097705e8698a9c",
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12"
+      ],
+      "required_gold": [
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "supporting_gold": [
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "d529916d9410dd1911e0419be1022627b3776864f66b735fda097705e8698a9c",
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12"
+      ],
+      "_required_gold": [
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe"
+      ],
+      "_supporting_gold": [
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975",
+        "d529916d9410dd1911e0419be1022627b3776864f66b735fda097705e8698a9c",
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12"
+      ],
+      "gold_locations": {
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad": {
+          "page": 127,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Ranger",
+            "Hunter",
+            "Level 1: SNEAK ATTACK"
+          ],
+          "source_unit_ids": [
+            "b9bf3b1ef5c7ff786c5ed890f7e37c42813e545c62ca7e943e5c0c2c388204ed",
+            "25bafddbdf82158cd5f6b815918d57a09230ea6ac1bfe9ebb06851af1ea079a8"
+          ]
+        },
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c": {
+          "page": 365,
+          "structural_path": [
+            "App. C: Rules Glossary",
+            "EXPERTISE"
+          ],
+          "source_unit_ids": [
+            "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c"
+          ]
+        },
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": {
+          "page": 34,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Create Your Character",
+            "ABILITY SCORES AND BACKGROUNDS"
+          ],
+          "source_unit_ids": [
+            "12c5824381da9bf13d9a80883191fa05a37adce67df041f94f1fe911a3b33f48"
+          ]
+        },
+        "bc8cc216268e9974bc9218b2ab38e3f9ff66b74706110c60a8b0e3fa31b5d975": {
+          "page": 11,
+          "structural_path": [
+            "Ch. 1: Playing the Game",
+            "The Six Abilities",
+            "Saving Throws",
+            "The Bonus Doesn't Stack"
+          ],
+          "source_unit_ids": [
+            "75628ac9a073bb71136ca696ba5d877d8219832a544ae61cf59cc4b2a3878b5d",
+            "e6ca9f0240b0facfa3c7a502f9dc8d1d90a668d1ee5fe4c85bf3ff1b750025fd"
+          ]
+        },
+        "d529916d9410dd1911e0419be1022627b3776864f66b735fda097705e8698a9c": {
+          "page": 42,
+          "structural_path": [
+            "Ch. 2: Creating a Character",
+            "Level Advancement",
+            "PROFICIENCY BONUS"
+          ],
+          "source_unit_ids": [
+            "d529916d9410dd1911e0419be1022627b3776864f66b735fda097705e8698a9c"
+          ]
+        },
+        "74254d8b427b435dfed0f763009a0d068cee39e9bf3cb500d7c2b26578510b12": {
+          "page": 127,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Ranger",
+            "Hunter",
+            "AS A MULTICLASS CHARACTER"
+          ],
+          "source_unit_ids": [
+            "e98a3cdaf9f0fbb73626557bfdd9e701df1dffb9a3cacd6d1496fb83131c4dd6",
+            "0681b80688862e3a43880882dd79fb13e095378e007041403e2d7984256ef327",
+            "4a32518aed877d372f524c88ed81ea46f3a9957433f618c3771b4e3890e6882d"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "9b3b35fbc5b01222eaaf6a3ef20935a5f32eb4fabe0dc1ace25c45c8388b05ad": "Establishes the Rogue class feature: at level 1 and 6, the Rogue gains Expertise in chosen skill proficiencies, which is the core interaction being asked about.",
+        "d3d89981e1727fe6dd784e1caef278894d484cc95a2d1115e90fa3b8c4e3ff7c": "Defines Expertise mechanically: it applies only to a skill in which you already have proficiency, doubles the Proficiency Bonus, and cannot be gained in the same skill more than once.",
+        "d46dbaaae0c170f9e7164eb75526c8e1583e8411dbab3747ca7c04f0378d0abe": "Shows that backgrounds expand the character\u2019s proficiency package by granting two skill proficiencies and a feat, which is needed to reason about how Rogue Expertise can apply to skills obtained from backgrounds and broader feat-based character building."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_024a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How does Cunning Strike modify Sneak Attack in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_024 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Cunning Strike core rule.",
+      "parent_query_id": "phb5e_mh_ws_024",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89",
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "fbfb5ae7f41b7494dd791a258949b48f0094bef9203c87f8419fb71d4690388b"
+      ],
+      "required_gold": [
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89"
+      ],
+      "supporting_gold": [
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "fbfb5ae7f41b7494dd791a258949b48f0094bef9203c87f8419fb71d4690388b"
+      ],
+      "_required_gold": [
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89"
+      ],
+      "_supporting_gold": [
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "fbfb5ae7f41b7494dd791a258949b48f0094bef9203c87f8419fb71d4690388b"
+      ],
+      "gold_locations": {
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89": {
+          "page": 128,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "LEVEL 5: CUNNING STRIKE"
+          ],
+          "source_unit_ids": [
+            "fa4834b254f4c24e176b419f22eb57f480121654bd54e1acbe71c595ac43743c",
+            "3d96f1ce01a28f25ab67a99938d2bd7abcf68429a77ed496461e2c11a6187ab3"
+          ]
+        },
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876": {
+          "page": 129,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "LEVEL 14: DEVIOUS STRIKES"
+          ],
+          "source_unit_ids": [
+            "9ace64d9ef81bce4ae3ff37009c365103b04ac7463e3844ff48428ea9b517e62",
+            "99269c778c44ea18e05bfcddbec7be694b61b687f8b1e19d8f07f02a78e0cf9f",
+            "0d6460ec3b53e35dca5be98b139e6d9d71b1652fdedfa6b87dc2f1a82682ce5a",
+            "429d6465e079f662f1c895977e0689c729d68d681e6129542d0807a5b999dd62",
+            "522cbf2ad8a72c4b775d1a272e8f5e8fac36c6f2dece35c7041cdf11d6ddbf15",
+            "40a576c78576e31826da8e524433456e488a5c74867d5519a362091169195f2d",
+            "1418978a09d40892c0301bca15db5a169de147276f562b7ae94066cb8c0c9f6c",
+            "b1ffa33198bc2ea4d008bb8b4fc0680865ea0e9b9688eb2971d3c966053da10f",
+            "4d8a4c6d4711b2209ef6e41dd496aff7c499ca5fadc3afdaa534837cd7b49ca4",
+            "51a57d4f2fc969e07d14aa77a66d72aeae17fd97d101b9d6c554bc477f089260",
+            "dbd7d7c1eda8030a0c77ab0c9103a0287e0864c6248478740f7ecbcedc1ee465"
+          ]
+        },
+        "fbfb5ae7f41b7494dd791a258949b48f0094bef9203c87f8419fb71d4690388b": {
+          "page": 128,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "ROGUE FEATURES"
+          ],
+          "source_unit_ids": [
+            "fbfb5ae7f41b7494dd791a258949b48f0094bef9203c87f8419fb71d4690388b"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89": "Contains the core 2024 PHB Cunning Strike rule: when Sneak Attack damage is dealt, the rogue can add a Cunning Strike effect by forgoing a specified number of Sneak Attack dice before rolling, with effects occurring after damage. This directly answers how Cunning Strike modifies Sneak Attack."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_024b",
+      "tier": "T3",
+      "question_type": "reasoning",
+      "question": "What changed at Rogue level 14 in the 2024 PHB, and how do newer Rogue subclass features alter Cunning Strike options?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_024 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Level-14 Rogue change plus subclass alterations.",
+      "parent_query_id": "phb5e_mh_ws_024",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "0d2b29d756f862e72aa3657840ce2f836f6adcd617638d762bb9182352002c5d",
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "aaa722ecf61ec3ff69f3c5833bd2520d5d2d5eb45fe2377510b935ca6afb2070",
+        "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c",
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89",
+        "bed8fd0cdf5c55e959d47286e8b8f19eb7ea2bf920febac106ad51d34d59f34f"
+      ],
+      "required_gold": [
+        "0d2b29d756f862e72aa3657840ce2f836f6adcd617638d762bb9182352002c5d",
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "aaa722ecf61ec3ff69f3c5833bd2520d5d2d5eb45fe2377510b935ca6afb2070",
+        "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c"
+      ],
+      "supporting_gold": [
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89",
+        "bed8fd0cdf5c55e959d47286e8b8f19eb7ea2bf920febac106ad51d34d59f34f"
+      ],
+      "_required_gold": [
+        "0d2b29d756f862e72aa3657840ce2f836f6adcd617638d762bb9182352002c5d",
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876",
+        "aaa722ecf61ec3ff69f3c5833bd2520d5d2d5eb45fe2377510b935ca6afb2070",
+        "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c"
+      ],
+      "_supporting_gold": [
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89",
+        "bed8fd0cdf5c55e959d47286e8b8f19eb7ea2bf920febac106ad51d34d59f34f"
+      ],
+      "gold_locations": {
+        "0d2b29d756f862e72aa3657840ce2f836f6adcd617638d762bb9182352002c5d": {
+          "page": 128,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "LEVEL 3: ROGUE SUBCLASS"
+          ],
+          "source_unit_ids": [
+            "edc3d1251e7fc9a2520771b5bba371cb3cfcfb66f869e1cfdb60c4620f39ed5f",
+            "5c217c5660246f42773091a56029d0da3483cddf11de9df46c6f134a2fab0436"
+          ]
+        },
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876": {
+          "page": 129,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "LEVEL 14: DEVIOUS STRIKES"
+          ],
+          "source_unit_ids": [
+            "9ace64d9ef81bce4ae3ff37009c365103b04ac7463e3844ff48428ea9b517e62",
+            "99269c778c44ea18e05bfcddbec7be694b61b687f8b1e19d8f07f02a78e0cf9f",
+            "0d6460ec3b53e35dca5be98b139e6d9d71b1652fdedfa6b87dc2f1a82682ce5a",
+            "429d6465e079f662f1c895977e0689c729d68d681e6129542d0807a5b999dd62",
+            "522cbf2ad8a72c4b775d1a272e8f5e8fac36c6f2dece35c7041cdf11d6ddbf15",
+            "40a576c78576e31826da8e524433456e488a5c74867d5519a362091169195f2d",
+            "1418978a09d40892c0301bca15db5a169de147276f562b7ae94066cb8c0c9f6c",
+            "b1ffa33198bc2ea4d008bb8b4fc0680865ea0e9b9688eb2971d3c966053da10f",
+            "4d8a4c6d4711b2209ef6e41dd496aff7c499ca5fadc3afdaa534837cd7b49ca4",
+            "51a57d4f2fc969e07d14aa77a66d72aeae17fd97d101b9d6c554bc477f089260",
+            "dbd7d7c1eda8030a0c77ab0c9103a0287e0864c6248478740f7ecbcedc1ee465"
+          ]
+        },
+        "aaa722ecf61ec3ff69f3c5833bd2520d5d2d5eb45fe2377510b935ca6afb2070": {
+          "page": 132,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "Arcane Trickster",
+            "LEVEL 3: ASSASSINATE"
+          ],
+          "source_unit_ids": [
+            "d2b30e2e98114aa79334b17fd6eeca37366b2af3cd7d5ecea69919688e3636ff",
+            "8cc9caa6ec12ed5bb5c7254479454c00aa21ede1227ec0f32e04e09f78468037"
+          ]
+        },
+        "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c": {
+          "page": 132,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "Arcane Trickster",
+            "LEVEL 17: DEATH STRIKE"
+          ],
+          "source_unit_ids": [
+            "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c"
+          ]
+        },
+        "ff1a75505315d81ae9b73ca5267c0f307e9d8431ae6fd31a0e663a0723352f89": {
+          "page": 128,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "LEVEL 5: CUNNING STRIKE"
+          ],
+          "source_unit_ids": [
+            "fa4834b254f4c24e176b419f22eb57f480121654bd54e1acbe71c595ac43743c",
+            "3d96f1ce01a28f25ab67a99938d2bd7abcf68429a77ed496461e2c11a6187ab3"
+          ]
+        },
+        "bed8fd0cdf5c55e959d47286e8b8f19eb7ea2bf920febac106ad51d34d59f34f": {
+          "page": 130,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Rogue",
+            "ROGUE SUBCLASSES"
+          ],
+          "source_unit_ids": [
+            "e0b1811ef9688f71293a7e9edee237fcdf5f6fa2cb4f280b93cd7b4560680bf6",
+            "08110699237c728ae54293e05c9bc7d274fe80b807df0dcd0e91de7f31038e76"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "0d2b29d756f862e72aa3657840ce2f836f6adcd617638d762bb9182352002c5d": "Needed to ground the level-14 class-table change in the 2024 PHB: Rogue level 14 is now Devious Strikes.",
+        "1574ec8e068c9bd58eb67e8aa68e66241fdbda0c34ddbaf649ec9f02bd015876": "Needed to define what Devious Strikes does: it adds new Cunning Strike options such as Daze, Knock Out, and Obscure.",
+        "aaa722ecf61ec3ff69f3c5833bd2520d5d2d5eb45fe2377510b935ca6afb2070": "Needed because it shows a newer Rogue subclass feature that alters Cunning Strike options at level 9 via Roving Aim and establishes subclass-specific interaction context; it is the relevant subclass page for updated Rogue subclasses.",
+        "d8ecc4052326ee240670e3e8d641376a978e7cb8b989c9beae43e68e024df06c": "Needed because it explicitly shows a newer Rogue subclass feature that modifies a Cunning Strike option: Envenom Weapons enhances the Poison option."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_027a",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "What does the Evoker subclass gain at level 3 in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_027 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Wizard subclass level-3 feature.",
+      "parent_query_id": "phb5e_mh_ws_027",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "7c4116541825b9991789854349b9411825fdb387be5da9a3fce02e9a5b0946e2",
+        "e03fe8535e42f2e378888c66197402ec09b4cfa7af3f40a72aa9f8302313a2fa",
+        "b040a162c5e80249c3663178afc5b2fb724a77472b1666026ca6ac286fe19440"
+      ],
+      "required_gold": [
+        "7c4116541825b9991789854349b9411825fdb387be5da9a3fce02e9a5b0946e2"
+      ],
+      "supporting_gold": [
+        "e03fe8535e42f2e378888c66197402ec09b4cfa7af3f40a72aa9f8302313a2fa",
+        "b040a162c5e80249c3663178afc5b2fb724a77472b1666026ca6ac286fe19440"
+      ],
+      "_required_gold": [
+        "7c4116541825b9991789854349b9411825fdb387be5da9a3fce02e9a5b0946e2"
+      ],
+      "_supporting_gold": [
+        "e03fe8535e42f2e378888c66197402ec09b4cfa7af3f40a72aa9f8302313a2fa",
+        "b040a162c5e80249c3663178afc5b2fb724a77472b1666026ca6ac286fe19440"
+      ],
+      "gold_locations": {
+        "7c4116541825b9991789854349b9411825fdb387be5da9a3fce02e9a5b0946e2": {
+          "page": 172,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "Abjurer",
+            "Create Explosive Elemental Effects"
+          ],
+          "source_unit_ids": [
+            "0836e9da25f68190175515ddefd824f96221e75a365b5c311fe55af318022632",
+            "8ade12e3c797db156696f8eb1406157de99578028e3ffa5189405cf3b18476ad"
+          ]
+        },
+        "e03fe8535e42f2e378888c66197402ec09b4cfa7af3f40a72aa9f8302313a2fa": {
+          "page": 165,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "LEVEL 3: WIZARD SUBCLASS"
+          ],
+          "source_unit_ids": [
+            "24b9cd40f143e5471e34ecb6aab88411b6126a0e04e4d3e7385da8ca80344d22",
+            "6f609ddc10c11d09c157a47db283ff10f0a16d94d1482bde8f93b0b5d2fea2dc"
+          ]
+        },
+        "b040a162c5e80249c3663178afc5b2fb724a77472b1666026ca6ac286fe19440": {
+          "page": 170,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "Wizard Spell List",
+            "WIZARD SUBCLASSES"
+          ],
+          "source_unit_ids": [
+            "3973e45a551913c4f38fb46caea8df04789ebf8df058a80b0d7830cdb124c4f1",
+            "ba8bd84fc53a7ba44ef7bdab904a550c0f52ec67a80b1eff554df69b2645bfb6"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "7c4116541825b9991789854349b9411825fdb387be5da9a3fce02e9a5b0946e2": "This chunk directly names the Evoker subclass and gives its level 3 feature, 'Evocation Savant,' including what it grants: two free level 1-2 Evocation wizard spells added to the spellbook, plus one free Evocation spell whenever the wizard gains access to a new spell-slot level."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "single_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    },
+    {
+      "id": "phb5e_mh_mb_027b",
+      "tier": "T2",
+      "question_type": "lookup",
+      "question": "How do Wizard spell preparation and the Wizard spell list work in the 2024 PHB?",
+      "expected_answer_summary": "",
+      "source_page": null,
+      "notes": "Micro-bundle derived from phb5e_mh_ws_027 during D&D 5e 2024 multihop decomposition expansion. Pending autogold grounding/review: Wizard spell preparation and list.",
+      "parent_query_id": "phb5e_mh_ws_027",
+      "legacy_gold_chunk_ids": [],
+      "gold_unit_ids": [
+        "888318905df3f0ad13bea914cb4fdb3855044a9b8089d74309fc7c7def8e015c",
+        "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24",
+        "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9",
+        "a9b2f34acf7e15bef44c2bdb69c2574912dc6ce3aff121026d0cbab82a3866ea",
+        "337241c2ea2ccc895e466ad0bfc102b5bd9c5b7fe798c3e0cfc32ca81c8fcdf9"
+      ],
+      "required_gold": [
+        "888318905df3f0ad13bea914cb4fdb3855044a9b8089d74309fc7c7def8e015c",
+        "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24",
+        "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9"
+      ],
+      "supporting_gold": [
+        "a9b2f34acf7e15bef44c2bdb69c2574912dc6ce3aff121026d0cbab82a3866ea",
+        "337241c2ea2ccc895e466ad0bfc102b5bd9c5b7fe798c3e0cfc32ca81c8fcdf9"
+      ],
+      "_required_gold": [
+        "888318905df3f0ad13bea914cb4fdb3855044a9b8089d74309fc7c7def8e015c",
+        "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24",
+        "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9"
+      ],
+      "_supporting_gold": [
+        "a9b2f34acf7e15bef44c2bdb69c2574912dc6ce3aff121026d0cbab82a3866ea",
+        "337241c2ea2ccc895e466ad0bfc102b5bd9c5b7fe798c3e0cfc32ca81c8fcdf9"
+      ],
+      "gold_locations": {
+        "888318905df3f0ad13bea914cb4fdb3855044a9b8089d74309fc7c7def8e015c": {
+          "page": 163,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Warlock",
+            "Warlock Spell List",
+            "Great Old One Patron",
+            "LEVEL 1: SPELLCASTING"
+          ],
+          "source_unit_ids": [
+            "1b144c8bd89d956e020a9b64a6bccdc2d44adced174faf6eb8f8332dac7abcf2",
+            "5a99d831a052c84f0aa0a41ce2787447968a048c32b8570dce6d2f99f251522e"
+          ]
+        },
+        "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24": {
+          "page": 233,
+          "structural_path": [
+            "Ch. 6: Equipment",
+            "Crafting Equipment",
+            "SPELL PREPARATION BY CLASS"
+          ],
+          "source_unit_ids": [
+            "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24"
+          ]
+        },
+        "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9": {
+          "page": 166,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "CANTRIPS (LEVEL O WIZARD SPELLS)"
+          ],
+          "source_unit_ids": [
+            "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9"
+          ]
+        },
+        "a9b2f34acf7e15bef44c2bdb69c2574912dc6ce3aff121026d0cbab82a3866ea": {
+          "page": 164,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard"
+          ],
+          "source_unit_ids": [
+            "94bf235606adde897a71732d53ab323f7599844ced76c08a501e15c218e092f3",
+            "74243c1d4eb383b52499327f29d02077e09457e05ebf017f095f42e49b2c6021"
+          ]
+        },
+        "337241c2ea2ccc895e466ad0bfc102b5bd9c5b7fe798c3e0cfc32ca81c8fcdf9": {
+          "page": 166,
+          "structural_path": [
+            "Ch. 3: Character Classes",
+            "Wizard",
+            "WIZARD SPELL LIST"
+          ],
+          "source_unit_ids": [
+            "337241c2ea2ccc895e466ad0bfc102b5bd9c5b7fe798c3e0cfc32ca81c8fcdf9"
+          ]
+        }
+      },
+      "_mode": "single_cite",
+      "_status": "uncited",
+      "required_gold_rationale": {
+        "888318905df3f0ad13bea914cb4fdb3855044a9b8089d74309fc7c7def8e015c": "Provides the Wizard class spellcasting text tying Wizard spells to the Wizard spell list and giving core preparation-related context for Wizard spellcasting.",
+        "501a401500c91b3b413bd4984bca63bbce355ded33406f12f86d48dc5a0dca24": "Gives the general spell preparation rule and the table entry showing Wizards can change prepared spells when they finish a Long Rest and can change any of them.",
+        "c92d39a6fa780929eaca6eb9c839be2fe71f345f593a11a63ab3961191308ff9": "Defines the Wizard spell list and how it is organized, which directly answers how the Wizard spell list works."
+      },
+      "benchmark_track": "working_set",
+      "evidence_scope": "multi_anchor",
+      "required_anchor_ids": [],
+      "supporting_anchor_ids": [],
+      "gold_chunks": []
+    }
+  ]
+}
