@@ -2,7 +2,7 @@
 
 **Status:** Implemented  
 **Scope:** `RulesIngestion` Retrieval Lab pipeline  
-**Primary design doc:** `Docs/Design/EXPERIMENT-PF2E-LLM-Reranking.md`
+**Primary design doc:** `Docs/Experiments/EXPERIMENT-PF2E-LLM-Reranking.md`
 
 ---
 
