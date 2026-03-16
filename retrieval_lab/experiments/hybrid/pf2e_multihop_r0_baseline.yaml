@@ -1,5 +1,6 @@
+# R0 baseline: same as R2 but no LLM rerank. Anchor for baseline_metrics_path comparison.
 retrieval_mode: hybrid
-experiment_name: "pf2e_multihop_r2_llm_listwise"
+experiment_name: "pf2e_multihop_r0_baseline"
 substrate_path: "out/Pathfinder2ePlayerCore"
 document_id: "PathCore"
 query_batches:
@@ -23,24 +24,8 @@ dense_budget: 100
 hybrid_fusion_method: cc
 cc_lambda: 0.7
 cc_bm25_normalization: minmax
-llm_rerank_enabled: true
-llm_rerank_method: listwise
-llm_rerank_model: "gpt-5-mini-2025-08-07"
-llm_rerank_admission_k: 12
-llm_rerank_text_char_limit: 900
-llm_rerank_prompt_template_id: "pf2e_listwise_v1"
-llm_rerank_max_output_tokens: 1200
+llm_rerank_enabled: false
 
-# Auto-gold: ground the 10 working-set queries that have no gold (source_page null).
+# No auto-gold for baseline run so we get single metrics.json / per_query.json for baseline comparison.
 auto_gold_review:
-  enabled: true
-  llm_model_id: "gpt-4o-mini"
-  candidate_top_k: 20
-  retrieval_model_id: ""
-  max_queries: 0
-  max_chars_per_chunk: 1600
-  max_required_gold: 5
-  max_supporting_gold: 5
-  review_queue_challenge_sample_size: 10
-  max_required_overlap: 2
-  persist_benchmark: true
+  enabled: false

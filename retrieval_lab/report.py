@@ -132,6 +132,12 @@ def generate_report(
         f"- **Models:** {', '.join(config.get('models', []))}",
         f"- **Top-k values:** {config.get('top_k', [])}",
         f"- **Retrieval mode:** {config.get('retrieval_mode', 'dense')}",
+    ])
+    if config.get("llm_rerank_enabled"):
+        lines.extend([
+            f"- **LLM rerank:** enabled (model={config.get('llm_rerank_model', 'N/A')}, admission_k={config.get('llm_rerank_admission_k', 'N/A')})",
+        ])
+    lines.extend([
         f"- **Corpus unit count:** {corpus_stats.get('unit_count', 'N/A')}",
         f"- **Corpus page count:** {corpus_stats.get('page_count', 'N/A')}",
         "",

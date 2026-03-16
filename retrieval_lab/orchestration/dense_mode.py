@@ -6,8 +6,9 @@ import json
 import hashlib
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -984,18 +985,18 @@ def _run_ranking_pipeline(
             str(getattr(config, "llm_rerank_cache_dir", "")).strip()
             or str((Path(getattr(config, "output_dir", "out/retrieval_lab/experiments")) / ".cache" / "llm_rerank").resolve())
         )
+        llm_max_workers = max(0, int(getattr(config, "llm_rerank_max_workers", 8)))
         eval_k = max(config.top_k) if config.top_k else 10
         unit_by_id = {str(unit.get("id") or ""): unit for unit in corpus if unit.get("id")}
         llm_rerank_debug = []
 
-        for i, q in enumerate(grounded_queries):
-            base_ids = list(ranked_lists[i] or [])
-            base_scores = list(score_lists[i] or [])
-            n0 = min(len(base_ids), len(base_scores))
-            base_ids = base_ids[:n0]
-            base_scores = base_scores[:n0]
+        def _run_one_llm_rerank(
+            i: int,
+            q: Dict[str, Any],
+            base_ids: List[str],
+            base_scores: List[float],
+        ) -> Tuple[int, List[str], List[float], Dict[str, Any]]:
             admitted_ids = base_ids[:llm_admission_k]
-            admitted_scores = base_scores[:llm_admission_k]
             baseline_rank_by_id = {cid: rank for rank, cid in enumerate(admitted_ids, start=1)}
             candidate_rows: List[Dict[str, Any]] = []
             for rank, cid in enumerate(admitted_ids, start=1):
@@ -1024,16 +1025,15 @@ def _run_ranking_pipeline(
             ordered_set = set(ordered_admitted)
             tail_ids = [cid for cid in base_ids if cid not in ordered_set]
             tail_score_by_id = {cid: float(sc) for cid, sc in zip(base_ids, base_scores)}
-            ranked_lists[i] = ordered_admitted + tail_ids
-            score_lists[i] = [float(len(ordered_admitted) - pos) for pos in range(len(ordered_admitted))] + [
+            ranked_i = ordered_admitted + tail_ids
+            scores_i = [float(len(ordered_admitted) - pos) for pos in range(len(ordered_admitted))] + [
                 float(tail_score_by_id.get(cid, 0.0)) for cid in tail_ids
             ]
-
             required_ids = _required_gold_ids(q)
             before_top = base_ids[:eval_k]
-            after_top = ranked_lists[i][:eval_k]
+            after_top = ranked_i[:eval_k]
             rank_before = {cid: rank for rank, cid in enumerate(base_ids, start=1)}
-            rank_after = {cid: rank for rank, cid in enumerate(ranked_lists[i], start=1)}
+            rank_after = {cid: rank for rank, cid in enumerate(ranked_i, start=1)}
             movement: Dict[str, Dict[str, Any]] = {}
             for cid in required_ids:
                 rb = rank_before.get(cid)
@@ -1044,25 +1044,58 @@ def _run_ranking_pipeline(
                     "crossed_into_top10": bool((rb is None or rb > 10) and (ra is not None and ra <= 10)),
                     "crossed_out_of_top10": bool((rb is not None and rb <= 10) and (ra is None or ra > 10)),
                 }
-            llm_rerank_debug.append(
-                {
-                    "query_id": q.get("id", ""),
-                    "candidate_pool_size": len(admitted_ids),
-                    "pre_rerank_top10": before_top[:10],
-                    "post_rerank_top10": after_top[:10],
-                    "required_gold_in_pool": sorted([cid for cid in required_ids if cid in baseline_rank_by_id]),
-                    "required_rank_before": {cid: rank_before.get(cid) for cid in required_ids},
-                    "required_rank_after": {cid: rank_after.get(cid) for cid in required_ids},
-                    "required_top10_crossings": movement,
-                    "rationale_tags": rerank_resp.get("rationale_tags") or {},
-                    "rerank_metadata": rerank_resp.get("metadata") or {},
-                }
-            )
+            debug_entry = {
+                "query_id": q.get("id", ""),
+                "candidate_pool_size": len(admitted_ids),
+                "pre_rerank_top10": before_top[:10],
+                "post_rerank_top10": after_top[:10],
+                "required_gold_in_pool": sorted([cid for cid in required_ids if cid in baseline_rank_by_id]),
+                "required_rank_before": {cid: rank_before.get(cid) for cid in required_ids},
+                "required_rank_after": {cid: rank_after.get(cid) for cid in required_ids},
+                "required_top10_crossings": movement,
+                "rationale_tags": rerank_resp.get("rationale_tags") or {},
+                "rerank_metadata": rerank_resp.get("metadata") or {},
+            }
+            return (i, ranked_i, scores_i, debug_entry)
+
+        if llm_max_workers <= 1:
+            for i, q in enumerate(grounded_queries):
+                base_ids = list(ranked_lists[i] or [])
+                base_scores = list(score_lists[i] or [])
+                n0 = min(len(base_ids), len(base_scores))
+                base_ids = base_ids[:n0]
+                base_scores = base_scores[:n0]
+                _i, ranked_i, scores_i, debug_entry = _run_one_llm_rerank(i, q, base_ids, base_scores)
+                ranked_lists[i] = ranked_i
+                score_lists[i] = scores_i
+                llm_rerank_debug.append(debug_entry)
+        else:
+            results_by_i: Dict[int, Tuple[List[str], List[float], Dict[str, Any]]] = {}
+            with ThreadPoolExecutor(max_workers=llm_max_workers) as executor:
+                futures = {}
+                for i, q in enumerate(grounded_queries):
+                    base_ids = list(ranked_lists[i] or [])
+                    base_scores = list(score_lists[i] or [])
+                    n0 = min(len(base_ids), len(base_scores))
+                    base_ids = base_ids[:n0]
+                    base_scores = base_scores[:n0]
+                    fut = executor.submit(_run_one_llm_rerank, i, q, base_ids, base_scores)
+                    futures[fut] = i
+                for fut in as_completed(futures):
+                    i, ranked_i, scores_i, debug_entry = fut.result()
+                    results_by_i[i] = (ranked_i, scores_i, debug_entry)
+            for i in range(len(grounded_queries)):
+                ranked_i, scores_i, debug_entry = results_by_i[i]
+                ranked_lists[i] = ranked_i
+                score_lists[i] = scores_i
+                llm_rerank_debug.append(debug_entry)
+
         logger.info(
-            "LLM rerank applied for %d queries with model=%s admission_k=%d",
+            "LLM rerank applied for %d queries with model=%s admission_k=%d max_workers=%d",
             len(grounded_queries),
             llm_rerank_model,
             llm_admission_k,
+            llm_max_workers if llm_max_workers > 1 else 1,
         )
 
     ranked_source_id_lists: Optional[List[List[List[str]]]] = None

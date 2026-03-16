@@ -279,3 +279,16 @@ def test_config_validate_llm_rerank_requires_hybrid_mode() -> None:
     )
     with pytest.raises(ValueError, match="llm_rerank_enabled requires retrieval_mode='hybrid' or 'hybrid\\+rerank'"):
         cfg.validate()
+
+
+def test_config_validate_llm_rerank_allows_prefix_smaller_than_eval_window() -> None:
+    cfg = ExperimentConfig.from_dict(
+        {
+            **_base_config_dict(),
+            "top_k": [1, 3, 5, 10, 20],
+            "llm_rerank_enabled": True,
+            "llm_rerank_model": "gpt-5-mini-2025-08-07",
+            "llm_rerank_admission_k": 12,
+        }
+    )
+    cfg.validate()
