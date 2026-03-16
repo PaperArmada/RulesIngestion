@@ -160,6 +160,8 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.answer_evaluation.llm_model_id = str(args.answer_model or "")
         if not config.answer_evaluation.enabled:
             config.answer_evaluation.enabled = True
+    if getattr(args, "answer_reasoning", None) is not None:
+        config.answer_evaluation.reasoning_effort = str(args.answer_reasoning).strip().lower()
     if getattr(args, "answer_top_k", None) is not None:
         config.answer_evaluation.eval_top_k = int(args.answer_top_k or 0)
         if not config.answer_evaluation.enabled:
@@ -198,6 +200,8 @@ def apply_cli_overrides(config: Any, args: Any) -> None:
         config.auto_gold_review.review_queue_challenge_sample_size = int(args.auto_gold_challenge_sample)
     if getattr(args, "auto_gold_max_required_overlap", None) is not None:
         config.auto_gold_review.max_required_overlap = int(args.auto_gold_max_required_overlap)
+    if getattr(args, "auto_gold_max_workers", None) is not None:
+        config.auto_gold_review.max_workers = max(0, int(args.auto_gold_max_workers))
     if getattr(args, "allow_benchmark_contract_mismatch", False):
         config.allow_benchmark_contract_mismatch = True
     if getattr(args, "enhancement_mode", None) is not None:

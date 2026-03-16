@@ -112,6 +112,8 @@ class AnswerEvaluationConfig:
     enabled: bool = False
     # OpenAI model identifier (e.g., "gpt-4o-mini"). Required when enabled=True.
     llm_model_id: str = ""
+    # Reasoning effort for models that support it: "none" (default), "low", "medium", "high".
+    reasoning_effort: str = "none"
     # Evaluate over top-k retrieved EvidenceUnits (0 => use max(experiment.top_k)).
     eval_top_k: int = 0
     # Deterministic subset size (sorted by query_id).
@@ -137,6 +139,7 @@ class AutoGoldReviewConfig:
     review_queue_challenge_sample_size: int = 10
     max_required_overlap: int = 2
     persist_benchmark: bool = True
+    max_workers: int = 8  # concurrent LLM review calls (0 or 1 => sequential)
 
 
 @dataclass
@@ -237,6 +240,8 @@ class ExperimentConfig:
     # R11: Cross-encoder reranker model name (optional). When set, re-rank hybrid top-50 to top-10.
     reranker: Optional[str] = None
     # LLM listwise reranker (fixed-pool reorder only).
+    # This may be smaller than max(top_k): the admitted prefix is reranked and the untouched
+    # remainder is appended in baseline order for evaluation.
     llm_rerank_enabled: bool = False
     llm_rerank_method: str = "listwise"  # listwise
     llm_rerank_model: str = ""
@@ -245,6 +250,7 @@ class ExperimentConfig:
     llm_rerank_prompt_template_id: str = "pf2e_listwise_v1"
     llm_rerank_max_output_tokens: int = 1200
     llm_rerank_cache_dir: str = ""
+    llm_rerank_max_workers: int = 8  # concurrent rerank calls (0 => sequential)
     # R6: Expand candidate set using co_retrieval_hints (when hint.related_topic matches unit topic_tags).
     co_retrieval_expand: bool = False
     # Phase-0 metric contract and guardrails.
@@ -348,8 +354,6 @@ class ExperimentConfig:
                 raise ValueError("llm_rerank_model is required when llm_rerank_enabled=true")
             if int(self.llm_rerank_admission_k) < 1:
                 raise ValueError("llm_rerank_admission_k must be >= 1")
-            if int(self.llm_rerank_admission_k) < max(self.top_k):
-                raise ValueError("llm_rerank_admission_k must be >= max(top_k)")
             if int(self.llm_rerank_text_char_limit) < 100:
                 raise ValueError("llm_rerank_text_char_limit must be >= 100")
             if int(self.llm_rerank_max_output_tokens) < 64:
@@ -583,6 +587,7 @@ class ExperimentConfig:
             llm_rerank_prompt_template_id=str(data.get("llm_rerank_prompt_template_id", "pf2e_listwise_v1")),
             llm_rerank_max_output_tokens=int(data.get("llm_rerank_max_output_tokens", 1200)),
             llm_rerank_cache_dir=str(data.get("llm_rerank_cache_dir", "")),
+            llm_rerank_max_workers=int(data.get("llm_rerank_max_workers", 8)),
             co_retrieval_expand=bool(data.get("co_retrieval_expand", False)),
             guardrail_t1_mrr_drop_max=float(data.get("guardrail_t1_mrr_drop_max", 0.02)),
             clause_family_projection=bool(data.get("clause_family_projection", False)),
@@ -757,6 +762,7 @@ def _parse_answer_evaluation(data: Dict[str, Any]) -> AnswerEvaluationConfig:
         return AnswerEvaluationConfig(
             enabled=bool(raw.get("enabled", False)),
             llm_model_id=str(raw.get("llm_model_id", raw.get("model_id", ""))),
+            reasoning_effort=str(raw.get("reasoning_effort", "none")).strip().lower() or "none",
             eval_top_k=int(raw.get("eval_top_k", 0)),
             max_queries=int(raw.get("max_queries", 20)),
             max_chars_per_unit=int(raw.get("max_chars_per_unit", 1200)),
@@ -780,6 +786,7 @@ def _parse_auto_gold_review(data: Dict[str, Any]) -> AutoGoldReviewConfig:
             review_queue_challenge_sample_size=int(raw.get("review_queue_challenge_sample_size", 10)),
             max_required_overlap=int(raw.get("max_required_overlap", 2)),
             persist_benchmark=bool(raw.get("persist_benchmark", True)),
+            max_workers=max(0, int(raw.get("max_workers", 8))),
         )
     return AutoGoldReviewConfig()
 

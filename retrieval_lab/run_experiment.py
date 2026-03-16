@@ -82,6 +82,7 @@ from retrieval_lab.gold_grounding import (
     apply_gold_recommendations_to_queries,
     flatten_query_batches,
     ground_queries_page_anchored,
+    persist_resolved_gold_to_batch_files,
     resolve_gold_locations_to_current_corpus,
 )
 from retrieval_lab.metrics import score_retrieval
@@ -1320,6 +1321,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                         max_supporting_gold=int(agr.max_supporting_gold),
                         challenge_sample_size=int(agr.review_queue_challenge_sample_size),
                         max_required_overlap=int(agr.max_required_overlap),
+                        max_workers=max(0, int(getattr(agr, "max_workers", 8))),
                     )
                     applied_queries, apply_summary = apply_gold_recommendations_to_queries(
                         flat_queries,
@@ -1349,6 +1351,17 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                     }
                     flat_queries = applied_queries
                     grounded_queries = applied_queries
+                    if agr.persist_benchmark and apply_summary.get("queries_applied", 0) > 0:
+                        cwd = Path.cwd()
+                        files_updated = persist_resolved_gold_to_batch_files(
+                            list(config.query_batches),
+                            flat_queries,
+                            cwd,
+                        )
+                        logger.info(
+                            "Auto-gold persist_benchmark: wrote gold to %d batch file(s)",
+                            files_updated,
+                        )
                     _sync_query_reviews_with_gold(
                         retrieved_chunks_by_model=retrieved_chunks_by_model,
                         grounded_queries=grounded_queries,
@@ -1419,7 +1432,8 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
                     first = next(iter(retrieved_chunks_by_model.keys()), None)
                     eval_models = [first] if first else []
 
-                gen = OpenAIAnswerGenerator(model_id=ae.llm_model_id)
+                reasoning_effort = getattr(ae, "reasoning_effort", None) or "none"
+                gen = OpenAIAnswerGenerator(model_id=ae.llm_model_id, reasoning_effort=reasoning_effort)
                 per_model: Dict[str, Any] = {}
                 for model_id in eval_models:
                     if not model_id:
@@ -1620,8 +1634,12 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             ),
             "max_required_overlap": int(getattr(config.auto_gold_review, "max_required_overlap", 2)),
             "persist_benchmark": bool(getattr(config.auto_gold_review, "persist_benchmark", True)),
+            "max_workers": max(0, int(getattr(config.auto_gold_review, "max_workers", 8))),
         },
         "allow_benchmark_contract_mismatch": bool(getattr(config, "allow_benchmark_contract_mismatch", False)),
+        "llm_rerank_enabled": bool(getattr(config, "llm_rerank_enabled", False)),
+        "llm_rerank_model": str(getattr(config, "llm_rerank_model", "")),
+        "llm_rerank_admission_k": int(getattr(config, "llm_rerank_admission_k", 0)),
         "corpus_fingerprint": corpus_index_payload.get("corpus_fingerprint", ""),
         "corpus_content_fingerprint": corpus_content_fingerprint,
         "corpus_index_sha256": corpus_index_sha256,

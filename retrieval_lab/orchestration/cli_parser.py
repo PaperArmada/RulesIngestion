@@ -205,6 +205,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument("--baseline-metrics", type=str, default=None, help="Optional baseline metrics.json path for failure-bucket delta reporting")
     parser.add_argument("--answer-eval", action="store_true", help="Run answer-generation evaluation pass (OpenAI; writes answer_eval.json)")
     parser.add_argument("--answer-model", type=str, default=None, help="Answer-eval LLM model id (e.g. gpt-4o-mini)")
+    parser.add_argument("--answer-reasoning", type=str, choices=["none", "low", "medium", "high"], default=None, help="Answer-eval reasoning effort (default: none)")
     parser.add_argument("--answer-top-k", type=int, default=None, help="Answer-eval uses top-k retrieved EvidenceUnits (default: max(top_k))")
     parser.add_argument("--answer-max-queries", type=int, default=None, help="Answer-eval max queries (deterministic: sorted by query_id)")
     parser.add_argument("--answer-max-chars-per-unit", type=int, default=None, help="Answer-eval evidence truncation per unit (chars)")
@@ -217,6 +218,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument("--auto-gold-max-chars-per-chunk", type=int, default=None, help="Truncate candidate text to this many chars for LLM review")
     parser.add_argument("--auto-gold-challenge-sample", type=int, default=None, help="Extra hard-but-successful queries to include in the human review queue")
     parser.add_argument("--auto-gold-max-required-overlap", type=int, default=None, help="Flag queries when the same required chunk appears in more than this many queries")
+    parser.add_argument("--auto-gold-max-workers", type=int, default=None, help="Concurrent LLM review calls (0 or 1 => sequential; default 8)")
     parser.add_argument(
         "--allow-benchmark-contract-mismatch",
         action="store_true",
