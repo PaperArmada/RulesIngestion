@@ -706,6 +706,24 @@ Primary readout:
 - T1 regressions
 - answer completeness on selected surface
 
+### 15.3.1 2026-03 PHB 5e signal: decomposition is the next lever
+
+The most relevant live design reference remains this memo, not the PF2E reranking experiment doc, because the PHB 5e signal now points at the controller's `decompose` path rather than at reranking alone.
+
+What we learned from the PHB 2024 multihop review pass is:
+
+- simple LLM reranking is still a ranking-depth lever, not a substitute for missing child retrieval
+- several PHB multihop failures are broad parent questions whose answer obligations are easier to retrieve as bounded child questions than as one fused prompt
+- the PHB multihop working set is therefore a strong evaluation surface for query decomposition, especially when paired with a micro-bundle surface derived from the same parents
+
+Operational implication:
+
+- treat `evals/retrieval/PHB5e/dnd_5e_2024_multihop_working_set_benchmark.json` as the parent surface
+- treat `evals/retrieval/PHB5e/dnd_5e_2024_multihop_microbundle_working_set_benchmark.json` as the child-obligation surface
+- use parent-to-microbundle decomposition coverage as the first concrete readout for `rewrite_query(..., decompose)` before investing further in more sophisticated rerank-only variants
+
+In short: the PHB 2024 multihop benchmark is now useful not just as another rerank stress test, but as a decomposition evaluation set.
+
 ### 15.4 Phase 3: Stage C-assisted typed closure
 
 | ID | Typed enrichment | Typed expansion | Rerank | Surfaces | Goal |
