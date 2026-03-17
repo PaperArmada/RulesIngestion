@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, Iterable, List, Protocol, Tuple
 
 from retrieval_lab.auto_gold_review.schema import GoldReviewResponse
@@ -164,6 +165,7 @@ def _sanitize_review_response(
         "applyable": applyable,
         "selected_required_ranks": selected_required_ranks,
         "notes_from_reviewer": str(response.notes or ""),
+        "reviewer_metadata": dict(response.metadata or {}),
     }
 
 
@@ -228,6 +230,45 @@ def build_review_queue(
     return queue
 
 
+def _review_one(
+    *,
+    query_id: str,
+    query: Dict[str, Any],
+    review: Dict[str, Any],
+    reviewer: GoldChunkReviewer,
+    candidate_top_k: int,
+    max_chars_per_chunk: int,
+    max_required_gold: int,
+    max_supporting_gold: int,
+) -> Tuple[str, Dict[str, Any]]:
+    """Run a single review; returns (query_id, recommendation_dict)."""
+    candidates = [
+        _normalize_candidate(candidate, max_chars_per_chunk=max_chars_per_chunk)
+        for candidate in (review.get("retrieved") or [])[: max(0, int(candidate_top_k))]
+        if str(candidate.get("chunk_id") or "").strip()
+    ]
+    response = reviewer.review(
+        question=str(review.get("question") or query.get("question") or ""),
+        expected_answer_summary=str(review.get("expected_answer_summary") or query.get("expected_answer_summary") or ""),
+        notes=str(query.get("notes") or review.get("notes") or ""),
+        query_metadata={
+            "query_id": query_id,
+            "tier": query.get("tier") or query.get("_tier") or "",
+            "suite": query.get("suite") or query.get("_suite") or "",
+            "question_type": query.get("question_type") or "",
+        },
+        candidates=candidates,
+    )
+    rec = _sanitize_review_response(
+        query=query,
+        response=response,
+        candidates=candidates,
+        max_required_gold=max_required_gold,
+        max_supporting_gold=max_supporting_gold,
+    )
+    return (query_id, rec)
+
+
 def evaluate_gold_reviews(
     *,
     query_reviews: List[Dict[str, Any]],
@@ -240,46 +281,64 @@ def evaluate_gold_reviews(
     max_supporting_gold: int = 5,
     challenge_sample_size: int = 10,
     max_required_overlap: int = 2,
+    max_workers: int = 8,
 ) -> Dict[str, Any]:
     query_by_id = {str(q.get("id") or ""): q for q in grounded_queries if q.get("id")}
+    review_by_id = {str(r.get("query_id") or ""): r for r in query_reviews if r.get("query_id")}
     ordered_review_ids = [str(review.get("query_id") or "") for review in query_reviews if review.get("query_id")]
     if max_queries > 0:
         ordered_review_ids = ordered_review_ids[:max_queries]
 
-    recommendations: List[Dict[str, Any]] = []
-    selected_query_ids: List[str] = []
+    work: List[Tuple[str, Dict[str, Any], Dict[str, Any]]] = []
     for query_id in ordered_review_ids:
         query = query_by_id.get(query_id)
-        review = next((row for row in query_reviews if str(row.get("query_id") or "") == query_id), None)
+        review = review_by_id.get(query_id)
         if query is None or review is None:
             continue
-        candidates = [
-            _normalize_candidate(candidate, max_chars_per_chunk=max_chars_per_chunk)
-            for candidate in (review.get("retrieved") or [])[: max(0, int(candidate_top_k))]
-            if str(candidate.get("chunk_id") or "").strip()
-        ]
-        response = reviewer.review(
-            question=str(review.get("question") or query.get("question") or ""),
-            expected_answer_summary=str(review.get("expected_answer_summary") or query.get("expected_answer_summary") or ""),
-            notes=str(query.get("notes") or review.get("notes") or ""),
-            query_metadata={
-                "query_id": query_id,
-                "tier": query.get("tier") or query.get("_tier") or "",
-                "suite": query.get("suite") or query.get("_suite") or "",
-                "question_type": query.get("question_type") or "",
-            },
-            candidates=candidates,
-        )
-        recommendations.append(
-            _sanitize_review_response(
+        work.append((query_id, query, review))
+
+    use_parallel = max_workers > 1 and len(work) > 1
+    recommendations: List[Dict[str, Any]] = []
+    selected_query_ids: List[str] = []
+
+    if use_parallel:
+        results_by_qid: Dict[str, Dict[str, Any]] = {}
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {
+                executor.submit(
+                    _review_one,
+                    query_id=qid,
+                    query=query,
+                    review=review,
+                    reviewer=reviewer,
+                    candidate_top_k=candidate_top_k,
+                    max_chars_per_chunk=max_chars_per_chunk,
+                    max_required_gold=max_required_gold,
+                    max_supporting_gold=max_supporting_gold,
+                ): qid
+                for qid, query, review in work
+            }
+            for fut in as_completed(futures):
+                qid, rec = fut.result()
+                results_by_qid[qid] = rec
+        for qid in ordered_review_ids:
+            if qid in results_by_qid:
+                recommendations.append(results_by_qid[qid])
+                selected_query_ids.append(qid)
+    else:
+        for query_id, query, review in work:
+            _, rec = _review_one(
+                query_id=query_id,
                 query=query,
-                response=response,
-                candidates=candidates,
+                review=review,
+                reviewer=reviewer,
+                candidate_top_k=candidate_top_k,
+                max_chars_per_chunk=max_chars_per_chunk,
                 max_required_gold=max_required_gold,
                 max_supporting_gold=max_supporting_gold,
             )
-        )
-        selected_query_ids.append(query_id)
+            recommendations.append(rec)
+            selected_query_ids.append(query_id)
 
     review_queue = build_review_queue(
         recommendations,

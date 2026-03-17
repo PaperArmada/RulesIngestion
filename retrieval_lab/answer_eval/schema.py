@@ -41,14 +41,28 @@ ANSWER_JSON_SCHEMA: Dict[str, Any] = {
 }
 
 
+def _strip_json_code_fence(raw_text: str) -> str:
+    """Strip optional markdown code fence so we can parse JSON from model output."""
+    text = str(raw_text or "").strip()
+    if not text.startswith("```"):
+        return text
+    lines = text.splitlines()
+    if not lines:
+        return text
+    if len(lines) >= 2 and lines[-1].strip() == "```":
+        return "\n".join(lines[1:-1]).strip()
+    return "\n".join(lines[1:]).strip() if lines[0].strip().startswith("```") else text
+
+
 def parse_answer_response(raw_text: str) -> Tuple[AnswerResponse, Dict[str, Any]]:
     """Parse an AnswerResponse from raw model text.
 
     Returns (response, debug) where debug includes parse errors and the raw text.
     """
     debug: Dict[str, Any] = {"raw_text": raw_text}
+    text_to_parse = _strip_json_code_fence(raw_text)
     try:
-        payload = json.loads(raw_text)
+        payload = json.loads(text_to_parse)
     except Exception as e:
         debug["parse_error"] = str(e)
         return AnswerResponse(answer="", citations=[], refusal=True, uncertainty="parse_error"), debug

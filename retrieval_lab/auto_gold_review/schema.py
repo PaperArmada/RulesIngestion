@@ -17,6 +17,7 @@ class GoldReviewResponse:
     review_flags: List[str] = field(default_factory=list)
     needs_human_review: bool = False
     notes: str = ""
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -27,6 +28,7 @@ class GoldReviewResponse:
             "review_flags": list(self.review_flags),
             "needs_human_review": bool(self.needs_human_review),
             "notes": self.notes,
+            "metadata": dict(self.metadata),
         }
 
 
@@ -72,8 +74,21 @@ GOLD_REVIEW_JSON_SCHEMA: Dict[str, Any] = {
 }
 
 
+def _strip_json_code_fence(text: str) -> str:
+    s = (text or "").strip()
+    if not s.startswith("```"):
+        return s
+    lines = s.splitlines()
+    if len(lines) >= 2 and lines[-1].strip() == "```":
+        return "\n".join(lines[1:-1]).strip()
+    if lines[0].strip().startswith("```"):
+        return "\n".join(lines[1:]).strip()
+    return s
+
+
 def parse_gold_review_response(raw_text: str) -> Tuple[GoldReviewResponse, Dict[str, Any]]:
     debug: Dict[str, Any] = {"raw_text": raw_text}
+    raw_text = _strip_json_code_fence(raw_text or "")
     try:
         payload = json.loads(raw_text)
     except Exception as e:
