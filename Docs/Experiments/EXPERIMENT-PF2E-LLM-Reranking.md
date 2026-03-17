@@ -5,6 +5,8 @@
 **Status:** R0 and R2 (with baseline) executed 2026-03-16; R1 not yet run.  
 **Related:** `bounded_multihop_retrieval_design_memo.md`, `pf2e_multihop_benchmark_design.md`, `retrieval_lab/orchestration/dense_mode.py`, `retrieval_lab/experiments/hybrid/pf2e_mpnet_hybrid_baseline.yaml`, `retrieval_lab/experiments/hybrid/pf2e_multihop_r2_llm_listwise.yaml`, `retrieval_lab/experiments/hybrid/pf2e_multihop_r0_baseline.yaml`.
 
+**Canonical tooling reference:** `Docs/Design/ARCHITECTURE-RERANKING-TOOLING.md` (LLM rerank pipeline, CLI/config, baseline delta semantics, sweep findings, and answer-eval model comparison).
+
 ---
 
 ## Experiment status (as of 2026-03-16)
