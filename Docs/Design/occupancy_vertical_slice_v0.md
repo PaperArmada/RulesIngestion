@@ -15,7 +15,7 @@ This draft assumes the current Rules Ingestion philosophy remains in force:
 
 This draft also assumes a **single ruleset surface** for the first slice:
 
-- **Ruleset:** D&D 5e 2014 occupancy behavior
+- **Ruleset:** D&D 5e 2024 PHB occupancy behavior
 - **Cell model:** 5-foot tactical cell
 - **Focus:** legality of **ending placement** in an already occupied cell
 
@@ -35,7 +35,7 @@ When a creature attempts to **end placement** in a 5-foot cell that already cont
 
 For the first executable slice, lock the behavior further:
 
-> Under the 2014 D&D 5e occupancy ruleset, when a **Medium, corporeal, non-exceptional creature** attempts to end movement in a cell already occupied by another **Medium, corporeal, non-exceptional creature**, the engine returns **reject** with a deterministic rule trace.
+> Under the 2024 D&D 5e PHB occupancy ruleset, when a **Medium, corporeal, non-exceptional creature** attempts to end movement in a cell already occupied by another **Medium, corporeal, non-exceptional creature**, the engine returns **reject** with a deterministic rule trace unless the explicit ally-prone occupied-space allowance applies.
 
 ### 2.3 Why this is the right first slice
 
@@ -60,7 +60,6 @@ The following are **not** part of this first proof:
 - Tiny multi-occupancy handling
 - swarm exceptions
 - incorporeal / ethereal exceptions
-- 2024 prone ally-stacking rules
 - forced movement resolution
 - object occupancy
 
@@ -76,11 +75,11 @@ The first rule should be a **default prohibition**, not a complete occupancy ont
 
 ### 3.2 Rule statement
 
-**Atomic Rule ID:** `occ_2014_no_end_move_in_occupied_space`
+**Atomic Rule ID:** `occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception`
 
 **Statement:**
 
-> A creature may not voluntarily end its movement in a cell already occupied by another creature, unless an explicit exception rule applies.
+> A creature may not voluntarily end its movement in a cell already occupied by another creature. In the 2024 PHB ruleset, ending movement in an ally's occupied space is allowed only under the explicit ally-prone condition; otherwise placement is rejected.
 
 ### 3.3 Operational interpretation
 
@@ -90,6 +89,8 @@ For v0, interpret this rule with the following assumptions:
 - the occupying entity is a creature
 - both entities are ordinary corporeal creatures
 - no exception trait, feature, form, or spell is active
+- relation context between acting and occupying entities is available (`ally` | `hostile` | `neutral`)
+- ally-prone state required by the 2024 allowance is explicitly available in request/world-state inputs
 - the evaluation concerns the **end state** of movement, not transient passage through the cell
 
 ### 3.4 Why this formulation
@@ -109,7 +110,6 @@ Later rules can layer on top as explicit overrides, for example:
 - `occ_exception_swarm_can_occupy_other_creature_space`
 - `occ_exception_incorporeal_move_through_creatures`
 - `occ_exception_tiny_multi_occupancy`
-- `occ_2024_ally_stack_if_prone`
 
 But none of those are required to prove the default prohibition.
 
@@ -119,21 +119,21 @@ But none of those are required to prove the default prohibition.
 
 ### 4.1 Grounding question
 
-**Grounding Question ID:** `ground_occ_2014_001`
+**Grounding Question ID:** `ground_occ_2024_001`
 
-> What D&D 5e 2014 rule text establishes that a creature cannot voluntarily end its move in another creature’s space?
+> What D&D 5e 2024 PHB rule text establishes the default restriction on voluntarily ending movement in another creature's space?
 
 ### 4.2 Companion exception question
 
-**Grounding Question ID:** `ground_occ_2014_002`
+**Grounding Question ID:** `ground_occ_2024_002`
 
-> What explicit D&D 5e 2014 exceptions allow a creature to move through, enter, or occupy another creature’s space despite the default rule?
+> What D&D 5e 2024 PHB rule text defines the ally-prone occupied-space allowance, including the exact condition and resulting legality?
 
 ### 4.3 Why two questions
 
 The first question grounds the **default rule**.
 
-The second question is not required to implement v0, but it is required to keep the design honest. It tells us whether the first rule artifact needs:
+The second question grounds the in-rule 2024 ally-prone branch required for this slice. Together, the two questions tell us whether the first rule artifact needs:
 
 - an `exception_capable` field
 - priority handling
@@ -147,7 +147,8 @@ For the first rule, use the smallest operational evidence set that makes the rul
 **Target evidence shape:**
 
 - `required_gold`: 1 core rule anchor
-- `supporting_gold`: 0-2 supporting exception anchors
+- `supporting_gold`: 1 ally-prone condition anchor
+- `optional_supporting_gold`: 0-2 additional exception anchors
 
 Do not expand this into a full movement benchmark item. The point is to support one first rule draft.
 
@@ -205,7 +206,21 @@ These are intentionally minimal and are not yet a full compiler contract.
       "enum": ["end_move_in_cell"]
     },
     "metadata": {
-      "type": "object"
+      "type": "object",
+      "required": [
+        "occupancy_relation",
+        "ally_prone_condition_met"
+      ],
+      "properties": {
+        "occupancy_relation": {
+          "type": "string",
+          "enum": ["ally", "hostile", "neutral"]
+        },
+        "ally_prone_condition_met": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -294,7 +309,7 @@ This is the smallest structured draft the evidence-collection loop should emit b
     "rule_id": { "type": "string" },
     "rule_kind": {
       "type": "string",
-      "enum": ["forbid_end_move_in_occupied_cell"]
+      "enum": ["forbid_end_move_in_occupied_cell_with_ally_prone_exception"]
     },
     "ruleset_id": { "type": "string" },
     "statement": { "type": "string" },
@@ -334,7 +349,7 @@ This is the smallest structured draft the evidence-collection loop should emit b
 ```json
 {
   "request_id": "req_place_001",
-  "ruleset_id": "dnd5e_2014_phb_occupancy_v0",
+  "ruleset_id": "dnd5e_2024_phb_occupancy_v0",
   "cell_id": "cell_A1",
   "entity": {
     "entity_id": "entity_B",
@@ -354,11 +369,11 @@ This is the smallest structured draft the evidence-collection loop should emit b
   "decision": "reject",
   "state_changed": false,
   "applied_rule_ids": [
-    "occ_2014_no_end_move_in_occupied_space"
+    "occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception"
   ],
   "violations": [
     {
-      "rule_id": "occ_2014_no_end_move_in_occupied_space",
+      "rule_id": "occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception",
       "reason_code": "occupied_cell_end_state_forbidden",
       "conflicting_entity_ids": ["entity_A"],
       "source_evidence_refs": ["ev_occ_001"]
@@ -368,6 +383,49 @@ This is the smallest structured draft the evidence-collection loop should emit b
     "cell_id": "cell_A1",
     "existing_occupants": ["entity_A"],
     "candidate_entity_id": "entity_B"
+  }
+}
+```
+
+### 6.3 Example request (ally-prone allowance path)
+
+```json
+{
+  "request_id": "req_place_002",
+  "ruleset_id": "dnd5e_2024_phb_occupancy_v0",
+  "cell_id": "cell_A2",
+  "entity": {
+    "entity_id": "entity_D",
+    "entity_kind": "creature",
+    "traits": ["medium", "corporeal", "ordinary"],
+    "size": "medium"
+  },
+  "intent": "end_move_in_cell",
+  "metadata": {
+    "occupancy_relation": "ally",
+    "ally_prone_condition_met": true
+  }
+}
+```
+
+### 6.4 Example decision (ally-prone allowance path)
+
+```json
+{
+  "request_id": "req_place_002",
+  "decision": "accept",
+  "state_changed": true,
+  "applied_rule_ids": [
+    "occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception"
+  ],
+  "violations": [],
+  "trace": {
+    "cell_id": "cell_A2",
+    "existing_occupants": ["entity_C"],
+    "candidate_entity_id": "entity_D",
+    "occupancy_relation": "ally",
+    "ally_prone_condition_met": true,
+    "rule_branch": "ally_prone_allowance"
   }
 }
 ```
@@ -392,7 +450,7 @@ If all five hold, this document is ready to become the canonical v0 design note 
 
 If this draft is accepted, the next document should define:
 
-1. the evidence-backed source text for `occ_2014_no_end_move_in_occupied_space`
+1. the evidence-backed source text for `occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception`
 2. the bounded collection / draft / verify loop for producing `AtomicRuleDraft`
 3. one tiny golden fixture for deterministic placement evaluation
 
