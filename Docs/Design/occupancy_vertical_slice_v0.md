@@ -1,0 +1,398 @@
+# Occupancy Vertical Slice v0
+
+**Status:** Draft for review  
+**Purpose:** Define the first exact runtime behavior to prove, the first atomic rule statement, the exact grounding question, and the minimal JSON schemas needed to evaluate a same-cell placement attempt.
+
+---
+
+## 1. Canonical framing
+
+This draft assumes the current Rules Ingestion philosophy remains in force:
+
+- EvidenceUnits are canonical admissible evidence.
+- Retrieval projections and enrichments are non-authoritative.
+- Runtime-facing rule artifacts must remain deterministic, replayable, and traceable back to source evidence.
+
+This draft also assumes a **single ruleset surface** for the first slice:
+
+- **Ruleset:** D&D 5e 2014 occupancy behavior
+- **Cell model:** 5-foot tactical cell
+- **Focus:** legality of **ending placement** in an already occupied cell
+
+This scope is intentionally narrower than general movement, full combat, or a full engine occupancy ontology.
+
+---
+
+## 2. Exact runtime behavior to prove
+
+### 2.1 Behavior statement
+
+**Behavior ID:** `cell_place_reject_001`
+
+When a creature attempts to **end placement** in a 5-foot cell that already contains another creature, the engine rejects the placement unless an explicit exception rule applies.
+
+### 2.2 First proved instance
+
+For the first executable slice, lock the behavior further:
+
+> Under the 2014 D&D 5e occupancy ruleset, when a **Medium, corporeal, non-exceptional creature** attempts to end movement in a cell already occupied by another **Medium, corporeal, non-exceptional creature**, the engine returns **reject** with a deterministic rule trace.
+
+### 2.3 Why this is the right first slice
+
+This behavior is small enough to test cleanly and concrete enough to force real contracts:
+
+- a ruleset version
+- an end-state legality check
+- a rule artifact
+- a deterministic evaluator
+- a provenance-bearing rejection result
+
+It avoids prematurely dragging in pathfinding, attacks of opportunity, difficult terrain accounting, or full movement sequencing.
+
+### 2.4 Explicit non-scope for v0
+
+The following are **not** part of this first proof:
+
+- hostile vs nonhostile movement path differences
+- difficult terrain cost accounting
+- size-difference pass-through
+- squeezing resolution
+- Tiny multi-occupancy handling
+- swarm exceptions
+- incorporeal / ethereal exceptions
+- 2024 prone ally-stacking rules
+- forced movement resolution
+- object occupancy
+
+These may become later rules or exceptions, but they are not required for the first legality check.
+
+---
+
+## 3. First atomic rule statement
+
+### 3.1 Rule intent
+
+The first rule should be a **default prohibition**, not a complete occupancy ontology.
+
+### 3.2 Rule statement
+
+**Atomic Rule ID:** `occ_2014_no_end_move_in_occupied_space`
+
+**Statement:**
+
+> A creature may not voluntarily end its movement in a cell already occupied by another creature, unless an explicit exception rule applies.
+
+### 3.3 Operational interpretation
+
+For v0, interpret this rule with the following assumptions:
+
+- the acting entity is a creature
+- the occupying entity is a creature
+- both entities are ordinary corporeal creatures
+- no exception trait, feature, form, or spell is active
+- the evaluation concerns the **end state** of movement, not transient passage through the cell
+
+### 3.4 Why this formulation
+
+This rule is preferable to something like “two incompatible entities cannot share a cell” because:
+
+- it is grounded in a concrete ruleset behavior
+- it avoids introducing a premature compatibility ontology
+- it is directly executable as a prohibition
+- it leaves room for later exception rules to override it
+
+### 3.5 Future extension shape
+
+Later rules can layer on top as explicit overrides, for example:
+
+- `occ_exception_halfling_pass_through_larger`
+- `occ_exception_swarm_can_occupy_other_creature_space`
+- `occ_exception_incorporeal_move_through_creatures`
+- `occ_exception_tiny_multi_occupancy`
+- `occ_2024_ally_stack_if_prone`
+
+But none of those are required to prove the default prohibition.
+
+---
+
+## 4. Exact grounding question
+
+### 4.1 Grounding question
+
+**Grounding Question ID:** `ground_occ_2014_001`
+
+> What D&D 5e 2014 rule text establishes that a creature cannot voluntarily end its move in another creature’s space?
+
+### 4.2 Companion exception question
+
+**Grounding Question ID:** `ground_occ_2014_002`
+
+> What explicit D&D 5e 2014 exceptions allow a creature to move through, enter, or occupy another creature’s space despite the default rule?
+
+### 4.3 Why two questions
+
+The first question grounds the **default rule**.
+
+The second question is not required to implement v0, but it is required to keep the design honest. It tells us whether the first rule artifact needs:
+
+- an `exception_capable` field
+- priority handling
+- override references
+- a separate exception track in the schema
+
+### 4.4 Evidence discipline
+
+For the first rule, use the smallest operational evidence set that makes the rule answerable.
+
+**Target evidence shape:**
+
+- `required_gold`: 1 core rule anchor
+- `supporting_gold`: 0-2 supporting exception anchors
+
+Do not expand this into a full movement benchmark item. The point is to support one first rule draft.
+
+---
+
+## 5. Minimal JSON schemas
+
+These are intentionally minimal and are not yet a full compiler contract.
+
+### 5.1 Placement request schema
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rules-engine/placement_request.schema.json",
+  "title": "PlacementRequest",
+  "type": "object",
+  "required": [
+    "request_id",
+    "ruleset_id",
+    "cell_id",
+    "entity",
+    "intent"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "ruleset_id": {
+      "type": "string"
+    },
+    "cell_id": {
+      "type": "string"
+    },
+    "entity": {
+      "type": "object",
+      "required": [
+        "entity_id",
+        "entity_kind",
+        "traits"
+      ],
+      "properties": {
+        "entity_id": { "type": "string" },
+        "entity_kind": { "type": "string" },
+        "traits": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "size": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "intent": {
+      "type": "string",
+      "enum": ["end_move_in_cell"]
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+### 5.2 Placement decision schema
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rules-engine/placement_decision.schema.json",
+  "title": "PlacementDecision",
+  "type": "object",
+  "required": [
+    "request_id",
+    "decision",
+    "state_changed",
+    "violations",
+    "applied_rule_ids"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["accept", "reject"]
+    },
+    "state_changed": {
+      "type": "boolean"
+    },
+    "applied_rule_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rule_id",
+          "reason_code"
+        ],
+        "properties": {
+          "rule_id": { "type": "string" },
+          "reason_code": { "type": "string" },
+          "conflicting_entity_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source_evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "trace": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+### 5.3 Rule draft schema
+
+This is the smallest structured draft the evidence-collection loop should emit before any future compiler layer.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rules-engine/atomic_rule_draft.schema.json",
+  "title": "AtomicRuleDraft",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "rule_kind",
+    "statement",
+    "ruleset_id",
+    "source_evidence_refs"
+  ],
+  "properties": {
+    "rule_id": { "type": "string" },
+    "rule_kind": {
+      "type": "string",
+      "enum": ["forbid_end_move_in_occupied_cell"]
+    },
+    "ruleset_id": { "type": "string" },
+    "statement": { "type": "string" },
+    "subject_pattern": {
+      "type": "object"
+    },
+    "object_pattern": {
+      "type": "object"
+    },
+    "priority": {
+      "type": "integer",
+      "default": 100
+    },
+    "exception_capable": {
+      "type": "boolean",
+      "default": true
+    },
+    "source_evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+---
+
+## 6. Example request and decision
+
+### 6.1 Example request
+
+```json
+{
+  "request_id": "req_place_001",
+  "ruleset_id": "dnd5e_2014_phb_occupancy_v0",
+  "cell_id": "cell_A1",
+  "entity": {
+    "entity_id": "entity_B",
+    "entity_kind": "creature",
+    "traits": ["medium", "corporeal", "ordinary"],
+    "size": "medium"
+  },
+  "intent": "end_move_in_cell"
+}
+```
+
+### 6.2 Example decision
+
+```json
+{
+  "request_id": "req_place_001",
+  "decision": "reject",
+  "state_changed": false,
+  "applied_rule_ids": [
+    "occ_2014_no_end_move_in_occupied_space"
+  ],
+  "violations": [
+    {
+      "rule_id": "occ_2014_no_end_move_in_occupied_space",
+      "reason_code": "occupied_cell_end_state_forbidden",
+      "conflicting_entity_ids": ["entity_A"],
+      "source_evidence_refs": ["ev_occ_001"]
+    }
+  ],
+  "trace": {
+    "cell_id": "cell_A1",
+    "existing_occupants": ["entity_A"],
+    "candidate_entity_id": "entity_B"
+  }
+}
+```
+
+---
+
+## 7. Review checklist before canonization
+
+Canonize this draft only if the team agrees that:
+
+- the first proof is about **end-state legality**, not full movement simulation
+- the first rule should be a **default prohibition**, not a full occupancy ontology
+- the first grounding question is narrow enough to support one atomic rule
+- the schemas are minimal but concrete enough to support a tiny evaluator
+- 2014 and 2024 rules should remain separated at the ruleset level
+
+If all five hold, this document is ready to become the canonical v0 design note for the first runtime occupancy slice.
+
+---
+
+## 8. Suggested immediate next artifact
+
+If this draft is accepted, the next document should define:
+
+1. the evidence-backed source text for `occ_2014_no_end_move_in_occupied_space`
+2. the bounded collection / draft / verify loop for producing `AtomicRuleDraft`
+3. one tiny golden fixture for deterministic placement evaluation
+
