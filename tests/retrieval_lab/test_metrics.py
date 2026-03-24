@@ -116,3 +116,21 @@ def test_merged_gold_id_matches_when_candidate_source_includes_merged_id() -> No
     )
     assert metrics_fixed.per_query[0]["failure_type"] == "hit"
     assert metrics_fixed.per_query[0]["first_gold_rank"] == 1
+
+
+def test_score_retrieval_prefers_required_gold_over_stale_internal_field() -> None:
+    grounded_queries = [
+        {
+            "id": "q1",
+            "gold_unit_ids": ["u1"],
+            "required_gold": ["u1"],
+            "_required_gold": ["stale-old-id"],
+            "_suite": "default",
+            "_tier": "T1",
+        }
+    ]
+    ranked_lists = [["u1", "u2"]]
+    score_lists = [[0.9, 0.1]]
+    metrics = score_retrieval(grounded_queries, ranked_lists, score_lists, [1, 3, 10])
+    assert metrics.per_query[0]["failure_type"] == "hit"
+    assert metrics.per_query[0]["first_gold_rank"] == 1

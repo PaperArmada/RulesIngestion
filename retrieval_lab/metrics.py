@@ -280,9 +280,10 @@ def score_retrieval(
     per_query_results = []
     for i, q in enumerate(grounded_queries):
         gold = list(q.get("gold_unit_ids") or [])
-        required_gold = list(q.get("_required_gold") or q.get("required_gold") or gold)
-        supporting_gold = list(q.get("_supporting_gold") or q.get("supporting_gold") or [])
-        mode = str(q.get("_mode") or q.get("mode") or "single_cite")
+        # Prefer canonical fields; fall back to internal normalized fields for legacy callers.
+        required_gold = list(q.get("required_gold") or q.get("_required_gold") or gold)
+        supporting_gold = list(q.get("supporting_gold") or q.get("_supporting_gold") or [])
+        mode = str(q.get("mode") or q.get("_mode") or "single_cite")
         suite = q.get("_suite", "default")
         tier = q.get("_tier", q.get("tier", "T1"))
         q_emb = query_embeddings[i] if query_embeddings is not None and i < query_embeddings.shape[0] else None

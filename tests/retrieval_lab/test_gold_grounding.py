@@ -69,6 +69,8 @@ def test_resolve_gold_locations_to_current_corpus_maps_source_ids() -> None:
     assert resolved[0]["gold_unit_ids"] == ["m1"]
     assert resolved[0]["required_gold"] == ["m1"]
     assert resolved[0]["supporting_gold"] == []
+    assert resolved[0]["_required_gold"] == ["m1"]
+    assert resolved[0]["_supporting_gold"] == []
     assert resolved[0]["required_gold_rationale"] == {"m1": "core rule"}
     assert resolved[0]["gold_locations"]["m1"]["source_unit_ids"] == ["f1"]
 

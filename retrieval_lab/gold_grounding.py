@@ -286,6 +286,10 @@ def resolve_gold_locations_to_current_corpus(
         if gold_ids:
             query_copy["gold_locations"] = new_locations
         query_copy["required_gold_rationale"] = new_rationale
+        # Keep internal normalized fields in sync with the projected corpus IDs.
+        query_copy["_required_gold"] = list(required or gold_ids)
+        query_copy["_supporting_gold"] = list(supporting)
+        query_copy["_mode"] = str(query_copy.get("mode") or query_copy.get("_mode") or "single_cite")
         if gold_ids:
             summary["queries_resolved_nonempty"] += 1
         else:
