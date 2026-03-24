@@ -1,10 +1,13 @@
+# PF2E multihop R2 LLM listwise — working set only (20 queries), gpt-5.3-codex reranker.
+# Use for parameter sweep: admission_k × text_char_limit (max_output_tokens from config).
+# Run from repo root, e.g.:
+#   uv run python -m retrieval_lab.run_experiment --config retrieval_lab/experiments/hybrid/pf2e_multihop_r2_sweep_working_set.yaml --llm-rerank
 retrieval_mode: hybrid
-experiment_name: "pf2e_multihop_r2_llm_listwise"
+experiment_name: "pf2e_multihop_r2_sweep_working_set"
 substrate_path: "out/Pathfinder2ePlayerCore"
 document_id: "PathCore"
 query_batches:
   - "evals/retrieval/Pathfinder2ePlayerCore/pathfinder2e_player_core_multihop_working_set_benchmark.json"
-  - "evals/retrieval/Pathfinder2ePlayerCore/pathfinder2e_player_core_50q_benchmark.json"
 models:
   - all-mpnet-base-v2
 top_k: [1, 3, 5, 10, 20]
@@ -31,7 +34,6 @@ llm_rerank_text_char_limit: 900
 llm_rerank_prompt_template_id: "pf2e_listwise_v1"
 llm_rerank_max_output_tokens: 1200
 
-# Auto-gold: ground the 10 working-set queries that have no gold (source_page null).
 auto_gold_review:
   enabled: true
   llm_model_id: "gpt-4o-mini"
