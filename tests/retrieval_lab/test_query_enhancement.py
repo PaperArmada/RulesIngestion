@@ -425,12 +425,6 @@ class TestDecomposition:
         assert len(result[0]) == 1
         assert result[0][0]["source"] == "original"
 
-    def test_heuristic_split_on_conjunctions(self):
-        from retrieval_lab.query_enhancement.enhancer import _heuristic_decompose
-        result = _heuristic_decompose("how does initiative work and what actions can I take", 3)
-        assert len(result) >= 1
-        assert all(r["source"] == "decompose" for r in result)
-
     def test_should_decompose_long_query(self):
         from retrieval_lab.query_enhancement.enhancer import _should_decompose
         p = _make_profile()
@@ -457,17 +451,48 @@ class TestDecomposition:
         assert _should_decompose("simple query", p) is True
 
     def test_decompose_mode_integration(self):
+        from retrieval_lab.query_enhancement import enhancer
+
         p = _make_profile()
-        p.decomposition = DecompositionConfig(enabled=True, when="always", max_subqueries=3)
-        result = enhance_queries(
-            ["how does initiative work and what actions can I take during combat"],
-            p, mode="decompose",
-        )
+        p.decomposition = DecompositionConfig(enabled=True, when="always")
+        original = enhancer.decompose_query
+        enhancer.decompose_query = lambda query, profile: [
+            {"q": "initiative timing", "source": "decompose", "intent": "initiative", "notes": "test"},
+            {"q": "combat action options", "source": "decompose", "intent": "actions", "notes": "test"},
+        ]
+        try:
+            result = enhance_queries(
+                ["how does initiative work and what actions can I take during combat"],
+                p,
+                mode="decompose",
+            )
+        finally:
+            enhancer.decompose_query = original
+
         assert len(result) == 1
         group = result[0]
         assert group[0]["source"] == "original"
         decompose_entries = [e for e in group if e["source"] == "decompose"]
-        assert len(decompose_entries) >= 1
+        assert len(decompose_entries) == 2
+
+    def test_decompose_mode_is_not_capped_by_max_expanded_queries(self):
+        from retrieval_lab.query_enhancement import enhancer
+
+        p = _make_profile()
+        p.policies.max_expanded_queries = 1
+        p.decomposition = DecompositionConfig(enabled=True, when="always")
+        original = enhancer.decompose_query
+        enhancer.decompose_query = lambda query, profile: [
+            {"q": "query one", "source": "decompose", "intent": "one", "notes": "test"},
+            {"q": "query two", "source": "decompose", "intent": "two", "notes": "test"},
+            {"q": "query three", "source": "decompose", "intent": "three", "notes": "test"},
+        ]
+        try:
+            result = enhance_queries(["complex question"], p, mode="decompose")
+        finally:
+            enhancer.decompose_query = original
+
+        assert len(result[0]) == 4  # original + all decomposition queries
 
     def test_multi_facet_template_triggers(self):
         from retrieval_lab.query_enhancement.enhancer import _should_decompose
@@ -475,6 +500,148 @@ class TestDecomposition:
         p.decomposition = DecompositionConfig(enabled=True, when="multi_hop_only")
         assert _should_decompose("how do combat spells interact with movement", p) is True
 
+
+class TestResponsesDecomposition:
+    def test_parse_decomposition_response(self):
+        from retrieval_lab.query_enhancement.decomposition import parse_decomposition_response
+
+        raw = json.dumps(
+            {
+                "retrieval_queries": [
+                    {
+                        "query": "pathfinder persistent damage recovery",
+                        "must_include_terms": ["persistent damage"],
+                    },
+                    {
+                        "query": "pathfinder flat check persistent damage",
+                        "must_include_terms": ["flat check"],
+                    },
+                ]
+            }
+        )
+        result = parse_decomposition_response(raw, original_query="pathfinder persistent damage flat check recovery")
+        assert len(result) == 2
+        assert result[0]["source"] == "decompose"
+        assert result[0]["must_include_terms"] == ["persistent damage"]
+
+    def test_parse_decomposition_response_rejects_out_of_query_terms(self):
+        from retrieval_lab.query_enhancement.decomposition import parse_decomposition_response
+
+        raw = json.dumps(
+            {
+                "retrieval_queries": [
+                    {
+                        "query": "persistent damage recovery",
+                        "must_include_terms": ["persistent damage"],
+                    },
+                    {
+                        "query": "persistent damage healing check",
+                        "must_include_terms": ["healing"],
+                    },
+                ]
+            }
+        )
+        result = parse_decomposition_response(raw, original_query="persistent damage recovery check")
+        assert len(result) == 1
+        assert result[0]["q"] == "persistent damage recovery"
+
+    def test_decomposition_cache_signature_is_stable(self):
+        from retrieval_lab.query_enhancement.decomposition import decomposition_cache_signature
+
+        p = _make_profile()
+        p.decomposition = DecompositionConfig(enabled=True, when="always")
+        sig1 = decomposition_cache_signature(p)
+        sig2 = decomposition_cache_signature(p)
+        assert sig1 == sig2
+
+    def test_decompose_query_uses_responses_api_schema(self):
+        from retrieval_lab.query_enhancement import decomposition as module
+        import sys
+        import types
+
+        p = _make_profile()
+        p.decomposition = DecompositionConfig(enabled=True, when="always", model_id="gpt-5-mini")
+
+        class _FakeResponse:
+            output_text = ""
+            output_parsed = {
+                "retrieval_queries": [
+                    {"query": "initiative work", "must_include_terms": ["initiative"]}
+                ]
+            }
+
+        class _FakeResponses:
+            def __init__(self):
+                self.last_kwargs = None
+
+            def create(self, **kwargs):
+                self.last_kwargs = kwargs
+                return _FakeResponse()
+
+        fake_responses = _FakeResponses()
+
+        class _FakeClient:
+            def __init__(self):
+                self.responses = fake_responses
+
+        original_openai = sys.modules.get("openai")
+        try:
+            fake_module = types.SimpleNamespace(OpenAI=lambda: _FakeClient())
+            sys.modules["openai"] = fake_module
+            result = module.decompose_query("how does initiative work?", p)
+        finally:
+            if original_openai is None:
+                sys.modules.pop("openai", None)
+            else:
+                sys.modules["openai"] = original_openai
+
+        assert len(result) == 1
+        assert fake_responses.last_kwargs["text"]["format"]["type"] == "json_schema"
+        assert "temperature" not in fake_responses.last_kwargs
+
+    def test_decompose_query_omits_temperature_for_gpt5_codex(self):
+        from retrieval_lab.query_enhancement import decomposition as module
+        import sys
+        import types
+
+        p = _make_profile()
+        p.decomposition = DecompositionConfig(enabled=True, when="always", model_id="gpt-5.3-codex")
+
+        class _FakeResponse:
+            output_text = ""
+            output_parsed = {
+                "retrieval_queries": [
+                    {"query": "initiative work", "must_include_terms": ["initiative"]}
+                ]
+            }
+
+        class _FakeResponses:
+            def __init__(self):
+                self.last_kwargs = None
+
+            def create(self, **kwargs):
+                self.last_kwargs = kwargs
+                return _FakeResponse()
+
+        fake_responses = _FakeResponses()
+
+        class _FakeClient:
+            def __init__(self):
+                self.responses = fake_responses
+
+        original_openai = sys.modules.get("openai")
+        try:
+            fake_module = types.SimpleNamespace(OpenAI=lambda: _FakeClient())
+            sys.modules["openai"] = fake_module
+            result = module.decompose_query("how does initiative work?", p)
+        finally:
+            if original_openai is None:
+                sys.modules.pop("openai", None)
+            else:
+                sys.modules["openai"] = original_openai
+
+        assert len(result) == 1
+        assert "temperature" not in fake_responses.last_kwargs
 
 # --- Replay determinism tests ---
 
@@ -519,14 +686,14 @@ class TestReplayDeterminism:
         assert h1a == h1b
         assert h1a == h2
 
-    def test_decomposition_heuristic_determinism(self):
-        from retrieval_lab.query_enhancement.enhancer import _heuristic_decompose
-        q = "how does initiative work and what actions can I take during combat"
-        r1 = _heuristic_decompose(q, 3)
-        r2 = _heuristic_decompose(q, 3)
-        assert len(r1) == len(r2)
-        for a, b in zip(r1, r2):
-            assert a["q"] == b["q"]
+    def test_decomposition_cache_signature_determinism(self):
+        from retrieval_lab.query_enhancement.decomposition import decomposition_cache_signature
+
+        p = _make_profile()
+        p.decomposition = DecompositionConfig(enabled=True, when="always")
+        r1 = decomposition_cache_signature(p)
+        r2 = decomposition_cache_signature(p)
+        assert r1 == r2
 
 
 # --- Profile linting tests ---

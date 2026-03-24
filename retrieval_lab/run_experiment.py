@@ -1012,7 +1012,8 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
     qe_flags = read_query_enhancement_config(config)
     qe_profile = None
     qe_cache = None
-    if qe_flags.enabled and qe_flags.mode != "none" and qe_flags.profile_path:
+    controller_enabled = bool(getattr(config, "controller_v0", None) and getattr(config.controller_v0, "enabled", False))
+    if qe_flags.enabled and qe_flags.mode != "none" and qe_flags.profile_path and not controller_enabled:
         from retrieval_lab.query_enhancement.profile import load_profile, validate_profile
         from retrieval_lab.query_enhancement.cache import QueryEnhancementCache
         qe_profile = load_profile(qe_flags.profile_path)
@@ -1080,11 +1081,13 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         "load_corpus_and_projection": time.perf_counter() - t_stage_start
     }
 
-    baseline_failure_types = _load_baseline_failure_types(
-        baseline_metrics_path=config.baseline_metrics_path,
-        retrieval_mode=retrieval_mode,
-        models=config.models,
-    )
+    baseline_failure_types = None
+    if not (qe_flags.enabled and qe_flags.mode == "decompose"):
+        baseline_failure_types = _load_baseline_failure_types(
+            baseline_metrics_path=config.baseline_metrics_path,
+            retrieval_mode=retrieval_mode,
+            models=config.models,
+        )
     if baseline_failure_types is not None:
         logger.info(
             "Conditional QE enabled from baseline failures: %d/%d queries eligible for enhancement",
@@ -1225,6 +1228,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             "Model bm25: retrieval done for %d queries; review in retrieved_chunks.json",
             len(grounded_queries),
         )
+        controller_trace_by_model = {}
     else:
         load_model_fn, encode_texts_fn, model_registry = _load_model_registry()
         dense_out = run_dense_mode(
@@ -1271,6 +1275,7 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
         embedding_provenance_by_model = dense_out.get("embedding_provenance_by_model", {})
         bm25_index_trace = dense_out.get("bm25_index_trace")
         hybrid_contribution_by_model = dense_out.get("hybrid_contribution_by_model", {})
+        controller_trace_by_model = dense_out.get("controller_trace_by_model", {})
     stage_timing_sec["retrieval_and_scoring"] = time.perf_counter() - t_retrieval
 
     auto_gold_review_payload: Optional[Dict[str, Any]] = None
@@ -1889,6 +1894,24 @@ def _run_experiment(config: ExperimentConfig, eval_only_run_id: Optional[str] = 
             json.dumps({"by_model": hybrid_contribution_by_model}, indent=2),
             encoding="utf-8",
         )
+    if controller_trace_by_model:
+        controller_trace_payload: Dict[str, Any] = {
+            "version": "controller_trace_v1",
+            "corpus": {
+                "document_id": getattr(config, "document_id", "") or "",
+                "substrate_path": getattr(config, "substrate_path", "") or "",
+                "substrate_version": getattr(config, "substrate_version", "") or "",
+                "run_id": run_id,
+                "experiment_id": experiment_id,
+                "experiment_name": getattr(config, "experiment_name", "") or "",
+            },
+            "by_model": controller_trace_by_model,
+        }
+        (output_dir / "controller_trace.json").write_text(
+            json.dumps(controller_trace_payload, indent=2),
+            encoding="utf-8",
+        )
+        logger.info("Controller v0 trace written to %s", output_dir / "controller_trace.json")
     if retrieved_chunks_by_model:
         logger.info("Retrieved chunks (for manual review): %s", paths.get("retrieved_chunks.json"))
     if embedding_provenance_by_model:
@@ -2002,8 +2025,9 @@ def main() -> None:
     parser = build_cli_parser()
     args = parser.parse_args()
 
-    if args.config:
-        config = ExperimentConfig.from_yaml(Path(args.config))
+    config_path = getattr(args, "config", None) or getattr(args, "config_file", None)
+    if config_path:
+        config = ExperimentConfig.from_yaml(Path(config_path))
     else:
         if not args.substrate or not args.models:
             parser.error("Without --config, --substrate and --models are required")

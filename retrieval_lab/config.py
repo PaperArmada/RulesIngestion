@@ -1,4 +1,12 @@
-"""Experiment configuration: YAML loading, validation, model resolution."""
+"""Experiment configuration: YAML loading, validation, model resolution.
+
+Retrieval Plane (canonical): See Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md.
+The minimal retrieval runtime is: baseline hybrid CC -> optional bounded decomposition ->
+candidate pool assembly -> fixed-pool LLM rerank -> cited EvidenceUnits.
+Retained runtime knobs: llm_rerank_enabled, query_enhancement.enabled (decomposition),
+hybrid_fusion_method/cc_lambda/cc_bm25_normalization (validated defaults).
+Corpus-level: embedding_model (default all-mpnet-base-v2), cc_lambda (0.7), bm25_budget (100).
+"""
 
 from __future__ import annotations
 
@@ -73,7 +81,10 @@ class OnlyAddFusionConfig:
     the locked-in baseline prefix.
     """
 
-    # Safety invariant: should be >= max(top_k) for your evaluation.
+    # When False (decomposition-only): final list is built only from variant retrieval;
+    # no original-query results are included. Use for practicing decomposition in isolation.
+    include_original: bool = True
+    # Safety invariant when include_original: should be >= max(top_k) for your evaluation.
     baseline_keep_n: int = 20
     variant_k_per_query: int = 20
     # Admission pool size for only-add fusion. Keep evaluation top-k unchanged; only the pool grows.
@@ -89,7 +100,7 @@ class OnlyAddFusionConfig:
     tail_rerank_window: int = 50
     # If set, appended candidates are assigned scores below the baseline band.
     append_score_band: float = 1e-6
-    # Future: rerank union with baseline locks. Not enabled by default.
+    # Future: rerank union with baseline locks (dead: never implemented; not in retrieval plane).
     rerank_union: bool = False
 
 
@@ -100,6 +111,37 @@ class QueryEnhancementConfig:
     mode: str = "none"  # none | dict | llm | llm+dict | decompose
     fusion_mode: str = "only_add"  # only_add | rrf | union_rerank
     only_add: OnlyAddFusionConfig = field(default_factory=OnlyAddFusionConfig)
+
+
+@dataclass
+class ControllerBudgets:
+    """Hard budgets for bounded retrieval controller v0."""
+
+    max_controller_hops: int = 2
+    max_rewrite_variants: int = 3
+    max_subqueries_per_rewrite: int = 3
+    max_expansion_anchors: int = 3
+    max_structural_adds_per_anchor: int = 5
+    max_typed_adds_per_anchor: int = 3
+    max_candidates_pre_rerank: int = 40
+    max_llm_calls_retrieval_path: int = 2
+
+
+@dataclass
+class ControllerV0Config:
+    """Bounded retrieval controller v0: policy engine over typed operators."""
+
+    enabled: bool = False
+    version: str = "v0"
+    policy: str = "linear_v0"
+    budgets: ControllerBudgets = field(default_factory=ControllerBudgets)
+    # Operator toggles and per-operator knobs (nested dict keyed by operator name).
+    operators: Dict[str, Any] = field(default_factory=dict)
+    # Cheap heuristics for failure-signal classification (e.g. taxonomy_fraction, entity_anchor_top_n).
+    failure_signals: Dict[str, Any] = field(default_factory=dict)
+    trace_enabled: bool = True
+    emit_candidate_journal: bool = True
+    emit_gold_diagnostics: bool = True
 
 
 @dataclass
@@ -172,7 +214,7 @@ class ExperimentConfig:
     batch_size: int = 16
     # Optional seed for reproducibility in harness runs.
     seed: Optional[int] = None
-    # Expand top-k with context then re-rank: append prev/next N chunks (document order), re-embed, re-rank.
+    # Expand context then re-rank (deprecated: never promoted; retrieval plane uses fixed pool only).
     expand_context: bool = False
     expand_context_n: int = 1
     # Fold units with len(text) < min_chars into adjacent units before retrieval-time heading merge.
@@ -203,23 +245,19 @@ class ExperimentConfig:
     dense_budget: Optional[int] = 100  # Ku — None means use max(top_k)
     # Hybrid fusion defaults are bakeoff-validated: CC + minmax + lambda=0.7.
     # RRF remains supported only for explicit comparison/legacy runs.
-    hybrid_fusion_method: str = HYBRID_FUSION_METHOD_DEFAULT  # cc | rrf(experimental)
+    hybrid_fusion_method: str = HYBRID_FUSION_METHOD_DEFAULT  # cc | rrf (deprecated: CC is canonical)
     # CC fusion parameters (only used when hybrid_fusion_method=cc).
     cc_lambda: float = CC_LAMBDA_DEFAULT  # weight for dense; (1-cc_lambda) for BM25
-    cc_bm25_normalization: str = CC_BM25_NORMALIZATION_DEFAULT  # minmax | atan(experimental)
-    # BM25-specific enrichment: when set, BM25 indexes text built with this profile
-    # instead of sharing corpus_texts with dense. Allows enriched BM25 + raw-text dense embeddings.
+    cc_bm25_normalization: str = CC_BM25_NORMALIZATION_DEFAULT  # minmax | atan (deprecated: minmax wins 9/12)
+    # BM25-specific enrichment (deprecated: no gain per EXPERIMENT-Embedding-Metadata; drop as runtime config).
     bm25_enrichment_profile: Optional[str] = None
-    # Two-stage retrieval: Stage1 admission (expanded query), Stage2 rerank (strict query).
+    # Two-stage retrieval (deprecated: never promoted; retrieval plane uses fixed-pool rerank only).
     two_stage_retrieval: bool = False
     stage1_admission_k: int = 100
     stage1_query_mode: str = "question_plus_summary"  # question_only | question_plus_summary | weighted
     stage2_query_mode: str = "question_only"  # question_only | question_plus_summary | weighted
     stage2_rerank_method: str = "dense"  # dense | cross_encoder
-    # Raw-first merge-rerank policy:
-    # 1) retrieve + rerank on unmerged units
-    # 2) promote to merged candidates
-    # 3) rerank merged candidates
+    # Raw-first merge-rerank (deprecated: never promoted; retrieval plane uses single merged corpus + rerank).
     raw_first_merge_rerank: bool = False
     raw_stage1_admission_k: int = 100
     raw_merge_rerank_top_k: int = 20
@@ -231,7 +269,7 @@ class ExperimentConfig:
     raw_merge_coverage_bonus: float = 0.0
     # R7: Per-corpus retrieval policies (corpus_id -> RetrievalPolicy). Optional.
     retrieval_policies: Optional[Dict[str, RetrievalPolicy]] = None
-    # R9: Unit-type soft boost. Add delta to score when query-type heuristic matches unit_type (0=off).
+    # R9: Unit-type soft boost (deprecated: never promoted; retrieval plane has no heuristic boosts).
     unit_type_boost: float = 0.0
     # R2: Parent-fetch enrichment (depth, char_cap, enabled).
     parent_fetch_depth: int = 1
@@ -251,23 +289,23 @@ class ExperimentConfig:
     llm_rerank_max_output_tokens: int = 1200
     llm_rerank_cache_dir: str = ""
     llm_rerank_max_workers: int = 8  # concurrent rerank calls (0 => sequential)
-    # R6: Expand candidate set using co_retrieval_hints (when hint.related_topic matches unit topic_tags).
+    # R6: Co-retrieval expand (deprecated: never promoted; retrieval plane has no post-retrieval expansions).
     co_retrieval_expand: bool = False
     # Phase-0 metric contract and guardrails.
     guardrail_t1_mrr_drop_max: float = 0.02
-    # A1: retrieval-only clause-family projection substrate.
+    # A1: Clause-family projection (deprecated as runtime flag; retrieval plane uses shaped Stage B only).
     clause_family_projection: bool = False
     clause_family_window: int = 2
     clause_family_max_units: int = 6
     clause_family_direction: str = "symmetric"
-    # B1: deterministic cross-reference sidecar expansion.
+    # B1: Crossref sidecar expand (deprecated: never promoted; no post-retrieval expansions in retrieval plane).
     crossref_sidecar_expand: bool = False
     crossref_expand_top_k: int = 10
     crossref_expand_per_hit: int = 2
     crossref_expand_total_cap: int = 20
-    # H7: minimal deterministic A′ co-retrieval hint generation.
+    # H7: A′ minimal co-retrieval (deprecated: never promoted).
     a_prime_generate_minimal: bool = False
-    # A1.2: dual-list fusion (Index_U canonical + Index_F clause-family).
+    # A1.2: Dual-list fusion (deprecated: never promoted; retrieval plane uses single index).
     dual_list_fusion: bool = False
     dual_list_ku: int = 12
     dual_list_kf: int = 12
@@ -276,7 +314,7 @@ class ExperimentConfig:
     dual_list_family_window: int = 3
     dual_list_family_max_units: int = 6
     dual_list_family_direction: str = "symmetric"
-    # B1 replacement: dependency-oriented pairing edges (delta→base, exception→base).
+    # B1: Dependency pairing expand (deprecated: never promoted; no post-retrieval expansions).
     dependency_pairing_expand: bool = False
     dependency_pairing_emax: int = 6
     # Optional path to baseline metrics.json for report delta section.
@@ -286,8 +324,7 @@ class ExperimentConfig:
     chunk_quality_max_short_le_40_rate: float = 0.10
     chunk_quality_max_short_le_80_rate: float = 0.20
     chunk_quality_max_duplicate_text_entry_rate: float = 0.05
-    # Embedding metadata enrichment: baseline (text only) | path | type | table_title | topic_tags | co_retrieval_hints | page | full.
-    # When set, run_id gets _embed_{profile} suffix so embeddings are recomputed per profile.
+    # Embedding metadata enrichment (deprecated: no gain per EXPERIMENT-Embedding-Metadata; baseline text-only).
     embedding_enrichment_profile: Optional[str] = None
     # Embedding recipe mode used for bakeoff reproducibility.
     # standardized: uniform pipeline across models
@@ -307,6 +344,8 @@ class ExperimentConfig:
     pairing: PairingConfig = field(default_factory=PairingConfig)
     # Query enhancement (pre-retrieval expansion/decomposition).
     query_enhancement: QueryEnhancementConfig = field(default_factory=QueryEnhancementConfig)
+    # Bounded retrieval controller v0 (when enabled, runs instead of query_enhancement path).
+    controller_v0: ControllerV0Config = field(default_factory=ControllerV0Config)
     # Optional response generation evaluation pass.
     answer_evaluation: AnswerEvaluationConfig = field(default_factory=AnswerEvaluationConfig)
     # Optional LLM review pass to auto-ground benchmark gold from retrieval results.
@@ -454,29 +493,33 @@ class ExperimentConfig:
                 raise ValueError(f"query_enhancement.profile_path not found: {qe.profile_path}")
             if qe.fusion_mode == "only_add":
                 oa = qe.only_add
-                if oa.baseline_keep_n < 1:
-                    raise ValueError("query_enhancement.only_add.baseline_keep_n must be >= 1")
                 if oa.variant_k_per_query < 1:
                     raise ValueError("query_enhancement.only_add.variant_k_per_query must be >= 1")
                 if oa.admission_cutoff < 0:
                     raise ValueError("query_enhancement.only_add.admission_cutoff must be >= 0 (0 uses default cutoff)")
                 if oa.append_score_band < 0:
                     raise ValueError("query_enhancement.only_add.append_score_band must be >= 0")
-                if oa.prefix_lock_n < 1:
-                    raise ValueError("query_enhancement.only_add.prefix_lock_n must be >= 1")
-                if oa.prefix_lock_n > oa.baseline_keep_n:
-                    raise ValueError("query_enhancement.only_add.prefix_lock_n must be <= baseline_keep_n")
                 if oa.tail_rerank not in ("none", "lexical", "cross_encoder", "cascade"):
                     raise ValueError("query_enhancement.only_add.tail_rerank must be none/lexical/cross_encoder/cascade")
                 if oa.tail_rerank_window < 1:
                     raise ValueError("query_enhancement.only_add.tail_rerank_window must be >= 1")
                 eval_k = max(self.top_k) if self.top_k else 0
-                if eval_k and oa.baseline_keep_n < eval_k:
-                    raise ValueError(
-                        f"query_enhancement.only_add.baseline_keep_n must be >= max(top_k)={eval_k} for only_add safety"
-                    )
-                if oa.admission_cutoff and oa.admission_cutoff < oa.baseline_keep_n:
-                    raise ValueError("query_enhancement.only_add.admission_cutoff must be >= baseline_keep_n (or 0)")
+                if oa.include_original:
+                    if oa.baseline_keep_n < 1:
+                        raise ValueError("query_enhancement.only_add.baseline_keep_n must be >= 1 when include_original=true")
+                    if oa.prefix_lock_n < 1:
+                        raise ValueError("query_enhancement.only_add.prefix_lock_n must be >= 1 when include_original=true")
+                    if oa.prefix_lock_n > oa.baseline_keep_n:
+                        raise ValueError("query_enhancement.only_add.prefix_lock_n must be <= baseline_keep_n")
+                    if eval_k and oa.baseline_keep_n < eval_k:
+                        raise ValueError(
+                            f"query_enhancement.only_add.baseline_keep_n must be >= max(top_k)={eval_k} for only_add safety"
+                        )
+                    if oa.admission_cutoff and oa.admission_cutoff < oa.baseline_keep_n:
+                        raise ValueError("query_enhancement.only_add.admission_cutoff must be >= baseline_keep_n (or 0)")
+                else:
+                    # Decomposition-only: baseline_keep_n/prefix_lock_n ignored at runtime (orchestrator passes 0).
+                    pass
 
         ae = self.answer_evaluation
         if ae.enabled and not ae.llm_model_id.strip():
@@ -530,6 +573,7 @@ class ExperimentConfig:
         dual_list = _parse_dual_list(data)
         pairing = _parse_pairing(data)
         query_enhancement = _parse_query_enhancement(data)
+        controller_v0 = _parse_controller_v0(data)
         answer_evaluation = _parse_answer_evaluation(data)
         auto_gold_review = _parse_auto_gold_review(data)
         cfg = cls(
@@ -637,11 +681,47 @@ class ExperimentConfig:
             dual_list=dual_list,
             pairing=pairing,
             query_enhancement=query_enhancement,
+            controller_v0=controller_v0,
             answer_evaluation=answer_evaluation,
             auto_gold_review=auto_gold_review,
             allow_benchmark_contract_mismatch=bool(data.get("allow_benchmark_contract_mismatch", False)),
         )
         return cfg
+
+
+def _parse_controller_v0(data: Dict[str, Any]) -> ControllerV0Config:
+    """Parse controller v0 section from experiment YAML."""
+    raw = data.get("controller") or data.get("controller_v0")
+    if not isinstance(raw, dict):
+        return ControllerV0Config()
+    budgets_raw = raw.get("budgets") or {}
+    budgets = ControllerBudgets(
+        max_controller_hops=int(budgets_raw.get("max_controller_hops", 2)),
+        max_rewrite_variants=int(budgets_raw.get("max_rewrite_variants", 3)),
+        max_subqueries_per_rewrite=int(budgets_raw.get("max_subqueries_per_rewrite", 3)),
+        max_expansion_anchors=int(budgets_raw.get("max_expansion_anchors", 3)),
+        max_structural_adds_per_anchor=int(budgets_raw.get("max_structural_adds_per_anchor", 5)),
+        max_typed_adds_per_anchor=int(budgets_raw.get("max_typed_adds_per_anchor", 3)),
+        max_candidates_pre_rerank=int(budgets_raw.get("max_candidates_pre_rerank", 40)),
+        max_llm_calls_retrieval_path=int(budgets_raw.get("max_llm_calls_retrieval_path", 2)),
+    )
+    operators = dict(raw.get("operators") or {})
+    failure_signals = dict(raw.get("failure_signals") or {})
+    trace_raw = raw.get("trace") or {}
+    trace_enabled = bool(trace_raw.get("enabled", True)) if isinstance(trace_raw, dict) else True
+    emit_candidate_journal = bool(trace_raw.get("emit_candidate_journal", True)) if isinstance(trace_raw, dict) else True
+    emit_gold_diagnostics = bool(trace_raw.get("emit_gold_diagnostics", True)) if isinstance(trace_raw, dict) else True
+    return ControllerV0Config(
+        enabled=bool(raw.get("enabled", False)),
+        version=str(raw.get("version", "v0")),
+        policy=str(raw.get("policy", "linear_v0")),
+        budgets=budgets,
+        operators=operators,
+        failure_signals=failure_signals,
+        trace_enabled=trace_enabled,
+        emit_candidate_journal=emit_candidate_journal,
+        emit_gold_diagnostics=emit_gold_diagnostics,
+    )
 
 
 def _parse_retrieval_policies(data: Any) -> Optional[Dict[str, RetrievalPolicy]]:
@@ -732,6 +812,7 @@ def _parse_query_enhancement(data: Dict[str, Any]) -> QueryEnhancementConfig:
         only_add_cfg = OnlyAddFusionConfig()
         if isinstance(raw_only_add, dict):
             only_add_cfg = OnlyAddFusionConfig(
+                include_original=bool(raw_only_add.get("include_original", only_add_cfg.include_original)),
                 baseline_keep_n=int(raw_only_add.get("baseline_keep_n", only_add_cfg.baseline_keep_n)),
                 variant_k_per_query=int(raw_only_add.get("variant_k_per_query", only_add_cfg.variant_k_per_query)),
                 admission_cutoff=int(raw_only_add.get("admission_cutoff", only_add_cfg.admission_cutoff)),

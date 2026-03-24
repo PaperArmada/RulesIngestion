@@ -15,7 +15,13 @@ def build_cli_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Retrieval Lab: embed substrate (once) and/or run retrieval evals over EvidenceUnits.",
     )
-    parser.add_argument("--config", type=str, help="Path to experiment YAML config")
+    parser.add_argument(
+        "config_file",
+        nargs="?",
+        default=None,
+        help="Path to experiment YAML config (optional positional; can also use --config)",
+    )
+    parser.add_argument("--config", type=str, dest="config", help="Path to experiment YAML config")
     parser.add_argument("--experiment-name", type=str, default=None, help="Override experiment_name from config")
     parser.add_argument("--substrate", type=str, help="Substrate path (overrides config)")
     parser.add_argument("--document-id", type=str, default="DnD_PHB_5.5", help="Document ID for substrate")

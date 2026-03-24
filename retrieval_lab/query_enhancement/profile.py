@@ -69,8 +69,12 @@ class PoliciesConfig:
 @dataclass
 class DecompositionConfig:
     enabled: bool = False
-    max_subqueries: int = 3
     when: str = "multi_hop_only"  # multi_hop_only | always | never
+    model_id: str = ""
+    reasoning_effort: str = "none"
+    prompt_template_id: str = "retrieval_query_decomposition_v2"
+    output_schema_version: str = "v1"
+    max_subqueries: Optional[int] = None  # legacy: ignored by Responses-based decomposition
 
 
 @dataclass
@@ -196,8 +200,16 @@ def _profile_from_dict(data: Dict[str, Any]) -> QueryExpansionProfile:
     dec_raw = data.get("decomposition", {})
     decomposition = DecompositionConfig(
         enabled=bool(dec_raw.get("enabled", False)),
-        max_subqueries=int(dec_raw.get("max_subqueries", 3)),
         when=str(dec_raw.get("when", "multi_hop_only")),
+        model_id=str(dec_raw.get("model_id", "")),
+        reasoning_effort=str(dec_raw.get("reasoning_effort", "none")),
+        prompt_template_id=str(dec_raw.get("prompt_template_id", "retrieval_query_decomposition_v2")),
+        output_schema_version=str(dec_raw.get("output_schema_version", "v1")),
+        max_subqueries=(
+            int(dec_raw["max_subqueries"])
+            if dec_raw.get("max_subqueries") is not None
+            else None
+        ),
     )
 
     llm_raw = data.get("llm_rewrite", {})
@@ -267,6 +279,8 @@ def validate_profile(profile: QueryExpansionProfile) -> List[str]:
         errors.append("max_expanded_queries must be >= 1")
     if profile.decomposition.when not in ("multi_hop_only", "always", "never"):
         errors.append(f"invalid decomposition.when: {profile.decomposition.when}")
+    if profile.decomposition.reasoning_effort not in ("none", "low", "medium", "high"):
+        errors.append(f"invalid decomposition.reasoning_effort: {profile.decomposition.reasoning_effort}")
     if profile.llm_rewrite.enabled:
         if not profile.llm_rewrite.model_id:
             errors.append("llm_rewrite.model_id required when llm_rewrite is enabled")

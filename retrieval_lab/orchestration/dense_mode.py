@@ -8,7 +8,7 @@ import logging
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
@@ -496,8 +496,12 @@ def _run_ranking_pipeline(
     qe_only_add: Any = None,
     qe_enhance_query_ids: Any = None,
     qe_cache: Any = None,
+    controller_config: Any = None,
 ) -> Dict[str, Any]:
     """Run query encoding, ranking, reranking, and post-retrieval expansions."""
+    # When controller v0 is enabled, use baseline path only (no QE).
+    if controller_config and getattr(controller_config, "enabled", False):
+        use_qe = False
     if use_semantic_grounding:
         summary_texts = [(q.get("expected_answer_summary") or "").strip() for q in flat_queries]
         summary_embeddings = encode_texts_fn(
@@ -544,6 +548,7 @@ def _run_ranking_pipeline(
     qe_expansion_logs: Optional[List[Any]] = None
     qe_fusion_debug: Optional[List[Dict[str, Any]]] = None
     hybrid_contribution_payload: Optional[Dict[str, Any]] = None
+    controller_trace: Optional[List[Dict[str, Any]]] = None
     if use_qe:
         from retrieval_lab.query_enhancement.multi_query import (
             expand_query_texts,
@@ -552,7 +557,6 @@ def _run_ranking_pipeline(
             fuse_multi_query_rankings,
             fuse_union_rerank,
         )
-        baseline_failure_types = qe_enhance_query_ids if isinstance(qe_enhance_query_ids, dict) else None
         if qe_mode == "decompose":
             # Tier-gated decomposition: only apply to T2/T3; keep T1 stable.
             per_query_modes: List[str] = []
@@ -561,11 +565,7 @@ def _run_ranking_pipeline(
                 if tier not in ("T2", "T3"):
                     per_query_modes.append("none")
                     continue
-                if baseline_failure_types is not None:
-                    qid = str(q.get("id", ""))
-                    # Recommended policy: decomposition only for retrieval_miss.
-                    per_query_modes.append("decompose" if (qid and baseline_failure_types.get(qid) == "retrieval_miss") else "none")
-                elif qe_enhance_query_ids is not None:
+                if isinstance(qe_enhance_query_ids, set):
                     qid = str(q.get("id", ""))
                     per_query_modes.append("decompose" if (qid and qid in qe_enhance_query_ids) else "none")
                 else:
@@ -628,12 +628,17 @@ def _run_ranking_pipeline(
         all_sim = np.dot(all_v_norm, c_norm.T)
 
         # Determine fusion knobs (defaults when qe_only_add is None).
+        # When include_original is False (decomposition-only), do not include original retrieval in the final list.
         eval_k = max(config.top_k)
-        baseline_keep_n = int(getattr(qe_only_add, "baseline_keep_n", eval_k))
-        baseline_keep_n = max(baseline_keep_n, eval_k)
+        include_original = bool(getattr(qe_only_add, "include_original", True))
+        if include_original:
+            baseline_keep_n = int(getattr(qe_only_add, "baseline_keep_n", eval_k))
+            baseline_keep_n = max(baseline_keep_n, eval_k)
+        else:
+            baseline_keep_n = 0
         variant_k_per_query = int(getattr(qe_only_add, "variant_k_per_query", 20))
         admission_cutoff = int(getattr(qe_only_add, "admission_cutoff", 0))
-        prefix_lock_n = int(getattr(qe_only_add, "prefix_lock_n", baseline_keep_n))
+        prefix_lock_n = int(getattr(qe_only_add, "prefix_lock_n", baseline_keep_n)) if include_original else 0
         tail_rerank = str(getattr(qe_only_add, "tail_rerank", "none"))
         tail_rerank_window = int(getattr(qe_only_add, "tail_rerank_window", 50))
         append_score_band = float(getattr(qe_only_add, "append_score_band", 1e-6))
@@ -890,6 +895,37 @@ def _run_ranking_pipeline(
             eval_k=eval_k,
         )
 
+    # Bounded controller v0: run one structural expansion step over baseline (no QE).
+    if controller_config and getattr(controller_config, "enabled", False):
+        from retrieval_lab.controller.engine import run_controller_v0
+
+        budgets = getattr(controller_config, "budgets", None)
+        max_cap = int(budgets.max_candidates_pre_rerank) if budgets else 40
+        gold_per_query: Optional[List[Set[str]]] = None
+        if getattr(controller_config, "emit_gold_diagnostics", True):
+            gold_per_query = []
+            for q in grounded_queries:
+                gids = set(q.get("gold_unit_ids") or [])
+                gids.update(q.get("required_gold") or [])
+                for rid in q.get("_required_gold") or []:
+                    gids.add(rid)
+                gold_per_query.append(gids)
+        ranked_lists, score_lists, controller_trace = run_controller_v0(
+            ranked_lists=ranked_lists,
+            score_lists=score_lists,
+            corpus=corpus,
+            id_to_index=id_to_index,
+            controller_config=controller_config,
+            max_candidates_pre_rerank=max_cap,
+            gold_unit_ids_per_query=gold_per_query,
+        )
+        logger.info(
+            "Controller v0 applied: %d queries, trace_enabled=%s",
+            len(ranked_lists),
+            getattr(controller_config, "trace_enabled", True),
+        )
+
+    # Rerank runs only after decomposition/fusion when QE is used; ranked_lists is already the fused list.
     reranker_model = getattr(config, "reranker", None)
     llm_rerank_debug: Optional[List[Dict[str, Any]]] = None
     if config.retrieval_mode == "hybrid+rerank" and not reranker_model:
@@ -1446,6 +1482,8 @@ def _run_ranking_pipeline(
         result["llm_rerank_debug"] = llm_rerank_debug
     if hybrid_contribution_payload is not None:
         result["hybrid_contribution"] = hybrid_contribution_payload
+    if controller_trace is not None:
+        result["controller_trace"] = controller_trace
     return result
 
 
@@ -1643,6 +1681,7 @@ def run_dense_mode(
     pairing_instrumentation_by_model: Dict[str, Any] = {}
     embedding_provenance_by_model: Dict[str, Any] = {}
     hybrid_contribution_by_model: Dict[str, Any] = {}
+    controller_trace_by_model: Dict[str, Any] = {}
     bm25_index_trace: Optional[Dict[str, Any]] = None
     mongo_uri = config.mongo_uri
     id_to_text = {u["id"]: u.get("text", "") for u in corpus}
@@ -1798,6 +1837,12 @@ def run_dense_mode(
             family_corpus_ids=family_corpus_ids,
             run_id_family=run_id_family,
         )
+        controller_config = getattr(config, "controller_v0", None)
+        _qe_profile = qe_profile
+        _qe_mode = qe_mode
+        if controller_config and getattr(controller_config, "enabled", False):
+            _qe_profile = None
+            _qe_mode = "none"
         rank_out = _run_ranking_pipeline(
             config=config,
             flags=flags,
@@ -1825,12 +1870,13 @@ def run_dense_mode(
             pairing_edges=pairing_edges,
             build_expanded_texts_fn=build_expanded_texts_fn,
             apply_unit_type_boost_fn=apply_unit_type_boost_fn,
-            qe_profile=qe_profile,
-            qe_mode=qe_mode,
+            qe_profile=_qe_profile,
+            qe_mode=_qe_mode,
             qe_fusion_mode=qe_fusion_mode,
             qe_only_add=qe_only_add,
             qe_enhance_query_ids=qe_enhance_query_ids,
             qe_cache=qe_cache,
+            controller_config=controller_config,
         )
         grounded_queries = rank_out["grounded_queries"]
         all_grounding_audit = rank_out["all_grounding_audit"]
@@ -1838,6 +1884,8 @@ def run_dense_mode(
             pairing_instrumentation_by_model[model_id] = rank_out["pairing_payload"]
         if rank_out.get("hybrid_contribution"):
             hybrid_contribution_by_model[model_id] = rank_out["hybrid_contribution"]
+        if rank_out.get("controller_trace") is not None:
+            controller_trace_by_model[model_id] = rank_out["controller_trace"]
 
         model_out = _build_metrics_and_reviews(
             model_id=model_id,
@@ -1877,5 +1925,6 @@ def run_dense_mode(
         "pairing_instrumentation_by_model": pairing_instrumentation_by_model,
         "embedding_provenance_by_model": embedding_provenance_by_model,
         "hybrid_contribution_by_model": hybrid_contribution_by_model,
+        "controller_trace_by_model": controller_trace_by_model,
         "bm25_index_trace": bm25_index_trace,
     }

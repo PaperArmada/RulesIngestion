@@ -1,0 +1,39 @@
+# PHB5e multihop decomposition via Responses API structured schema, codex-locked K=30
+experiment_name: "phb5e_multihop_e6_responses_decompose_qvocab_codex_k30"
+retrieval_mode: hybrid
+substrate_path: "out/DnD_PHB_5.5"
+document_id: "DnD_PHB_5.5"
+substrate_version: "v2"
+query_batches:
+  - "evals/retrieval/PHB5e/dnd_5e_2024_multihop_working_set_benchmark.json"
+  - "evals/retrieval/PHB5e/dnd_5e_2024_multihop_microbundle_working_set_benchmark.json"
+models:
+  - all-mpnet-base-v2
+top_k: [1, 3, 5, 10, 20, 30]
+output_dir: "out/retrieval_lab/experiments"
+reuse_embeddings: true
+seed: 42
+gold_semantic_top_n: 5
+gold_jaccard_threshold: 0.15
+batch_size: 16
+min_chars: 200
+merge_chunks: true
+merge_max_chars: 2000
+bm25_budget: 100
+dense_budget: 100
+hybrid_fusion_method: cc
+cc_lambda: 0.7
+cc_bm25_normalization: minmax
+llm_rerank_enabled: false
+auto_gold_review:
+  enabled: false
+query_enhancement:
+  enabled: true
+  mode: decompose
+  profile_path: "retrieval_lab/query_enhancement/profiles/phb5e_decompose_profile_codex.json"
+  fusion_mode: only_add
+  only_add:
+    baseline_keep_n: 30
+    variant_k_per_query: 20
+    admission_cutoff: 50
+    prefix_lock_n: 30

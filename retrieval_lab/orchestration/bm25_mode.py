@@ -75,10 +75,7 @@ def run_bm25_mode(
                 if tier not in ("T2", "T3"):
                     per_query_modes.append("none")
                     continue
-                if isinstance(qe_enhance_query_ids, dict):
-                    qid = str(q.get("id", ""))
-                    per_query_modes.append("decompose" if (qid and qe_enhance_query_ids.get(qid) == "retrieval_miss") else "none")
-                elif qe_enhance_query_ids is not None:
+                if isinstance(qe_enhance_query_ids, set):
                     qid = str(q.get("id", ""))
                     per_query_modes.append("decompose" if (qid and qid in qe_enhance_query_ids) else "none")
                 else:
@@ -97,12 +94,17 @@ def run_bm25_mode(
         corpus_ids_arr = np.asarray(corpus_ids, dtype=object)
 
         # Resolve fusion knobs (defaults when qe_only_add is None).
+        # When include_original is False (decomposition-only), do not include original retrieval in the final list.
         eval_k = max(config.top_k)
-        baseline_keep_n = int(getattr(qe_only_add, "baseline_keep_n", eval_k))
-        baseline_keep_n = max(baseline_keep_n, eval_k)
+        include_original = bool(getattr(qe_only_add, "include_original", True))
+        if include_original:
+            baseline_keep_n = int(getattr(qe_only_add, "baseline_keep_n", eval_k))
+            baseline_keep_n = max(baseline_keep_n, eval_k)
+        else:
+            baseline_keep_n = 0
         variant_k_per_query = int(getattr(qe_only_add, "variant_k_per_query", 20))
         admission_cutoff = int(getattr(qe_only_add, "admission_cutoff", 0))
-        prefix_lock_n = int(getattr(qe_only_add, "prefix_lock_n", baseline_keep_n))
+        prefix_lock_n = int(getattr(qe_only_add, "prefix_lock_n", baseline_keep_n)) if include_original else 0
         tail_rerank = str(getattr(qe_only_add, "tail_rerank", "none"))
         tail_rerank_window = int(getattr(qe_only_add, "tail_rerank_window", 50))
         append_score_band = float(getattr(qe_only_add, "append_score_band", 1e-6))
@@ -219,7 +221,7 @@ def run_bm25_mode(
         config=expansion_cfg,
     )
 
-    # Diagnostic: rerank tail segment (after expansion/boost), then enforce prefix lock.
+    # Rerank only after decomposition/fusion: tail_rerank operates on the fused list.
     if use_qe and qe_fusion_mode == "only_add" and (qe_fusion_debug or []) and tail_rerank != "none":
         from retrieval_lab.query_enhancement.multi_query import lexical_rerank_tail_segment
 

@@ -1,0 +1,51 @@
+{
+  "profile_id": "phb5e_decompose_v2",
+  "corpus_id": "DnD_PHB_5.5",
+  "corpus_hash": "",
+  "profile_version": "0.1.0",
+  "normalization": {
+    "lowercase": true,
+    "unicode_nfkc": true,
+    "strip_punct": false,
+    "dice_normalization": true,
+    "stopword_policy": "none"
+  },
+  "synonym_sets": [],
+  "term_boosters": [],
+  "allowed_vocab": {
+    "top_keywords": [],
+    "headings": [],
+    "entities": []
+  },
+  "policies": {
+    "max_expanded_queries": 3,
+    "include_original": true,
+    "require_facet_diversity": true,
+    "drift_guard": {
+      "enabled": false,
+      "method": "lexical_overlap",
+      "threshold": 0.3
+    }
+  },
+  "decomposition": {
+    "enabled": true,
+    "when": "always",
+    "model_id": "",
+    "reasoning_effort": "low",
+    "prompt_template_id": "retrieval_query_decomposition_v2",
+    "output_schema_version": "v1"
+  },
+  "llm_rewrite": {
+    "enabled": false,
+    "model_id": "",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "prompt_template_id": "",
+    "prompt_hash": "",
+    "output_schema_version": "v1"
+  },
+  "cache": {
+    "enabled": true,
+    "cache_dir": ".qe_cache"
+  }
+}

@@ -5,9 +5,13 @@ from __future__ import annotations
 import json
 import logging
 import re
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from retrieval_lab.query_enhancement.cache import QueryEnhancementCache
+from retrieval_lab.query_enhancement.decomposition import (
+    decomposition_cache_signature,
+    decompose_query,
+)
 from retrieval_lab.query_enhancement.profile import (
     QueryExpansionProfile,
     SynonymSet,
@@ -41,6 +45,14 @@ Respond with ONLY valid JSON matching this schema:
 VALID_MODES = ("none", "dict", "llm", "llm+dict", "decompose")
 
 
+def _cache_signature(profile: QueryExpansionProfile, mode: str) -> Tuple[str, str]:
+    if mode == "decompose":
+        return decomposition_cache_signature(profile)
+    if "llm" in mode:
+        return profile.llm_rewrite.model_id, profile.llm_rewrite.prompt_hash
+    return "", ""
+
+
 def enhance_queries(
     query_texts: List[str],
     profile: QueryExpansionProfile,
@@ -69,6 +81,7 @@ def enhance_queries(
     results: List[List[Dict[str, Any]]] = []
     for qt in query_texts:
         q_norm = normalize_query(qt, profile)
+        cache_model_id, cache_prompt_hash = _cache_signature(profile, mode)
 
         cached = None
         if cache is not None:
@@ -78,8 +91,8 @@ def enhance_queries(
                 profile_hash=profile_hash,
                 query_norm=q_norm,
                 mode=mode,
-                model_id=profile.llm_rewrite.model_id if "llm" in mode else "",
-                prompt_hash=profile.llm_rewrite.prompt_hash if "llm" in mode else "",
+                model_id=cache_model_id,
+                prompt_hash=cache_prompt_hash,
             )
         if cached is not None:
             results.append(cached)
@@ -102,7 +115,8 @@ def enhance_queries(
             sub_queries = _decompose(qt, profile)
             expansions.extend(sub_queries)
 
-        expansions = _dedupe_and_cap(expansions, max_expansions, include_original=profile.policies.include_original)
+        max_total = None if mode == "decompose" else max_expansions
+        expansions = _dedupe_and_cap(expansions, max_total, include_original=profile.policies.include_original)
 
         if cache is not None:
             cache.put(
@@ -112,8 +126,8 @@ def enhance_queries(
                 query_norm=q_norm,
                 mode=mode,
                 expansions=expansions,
-                model_id=profile.llm_rewrite.model_id if "llm" in mode else "",
-                prompt_hash=profile.llm_rewrite.prompt_hash if "llm" in mode else "",
+                model_id=cache_model_id,
+                prompt_hash=cache_prompt_hash,
             )
 
         results.append(expansions)
@@ -253,11 +267,7 @@ def _decompose(query: str, profile: QueryExpansionProfile) -> List[Dict[str, Any
     if not _should_decompose(query, profile):
         return []
 
-    max_sub = profile.decomposition.max_subqueries
-
-    if profile.llm_rewrite.enabled:
-        return _llm_decompose(query, profile, max_sub)
-    return _heuristic_decompose(query, max_sub)
+    return decompose_query(query, profile)
 
 
 _CONJUNCTION_PATTERNS = [
@@ -301,77 +311,9 @@ def _should_decompose(query: str, profile: QueryExpansionProfile) -> bool:
     return False
 
 
-def _heuristic_decompose(query: str, max_sub: int) -> List[Dict[str, Any]]:
-    """Split query on conjunctions into subqueries."""
-    parts = re.split(r"\band\b|\bwhile\b|\bduring\b|\bbut\b", query, flags=re.IGNORECASE)
-    parts = [p.strip() for p in parts if p.strip() and len(p.strip().split()) >= 3]
-
-    if len(parts) <= 1:
-        return []
-
-    subqueries: List[Dict[str, Any]] = []
-    for i, part in enumerate(parts[:max_sub]):
-        if not part.endswith("?"):
-            part = part.rstrip(".") + "?"
-        subqueries.append({
-            "q": part,
-            "source": "decompose",
-            "intent": f"subquery:{i+1}",
-            "notes": "heuristic_split",
-        })
-    return subqueries
-
-
-_DECOMPOSE_PROMPT = """You are a TTRPG rules retrieval assistant. The following question requires information from multiple rule sections. Break it into {n} simpler subquestions, each targeting a single rule concept.
-
-QUESTION: {query}
-
-Respond with ONLY valid JSON:
-{{"subqueries": [{{"q": "simpler subquestion", "intent": "brief aspect label"}}]}}"""
-
-
-def _llm_decompose(query: str, profile: QueryExpansionProfile, max_sub: int) -> List[Dict[str, Any]]:
-    """Use LLM to decompose a multi-hop query into subqueries."""
-    prompt = _DECOMPOSE_PROMPT.format(n=max_sub, query=query)
-    try:
-        from openai import OpenAI
-        client = OpenAI()
-        response = client.chat.completions.create(
-            model=profile.llm_rewrite.model_id,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=profile.llm_rewrite.temperature,
-            top_p=profile.llm_rewrite.top_p,
-            response_format={"type": "json_object"},
-        )
-        raw = response.choices[0].message.content or ""
-        data = json.loads(raw)
-    except Exception as e:
-        logger.error("LLM decomposition failed: %s", e)
-        return _heuristic_decompose(query, max_sub)
-
-    subqueries_raw = data.get("subqueries", [])
-    if not isinstance(subqueries_raw, list):
-        return _heuristic_decompose(query, max_sub)
-
-    result: List[Dict[str, Any]] = []
-    for item in subqueries_raw[:max_sub]:
-        if not isinstance(item, dict) or "q" not in item:
-            continue
-        q = str(item["q"]).strip()
-        if not q:
-            continue
-        result.append({
-            "q": q,
-            "source": "decompose",
-            "intent": str(item.get("intent", f"subquery:{len(result)+1}")),
-            "notes": "llm_decompose",
-        })
-    return result if result else _heuristic_decompose(query, max_sub)
-
-
 def _dedupe_and_cap(
     expansions: List[Dict[str, Any]],
-    max_total: int,
+    max_total: Optional[int],
     include_original: bool,
 ) -> List[Dict[str, Any]]:
     """Deduplicate by normalized query text, preserve original first, then cap."""
@@ -384,6 +326,9 @@ def _dedupe_and_cap(
             continue
         seen.add(key)
         deduped.append(exp)
+
+    if max_total is None:
+        return deduped
 
     # Original always counts; cap the rest
     if include_original and deduped:
