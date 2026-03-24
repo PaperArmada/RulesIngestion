@@ -446,11 +446,100 @@ If all five hold, this document is ready to become the canonical v0 design note 
 
 ---
 
-## 8. Suggested immediate next artifact
+## 8. Retrieval gate and runnable artifacts
 
-If this draft is accepted, the next document should define:
+Use the following minimal files for the retrieval grounding gate:
 
-1. the evidence-backed source text for `occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception`
-2. the bounded collection / draft / verify loop for producing `AtomicRuleDraft`
-3. one tiny golden fixture for deterministic placement evaluation
+- Benchmark input: `evals/retrieval/PHB5e/dnd_5e_2024_occupancy_vertical_slice_v0_benchmark.json`
+- Experiment config: `retrieval_lab/experiments/hybrid/phb5e_occupancy_vertical_slice_v0.yaml`
+
+Run from `RulesIngestion/`:
+
+```bash
+uv run python -m retrieval_lab.run_experiment retrieval_lab/experiments/hybrid/phb5e_occupancy_vertical_slice_v0.yaml
+```
+
+### 8.1 Expected artifacts
+
+For the selected evaluation surface, require:
+
+- `metrics.<surface>.json`
+- `per_query.<surface>.json`
+- `retrieved_chunks.<surface>.json`
+- `prod_readiness.json`
+
+### 8.2 Retrieval pass/fail gate
+
+Pass only if:
+
+1. `ground_occ_2024_001` retrieves the default-branch anchor as required gold.
+2. `ground_occ_2024_002` retrieves the ally-prone branch anchor as required gold.
+3. Both are visible in the selected scoring surface artifacts.
+
+Fail if either required anchor is not present in candidates at the configured rank depth.
+
+---
+
+## 9. Bounded collect/draft/verify loop (AtomicRuleDraft)
+
+The first rule draft must be emitted through a deterministic three-step loop.
+
+### 9.1 Collect
+
+- Input: grounded EvidenceUnit refs from the retrieval gate (`ground_occ_2024_001`, `ground_occ_2024_002`).
+- Output: normalized evidence set with stable ordering by `unit_id`.
+- Constraint: no retrieval-only projection ids are admitted as sources.
+
+### 9.2 Draft
+
+Emit one `AtomicRuleDraft` with:
+
+- `rule_id`: `occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception`
+- `rule_kind`: `forbid_end_move_in_occupied_cell_with_ally_prone_exception`
+- `ruleset_id`: `dnd5e_2024_phb_occupancy_v0`
+- `source_evidence_refs`: exact collected EvidenceUnit ids
+- Statement semantics containing both branches:
+  - default occupied-space prohibition
+  - ally-prone allowance branch
+
+### 9.3 Verify
+
+- Re-run collect + draft with identical inputs/config.
+- Compare serialized JSON bytes.
+- Pass only if outputs are byte-identical and all source refs are unchanged.
+
+---
+
+## 10. Runtime contract and fixture gate
+
+### 10.1 Minimal runtime input contract
+
+The evaluator input must include:
+
+- acting entity
+- existing occupants in target cell
+- relation signal (`ally` | `hostile` | `neutral`)
+- ally-prone condition state
+- ruleset and intent (`end_move_in_cell`)
+
+### 10.2 Golden fixture
+
+Fixture file:
+
+- `evals/runtime/occupancy_vertical_slice_v0_fixtures.json`
+
+Required cases:
+
+1. **Reject branch:** occupied cell with no ally-prone allowance.
+2. **Accept branch:** occupied ally cell with ally-prone allowance met.
+
+### 10.3 Runtime pass/fail gate
+
+Pass only if both fixture cases produce deterministic outputs:
+
+- stable `decision`
+- stable `state_changed`
+- stable `applied_rule_ids`
+- stable `violations`
+- stable trace branch reason
 

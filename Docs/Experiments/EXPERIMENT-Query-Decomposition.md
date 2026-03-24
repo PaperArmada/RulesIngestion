@@ -2,7 +2,7 @@
 
 **Purpose:** Define and run a controlled experiment for `rewrite_query(..., decompose)` on the PHB 5e multihop surfaces: measure whether decomposition improves parent-to-microbundle coverage and parent-surface retrieval without material regression.
 
-**Status:** Design documented; E0/E6/E7 not yet run. Gates to be checked after implementation and runs.  
+**Status:** E0/E6/E7 executed on PHB5e multihop; decomposition gates failed on this surface (not promoted).  
 **Related:** [bounded_multihop_retrieval_design_memo.md](../Design/bounded_multihop_retrieval_design_memo.md) §10–11, §15.3, §15.3.1; [ARCHITECTURE-RERANKING-TOOLING.md](../Design/ARCHITECTURE-RERANKING-TOOLING.md) (rerank stage used in E7); `retrieval_lab/query_enhancement/`, `retrieval_lab/orchestration/dense_mode.py`.
 
 ---
@@ -77,13 +77,13 @@ Revisit after E0 and E6 (and optionally E7) are run. Mark each criterion satisfi
 
 | Criterion | Status | Evidence / notes |
 |-----------|--------|-------------------|
-| **Implement** | ⬜ Not yet | Harness can run `--enhancement-mode decompose`; confirm decompose path is wired for PHB 5e config, profile exists or stub returns bounded subqueries; parent–child coverage aggregation implemented or clearly scoped. |
-| **Run** | ⬜ Not yet | E0: run on parent + child benchmarks (or parent run only with coverage defined over children). E6: same with `--enhancement-mode decompose`. Same baseline-metrics comparison pattern as PF2E rerank. |
-| **Measure** | ⬜ Not yet | Parent-surface metrics (MRR, ReqFSH@10, failure buckets, T1 regression); parent-to-microbundle coverage (E0 vs E6). Optional: E7 same metrics. |
-| **Decide** | ⬜ Not yet | Promote decomposition (e.g. default for multihop on this surface) only if: (1) parent-to-microbundle coverage improves vs E0, (2) no material T1 regression on parent surface, (3) if answer-eval is run, no degradation of answer-level fidelity on selected surface. |
+| **Implement** | ✅ Done | Decompose path runs with `query_enhancement.mode=decompose` and profile `phb5e_decompose_v1`; E6/E7 reports show mode, profile hash, and attribution blocks. |
+| **Run** | ✅ Done | E0=`phb5e_multihop_e0_baseline_20260317_031847`; E6=`phb5e_multihop_e6_decompose_20260317_032027`; E7=`phb5e_multihop_e7_decompose_rerank_20260317_032400`. |
+| **Measure** | ✅ Done | E0→E6 regresses parent+child mixed surface: MRR 0.6195→0.5917, ReqFSH@10 0.6567→0.5821, Gold-in-candidates 1.0000→0.9403, retrieval_miss 0→4. Parent-to-microbundle hit@10 mean also drops: 0.9583→0.9375; E7 is identical to E6. |
+| **Decide** | ✅ Done | Do **not** promote decomposition for this PHB5e surface: required coverage regressed and no parent-to-microbundle coverage gain was observed. |
 
-**Verdict (to fill after runs):**  
-⬜ Gates not yet assessed. After E0 + E6: update table above, set verdict to **promoted** / **not promoted** / **inconclusive** and one-line reason.
+**Verdict:** **not promoted**.  
+One-line reason: E6/E7 did not improve parent-to-microbundle coverage and materially regressed parent-surface retrieval metrics versus E0.
 
 ---
 
@@ -112,13 +112,19 @@ Revisit after E0 and E6 (and optionally E7) are run. Mark each criterion satisfi
 
 After E0 and E6 (and optionally E7) are executed:
 
-1. **Implement:** Confirm decompose path is used in the run (e.g. enhancement_attribution or logs show `decompose`); note any stub or profile used.
-2. **Run:** Record run IDs: E0 = `____________________`, E6 = `____________________`, E7 = `____________________` (if run).
-3. **Measure:** Fill in:
-   - Parent surface (E0 vs E6): MRR delta, ReqFSH@10 delta, T1 regression (Y/N), failure-bucket deltas.
-   - Parent-to-microbundle coverage: E0 = ____, E6 = ____, (E7 = ____).
-4. **Decide:** State whether the three promotion conditions are met; set **Verdict** in §5 to **promoted** / **not promoted** / **inconclusive** and reason.
-5. **Artifacts:** Point to report and metrics paths (e.g. `out/retrieval_lab/experiments/...`).
+1. **Implement:** Confirmed (`mode=decompose`, profile `phb5e_decompose_v1`, hash `a8d4106caae61fad` in E6/E7 reports).  
+2. **Run IDs:** E0 = `phb5e_multihop_e0_baseline_20260317_031847`, E6 = `phb5e_multihop_e6_decompose_20260317_032027`, E7 = `phb5e_multihop_e7_decompose_rerank_20260317_032400`.
+3. **Measure (E0 -> E6, full_working_set):**
+   - Parent/child mixed surface: MRR **-0.0278** (0.6195 -> 0.5917), ReqFSH@10 **-0.0746** (0.6567 -> 0.5821), Gold-in-candidates **-0.0597** (1.0000 -> 0.9403), retrieval_miss **+4** (0 -> 4).
+   - Parent-only (query id prefix `phb5e_mh_ws_`): MRR **+0.0014** (0.5620 -> 0.5634), hit@10 **-0.0333** (0.9000 -> 0.8667).
+   - Microbundle-only (query id prefix `phb5e_mh_mb_`): MRR **-0.0517** (0.6662 -> 0.6145), hit@10 **-0.0270** (0.9459 -> 0.9189).
+   - Parent-to-microbundle coverage proxy (mean parent child hit@10): **-0.0208** (0.9583 -> 0.9375).
+   - E7 vs E6: no metric recovery; values are effectively unchanged at report precision.
+4. **Decide:** Promotion conditions are not met; verdict is **not promoted** for this PHB5e surface.
+5. **Artifacts:**
+   - `out/retrieval_lab/experiments/phb5e_multihop_e0_baseline_20260317_031847`
+   - `out/retrieval_lab/experiments/phb5e_multihop_e6_decompose_20260317_032027`
+   - `out/retrieval_lab/experiments/phb5e_multihop_e7_decompose_rerank_20260317_032400`
 
 ---
 

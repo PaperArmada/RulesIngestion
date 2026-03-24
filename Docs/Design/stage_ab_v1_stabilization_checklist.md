@@ -1,7 +1,7 @@
 # Stage A/B v1 Stabilization Checklist (Agent Handoff)
 
 **Status:** Historical handoff checklist. The resulting canonical documentation
-now lives in [v1/](v1/); keep this file for provenance, not as an active spec.
+now lives in the top-level design suite (start at [README.md](README.md)); keep this file for provenance, not as an active spec.
 
 **Purpose:** Convert current Stage A + Stage B + Retrieval Lab work into a **canonical v1** with stable contracts, archived legacy artifacts, cleaned code, and a robust regression test wall.  
 **Scope:** Stage A (Extraction + Prose Reconstruction), Stage B (Evidence Binding), Retrieval Lab (evaluation + comparisons), baseline eval suite.  

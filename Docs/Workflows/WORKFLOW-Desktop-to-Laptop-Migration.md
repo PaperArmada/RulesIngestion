@@ -205,6 +205,31 @@ Special caution:
   often include absolute desktop paths. Preserve them for provenance if needed,
   but do not treat them as portable source-of-truth files.
 
+### 5.1 Push the tracked commit
+
+Do not stop at a local commit. If the laptop will pull from git, you must push
+the tracked source-of-truth commit to the remote before leaving the desktop.
+
+Minimum command:
+
+```bash
+git push
+```
+
+If the branch does not yet track a remote branch:
+
+```bash
+git push -u origin HEAD
+```
+
+Explicit reminder:
+
+- a local-only commit is not a migration checkpoint,
+- the laptop cannot rely on your tracked source of truth until the commit is on
+  the remote,
+- push before you begin copying ignored artifacts unless you intentionally want
+  the laptop bootstrap to depend on manual patch transfer instead of git.
+
 ---
 
 ## 6) Step 4: inventory ignored artifacts before migration

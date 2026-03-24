@@ -107,10 +107,9 @@ expanded corpus-specific benchmarks used for diagnostics and targeted experiment
 **Updated at:** 2026-03-24
 
 Source of truth:
-`Docs/Reports/REFERENCE-Retrieval-Benchmark-Results-Timeline.md`
-and `Docs/Reports/REPORT-2026-03-13-Full-Benchmark-Sweep-Atomic-and-Benchmark.md`.
-Metric naming glossary:
-`Docs/Reports/REFERENCE-Retrieval-Benchmark-Results-Timeline.md` (`Metric glossary (canonical naming)`).
+- `Docs/Reports/REFERENCE-Retrieval-Benchmark-Results-Timeline.md`
+- `Docs/Reports/REPORT-2026-03-13-Full-Benchmark-Sweep-Atomic-and-Benchmark.md`
+- Metric and acronym glossary: `Docs/Reports/REFERENCE-Retrieval-Benchmark-Results-Timeline.md` (`Metric glossary (canonical naming)` and `Retrieval acronym glossary`)
 
 | Corpus | Atomic benchmark (queries) | Main benchmark (queries) | Atomic clean subset (2026-03-13) | Benchmark clean subset (2026-03-13) | Current read |
 |---|---|---|---|---|---|
@@ -125,7 +124,7 @@ Use `clean_subset` as the default headline for recommendation decisions; treat
 
 ### Report index metrics snapshot
 
-For the full metrics-informed learning map, see:
+For the full metrics-informed learning map, see
 `Docs/Reports/REFERENCE-Retrieval-Benchmark-Results-Timeline.md`.
 
 | Report | Benchmark use | Retrieval metric signals | Decision read | When |

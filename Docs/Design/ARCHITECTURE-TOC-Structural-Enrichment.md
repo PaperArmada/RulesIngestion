@@ -3,7 +3,7 @@
 **Purpose:** Describe the Mark III **Table-of-Contents (TOC) structural enrichment** pipeline: how book-level section structure is derived from the TOC, how it is used to enrich `structural_path` on EvidenceUnits, and how this fits into the Stage A/B flow and retrieval guarantees.
 
 **Status:** Implemented (Mark III).  
-**Related:** [v1/architecture_overview.md](v1/architecture_overview.md), [v1/stage_b_contract.md](v1/stage_b_contract.md), [v1/schema_registry.md](v1/schema_registry.md).
+**Related:** [ARCHITECTURE-RulesIngestion-High-Level.md](ARCHITECTURE-RulesIngestion-High-Level.md), [RETRIEVAL_LAB.md](RETRIEVAL_LAB.md), [gold_resolution_design.md](gold_resolution_design.md), [ARCHITECTURE-Retrieval-Runtime-Plane.md](ARCHITECTURE-Retrieval-Runtime-Plane.md).
 
 ---
 
@@ -172,8 +172,15 @@ Retrieval Lab metrics treat "gold in candidates" as: at least one **required** g
 
 ## 11. References
 
-- [v1/architecture_overview.md](v1/architecture_overview.md) — Stage A/B and Retrieval Lab placement.
-- [v1/stage_b_contract.md](v1/stage_b_contract.md) — EvidenceUnit, gates, structural_path semantics.
-- [v1/stage_a_contract.md](v1/stage_a_contract.md) — SurfaceAST, no structural change from TOC.
-- [v1/schema_registry.md](v1/schema_registry.md) — EvidenceUnit schema, join_metadata, source_unit_ids.
-- [ADR-003](v1/adr/ADR-003.md) — Clause families as retrieval-only projections; structural_path feeds into structure-aware retrieval.
+- [ARCHITECTURE-RulesIngestion-High-Level.md](ARCHITECTURE-RulesIngestion-High-Level.md) — Stage A/B and Retrieval Lab placement.
+- [RETRIEVAL_LAB.md](RETRIEVAL_LAB.md) — current retrieval architecture and promotion semantics.
+- [gold_resolution_design.md](gold_resolution_design.md) — benchmark projection lifecycle and contract alignment.
+- [ARCHITECTURE-Retrieval-Runtime-Plane.md](ARCHITECTURE-Retrieval-Runtime-Plane.md) — runtime retrieval defaults and boundaries.
+
+### Archived references for review
+
+- [archive/v1/architecture_overview.md](archive/v1/architecture_overview.md) — historical Stage A/B/R framing.
+- [archive/v1/stage_b_contract.md](archive/v1/stage_b_contract.md) — historical EvidenceUnit contract details.
+- [archive/v1/stage_a_contract.md](archive/v1/stage_a_contract.md) — historical SurfaceAST and Stage A contract details.
+- [archive/v1/schema_registry.md](archive/v1/schema_registry.md) — historical artifact/schema vocabulary.
+- [archive/v1/adr/ADR-003.md](archive/v1/adr/ADR-003.md) — retrieval-only projection policy rationale.

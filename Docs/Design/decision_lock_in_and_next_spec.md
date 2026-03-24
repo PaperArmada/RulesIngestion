@@ -1,8 +1,7 @@
 # Decision Lock-In + Next Implementation Spec (Stages A/B / Retrieval Lab)
 
 **Status:** Historical decision memo kept for rationale. The canonical current
-baseline is documented in [v1/](v1/) and current workflow docs; this note is not
-normative for the stabilized Mark III surface.
+baseline is documented in the top-level design suite (start at [README.md](README.md)) and current workflow docs; this note is not normative for the stabilized Mark III surface.
 
 ## Context
 
@@ -11,6 +10,40 @@ Stage A extraction is high-fidelity (minimal prose/structure loss). Benchmark re
 Clause-family projection variants demonstrate a strong compositional lift (especially on T2) but can introduce T1 regressions depending on parameterization. The current “sidecar” edge mechanism fires and adds candidates, but adds **zero gold** because it links sibling neighbors rather than true dependency pairs.
 
 **Update (post-run):** Dual-list fusion (Index_U + Index_F, quota interleave) is now the **PHB default baseline** for this stage. It delivered 0 T1 regressions, higher T1 MRR, and doubled T2 Full-set@10; see § Findings and baseline update.
+
+---
+
+## Addendum: PHB 2024 Occupancy vertical slice lock-in
+
+This addendum records the current lock-in for the first runtime legality slice documented in `occupancy_vertical_slice_v0.md`.
+
+### Locked decisions
+
+1) **Ruleset surface for this slice is PHB 2024.**  
+   Occupancy grounding and rule artifacts for this slice are keyed to the 2024 PHB ruleset identity, not 2014.
+
+2) **Ally-prone handling is in-rule, not deferred.**  
+   The first atomic occupancy rule keeps a default prohibition branch and includes an explicit ally-prone allowance branch in the same rule contract.
+
+3) **Promotion requires evidence-backed determinism.**  
+   Runtime behavior may only be promoted if grounded evidence, rule draft output, and fixture decisions are all reproducible under fixed inputs/config.
+
+### Promotion-ready gates for this slice
+
+- **Retrieval gate (grounding questions):**
+  - `ground_occ_2024_001` retrieves the default occupied-space restriction anchor.
+  - `ground_occ_2024_002` retrieves the ally-prone allowance anchor.
+  - Both anchors must be present in the selected evaluation surface artifacts.
+
+- **Rule-draft gate:**
+  - One `AtomicRuleDraft` is emitted for `occ_2024_end_move_in_occupied_space_default_with_ally_prone_exception`.
+  - `rule_id`, `ruleset_id`, and `source_evidence_refs` are stable across replay.
+  - Re-running the draft step with identical inputs yields byte-identical output.
+
+- **Fixture gate:**
+  - One reject fixture (`occupied_cell_end_state_forbidden`) passes.
+  - One accept fixture (`ally_prone_allowance`) passes.
+  - Output trace records applied rule id and branch reason deterministically.
 
 ---
 
