@@ -10,8 +10,9 @@
 ## How to use this doc
 
 - Start with the timeline to understand what changed and why.
-- Use the report index table to jump into detail.
+- Use the report index and metrics snapshot tables to jump into detail.
 - Use the "Decision impact" and "What we learned" columns to trace how results informed policy and architecture.
+- Use the metric and acronym glossaries to keep naming consistent across docs.
 
 ---
 
@@ -66,28 +67,28 @@ different token, map it using the aliases below.
 
 ## Timeline (high signal, non-comprehensive)
 
-## 2026-03-04: Embedding baseline decision-grade bakeoff
+### 2026-03-04: Embedding baseline decision-grade bakeoff
 
 - **Primary report:** `Docs/Reports/REPORT-Embedding-Bakeoff-Comprehensive-2026-03-04.md`
 - **Decision impact:** Established the embedding baseline used by retrieval defaults and downstream comparisons.
 - **What we learned:** Model behavior differs by corpus; default must optimize for robust cross-corpus operation, not only per-corpus peak score.
 - **Design references informed:** `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md`
 
-## 2026-03-05: Hybrid CC parity and lambda sweep (clean run)
+### 2026-03-05: Hybrid CC parity and lambda sweep (clean run)
 
 - **Primary report:** `Docs/Reports/REPORT-Hybrid-Bakeoff-2026-03-05-Full.md`
 - **Decision impact:** Locked hybrid default posture around CC fusion, minmax normalization, and lambda defaults with corpus-aware nuance.
 - **What we learned:** Hybrid uplift is corpus/model dependent; one global knob is not enough for every edge case, but stable defaults are still possible.
 - **Design references informed:** `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Design/ARCHITECTURE-RERANKING-TOOLING.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md`
 
-## 2026-03-13: Hardened full benchmark sweep refresh
+### 2026-03-13: Hardened full benchmark sweep refresh
 
 - **Primary report:** `Docs/Reports/REPORT-2026-03-13-Full-Benchmark-Sweep-Atomic-and-Benchmark.md`
 - **Decision impact:** Promoted clean-subset-first interpretation and hardened contract-valid scoreboard usage.
 - **What we learned:** Dual-scoreboard (`clean_subset` vs `full_working_set`) is essential to separate retrieval quality from benchmark debt.
 - **Design references informed:** `Docs/Design/RETRIEVAL_LAB.md`, `Docs/Design/gold_resolution_design.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md`
 
-## 2026-03-17: SWCR and decomposition deep dives
+### 2026-03-17: SWCR and decomposition deep dives
 
 - **Primary reports:** `Docs/Reports/REPORT-SWCR-Retrieval-Deep-Dive-2026-03-17.md`, `Docs/Reports/REPORT-Decomposition-System-Comprehensive-Review.md`, `Docs/Reports/REPORT-Query-Decomposition-Per-Query-Investigation-2026-03-17.md`
 - **Decision impact:** Clarified where retrieval weaknesses are true model/retrieval issues vs benchmark/data-process issues, and where decomposition should remain controlled.
@@ -98,17 +99,17 @@ different token, map it using the aliases below.
 
 ## Report index and learning map
 
-| Date | Report | Primary use | Key learning | Informed decisions/docs |
+| Report | Primary use | Key learning | Informed decisions/docs | When |
 |---|---|---|---|---|
-| 2026-03-04 | `Docs/Reports/REPORT-Embedding-Bakeoff-Comprehensive-2026-03-04.md` | Embedding model baseline selection | Cross-corpus stability matters as much as peak per-track score. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` |
-| 2026-03-04 | `Docs/Reports/REPORT-Hybrid-Wiring-Audit-2026-03-04.md` | Validate hybrid plumbing and scoring assumptions | Metric conclusions are only trustworthy after wiring correctness is verified. | `Docs/Design/ARCHITECTURE-RERANKING-TOOLING.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` |
-| 2026-03-05 | `Docs/Reports/REPORT-Hybrid-Bakeoff-Results-2026-03-04.md` | Earlier hybrid decision snapshot | Early signal aligned with later full sweep direction. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md` |
-| 2026-03-05 | `Docs/Reports/REPORT-Hybrid-Bakeoff-2026-03-05-Full.md` | Full hybrid parameter/model/corpus sweep | CC+minmax is durable default; lambda should be tuned with corpus/model context. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` |
-| 2026-03-12 | `Docs/Reports/REPORT-2026-03-12-Atomic-Benchmark-Question-Surface-Review.md` | Question-surface quality diagnostics | Benchmark quality strongly affects metric interpretability. | `Docs/Design/gold_resolution_design.md`, `Docs/Design/RETRIEVAL_LAB.md` |
-| 2026-03-13 | `Docs/Reports/REPORT-2026-03-13-Full-Benchmark-Sweep-Atomic-and-Benchmark.md` | Hardened rerun baseline refresh | `clean_subset` is the trustworthy headline; `full_working_set` remains diagnostic. | `Docs/Design/RETRIEVAL_LAB.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` |
-| 2026-03-17 | `Docs/Reports/REPORT-SWCR-Retrieval-Deep-Dive-2026-03-17.md` | SWCR corpus-level retrieval diagnosis | Some low scores are true retriever challenges, not benchmark debt artifacts. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md` |
-| 2026-03-17 | `Docs/Reports/REPORT-Decomposition-System-Comprehensive-Review.md` | Decomposition strategy evaluation | Decomposition should be bounded and policy-driven, not always-on. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Design/SPEC-Controller-V0-Operators.md` |
-| 2026-03-17 | `Docs/Reports/REPORT-Query-Decomposition-Per-Query-Investigation-2026-03-17.md` | Per-query decomposition failures/wins | Per-query audits are required before promoting decomposition defaults. | `Docs/Design/SPEC-Controller-V0-Operators.md`, `Docs/Design/RETRIEVAL_LAB.md` |
+| `Docs/Reports/REPORT-Embedding-Bakeoff-Comprehensive-2026-03-04.md` | Embedding model baseline selection | Cross-corpus stability matters as much as peak per-track score. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` | 2026-03-04 |
+| `Docs/Reports/REPORT-Hybrid-Wiring-Audit-2026-03-04.md` | Validate hybrid plumbing and scoring assumptions | Metric conclusions are only trustworthy after wiring correctness is verified. | `Docs/Design/ARCHITECTURE-RERANKING-TOOLING.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` | 2026-03-04 |
+| `Docs/Reports/REPORT-Hybrid-Bakeoff-Results-2026-03-04.md` | Early hybrid decision snapshot | Early signal aligned with later full sweep direction. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md` | 2026-03-05 |
+| `Docs/Reports/REPORT-Hybrid-Bakeoff-2026-03-05-Full.md` | Full hybrid parameter/model/corpus sweep | CC + minmax is a durable default; lambda should be tuned with corpus/model context. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` | 2026-03-05 |
+| `Docs/Reports/REPORT-2026-03-12-Atomic-Benchmark-Question-Surface-Review.md` | Question-surface quality diagnostics | Benchmark quality strongly affects metric interpretability. | `Docs/Design/gold_resolution_design.md`, `Docs/Design/RETRIEVAL_LAB.md` | 2026-03-12 |
+| `Docs/Reports/REPORT-2026-03-13-Full-Benchmark-Sweep-Atomic-and-Benchmark.md` | Hardened rerun baseline refresh | `clean_subset` is the trustworthy headline; `full_working_set` remains diagnostic. | `Docs/Design/RETRIEVAL_LAB.md`, `Docs/Workflows/WORKFLOW-Retrieval-Best-Practices.md` | 2026-03-13 |
+| `Docs/Reports/REPORT-SWCR-Retrieval-Deep-Dive-2026-03-17.md` | SWCR corpus-level retrieval diagnosis | Some low scores are true retriever challenges, not benchmark debt artifacts. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md` | 2026-03-17 |
+| `Docs/Reports/REPORT-Decomposition-System-Comprehensive-Review.md` | Decomposition strategy evaluation | Decomposition should be bounded and policy-driven, not always-on. | `Docs/Design/ARCHITECTURE-Retrieval-Runtime-Plane.md`, `Docs/Design/SPEC-Controller-V0-Operators.md` | 2026-03-16 |
+| `Docs/Reports/REPORT-Query-Decomposition-Per-Query-Investigation-2026-03-17.md` | Per-query decomposition failures/wins | Per-query audits are required before promoting decomposition defaults. | `Docs/Design/SPEC-Controller-V0-Operators.md`, `Docs/Design/RETRIEVAL_LAB.md` | 2026-03-17 |
 
 ---
 

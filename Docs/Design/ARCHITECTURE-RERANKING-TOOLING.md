@@ -8,9 +8,11 @@ Canonical architecture reference for how LLM listwise reranking is wired, config
 
 LLM reranking is a fixed-pool reordering stage after hybrid retrieval. It does not retrieve new evidence; it reorders admitted candidates before final top-k scoring.
 
+**Query decomposition** (optional) runs before retrieval: a single user query may be rewritten into up to N subqueries; retrieval runs per subquery and candidates are fused (e.g. reciprocal rank fusion). Decomposition is configured and evaluated separately; when enabled, reranking operates on the fused pool produced by the decomposition path. See [EXPERIMENT-Query-Decomposition.md](../Experiments/EXPERIMENT-Query-Decomposition.md) for the PHB 5e multihop experiment (E0/E6/E7) and harness integration.
+
 This document covers:
 
-- reranker pipeline placement in Retrieval Lab
+- reranker pipeline placement in Retrieval Lab (including placement relative to optional decomposition)
 - configuration and CLI contracts
 - baseline delta semantics and outcome classification
 - retrieval metrics interpretation
@@ -22,11 +24,12 @@ This document does not define Stage C graph enrichment or broad agentic retrieva
 
 ## 2. System Placement
 
-Reranking is a retrieval-time feature within a normal experiment run.
+Reranking is a retrieval-time feature within a normal experiment run. When query decomposition is enabled, it runs before retrieval; reranking then operates on the fused candidate pool.
 
 ```text
 Query
- -> Hybrid retrieval (candidate generation)
+ -> [Optional] Query decomposition (rewrite → subqueries; retrieve per subquery; fuse candidates)
+ -> Hybrid retrieval (candidate generation, or per-subquery then fuse)
  -> Candidate admission (llm_rerank_admission_k)
  -> Candidate truncation (llm_rerank_text_char_limit)
  -> LLM listwise reorder
@@ -220,3 +223,13 @@ Run outputs:
 - Treat `clean_subset` placeholders in working-set-only runs as non-comparable artifacts when `n` is empty.
 - Track outcome class plus metrics deltas; metric-only wins can hide failure-bucket regressions.
 - Keep rerank and answer-eval model decisions independent; they optimize different objectives.
+
+---
+
+## 9. Integration best practices (post scoring-fix update)
+
+- Keep reranking interpretation separated by failure class: first-hop admission fixes and multihop closure fixes are different interventions.
+- If NextPlaid/GTE (or any late-interaction branch) is enabled, evaluate it against three surfaces in one pass: targeted slices, clean-subset, and multihop baselines.
+- Require guardrail parity when adding a rescue branch before reranking: latency p95 and candidate pool size must stay within configured budgets.
+- Treat small required-full-set@10 gains as valuable only when MRR and multihop baselines are not silently regressing on the primary promotion surface.
+- Do not promote a rescue retriever to default multihop policy unless it beats or matches E0/E6-class baselines on combined multihop tracks.

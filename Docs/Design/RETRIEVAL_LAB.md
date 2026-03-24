@@ -2,8 +2,9 @@
 
 **Purpose:** Describe the current Retrieval Lab architecture as implemented today: where it sits in the RulesIngestion pipeline, how runs are configured and scored, what artifacts recommendation-grade runs emit, and which surfaces are authoritative for downstream promotion and comparison.
 **Status:** Implemented and current.
-**Related:** [v1/architecture_overview.md](v1/architecture_overview.md), [v1/retrieval_lab_v1.md](v1/retrieval_lab_v1.md), [gold_resolution_design.md](gold_resolution_design.md), [ARCHITECTURE-TOC-Structural-Enrichment.md](ARCHITECTURE-TOC-Structural-Enrichment.md), [v1/baseline_manifest.md](v1/baseline_manifest.md), [v1/schema_registry.md](v1/schema_registry.md).
-**Canonical note:** `v1/retrieval_lab_v1.md` remains the stable contract/runbook reference. This top-level doc is the current architecture landing page for the live Retrieval Lab implementation.
+**Related:** [README.md](README.md), [ARCHITECTURE-RulesIngestion-High-Level.md](ARCHITECTURE-RulesIngestion-High-Level.md), [ARCHITECTURE-Retrieval-Runtime-Plane.md](ARCHITECTURE-Retrieval-Runtime-Plane.md), [gold_resolution_design.md](gold_resolution_design.md), [ARCHITECTURE-TOC-Structural-Enrichment.md](ARCHITECTURE-TOC-Structural-Enrichment.md), [ARCHITECTURE-RERANKING-TOOLING.md](ARCHITECTURE-RERANKING-TOOLING.md).
+**Canonical note:** This top-level document is the current Retrieval Lab architecture reference for the live system.
+**Historical runbook reference (archived):** [archive/v1/retrieval_lab_v1.md](archive/v1/retrieval_lab_v1.md), [archive/v1/baseline_manifest.md](archive/v1/baseline_manifest.md), [archive/v1/schema_registry.md](archive/v1/schema_registry.md), [archive/v1/architecture_overview.md](archive/v1/architecture_overview.md).
 
 ---
 
@@ -93,10 +94,13 @@ Retrieval Lab currently supports three primary retrieval modes:
 - **BM25:** sparse retrieval without an embedding step
 - **Hybrid:** dense plus BM25 fusion inside the experiment flow
 
+Retrieval Lab baseline now includes a **routing step** that can send bridge-risk queries through a late-interaction retriever branch (NextPlaid/GTE) before candidate fusion.
+
 The most important current default is:
 
 - **Hybrid fusion now defaults to convex combination (`cc`)**
 - **RRF remains supported, but as an explicit comparison/legacy mode**
+- **NextPlaid/GTE is baseline-routed for bridge-risk query profiles; it is not the global default for all queries**
 
 That is a material change from older docs and historical experiment notes that framed hybrid as RRF-first.
 
@@ -110,7 +114,24 @@ For recommendation-grade hybrid work, the current architectural direction is:
 - compare only contract-valid runs
 - promote from `prod_readiness.json`, not from an informal run name
 
-The stable details of command syntax and legacy v1 policy remain in [v1/retrieval_lab_v1.md](v1/retrieval_lab_v1.md).
+### 4.1 2026-03 scoring correction and policy update
+
+The previously observed "zero MRR" failure mode in targeted NextPlaid bakeoffs was traced to a scoring-path bug, not retriever collapse. After correction:
+
+- PHB5e clean-subset MRR improved from `0.5875` (benchmark baseline) to `0.7437` (NextPlaid), with required-gold hit rate reaching `97.4%` by top-20 and `100%` by top-50.
+- Starfinder improved from `0.6162` to `0.6446`.
+- SWCR improved from `0.2868` to `0.6021`.
+- Stage 2 dual-list fusion on PHB improved required-full-set@10 from `20/32` to `22/32` while preserving guardrails (~`25 ms` p95, stable candidate budgets).
+- A deep diagnostic (`top_k=100` + oracle self-retrieval) showed corpus/query alignment is strong (>=95% oracle hits by top-10), so remaining gaps are not corpus-missingness failures.
+
+At the same time, multihop integration remains weaker than established baselines:
+
+- PHB multihop combined MRR at `0.5614` trails E0 (`0.6195`) and E6 (`0.5937`).
+- PF2e working-set MRR at `0.6725` trails baseline (`0.8542`).
+
+**Policy outcome:** Update the baseline process to include route-based bridge rescue for specific first-hop failures; do not promote NextPlaid/GTE as a replacement for the default multihop path.
+
+The stable details of older command syntax and legacy v1 policy are preserved in [archive/v1/retrieval_lab_v1.md](archive/v1/retrieval_lab_v1.md).
 
 ---
 
@@ -233,6 +254,16 @@ Several boundaries should be treated as non-negotiable:
 - Do not treat an old benchmark definition as implicitly valid for a newly shaped corpus.
 - Do not promote from a run name or an ad hoc metrics file when `prod_readiness.json` is available.
 - Do not assume hybrid semantics from old RRF-era notes when the live config defaults are CC-based.
+- Do not treat late-interaction wins on targeted first-hop slices as evidence of multihop closure readiness.
+
+### Best practices (current)
+
+- Use **clean-subset** for promotion decisions and report denominators explicitly.
+- Keep one strict baseline process (hybrid CC + route decision + bounded decomposition policy + fixed-pool rerank) and record route choice per query.
+- When evaluating a new retriever, run three checks together: targeted slice metrics, multihop baseline comparison, and oracle/candidate-admission diagnostics.
+- Preserve guardrails as first-class metrics: latency p95 and candidate-pool size must not regress when retrieval quality improves.
+- Classify wins by failure mode: first-hop admission wins do not imply multi-evidence closure wins.
+- Promote by policy artifact (`prod_readiness.json`) and architecture fit, not by isolated MRR gains.
 
 In practice, Retrieval Lab should be reasoned about as:
 
@@ -245,11 +276,16 @@ In practice, Retrieval Lab should be reasoned about as:
 
 ## 10. Related current architecture docs
 
-- [v1/retrieval_lab_v1.md](v1/retrieval_lab_v1.md) — stable Retrieval Lab contract and runbook reference
+- [ARCHITECTURE-Retrieval-Runtime-Plane.md](ARCHITECTURE-Retrieval-Runtime-Plane.md) — five-stage runtime path and validated defaults
 - [gold_resolution_design.md](gold_resolution_design.md) — benchmark definition, projection, and promotion lifecycle
 - [ARCHITECTURE-TOC-Structural-Enrichment.md](ARCHITECTURE-TOC-Structural-Enrichment.md) — structural enrichment that can change the effective retrieval substrate
-- [v1/baseline_manifest.md](v1/baseline_manifest.md) — baseline packaging and canonical bundle semantics
-- [v1/schema_registry.md](v1/schema_registry.md) — schemas and artifact vocabulary used across runs
+- [ARCHITECTURE-RERANKING-TOOLING.md](ARCHITECTURE-RERANKING-TOOLING.md) — reranker placement, config, and evaluation semantics
+
+### Archived but still useful for review
+
+- [archive/v1/retrieval_lab_v1.md](archive/v1/retrieval_lab_v1.md) — legacy runbook and contract framing
+- [archive/v1/baseline_manifest.md](archive/v1/baseline_manifest.md) — baseline packaging and bundle semantics
+- [archive/v1/schema_registry.md](archive/v1/schema_registry.md) — artifact vocabulary used by older runs
 
 ---
 
@@ -263,4 +299,4 @@ The Retrieval Lab document we need at the top level is no longer a stub. It shou
 - first-class ratification and promotion artifacts
 - optional auto-gold review and answer evaluation layered onto the same experiment flow
 
-Use this document to orient to the current system. Use `v1/` for deeper stable contract details.
+Use this document to orient to the current system. Use `archive/v1/` only as historical context when reviewing legacy assumptions or artifacts.
