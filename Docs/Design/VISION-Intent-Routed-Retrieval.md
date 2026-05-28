@@ -1,0 +1,193 @@
+# Vision: Intent-Routed Retrieval
+
+**Status:** Exploratory tinker on `tinker/intent-routed-retrieval`. Not canonical to the upstream architecture.
+**Branch:** `tinker/intent-routed-retrieval` on `PaperArmada/RulesIngestion` (fork of `Drakosfire/RulesIngestion`).
+**Author:** Matt Reed, in collaboration with Claude.
+**Related upstream docs:** [`ARCHITECTURE-RulesIngestion-High-Level.md`](ARCHITECTURE-RulesIngestion-High-Level.md), [`bounded_multihop_retrieval_design_memo.md`](bounded_multihop_retrieval_design_memo.md), [`RETRIEVAL_LAB.md`](RETRIEVAL_LAB.md).
+
+---
+
+## 1. Thesis
+
+Retrieval is a routing problem, not a single-tool problem. Every query has a particular relationship to its evidence (literal token overlap, conceptual proximity, intent-to-evidence projection, set membership, structural position, link traversal, example similarity). The right machinery for each is different, and the system's quality is bounded by two things:
+
+1. How accurately and cheaply it classifies the query-to-evidence relationship.
+2. How well each routed path is built, in isolation, with deterministic and bounded behavior.
+
+Everything else (HyDE prompting, decomposition strategy, reranking) is implementation detail downstream of those two decisions.
+
+This document tinkers with that thesis as a contrast to the upstream bounded-multihop-controller direction. The two approaches overlap heavily (decomposition, fixed-pool reranking, bounded retries) but differ in where they put the load-bearing reasoning: upstream puts it in a deterministic controller plus targeted late-interaction rescue; this vision puts it in an explicit query-type classifier that dispatches to specialized retrieval modes.
+
+---
+
+## 2. The Retrieval-Mode Taxonomy
+
+Each query has a relationship to its target evidence. The taxonomy below organizes by that relationship, not by the underlying algorithm.
+
+| Mode | Query / answer relationship | Primary mechanism |
+|---|---|---|
+| **Keyword / lexical** | You know what you're looking for, not where to find it. Query contains the corpus's tokens. | BM25, exact match. |
+| **Semantic (vanilla dense)** | Query and answer share conceptual neighborhood. Question-shape ≈ answer-shape. Paraphrase / synonym territory. | Dense embeddings, cosine similarity. |
+| **HyDE (intent projection)** | Question-shape does **not** match answer-shape. Query expresses intent; evidence is what would *answer* the intent, possibly assembled from multiple sources with no token overlap. | Generate a hypothetical answer-shaped artifact, embed it, dense retrieve. |
+| **Enumeration / set completion** | "Give me every X matching Y." Need a complete set, not a top-K. | Predicate filter over typed metadata. |
+| **Structural navigation** | "The combat chapter." Query is about document position, not content. | TOC / heading-index lookup. |
+| **Cross-reference traversal** | "What rules reference Saving Throws?" Graph hop over named-rule links. | Typed link layer (overlaps with upstream Stage C investment). |
+| **Example-based ("more like this")** | Query is a known passage; retrieve similar passages. | Passage-as-query dense retrieval. |
+
+**Critical distinction (HyDE vs vanilla semantic):** HyDE is not a vocabulary patch. It is a forward projection from intent to expected-evidence-shape, executed in embedding space. Vanilla semantic search bridges paraphrase when question and answer live in the same conceptual neighborhood. HyDE bridges the chasm when they do not (e.g. "How is the engineering team doing?" → merge requests, status updates, incident logs, none of which share vocabulary with the query).
+
+---
+
+## 3. Routing Decision Boundaries
+
+A query falls into a primary bucket based on three signals:
+
+1. **Lexical anchoring:** does the query contain rare entities the corpus also uses?
+2. **Form alignment:** does the query's shape look like answer-shape (definition-shaped) or intent-shaped (open-ended)?
+3. **Composite flag:** does the query's logical structure require independently retrievable sub-pieces?
+
+Resulting buckets and routes:
+
+- **Entity-anchored, single-target** → hybrid (BM25 + dense, CC) + rerank. *Fast path, no LLM hops on retrieval.*
+- **Entity-anchored, composite** → decompose into sub-intents, recurse each through the classifier, synthesize.
+- **Concept-anchored** → dense + rerank. Paraphrase handled directly.
+- **Intent-bearing, distributed evidence** → HyDE with shape prior + dense + rerank. *This is where HyDE earns its keep.*
+- **Enumeration** → typed-metadata filter (not retrieval).
+- **Structural** → TOC lookup.
+- **Cross-reference** → link-graph hop.
+- **Example-based** → passage-as-query dense.
+
+Composite queries recurse with bounded depth (max 2). Most queries are single-hop.
+
+---
+
+## 4. Two-Phase System
+
+### Phase A: Corpus Self-Portrait (offline, automated, once per corpus)
+
+Before any query lands, the system builds an automated self-description of the corpus. Hand-curation is explicitly out of scope; everything is generated by model passes over the Stage B substrate.
+
+- **Glossary:** term-definition pairs extracted by syntactic signal (italic first-use, bold-headed paragraph, "X is..." constructions).
+- **Acronyms:** regex plus context resolution.
+- **Structural inventory:** clusters of `EvidenceUnit`s by structural fingerprint (heading depth, presence of "Trigger/Effect/Success" rows, table layouts, ladder-of-degrees, glossary-style entries). Each cluster has a model-generated description of what content lives there.
+- **Typed metadata index:** per-unit attributes mined opportunistically (level, damage type, action category, prerequisites, source page). This is the substrate enumeration queries require.
+- **Cross-reference graph:** named-rule-to-named-rule links extracted from text. Supports cross-reference traversal and improves multi-hop.
+
+The bundle is small enough to be prompt-injectable. It is the priming context for every query-time reasoning step.
+
+### Phase B: Query Routing (online, per query)
+
+```
+query
+  → classify(query, corpus_self_portrait)
+       output: relationship-bucket, slot-fillings, composite-flag, confidence
+  → route by bucket:
+       entity-anchored single        : hybrid + rerank
+       entity-anchored composite     : decompose, per-sub-intent recurse
+       concept-anchored              : dense + rerank
+       intent-bearing distributed    : HyDE w/ shape prior + dense + rerank
+       enumeration                   : typed-metadata filter
+       structural                    : TOC lookup
+       cross-reference               : link-graph hop
+       example-based                 : passage-as-query dense
+  → synthesize from retrieved evidence
+  → sufficiency check (structural, not vibes)
+  → optional one bounded retry → return
+```
+
+---
+
+## 5. Design Constraints
+
+1. **Bound everything.** Decomposition depth ≤ 2, retry count ≤ 1, candidate pool sized explicitly. No open-ended agent loops.
+2. **Deterministic by default.** Same query, same corpus, same seed reproduces the same trace. Temperature 0 on classifier and routing decisions; sampling only on synthesis if creativity is wanted.
+3. **Cheap path stays cheap.** Entity-anchored single-target queries get no LLM hops on the retrieval side. Most queries should land there.
+4. **Automation over curation.** No hand-written glossaries, shape libraries, or question templates. The system improves by improving the introspection pipeline.
+5. **Instrument the routing.** The most important diagnostic is "which bucket got assigned, with what confidence, and was the retrieval that followed correct." If the classifier is wrong, downstream tuning is wasted.
+
+---
+
+## 6. HyDE With Shape Prior: How It Actually Works
+
+The intent-bearing-distributed path is the most novel piece, so spelling it out:
+
+1. **Intent extraction:** model reads the query, outputs a short statement of intent ("user wants to know whether action X has effect Y on object Z").
+2. **Shape inference:** model is shown the structural inventory and answers "which cluster(s) of the corpus would contain content that satisfies this intent?" Output: 1-3 target cluster IDs.
+3. **Hypothesis generation:** model generates a hypothetical answer-shaped artifact, prompted to use the target cluster's structural form and the glossary's vocabulary where applicable. The hypothesis may span multiple shapes if the intent decomposes that way.
+4. **Embed and retrieve:** dense retrieval on the hypothesis embedding.
+5. **Rerank and synthesize.**
+
+Contrast with naive HyDE: naive generates one paragraph of plausible prose, which embeds near other prose (often flavor text) rather than the structured rules entry. Shape-primed HyDE projects into the same structural neighborhood as the intended evidence.
+
+---
+
+## 7. Sufficiency Check
+
+After synthesis, before return:
+
+- **Entity-anchored:** every named entity in the decomposition was matched by at least one retrieved unit.
+- **Intent-bearing:** every shape that the classifier said the answer would draw from is represented in retrieved evidence.
+- **Composite:** every sub-intent's sufficiency check passes.
+
+Failures trigger one bounded retry with a re-formulated query targeting the gap. Hard stop at one retry; report partial results otherwise.
+
+Model self-reports of "I have enough" are explicitly *not* used. Structural coverage only.
+
+---
+
+## 8. First Slice to Build
+
+Three thin layers end-to-end, before deepening any single one:
+
+1. **Introspection v0** (`Phase A`): glossary + acronym extractor, structural clusterer with auto-labeled cluster descriptions. Output: one JSON `corpus_self_portrait.json` per corpus. Target corpora: SWCR (hardest) and PHB5e (cleanest baseline). Read output by hand to sanity-check.
+2. **Classifier v0**: takes query + self-portrait, outputs one of 8 bucket labels with confidence. Few-shot prompted, no fine-tuning. Hand-label the 50q benchmarks with intended bucket and measure classifier accuracy directly.
+3. **Router v0**: implement only the entity-anchored-single path (hybrid + rerank) and the intent-bearing-distributed path (HyDE-with-shape-prior + dense + rerank). Defer enumeration, cross-reference, structural, example-based, comparison until the first two work. Run end-to-end against the 50q sets.
+
+This is enough to test whether the routing thesis carries weight. If classifier accuracy is high and HyDE-with-shape-prior measurably beats raw dense on the blind_eval subsets, deepen introspection next. If not, the thesis is wrong and we back out before bolting on enumeration and link traversal.
+
+---
+
+## 9. Success Signals
+
+These are intended targets, not verified outcomes. We'll know if they hold by measuring.
+
+- Classifier accuracy ≥ 85% against hand-labeled benchmark queries.
+- Entity-anchored path: hybrid + rerank metrics match or beat the upstream baseline (no regression on simple cases).
+- Intent-bearing path: HyDE-with-shape-prior beats raw dense by a measurable MRR delta on PF2e and Starfinder `blind_eval` subsets.
+- Fast-path latency under ~200 ms (no LLM hop).
+- HyDE-path latency dominated by one hypothesizer round-trip, no retries on v0.
+
+If these move the right way, deepen. If they don't, back out.
+
+---
+
+## 10. Open Questions
+
+- The classifier is load-bearing. Few-shot may not be enough; if accuracy plateaus low, a small fine-tune or a better prompt structure will be needed.
+- HyDE-with-shape-prior wants the self-portrait to fit in the hypothesizer's context window. SWCR may push that boundary; if so, we'll need a per-query subset of the structural inventory rather than the whole thing.
+- Sufficiency-check criteria are well-defined for entity-anchored queries but fuzzy for intent-bearing ones. First attempt: require coverage of every shape the classifier said the answer would draw from. May need iteration.
+- Most of the eval set is single-step. Multi-hop / composite queries have the least feedback signal. May need to author new test queries before the recursion path can be tuned honestly.
+- Local-model selection (Ollama-hosted) for classifier, extractor, hypothesizer, and synthesizer is still open. Hardware budget on this machine governs which models are realistic.
+
+---
+
+## 11. What This Vision Is Not
+
+- Not graph-first.
+- Not open-ended agentic search.
+- Not a generic query-enhancement platform.
+- Not a competitor to upstream's bounded-multihop controller; an exploration of a complementary framing.
+- Not a curation-heavy approach. Hand-written glossaries, shape libraries, and question templates are explicitly out of scope.
+
+It is a classifier-routed dispatch system over a small set of specialized retrieval modes, grounded by an automated corpus self-portrait that primes the LLM steps.
+
+---
+
+## 12. Status and Next Steps
+
+- [x] Vision captured (this document).
+- [ ] Choose local model lineup (Ollama, hardware-bounded).
+- [ ] Introspection v0: corpus self-portrait builder.
+- [ ] Classifier v0: query-to-bucket router.
+- [ ] Router v0: entity-anchored and intent-bearing paths.
+- [ ] Run end-to-end on SWCR and PHB5e 50q benchmarks; compare to upstream baseline.
