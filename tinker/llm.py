@@ -17,7 +17,7 @@ from typing import Any, Iterable
 import ollama
 
 
-MODEL_CLASSIFIER = "qwen3:4b"
+MODEL_CLASSIFIER = "qwen3:14b"
 MODEL_WORKHORSE = "qwen3:14b"
 MODEL_EMBEDDER = "qwen3-embedding"
 

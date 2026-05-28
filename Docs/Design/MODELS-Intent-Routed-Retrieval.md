@@ -11,7 +11,7 @@
 | Role | Model | Quant | Disk | Approx VRAM | Thinking default |
 |---|---|---|---|---|---|
 | Embedder (dense retrieval + HyDE hypothesis embedding) | `qwen3-embedding` | default | 4.7 GB | ~5-6 GB | n/a |
-| Query classifier (online, per query) | `qwen3:4b` | Q4_K_M | ~2.5 GB | ~2.5-3 GB | **off** |
+| Query classifier (online, per query, q-ROFS) | `qwen3:14b` | Q4_K_M | ~9 GB | ~9-10 GB | **off** |
 | Intent extractor & shape inference (online) | `qwen3:14b` | Q4_K_M | ~9 GB | ~9-10 GB | off (configurable on) |
 | HyDE hypothesizer (online) | `qwen3:14b` | Q4_K_M | ~9 GB | ~9-10 GB | off |
 | Synthesizer (online) | `qwen3:14b` | Q4_K_M | ~9 GB | ~9-10 GB | off (configurable on) |
@@ -29,9 +29,16 @@ Cross-encoder reranker is **not** an Ollama model. It runs via `sentence-transfo
 
 Qwen3-Embedding-8B is the leading open-weight MTEB English embedder as of early 2026. Gemini-Embedding-001 leads English MTEB but is API-only. Open alternatives (`nomic-embed-text` ~62.4 MTEB, `mxbai-embed-large` ~64.7 MTEB) trail by enough that a single-corpus advantage is unlikely but worth A/B-ing if Qwen3 underperforms on rulebook text specifically.
 
-### Classifier: `qwen3:4b`
+### Classifier: `qwen3:14b` (q-ROFS, default) / `qwen3:4b` (single-label, fast fallback)
 
-The classifier runs on every query, so latency matters. Qwen3-4B (Q4) is small enough to stay co-resident with the embedder and reportedly competitive with much larger models on simple structured-output tasks. Llama-3.2-3B was considered but is reported as unreliable for valid JSON without grammar constraints (~50% parse success without `format=json`). Qwen3-4B with `format=json` is a safer floor.
+The classifier runs per query. We measured both 4b and 14b on the SWCR atomic benchmark (19 queries) using q-rung orthopair fuzzy elicitation (Pythagorean, q=2). Both pick the same chosen-bucket distribution, but the 14b is meaningfully better calibrated:
+
+- 4b mean margin = 0.366, max 0.700 (over-confident on 12/19 queries).
+- 14b mean margin = 0.126, max 0.200 (correctly identifies that 14/19 atomic-rules queries sit between concept-anchored and intent-bearing-distributed, which by design they do — they're cross-corpus universal questions).
+
+Since latency is not the binding constraint for this tinker, we default both `classify_query` and `classify_query_qrofs` to `qwen3:14b`. The legacy 4b model remains available via the `--model` flag on `tinker/scripts/eval_classifier.py` for ablation runs.
+
+Per-query latency on this machine: ~8-15 s for q-ROFS @ 14b (vs ~4 s @ 4b). Acceptable for tinker.
 
 ### Workhorse: `qwen3:14b`
 
