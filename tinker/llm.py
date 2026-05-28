@@ -242,6 +242,45 @@ def label_cluster(
     return result.text.strip()
 
 
+def unload_ollama_model(model: str, *, wait_seconds: float = 10.0) -> bool:
+    """Ask Ollama to evict *model* from VRAM and wait until it is actually unloaded.
+
+    Returns True if the model was confirmed absent from `/api/ps` within
+    *wait_seconds*, False otherwise. Both the unload-request and the poll
+    are best-effort; failures (Ollama down, model not loaded, API drift)
+    are swallowed and return False so callers can keep flowing.
+
+    Critical for the cross-encoder reranker step: sentence-transformers
+    will silently fall back to CPU (~400x slower) if it cannot allocate
+    its activation tensors on a contended GPU, so we must wait for the
+    LLM weights to actually leave VRAM before invoking the reranker.
+    """
+    import time
+    import urllib.request
+    import urllib.error
+    import json as _json
+
+    try:
+        ollama.generate(model=model, prompt="", keep_alive=0)
+    except Exception:
+        pass
+
+    deadline = time.perf_counter() + wait_seconds
+    while time.perf_counter() < deadline:
+        try:
+            with urllib.request.urlopen(
+                "http://localhost:11434/api/ps", timeout=2.0
+            ) as resp:
+                payload = _json.loads(resp.read())
+            loaded = {m.get("name") for m in payload.get("models", [])}
+            if model not in loaded and f"{model}:latest" not in loaded:
+                return True
+        except (urllib.error.URLError, OSError, ValueError):
+            return False
+        time.sleep(0.1)
+    return False
+
+
 def embed(texts: Iterable[str]) -> list[list[float]]:
     """Batch-embed texts with the embedding model.
 

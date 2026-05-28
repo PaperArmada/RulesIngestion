@@ -51,15 +51,19 @@ def test_rerank_handles_empty_candidates(monkeypatch) -> None:
 
 
 def test_load_reranker_is_cached(monkeypatch) -> None:
-    """Unit: load_reranker memoizes by model_name."""
+    """Unit: load_reranker memoizes by model_name.
+
+    Forces CPU path so we exercise the load_cross_encoder branch (the
+    CUDA branch goes through sentence_transformers.CrossEncoder directly).
+    """
     load_count = {"n": 0}
 
     def fake_load_ce(model_name: str):
         load_count["n"] += 1
         return f"model:{model_name}"
 
+    monkeypatch.setenv("TINKER_RERANK_DEVICE", "cpu")
     monkeypatch.setattr(rerank, "load_cross_encoder", fake_load_ce)
-    monkeypatch.setitem(rerank._LOADED, "", None)  # touch dict reference
     rerank._LOADED.clear()
 
     a = rerank.load_reranker("model-a")
