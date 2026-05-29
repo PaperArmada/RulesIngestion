@@ -15,12 +15,47 @@ to force CPU.
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
-
-from retrieval_lab.reranker import load_cross_encoder, rerank_candidates
 
 
 DEFAULT_RERANKER_MODEL = "BAAI/bge-reranker-v2-m3"
+
+
+def _maybe_enable_hf_offline(model_name: str) -> None:
+    """If the model is already in the local HF cache, pin offline mode.
+
+    sentence-transformers fires a `HEAD` against huggingface.co on every
+    load to validate cache freshness, which prints an "unauthenticated
+    request" warning and adds a network round-trip. When the model is
+    cached, we don't need that check — HF_HUB_OFFLINE=1 short-circuits
+    it. If the model isn't cached yet, we leave the env var alone so
+    the first-time download can happen normally.
+    """
+    if os.environ.get("HF_HUB_OFFLINE"):
+        return
+    hub_root = Path(os.environ.get("HF_HOME", str(Path.home() / ".cache" / "huggingface"))) / "hub"
+    if not hub_root.is_dir():
+        return
+    # repo-id "BAAI/bge-reranker-v2-m3" lands at "models--BAAI--bge-reranker-v2-m3".
+    repo_dir = hub_root / ("models--" + model_name.replace("/", "--"))
+    if not repo_dir.is_dir():
+        return
+    snapshots = repo_dir / "snapshots"
+    if snapshots.is_dir() and any(snapshots.iterdir()):
+        os.environ["HF_HUB_OFFLINE"] = "1"
+
+
+# Pin offline mode for the default reranker model at import time (the most
+# common case). Other models picked at runtime will fall through to the
+# online path naturally.
+_maybe_enable_hf_offline(DEFAULT_RERANKER_MODEL)
+
+
+from retrieval_lab.reranker import (  # noqa: E402  imports after env tweak
+    load_cross_encoder,
+    rerank_candidates,
+)
 
 _LOADED: dict[str, Any] = {}
 
