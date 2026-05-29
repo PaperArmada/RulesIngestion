@@ -28,7 +28,7 @@ from tinker.routing.entity_anchored import RouteResult, run_entity_anchored
 from tinker.routing.intent_bearing import run_intent_bearing
 
 
-AMBIGUITY_MARGIN_DEFAULT = 0.15
+AMBIGUITY_MARGIN_DEFAULT = 0.05
 
 
 _IMPLEMENTED_BUCKETS = {"entity_anchored_single", "intent_bearing_distributed"}
@@ -89,14 +89,11 @@ def route_and_retrieve(
     unit_text_by_id: dict[str, str],
     self_portrait: dict[str, Any],
     cache: TinkerCache | None = None,
-    classifier_model: str | None = None,
     top_k: int = 10,
     candidate_pool: int = 50,
     ambiguity_margin: float = AMBIGUITY_MARGIN_DEFAULT,
     use_qrofs: bool = True,
     rerank: bool = True,
-    workhorse_model: str = tinker_llm.MODEL_WORKHORSE,
-    embedder_model: str = tinker_llm.MODEL_EMBEDDER,
 ) -> DispatchResult:
     overall_t0 = time.perf_counter()
 
@@ -112,8 +109,6 @@ def route_and_retrieve(
         "self_portrait_summary": self_portrait_summary,
         "cache": cache,
     }
-    if classifier_model:
-        classifier_kw["model"] = classifier_model
 
     if use_qrofs:
         qresult = cls.classify_query_qrofs(query, **classifier_kw)
@@ -154,7 +149,7 @@ def route_and_retrieve(
     # (its extract_intent + hypothesize steps use it).
     needs_workhorse = "intent_bearing_distributed" in runners_to_invoke
     if rerank and not needs_workhorse:
-        tinker_llm.unload_ollama_model(workhorse_model)
+        tinker_llm.unload_workhorse()
 
     for runner_id in runners_to_invoke:
         if runner_id == "entity_anchored_single":

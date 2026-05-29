@@ -14,18 +14,14 @@ import time
 from dataclasses import dataclass, field
 from typing import Any
 
-import ollama
-
-from tinker import llm as tinker_llm
+from tinker.backends import current_backend
 from tinker.cache import TinkerCache
 from tinker.routing.buckets import (
     BUCKET_BY_ID,
     BUCKET_IDS,
     render_bucket_descriptions,
 )
-
-
-CLASSIFIER_MODEL = tinker_llm.MODEL_CLASSIFIER
+from tinker.runtime_config import CFG
 
 
 @dataclass(frozen=True)
@@ -72,27 +68,27 @@ def classify_query(
     *,
     self_portrait_summary: str | None = None,
     cache: TinkerCache | None = None,
-    model: str = CLASSIFIER_MODEL,
     think: bool = False,
 ) -> ClassifyResult:
     """Classify a query into one of the 8 retrieval buckets.
 
-    Returns a `ClassifyResult` with bucket id, confidence, reason, and
-    measured latency. If `cache` is provided, identical (query, self_portrait,
-    model) tuples reuse the previous response.
+    Routes through the configured LLM backend. Cache key includes the
+    backend name so an Ollama-cached row doesn't shadow a Gemini run.
 
     On unparseable JSON or unknown bucket id, returns bucket="entity_anchored_single"
-    (the safest fast-path default) with confidence=0.0 and the failure noted
-    in `reason`.
+    (the safest fast-path default) with confidence=0.0 and the failure
+    noted in `reason`.
     """
+    backend = current_backend()
     system, user = _build_prompt(query, self_portrait_summary)
     payload = {
         "role": "classify",
         "system": system,
         "user": user,
     }
+    cache_model_key = f"{backend.name}:classify"
     if cache is not None:
-        hit = cache.get_llm("classify", model, payload)
+        hit = cache.get_llm("classify", cache_model_key, payload)
         if hit is not None:
             try:
                 parsed = json.loads(hit)
@@ -101,20 +97,18 @@ def classify_query(
                 pass  # corrupted cache row; re-run
 
     t0 = time.perf_counter()
-    response = ollama.chat(
-        model=model,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
+    result = backend.chat(
+        role="classify",
+        system=system,
+        user=user,
         think=think,
-        format="json",
+        json_format=True,
     )
     latency_ms = (time.perf_counter() - t0) * 1000
-    text = response["message"]["content"]
+    text = result.text
 
     if cache is not None:
-        cache.put_llm("classify", model, payload, text)
+        cache.put_llm("classify", cache_model_key, payload, text)
 
     try:
         parsed = json.loads(text)
@@ -124,7 +118,7 @@ def classify_query(
             confidence=0.0,
             reason=f"JSON parse error: {exc}",
             latency_ms=latency_ms,
-            raw={"text": text, "response": dict(response)},
+            raw={"text": text, "backend": backend.name},
             cached=False,
         )
 
@@ -236,20 +230,24 @@ def classify_query_qrofs(
     *,
     self_portrait_summary: str | None = None,
     cache: TinkerCache | None = None,
-    model: str = CLASSIFIER_MODEL,
     q: int = DEFAULT_Q,
-    think: bool = False,
+    think: bool | None = None,
 ) -> QROFSResult:
     """Classify a query via q-rung orthopair fuzzy membership.
 
     Returns per-bucket (mu, nu, pi). Routing logic outside this function
-    decides what to do with the multi-bucket signal.
+    decides what to do with the multi-bucket signal. `think` defaults to
+    the CFG.think_classify knob when not explicitly overridden; the cache
+    key includes the think flag so thinking/non-thinking runs don't alias.
     """
+    backend = current_backend()
+    use_think = CFG.think_classify if think is None else think
     system, user = _build_qrofs_prompt(query, self_portrait_summary, q)
     payload = {"role": "classify_qrofs", "system": system, "user": user, "q": q}
+    cache_model_key = f"{backend.name}:classify_qrofs:think={int(use_think)}"
 
     if cache is not None:
-        hit = cache.get_llm("classify_qrofs", model, payload)
+        hit = cache.get_llm("classify_qrofs", cache_model_key, payload)
         if hit is not None:
             try:
                 parsed = json.loads(hit)
@@ -260,25 +258,21 @@ def classify_query_qrofs(
                 pass
 
     t0 = time.perf_counter()
-    response = ollama.chat(
-        model=model,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        think=think,
-        format="json",
+    result = backend.chat(
+        role="classify_qrofs",
+        system=system,
+        user=user,
+        think=use_think,
+        json_format=True,
     )
     latency_ms = (time.perf_counter() - t0) * 1000
-    text = response["message"]["content"]
+    text = result.text
     if cache is not None:
-        cache.put_llm("classify_qrofs", model, payload, text)
+        cache.put_llm("classify_qrofs", cache_model_key, payload, text)
 
     try:
         parsed = json.loads(text)
     except json.JSONDecodeError as exc:
-        # Fall back: every bucket gets mu=nu=0 (max hesitation). Chosen
-        # bucket is the safe default.
         return _qrofs_fallback(
             f"JSON parse error: {exc}", text, latency_ms, q
         )

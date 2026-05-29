@@ -147,7 +147,7 @@ def run_intent_bearing(
     if rerank and candidates:
         # See entity_anchored.run_entity_anchored for VRAM-swap rationale.
         t_unload = time.perf_counter()
-        tinker_llm.unload_ollama_model(tinker_llm.MODEL_WORKHORSE)
+        tinker_llm.unload_workhorse()
         tinker_llm.unload_ollama_model(tinker_llm.MODEL_EMBEDDER)
         timing["ollama_unload_ms"] = (time.perf_counter() - t_unload) * 1000
 

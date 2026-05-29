@@ -86,12 +86,6 @@ def main() -> int:
         action="store_true",
         help="Use the q-rung orthopair classifier (per-bucket mu/nu/pi).",
     )
-    parser.add_argument(
-        "--model",
-        type=str,
-        default=None,
-        help="Override the Ollama model used by the classifier (default: qwen3:4b).",
-    )
     parser.add_argument("--out", type=Path, default=None, help="Output JSON path.")
     args = parser.parse_args()
 
@@ -134,7 +128,6 @@ def main() -> int:
                 question,
                 self_portrait_summary=self_portrait_summary,
                 cache=cache,
-                **({"model": args.model} if args.model else {}),
             )
             entry: dict[str, Any] = {
                 "id": qid,
@@ -186,7 +179,6 @@ def main() -> int:
             question,
             self_portrait_summary=self_portrait_summary,
             cache=cache,
-            **({"model": args.model} if args.model else {}),
         )
         predictions.append(
             {

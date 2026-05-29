@@ -74,7 +74,7 @@ def run_entity_anchored(
         # leave no room for the reranker (~2 GB) and sentence-transformers
         # silently falls back to CPU (~400x slower).
         t_unload = time.perf_counter()
-        tinker_llm.unload_ollama_model(tinker_llm.MODEL_WORKHORSE)
+        tinker_llm.unload_workhorse()
         tinker_llm.unload_ollama_model(tinker_llm.MODEL_EMBEDDER)
         timing["ollama_unload_ms"] = (time.perf_counter() - t_unload) * 1000
 

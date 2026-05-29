@@ -1,11 +1,11 @@
-"""Ollama-backed LLM wrapper for intent-routed retrieval.
+"""LLM wrapper for intent-routed retrieval.
 
-Centralizes role-to-model bindings and per-role thinking-mode defaults so
-individual call sites don't drift. See
-Docs/Design/MODELS-Intent-Routed-Retrieval.md for the lineup and rationale.
+Role functions (classify, extract_intent, hypothesize, synthesize,
+extract_glossary, label_cluster) dispatch through `tinker.backends`. The
+backend is selected by the TINKER_LLM_BACKEND env var (ollama | gemini).
 
-Every role function accepts a `think` override; pass None to use the
-role default, True/False to force.
+Embedding stays on Ollama regardless of backend choice. Hosted embeddings
+are a separate decision that hasn't been made yet.
 """
 
 from __future__ import annotations
@@ -16,14 +16,21 @@ from typing import Any, Iterable
 
 import ollama
 
+from tinker.backends import ChatResult, current_backend
+from tinker.backends.ollama_backend import (
+    MODEL_CLASSIFIER,
+    MODEL_WORKHORSE,
+    _unload_ollama_model,
+)
+from tinker.runtime_config import CFG
 
-MODEL_CLASSIFIER = "qwen3:14b"
-MODEL_WORKHORSE = "qwen3:14b"
+
 MODEL_EMBEDDER = "qwen3-embedding"
 
 
 DEFAULT_THINK: dict[str, bool] = {
     "classify": False,
+    "classify_qrofs": False,
     "extract_intent": False,
     "hypothesize": False,
     "synthesize": False,
@@ -39,24 +46,23 @@ class LLMResult:
 
 
 def _chat(
-    model: str,
-    messages: list[dict[str, str]],
+    role: str,
+    system: str,
+    user: str,
     *,
     think: bool,
     json_format: bool = False,
-    options: dict[str, Any] | None = None,
-) -> LLMResult:
-    kwargs: dict[str, Any] = {
-        "model": model,
-        "messages": messages,
-        "think": think,
-    }
-    if json_format:
-        kwargs["format"] = "json"
-    if options:
-        kwargs["options"] = options
-    resp = ollama.chat(**kwargs)
-    return LLMResult(text=resp["message"]["content"], raw=dict(resp))
+    max_tokens: int | None = None,
+) -> ChatResult:
+    """Dispatch one chat turn through the configured backend."""
+    return current_backend().chat(
+        role=role,
+        system=system,
+        user=user,
+        think=think,
+        json_format=json_format,
+        max_tokens=max_tokens,
+    )
 
 
 def _resolve_think(role: str, override: bool | None) -> bool:
@@ -72,11 +78,8 @@ def classify(
     *,
     think: bool | None = None,
 ) -> dict[str, Any]:
-    """Classify a query into one of the retrieval buckets.
-
-    Returns a dict with keys: bucket, confidence, reason. Raises
-    json.JSONDecodeError if the model produces invalid JSON despite
-    format=json.
+    """Smoke-test classifier. The production classifier lives in
+    `tinker.routing.classifier`; this stays for `python -m tinker.llm`.
     """
     system = (
         "You are a query classifier for a retrieval system. Given a user "
@@ -91,8 +94,9 @@ def classify(
         f"Query: {query}"
     )
     result = _chat(
-        MODEL_CLASSIFIER,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "classify",
+        system,
+        user,
         think=_resolve_think("classify", think),
         json_format=True,
     )
@@ -105,10 +109,6 @@ def extract_intent(
     *,
     think: bool | None = None,
 ) -> dict[str, Any]:
-    """Read a query, output an intent statement plus 1-3 target cluster ids.
-
-    Returns dict: {intent: str, target_clusters: list[str], reason: str}.
-    """
     system = (
         "You analyze a user query against a corpus's structural inventory "
         "to identify (a) what intent the query expresses and (b) which "
@@ -119,10 +119,13 @@ def extract_intent(
     user = (
         f"Structural inventory:\n{structural_inventory}\n\nQuery: {query}"
     )
+    # think: explicit override wins; otherwise the CFG knob (default off).
+    use_think = CFG.think_intent if think is None else think
     result = _chat(
-        MODEL_WORKHORSE,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
-        think=_resolve_think("extract_intent", think),
+        "extract_intent",
+        system,
+        user,
+        think=use_think,
         json_format=True,
     )
     return json.loads(result.text)
@@ -134,31 +137,38 @@ def hypothesize(
     glossary_terms: list[str],
     *,
     think: bool | None = None,
+    max_tokens: int | None = None,
 ) -> str:
-    """Generate a hypothetical answer-shaped artifact for HyDE embedding.
+    """Generate a hypothesis-shaped artifact for HyDE embedding.
 
-    Produces text in the target structural shape, using glossary terms
-    where natural. The hypothesis is intended for embedding, not for
-    showing to a user.
+    The token cap and word limit come from CFG (hypothesis_max_tokens /
+    hypothesis_word_limit) unless overridden. The 200-token / 120-word
+    default was a local-latency accommodation; hosted models can afford a
+    richer hypothesis, which may embed closer to the target evidence.
     """
+    cap = CFG.hypothesis_max_tokens if max_tokens is None else max_tokens
+    word_limit = CFG.hypothesis_word_limit
     system = (
         "You generate a hypothetical answer-shaped artifact whose purpose "
         "is to bridge a user query to corpus evidence in embedding space. "
         "The hypothesis must look like the target structural shape, not "
         "generic prose, and should use the provided vocabulary where it "
-        "fits naturally. Do not write disclaimers; produce only the "
+        f"fits naturally. Be concise: under {word_limit} words. Do not write "
+        "disclaimers, do not restate the question; produce only the "
         "artifact itself."
     )
     user = (
         f"Target structural shape:\n{target_shape_description}\n\n"
         f"Glossary terms (use where they fit): {', '.join(glossary_terms) if glossary_terms else '(none provided)'}\n\n"
         f"User query: {query}\n\n"
-        "Generate the hypothetical artifact now."
+        f"Generate the hypothetical artifact now (under {word_limit} words)."
     )
     result = _chat(
-        MODEL_WORKHORSE,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "hypothesize",
+        system,
+        user,
         think=_resolve_think("hypothesize", think),
+        max_tokens=cap,
     )
     return result.text.strip()
 
@@ -169,11 +179,6 @@ def synthesize(
     *,
     think: bool | None = None,
 ) -> str:
-    """Generate a final answer from retrieved evidence.
-
-    Each evidence string is shown with a bracketed index; the model is
-    instructed to cite that index for each claim.
-    """
     system = (
         "Answer the user's question using ONLY the provided evidence. "
         "Cite the bracketed evidence index for each claim, e.g. [2]. "
@@ -183,8 +188,9 @@ def synthesize(
     evidence_block = "\n\n".join(f"[{i}] {chunk}" for i, chunk in enumerate(evidence))
     user = f"Evidence:\n{evidence_block}\n\nQuestion: {query}"
     result = _chat(
-        MODEL_WORKHORSE,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "synthesize",
+        system,
+        user,
         think=_resolve_think("synthesize", think),
     )
     return result.text.strip()
@@ -195,10 +201,6 @@ def extract_glossary(
     *,
     think: bool | None = None,
 ) -> dict[str, Any]:
-    """Extract term-definition pairs and acronym expansions from a chunk.
-
-    Returns dict: {terms: list[{term, definition}], acronyms: list[{acronym, expansion}]}.
-    """
     system = (
         "You extract glossary-style term-definition pairs and acronym "
         "expansions from a passage of rulebook text. Include only items "
@@ -208,8 +210,9 @@ def extract_glossary(
     )
     user = f"Passage:\n{chunk_text}"
     result = _chat(
-        MODEL_WORKHORSE,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "extract_glossary",
+        system,
+        user,
         think=_resolve_think("extract_glossary", think),
         json_format=True,
     )
@@ -221,7 +224,6 @@ def label_cluster(
     *,
     think: bool | None = None,
 ) -> str:
-    """Describe a structural cluster's shape in one sentence."""
     system = (
         "You describe the structural form of a cluster of corpus chunks "
         "in a single sentence. Focus on layout and recurring fields "
@@ -235,58 +237,28 @@ def label_cluster(
         + "\n\nDescribe the structural shape in one sentence."
     )
     result = _chat(
-        MODEL_WORKHORSE,
-        [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        "label_cluster",
+        system,
+        user,
         think=_resolve_think("label_cluster", think),
     )
     return result.text.strip()
 
 
+def unload_workhorse() -> bool:
+    """Evict the workhorse LLM from the GPU (Ollama). Hosted backends no-op."""
+    return current_backend().unload_chat("workhorse")
+
+
 def unload_ollama_model(model: str, *, wait_seconds: float = 10.0) -> bool:
-    """Ask Ollama to evict *model* from VRAM and wait until it is actually unloaded.
-
-    Returns True if the model was confirmed absent from `/api/ps` within
-    *wait_seconds*, False otherwise. Both the unload-request and the poll
-    are best-effort; failures (Ollama down, model not loaded, API drift)
-    are swallowed and return False so callers can keep flowing.
-
-    Critical for the cross-encoder reranker step: sentence-transformers
-    will silently fall back to CPU (~400x slower) if it cannot allocate
-    its activation tensors on a contended GPU, so we must wait for the
-    LLM weights to actually leave VRAM before invoking the reranker.
+    """Direct Ollama eviction by model name. Used for the embedder
+    (always local) regardless of which LLM backend is configured.
     """
-    import time
-    import urllib.request
-    import urllib.error
-    import json as _json
-
-    try:
-        ollama.generate(model=model, prompt="", keep_alive=0)
-    except Exception:
-        pass
-
-    deadline = time.perf_counter() + wait_seconds
-    while time.perf_counter() < deadline:
-        try:
-            with urllib.request.urlopen(
-                "http://localhost:11434/api/ps", timeout=2.0
-            ) as resp:
-                payload = _json.loads(resp.read())
-            loaded = {m.get("name") for m in payload.get("models", [])}
-            if model not in loaded and f"{model}:latest" not in loaded:
-                return True
-        except (urllib.error.URLError, OSError, ValueError):
-            return False
-        time.sleep(0.1)
-    return False
+    return _unload_ollama_model(model, wait_seconds=wait_seconds)
 
 
 def embed(texts: Iterable[str]) -> list[list[float]]:
-    """Batch-embed texts with the embedding model.
-
-    Returns one vector per input, in input order. Uses Ollama's batched
-    embed API.
-    """
+    """Batch-embed via Ollama's qwen3-embedding. Always local."""
     items = list(texts)
     if not items:
         return []
@@ -295,11 +267,10 @@ def embed(texts: Iterable[str]) -> list[list[float]]:
 
 
 def smoke_test() -> None:
-    """Quick end-to-end sanity check. Run as `python -m tinker.llm`.
+    """Quick end-to-end sanity check against the current backend."""
+    from tinker.backends import current_backend as _cb
+    print(f"== backend: {_cb().name} ==")
 
-    Verifies the wrapper can reach Ollama and exercise each role with
-    trivial inputs. Prints results to stdout.
-    """
     print("== embed ==")
     vecs = embed(["Healing Word is a spell.", "Sidestep is a reaction."])
     print(f"  got {len(vecs)} vectors, dim={len(vecs[0])}")
