@@ -38,7 +38,8 @@ def main() -> int:
     ap.add_argument("--substrate-dir", type=Path, required=True)
     ap.add_argument("--document-id", type=str, required=True)
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--min-coverage", type=int, default=12)
+    ap.add_argument("--min-coverage-floor", type=int, default=6)
+    ap.add_argument("--min-coverage-frac", type=float, default=0.015)
     ap.add_argument("--max-cardinality", type=int, default=30)
     ap.add_argument("--top", type=int, default=25)
     args = ap.parse_args()
@@ -47,11 +48,14 @@ def main() -> int:
     print(f"Loaded {len(units)} units. Discovering facets (schema-free)...\n")
 
     facets = discover_facets(
-        units, min_coverage=args.min_coverage, max_cardinality=args.max_cardinality
+        units, min_coverage_floor=args.min_coverage_floor,
+        min_coverage_frac=args.min_coverage_frac, max_cardinality=args.max_cardinality
     )
 
+    eff = max(args.min_coverage_floor, round(args.min_coverage_frac * len(units)))
     print(f"Discovered {len(facets)} qualified facet channels "
-          f"(min_coverage={args.min_coverage}, max_cardinality={args.max_cardinality}):\n")
+          f"(effective min_coverage={eff} = max({args.min_coverage_floor}, "
+          f"{args.min_coverage_frac}*{len(units)}), max_cardinality={args.max_cardinality}):\n")
     print(f"{'channel':<32s} {'card':>4s} {'cover':>5s} {'score':>7s}  top values")
     print("-" * 90)
     for ch in facets[: args.top]:
