@@ -174,3 +174,57 @@ given exactly |gold| slots (similarity ≠ set membership).
 Verdict so far: cross-paradigm routing is validated on this corpus — the concept
 M6 redirected toward holds where M5's within-similarity routing failed. Pending
 M7.4 for generality.
+
+---
+
+## 9. M7.4 — portability to a second rulebook (D&D 5e SRD)
+
+Second corpus: the official CC-BY D&D 5.1 SRD PDF (403 pages → 2804 units),
+ingested via the same `ingest_no_ocr` path.
+
+**Spike required first (M7.4a).** The SRD PDF separates glyphs with tab/CR/nbsp,
+which scrambled pymupdf4llm's bold detection — the `**Label:**`-only extractor
+found 5/190 labels on a sample. This is the layout-dependence risk §6 flagged,
+and it materialized. The fix kept the approach *more* general, not more special:
+- normalize per-glyph spacing artifacts;
+- detect bold OR plain TitleCase labels by position-slicing the value to the
+  next label (no dependence on bold surviving);
+- add a `phrase` value token (whole cleaned value) alongside typed tokens, so
+  phrase-valued fields survive (5e `Casting Time: 1 bonus action` was being
+  fragmented to integer `1`); the statistical qualifier picks the right
+  representation per field;
+- make the coverage threshold relative to corpus size
+  (`max(floor, frac * n_units)`) instead of an absolute count tuned to SWCR.
+
+SWCR regression after the spike: 16 channels (was 15), hand-fixture Jaccard 0.78
+unchanged.
+
+**Discovery on 5e (unchanged code, n=2804, effective min_coverage=42):** surfaced
+8 channels, ~4 clean and genuinely 5e-specific — `Casting Time/phrase`
+(`1 action` ×230, `1 minute`, `1 bonus action`), `Range/phrase`
+(`touch`/`60 feet`/`self`), `Melee Weapon Attack/dice` (`2d6`/`1d6`/`2d8`),
+`Ranged Weapon Attack/dice` — none of which exist in SWCR. Plus noise
+(`Components/integer` catching gp costs, page-header barewords). 5e **monster**
+stat blocks are columnar and not inline-labeled, so they don't enumerate — a
+corpus-structure fact, not a pipeline failure.
+
+**Eval (20 auto-gen queries, paraphrased):**
+
+| metric | SWCR | 5e SRD |
+|---|---|---|
+| enumeration route set-F1 | 1.000 (37/37 exact) | 1.000 (20/20 exact) |
+| raw_dense set-F1 @ top-20 | 0.128 | 0.107 |
+| raw_dense @ top-\|gold\| | 0.131 | 0.116 |
+| facet resolution (paraphrased) | 37/37 | 20/20 |
+
+**Verdict: cross-paradigm enumeration routing generalizes across rulebooks.** The
+same code (after the typography/adaptivity spike) discovered a different system's
+facets, auto-generated its eval, and resolved paraphrased NL to the right facet
+20/20, while similarity retrieval is structurally capped at ~0.11. Caveats
+unchanged: the 1.000 is partly circular (route and gold share the index — the
+independently-measured skills are resolution accuracy and raw_dense's structural
+failure); auto-gen facet quality varies (some noisy facets get queries), so a
+production system wants a facet-quality filter; the regex form-detector
+over-fires (16/19 negatives) and the LLM `is_enumeration` gate (0/19) is the real
+gate. Two corpora, same domain; cross-domain remains untested by choice (the
+product is rulebooks).
