@@ -71,6 +71,15 @@ surfaced it. See the `feedback-verify-with-data` memory.
   gold is SWCR's Subdual Damage rule). Bias, not variance — which is why a
   longer/better hypothesis did not help.
 
+> **Confound (added 2026-05-30):** the shape-prior bridge HyDE was given was
+> weak. The M1 glossary feeding it is a 130-term regex grab-bag missing the rule
+> concepts the failing queries needed (subdual/morale/reaction/negotiation/rest).
+> So this is "HyDE with a *weak* shape prior," not a clean test of HyDE-as-
+> designed. The embedder-ceiling argument (0.993 pool recall) is the part that
+> stands independently; the prior-drift cause is refined to "weak bridge +
+> fallback to prior." M9 re-runs HyDE with a proper LLM-built glossary to put the
+> as-designed performance on the record.
+
 ### Side-finding worth carrying forward
 
 raw_dense pool recall@50 is 0.993 but its final recall@10 is 0.589: the gold is

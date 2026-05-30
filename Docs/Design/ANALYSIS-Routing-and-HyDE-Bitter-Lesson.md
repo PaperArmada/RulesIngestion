@@ -217,3 +217,25 @@ Both links of the §1 causal chain hold at the population level. HyDE is the wro
 tool against a strong instruction-tuned embedder on a niche corpus: the embedder
 removes HyDE's reason to exist, and the LLM prior makes the hypothesis an active
 liability. This is the empirical spine of the §2 bitter-lesson reading.
+
+### Confound found later (2026-05-30): the shape-prior bridge was weak
+
+A follow-up review (prompted by the question "but we gave HyDE the glossary as a
+bridge — why did it still drift?") found the bridge was nearly empty of the right
+content. The intent-bearing route does inject a shape prior (cluster shapes +
+glossary terms), but the M1 glossary is a 130-term **regex grab-bag** with low
+recall and noise — it contains a credits line ("Additional proofreading and
+suggestions") and is MISSING the rule concepts the failing queries needed
+(subdual / morale / reaction / negotiation / rest all absent). So the
+hypothesizer was handed noisy, often-irrelevant terms, used what it was given
+(visible confabulation from injected class-feature terms in §4's m01 example),
+and filled the rest from its prior.
+
+Consequence for the verdict: the fair claim is **"HyDE with this (weak) shape
+prior failed,"** not "HyDE-with-shape-prior is obsolete." The drift mechanism (§1)
+is real but its *cause* is refined: weak bridge + fallback to prior, not an
+inherent inability to know the domain. What survives independently is the
+embedder-ceiling argument — the raw query already pulls 0.993 of gold into the
+top-50, so even a perfect bridge has almost no headroom to beat it. M9 re-tests
+HyDE with a proper LLM-built glossary to put the system's described performance on
+the record and separate "weak bridge" from "no headroom."
