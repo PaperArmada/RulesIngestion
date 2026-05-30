@@ -322,3 +322,37 @@ cross-encoder on this corpus — dense-only already beats it. Re-running the who
 project's evals after (a) would raise every baseline; the qualitative verdicts
 (HyDE loses, enumeration/cross-paradigm wins) are unaffected, but the numbers are
 currently depressed by a fixable substrate+reranker interaction.
+
+### 6a. Rerank bake-off (M10): no reranker beats dense@10, but LLM-listwise wins the top
+
+Six conditions on the 19-query gold (dense pool=50). The LLM prompt did NOT
+mention index/navigation pages — a fair zero-shot test.
+
+| condition | R@1 | R@5 | R@10 |
+|---|---|---|---|
+| dense_only | 0.148 | 0.486 | **0.768** |
+| cross_encoder (pipeline default) | 0.087 | 0.418 | 0.589 |
+| llm_listwise (Gemini Flash) | **0.211** | **0.520** | 0.749 |
+| dense_only + index-filter | 0.148 | 0.486 | 0.768 |
+| cross_encoder + index-filter | 0.104 | 0.487 | 0.638 |
+| llm_listwise + index-filter | **0.217** | 0.518 | 0.757 |
+
+Reads:
+- **Cross-encoder loses everywhere.** Index-filtering rescues it (0.589→0.638)
+  but it never approaches dense-only. Confirmed: drop it.
+- **No reranker beats dense-only at R@10** (0.768). Reranking does not improve
+  bulk recall@10 on this corpus.
+- **LLM-listwise wins the TOP**: R@1 0.148→0.211 (~+43% relative) and R@5
+  0.486→0.520, without being told to avoid index pages. It reasons "does this
+  answer the query" and isn't fooled by keyword density.
+- **Index filter** mainly rescues the (still-losing) cross-encoder; it barely
+  moves dense or LLM (the nav pages were already ranked low by dense).
+
+**So the architecture answer is need-dependent.** If a downstream synthesizer
+reads the top 1–3 passages, the LLM listwise reranker is worth it (better top
+precision). If you need broad recall@10, plain dense is best and any reranker is
+overhead. The cross-encoder is dominated in every regime here. This is a third
+specialized-component-vs-general-model instance: the cross-encoder (narrow,
+trained, surface-feature-brittle) loses; the LLM (general reasoner) wins where it
+can afford to (small-K reranking), while the embedder (specialized) remains
+irreplaceable for first-stage retrieval at scale.
