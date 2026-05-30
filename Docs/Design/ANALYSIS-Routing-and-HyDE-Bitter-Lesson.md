@@ -233,9 +233,28 @@ and filled the rest from its prior.
 
 Consequence for the verdict: the fair claim is **"HyDE with this (weak) shape
 prior failed,"** not "HyDE-with-shape-prior is obsolete." The drift mechanism (§1)
-is real but its *cause* is refined: weak bridge + fallback to prior, not an
-inherent inability to know the domain. What survives independently is the
-embedder-ceiling argument — the raw query already pulls 0.993 of gold into the
-top-50, so even a perfect bridge has almost no headroom to beat it. M9 re-tests
-HyDE with a proper LLM-built glossary to put the system's described performance on
-the record and separate "weak bridge" from "no headroom."
+is real but its *cause* needs the M9 test below to separate "weak bridge" from
+"no headroom."
+
+### M9 resolution: properly-supported HyDE still loses — it was no headroom
+
+Built a proper bridge: an LLM glossary (811 terms with definitions, vs the old
+130-term regex grab-bag; coverage of the failing concepts flipped from 1/8 to
+6/8 — subdual/morale/negotiation/rest/wound/surprise now present), entries
+relevance-selected per query by embedding similarity, injected as
+`term: definition`. Re-ran the pool-recall diagnostic on the 19-query gold:
+
+| pool | mean recall@50 |
+|---|---|
+| query (raw_dense) | 0.993 |
+| **bridged-HyDE** | **0.890** |
+| weak-bridge HyDE (original) | 0.873 |
+
+The proper bridge lifted HyDE only 0.873 → 0.890, and bridged-HyDE **beat the
+raw query pool on 0/19 queries (worse on 7)**; one query collapsed to 0.00. So
+the dominant factor was **no headroom**, not the weak glossary: the embedder
+already retrieves ~0.993 of gold into the top-50, so replacing the query with any
+hypothesis (however well grounded) can only lose. The weak bridge contributed a
+little (~0.017 of the gap); the embedder ceiling dominates. The original M5/M6
+verdict stands, now on firm ground and with the mechanism correctly attributed.
+(Output: `out/tinker/swcr/runs/m9_hyde_bridged/`.)

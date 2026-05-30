@@ -71,14 +71,16 @@ surfaced it. See the `feedback-verify-with-data` memory.
   gold is SWCR's Subdual Damage rule). Bias, not variance — which is why a
   longer/better hypothesis did not help.
 
-> **Confound (added 2026-05-30):** the shape-prior bridge HyDE was given was
-> weak. The M1 glossary feeding it is a 130-term regex grab-bag missing the rule
-> concepts the failing queries needed (subdual/morale/reaction/negotiation/rest).
-> So this is "HyDE with a *weak* shape prior," not a clean test of HyDE-as-
-> designed. The embedder-ceiling argument (0.993 pool recall) is the part that
-> stands independently; the prior-drift cause is refined to "weak bridge +
-> fallback to prior." M9 re-runs HyDE with a proper LLM-built glossary to put the
-> as-designed performance on the record.
+> **Confound investigated + resolved (2026-05-30):** the original shape-prior
+> bridge was weak (130-term regex glossary missing the failing queries' rule
+> concepts). M9 rebuilt it properly — an 811-term LLM glossary with definitions
+> (failing-concept coverage 1/8 → 6/8), relevance-selected, injected as
+> `term: definition` — and re-ran the pool-recall diagnostic. Result:
+> bridged-HyDE 0.890 vs query 0.993, still beating the raw query on **0/19**
+> queries. The proper bridge moved HyDE only +0.017; the verdict was **no
+> headroom**, not the weak glossary. The embedder retrieves ~0.993 of gold into
+> the top-50, so any hypothesis substitution loses. Original verdict stands, with
+> the mechanism now correctly attributed. (`out/tinker/swcr/runs/m9_hyde_bridged/`)
 
 ### Side-finding worth carrying forward
 
