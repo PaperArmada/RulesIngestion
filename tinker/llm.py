@@ -173,6 +173,65 @@ def hypothesize(
     return result.text.strip()
 
 
+def resolve_facet(
+    query: str,
+    facet_schema: str,
+    *,
+    think: bool | None = None,
+) -> dict[str, Any]:
+    """Map a query to ONE enumerable facet value from a discovered catalog.
+
+    The catalog is built from schema-free facet discovery (corpus-specific
+    but auto-discovered, not hardcoded). Returns
+    {is_enumeration: bool, channel: str|null, value: str|null, reason: str}.
+    `channel` and `value` must be copied from the catalog; the route validates.
+    """
+    system = (
+        "You map a user query to ONE enumerable facet value from a catalog of "
+        "facets discovered in a corpus. A facet value defines a complete SET of "
+        "items sharing an attribute value (e.g. all items at a given level). "
+        "If the query asks to enumerate / list / count the complete set of items "
+        "sharing one attribute value, return that facet's channel and the exact "
+        "value token from the catalog. If the query is NOT a set-completion "
+        "request, set is_enumeration to false. Respond ONLY with JSON: "
+        '{"is_enumeration": bool, "channel": str|null, "value": str|null, '
+        '"reason": str}. The channel must be copied exactly from the catalog, '
+        "and the value must be one of that channel's listed tokens."
+    )
+    user = f"Facet catalog:\n{facet_schema}\n\nQuery: {query}"
+    result = _chat(
+        "resolve_facet",
+        system,
+        user,
+        think=False if think is None else think,
+        json_format=True,
+    )
+    return json.loads(result.text)
+
+
+def paraphrase_query(question: str, *, think: bool | None = None) -> str:
+    """Rewrite a templated enumeration query as natural user phrasing.
+
+    Used only for eval prep: it tests the facet resolver on phrasing it did not
+    generate from. Preserves the exact attribute and value; avoids copying the
+    field label verbatim so resolution must be semantic, not a template reversal.
+    """
+    system = (
+        "Rewrite the request as a natural question a real user would ask. "
+        "Preserve the EXACT attribute and value being requested, but do NOT copy "
+        "the field label verbatim — use natural synonyms and phrasing. Keep it a "
+        "clear request to list/enumerate the complete set. Output only the "
+        "rewritten question, nothing else."
+    )
+    result = _chat(
+        "paraphrase",
+        system,
+        f"Request: {question}",
+        think=False if think is None else think,
+    )
+    return result.text.strip()
+
+
 def synthesize(
     query: str,
     evidence: list[str],
