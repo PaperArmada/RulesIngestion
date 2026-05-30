@@ -88,6 +88,17 @@ raw_dense pool recall@50 is 0.993 but its final recall@10 is 0.589: the gold is
 in the pool; the **reranker** (or `top_k`) is the binding constraint on this
 corpus, not retrieval. Any future quality work should target ranking, not recall.
 
+> **Sharpened later (2026-05-30):** the cross-encoder is not just the binding
+> constraint, it is **net-negative**. Within the same dense top-50 pool,
+> dense-order recall@10 is 0.768 vs rerank-order 0.589 — the reranker helped 0
+> queries, hurt 13. Dominant mode: it promotes keyword-dense index/TOC pages (4
+> navigational units intrude the top-5 on 10/19 queries) and demotes terse gold.
+> So **every recall@10 in this report is depressed by the reranker**; dense-only
+> is the stronger baseline (0.768). Qualitative verdicts are unaffected (HyDE
+> still loses to dense-only; enumeration/cross-paradigm still win), but the
+> numbers should be re-run after filtering navigational units and reconsidering
+> the cross-encoder. See ANALYSIS §6.
+
 ### Cost / latency context
 
 Moving the LLM to Gemini cut router latency from ~57 s/query mean (local, swap-

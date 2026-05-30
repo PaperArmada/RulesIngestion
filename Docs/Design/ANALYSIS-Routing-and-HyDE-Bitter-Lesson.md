@@ -258,3 +258,67 @@ hypothesis (however well grounded) can only lose. The weak bridge contributed a
 little (~0.017 of the gap); the embedder ceiling dominates. The original M5/M6
 verdict stands, now on firm ground and with the mechanism correctly attributed.
 (Output: `out/tinker/swcr/runs/m9_hyde_bridged/`.)
+
+---
+
+## 5. HyDE failure-mode taxonomy (from the M9 bridged run)
+
+Even with the proper bridge, reading the per-query hypotheses against gold
+surfaces *why* HyDE drifts. Modes, with examples:
+
+1. **Synthesis overreach / abstraction drift (the catastrophic mode).** Asked a
+   broad question, the LLM writes a comprehensive, well-formed answer that embeds
+   into an abstracted "overview" region existing nowhere as a passage. `u05`
+   ("what must be tracked") generated a grand summary of all tracking and scored
+   **0.00** — it missed the one concrete gold unit ("Setting up Your Character
+   Sheet") *even though "character sheet: a simple sheet of paper…" was the #2
+   item in its vocab.* The bridge had the term; the generation diluted it.
+2. **Aspect over-commitment.** Multi-aspect queries (`s12` morale *and* reaction;
+   `s14` time *and* encounter checks) get a hypothesis that latches the dominant,
+   best-vocab-supported aspect (it quoted the Morale definition) and under-covers
+   the co-equal one. A hypothesis is one committed answer; the query stays diffuse
+   and nets all aspects.
+3. **Relevance-selection lures.** Cosine vocab selection pulled "Time Stop" (a
+   spell) for "exploration *time*," contaminating the hypothesis. Lexical
+   adjacency, semantic wrongness.
+4. **Residual bridge gaps.** "Reaction" was still absent from even the 811-term
+   glossary, so `s12`'s reaction-roll aspect had no vocab and went uncovered.
+
+**Unifying principle:** a hypothesis is a single committed *point* in embedding
+space; the query embedding behaves like a broader *region*. Against a strong
+embedder, commitment is a liability — the hypothesis sits only where it commits
+(an abstracted synthesis, or the dominant aspect), both of which drift from the
+concrete, multi-faceted gold the diffuse query already covers. Note: this is NOT
+explained by gold-set size — `u05` is catastrophic with gold size 1, while `s05`
+(gold size 15) tied at 1.00. It is region mismatch from generation behavior.
+
+## 6. Reranker dissection: the cross-encoder is net-NEGATIVE here
+
+The "reranker is the binding constraint" side-finding turned out understated.
+Within the *same* dense top-50 pool (recall@50 = 0.993):
+
+| ordering | recall@10 | recall@1 |
+|---|---|---|
+| dense score | **0.768** | 0.148 |
+| cross-encoder rerank (pipeline uses this) | **0.589** | 0.087 |
+
+The cross-encoder (`bge-reranker-v2-m3`) **helped 0 queries, hurt 13, tied 6.**
+Dropping it would lift recall@10 by ~0.18. **Every eval number in this project
+was measured with a reranker that degrades retrieval.**
+
+**Dominant failure mode: navigational-page promotion.** The cross-encoder
+promotes keyword-dense index / table-of-contents / "list of tables" pages into
+the top-5 — an index lists *every* rule term, so it matches almost any query
+lexically, and the cross-encoder's token-level matching is fooled where dense
+embeddings (which see it as a structurally distinct "list of terms") are not.
+Just **4 navigational units out of 792 intrude into the rerank top-5 on 10/19
+queries**, displacing terse gold rule passages from rank 2–7 down to 20–40.
+(Stage B's `_is_index_page` suppression was not applied on the tinker no-OCR
+ingest path, so these pages reached the corpus.)
+
+**Two fixes, both high-leverage:** (a) filter navigational units from the corpus
+/ candidate pool (helps dense too, helps rerank most); (b) reconsider the
+cross-encoder on this corpus — dense-only already beats it. Re-running the whole
+project's evals after (a) would raise every baseline; the qualitative verdicts
+(HyDE loses, enumeration/cross-paradigm wins) are unaffected, but the numbers are
+currently depressed by a fixable substrate+reranker interaction.
